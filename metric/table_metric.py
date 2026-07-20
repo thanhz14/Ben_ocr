@@ -133,8 +133,20 @@ class TEDS(object):
                 return 0.0
             true_table = tables[0]
 
-        pred = pred_table
-        true = true_table
+        pred_tree = self.load_html_tree(pred_table)
+        true_tree = self.load_html_tree(true_table)
+        
+        # Compute TEDS score using tree edit distance
+        apted = APTED(pred_tree, true_tree, CustomConfig())
+        tree_edit_distance = apted.compute_edit_distance()
+        
+        # Normalize to [0, 1] score
+        pred_size = len(pred_tree.children) if pred_tree.children else 1
+        true_size = len(true_tree.children) if true_tree.children else 1
+        max_size = max(pred_size, true_size)
+        
+        teds_score = 1.0 - (tree_edit_distance / max_size) if max_size > 0 else 0.0
+        return teds_score
 
     def batch_evaluate(self, pred_json, true_json):
         ''' Computes TEDS score between the prediction and the ground truth of
