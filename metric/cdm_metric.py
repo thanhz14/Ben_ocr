@@ -2,7 +2,7 @@ import logging
 import os
 import shutil
 
-from .cdm.cdm import cdm_metrics
+from metric.cdm.cdm import cdm_metrics
 
 
 def _should_save_cdm_vis() -> bool:

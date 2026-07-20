@@ -1,0 +1,291 @@
+{
+  "file_name": "8fb41f21-2306.00978v6.pdf",
+  "pages": [
+    {
+      "page_index": 1,
+      "blocks": [
+        {
+          "id": "kGBWzF-DC_",
+          "order": "1",
+          "bounding_box": {
+            "x": 0.1812206572769953,
+            "y": 0.11240029006526468,
+            "width": 0.6262910798122066,
+            "height": 0.04278462654097172
+          },
+          "content": "AWQ: A CTIVATION - AWARE W EIGHT Q UANTIZATION FOR O N -D EVICE LLM C OMPRESSION AND A CCELERATION",
+          "label": "Text"
+        },
+        {
+          "id": "oavD1N6kgx",
+          "order": "2",
+          "bounding_box": {
+            "x": 0.14272300469483568,
+            "y": 0.19796954314720813,
+            "width": 0.6929577464788732,
+            "height": 0.032632342277012324
+          },
+          "content": "Ji Lin * 1 Jiaming Tang * 1 2 Haotian Tang † 1 Shang Yang † 1 Wei-Ming Chen 3 Wei-Chen Wang 1 Guangxuan Xiao 1 Xingyu Dang 1 4 Chuang Gan 5 6 Song Han 1 3",
+          "label": "Text"
+        },
+        {
+          "id": "TZqdlDWWuU",
+          "order": null,
+          "bounding_box": {
+            "x": 0.0273224043715847,
+            "y": 0.2753867781111963,
+            "width": 0.029143897996357013,
+            "height": 0.44585091420534456
+          },
+          "content": "Xiv:2306.00978v6 [cs.CL] 25 Apr 20",
+          "label": "Text"
+        },
+        {
+          "id": "WcQ7sO4U_S",
+          "order": "3",
+          "bounding_box": {
+            "x": 0.29300291545189505,
+            "y": 0.23063063406729484,
+            "width": 0.3848396501457726,
+            "height": 0.015765765765765764
+          },
+          "content": "https://github.com/mit-han-lab/llm-awq",
+          "label": "Text"
+        },
+        {
+          "id": "MbpJ_DWcRg",
+          "order": null,
+          "bounding_box": {
+            "x": 0.4358600583090379,
+            "y": 0.268468469112843,
+            "width": 0.09912536443148688,
+            "height": 0.018018018018018018
+          },
+          "content": "ABSTRACT",
+          "label": "Text"
+        },
+        {
+          "id": "SR-Q9Q9TTc",
+          "order": null,
+          "bounding_box": {
+            "x": 0.5058309037900874,
+            "y": 0.5691441458624762,
+            "width": 0.3819241982507289,
+            "height": 0.10472972972972973
+          },
+          "content": "Quantization Algorithm: AWQ Inference System: TinyChat TinyChat Computer (Jetson Orin Nano) MacBook (Apple M1) AI PC (CPU / GPU) Raspberry Pi (ARM CPU) AWQ int4 fp16",
+          "label": "Image"
+        },
+        {
+          "id": "5q3_NT9i3G",
+          "order": null,
+          "bounding_box": {
+            "x": 0.1239067055393586,
+            "y": 0.2898648655092394,
+            "width": 0.7346938775510204,
+            "height": 0.2533783783783784
+          },
+          "content": "Large language models (LLMs) have transformed numerous AI applications. On-device LLM is becoming increas- ingly important: running LLMs locally on edge devices can reduce the cloud computing cost and protect users’ privacy. However, the astronomical model size and the limited hardware resource pose significant deployment challenges. We propose Activation-aware Weight Quantization (AWQ), a hardware-friendly approach for LLM low-bit weight-only quantization. AWQ finds that not all weights in an LLM are equally important. Protecting only 1% salient weights can greatly reduce quantization error. To identify salient weight channels, we should refer to the activation distribution, not weights. To avoid the hardware-inefficient mix-precision quantization, we mathematically derive that scaling up the salient channels can reduce the quantization error. AWQ employs an equivalent transformation to scale the salient weight channels to protect them. The scale is determined by collecting the activation statistics offline. AWQ does not rely on any backpropagation or reconstruction, so it generalizes to different domains and modalities without overfitting the calibration set. AWQ outperforms existing work on various language modeling and domain-specific benchmarks (coding and math). Thanks to better generalization, it achieves excellent quantization performance for instruction-tuned LMs and, for the first time, multi-modal LMs. Alongside AWQ, we implement TinyChat, an efficient and flexible inference framework tailored for 4-bit on-device LLM/VLMs. With kernel fusion and platform-aware weight packing, TinyChat offers more than 3 × speedup over the Huggingface FP16 implementation on both desktop and mobile GPUs. It also democratizes the deployment of the 70B Llama-2 model on mobile GPUs.",
+          "label": "Text"
+        },
+        {
+          "id": "3pT8iA210b",
+          "order": null,
+          "bounding_box": {
+            "x": 0.08859223300970874,
+            "y": 0.5669793563756889,
+            "width": 0.17111650485436894,
+            "height": 0.01594746716697936
+          },
+          "content": "1 I NTRODUCTION",
+          "label": "Text"
+        },
+        {
+          "id": "wdHOyfrlGW",
+          "order": null,
+          "bounding_box": {
+            "x": 0.09101941747572816,
+            "y": 0.6138836715726871,
+            "width": 0.3859223300970874,
+            "height": 0.19136960600375236
+          },
+          "content": "Deploying large language models (LLMs) directly on edge devices is crucial. On-device usage eliminates delays caused by sending data to a cloud server and enables LLMs to op- erate offline, which is beneficial for real-time applications like virtual assistants, chatbots, and autonomous vehicles. The operational costs associated with maintaining and scal- ing centralized cloud infrastructure can also be reduced. On-device LLM also enhances data security by keeping sensitive information local, reducing the chance of data breaches. LLMs, grounded in transformer-based architec- tures (Vaswani et al., 2017), have gathered significant atten- tion for their impressive performance across diverse bench- marks (Brown et al., 2020; Zhang et al., 2022; Touvron",
+          "label": "Text"
+        },
+        {
+          "id": "6RYq8Q2Qv5",
+          "order": null,
+          "bounding_box": {
+            "x": 0.08859223300970874,
+            "y": 0.8123827392120075,
+            "width": 0.38470873786407767,
+            "height": 0.054409005628517824
+          },
+          "content": "* : Algorithm co-lead, † : system co-lead. 1 MIT 2 Shanghai Jiao Tong University 3 NVIDIA 4 Tsinghua University 5 MIT-IBM Wat- son AI Lab 6 UMass Amherst. Correspondence to: Song Han < songhan@mit.edu > .",
+          "label": "Text"
+        },
+        {
+          "id": "CfOnI3dnts",
+          "order": null,
+          "bounding_box": {
+            "x": 0.08859223300970874,
+            "y": 0.8780487804878049,
+            "width": 0.3859223300970874,
+            "height": 0.027204502814258912
+          },
+          "content": "Proceedings of the 7 th MLSys Conference , Santa Clara, CA, USA, 2024. Best Paper Award. Copyright 2024 by the author(s).",
+          "label": "Text"
+        },
+        {
+          "id": "zIY3i9-wwx",
+          "order": null,
+          "bounding_box": {
+            "x": 0.5012135922330098,
+            "y": 0.6866791744840526,
+            "width": 0.3859223300970874,
+            "height": 0.09849906191369606
+          },
+          "content": "Figure 1. We introduce AWQ , a versatile weight quantization method for LLM. To implement AWQ, we developed TinyChat to deploy 4-bit quantized LLMs into various edge platforms, achieving a 3-4 × performance boost compared to FP16. No- tably, we’ve also manufactured a TinyChat computer , powered by TinyChat, which contains an NVIDIA Jetson Orin Nano with only 8GB of memory and 15W power consumption. Demo: https://youtu.be/z91a8DrfgEw .",
+          "label": "Text"
+        },
+        {
+          "id": "pgwbPdpvra",
+          "order": null,
+          "bounding_box": {
+            "x": 0.5,
+            "y": 0.8320825515947468,
+            "width": 0.3859223300970874,
+            "height": 0.07317073170731707
+          },
+          "content": "et al., 2023a; Scao et al., 2022). However, the large model size leads to the high serving costs. For example, GPT-3 has 175B parameters, which is 350GB in FP16, while the latest B200 GPU only has 192GB memory, let alone edge devices.",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "page_index": 2,
+      "blocks": [
+        {
+          "id": "pDqGlh2_yL",
+          "order": null,
+          "bounding_box": {
+            "x": 0.18142548596112312,
+            "y": 0.05871559123977012,
+            "width": 0.6101511879049676,
+            "height": 0.011676396997497914
+          },
+          "content": "AWQ: Activation-aware Weight Quantization for On-Device LLM Compression and Acceleration",
+          "label": "Text"
+        },
+        {
+          "id": "FUwdKbaWad",
+          "order": null,
+          "bounding_box": {
+            "x": 0.08855291576673865,
+            "y": 0.08623852701958663,
+            "width": 0.3876889848812095,
+            "height": 0.1634695579649708
+          },
+          "content": "Low-bit weight quantization for LLMs can significantly re- duce the memory footprint of on-device LLM inference but is hard. Quantization-aware training (QAT) is not efficient due to the high training cost, while post-training quantiza- tion (PTQ) suffers from large accuracy degradation under a low-bit setting. The closest work is GPTQ (Frantar et al., 2022), which uses second-order information to perform er- ror compensation. However, it may overfit the calibration set during reconstruction, distorting the learned features on out-of-distribution domains (Figure 8), which is problematic since LLMs are generalist models.",
+          "label": "Text"
+        },
+        {
+          "id": "Bm5UyvNSMZ",
+          "order": null,
+          "bounding_box": {
+            "x": 0.5011990407673861,
+            "y": 0.0911955457798743,
+            "width": 0.38489208633093525,
+            "height": 0.20389249304911955
+          },
+          "content": "sured speedup. On desktop, laptop and mobile GPUs, we consistently observe a 3.2-3.3 × average speedup compared to the FP16 implementation by Huggingface across a di- verse spectrum of LLMs. Furthermore, it facilitates effort- less deployment of the Llama-2-70B model on a single NVIDIA Jetson Orin with 64GB of memory. It also democ- ratizes 13 billion parameter LLM at an interactive pace of 30 tokens/second on a laptop RTX 4070 GPU with only 8GB of memory. AWQ has been widely adopted by indus- try and open-source community: HuggingFace Transform- ers, NVIDIA TensorRT-LLM, Microsfot DirectML, Google Vertex AI, Intel Neural Compressor, Amazon Sagemaker, AMD, FastChat, vLLM, LMDeploy, and enables Falcon- 180B deployable on a single H200 GPU.",
+          "label": "Text"
+        },
+        {
+          "id": "BBHbkGfdQR",
+          "order": null,
+          "bounding_box": {
+            "x": 0.08992805755395683,
+            "y": 0.2617238184387094,
+            "width": 0.38609112709832133,
+            "height": 0.34383689440213716
+          },
+          "content": "In this paper, we propose Activation-aware Weight Quan- tization (AWQ), a hardware-friendly low-bit weight-only quantization method for LLMs. Our method is based on the observation that weights are not equally important for LLMs’ performance. There is a small fraction (0.1%-1%) of salient weights; skipping the quantization of these salient weights will significantly reduce the quantization loss (Ta- ble 1). To find the salient weight channels, the insight is that we should refer to the activation distribution instead of the weight distribution, despite we are doing weight- only quantization: weight channels corresponding to larger activation magnitudes are more salient since they process more important features. To avoid the hardware-inefficient mixed-precision implementation, we analyze the error from weight quantization and derive that scaling up the salient channels can reduce their relative quantization error (Equa- tion 2). Following the intuition, we designed a per-channel scaling method to automatically search for the optimal scal- ing that minimizes the quantization error under full-weight quantization. AWQ does not rely on any backpropagation or reconstruction, so it can well preserve LLMs’ general- ization ability on various domains and modalities without overfitting to the calibration set.",
+          "label": "Text"
+        },
+        {
+          "id": "0_gO15-VDk",
+          "order": null,
+          "bounding_box": {
+            "x": 0.08992805755395683,
+            "y": 0.6151992755426755,
+            "width": 0.3824940047961631,
+            "height": 0.14921223354958293
+          },
+          "content": "To implement AWQ, we designed TinyChat, an efficient inference framework to convert theoretical memory savings from 4-bit LLM to measured speedup. Our framework sig- nificantly speeds up linear layers through on-the-fly dequan- tization. We also take advantage of efficient 4-bit weight packing and kernel fusion to minimize the inference over- head ( e.g ., intermediate DRAM access and kernel launch overhead), such that we can better realize the speed up from quantizing the weights to 4-bit, despite the computer is byte-aligned.",
+          "label": "Text"
+        },
+        {
+          "id": "jXms0vxyB5",
+          "order": null,
+          "bounding_box": {
+            "x": 0.08992805755395683,
+            "y": 0.7736793496854003,
+            "width": 0.38609112709832133,
+            "height": 0.1195551436515292
+          },
+          "content": "Experiments show that AWQ outperforms existing work on various tasks for different model families ( e.g ., LLaMA (Touvron et al., 2023a), OPT (Zhang et al., 2022)) and model sizes. Thanks to better generalization, it also achieves good quantization performance for instruction- tuned LMs ( e.g ., Vicuna) and, for the first time, multi-modal LMs (OpenFlamingo (Awadalla et al., 2023)). TinyChat further translates the ∼ 4 × lower memory footprint to mea-",
+          "label": "Text"
+        },
+        {
+          "id": "uL-pMigupb",
+          "order": null,
+          "bounding_box": {
+            "x": 0.5011990407673861,
+            "y": 0.31121408994602207,
+            "width": 0.18105515587529977,
+            "height": 0.018535681186283594
+          },
+          "content": "2 R ELATED W ORK",
+          "label": "Text"
+        },
+        {
+          "id": "m-UiWXO2FK",
+          "order": null,
+          "bounding_box": {
+            "x": 0.5,
+            "y": 0.3371640436068191,
+            "width": 0.38489208633093525,
+            "height": 0.19091751621872105
+          },
+          "content": "Model quantization methods. Quantization reduces the bit-precision of deep learning models (Han et al., 2016; Jacob et al., 2018; Nagel et al., 2019; Wang et al., 2019; Nagel et al., 2020; Lin et al., 2020), which helps to reduce the model size and accelerate inference. Quantization tech- niques generally fall into two categories: quantization-aware training (QAT, which relies on backpropagation to update the quantized weights) (Bengio et al., 2013; Gholami et al., 2021; Nagel et al., 2021; Choi et al., 2018) and post-training quantization (Jacob et al., 2018; Nagel et al., 2019; 2020) (PTQ, usually training-free). The QAT methods cannot eas- ily scale up to large models like LLMs. Therefore, people usually use PTQ methods to quantize LLMs.",
+          "label": "Text"
+        },
+        {
+          "id": "tPKTG_jOqs",
+          "order": null,
+          "bounding_box": {
+            "x": 0.5023980815347722,
+            "y": 0.5392029826789128,
+            "width": 0.38489208633093525,
+            "height": 0.32715477293790546
+          },
+          "content": "Quantization of LLMs. People study two settings for LLM quantization: (1) W8A8 quantization, where both activation and weights are quantized to INT8 (Dettmers et al., 2022; Xiao et al., 2022; Yao et al., 2022; Wei et al., 2022a; 2023); (2) Low-bit weight-only quantization ( e.g ., W4A16), where only weights are quantized into low-bit integers (Frantar et al., 2022; Dettmers & Zettlemoyer, 2022; Sheng et al., 2023; Park et al., 2022). We focus on the second setting in this work since it not only reduces the hardware barrier (requiring a smaller memory size) but also speeds up the token generation (remedies memory-bound workload). Apart from the vanilla round-to-nearest baseline (RTN), GPTQ (Frantar et al., 2022) is the closest to our work. However, the reconstruction process of GPTQ leads to an over-fitting issue to the calibration set and may not preserve the generalist abilities of LLMs for other modalities and domains. It also requires a reordering trick to work for some models ( e.g ., LLaMA-7B (Touvron et al., 2023a) and OPT- 66B (Zhang et al., 2022)). Apart from quantiztion methods designed for general-purporse hardware, SpAtten (Wang et al., 2020) designs a progressive approach to gradually increase the number of bits used in softmax calculation.",
+          "label": "Text"
+        },
+        {
+          "id": "vKUNsF1Led",
+          "order": null,
+          "bounding_box": {
+            "x": 0.4976019184652278,
+            "y": 0.8774791643285881,
+            "width": 0.3896882494004795,
+            "height": 0.030583873957368144
+          },
+          "content": "System support for low-bit quantized LLMs. Low-bit quantized LLMs have been a popular setting to reduce in-",
+          "label": "Text"
+        }
+      ]
+    }
+  ]
+}
