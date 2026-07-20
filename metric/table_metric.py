@@ -37,6 +37,13 @@ class TableTree(Tree):
             result += child.bracket()
         return "{{{}}}".format(result)
 
+    def get_tree_size(self):
+        """Count total nodes in tree"""
+        size = 1
+        for child in self.children:
+            size += child.get_tree_size()
+        return size
+
 
 class CustomConfig(Config):
     @staticmethod
@@ -140,13 +147,13 @@ class TEDS(object):
         apted = APTED(pred_tree, true_tree, CustomConfig())
         tree_edit_distance = apted.compute_edit_distance()
         
-        # Normalize to [0, 1] score
-        pred_size = len(pred_tree.children) if pred_tree.children else 1
-        true_size = len(true_tree.children) if true_tree.children else 1
+        # Normalize to [0, 1] score using tree sizes
+        pred_size = pred_tree.get_tree_size()
+        true_size = true_tree.get_tree_size()
         max_size = max(pred_size, true_size)
         
         teds_score = 1.0 - (tree_edit_distance / max_size) if max_size > 0 else 0.0
-        return teds_score
+        return max(0.0, min(1.0, teds_score))  # Clamp to [0, 1]
 
     def batch_evaluate(self, pred_json, true_json):
         ''' Computes TEDS score between the prediction and the ground truth of
