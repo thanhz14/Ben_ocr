@@ -1,0 +1,1008 @@
+{
+    "input_path": "input/2306.00978v6.pdf",
+    "page_index": 5,
+    "page_count": 15,
+    "width": 1224,
+    "height": 1584,
+    "model_settings": {
+        "use_doc_preprocessor": false,
+        "use_layout_detection": true,
+        "use_chart_recognition": true,
+        "use_seal_recognition": false,
+        "use_ocr_for_image_block": true,
+        "format_block_content": true,
+        "merge_layout_blocks": true,
+        "markdown_ignore_labels": [
+            "number",
+            "footnote",
+            "header",
+            "header_image",
+            "footer",
+            "footer_image",
+            "aside_text"
+        ],
+        "return_layout_polygon_points": true
+    },
+    "parsing_res_list": [
+        {
+            "block_label": "header",
+            "block_content": "AWQ: Activation-aware Weight Quantization for On-Device LLM Compression and Acceleration",
+            "block_bbox": [
+                220,
+                93,
+                973,
+                114
+            ],
+            "block_id": 0,
+            "block_order": null,
+            "group_id": 0,
+            "block_polygon_points": [
+                [
+                    220.0,
+                    93.0
+                ],
+                [
+                    973.0,
+                    93.0
+                ],
+                [
+                    973.0,
+                    114.0
+                ],
+                [
+                    220.0,
+                    114.0
+                ]
+            ]
+        },
+        {
+            "block_label": "image",
+            "block_content": "<div style=\"text-align: center;\"><img src=\"imgs/img_in_image_box_108_131_490_261.jpg\" alt=\"Image\" width=\"31%\" />\n\nOriginal weights:\nPacked weights:\nMask = 0x0F...0\nReordering offline\n\nOriginal weights:\nPacked weights:\nMask = 0x0F...0\nReordering offline\n\n</div>\n",
+            "block_bbox": [
+                108,
+                131,
+                490,
+                261
+            ],
+            "block_id": 1,
+            "block_order": null,
+            "group_id": 1,
+            "block_polygon_points": [
+                [
+                    108.0,
+                    131.0
+                ],
+                [
+                    490.0,
+                    131.0
+                ],
+                [
+                    490.0,
+                    261.0
+                ],
+                [
+                    108.0,
+                    261.0
+                ]
+            ]
+        },
+        {
+            "block_label": "image",
+            "block_content": "<div style=\"text-align: center;\"><img src=\"imgs/img_in_image_box_485_138_818_262.jpg\" alt=\"Image\" width=\"27%\" />\n\n0F (128-bit mask)\n\n $ W_{low} = P_w \\& Mask $\n\n $ W_{low} \\quad 0 \\quad W_{15} \\quad \\ldots \\quad W_2 \\quad 0 \\quad W_1 \\quad 0 \\quad W_0 $\n\n127\n\nRuntime unpacking\n\n $ W_{high} = (P_w \\gg 4) \\& Mask $\n\n $ W_{high} \\quad 0 \\quad W_{31} \\quad \\ldots \\quad W_{18} \\quad 0 \\quad W_{17} \\quad 0 \\quad W_{16} $\n\n127\n\n</div>\n",
+            "block_bbox": [
+                485,
+                138,
+                818,
+                262
+            ],
+            "block_id": 2,
+            "block_order": null,
+            "group_id": 2,
+            "block_polygon_points": [
+                [
+                    485.0,
+                    138.0
+                ],
+                [
+                    818.0,
+                    138.0
+                ],
+                [
+                    818.0,
+                    262.0
+                ],
+                [
+                    485.0,
+                    262.0
+                ]
+            ]
+        },
+        {
+            "block_label": "chart",
+            "block_content": "<table border=1 style='margin: auto; width: max-content;'>\n  <thead><tr><th style='text-align: center;'></th><th style='text-align: center;'>Original weights</th><th style='text-align: center;'>Packed weights</th></tr></thead>\n  <tbody>\n    <tr><td style='text-align: center;'>(4k,4k)</td><td style='text-align: center;'>248</td><td style='text-align: center;'>215</td></tr>\n    <tr><td style='text-align: center;'>(11k,4k)</td><td style='text-align: center;'>472</td><td style='text-align: center;'>399</td></tr>\n    <tr><td style='text-align: center;'>(4k,11k)</td><td style='text-align: center;'>489</td><td style='text-align: center;'>400</td></tr>\n    <tr><td style='text-align: center;'>(4k,32k)</td><td style='text-align: center;'>1172</td><td style='text-align: center;'>954</td></tr>\n  </tbody>\n</table>",
+            "block_bbox": [
+                823,
+                141,
+                1082,
+                259
+            ],
+            "block_id": 3,
+            "block_order": null,
+            "group_id": 3,
+            "block_polygon_points": [
+                [
+                    823.0,
+                    141.0
+                ],
+                [
+                    1082.0,
+                    141.0
+                ],
+                [
+                    1082.0,
+                    259.0
+                ],
+                [
+                    823.0,
+                    259.0
+                ]
+            ]
+        },
+        {
+            "block_label": "figure_title",
+            "block_content": "<div style=\"text-align: center;\">Figure 4. SIMD-aware weight packing for ARM NEON with 128-bit SIMD units. Original weights are reordered and packed to align with the bit width so that the weights can be unpacked into bytes at runtime using AND and shift bitwise operations with a 128-bit mask.</div>\n",
+            "block_bbox": [
+                104,
+                280,
+                1087,
+                323
+            ],
+            "block_id": 4,
+            "block_order": null,
+            "group_id": 4,
+            "block_polygon_points": [
+                [
+                    104.0,
+                    280.0
+                ],
+                [
+                    1087.0,
+                    280.0
+                ],
+                [
+                    1087.0,
+                    323.0
+                ],
+                [
+                    104.0,
+                    323.0
+                ]
+            ]
+        },
+        {
+            "block_label": "text",
+            "block_content": "with 200 tokens only takes 10 ms. Consequently, the generation phase is substantially slower than the context stage, particularly for on-device interactive applications.",
+            "block_bbox": [
+                104,
+                365,
+                586,
+                437
+            ],
+            "block_id": 5,
+            "block_order": 1,
+            "group_id": 5,
+            "block_polygon_points": [
+                [
+                    104.0,
+                    365.0
+                ],
+                [
+                    586.0,
+                    365.0
+                ],
+                [
+                    586.0,
+                    437.0
+                ],
+                [
+                    104.0,
+                    437.0
+                ]
+            ]
+        },
+        {
+            "block_label": "text",
+            "block_content": "Generation stage is memory-bound. To accelerate the generation phase, we conduct a roofline analysis in Figure 3(b). The 4090 GPU has a peak computation throughput of 165 TFLOPS and a memory bandwidth of 1TB/s. Therefore, any workload with arithmetic intensity (the ratio of FLOPs to memory access) less than 165 is memory bounded on 4090 GPUs. Notably, when executed in FP16, the generation stage for on-device LLMs has arithmetic intensity  $ \\approx 1 $. This underscores the memory-bound nature of the workload. Since the FLOPs of a given model is fixed, the only way to improve the peak performance is to reduce the total amount of memory traffic. AWQ reduces the weight memory by four times.",
+            "block_bbox": [
+                104,
+                451,
+                586,
+                763
+            ],
+            "block_id": 6,
+            "block_order": 2,
+            "group_id": 6,
+            "block_polygon_points": [
+                [
+                    104.0,
+                    451.0
+                ],
+                [
+                    586.0,
+                    451.0
+                ],
+                [
+                    586.0,
+                    763.0
+                ],
+                [
+                    104.0,
+                    763.0
+                ]
+            ]
+        },
+        {
+            "block_label": "text",
+            "block_content": "Weight access dominates memory traffic. We therefore further break down the memory access for weight and activation in Figure 3(c). Clearly, weight access dominates the memory traffic for on-device LLMs. Quantizing the model weights to 4 bit integers will approximately increase the arithmetic intensity to 4 FLOPs/Byte, leading to a 4TFLOPS peak performance in Figure 3(b). Since weight-only quantization leads to a lower bit width for weights (and thus higher theoretical performance upper bound), it is natural for AWQ to follow this setting for on-device LLM applications.",
+            "block_bbox": [
+                104,
+                776,
+                585,
+                1018
+            ],
+            "block_id": 7,
+            "block_order": 3,
+            "group_id": 7,
+            "block_polygon_points": [
+                [
+                    104.0,
+                    776.0
+                ],
+                [
+                    585.0,
+                    776.0
+                ],
+                [
+                    585.0,
+                    1018.0
+                ],
+                [
+                    104.0,
+                    1018.0
+                ]
+            ]
+        },
+        {
+            "block_label": "paragraph_title",
+            "block_content": "### 4.2 Deploy AWQ with TinyChat",
+            "block_bbox": [
+                105,
+                1040,
+                401,
+                1065
+            ],
+            "block_id": 8,
+            "block_order": 4,
+            "group_id": 8,
+            "block_polygon_points": [
+                [
+                    105.0,
+                    1040.0
+                ],
+                [
+                    401.0,
+                    1040.0
+                ],
+                [
+                    401.0,
+                    1065.0
+                ],
+                [
+                    105.0,
+                    1065.0
+                ]
+            ]
+        },
+        {
+            "block_label": "text",
+            "block_content": "To this end, we demonstrated that 4-bit weight quantization could lead to a 4× theoretical peak performance. We further design TinyChat to realize this speedup. On GPUs, we only focus on implementing essential components, including attention, layer normalization, and linear projection kernels. The flexible frontend allows easy customization and fast support for new models. TinyChat with 4-bit AWQ achieves more than 3× speedup compared with the Huggingface FP16 implementation across different families of LLMs on GPUs. On CPUs, we lower the entire computation graph to C++ to minimize overhead.",
+            "block_bbox": [
+                104,
+                1087,
+                585,
+                1351
+            ],
+            "block_id": 9,
+            "block_order": 5,
+            "group_id": 9,
+            "block_polygon_points": [
+                [
+                    104.0,
+                    1087.0
+                ],
+                [
+                    585.0,
+                    1087.0
+                ],
+                [
+                    585.0,
+                    1351.0
+                ],
+                [
+                    104.0,
+                    1351.0
+                ]
+            ]
+        },
+        {
+            "block_label": "text",
+            "block_content": "On-the-fly weight dequantization. For quantized layers, as the hardware does not provide multiplication instructions between INT4 and FP16, we need to dequantize the integers to FP16 before performing matrix computation. We avoid writing dequantized weights into DRAM by fusing dequantization kernels with the matrix multiplication kernel. Note that such fusion is adopted for both matrix-matrix (MM) and matrix-vector (MV) product kernels.",
+            "block_bbox": [
+                104,
+                1364,
+                585,
+                1437
+            ],
+            "block_id": 10,
+            "block_order": 6,
+            "group_id": 10,
+            "block_polygon_points": [
+                [
+                    104.0,
+                    1364.0
+                ],
+                [
+                    585.0,
+                    1364.0
+                ],
+                [
+                    585.0,
+                    1437.0
+                ],
+                [
+                    104.0,
+                    1437.0
+                ]
+            ]
+        },
+        {
+            "block_label": "text",
+            "block_content": "",
+            "block_bbox": [
+                607,
+                364,
+                1088,
+                485
+            ],
+            "block_id": 11,
+            "block_order": 7,
+            "group_id": 10,
+            "block_polygon_points": [
+                [
+                    607.0,
+                    364.0
+                ],
+                [
+                    1088.0,
+                    364.0
+                ],
+                [
+                    1088.0,
+                    485.0
+                ],
+                [
+                    607.0,
+                    485.0
+                ]
+            ]
+        },
+        {
+            "block_label": "text",
+            "block_content": "SIMD-aware weight packing. On-the-fly weight dequantization reduces intermediate DRAM access, but remains expensive. For instance, dequantizing a single 4-bit weight involves 1 shift, 1 bitwise AND, and 1 FMA scaling operations, while the dequantized weight undergoes only 1 FMA computation. This process is particularly costly on CPUs with SIMD architecture that favor vectorized instructions. To mitigate this, we suggest platform-specific weight packing tailored to the bitwidth of a device's SIMD units. Figure 4 demonstrates our strategy for ARM CPUs with 128-bit SIMD registers offering up to 1.2× speedup. Here, each register holds 32 4-bit weights, sequenced as  $ w_{0}, w_{16}, w_{1}, w_{17}, ..., w_{15}, w_{31} $. This approach requires just three SIMD instructions to unpack all 32 weights, as opposed to 3 scalar instructions per weight in a conventional packing ( $ w_{0}, w_{1}, ..., w_{31} $). Generally, for  $ 2^{n} $-bit SIMD registers, adjacent weights will have indices off by  $ 1/8 \\times 2^{n} $, since each register can hold  $ 1/8 \\times 2^{n} $ 8-bit integers. On GPUs, we found it more efficient to pack each 8 weights into  $ w_{\\{0,2,4,6,1,3,5,7\\}} $ following (Kim et al., 2022).",
+            "block_bbox": [
+                607,
+                555,
+                1089,
+                1037
+            ],
+            "block_id": 12,
+            "block_order": 8,
+            "group_id": 12,
+            "block_polygon_points": [
+                [
+                    607.0,
+                    555.0
+                ],
+                [
+                    1089.0,
+                    555.0
+                ],
+                [
+                    1089.0,
+                    1037.0
+                ],
+                [
+                    607.0,
+                    1037.0
+                ]
+            ]
+        },
+        {
+            "block_label": "text",
+            "block_content": "Kernel fusion. We also extensively apply kernel fusion to optimize on-device LLM inference. For layer normalization, we fuse all operators (e.g. multiplication, division and square root) into a single kernel. For attention layers, we fuse QKV projections into a single kernel, and also perform on-the-fly positional embedding calculation. We also pre-allocate KV caches and perform cache updates within the attention kernel. Kernel fusion is particularly useful for models with inefficient forward pass implementations, such as Falcon (Penedo et al., 2023) and StarCoder (Li et al., 2023c). Notably, the computation time for each FP16 kernel is in the order of 0.01ms on the 4090 GPU, comparable to the GPU kernel launch overhead. Hence, reducing number of kernel calls through kernel fusion leads to direct speedups.",
+            "block_bbox": [
+                607,
+                1101,
+                1090,
+                1439
+            ],
+            "block_id": 13,
+            "block_order": 9,
+            "group_id": 13,
+            "block_polygon_points": [
+                [
+                    607.0,
+                    1101.0
+                ],
+                [
+                    1090.0,
+                    1101.0
+                ],
+                [
+                    1090.0,
+                    1439.0
+                ],
+                [
+                    607.0,
+                    1439.0
+                ]
+            ]
+        }
+    ],
+    "layout_det_res": {
+        "input_path": null,
+        "page_index": null,
+        "boxes": [
+            {
+                "cls_id": 12,
+                "label": "header",
+                "score": 0.7803011536598206,
+                "coordinate": [
+                    220,
+                    93,
+                    973,
+                    114
+                ],
+                "order": null,
+                "polygon_points": [
+                    [
+                        220.0,
+                        93.0
+                    ],
+                    [
+                        973.0,
+                        93.0
+                    ],
+                    [
+                        973.0,
+                        114.0
+                    ],
+                    [
+                        220.0,
+                        114.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 14,
+                "label": "image",
+                "score": 0.4009339511394501,
+                "coordinate": [
+                    108,
+                    131,
+                    490,
+                    261
+                ],
+                "order": null,
+                "polygon_points": [
+                    [
+                        108.0,
+                        131.0
+                    ],
+                    [
+                        490.0,
+                        131.0
+                    ],
+                    [
+                        490.0,
+                        261.0
+                    ],
+                    [
+                        108.0,
+                        261.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 14,
+                "label": "image",
+                "score": 0.41221514344215393,
+                "coordinate": [
+                    485,
+                    138,
+                    818,
+                    262
+                ],
+                "order": null,
+                "polygon_points": [
+                    [
+                        485.0,
+                        138.0
+                    ],
+                    [
+                        818.0,
+                        138.0
+                    ],
+                    [
+                        818.0,
+                        262.0
+                    ],
+                    [
+                        485.0,
+                        262.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 3,
+                "label": "chart",
+                "score": 0.7655956149101257,
+                "coordinate": [
+                    823,
+                    141,
+                    1082,
+                    259
+                ],
+                "order": null,
+                "polygon_points": [
+                    [
+                        823.0,
+                        141.0
+                    ],
+                    [
+                        1082.0,
+                        141.0
+                    ],
+                    [
+                        1082.0,
+                        259.0
+                    ],
+                    [
+                        823.0,
+                        259.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 7,
+                "label": "figure_title",
+                "score": 0.9167952537536621,
+                "coordinate": [
+                    104,
+                    280,
+                    1087,
+                    323
+                ],
+                "order": null,
+                "polygon_points": [
+                    [
+                        104.0,
+                        280.0
+                    ],
+                    [
+                        1087.0,
+                        280.0
+                    ],
+                    [
+                        1087.0,
+                        323.0
+                    ],
+                    [
+                        104.0,
+                        323.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.9248249530792236,
+                "coordinate": [
+                    104,
+                    365,
+                    586,
+                    437
+                ],
+                "order": 1,
+                "polygon_points": [
+                    [
+                        104.0,
+                        365.0
+                    ],
+                    [
+                        586.0,
+                        365.0
+                    ],
+                    [
+                        586.0,
+                        437.0
+                    ],
+                    [
+                        104.0,
+                        437.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.9651829600334167,
+                "coordinate": [
+                    104,
+                    451,
+                    586,
+                    763
+                ],
+                "order": 2,
+                "polygon_points": [
+                    [
+                        104.0,
+                        451.0
+                    ],
+                    [
+                        586.0,
+                        451.0
+                    ],
+                    [
+                        586.0,
+                        763.0
+                    ],
+                    [
+                        104.0,
+                        763.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.9620746374130249,
+                "coordinate": [
+                    104,
+                    776,
+                    585,
+                    1018
+                ],
+                "order": 3,
+                "polygon_points": [
+                    [
+                        104.0,
+                        776.0
+                    ],
+                    [
+                        585.0,
+                        776.0
+                    ],
+                    [
+                        585.0,
+                        1018.0
+                    ],
+                    [
+                        104.0,
+                        1018.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 17,
+                "label": "paragraph_title",
+                "score": 0.844395637512207,
+                "coordinate": [
+                    105,
+                    1040,
+                    401,
+                    1065
+                ],
+                "order": 4,
+                "polygon_points": [
+                    [
+                        105.0,
+                        1040.0
+                    ],
+                    [
+                        401.0,
+                        1040.0
+                    ],
+                    [
+                        401.0,
+                        1065.0
+                    ],
+                    [
+                        105.0,
+                        1065.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.9570472240447998,
+                "coordinate": [
+                    104,
+                    1087,
+                    585,
+                    1351
+                ],
+                "order": 5,
+                "polygon_points": [
+                    [
+                        104.0,
+                        1087.0
+                    ],
+                    [
+                        585.0,
+                        1087.0
+                    ],
+                    [
+                        585.0,
+                        1351.0
+                    ],
+                    [
+                        104.0,
+                        1351.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.9369655847549438,
+                "coordinate": [
+                    104,
+                    1364,
+                    585,
+                    1437
+                ],
+                "order": 6,
+                "polygon_points": [
+                    [
+                        104.0,
+                        1364.0
+                    ],
+                    [
+                        585.0,
+                        1364.0
+                    ],
+                    [
+                        585.0,
+                        1437.0
+                    ],
+                    [
+                        104.0,
+                        1437.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.9487188458442688,
+                "coordinate": [
+                    607,
+                    364,
+                    1088,
+                    485
+                ],
+                "order": 7,
+                "polygon_points": [
+                    [
+                        607.0,
+                        364.0
+                    ],
+                    [
+                        1088.0,
+                        364.0
+                    ],
+                    [
+                        1088.0,
+                        485.0
+                    ],
+                    [
+                        607.0,
+                        485.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.968635618686676,
+                "coordinate": [
+                    607,
+                    555,
+                    1089,
+                    1037
+                ],
+                "order": 8,
+                "polygon_points": [
+                    [
+                        607.0,
+                        555.0
+                    ],
+                    [
+                        1089.0,
+                        555.0
+                    ],
+                    [
+                        1089.0,
+                        1037.0
+                    ],
+                    [
+                        607.0,
+                        1037.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 15,
+                "label": "inline_formula",
+                "score": 0.5049075484275818,
+                "coordinate": [
+                    613,
+                    845,
+                    855,
+                    865
+                ],
+                "order": 9,
+                "polygon_points": [
+                    [
+                        613.0,
+                        845.0
+                    ],
+                    [
+                        613.0,
+                        864.0
+                    ],
+                    [
+                        854.0,
+                        864.0
+                    ],
+                    [
+                        854.0,
+                        845.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 15,
+                "label": "inline_formula",
+                "score": 0.7142564058303833,
+                "coordinate": [
+                    683,
+                    915,
+                    816,
+                    936
+                ],
+                "order": 10,
+                "polygon_points": [
+                    [
+                        683.0,
+                        915.0
+                    ],
+                    [
+                        815.0,
+                        915.0
+                    ],
+                    [
+                        815.0,
+                        935.0
+                    ],
+                    [
+                        683.0,
+                        935.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 15,
+                "label": "inline_formula",
+                "score": 0.6958277225494385,
+                "coordinate": [
+                    1004,
+                    937,
+                    1079,
+                    959
+                ],
+                "order": 11,
+                "polygon_points": [
+                    [
+                        1004.0,
+                        937.0
+                    ],
+                    [
+                        1078.0,
+                        937.0
+                    ],
+                    [
+                        1078.0,
+                        958.0
+                    ],
+                    [
+                        1004.0,
+                        958.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 15,
+                "label": "inline_formula",
+                "score": 0.685317873954773,
+                "coordinate": [
+                    850,
+                    960,
+                    928,
+                    983
+                ],
+                "order": 12,
+                "polygon_points": [
+                    [
+                        850.0,
+                        960.0
+                    ],
+                    [
+                        927.0,
+                        960.0
+                    ],
+                    [
+                        927.0,
+                        982.0
+                    ],
+                    [
+                        850.0,
+                        982.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.962128758430481,
+                "coordinate": [
+                    607,
+                    1101,
+                    1090,
+                    1439
+                ],
+                "order": 13,
+                "polygon_points": [
+                    [
+                        607.0,
+                        1101.0
+                    ],
+                    [
+                        1090.0,
+                        1101.0
+                    ],
+                    [
+                        1090.0,
+                        1439.0
+                    ],
+                    [
+                        607.0,
+                        1439.0
+                    ]
+                ]
+            }
+        ]
+    }
+}

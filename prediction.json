@@ -1,0 +1,163 @@
+{
+    "page": 0,
+    "width": 1224,
+    "height": 1584,
+    "blocks": [
+        {
+            "id": 0,
+            "type": "aside_text",
+            "text": "arXiv:2306.00978v6 [cs.CL] 25 Apr 2026",
+            "bbox": [
+                28,
+                438,
+                73,
+                1138
+            ],
+            "order": null
+        },
+        {
+            "id": 1,
+            "type": "doc_title",
+            "text": "# AWQ: A\\_CTIVATION-AWARE\\_WEIGHT QUANTIZATION FOR ON-DEVICE LLM COMPRESSION AND ACCELERATION",
+            "bbox": [
+                223,
+                179,
+                969,
+                246
+            ],
+            "order": 1
+        },
+        {
+            "id": 2,
+            "type": "text",
+            "text": "Ji Lin $ ^{*1} $ Jiaming Tang $ ^{*12} $ Haotian Tang $ ^{\\dagger1} $ Shang Yang $ ^{\\dagger1} $ Wei-Ming Chen $ ^{3} $ Wei-Chen Wang $ ^{1} $ Guangxuan Xiao $ ^{1} $ Xingyu Dang $ ^{14} $ Chuang Gan $ ^{56} $ Song Han $ ^{13} $",
+            "bbox": [
+                171,
+                314,
+                1016,
+                364
+            ],
+            "order": 2
+        },
+        {
+            "id": 3,
+            "type": "text",
+            "text": "https://github.com/mit-han-lab/llm-awq",
+            "bbox": [
+                363,
+                368,
+                830,
+                390
+            ],
+            "order": 3
+        },
+        {
+            "id": 4,
+            "type": "paragraph_title",
+            "text": "## ABSTRACT",
+            "bbox": [
+                535,
+                432,
+                657,
+                454
+            ],
+            "order": 4
+        },
+        {
+            "id": 5,
+            "type": "abstract",
+            "text": "Large language models (LLMs) have transformed numerous AI applications. On-device LLM is becoming increasingly important: running LLMs locally on edge devices can reduce the cloud computing cost and protect users' privacy. However, the astronomical model size and the limited hardware resource pose significant deployment challenges. We propose Activation-aware Weight Quantization (AWQ), a hardware-friendly approach for LLM low-bit weight-only quantization. AWQ finds that not all weights in an LLM are equally important. Protecting only 1% salient weights can greatly reduce quantization error. To identify salient weight channels, we should refer to the activation distribution, not weights. To avoid the hardware-inefficient mix-precision quantization, we mathematically derive that scaling up the salient channels can reduce the quantization error. AWQ employs an equivalent transformation to scale the salient weight channels to protect them. The scale is determined by collecting the activation statistics offline. AWQ does not rely on any backpropagation or reconstruction, so it generalizes to different domains and modalities without overfitting the calibration set. AWQ outperforms existing work on various language modeling and domain-specific benchmarks (coding and math). Thanks to better generalization, it achieves excellent quantization performance for instruction-tuned LMs and, for the first time, multi-modal LMs. Alongside AWQ, we implement TinyChat, an efficient and flexible inference framework tailored for 4-bit on-device LLM/VLMs. With kernel fusion and platform-aware weight packing, TinyChat offers more than 3× speedup over the Huggingface FP16 implementation on both desktop and mobile GPUs. It also democratizes the deployment of the 70B Llama-2 model on mobile GPUs.",
+            "bbox": [
+                144,
+                456,
+                1050,
+                864
+            ],
+            "order": 5
+        },
+        {
+            "id": 6,
+            "type": "paragraph_title",
+            "text": "## 1 INTRODUCTION",
+            "bbox": [
+                108,
+                898,
+                318,
+                921
+            ],
+            "order": 6
+        },
+        {
+            "id": 7,
+            "type": "text",
+            "text": "Deploying large language models (LLMs) directly on edge devices is crucial. On-device usage eliminates delays caused by sending data to a cloud server and enables LLMs to operate offline, which is beneficial for real-time applications like virtual assistants, chatbots, and autonomous vehicles. The operational costs associated with maintaining and scaling centralized cloud infrastructure can also be reduced. On-device LLM also enhances data security by keeping sensitive information local, reducing the chance of data breaches. LLMs, grounded in transformer-based architectures (Vaswani et al., 2017), have gathered significant attention for their impressive performance across diverse benchmarks (Brown et al., 2020; Zhang et al., 2022; Touvron",
+            "bbox": [
+                104,
+                969,
+                586,
+                1280
+            ],
+            "order": 7
+        },
+        {
+            "id": 8,
+            "type": "image",
+            "text": "<div style=\"text-align: center;\"><img src=\"imgs/img_in_image_box_615_899_1081_1063.jpg\" alt=\"Image\" width=\"38%\" />\n\nfp16\nAWQ\nMacBook\n(Apple M1)\nQuantization Algorithm: AWQ\nRaspberry Pi (ARM CPU)\nInference System: TinyChat\nAI PC (CPU / GPU)\n\n</div>\n",
+            "bbox": [
+                615,
+                899,
+                1081,
+                1063
+            ],
+            "order": null
+        },
+        {
+            "id": 9,
+            "type": "figure_title",
+            "text": "<div style=\"text-align: center;\">Figure 1. We introduce AWQ, a versatile weight quantization method for LLM. To implement AWQ, we developed TinyChat to deploy 4-bit quantized LLMs into various edge platforms, achieving a 3-4× performance boost compared to FP16. Notably, we've also manufactured a TinyChat computer, powered by TinyChat, which contains an NVIDIA Jetson Orin Nano with only 8GB of memory and 15W power consumption. Demo: https://youtu.be/z91a8DrfgEw.</div>\n",
+            "bbox": [
+                608,
+                1086,
+                1088,
+                1247
+            ],
+            "order": null
+        },
+        {
+            "id": 10,
+            "type": "footnote",
+            "text": " $ ^{*} $: Algorithm co-lead,  $ ^{\\dagger} $: system co-lead.  $ ^{1} $MIT  $ ^{2} $Shanghai Jiao Tong University  $ ^{3} $NVIDIA  $ ^{4} $Tsinghua University  $ ^{5} $MIT-IBM Watson AI Lab  $ ^{6} $UMass Amherst. Correspondence to: Song Han <songhan@mit.edu>.",
+            "bbox": [
+                104,
+                1294,
+                585,
+                1376
+            ],
+            "order": null
+        },
+        {
+            "id": 11,
+            "type": "text",
+            "text": "et al., 2023a; Scao et al., 2022). However, the large model size leads to the high serving costs. For example, GPT-3 has 175B parameters, which is 350GB in FP16, while the latest B200 GPU only has 192GB memory, let alone edge devices.",
+            "bbox": [
+                607,
+                1316,
+                1087,
+                1436
+            ],
+            "order": 8
+        },
+        {
+            "id": 12,
+            "type": "footer",
+            "text": "Proceedings of the 7th MLSys Conference, Santa Clara, CA, USA, 2024. Best Paper Award. Copyright 2024 by the author(s).",
+            "bbox": [
+                104,
+                1393,
+                583,
+                1436
+            ],
+            "order": null
+        }
+    ]
+}

@@ -1,0 +1,1056 @@
+{
+    "input_path": "input/2306.00978v6.pdf",
+    "page_index": 10,
+    "page_count": 15,
+    "width": 1224,
+    "height": 1584,
+    "model_settings": {
+        "use_doc_preprocessor": false,
+        "use_layout_detection": true,
+        "use_chart_recognition": true,
+        "use_seal_recognition": false,
+        "use_ocr_for_image_block": true,
+        "format_block_content": true,
+        "merge_layout_blocks": true,
+        "markdown_ignore_labels": [
+            "number",
+            "footnote",
+            "header",
+            "header_image",
+            "footer",
+            "footer_image",
+            "aside_text"
+        ],
+        "return_layout_polygon_points": true
+    },
+    "parsing_res_list": [
+        {
+            "block_label": "header",
+            "block_content": "AWQ: Activation-aware Weight Quantization for On-Device LLM Compression and Acceleration",
+            "block_bbox": [
+                220,
+                92,
+                972,
+                114
+            ],
+            "block_id": 0,
+            "block_order": null,
+            "group_id": 0,
+            "block_polygon_points": [
+                [
+                    220.0,
+                    92.0
+                ],
+                [
+                    972.0,
+                    92.0
+                ],
+                [
+                    972.0,
+                    114.0
+                ],
+                [
+                    220.0,
+                    114.0
+                ]
+            ]
+        },
+        {
+            "block_label": "chart",
+            "block_content": "<table border=1 style='margin: auto; width: max-content;'>\n  <thead><tr><th style='text-align: center;'>Model</th><th style='text-align: center;'>Model</th><th style='text-align: center;'>AutoGPTQ</th><th style='text-align: center;'>llama.cpp</th><th style='text-align: center;'>exllama</th><th style='text-align: center;'>TinyChat</th></tr></thead>\n  <tbody>\n    <tr><td style='text-align: center;'>(a) Latency comparison on Jetson Orin (64G) mobile GPU</td><td style='text-align: center;'>Llama-2 (7B)</td><td style='text-align: center;'>13.4</td><td style='text-align: center;'>22.5</td><td style='text-align: center;'>15.9</td><td style='text-align: center;'>39.1</td></tr>\n    <tr><td style='text-align: center;'></td><td style='text-align: center;'>Llama-2 (13B)</td><td style='text-align: center;'>8.0</td><td style='text-align: center;'>13.3</td><td style='text-align: center;'>9.1</td><td style='text-align: center;'>21.2</td></tr>\n    <tr><td style='text-align: center;'>(b) Latency comparison on Raspberry Pi</td><td style='text-align: center;'>Llama-2 (7B)</td><td style='text-align: center;'>13.4</td><td style='text-align: center;'>22.5</td><td style='text-align: center;'>15.9</td><td style='text-align: center;'>39.1</td></tr>\n    <tr><td style='text-align: center;'></td><td style='text-align: center;'>Llama-2 (13B)</td><td style='text-align: center;'>8.0</td><td style='text-align: center;'>13.3</td><td style='text-align: center;'>9.1</td><td style='text-align: center;'>21.2</td></tr>\n    <tr><td style='text-align: center;'>(c) Latency comparison on Jetson Orin (64G) mobile GPU</td><td style='text-align: center;'>Llama-2 (70B)</td><td style='text-align: center;'>2.9</td><td style='text-align: center;'>5.8</td><td style='text-align: center;'>3.2</td><td style='text-align: center;'>8.8</td></tr>\n    <tr><td style='text-align: center;'></td><td style='text-align: center;'>Llama-2 (70B)</td><td style='text-align: center;'>1.3</td><td style='text-align: center;'>3.0</td><td style='text-align: center;'>1.4</td><td style='text-align: center;'>4.0</td></tr>\n    <tr><td style='text-align: center;'>(d) Latency comparison on Raspberry Pi</td><td style='text-align: center;'>StableCode (3B)</td><td style='text-align: center;'>6</td><td style='text-align: center;'>6</td><td style='text-align: center;'>10</td><td style='text-align: center;'>17</td></tr>\n    <tr><td style='text-align: center;'></td><td style='text-align: center;'>Mistral (7B)</td><td style='text-align: center;'>14</td><td style='text-align: center;'>32</td><td style='text-align: center;'>37</td><td style='text-align: center;'>22</td></tr>\n    <tr><td style='text-align: center;'>(e) Latency comparison on Jetson Orin (64G) mobile GPU</td><td style='text-align: center;'>StableCode (15.5B)</td><td style='text-align: center;'>6</td><td style='text-align: center;'>6</td><td style='text-align: center;'>12</td><td style='text-align: center;'>15</td></tr>\n    <tr><td style='text-align: center;'></td><td style='text-align: center;'>StableCode (3B)</td><td style='text-align: center;'>10</td><td style='text-align: center;'>32</td><td style='text-align: center;'>24</td><td style='text-align: center;'>30</td></tr>\n    <tr><td style='text-align: center;'>(f) Latency comparison on Raspberry Pi</td><td style='text-align: center;'>Falcon (7B)</td><td style='text-align: center;'>0</td><td style='text-align: center;'>3</td><td style='text-align: center;'>0</td><td style='text-align: center;'>7</td></tr>\n    <tr><td style='text-align: center;'></td><td style='text-align: center;'>Llama-2 (7B)</td><td style='text-align: center;'>0</td><td style='text-align: center;'>0.7</td><td style='text-align: center;'>0.7</td><td style='text-align: center;'>0.7</td></tr>\n    <tr><td style='text-align: center;'></td><td style='text-align: center;'>OPT (6.7B)</td><td style='text-align: center;'>0</td><td style='text-align: center;'>0.7</td><td style='text-align: center;'>0.7</td><td style='text-align: center;'>3.0</td></tr>\n    <tr><td style='text-align: center;'></td><td style='text-align: center;'>OPT (1.3B)</td><td style='text-align: center;'>0</td><td style='text-align: center;'>0.7</td><td style='text-align: center;'>0.7</td><td style='text-align: center;'>3.0</td></tr>\n  </tbody>\n</table>",
+            "block_bbox": [
+                111,
+                129,
+                1075,
+                306
+            ],
+            "block_id": 1,
+            "block_order": null,
+            "group_id": 1,
+            "block_polygon_points": [
+                [
+                    111.0,
+                    129.0
+                ],
+                [
+                    1075.0,
+                    129.0
+                ],
+                [
+                    1075.0,
+                    306.0
+                ],
+                [
+                    111.0,
+                    306.0
+                ]
+            ]
+        },
+        {
+            "block_label": "figure_title",
+            "block_content": "<div style=\"text-align: center;\">(a) Latency comparison on Jetson Orin (64G) mobile GPU</div>\n",
+            "block_bbox": [
+                327,
+                293,
+                707,
+                314
+            ],
+            "block_id": 2,
+            "block_order": null,
+            "group_id": 2,
+            "block_polygon_points": [
+                [
+                    334.0,
+                    313.0
+                ],
+                [
+                    700.0,
+                    313.0
+                ],
+                [
+                    706.0,
+                    306.0
+                ],
+                [
+                    706.0,
+                    293.0
+                ],
+                [
+                    340.0,
+                    293.0
+                ],
+                [
+                    334.0,
+                    307.0
+                ]
+            ]
+        },
+        {
+            "block_label": "figure_title",
+            "block_content": "<div style=\"text-align: center;\">(b) Latency on Raspberry Pi 4</div>\n",
+            "block_bbox": [
+                891,
+                294,
+                1087,
+                314
+            ],
+            "block_id": 3,
+            "block_order": null,
+            "group_id": 3,
+            "block_polygon_points": [
+                [
+                    891.0,
+                    294.0
+                ],
+                [
+                    1086.0,
+                    294.0
+                ],
+                [
+                    1086.0,
+                    313.0
+                ],
+                [
+                    891.0,
+                    313.0
+                ]
+            ]
+        },
+        {
+            "block_label": "figure_title",
+            "block_content": "<div style=\"text-align: center;\">Figure 10. TinyChat offers 1.2-3.0× speedup over existing systems when running 4-bit quantized Llama models on NVIDIA Jetson Orin. It also supports a diverse range of general-purpose and coding-specific LLMs with at least 2.6× speedup over AutoGPTQ, which also supports all these workloads. Moreover, TinyChat seamlessly operates on Raspberry Pi and enables the deployment of LLMs with up to 7 billion parameters on extremely resource-constrained IoT devices.</div>\n",
+            "block_bbox": [
+                105,
+                330,
+                1088,
+                415
+            ],
+            "block_id": 4,
+            "block_order": null,
+            "group_id": 4,
+            "block_polygon_points": [
+                [
+                    105.0,
+                    330.0
+                ],
+                [
+                    1088.0,
+                    330.0
+                ],
+                [
+                    1088.0,
+                    415.0
+                ],
+                [
+                    105.0,
+                    415.0
+                ]
+            ]
+        },
+        {
+            "block_label": "text",
+            "block_content": "We perform batch size = 1 inference for all LLMs using a fixed prompt length of 4 tokens. We generate 200 tokens for each inference run and calculate the median latency as the final result.",
+            "block_bbox": [
+                104,
+                454,
+                583,
+                550
+            ],
+            "block_id": 5,
+            "block_order": 1,
+            "group_id": 5,
+            "block_polygon_points": [
+                [
+                    104.0,
+                    454.0
+                ],
+                [
+                    583.0,
+                    454.0
+                ],
+                [
+                    583.0,
+                    550.0
+                ],
+                [
+                    104.0,
+                    550.0
+                ]
+            ]
+        },
+        {
+            "block_label": "text",
+            "block_content": "Results. As in Figure 9(a), TinyChat brings 2.7-3.9× speedup to three families of LLMs (Llama-2, MPT and Falcon) on 4090 compared with the Huggingface FP16 implementation. For Llama-2-7B, we improve the inference speed from 52 tokens/s to 62 tokens/s through FP16 kernel fusion. On top of the stronger FP16 baseline, we further harvest 3.1× additional speedup from the fast quantized linear kernels. For Falcon-7B, the official implementation did not support KV cache correctly during the inference time, and thus it is significantly slower than other models. In this case, our FP16 optimizations bring about a larger speedup of 1.6×. On the laptop 4070 GPU with only 8GB memory, we are still able to run Llama-2-13B models at 33 tokens/s, while the FP16 implementation cannot fit 7B models. We also demonstrate visual-language model (Lin et al., 2024) acceleration results in Table 10. TinyChat brings about 3× speedup to both VILA-7B and VILA-13B on NVIDIA Jetson Orin. Notably, we implement the forward pass for all AWQ models using native PyTorch APIs, and this code is reused across various GPU architectures. Hence, TinyChat offers exceptional extensibility.",
+            "block_bbox": [
+                104,
+                587,
+                585,
+                1091
+            ],
+            "block_id": 6,
+            "block_order": 2,
+            "group_id": 6,
+            "block_polygon_points": [
+                [
+                    104.0,
+                    587.0
+                ],
+                [
+                    585.0,
+                    587.0
+                ],
+                [
+                    585.0,
+                    1091.0
+                ],
+                [
+                    104.0,
+                    1091.0
+                ]
+            ]
+        },
+        {
+            "block_label": "text",
+            "block_content": "Comparisons against other systems. We compare TinyChat against existing edge LLM inference systems AutoGPTQ, llama.cpp and exllama in Figure 10. Our system achieves up to  $ 1.7\\times $ speedup over llama.cpp on Orin. Furthermore, llama.cpp and exllama exhibit limited adaptability, primarily tailored for LLaMA and Llama-2 models. In contrast, our TinyChat supports a wide range of applications, including StarCoder (Li et al., 2023c), StableCode (GPT-NeoX) (Black et al., 2022), Mistral (Jiang et al., 2023), and Falcon (Penedo et al., 2023) while consistently delivering significant speedup over AutoGPTQ. TinyChat even democratizes LLM deployment on extremely resource-constrained Raspberry Pi 4B, achieving 0.7 tokens/s for 7B models.",
+            "block_bbox": [
+                103,
+                1125,
+                586,
+                1438
+            ],
+            "block_id": 7,
+            "block_order": 3,
+            "group_id": 7,
+            "block_polygon_points": [
+                [
+                    103.0,
+                    1125.0
+                ],
+                [
+                    586.0,
+                    1125.0
+                ],
+                [
+                    586.0,
+                    1438.0
+                ],
+                [
+                    103.0,
+                    1438.0
+                ]
+            ]
+        },
+        {
+            "block_label": "paragraph_title",
+            "block_content": "## 6 CONCLUSION",
+            "block_bbox": [
+                610,
+                452,
+                800,
+                477
+            ],
+            "block_id": 8,
+            "block_order": 4,
+            "group_id": 8,
+            "block_polygon_points": [
+                [
+                    610.0,
+                    452.0
+                ],
+                [
+                    800.0,
+                    452.0
+                ],
+                [
+                    800.0,
+                    477.0
+                ],
+                [
+                    610.0,
+                    477.0
+                ]
+            ]
+        },
+        {
+            "block_label": "text",
+            "block_content": "In this work, we propose Activation-aware Weight Quantization (AWQ), a simple yet effective method for low-bit weight-only LLM compression. Based on the observation that weights are not equally important in LLMs, AWQ performs per-channel scaling to reduce the quantization loss of salient weights. AWQ does not over-fit the calibration set and preserves the generalist abilities of LLMs in various domains and modalities. It outperforms existing work on language modeling and is applicable to instruction-tuned LMs and multi-modal LMs. Our TinyChat system further translates the theoretical memory savings achieved by AWQ into  $ 3.2-3.3\\times $ measured speedups over the FP16 implementations from Huggingface on desktop and mobile GPUs, democratizing LLM deployment on the edge.",
+            "block_bbox": [
+                607,
+                499,
+                1089,
+                837
+            ],
+            "block_id": 9,
+            "block_order": 5,
+            "group_id": 9,
+            "block_polygon_points": [
+                [
+                    607.0,
+                    499.0
+                ],
+                [
+                    1089.0,
+                    499.0
+                ],
+                [
+                    1089.0,
+                    837.0
+                ],
+                [
+                    607.0,
+                    837.0
+                ]
+            ]
+        },
+        {
+            "block_label": "paragraph_title",
+            "block_content": "## ACKNOWLEDGEMENTS",
+            "block_bbox": [
+                610,
+                857,
+                865,
+                881
+            ],
+            "block_id": 10,
+            "block_order": 6,
+            "group_id": 10,
+            "block_polygon_points": [
+                [
+                    610.0,
+                    857.0
+                ],
+                [
+                    865.0,
+                    857.0
+                ],
+                [
+                    865.0,
+                    881.0
+                ],
+                [
+                    610.0,
+                    881.0
+                ]
+            ]
+        },
+        {
+            "block_label": "text",
+            "block_content": "We thank MIT AI Hardware Program, National Science Foundation (CNS-2112562), MIT-IBM Watson AI Lab, Amazon and MIT Science Hub, Microsoft Turing Academic Program, and Samsung for supporting this research.",
+            "block_bbox": [
+                607,
+                903,
+                1088,
+                1002
+            ],
+            "block_id": 11,
+            "block_order": 7,
+            "group_id": 11,
+            "block_polygon_points": [
+                [
+                    607.0,
+                    903.0
+                ],
+                [
+                    1088.0,
+                    903.0
+                ],
+                [
+                    1088.0,
+                    1002.0
+                ],
+                [
+                    607.0,
+                    1002.0
+                ]
+            ]
+        },
+        {
+            "block_label": "paragraph_title",
+            "block_content": "## REFERENCES",
+            "block_bbox": [
+                611,
+                1021,
+                763,
+                1046
+            ],
+            "block_id": 12,
+            "block_order": 8,
+            "group_id": 12,
+            "block_polygon_points": [
+                [
+                    611.0,
+                    1021.0
+                ],
+                [
+                    763.0,
+                    1021.0
+                ],
+                [
+                    763.0,
+                    1046.0
+                ],
+                [
+                    611.0,
+                    1046.0
+                ]
+            ]
+        },
+        {
+            "block_label": "reference_content",
+            "block_content": "Alayrac, J.-B., Donahue, J., Luc, P., Miech, A., Barr, I., Hasson, Y., Lenc, K., Mensch, A., Millican, K., Reynolds, M., et al. Flamingo: a visual language model for few-shot learning. Advances in Neural Information Processing Systems, 35:23716–23736, 2022.",
+            "block_bbox": [
+                612,
+                1069,
+                1087,
+                1187
+            ],
+            "block_id": 13,
+            "block_order": 9,
+            "group_id": 13,
+            "block_polygon_points": [
+                [
+                    612.0,
+                    1069.0
+                ],
+                [
+                    1087.0,
+                    1069.0
+                ],
+                [
+                    1087.0,
+                    1187.0
+                ],
+                [
+                    612.0,
+                    1187.0
+                ]
+            ]
+        },
+        {
+            "block_label": "reference_content",
+            "block_content": "Austin, J., Odena, A., Nye, M., Bosma, M., Michalewski, H., Dohan, D., Jiang, E., Cai, C., Terry, M., Le, Q., and Sutton, C. Program synthesis with large language models, 2021.",
+            "block_bbox": [
+                613,
+                1205,
+                1087,
+                1299
+            ],
+            "block_id": 14,
+            "block_order": 10,
+            "group_id": 14,
+            "block_polygon_points": [
+                [
+                    613.0,
+                    1205.0
+                ],
+                [
+                    1087.0,
+                    1205.0
+                ],
+                [
+                    1087.0,
+                    1299.0
+                ],
+                [
+                    613.0,
+                    1299.0
+                ]
+            ]
+        },
+        {
+            "block_label": "reference_content",
+            "block_content": "Awadalla, A., Gao, I., Gardner, J., Hessel, J., Hanafy, Y., Zhu, W., Marathe, K., Bitton, Y., Gadre, S., Jitsev, J., Kornblith, S., Koh, P. W., Ilharco, G., Wortsman, M., and Schmidt, L. Openflamingo, March 2023. URL https://doi.org/10.5281/zenodo.7733589.",
+            "block_bbox": [
+                611,
+                1317,
+                1088,
+                1434
+            ],
+            "block_id": 15,
+            "block_order": 11,
+            "group_id": 15,
+            "block_polygon_points": [
+                [
+                    611.0,
+                    1317.0
+                ],
+                [
+                    1088.0,
+                    1317.0
+                ],
+                [
+                    1088.0,
+                    1434.0
+                ],
+                [
+                    611.0,
+                    1434.0
+                ]
+            ]
+        }
+    ],
+    "layout_det_res": {
+        "input_path": null,
+        "page_index": null,
+        "boxes": [
+            {
+                "cls_id": 12,
+                "label": "header",
+                "score": 0.7897122502326965,
+                "coordinate": [
+                    220,
+                    92,
+                    972,
+                    114
+                ],
+                "order": null,
+                "polygon_points": [
+                    [
+                        220.0,
+                        92.0
+                    ],
+                    [
+                        972.0,
+                        92.0
+                    ],
+                    [
+                        972.0,
+                        114.0
+                    ],
+                    [
+                        220.0,
+                        114.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 3,
+                "label": "chart",
+                "score": 0.7491946220397949,
+                "coordinate": [
+                    111,
+                    129,
+                    1075,
+                    306
+                ],
+                "order": null,
+                "polygon_points": [
+                    [
+                        111.0,
+                        129.0
+                    ],
+                    [
+                        1075.0,
+                        129.0
+                    ],
+                    [
+                        1075.0,
+                        306.0
+                    ],
+                    [
+                        111.0,
+                        306.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 7,
+                "label": "figure_title",
+                "score": 0.320448637008667,
+                "coordinate": [
+                    327,
+                    293,
+                    707,
+                    314
+                ],
+                "order": null,
+                "polygon_points": [
+                    [
+                        334.0,
+                        313.0
+                    ],
+                    [
+                        700.0,
+                        313.0
+                    ],
+                    [
+                        706.0,
+                        306.0
+                    ],
+                    [
+                        706.0,
+                        293.0
+                    ],
+                    [
+                        340.0,
+                        293.0
+                    ],
+                    [
+                        334.0,
+                        307.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 7,
+                "label": "figure_title",
+                "score": 0.43323245644569397,
+                "coordinate": [
+                    891,
+                    294,
+                    1087,
+                    314
+                ],
+                "order": null,
+                "polygon_points": [
+                    [
+                        891.0,
+                        294.0
+                    ],
+                    [
+                        1086.0,
+                        294.0
+                    ],
+                    [
+                        1086.0,
+                        313.0
+                    ],
+                    [
+                        891.0,
+                        313.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 7,
+                "label": "figure_title",
+                "score": 0.9293658137321472,
+                "coordinate": [
+                    105,
+                    330,
+                    1088,
+                    415
+                ],
+                "order": null,
+                "polygon_points": [
+                    [
+                        105.0,
+                        330.0
+                    ],
+                    [
+                        1088.0,
+                        330.0
+                    ],
+                    [
+                        1088.0,
+                        415.0
+                    ],
+                    [
+                        105.0,
+                        415.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.9425657391548157,
+                "coordinate": [
+                    104,
+                    454,
+                    583,
+                    550
+                ],
+                "order": 1,
+                "polygon_points": [
+                    [
+                        104.0,
+                        454.0
+                    ],
+                    [
+                        583.0,
+                        454.0
+                    ],
+                    [
+                        583.0,
+                        550.0
+                    ],
+                    [
+                        104.0,
+                        550.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.9654055833816528,
+                "coordinate": [
+                    104,
+                    587,
+                    585,
+                    1091
+                ],
+                "order": 2,
+                "polygon_points": [
+                    [
+                        104.0,
+                        587.0
+                    ],
+                    [
+                        585.0,
+                        587.0
+                    ],
+                    [
+                        585.0,
+                        1091.0
+                    ],
+                    [
+                        104.0,
+                        1091.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.9661844968795776,
+                "coordinate": [
+                    103,
+                    1125,
+                    586,
+                    1438
+                ],
+                "order": 3,
+                "polygon_points": [
+                    [
+                        103.0,
+                        1125.0
+                    ],
+                    [
+                        586.0,
+                        1125.0
+                    ],
+                    [
+                        586.0,
+                        1438.0
+                    ],
+                    [
+                        103.0,
+                        1438.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 17,
+                "label": "paragraph_title",
+                "score": 0.8606730699539185,
+                "coordinate": [
+                    610,
+                    452,
+                    800,
+                    477
+                ],
+                "order": 4,
+                "polygon_points": [
+                    [
+                        610.0,
+                        452.0
+                    ],
+                    [
+                        800.0,
+                        452.0
+                    ],
+                    [
+                        800.0,
+                        477.0
+                    ],
+                    [
+                        610.0,
+                        477.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.9638723731040955,
+                "coordinate": [
+                    607,
+                    499,
+                    1089,
+                    837
+                ],
+                "order": 5,
+                "polygon_points": [
+                    [
+                        607.0,
+                        499.0
+                    ],
+                    [
+                        1089.0,
+                        499.0
+                    ],
+                    [
+                        1089.0,
+                        837.0
+                    ],
+                    [
+                        607.0,
+                        837.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 17,
+                "label": "paragraph_title",
+                "score": 0.8452056050300598,
+                "coordinate": [
+                    610,
+                    857,
+                    865,
+                    881
+                ],
+                "order": 6,
+                "polygon_points": [
+                    [
+                        610.0,
+                        857.0
+                    ],
+                    [
+                        865.0,
+                        857.0
+                    ],
+                    [
+                        865.0,
+                        881.0
+                    ],
+                    [
+                        610.0,
+                        881.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.9326308369636536,
+                "coordinate": [
+                    607,
+                    903,
+                    1088,
+                    1002
+                ],
+                "order": 7,
+                "polygon_points": [
+                    [
+                        607.0,
+                        903.0
+                    ],
+                    [
+                        1088.0,
+                        903.0
+                    ],
+                    [
+                        1088.0,
+                        1002.0
+                    ],
+                    [
+                        607.0,
+                        1002.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 17,
+                "label": "paragraph_title",
+                "score": 0.8247154355049133,
+                "coordinate": [
+                    611,
+                    1021,
+                    763,
+                    1046
+                ],
+                "order": 8,
+                "polygon_points": [
+                    [
+                        611.0,
+                        1021.0
+                    ],
+                    [
+                        763.0,
+                        1021.0
+                    ],
+                    [
+                        763.0,
+                        1046.0
+                    ],
+                    [
+                        611.0,
+                        1046.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 18,
+                "label": "reference",
+                "score": 0.9135255217552185,
+                "coordinate": [
+                    611,
+                    1072,
+                    1088,
+                    1432
+                ],
+                "order": 9,
+                "polygon_points": [
+                    [
+                        611.0,
+                        1072.0
+                    ],
+                    [
+                        1087.0,
+                        1072.0
+                    ],
+                    [
+                        1087.0,
+                        1306.0
+                    ],
+                    [
+                        611.0,
+                        1306.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 19,
+                "label": "reference_content",
+                "score": 0.9451224207878113,
+                "coordinate": [
+                    612,
+                    1069,
+                    1087,
+                    1187
+                ],
+                "order": 10,
+                "polygon_points": [
+                    [
+                        612.0,
+                        1069.0
+                    ],
+                    [
+                        1087.0,
+                        1069.0
+                    ],
+                    [
+                        1087.0,
+                        1187.0
+                    ],
+                    [
+                        612.0,
+                        1187.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 19,
+                "label": "reference_content",
+                "score": 0.9458476901054382,
+                "coordinate": [
+                    613,
+                    1205,
+                    1087,
+                    1299
+                ],
+                "order": 11,
+                "polygon_points": [
+                    [
+                        613.0,
+                        1205.0
+                    ],
+                    [
+                        1087.0,
+                        1205.0
+                    ],
+                    [
+                        1087.0,
+                        1299.0
+                    ],
+                    [
+                        613.0,
+                        1299.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 19,
+                "label": "reference_content",
+                "score": 0.9552766680717468,
+                "coordinate": [
+                    611,
+                    1317,
+                    1088,
+                    1434
+                ],
+                "order": 12,
+                "polygon_points": [
+                    [
+                        611.0,
+                        1317.0
+                    ],
+                    [
+                        1088.0,
+                        1317.0
+                    ],
+                    [
+                        1088.0,
+                        1434.0
+                    ],
+                    [
+                        611.0,
+                        1434.0
+                    ]
+                ]
+            }
+        ]
+    }
+}

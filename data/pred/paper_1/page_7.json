@@ -1,0 +1,766 @@
+{
+    "input_path": "input/2306.00978v6.pdf",
+    "page_index": 7,
+    "page_count": 15,
+    "width": 1224,
+    "height": 1584,
+    "model_settings": {
+        "use_doc_preprocessor": false,
+        "use_layout_detection": true,
+        "use_chart_recognition": true,
+        "use_seal_recognition": false,
+        "use_ocr_for_image_block": true,
+        "format_block_content": true,
+        "merge_layout_blocks": true,
+        "markdown_ignore_labels": [
+            "number",
+            "footnote",
+            "header",
+            "header_image",
+            "footer",
+            "footer_image",
+            "aside_text"
+        ],
+        "return_layout_polygon_points": true
+    },
+    "parsing_res_list": [
+        {
+            "block_label": "figure_title",
+            "block_content": "<div style=\"text-align: center;\">AWQ: Activation-aware Weight Quantization for On-Device LLM Compression and Acceleration</div>\n",
+            "block_bbox": [
+                220,
+                91,
+                973,
+                115
+            ],
+            "block_id": 0,
+            "block_order": null,
+            "group_id": 0,
+            "block_polygon_points": [
+                [
+                    220.0,
+                    91.0
+                ],
+                [
+                    973.0,
+                    91.0
+                ],
+                [
+                    973.0,
+                    115.0
+                ],
+                [
+                    220.0,
+                    115.0
+                ]
+            ]
+        },
+        {
+            "block_label": "table",
+            "block_content": "\n<table border=1 style='margin: auto; word-wrap: break-word;'><tr><td colspan=\"2\">COCO (CIDEr  $ \\uparrow $)</td><td style='text-align: center; word-wrap: break-word;'>0-shot</td><td style='text-align: center; word-wrap: break-word;'>4-shot</td><td style='text-align: center; word-wrap: break-word;'>8-shot</td><td style='text-align: center; word-wrap: break-word;'>16-shot</td><td style='text-align: center; word-wrap: break-word;'>32-shot</td><td style='text-align: center; word-wrap: break-word;'>$ \\Delta $(32-shot)</td></tr><tr><td style='text-align: center; word-wrap: break-word;'>FP16</td><td style='text-align: center; word-wrap: break-word;'>-</td><td style='text-align: center; word-wrap: break-word;'>63.73</td><td style='text-align: center; word-wrap: break-word;'>72.18</td><td style='text-align: center; word-wrap: break-word;'>76.95</td><td style='text-align: center; word-wrap: break-word;'>79.74</td><td style='text-align: center; word-wrap: break-word;'>81.70</td><td style='text-align: center; word-wrap: break-word;'>-</td></tr><tr><td style='text-align: center; word-wrap: break-word;'>INT4</td><td style='text-align: center; word-wrap: break-word;'>RTN</td><td style='text-align: center; word-wrap: break-word;'>60.24</td><td style='text-align: center; word-wrap: break-word;'>68.07</td><td style='text-align: center; word-wrap: break-word;'>72.46</td><td style='text-align: center; word-wrap: break-word;'>74.09</td><td style='text-align: center; word-wrap: break-word;'>77.13</td><td style='text-align: center; word-wrap: break-word;'>-4.57</td></tr><tr><td rowspan=\"2\">g128</td><td style='text-align: center; word-wrap: break-word;'>GPTQ</td><td style='text-align: center; word-wrap: break-word;'>59.72</td><td style='text-align: center; word-wrap: break-word;'>67.68</td><td style='text-align: center; word-wrap: break-word;'>72.53</td><td style='text-align: center; word-wrap: break-word;'>74.98</td><td style='text-align: center; word-wrap: break-word;'>74.98</td><td style='text-align: center; word-wrap: break-word;'>-6.72</td></tr><tr><td style='text-align: center; word-wrap: break-word;'>AWQ</td><td style='text-align: center; word-wrap: break-word;'>62.57</td><td style='text-align: center; word-wrap: break-word;'>71.02</td><td style='text-align: center; word-wrap: break-word;'>74.75</td><td style='text-align: center; word-wrap: break-word;'>78.23</td><td style='text-align: center; word-wrap: break-word;'>80.53</td><td style='text-align: center; word-wrap: break-word;'>-1.17</td></tr><tr><td style='text-align: center; word-wrap: break-word;'>INT3</td><td style='text-align: center; word-wrap: break-word;'>RTN</td><td style='text-align: center; word-wrap: break-word;'>46.07</td><td style='text-align: center; word-wrap: break-word;'>55.13</td><td style='text-align: center; word-wrap: break-word;'>60.46</td><td style='text-align: center; word-wrap: break-word;'>63.21</td><td style='text-align: center; word-wrap: break-word;'>64.79</td><td style='text-align: center; word-wrap: break-word;'>-16.91</td></tr><tr><td rowspan=\"2\">g128</td><td style='text-align: center; word-wrap: break-word;'>GPTQ</td><td style='text-align: center; word-wrap: break-word;'>29.84</td><td style='text-align: center; word-wrap: break-word;'>50.77</td><td style='text-align: center; word-wrap: break-word;'>56.55</td><td style='text-align: center; word-wrap: break-word;'>60.54</td><td style='text-align: center; word-wrap: break-word;'>64.77</td><td style='text-align: center; word-wrap: break-word;'>-16.93</td></tr><tr><td style='text-align: center; word-wrap: break-word;'>AWQ</td><td style='text-align: center; word-wrap: break-word;'>56.33</td><td style='text-align: center; word-wrap: break-word;'>64.73</td><td style='text-align: center; word-wrap: break-word;'>68.79</td><td style='text-align: center; word-wrap: break-word;'>72.86</td><td style='text-align: center; word-wrap: break-word;'>74.47</td><td style='text-align: center; word-wrap: break-word;'>-7.23</td></tr></table>",
+            "block_bbox": [
+                210,
+                132,
+                982,
+                342
+            ],
+            "block_id": 1,
+            "block_order": null,
+            "group_id": 1,
+            "block_polygon_points": [
+                [
+                    210.0,
+                    132.0
+                ],
+                [
+                    982.0,
+                    132.0
+                ],
+                [
+                    982.0,
+                    342.0
+                ],
+                [
+                    210.0,
+                    342.0
+                ]
+            ]
+        },
+        {
+            "block_label": "figure_title",
+            "block_content": "<div style=\"text-align: center;\">Table 6. Quantization results of a visual language model OpenFlamingo-9B (Awadalla et al., 2023) on COCO Captioning datasets. Activation-aware Weight Quantization outperforms existing methods under zero-shot and various few-shot settings, demonstrating the generability to different modalities and in-context learning workloads. Activation-aware Weight Quantization reduces the quantization degradation (32-shot) from 4.57 to 1.17 under INT4-g128, providing 4× model size reduction with negligible performance loss.</div>\n",
+            "block_bbox": [
+                105,
+                361,
+                1088,
+                445
+            ],
+            "block_id": 2,
+            "block_order": null,
+            "group_id": 2,
+            "block_polygon_points": [
+                [
+                    105.0,
+                    361.0
+                ],
+                [
+                    1088.0,
+                    361.0
+                ],
+                [
+                    1088.0,
+                    445.0
+                ],
+                [
+                    105.0,
+                    445.0
+                ]
+            ]
+        },
+        {
+            "block_label": "table",
+            "block_content": "\n<table border=1 style='margin: auto; word-wrap: break-word;'><tr><td style='text-align: center; word-wrap: break-word;'>Model (Accuracy $ \\uparrow $)</td><td style='text-align: center; word-wrap: break-word;'>VQAv2</td><td style='text-align: center; word-wrap: break-word;'>GQA</td><td style='text-align: center; word-wrap: break-word;'>VizWiz</td><td style='text-align: center; word-wrap: break-word;'>SQA-I</td><td style='text-align: center; word-wrap: break-word;'>VQA-T</td><td style='text-align: center; word-wrap: break-word;'>POPE</td><td style='text-align: center; word-wrap: break-word;'>MME</td><td style='text-align: center; word-wrap: break-word;'>MMB</td><td style='text-align: center; word-wrap: break-word;'>SEED</td><td style='text-align: center; word-wrap: break-word;'>llava-bench</td><td style='text-align: center; word-wrap: break-word;'>MM-Vet</td></tr><tr><td style='text-align: center; word-wrap: break-word;'>VILA-7B</td><td style='text-align: center; word-wrap: break-word;'>80.3</td><td style='text-align: center; word-wrap: break-word;'>63.1</td><td style='text-align: center; word-wrap: break-word;'>59.6</td><td style='text-align: center; word-wrap: break-word;'>68.0</td><td style='text-align: center; word-wrap: break-word;'>62.6</td><td style='text-align: center; word-wrap: break-word;'>86.3</td><td style='text-align: center; word-wrap: break-word;'>1489.4</td><td style='text-align: center; word-wrap: break-word;'>69.8</td><td style='text-align: center; word-wrap: break-word;'>61.7</td><td style='text-align: center; word-wrap: break-word;'>75.2</td><td style='text-align: center; word-wrap: break-word;'>35.1</td></tr><tr><td style='text-align: center; word-wrap: break-word;'>VILA-7B-AWQ</td><td style='text-align: center; word-wrap: break-word;'>80.1</td><td style='text-align: center; word-wrap: break-word;'>63.0</td><td style='text-align: center; word-wrap: break-word;'>57.8</td><td style='text-align: center; word-wrap: break-word;'>68.0</td><td style='text-align: center; word-wrap: break-word;'>61.9</td><td style='text-align: center; word-wrap: break-word;'>85.3</td><td style='text-align: center; word-wrap: break-word;'>1486.3</td><td style='text-align: center; word-wrap: break-word;'>68.8</td><td style='text-align: center; word-wrap: break-word;'>61.3</td><td style='text-align: center; word-wrap: break-word;'>75.8</td><td style='text-align: center; word-wrap: break-word;'>35.9</td></tr><tr><td style='text-align: center; word-wrap: break-word;'>VILA-13B</td><td style='text-align: center; word-wrap: break-word;'>80.5</td><td style='text-align: center; word-wrap: break-word;'>63.6</td><td style='text-align: center; word-wrap: break-word;'>63.1</td><td style='text-align: center; word-wrap: break-word;'>70.5</td><td style='text-align: center; word-wrap: break-word;'>64.0</td><td style='text-align: center; word-wrap: break-word;'>86.3</td><td style='text-align: center; word-wrap: break-word;'>1553.6</td><td style='text-align: center; word-wrap: break-word;'>73.8</td><td style='text-align: center; word-wrap: break-word;'>62.8</td><td style='text-align: center; word-wrap: break-word;'>78.3</td><td style='text-align: center; word-wrap: break-word;'>42.6</td></tr><tr><td style='text-align: center; word-wrap: break-word;'>VILA-13B-AWQ</td><td style='text-align: center; word-wrap: break-word;'>80.4</td><td style='text-align: center; word-wrap: break-word;'>63.6</td><td style='text-align: center; word-wrap: break-word;'>63.0</td><td style='text-align: center; word-wrap: break-word;'>71.2</td><td style='text-align: center; word-wrap: break-word;'>63.5</td><td style='text-align: center; word-wrap: break-word;'>87.0</td><td style='text-align: center; word-wrap: break-word;'>1552.9</td><td style='text-align: center; word-wrap: break-word;'>73.6</td><td style='text-align: center; word-wrap: break-word;'>62.2</td><td style='text-align: center; word-wrap: break-word;'>77.6</td><td style='text-align: center; word-wrap: break-word;'>42.0</td></tr></table>",
+            "block_bbox": [
+                117,
+                467,
+                1075,
+                592
+            ],
+            "block_id": 3,
+            "block_order": null,
+            "group_id": 3,
+            "block_polygon_points": [
+                [
+                    116.99981689453125,
+                    467.0
+                ],
+                [
+                    1073.0859375,
+                    459.9552001953125
+                ],
+                [
+                    1074.0,
+                    584.0
+                ],
+                [
+                    117.91387939453125,
+                    591.0447998046875
+                ]
+            ]
+        },
+        {
+            "block_label": "figure_title",
+            "block_content": "<div style=\"text-align: center;\">Table 7. INT4-g128 results of VILA-7B and VILA-13B (Lin et al., 2024) on 11 visual-language benchmarks. AWQ consistently shows lossless performance on all benchmarks. Benchmark names are abbreviated due to space limits. VQA-v2 (Goyal et al., 2017); GQA (Hudson & Manning, 2019); VisWiz (Gurari et al., 2018); SQA $ ^{1} $: ScienceQA-IMG (Lu et al., 2022); VQA $ ^{T} $: TextVQA (Singh et al., 2019); POPE (Li et al., 2023d); MME (Fu et al., 2023); MMB: MMBench (Liu et al., 2023b); MMB $ ^{CN} $: MMBench-Chinese (Liu et al., 2023b); SEED: SEED-Bench (Li et al., 2023a); LLaVA $ ^{W} $: LLaVA-Bench (In-the-Wild) (Liu et al., 2023a); MM-Vet (Yu et al., 2023).</div>\n",
+            "block_bbox": [
+                104,
+                611,
+                1088,
+                715
+            ],
+            "block_id": 4,
+            "block_order": null,
+            "group_id": 4,
+            "block_polygon_points": [
+                [
+                    104.0,
+                    611.0
+                ],
+                [
+                    1088.0,
+                    611.0
+                ],
+                [
+                    1088.0,
+                    715.0
+                ],
+                [
+                    104.0,
+                    715.0
+                ]
+            ]
+        },
+        {
+            "block_label": "text",
+            "block_content": "et al., 2023b)) due to their superior performance compared to other open-source LLMs (Zhang et al., 2022; Scao et al., 2022); it is also the foundation of many popular open-source models (Taori et al., 2023; Chiang et al., 2023). We evaluate the perplexity before and after quantization in Table 4. AWQ consistently outperforms round-to-nearest (RTN) and GPTQ (Frantar et al., 2022) (w/ and w/o reordering) across different model scales (7B-70B) and generations.",
+            "block_bbox": [
+                104,
+                755,
+                585,
+                949
+            ],
+            "block_id": 5,
+            "block_order": 1,
+            "group_id": 5,
+            "block_polygon_points": [
+                [
+                    104.0,
+                    755.0
+                ],
+                [
+                    585.0,
+                    755.0
+                ],
+                [
+                    585.0,
+                    949.0
+                ],
+                [
+                    104.0,
+                    949.0
+                ]
+            ]
+        },
+        {
+            "block_label": "text",
+            "block_content": "Results on Mistral / Mixtral models. We also evaluated AWQ on the Mistral and Mixtral models, which are among the most popular open-source LLMs and Mixture-of-Experts (MoE) models, respectively (Jiang et al., 2023; 2024). The results indicate that AWQ achieves superior performance on both the Mistral and Mixtral models. This demonstrates that AWQ is effective across various model architectures.",
+            "block_bbox": [
+                103,
+                964,
+                585,
+                1157
+            ],
+            "block_id": 6,
+            "block_order": 2,
+            "group_id": 6,
+            "block_polygon_points": [
+                [
+                    103.0,
+                    964.0
+                ],
+                [
+                    585.0,
+                    964.0
+                ],
+                [
+                    585.0,
+                    1157.0
+                ],
+                [
+                    103.0,
+                    1157.0
+                ]
+            ]
+        },
+        {
+            "block_label": "text",
+            "block_content": "Quantization of instruction-tuned models. Instruction tuning can significantly improve the models' performance and usability (Wei et al., 2021; Sanh et al., 2021; Ouyang et al., 2022; Chung et al., 2022). It has become an essential procedure before model deployment. We further benchmark our method's performance on a popular instruction-tuned model Vicuna (Chiang et al., 2023) in Figure 5. We used the GPT-4 score to evaluate the quantized models' performance against the FP16 counterpart on 80 sample questions (Chiang et al., 2023). We compare the responses with both orders (quantized-FP16, FP16-quantized) to get rid of the ordering",
+            "block_bbox": [
+                103,
+                1173,
+                584,
+                1439
+            ],
+            "block_id": 7,
+            "block_order": 3,
+            "group_id": 7,
+            "block_polygon_points": [
+                [
+                    103.0,
+                    1173.0
+                ],
+                [
+                    584.0,
+                    1173.0
+                ],
+                [
+                    584.0,
+                    1439.0
+                ],
+                [
+                    103.0,
+                    1439.0
+                ]
+            ]
+        },
+        {
+            "block_label": "table",
+            "block_content": "\n<table border=1 style='margin: auto; word-wrap: break-word;'><tr><td style='text-align: center; word-wrap: break-word;'>MBPP (7B)</td><td style='text-align: center; word-wrap: break-word;'>pass@1</td><td style='text-align: center; word-wrap: break-word;'>pass@10</td><td style='text-align: center; word-wrap: break-word;'>GSM8K</td><td style='text-align: center; word-wrap: break-word;'>7B</td><td style='text-align: center; word-wrap: break-word;'>13B</td><td style='text-align: center; word-wrap: break-word;'>70B</td></tr><tr><td style='text-align: center; word-wrap: break-word;'>FP16</td><td style='text-align: center; word-wrap: break-word;'>38.53</td><td style='text-align: center; word-wrap: break-word;'>49.77</td><td style='text-align: center; word-wrap: break-word;'>FP16</td><td style='text-align: center; word-wrap: break-word;'>13.87</td><td style='text-align: center; word-wrap: break-word;'>26.16</td><td style='text-align: center; word-wrap: break-word;'>56.41</td></tr><tr><td style='text-align: center; word-wrap: break-word;'>RTN</td><td style='text-align: center; word-wrap: break-word;'>37.51</td><td style='text-align: center; word-wrap: break-word;'>48.49</td><td style='text-align: center; word-wrap: break-word;'>RTN</td><td style='text-align: center; word-wrap: break-word;'>11.07</td><td style='text-align: center; word-wrap: break-word;'>21.23</td><td style='text-align: center; word-wrap: break-word;'>53.98</td></tr><tr><td style='text-align: center; word-wrap: break-word;'>GPTQ</td><td style='text-align: center; word-wrap: break-word;'>31.97</td><td style='text-align: center; word-wrap: break-word;'>44.75</td><td style='text-align: center; word-wrap: break-word;'>GPTQ</td><td style='text-align: center; word-wrap: break-word;'>12.13</td><td style='text-align: center; word-wrap: break-word;'>24.26</td><td style='text-align: center; word-wrap: break-word;'>56.03</td></tr><tr><td style='text-align: center; word-wrap: break-word;'>AWQ</td><td style='text-align: center; word-wrap: break-word;'>40.64</td><td style='text-align: center; word-wrap: break-word;'>49.25</td><td style='text-align: center; word-wrap: break-word;'>AWQ</td><td style='text-align: center; word-wrap: break-word;'>13.57</td><td style='text-align: center; word-wrap: break-word;'>25.25</td><td style='text-align: center; word-wrap: break-word;'>56.40</td></tr></table>",
+            "block_bbox": [
+                617,
+                754,
+                1077,
+                887
+            ],
+            "block_id": 8,
+            "block_order": null,
+            "group_id": 8,
+            "block_polygon_points": [
+                [
+                    617.0,
+                    754.0
+                ],
+                [
+                    1077.0,
+                    754.0
+                ],
+                [
+                    1077.0,
+                    887.0
+                ],
+                [
+                    617.0,
+                    887.0
+                ]
+            ]
+        },
+        {
+            "block_label": "figure_title",
+            "block_content": "<div style=\"text-align: center;\">Table 8. INT4-g128 quantization results of CodeLlama-7b-Instruct-hf on MBPP dataset and Llama-2 (7B/13B/70B) on GSM8K dataset. AWQ outperforms existing methods on programming and math datasets, demonstrating the generability to different scenarios and evaluation settings. Notably, AWQ under the INT4-g128 configuration demonstrates comparable performance to the original FP16 model across both datasets.</div>\n",
+            "block_bbox": [
+                607,
+                907,
+                1088,
+                1051
+            ],
+            "block_id": 9,
+            "block_order": null,
+            "group_id": 9,
+            "block_polygon_points": [
+                [
+                    607.0,
+                    907.0
+                ],
+                [
+                    1088.0,
+                    907.0
+                ],
+                [
+                    1088.0,
+                    1051.0
+                ],
+                [
+                    607.0,
+                    1051.0
+                ]
+            ]
+        },
+        {
+            "block_label": "text",
+            "block_content": "effect (we found GPT-4 tends to increase the rating of the first input), leading to 160 trials. AWQ consistently improves the INT3-g128 quantized Vicuna models over RTN and GPTQ under both scales (7B and 13B), demonstrating the generability to instruction-tuned models.",
+            "block_bbox": [
+                607,
+                1106,
+                1088,
+                1228
+            ],
+            "block_id": 10,
+            "block_order": 4,
+            "group_id": 10,
+            "block_polygon_points": [
+                [
+                    607.0,
+                    1106.0
+                ],
+                [
+                    1088.0,
+                    1106.0
+                ],
+                [
+                    1088.0,
+                    1228.0
+                ],
+                [
+                    607.0,
+                    1228.0
+                ]
+            ]
+        },
+        {
+            "block_label": "text",
+            "block_content": "Quantization of multi-modal language models. Large multi-modal models (LMMs) or visual language models (VLMs) are LLMs augmented with vision inputs (Alayrac et al., 2022; Li et al., 2023b; Koh et al., 2023; Driess et al., 2023; Zhang et al., 2023; Liu et al., 2023a). Such models are able to perform text generation conditioned on image/video inputs. Since our method does not have the overfitting issue to the calibration set, it can be directly applied to VLMs.",
+            "block_bbox": [
+                607,
+                1244,
+                1089,
+                1438
+            ],
+            "block_id": 11,
+            "block_order": 5,
+            "group_id": 11,
+            "block_polygon_points": [
+                [
+                    607.0,
+                    1244.0
+                ],
+                [
+                    1089.0,
+                    1244.0
+                ],
+                [
+                    1089.0,
+                    1438.0
+                ],
+                [
+                    607.0,
+                    1438.0
+                ]
+            ]
+        }
+    ],
+    "layout_det_res": {
+        "input_path": null,
+        "page_index": null,
+        "boxes": [
+            {
+                "cls_id": 7,
+                "label": "figure_title",
+                "score": 0.7944780588150024,
+                "coordinate": [
+                    220,
+                    91,
+                    973,
+                    115
+                ],
+                "order": null,
+                "polygon_points": [
+                    [
+                        220.0,
+                        91.0
+                    ],
+                    [
+                        973.0,
+                        91.0
+                    ],
+                    [
+                        973.0,
+                        115.0
+                    ],
+                    [
+                        220.0,
+                        115.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 21,
+                "label": "table",
+                "score": 0.947289228439331,
+                "coordinate": [
+                    210,
+                    132,
+                    982,
+                    342
+                ],
+                "order": null,
+                "polygon_points": [
+                    [
+                        210.0,
+                        132.0
+                    ],
+                    [
+                        982.0,
+                        132.0
+                    ],
+                    [
+                        982.0,
+                        342.0
+                    ],
+                    [
+                        210.0,
+                        342.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 7,
+                "label": "figure_title",
+                "score": 0.9261839985847473,
+                "coordinate": [
+                    105,
+                    361,
+                    1088,
+                    445
+                ],
+                "order": null,
+                "polygon_points": [
+                    [
+                        105.0,
+                        361.0
+                    ],
+                    [
+                        1088.0,
+                        361.0
+                    ],
+                    [
+                        1088.0,
+                        445.0
+                    ],
+                    [
+                        105.0,
+                        445.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 21,
+                "label": "table",
+                "score": 0.9433127641677856,
+                "coordinate": [
+                    117,
+                    467,
+                    1075,
+                    592
+                ],
+                "order": null,
+                "polygon_points": [
+                    [
+                        116.99981689453125,
+                        467.0
+                    ],
+                    [
+                        1073.0859375,
+                        459.9552001953125
+                    ],
+                    [
+                        1074.0,
+                        584.0
+                    ],
+                    [
+                        117.91387939453125,
+                        591.0447998046875
+                    ]
+                ]
+            },
+            {
+                "cls_id": 7,
+                "label": "figure_title",
+                "score": 0.9252381920814514,
+                "coordinate": [
+                    104,
+                    611,
+                    1088,
+                    715
+                ],
+                "order": null,
+                "polygon_points": [
+                    [
+                        104.0,
+                        611.0
+                    ],
+                    [
+                        1088.0,
+                        611.0
+                    ],
+                    [
+                        1088.0,
+                        715.0
+                    ],
+                    [
+                        104.0,
+                        715.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.9519953727722168,
+                "coordinate": [
+                    104,
+                    755,
+                    585,
+                    949
+                ],
+                "order": 1,
+                "polygon_points": [
+                    [
+                        104.0,
+                        755.0
+                    ],
+                    [
+                        585.0,
+                        755.0
+                    ],
+                    [
+                        585.0,
+                        949.0
+                    ],
+                    [
+                        104.0,
+                        949.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.9558175802230835,
+                "coordinate": [
+                    103,
+                    964,
+                    585,
+                    1157
+                ],
+                "order": 2,
+                "polygon_points": [
+                    [
+                        103.0,
+                        964.0
+                    ],
+                    [
+                        585.0,
+                        964.0
+                    ],
+                    [
+                        585.0,
+                        1157.0
+                    ],
+                    [
+                        103.0,
+                        1157.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.9594928622245789,
+                "coordinate": [
+                    103,
+                    1173,
+                    584,
+                    1439
+                ],
+                "order": 3,
+                "polygon_points": [
+                    [
+                        103.0,
+                        1173.0
+                    ],
+                    [
+                        584.0,
+                        1173.0
+                    ],
+                    [
+                        584.0,
+                        1439.0
+                    ],
+                    [
+                        103.0,
+                        1439.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 21,
+                "label": "table",
+                "score": 0.9396476745605469,
+                "coordinate": [
+                    617,
+                    754,
+                    1077,
+                    887
+                ],
+                "order": null,
+                "polygon_points": [
+                    [
+                        617.0,
+                        754.0
+                    ],
+                    [
+                        1077.0,
+                        754.0
+                    ],
+                    [
+                        1077.0,
+                        887.0
+                    ],
+                    [
+                        617.0,
+                        887.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 7,
+                "label": "figure_title",
+                "score": 0.9290079474449158,
+                "coordinate": [
+                    607,
+                    907,
+                    1088,
+                    1051
+                ],
+                "order": null,
+                "polygon_points": [
+                    [
+                        607.0,
+                        907.0
+                    ],
+                    [
+                        1088.0,
+                        907.0
+                    ],
+                    [
+                        1088.0,
+                        1051.0
+                    ],
+                    [
+                        607.0,
+                        1051.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.9369874596595764,
+                "coordinate": [
+                    607,
+                    1106,
+                    1088,
+                    1228
+                ],
+                "order": 4,
+                "polygon_points": [
+                    [
+                        607.0,
+                        1106.0
+                    ],
+                    [
+                        1088.0,
+                        1106.0
+                    ],
+                    [
+                        1088.0,
+                        1228.0
+                    ],
+                    [
+                        607.0,
+                        1228.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.9578778147697449,
+                "coordinate": [
+                    607,
+                    1244,
+                    1089,
+                    1438
+                ],
+                "order": 5,
+                "polygon_points": [
+                    [
+                        607.0,
+                        1244.0
+                    ],
+                    [
+                        1089.0,
+                        1244.0
+                    ],
+                    [
+                        1089.0,
+                        1438.0
+                    ],
+                    [
+                        607.0,
+                        1438.0
+                    ]
+                ]
+            }
+        ]
+    }
+}
