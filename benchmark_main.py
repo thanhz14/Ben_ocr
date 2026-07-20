@@ -5,7 +5,7 @@ Benchmark OCR/document-parsing results per label, following the OmniDocBench app
 Metrics by category
 -------------------
   text    : normalized edit distance (edit_similarity)
-  formula : normalized edit distance + CDM  (from metric/fomula.py → metric/cdm_metric.py)
+  formula : normalized edit distance + CDM  (from metric/formula.py → metric/cdm_metric.py)
   table   : normalized edit distance + TEDS (from metric/table.py  → metric/table_metric.py)
 
 Usage
