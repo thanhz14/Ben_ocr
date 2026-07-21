@@ -68,7 +68,7 @@ def parse_label_studio_json(input_file, output_file=None, page_width=1224, page_
                 
                 value = result.get('value', {})
                 meta = result.get('meta', {})
-                page_index = value.get('pageIndex', 1)
+                page_index = value.get('pageIndex', 1) -1
                 
                 # Get order from meta.text
                 order_list = meta.get('text', [])
