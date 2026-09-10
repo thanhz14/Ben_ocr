@@ -1,0 +1,2277 @@
+{
+  "file_name": "paper_16",
+  "pages": [
+    {
+      "page_index": 1,
+      "blocks": [
+        {
+          "id": "0",
+          "order": null,
+          "bounding_box": {
+            "x": 0.03022875816993464,
+            "y": 0.36426767676767674,
+            "width": 0.03431372549019608,
+            "height": 0.45202020202020204
+          },
+          "content": "arXiv:2607.20760v1 [stat.ME] 22 Jul 2026",
+          "label": "Text"
+        },
+        {
+          "id": "1",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.12254901960784313,
+            "y": 0.14457070707070707,
+            "width": 0.7540849673202614,
+            "height": 0.09090909090909091
+          },
+          "content": "# Twoblock clustering trees with coskewness-based dimension reduction: recovering piecewise multivariate linear regimes",
+          "label": "Text"
+        },
+        {
+          "id": "2",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.41911764705882354,
+            "y": 0.2582070707070707,
+            "width": 0.16013071895424835,
+            "height": 0.020202020202020204
+          },
+          "content": "Sven Serneels $ ^{1,2} $",
+          "label": "Text"
+        },
+        {
+          "id": "3",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.3161764705882353,
+            "y": 0.2916666666666667,
+            "width": 0.3668300653594771,
+            "height": 0.017676767676767676
+          },
+          "content": " $ ^{1} $ Snow Stallion AI, Cheyenne, Wyoming, USA",
+          "label": "Text"
+        },
+        {
+          "id": "4",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.2508169934640523,
+            "y": 0.3143939393939394,
+            "width": 0.5040849673202614,
+            "height": 0.017676767676767676
+          },
+          "content": " $ ^{2} $ Department of Mathematics, University of Antwerp, Belgium $ ^{*} $",
+          "label": "Text"
+        },
+        {
+          "id": "5",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.38562091503267976,
+            "y": 0.34154040404040403,
+            "width": 0.2295751633986928,
+            "height": 0.015151515151515152
+          },
+          "content": "ORCID: 0000-0003-1642-189X",
+          "label": "Text"
+        },
+        {
+          "id": "6",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.4583333333333333,
+            "y": 0.41224747474747475,
+            "width": 0.08333333333333333,
+            "height": 0.015782828282828284
+          },
+          "content": "## Abstract",
+          "label": "Text"
+        },
+        {
+          "id": "7",
+          "order": 7,
+          "bounding_box": {
+            "x": 0.16094771241830066,
+            "y": 0.43813131313131315,
+            "width": 0.6772875816993464,
+            "height": 0.2398989898989899
+          },
+          "content": "The twoblock clustering tree (tbtree) is introduced as a highly interpretable regression tree for multivariate responses. Twoblock trees are deterministic decision trees that have local multivariate linear models as their leaves and use dense or sparse twoblock dimension reduction as local leaf models and in the impurity. The resulting models are both computationally efficient and can be highly interpretable. Beyond proposing the decision tree estimator itself, this paper also introduces an estimator for the twoblock dimension reduced space based on maximizing coskewness, which facilitates identification of non-normal clusters in the data. The tree inherently produces a set of local linear models and is therefore apt to recover peicewise linear regimes, which is illustrated in a simulation. However, two real world data examples illustrate that twoblock trees are also capable of modeling more complexly nonlinear dependencies and can perform on par with black box modeling techniques, such as random forests. At each point, both the twoblock models that generate the splits, as well as the ones in the leaves, can be inspected and interpreted.",
+          "label": "Text"
+        },
+        {
+          "id": "8",
+          "order": 8,
+          "bounding_box": {
+            "x": 0.16094771241830066,
+            "y": 0.6856060606060606,
+            "width": 0.6756535947712419,
+            "height": 0.05113636363636364
+          },
+          "content": "Keywords: twoblock dimension reduction, coskewness, higher-order power method, twoblock trees, top-down clustering trees, regression trees, regime discovery, interpretable machine learning.",
+          "label": "Text"
+        },
+        {
+          "id": "9",
+          "order": 9,
+          "bounding_box": {
+            "x": 0.16094771241830066,
+            "y": 0.7449494949494949,
+            "width": 0.6143790849673203,
+            "height": 0.016414141414141416
+          },
+          "content": "Mathematics Subject Classification (2020): 62H30, 62H25, 62J05, 62-08",
+          "label": "Text"
+        },
+        {
+          "id": "10",
+          "order": 10,
+          "bounding_box": {
+            "x": 0.11519607843137254,
+            "y": 0.7897727272727273,
+            "width": 0.21650326797385622,
+            "height": 0.020833333333333332
+          },
+          "content": "## 1 Introduction",
+          "label": "Text"
+        },
+        {
+          "id": "11",
+          "order": 11,
+          "bounding_box": {
+            "x": 0.11274509803921569,
+            "y": 0.8276515151515151,
+            "width": 0.7736928104575164,
+            "height": 0.054924242424242424
+          },
+          "content": "In many industrial and scientific applications the mechanism that links a set of predictors to the quantities one wishes to predict is genuinely non-linear, yet it can reasonably be approximated by a set of local linear regimes. Manufacturing processes are often operated",
+          "label": "Text"
+        },
+        {
+          "id": "12",
+          "order": null,
+          "bounding_box": {
+            "x": 0.13562091503267973,
+            "y": 0.8926767676767676,
+            "width": 0.4665032679738562,
+            "height": 0.015782828282828284
+          },
+          "content": "*Corresponding author, e-mail: sven.serneels@uantwerpen.be",
+          "label": "Text"
+        },
+        {
+          "id": "13",
+          "order": null,
+          "bounding_box": {
+            "x": 0.4934640522875817,
+            "y": 0.9362373737373737,
+            "width": 0.012254901960784314,
+            "height": 0.012626262626262626
+          },
+          "content": "1",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "page_index": 2,
+      "blocks": [
+        {
+          "id": "0",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.1119281045751634,
+            "y": 0.09343434343434344,
+            "width": 0.7736928104575164,
+            "height": 0.1268939393939394
+          },
+          "content": "in distinct modes, for instance to produce different grades. In materials science, properties may depend on composition class. Likewise, biological responses may stratify by genotype. In all such cases, the response surface is shaped by discrete or threshold mechanisms on top of smooth local trends, and a single global linear model is forced to average across the underlying structure. To accurately predict such responses, a global model is required that can approximate a structure with many linear regimes closely. Sundry models exist that can approximate nonlinear responses very well, such as random forests or neural networks.",
+          "label": "Text"
+        },
+        {
+          "id": "1",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.1119281045751634,
+            "y": 0.2222222222222222,
+            "width": 0.7736928104575164,
+            "height": 0.16161616161616163
+          },
+          "content": "Predictive accuracy, however, is rarely the only requirement. In the same applications, practitioners typically also need to understand how a model reaches its predictions – to validate it against domain knowledge, to diagnose failures, and, increasingly, to satisfy regulatory demands for transparency. What is needed are methods that are simultaneously accurate and highly interpretable. The flexible regressors that dominate the accuracy benchmarks, such as random forests (Breiman, 2001) and multilayer perceptrons (Goodfellow et al., 2016), sit at the opposite end of this trade-off: a 200-tree forest contains hundreds of thousands of split parameters and a feed-forward network thousands of trainable weights, so that such models become very hard to inspect or interpret.",
+          "label": "Text"
+        },
+        {
+          "id": "2",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.1119281045751634,
+            "y": 0.38573232323232326,
+            "width": 0.7736928104575164,
+            "height": 0.19886363636363635
+          },
+          "content": "The decision-tree family has presented itself as a strong candidate for a long time to produce both highly interpretable and highly accurate fits and predictions. Because such models arrive at decisions through a short sequence of explicit conditions, they are easy to explain or inspect. The classical regression tree of Breiman et al. (1984) fits a constant in every leaf and remains one of the most readily interpretable predictive models available, but it tends either to over-fit or to require very deep trees with many leaves to reach competitive accuracy. A deep tree, however, is no longer interpretable in any practical sense. Random forests resolve the accuracy problem by averaging over many such trees, but abandon interpretability entirely. For these reasons a substantial literature has proposed decision trees that carry a regression model in each leaf rather than a constant, so that fewer, shallower splits suffice.",
+          "label": "Text"
+        },
+        {
+          "id": "3",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.1119281045751634,
+            "y": 0.5858585858585859,
+            "width": 0.7753267973856209,
+            "height": 0.3282828282828283
+          },
+          "content": "The oldest family of this kind is due to Quinlan: the M5 model tree (Quinlan, 1992) places a linear regression model in every leaf, and its rule-based descendant Cubist (Quinlan, 1993) recasts the tree as a collection of rules, each equipped with its own linear model, and remains in routine use today. In practice, however, Cubist too reaches competitive accuracy only when several such rule-based models are combined into committees – a boosting-style ensemble in which each successive member corrects the residuals of its predecessors. A single model tree is often too coarse: its axis-aligned splits on individual predictors cannot capture regime boundaries that run obliquely through the predictor space, so accuracy is recovered by averaging many imperfect trees instead. The price is the familiar one: a committee of overlapping rule sets can no longer be read or validated as one transparent model, so the very property that motivated the model-in-leaf construction is forfeited again. This has spurred the search for methods that attain accuracy within a single tree. Eriksson et al. (2009) bridged dimension reduction and trees in exactly this spirit with their PLS-Trees, which fit a partial least squares (PLS) regression at each node and split along the first predictor score, yielding leaves whose loading vectors expose interpretable local sub-models. A parallel line of work seeks globally optimal trees by mixed-integer optimization (Bertsimas and Dunn, 2017; Bertsimas et al., 2021); these are elegant but computationally prohibitive at realistic scale – Bertsimas and Dunn (2017) report per-tree time limits of thirty minutes to two hours, never",
+          "label": "Text"
+        },
+        {
+          "id": "4",
+          "order": null,
+          "bounding_box": {
+            "x": 0.49264705882352944,
+            "y": 0.9356060606060606,
+            "width": 0.014705882352941176,
+            "height": 0.013257575757575758
+          },
+          "content": "2",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "page_index": 11,
+      "blocks": [
+        {
+          "id": "0",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.1111111111111111,
+            "y": 0.0928030303030303,
+            "width": 0.7736928104575164,
+            "height": 0.037247474747474744
+          },
+          "content": "the first X-score rather than on a response score or a later component. It also keeps the exhaustive search linear in n and the leaves interpretable as intervals of a single latent score.",
+          "label": "Text"
+        },
+        {
+          "id": "1",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.11356209150326797,
+            "y": 0.1527777777777778,
+            "width": 0.2704248366013072,
+            "height": 0.019570707070707072
+          },
+          "content": "### 5.2 Impurity criterion",
+          "label": "Text"
+        },
+        {
+          "id": "2",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.1111111111111111,
+            "y": 0.18244949494949494,
+            "width": 0.7736928104575164,
+            "height": 0.27525252525252525
+          },
+          "content": "Given the score ordering, a cut is scored by an impurity that combines, following Eriksson et al. (2009), a within-child response term, a within-child  $ t_{1} $-homogeneity term and a balance penalty, with weights A and B (defaults A = B = 0.3). The default response term adopted herein is Eriksson's within-child response variance. For problems with many responses compressed into few Y-side components a Y-latent variance is additionally provided that scores cuts in the reduced U-subspace; it coincides with the variance criterion when the number of retained Y-components matches the response rank and is a genuine reduction otherwise. This criterion, together with a slope-contrast objective, a kurtosis-based bimodality criterion and an impurity-invariant k-means partition in the joint  $ (t_{1}, u_{1}) $ score plane, is catalogued in the Supplementary Material. Two cut-search heuristics are available: exhaustive search scans every interior break of the  $ t_{1} $-order (the default), and a polynomial search exploits the piecewise-quadratic structure of the variance impurity for a search cost independent of n. The k-means partition, which clusters the rows in the  $ (t_{1}, u_{1}) $ plane and snaps the resulting boundary back to a threshold on  $ t_{1} $, is selected by a separate flag; it turns out to pair particularly well with the coskewness objective for regime recovery (Section 6).",
+          "label": "Text"
+        },
+        {
+          "id": "3",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.11356209150326797,
+            "y": 0.4797979797979798,
+            "width": 0.4444444444444444,
+            "height": 0.020202020202020204
+          },
+          "content": "### 5.3 Cross-validation termination gate",
+          "label": "Text"
+        },
+        {
+          "id": "4",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.1111111111111111,
+            "y": 0.51010101010101,
+            "width": 0.7745098039215687,
+            "height": 0.09027777777777778
+          },
+          "content": "The greedy rule above accepts any algorithmically valid split, which on small or noisy nodes can encourage growth that does not generalize. A cross-validation gate that refuses such splits is added. For a node with rows N, the node's CV score under a candidate parameter tuple is the K-fold mean of per-response variance-normalized mean squared errors, summed across responses,",
+          "label": "Text"
+        },
+        {
+          "id": "5",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.3112745098039216,
+            "y": 0.5991161616161617,
+            "width": 0.37336601307189543,
+            "height": 0.04861111111111111
+          },
+          "content": " $$ S(\\mathcal{N};\\pmb{\\sigma}^{2})=\\frac{1}{K}\\sum_{k=1}^{K}\\sum_{j=1}^{q}\\frac{\\frac{1}{|V_{k}|}\\sum_{i\\in V_{k}}(y_{i j}-\\hat{y}_{i j})^{2}}{\\sigma_{j}^{2}}. $$ ",
+          "label": "Formula"
+        },
+        {
+          "id": "6",
+          "order": 7,
+          "bounding_box": {
+            "x": 0.8578431372549019,
+            "y": 0.6142676767676768,
+            "width": 0.02369281045751634,
+            "height": 0.018308080808080808
+          },
+          "content": "(8)",
+          "label": "Formula"
+        },
+        {
+          "id": "7",
+          "order": 8,
+          "bounding_box": {
+            "x": 0.1119281045751634,
+            "y": 0.6553030303030303,
+            "width": 0.798202614379085,
+            "height": 0.11047979797979798
+          },
+          "content": "Given a candidate cut partitioning $\\mathcal{N}$ into $\\mathcal{L}$, $\\mathcal{R}$, the gate compares the parent score $S_p = S(\\mathcal{N}; \\sigma_N^2)$ with the size-weighted combined child score $S_c = (|\\mathcal{L}| S(\\mathcal{L}; \\sigma_N^2) + |\\mathcal{R}| S(\\mathcal{R}; \\sigma_N^2)) / (\\lfloor \\mathcal{L} \\rfloor + |\\mathcal{R} \\rfloor)$ and accepts the split iff $(S_p - S_c) / S_p \\geq \\tau_{cv}$, with a default $\\tau_{cv} = 0.01$. Crucially, both children are scored with the parent's per-response variance $\\sigma_N^2$ as the common denominator: scoring each node against its own variance makes the scores incomparable across nodes, and on regime-jump data would spuriously reject the very root split that separates two regimes.",
+          "label": "Text"
+        },
+        {
+          "id": "8",
+          "order": 9,
+          "bounding_box": {
+            "x": 0.11356209150326797,
+            "y": 0.7878787878787878,
+            "width": 0.28431372549019607,
+            "height": 0.020202020202020204
+          },
+          "content": "### 5.4 Algorithm and cost",
+          "label": "Text"
+        },
+        {
+          "id": "9",
+          "order": 10,
+          "bounding_box": {
+            "x": 0.1119281045751634,
+            "y": 0.8175505050505051,
+            "width": 0.7745098039215687,
+            "height": 0.09154040404040405
+          },
+          "content": "Algorithm 2 summarizes one recursive step, launched with $\\mathcal{N} = \\{1, \\ldots, n\\}$ and $d = 0$. Each internal node fits one twoblock split model (and, under per-node cross-validation, a small grid of them); with the matrix-free coskewness solver of Section 3.3 the per-node cost stays of the same order as the covariance fit. Once the structure is fixed, each of the $|\\mathcal{L}(\\mathcal{T})|$ leaves is refit once under the covariance leaf objective – a cheap ordinary twoblock fit on the leaf's",
+          "label": "Text"
+        },
+        {
+          "id": "10",
+          "order": null,
+          "bounding_box": {
+            "x": 0.48856209150326796,
+            "y": 0.9356060606060606,
+            "width": 0.022058823529411766,
+            "height": 0.013257575757575758
+          },
+          "content": "11",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "page_index": 12,
+      "blocks": [
+        {
+          "id": "0",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.1111111111111111,
+            "y": 0.0928030303030303,
+            "width": 0.7728758169934641,
+            "height": 0.05555555555555555
+          },
+          "content": "members, adding a term linear in n overall. A whole tree fits in seconds on the benchmarks below – in contrast to the thirty-minute-to-two-hour budgets reported for mixed-integer optimal trees (Bertsimas and Dunn, 2017).",
+          "label": "Text"
+        },
+        {
+          "id": "1",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.11601307189542484,
+            "y": 0.16224747474747475,
+            "width": 0.7704248366013072,
+            "height": 0.2809343434343434
+          },
+          "content": "Algorithm 2 One recursive step of tbtree.\n\nRequire: Node rows $\\mathcal{N}$, depth $d$, hyper-parameters $(d_{\\max}, n_{\\min}, A, B, \\tau_{\\mathrm{cv}})$, base estimator, a split objective (coskew / cov+coskew) and a leaf objective (cov), impurity, search heuristic.\n\n1: Restrict $\\mathbf{X}_{\\mathcal{N}}$, $\\mathbf{Y}_{\\mathcal{N}}$ to $\\mathcal{N}$.\n\n2: if $d \\geq d_{\\max}$ or $|\\mathcal{N}| < 2n_{\\min}$ then\n\n3: Fit the leaf model (leaf objective) on $(\\mathbf{X}_{\\mathcal{N}}, \\mathbf{Y}_{\\mathcal{N}})$ and return a leaf.\n\n4: end if\n\n5: (Optional) select per-node parameters by CV (8); record $S_{\\mathrm{p}}$ with $\\mathcal{N}$'s variance as denominator.\n\n6: Fit the split model (split objective) on $(\\mathbf{X}_{\\mathcal{N}}, \\mathbf{Y}_{\\mathcal{N}})$; compute $t_{i1}$.\n\n7: Find $\\tau^{*}$ minimizing the chosen impurity on $t_{.1}$ subject to $n_{\\min}$; if none exists, fit a leaf model and return a leaf.\n\n8: (Optional) CV gate: if $(S_{\\mathrm{p}} - S_{\\mathrm{c}})/S_{\\mathrm{p}} < \\tau_{\\mathrm{cv}}$, fit a leaf model and return a leaf.\n\n9: Recurse on the two children at depth $d + 1$.",
+          "label": "Text"
+        },
+        {
+          "id": "2",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.11356209150326797,
+            "y": 0.4880050505050505,
+            "width": 0.6797385620915033,
+            "height": 0.023989898989898988
+          },
+          "content": "## 6 Simulation: recovering piecewise linear regimes",
+          "label": "Text"
+        },
+        {
+          "id": "3",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.11356209150326797,
+            "y": 0.5284090909090909,
+            "width": 0.14133986928104575,
+            "height": 0.020833333333333332
+          },
+          "content": "### 6.1 Design",
+          "label": "Text"
+        },
+        {
+          "id": "4",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.1111111111111111,
+            "y": 0.5587121212121212,
+            "width": 0.7736928104575164,
+            "height": 0.09154040404040405
+          },
+          "content": "The following study tests whether the coskewness objective helps  $ \\text{tbtree} $ recover piecewise multivariate linear regimes. A four-regime latent-variable mixture is constructed. Each regime  $ k \\in \\{1, \\ldots, 4\\} $ has an orthonormal pair of X-loadings  $ \\boldsymbol{P}_k \\in \\mathbb{R}^{p \\times 2} $ from the QR decomposition of a Gaussian matrix and a Y-loading pair  $ \\boldsymbol{Q}_k \\in \\mathbb{R}^{q \\times 2} $; the regime is centred at a Gaussian location  $ \\boldsymbol{c}_k $. With standard-Gaussian latent scores  $ \\boldsymbol{T}_k $, the rows are",
+          "label": "Text"
+        },
+        {
+          "id": "5",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.26062091503267976,
+            "y": 0.6628787878787878,
+            "width": 0.47630718954248363,
+            "height": 0.020202020202020204
+          },
+          "content": " $$ \\begin{array}{r l r l r l}&{X_{k}=c_{k}+T_{k}P_{k}^{\\top}+\\sigma_{\\varepsilon}E_{x},}&{}&{Y_{k}=\\mu_{k}+T_{k}Q_{k}^{\\top}+\\sigma_{\\varepsilon}E_{y},}\\end{array} $$ ",
+          "label": "Formula"
+        },
+        {
+          "id": "6",
+          "order": 7,
+          "bounding_box": {
+            "x": 0.8578431372549019,
+            "y": 0.663510101010101,
+            "width": 0.02369281045751634,
+            "height": 0.018308080808080808
+          },
+          "content": "(9)",
+          "label": "Formula"
+        },
+        {
+          "id": "7",
+          "order": 8,
+          "bounding_box": {
+            "x": 0.11274509803921569,
+            "y": 0.6957070707070707,
+            "width": 0.7712418300653595,
+            "height": 0.09027777777777778
+          },
+          "content": "with i.i.d. Gaussian noise  $ \\mathbf{E}_x, \\mathbf{E}_y $ at level  $ \\sigma_\\varepsilon $. Setting  $ \\boldsymbol{\\mu}_k = 0 $ gives the slope-only Scenario A; drawing  $ \\boldsymbol{\\mu}_k $ from a Gaussian of standard deviation 2 gives the regime-jump Scenario B. Throughout,  $ n_k = 100 $,  $ p = 10 $,  $ q = 3 $ and a 70/30 split are used, averaged over five seeds. Each regime is a distinct local linear map, so the union is a genuinely piecewise multivariate linear structure – exactly the target of the paper’s central claim.",
+          "label": "Text"
+        },
+        {
+          "id": "8",
+          "order": 9,
+          "bounding_box": {
+            "x": 0.1119281045751634,
+            "y": 0.7872474747474747,
+            "width": 0.7728758169934641,
+            "height": 0.1275252525252525
+          },
+          "content": "Depth-four tbtrees are grown with two X-components per node, comparing the three decomposition objectives (covariance, coskewness, combined with  $ \\gamma = 0.5 $) under two cut searches: the exhaustive variance cut on  $ t_1 $ and the k-means partition in the  $ (t_1, u_1) $ plane. Regime recovery is measured by the adjusted Rand index (ARI) (Hubert and Arabie, 1985) between the raw leaf partition and the true regime labels – the strictest such measure, as it credits neither extra leaves nor a majority-vote relabelling – and predictive quality by the mean test  $ R^2 $.",
+          "label": "Text"
+        },
+        {
+          "id": "9",
+          "order": null,
+          "bounding_box": {
+            "x": 0.48856209150326796,
+            "y": 0.9349747474747475,
+            "width": 0.02287581699346405,
+            "height": 0.013888888888888888
+          },
+          "content": "12",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "page_index": 13,
+      "blocks": [
+        {
+          "id": "0",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.11356209150326797,
+            "y": 0.09090909090909091,
+            "width": 0.14950980392156862,
+            "height": 0.019570707070707072
+          },
+          "content": "### 6.2 Results",
+          "label": "Text"
+        },
+        {
+          "id": "1",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.1111111111111111,
+            "y": 0.12058080808080808,
+            "width": 0.7745098039215687,
+            "height": 0.27525252525252525
+          },
+          "content": "Table 1 reports the two objectives that bracket the comparison at each noise level, and Figure 3 shows the full ARI-versus-noise picture. Three findings stand out. First, for regime recovery the coskewness objective is clearly superior, and the effect is strongest with the k-means split: in Scenario A the covariance objective's ARI falls from 0.47 to 0.40 as the noise rises from  $ \\sigma_{\\varepsilon} = 0.1 $ to 0.5, whereas the coskewness k-means variant rises from 0.52 to 0.61 – the advantage grows precisely where the covariance signal decays and the mixture's third-moment signature persists. Second, the coskewness trees are also structurally closer to the truth, using about six leaves for four regimes against the covariance trees' ten to twelve. Third, this regime-recovery gain carries a predictive cost on this deliberately smooth mixture: because each leaf's regression is a linear latent model, a  $ t_{1} $ that maximizes between-regime separation rather than within-regime covariance sacrifices some  $ R^{2} $ (Scenario A,  $ \\sigma_{\\varepsilon} = 0.3 $: 0.39 for coskewness against 0.75 for covariance). The combined objective sits between the two. The same qualitative ordering holds in the regime-jump Scenario B, where the coskewness k-means ARI reaches 0.64 against the covariance objective's 0.44 at the highest noise level.",
+          "label": "Text"
+        },
+        {
+          "id": "2",
+          "order": null,
+          "bounding_box": {
+            "x": 0.1111111111111111,
+            "y": 0.4172979797979798,
+            "width": 0.7736928104575164,
+            "height": 0.11047979797979798
+          },
+          "content": "<div style=\"text-align: center;\">Table 1: Four-regime simulation: regime-recovery ARI (raw leaf partition vs. true regimes) and mean test  $ R^{2} $, averaged over five seeds, for the covariance objective with the exhaustive variance cut and the coskewness objective with the k-means  $ (t_{1}, u_{1}) $ split – the best regime-recovery configuration. The coskewness objective wins on ARI at every noise level and by a growing margin, at a predictive cost on this smooth mixture. The combined objective (not shown) interpolates; the full grid is in Figure 3.</div>\n",
+          "label": "Image"
+        },
+        {
+          "id": "3",
+          "order": null,
+          "bounding_box": {
+            "x": 0.23202614379084968,
+            "y": 0.5284090909090909,
+            "width": 0.5375816993464052,
+            "height": 0.16792929292929293
+          },
+          "content": "<table><tr><td>Scenario</td><td>$ \\sigma_{\\varepsilon} $</td><td>cov, exhaustive</td><td>coskew, $ k $-means</td></tr><tr><td></td><td></td><td>ARI / $ R^{2} $</td><td>ARI / $ R^{2} $</td></tr><tr><td>A (slope only)</td><td>0.1</td><td>0.47 / 0.91</td><td>0.52 / 0.55</td></tr><tr><td>A</td><td>0.3</td><td>0.46 / 0.75</td><td>0.52 / 0.39</td></tr><tr><td>A</td><td>0.5</td><td>0.40 / 0.47</td><td>0.61 / 0.28</td></tr><tr><td>B (regime jump)</td><td>0.05</td><td>0.45 / 0.99</td><td>0.61 / 0.85</td></tr><tr><td>B</td><td>0.15</td><td>0.45 / 0.97</td><td>0.60 / 0.89</td></tr><tr><td>B</td><td>0.30</td><td>0.44 / 0.91</td><td>0.64 / 0.82</td></tr></table>",
+          "label": "Table"
+        },
+        {
+          "id": "4",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.1119281045751634,
+            "y": 0.7203282828282829,
+            "width": 0.7736928104575164,
+            "height": 0.10921717171717171
+          },
+          "content": "Summarizing, the coskewness objective recovers the regimes markedly better than the covariance objective that underlies PLS-Trees for piecewise multivariate linear data, with the advantage widening as noise obscures the first-order structure. When the goal is regime discovery, the coskewness objective with the k-means split is the configuration to use; when pure predictive accuracy on smooth data is the goal, the covariance or combined objective is preferable.",
+          "label": "Text"
+        },
+        {
+          "id": "5",
+          "order": null,
+          "bounding_box": {
+            "x": 0.48937908496732024,
+            "y": 0.9349747474747475,
+            "width": 0.022058823529411766,
+            "height": 0.01452020202020202
+          },
+          "content": "13",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "page_index": 14,
+      "blocks": [
+        {
+          "id": "0",
+          "order": null,
+          "bounding_box": {
+            "x": 0.14133986928104575,
+            "y": 0.25441919191919193,
+            "width": 0.7165032679738562,
+            "height": 0.3813131313131313
+          },
+          "content": "<div style=\"text-align: center;\"><img src=\"imgs/img_in_chart_box_173_403_1050_1007.jpg\" alt=\"Image\" width=\"71%\" />\n\n\n\n</div>\n",
+          "label": "Image"
+        },
+        {
+          "id": "1",
+          "order": null,
+          "bounding_box": {
+            "x": 0.1111111111111111,
+            "y": 0.6628787878787878,
+            "width": 0.7736928104575164,
+            "height": 0.0928030303030303
+          },
+          "content": "<div style=\"text-align: center;\">Figure 3: Coskewness and regime recovery on the four-regime simulation (Scenario A): regime-recovery ARI against noise level for the three objectives (colour) under the exhaustive variance cut (solid) and the k-means  $ (t_{1}, u_{1}) $ split (dashed). The coskewness and combined objectives with the k-means split give the highest ARI, and their margin over the covariance objective grows with noise.</div>\n",
+          "label": "Image"
+        },
+        {
+          "id": "2",
+          "order": null,
+          "bounding_box": {
+            "x": 0.48856209150326796,
+            "y": 0.9349747474747475,
+            "width": 0.02369281045751634,
+            "height": 0.01452020202020202
+          },
+          "content": "14",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "page_index": 15,
+      "blocks": [
+        {
+          "id": "0",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.11356209150326797,
+            "y": 0.08838383838383838,
+            "width": 0.36519607843137253,
+            "height": 0.022095959595959596
+          },
+          "content": "## 7 Real-world benchmarks",
+          "label": "Text"
+        },
+        {
+          "id": "1",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.11356209150326797,
+            "y": 0.12815656565656566,
+            "width": 0.44199346405228757,
+            "height": 0.020202020202020204
+          },
+          "content": "### 7.1 UCI energy-efficiency benchmark",
+          "label": "Text"
+        },
+        {
+          "id": "2",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.1111111111111111,
+            "y": 0.15845959595959597,
+            "width": 0.7736928104575164,
+            "height": 0.1268939393939394
+          },
+          "content": "The energy-efficiency dataset of Tsanas and Xifara (2012) comprises 768 simulated residential buildings parametrized by eight building attributes and predicts two continuous energy responses (heating and cooling load). Four of the eight inputs are discrete, which is the source of the dataset's regime structure, but the response surface is otherwise smooth and non-linear rather than sharply piecewise – the opposite end of the spectrum from the piecewise mixtures of the simulation, and the setting in which the paper's second claim is tested, that tbtree can also deliver state-of-the-art predictive accuracy.",
+          "label": "Text"
+        },
+        {
+          "id": "3",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.1111111111111111,
+            "y": 0.28535353535353536,
+            "width": 0.7753267973856209,
+            "height": 0.31186868686868685
+          },
+          "content": "Table 2 reports mean test  $ R^{2} $ on a fixed 80/20 split (seed 0) with approximate parameter counts, for the two decoupled tbtree configurations (a coskewness split and a combined split, each with covariance leaves) against the usual black-box references. The combined split with covariance leaves is the best tbtree configuration obtained, at mean  $ R^{2} = 0.975 $ – above a deep CART regression tree (0.970, at 613 leaves), and within noise of a 200-tree random forest (0.980) and a two-hidden-layer multilayer perceptron (0.978). It reaches this as a single tree of eleven leaves with a few hundred stored coefficients: one to three orders of magnitude fewer parameters than the black-box regressors, and fitted in seconds. The pure-coskewness split with covariance leaves is more parsimonious ( $ R^{2} = 0.937 $, six leaves) but, on data this smooth, does not need the extra regime sensitivity. On this benchmark decoupling barely moves the predictions relative to a fully coupled tree: the leaves are small and cross-validated to two or three components, so the covariance and coskewness leaf regressions almost coincide, and the small predictive edge of the combined objective lives in the split rather than the leaf. The combined split is thus the sweet spot on smooth non-linear data, just as a pure-coskewness split is on sharply piecewise data. Figure 4 shows the resulting tree, whose deepest low-cost split separates the two overall-height levels that dominate the predictor block.",
+          "label": "Text"
+        },
+        {
+          "id": "4",
+          "order": null,
+          "bounding_box": {
+            "x": 0.1111111111111111,
+            "y": 0.6231060606060606,
+            "width": 0.7745098039215687,
+            "height": 0.09027777777777778
+          },
+          "content": "<div style=\"text-align: center;\">Table 2: UCI energy-efficiency benchmark (Tsanas & Xifara, 2012): mean test  $ R^{2} $ on the 80/20 hold-out and approximate parameter count, for the two decoupled tbtree configurations (coskewness / combined split, covariance leaves) and the black-box references. The combined-split tbtree is the best single-tree model and matches the black-box regressors to within noise at a fraction of their size. Best single tree in bold.</div>\n",
+          "label": "Image"
+        },
+        {
+          "id": "5",
+          "order": null,
+          "bounding_box": {
+            "x": 0.24836601307189543,
+            "y": 0.7152777777777778,
+            "width": 0.5032679738562091,
+            "height": 0.1407828282828283
+          },
+          "content": "<table><tr><td>Model</td><td>mean $ R^{2} $</td><td>#params</td></tr><tr><td>flat twoblock</td><td>0.876</td><td>18</td></tr><tr><td>tbtree coskew split, cov leaves</td><td>0.937</td><td>$ \\sim $110</td></tr><tr><td>tbtree cov+coskew split, cov leaves</td><td>0.975</td><td>$ \\sim $200</td></tr><tr><td>CART regression tree</td><td>0.970</td><td>1226</td></tr><tr><td>Random forest, 200 trees</td><td>0.980</td><td>155394</td></tr><tr><td>MLP (64, 32), ReLU</td><td>0.978</td><td>2722</td></tr></table>",
+          "label": "Table"
+        },
+        {
+          "id": "6",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.11274509803921569,
+            "y": 0.8775252525252525,
+            "width": 0.7728758169934641,
+            "height": 0.036616161616161616
+          },
+          "content": "This example illustrates that, for piecewise multivariate linear data, a combined-split tbtree with covariance leaves allows a shallow, interpretable model to achieve predictions",
+          "label": "Text"
+        },
+        {
+          "id": "7",
+          "order": null,
+          "bounding_box": {
+            "x": 0.48856209150326796,
+            "y": 0.9349747474747475,
+            "width": 0.02287581699346405,
+            "height": 0.01452020202020202
+          },
+          "content": "15",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "page_index": 16,
+      "blocks": [
+        {
+          "id": "0",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.1650326797385621,
+            "y": 0.09090909090909091,
+            "width": 0.7009803921568627,
+            "height": 0.017676767676767676
+          },
+          "content": "UCI energy efficiency: tbtree-B (variance impurity,  $ \\tau_{cv}=0.01 $, 10 leaves, depth 4)",
+          "label": "Text"
+        },
+        {
+          "id": "1",
+          "order": null,
+          "bounding_box": {
+            "x": 0.13316993464052287,
+            "y": 0.10921717171717171,
+            "width": 0.704248366013072,
+            "height": 0.29987373737373735
+          },
+          "content": "<div style=\"text-align: center;\"><img src=\"imgs/img_in_chart_box_163_173_1025_648.jpg\" alt=\"Image\" width=\"70%\" />\n\n\n\n</div>\n",
+          "label": "Image"
+        },
+        {
+          "id": "2",
+          "order": null,
+          "bounding_box": {
+            "x": 0.1119281045751634,
+            "y": 0.4286616161616162,
+            "width": 0.7720588235294118,
+            "height": 0.0726010101010101
+          },
+          "content": "<div style=\"text-align: center;\">Figure 4: UCI energy efficiency: a depth-four tbtree. The dendrogram exposes the hierarchical regime structure of the simulated buildings, with the deepest low-cost split separating the two overall-height levels. Bracket heights are the impurity costs at which each split was committed.</div>\n",
+          "label": "Image"
+        },
+        {
+          "id": "3",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.1111111111111111,
+            "y": 0.5233585858585859,
+            "width": 0.7728758169934641,
+            "height": 0.036616161616161616
+          },
+          "content": "almost as accurate as state-of-the-art black-box regressors, while only using a tiny fraction of the latter's parameters.",
+          "label": "Text"
+        },
+        {
+          "id": "4",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.1119281045751634,
+            "y": 0.5839646464646465,
+            "width": 0.6633986928104575,
+            "height": 0.019570707070707072
+          },
+          "content": "### 7.2 Gas-turbine emissions: prediction under regime drift",
+          "label": "Text"
+        },
+        {
+          "id": "5",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.1111111111111111,
+            "y": 0.61489898989899,
+            "width": 0.7736928104575164,
+            "height": 0.1994949494949495
+          },
+          "content": "The second benchmark stresses the decoupled tree on a large, genuinely non-linear regression with a temporal train/test split. The gas-turbine dataset of Kaya et al. (2019) collects 36,733 hourly readings from a combined-cycle power plant over 2011–2015: nine ambient and process predictors and two emission responses, carbon monoxide (CO) and nitrogen oxides (NOx). Training uses 2011–2014 and testing 2015, so the test year is an out-of-distribution extrapolation under drifting operating conditions – the setting in which a black-box regressor's advantage on i.i.d. data is least assured. Because the two responses differ in scale by roughly a factor of five, the root mean squared error of prediction (RMSEP) is reported per response together with a scale-weighted mean,  $ \\text{RMSEP}_w = \\frac{1}{2} \\sum_j \\text{RMSEP}_j / \\sigma_j $, where  $ \\sigma_j $ is the test standard deviation of response  $ j $; this puts the two responses on an equal footing and tracks a mean coefficient of determination.",
+          "label": "Text"
+        },
+        {
+          "id": "6",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.1111111111111111,
+            "y": 0.8150252525252525,
+            "width": 0.7736928104575164,
+            "height": 0.09027777777777778
+          },
+          "content": "Table 3 reports the two decoupled tbtree configurations against the black-box references. On the scale-weighted mean the decoupled coskewness-split tree is the best model overall (RMSEP $ _{w} $ = 0.830), ahead of a 200-tree random forest (0.876), a multilayer perceptron (0.882), a temporal convolutional network (TCN; Bai et al., 2018) (0.840) and Cubist (0.863); the combined-split tree is a close second (0.834). The advantage is sharpest on CO, where",
+          "label": "Text"
+        },
+        {
+          "id": "7",
+          "order": null,
+          "bounding_box": {
+            "x": 0.48856209150326796,
+            "y": 0.9349747474747475,
+            "width": 0.02369281045751634,
+            "height": 0.01452020202020202
+          },
+          "content": "16",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "page_index": 17,
+      "blocks": [
+        {
+          "id": "0",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.1119281045751634,
+            "y": 0.0928030303030303,
+            "width": 0.7745098039215687,
+            "height": 0.09090909090909091
+          },
+          "content": "both decoupled trees have the lowest error of any method; on the harder, drift-dominated NOx response they are competitive with, though not ahead of, the deepest black-box models. A fully coupled coskewness tree is markedly worse on NOx, its skewness-aligned leaves generalizing poorly across the year boundary. This is exactly the gap the covariance leaves close.",
+          "label": "Text"
+        },
+        {
+          "id": "1",
+          "order": null,
+          "bounding_box": {
+            "x": 0.1119281045751634,
+            "y": 0.20707070707070707,
+            "width": 0.7728758169934641,
+            "height": 0.07133838383838384
+          },
+          "content": "<div style=\"text-align: center;\">Table 3: Gas-turbine emissions (Kaya et al., 2019), temporal split (train 2011–2014, test 2015): per-response RMSEP and the scale-weighted mean  $ \\overline{RMSEP}_{w} $ (lower is better), with the number of local leaf models. The two decoupled tbtree configurations are shown against the black-box references. Best in each column in bold.</div>\n",
+          "label": "Image"
+        },
+        {
+          "id": "2",
+          "order": null,
+          "bounding_box": {
+            "x": 0.1184640522875817,
+            "y": 0.27904040404040403,
+            "width": 0.7687908496732027,
+            "height": 0.1773989898989899
+          },
+          "content": "<table><tr><td>Model</td><td># regimes</td><td>RMSEP CO</td><td>RMSEP NOx</td><td>RMSEP w</td></tr><tr><td>tbtree coskew split, cov leaves</td><td>16</td><td>1.61</td><td>10.44</td><td>0.830</td></tr><tr><td>tbtree cov+coskew split, cov leaves</td><td>16</td><td>1.62</td><td>10.50</td><td>0.834</td></tr><tr><td>TCN (4 blocks)</td><td>-</td><td>1.81</td><td>9.70</td><td>0.840</td></tr><tr><td>Cubist (10 committees)</td><td>-</td><td>1.70</td><td>10.75</td><td>0.863</td></tr><tr><td>Random forest, 200 trees</td><td>-</td><td>1.67</td><td>11.20</td><td>0.876</td></tr><tr><td>MLP (64, 32), ReLU</td><td>-</td><td>1.71</td><td>11.13</td><td>0.882</td></tr><tr><td>flat twoblock</td><td>-</td><td>1.77</td><td>12.68</td><td>0.966</td></tr><tr><td>CART regression tree</td><td>-</td><td>2.33</td><td>12.96</td><td>1.104</td></tr></table>",
+          "label": "Table"
+        },
+        {
+          "id": "3",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.1111111111111111,
+            "y": 0.4810606060606061,
+            "width": 0.7745098039215687,
+            "height": 0.18181818181818182
+          },
+          "content": "The predictive parity above is bought at no cost to transparency, which is the point of the example. The decoupled coskewness tree partitions the operating envelope into 16 regimes, each carrying its own covariance twoblock model – a linear map from the nine process variables to the two emissions, with fully readable coefficients (all 16 leaves non-degenerate). The regimes are genuinely heterogeneous: across them the dominant driver of CO takes four distinct values (compressor discharge pressure in most regimes, but the inlet-filter pressure drop, the turbine exhaust pressure or the turbine-after temperature in specific operating regions), and the dominant NOx driver takes two. A plant engineer can thus read off which process variable governs emissions in each operating regime, an explanation nor the random forest, the MLP, or the TCN can provide.",
+          "label": "Text"
+        },
+        {
+          "id": "4",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.1119281045751634,
+            "y": 0.6628787878787878,
+            "width": 0.7736928104575164,
+            "height": 0.07449494949494949
+          },
+          "content": "Summarizing, the decoupled tbtree matches or beats every black-box baseline on scale-weighted error while remaining a single tree of 16 interpretable local emission models; the covariance leaves are what let the coskewness split compete predictively, whereas a fully coupled coskewness tree would trail in terms of predictive power.",
+          "label": "Text"
+        },
+        {
+          "id": "5",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.11356209150326797,
+            "y": 0.7632575757575758,
+            "width": 0.35866013071895425,
+            "height": 0.022727272727272728
+          },
+          "content": "## 8 Discussion and outlook",
+          "label": "Text"
+        },
+        {
+          "id": "6",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.1111111111111111,
+            "y": 0.8011363636363636,
+            "width": 0.7745098039215687,
+            "height": 0.1111111111111111
+          },
+          "content": "This paper has introduced tbtree, a shallow, deterministic and interpretable, top-down clustering tree that carries a local (dense or sparse) twoblock dimension reduction model in every leaf. To the author's knowledge it is the first tree-based regression method to do so, generalizing the PLS-Trees of Eriksson et al. (2009) from partial least squares to the joint predictor–response reduction of Cook et al. (2023). Its central methodological ingredient is a novel twoblock decomposition whose latent directions maximize the coskewness of the pre-",
+          "label": "Text"
+        },
+        {
+          "id": "7",
+          "order": null,
+          "bounding_box": {
+            "x": 0.48856209150326796,
+            "y": 0.9349747474747475,
+            "width": 0.02287581699346405,
+            "height": 0.01452020202020202
+          },
+          "content": "17",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "page_index": 18,
+      "blocks": [
+        {
+          "id": "0",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.1119281045751634,
+            "y": 0.09343434343434344,
+            "width": 0.7736928104575164,
+            "height": 0.08964646464646464
+          },
+          "content": "dictor and response scores rather than their covariance, solved by a matrix-free higher-order power method that never forms a moment tensor. The motivation is a simple statistical observation: a node that straddles two regimes is a mixture, mixtures are non-normal, and the between-regime separation surfaces in the third-order joint moments before it dominates the second-order ones.",
+          "label": "Text"
+        },
+        {
+          "id": "1",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.1119281045751634,
+            "y": 0.18434343434343434,
+            "width": 0.7736928104575164,
+            "height": 0.34595959595959597
+          },
+          "content": "The empirical study confirms the positioning. A controlled simulation shows the coskewness objective recovering a planted skewed direction that the covariance objective is provably blind to. Inside the tree, on a four-regime piecewise-linear simulation, the coskewness objective recovers the regimes more faithfully than the covariance objective, with the advantage widening as noise erodes the first-order signal. On two real-world regressions the decoupled tree, which consists of a coskewness or combined split with covariance leaves, then delivers competitive prediction. On the energy-efficiency benchmark the combined-split tree gives the best single-tree accuracy observed ( $ R^{2}=0.975 $), matching a random forest and a multilayer perceptron to within noise at one to three orders of magnitude fewer parameters. On the gas-turbine emissions benchmark, under a temporal split with genuine operating-condition drift, the coskewness-split tree attains the lowest scale-weighted error of any method – ahead of a random forest, a multilayer perceptron and a temporal convolutional network – while remaining a single tree of sixteen interpretable local emission models. Decoupling is what reconciles the two goals: the third-moment split supplies regime-aware routing while the covariance leaves supply predictive sharpness, so on the predictive benchmarks the coskewness split costs little or nothing relative to a covariance tree yet retains its regime structure. The covariance and coskewness roles thus occupy complementary ends of a single interpretable dial: a coskewness (or combined) split for regime-aligned structure, covariance leaves for predictive accuracy.",
+          "label": "Text"
+        },
+        {
+          "id": "2",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.1119281045751634,
+            "y": 0.5315656565656566,
+            "width": 0.7736928104575164,
+            "height": 0.1452020202020202
+          },
+          "content": "In spite of the good results reported, it is noted that third order moments are estimated with more sampling variability than second moments, so the coskewness objective needs a reasonable sample size to pay off. On a small concrete-slump benchmark that merely consists of 78 training rows (Yeh, 2007) it degraded rather than improved both recovery and prediction; the covariance objective remains the right default on small-n problems. The regime-recovery gains on piecewise data also come with a predictive cost that only the combined objective and the k-means split partly mitigate; choosing  $ \\gamma $ and the split by cross-validation for a given dataset is the pragmatic recommendation.",
+          "label": "Text"
+        },
+        {
+          "id": "3",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.1119281045751634,
+            "y": 0.67739898989899,
+            "width": 0.7728758169934641,
+            "height": 0.12815656565656566
+          },
+          "content": "Several extensions are natural. The coskewness objective is presently available only with the dense and sparse twoblock bases; extending it to the robust and cellwise-robust bases (Serneels, 2026b,a) would combine regime discovery with outlier resistance. A plane search in  $ c t_{2} + (1 - |c|) t_{1} $ along the lines of Eriksson et al. (2009)'s §5.4.1 would relax the axis-aligned cut. Finally, higher-order objectives beyond coskewness – cokurtosis, or a joint independent-component criterion (De Lathauwer et al., 2000a) – are a natural continuation of the same programme.",
+          "label": "Text"
+        },
+        {
+          "id": "4",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.11356209150326797,
+            "y": 0.8320707070707071,
+            "width": 0.32189542483660133,
+            "height": 0.022095959595959596
+          },
+          "content": "## 9 Software availability",
+          "label": "Text"
+        },
+        {
+          "id": "5",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.1119281045751634,
+            "y": 0.8699494949494949,
+            "width": 0.7728758169934641,
+            "height": 0.036616161616161616
+          },
+          "content": "tbtree and the coskewness twoblock decomposition are implemented in the open-source Python package twoblock, with source on GitHub at https://github.com/SvenSerneels/",
+          "label": "Text"
+        },
+        {
+          "id": "6",
+          "order": null,
+          "bounding_box": {
+            "x": 0.48856209150326796,
+            "y": 0.9349747474747475,
+            "width": 0.02287581699346405,
+            "height": 0.013888888888888888
+          },
+          "content": "18",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "page_index": 19,
+      "blocks": [
+        {
+          "id": "0",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.1119281045751634,
+            "y": 0.0928030303030303,
+            "width": 0.7736928104575164,
+            "height": 0.05555555555555555
+          },
+          "content": "twoblock and will be released to the public in the upcoming release of the package. Reproducible Jupyter notebooks for the coskewness simulation, the four-regime tree simulation and both real-world examples ship under examples/.",
+          "label": "Text"
+        },
+        {
+          "id": "1",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.11437908496732026,
+            "y": 0.1755050505050505,
+            "width": 0.14869281045751634,
+            "height": 0.020833333333333332
+          },
+          "content": "## References",
+          "label": "Text"
+        },
+        {
+          "id": "2",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.11519607843137254,
+            "y": 0.21275252525252525,
+            "width": 0.7679738562091504,
+            "height": 0.03598484848484849
+          },
+          "content": "Bai, S., Kolter, J. Z., and Koltun, V. (2018). An empirical evaluation of generic convolutional and recurrent networks for sequence modeling. arXiv:1803.01271.",
+          "label": "Text"
+        },
+        {
+          "id": "3",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.11601307189542484,
+            "y": 0.26136363636363635,
+            "width": 0.7663398692810458,
+            "height": 0.03598484848484849
+          },
+          "content": "Bertsimas, D. and Dunn, J. (2017). Optimal classification trees. Machine Learning, 106(7):1039–1082.",
+          "label": "Text"
+        },
+        {
+          "id": "4",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.11601307189542484,
+            "y": 0.30934343434343436,
+            "width": 0.7679738562091504,
+            "height": 0.03535353535353535
+          },
+          "content": "Bertsimas, D., Dunn, J., and Yang, Y. (2021). Optimal regression trees. Operations Research Letters, 49(5):715–720.",
+          "label": "Text"
+        },
+        {
+          "id": "5",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.11519607843137254,
+            "y": 0.3573232323232323,
+            "width": 0.5759803921568627,
+            "height": 0.018308080808080808
+          },
+          "content": "Breiman, L. (2001). Random forests. Machine Learning, 45(1):5–32.",
+          "label": "Text"
+        },
+        {
+          "id": "6",
+          "order": 7,
+          "bounding_box": {
+            "x": 0.11519607843137254,
+            "y": 0.38762626262626265,
+            "width": 0.7696078431372549,
+            "height": 0.03598484848484849
+          },
+          "content": "Breiman, L., Friedman, J. H., Olshen, R. A., and Stone, C. J. (1984). Classification and Regression Trees. Wadsworth and Brooks/Cole, Monterey, CA.",
+          "label": "Text"
+        },
+        {
+          "id": "7",
+          "order": 8,
+          "bounding_box": {
+            "x": 0.11519607843137254,
+            "y": 0.43623737373737376,
+            "width": 0.7679738562091504,
+            "height": 0.05303030303030303
+          },
+          "content": "Cook, R. D., Forzani, L., and Liu, L. (2023). Partial least squares for simultaneous reduction of response and predictor vectors in regression. Journal of Multivariate Analysis, 196:105163.",
+          "label": "Text"
+        },
+        {
+          "id": "8",
+          "order": 9,
+          "bounding_box": {
+            "x": 0.11437908496732026,
+            "y": 0.5025252525252525,
+            "width": 0.7671568627450981,
+            "height": 0.03598484848484849
+          },
+          "content": "de Jong, S. (1993). SIMPLS: An alternative approach to partial least squares regression. Chemometrics and Intelligent Laboratory Systems, 18(3):251–263.",
+          "label": "Text"
+        },
+        {
+          "id": "9",
+          "order": 10,
+          "bounding_box": {
+            "x": 0.11519607843137254,
+            "y": 0.5511363636363636,
+            "width": 0.7679738562091504,
+            "height": 0.036616161616161616
+          },
+          "content": "De Lathauwer, L., De Moor, B., and Vandewalle, J. (2000a). An introduction to independent component analysis. Journal of Chemometrics, 14(3):123–149.",
+          "label": "Text"
+        },
+        {
+          "id": "10",
+          "order": 11,
+          "bounding_box": {
+            "x": 0.11519607843137254,
+            "y": 0.5991161616161617,
+            "width": 0.7679738562091504,
+            "height": 0.05366161616161616
+          },
+          "content": "De Lathauwer, L., De Moor, B., and Vandewalle, J. (2000b). On the best rank-1 and rank- $ (r_{1}, r_{2}, \\ldots, r_{n}) $ approximation of higher-order tensors. SIAM Journal on Matrix Analysis and Applications, 21(4):1324–1342.",
+          "label": "Text"
+        },
+        {
+          "id": "11",
+          "order": 12,
+          "bounding_box": {
+            "x": 0.11519607843137254,
+            "y": 0.6660353535353535,
+            "width": 0.7671568627450981,
+            "height": 0.054292929292929296
+          },
+          "content": "Driscoll, S. P., MacMillan, Y. S., and Wentzell, P. D. (2020). Sparse projection pursuit analysis: an alternative for exploring multivariate chemical data. Analytical Chemistry, 92(2):1755–1762.",
+          "label": "Text"
+        },
+        {
+          "id": "12",
+          "order": 13,
+          "bounding_box": {
+            "x": 0.11519607843137254,
+            "y": 0.7329545454545454,
+            "width": 0.7663398692810458,
+            "height": 0.03535353535353535
+          },
+          "content": "Eriksson, L., Trygg, J., and Wold, S. (2009). PLS-trees, a top-down clustering approach. Journal of Chemometrics, 23(11):569–580.",
+          "label": "Text"
+        },
+        {
+          "id": "13",
+          "order": 14,
+          "bounding_box": {
+            "x": 0.11519607843137254,
+            "y": 0.7803030303030303,
+            "width": 0.6740196078431373,
+            "height": 0.01893939393939394
+          },
+          "content": "Goodfellow, I., Bengio, Y., and Courville, A. (2016). Deep learning. MIT Press.",
+          "label": "Text"
+        },
+        {
+          "id": "14",
+          "order": 15,
+          "bounding_box": {
+            "x": 0.11519607843137254,
+            "y": 0.8112373737373737,
+            "width": 0.7671568627450981,
+            "height": 0.03535353535353535
+          },
+          "content": "Hubert, L. and Arabie, P. (1985). Comparing partitions. Journal of Classification, 2(1):193–218.",
+          "label": "Text"
+        },
+        {
+          "id": "15",
+          "order": 16,
+          "bounding_box": {
+            "x": 0.11519607843137254,
+            "y": 0.8592171717171717,
+            "width": 0.7687908496732027,
+            "height": 0.05366161616161616
+          },
+          "content": "Kaya, H., Tüfekci, P., and Uzun, E. (2019). Predicting CO and NOx emissions from gas turbines: Novel data and a benchmark PEMS. Turkish Journal of Electrical Engineering and Computer Sciences, 27(6):4783–4796.",
+          "label": "Text"
+        },
+        {
+          "id": "16",
+          "order": null,
+          "bounding_box": {
+            "x": 0.48856209150326796,
+            "y": 0.9349747474747475,
+            "width": 0.02287581699346405,
+            "height": 0.013888888888888888
+          },
+          "content": "19",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "page_index": 20,
+      "blocks": [
+        {
+          "id": "0",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.11437908496732026,
+            "y": 0.0928030303030303,
+            "width": 0.7687908496732027,
+            "height": 0.036616161616161616
+          },
+          "content": "Menvouta, E. J., Serneels, S., and Verdonck, T. (2022). Sparse dimension reduction based on energy and ball statistics. Advances in Data Analysis and Classification, 16(4):951–975.",
+          "label": "Text"
+        },
+        {
+          "id": "1",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.11519607843137254,
+            "y": 0.14204545454545456,
+            "width": 0.7687908496732027,
+            "height": 0.03598484848484849
+          },
+          "content": "Quinlan, J. R. (1992). Learning with continuous classes. In Proceedings of the 5th Australian Joint Conference on Artificial Intelligence, pages 343–348, Singapore. World Scientific.",
+          "label": "Text"
+        },
+        {
+          "id": "2",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.11519607843137254,
+            "y": 0.19065656565656566,
+            "width": 0.7679738562091504,
+            "height": 0.054292929292929296
+          },
+          "content": "Quinlan, J. R. (1993). Combining instance-based and model-based learning. In Proceedings of the Tenth International Conference on Machine Learning, pages 236–243, San Mateo, CA. Morgan Kaufmann.",
+          "label": "Text"
+        },
+        {
+          "id": "3",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.11519607843137254,
+            "y": 0.25757575757575757,
+            "width": 0.7679738562091504,
+            "height": 0.07386363636363637
+          },
+          "content": "Serneels, S. (2019). Projection pursuit based generalized betas accounting for higher order com- moment effects in financial market analysis. In JSM Proceedings, Business and Economic Statistics Section, pages 3009–3035, Alexandria, VA. American Statistical Association. Offprint available on arXiv: https://arxiv.org/abs/1908.00141.",
+          "label": "Text"
+        },
+        {
+          "id": "4",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.11519607843137254,
+            "y": 0.3434343434343434,
+            "width": 0.7687908496732027,
+            "height": 0.036616161616161616
+          },
+          "content": "Serneels, S. (2025). Sparse twoblock dimension reduction: a versatile alternative to sparse PLS2 and CCA. Journal of Chemometrics, 39(8):e70051.",
+          "label": "Text"
+        },
+        {
+          "id": "5",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.11519607843137254,
+            "y": 0.3926767676767677,
+            "width": 0.7671568627450981,
+            "height": 0.037247474747474744
+          },
+          "content": "Serneels, S. (2026a). Cellwise robust twoblock dimension reduction. Submitted for publication; preprint available at https://arxiv.org/abs/2604.15106.",
+          "label": "Text"
+        },
+        {
+          "id": "6",
+          "order": 7,
+          "bounding_box": {
+            "x": 0.11519607843137254,
+            "y": 0.44191919191919193,
+            "width": 0.7679738562091504,
+            "height": 0.036616161616161616
+          },
+          "content": "Serneels, S. (2026b). Robust twoblock simultaneous dimension reduction. Submitted for publication; preprint available at https://arxiv.org/abs/2603.24820.",
+          "label": "Text"
+        },
+        {
+          "id": "7",
+          "order": 8,
+          "bounding_box": {
+            "x": 0.11519607843137254,
+            "y": 0.4911616161616162,
+            "width": 0.7671568627450981,
+            "height": 0.05366161616161616
+          },
+          "content": "Shao, X. and Zhang, J. (2014). Martingale difference correlation and its use in high-dimensional variable screening. Journal of the American Statistical Association, 109(507):1302–1318.",
+          "label": "Text"
+        },
+        {
+          "id": "8",
+          "order": 9,
+          "bounding_box": {
+            "x": 0.11601307189542484,
+            "y": 0.5580808080808081,
+            "width": 0.7663398692810458,
+            "height": 0.054292929292929296
+          },
+          "content": "Tsanas, A. and Xifara, A. (2012). Accurate quantitative estimation of energy performance of residential buildings using statistical machine learning tools. Energy and Buildings, 49:560–567.",
+          "label": "Text"
+        },
+        {
+          "id": "9",
+          "order": 10,
+          "bounding_box": {
+            "x": 0.11519607843137254,
+            "y": 0.625,
+            "width": 0.7679738562091504,
+            "height": 0.03598484848484849
+          },
+          "content": "Yeh, I.-C. (2007). Modeling slump flow of concrete using second-order regressions and artificial neural networks. Cement and Concrete Composites, 29(6):474–480.",
+          "label": "Text"
+        },
+        {
+          "id": "10",
+          "order": null,
+          "bounding_box": {
+            "x": 0.4877450980392157,
+            "y": 0.9349747474747475,
+            "width": 0.02369281045751634,
+            "height": 0.01452020202020202
+          },
+          "content": "20",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "page_index": 3,
+      "blocks": [
+        {
+          "id": "0",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.1119281045751634,
+            "y": 0.09343434343434344,
+            "width": 0.7728758169934641,
+            "height": 0.034722222222222224
+          },
+          "content": "test trees deeper than four levels, and target a single response rather than the multivariate case.",
+          "label": "Text"
+        },
+        {
+          "id": "1",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.1111111111111111,
+            "y": 0.13068181818181818,
+            "width": 0.7753267973856209,
+            "height": 0.18055555555555555
+          },
+          "content": "Novel in this paper is to initiate tree construction from the recently proposed twoblock method (Cook et al., 2023), which returns, for a predictor block  $ \\mathbf{X} \\in \\mathbb{R}^{n \\times p} $ and a response block  $ \\mathbf{Y} \\in \\mathbb{R}^{n \\times q} $, a reduced central subspace of each block with respect to the other. It is a genuinely multivariate joint reduction with optional embedded per-block variable selection if the sparse variant of Serneels (2025) is selected. When the data contain several operating regimes a single global twoblock model fits poorly; but, owing to its construction, the reduced score spaces it produces are an excellent device for identifying those regimes as distinct subspaces. This is the observation exploited here: rather than fight the global misfit, the twoblock scores are used to partition the data and place a fresh, locally faithful twoblock model in each part.",
+          "label": "Text"
+        },
+        {
+          "id": "2",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.1111111111111111,
+            "y": 0.3125,
+            "width": 0.7745098039215687,
+            "height": 0.2727272727272727
+          },
+          "content": "The published twoblock methods choose their latent directions to maximize the covariance of the predictor and response scores. This is the natural objective when the two blocks are jointly Gaussian, but it may be the wrong lens for the regime-identification task. A node that straddles two regimes contains a mixture of two local linear laws, and a mixture of Gaussians is non-Gaussian: its skewness and higher moments carry the signature of the components. Concretely, the direction that best separates two regimes is often one along which the joint predictor–response distribution is strongly skewed while its covariance with the response is weak or even zero. The covariance objective is blind to such a direction by construction; a third-moment objective is not. This paper therefore introduces, nested into its central methodological contribution, a novel twoblock decomposition whose latent directions maximize the coskeewness of the scores rather than their covariance, or a convex combination of the two criteria that trades regime sensitivity against predictive sharpness. Both are computed by a matrix-free, block-symmetric higher-order power method (De Lathauwer et al., 2000b) that never materializes a third-moment tensor, so the cost per latent direction stays linear in the data size.",
+          "label": "Text"
+        },
+        {
+          "id": "3",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.1119281045751634,
+            "y": 0.586489898989899,
+            "width": 0.7736928104575164,
+            "height": 0.2361111111111111
+          },
+          "content": "Putting these pieces together, the twoblock clustering tree (tbtree) is proposed: a potentially shallow, interpretable, deterministic top-down clustering scheme that fits a twoblock model at each node, splits along the first predictor score, and is multivariate by construction. Its specific contributions are the following. At first, twoblock trees prtoposed here (tbtree) are the first tree-based regression method to place a local, genuinely multivariate twoblock (dense or sparse) dimension reduction model in every leaf. They generalize the PLS-Trees of Eriksson et al. (2009) from partial least squares to the joint predictor-response reduction of Cook et al. (2023), so both the split direction and the leaf prediction are informed by the multivariate response block. Secondly, to obtain a split impurity more efficient at detecting regimes, a novel twoblock decomposition is introduced based on coskewness: its latent directions maximize a third-order comoment of the predictor and response scores, or a convex combination with the classical covariance objective. This dimension reduction based on thrid order comoments is novel by itself and has not been published elsewhere.",
+          "label": "Text"
+        },
+        {
+          "id": "4",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.1119281045751634,
+            "y": 0.8238636363636364,
+            "width": 0.7753267973856209,
+            "height": 0.09027777777777778
+          },
+          "content": "The remainder of the paper is organized as follows. Section 2 recaps the twoblock estimator. Section 3 develops the coskewness decomposition and its higher-order power method. Section 4 reports a controlled simulation for the coskewness objective in isolation. Section 5 states the tbtree algorithm, its impurity criterion and its cross-validation pruning gate. Section 6 reports the four-regime simulation study. Section 7 applies the method to",
+          "label": "Text"
+        },
+        {
+          "id": "5",
+          "order": null,
+          "bounding_box": {
+            "x": 0.49264705882352944,
+            "y": 0.9356060606060606,
+            "width": 0.013888888888888888,
+            "height": 0.013257575757575758
+          },
+          "content": "3",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "page_index": 4,
+      "blocks": [
+        {
+          "id": "0",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.1119281045751634,
+            "y": 0.0928030303030303,
+            "width": 0.7736928104575164,
+            "height": 0.037247474747474744
+          },
+          "content": "the energy-efficiency and gas-turbine benchmarks. Section 8 concludes and Section 9 points to the implementation.",
+          "label": "Text"
+        },
+        {
+          "id": "1",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.1119281045751634,
+            "y": 0.15782828282828282,
+            "width": 0.369281045751634,
+            "height": 0.021464646464646464
+          },
+          "content": "## 2 The twoblock estimator",
+          "label": "Text"
+        },
+        {
+          "id": "2",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.11029411764705882,
+            "y": 0.19444444444444445,
+            "width": 0.7753267973856209,
+            "height": 0.09217171717171717
+          },
+          "content": "Consider $n$ rows of two blocks of variables, a predictor block $\\mathbf{X} \\in \\mathbb{R}^{n \\times p}$ and a response block $\\mathbf{Y} \\in \\mathbb{R}^{n \\times q}$, with $\\mathbf{x}_i$ and $\\mathbf{y}_i$ the $i$th rows; both blocks are centred and scaled before the decomposition. The twoblock estimator (Cook et al., 2023) performs a simultaneous sufficient dimension reduction of the two blocks: it seeks score matrices $\\mathbf{T} = \\mathbf{X}\\mathbf{W}$ and $\\mathbf{U} = \\mathbf{Y}\\mathbf{V}$, of possibly different ranks $h$ and $g$, such that",
+          "label": "Text"
+        },
+        {
+          "id": "3",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.3349673202614379,
+            "y": 0.29924242424242425,
+            "width": 0.32679738562091504,
+            "height": 0.019570707070707072
+          },
+          "content": " $$ \\mathbf{Y}\\perp\\mathbf{X}\\mid\\mathbf{T}\\qquad\\mathrm{a n d}\\qquad\\mathbf{X}\\perp\\mathbf{Y}\\mid\\mathbf{U}, $$ ",
+          "label": "Formula"
+        },
+        {
+          "id": "4",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.8570261437908496,
+            "y": 0.3005050505050505,
+            "width": 0.024509803921568627,
+            "height": 0.018308080808080808
+          },
+          "content": "(1)",
+          "label": "Formula"
+        },
+        {
+          "id": "5",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.1111111111111111,
+            "y": 0.3333333333333333,
+            "width": 0.7736928104575164,
+            "height": 0.09343434343434344
+          },
+          "content": "i.e. each block is reduced to an estimate of a central subspace that carries all the information that block holds about the other block. In sample, with the independence conditions relaxed to zero covariance, Cook et al. (2023) estimate the two subspaces by a pair of PLS-type deflation loops, one per block. Let  $ \\mathbf{X}_0 = \\mathbf{X} $ and  $ \\mathbf{Y}_0 = \\mathbf{Y} $; the weight vectors maximize the covariance between a candidate score in the (deflated) own block and the other block in full,",
+          "label": "Text"
+        },
+        {
+          "id": "6",
+          "order": 7,
+          "bounding_box": {
+            "x": 0.23202614379084968,
+            "y": 0.4551767676767677,
+            "width": 0.5334967320261438,
+            "height": 0.03282828282828283
+          },
+          "content": " $$ w_{i}=\\underset{\\|c\\|=1}{\\operatorname{argmax}}\\ \\mathbf{c}^{\\top}\\mathbf{X}_{i-1}^{\\top}\\mathbf{Y}\\mathbf{Y}^{\\top}\\mathbf{X}_{i-1}\\mathbf{c},\\quad\\mathbf{t}_{i}=\\mathbf{X}_{i-1}w_{i}, $$ ",
+          "label": "Formula"
+        },
+        {
+          "id": "7",
+          "order": 8,
+          "bounding_box": {
+            "x": 0.8472222222222222,
+            "y": 0.4583333333333333,
+            "width": 0.03431372549019608,
+            "height": 0.017676767676767676
+          },
+          "content": "  2a ",
+          "label": "Formula"
+        },
+        {
+          "id": "8",
+          "order": 9,
+          "bounding_box": {
+            "x": 0.23447712418300654,
+            "y": 0.4898989898989899,
+            "width": 0.5245098039215687,
+            "height": 0.03345959595959596
+          },
+          "content": " $$ \\begin{array}{r}{v_{j}=\\underset{||a||=1}{\\mathrm{a r g m a x}}~a^{\\top}Y_{j-1}^{\\top}X X^{\\top}Y_{j-1}a,\\quad u_{j}=Y_{j-1}v_{j},}\\end{array} $$ ",
+          "label": "Formula"
+        },
+        {
+          "id": "9",
+          "order": 10,
+          "bounding_box": {
+            "x": 0.8464052287581699,
+            "y": 0.49242424242424243,
+            "width": 0.035130718954248366,
+            "height": 0.018308080808080808
+          },
+          "content": "(2b)",
+          "label": "Formula"
+        },
+        {
+          "id": "10",
+          "order": 11,
+          "bounding_box": {
+            "x": 0.1111111111111111,
+            "y": 0.5366161616161617,
+            "width": 0.7745098039215687,
+            "height": 0.18434343434343434
+          },
+          "content": "each loop followed by its own rank-one deflation  $ \\mathbf{X}_i = \\mathbf{X}_{i-1} - \\mathbf{t}_i \\mathbf{p}_i^\\top $ and  $ \\mathbf{Y}_j = \\mathbf{Y}_{j-1} - \\mathbf{u}_j \\mathbf{q}_j^\\top $, with loadings  $ \\mathbf{p}_i = \\mathbf{X}_{i-1}^\\top \\mathbf{t}_i / \\mathbf{t}_i^\\top \\mathbf{t}_i $ and  $ \\mathbf{q}_j = \\mathbf{Y}_{j-1}^\\top \\mathbf{u}_j / \\mathbf{u}_j^\\top \\mathbf{u}_j $, which keeps successive scores within each block uncorrelated. For the leading component the two criteria are solved jointly by the dominant singular vector pair of  $ \\mathbf{X}^\\top \\mathbf{Y}/n $, i.e.  $ (\\mathbf{w}_1, \\mathbf{v}_1) $ maximize the score covariance  $ \\mathbb{E}[t \\mathbf{u}] $, which is equivalent to SIMPLS (de Jong, 1993). The difference from PLS2 or SIMPLS resides beyond the first component: there, the  $ \\mathbf{Y} $-side scores and loadings are a computational by-product of a single  $ \\mathbf{X} $-driven deflation, whereas twoblock deflates each block separately, so that  $ \\mathbf{T} $ and  $ \\mathbf{U} $ are both genuine central-subspace estimates and the two blocks may retain different numbers of components. The two reductions recombine into a single coefficient matrix",
+          "label": "Text"
+        },
+        {
+          "id": "11",
+          "order": 12,
+          "bounding_box": {
+            "x": 0.20506535947712418,
+            "y": 0.7323232323232324,
+            "width": 0.5882352941176471,
+            "height": 0.022095959595959596
+          },
+          "content": " $$ \\boldsymbol{B}=\\boldsymbol{W}\\left(\\boldsymbol{W}^{\\top}\\boldsymbol{X}^{\\top}\\boldsymbol{X}\\boldsymbol{W}\\right)^{-1}\\boldsymbol{W}^{\\top}\\boldsymbol{X}^{\\top}\\boldsymbol{Y}\\boldsymbol{V}\\boldsymbol{V}^{\\top}\\in\\mathbb{R}^{p\\times q},\\qquad\\hat{\\boldsymbol{Y}}=\\boldsymbol{X}\\boldsymbol{B}, $$ ",
+          "label": "Formula"
+        },
+        {
+          "id": "12",
+          "order": 13,
+          "bounding_box": {
+            "x": 0.8578431372549019,
+            "y": 0.735479797979798,
+            "width": 0.02369281045751634,
+            "height": 0.017676767676767676
+          },
+          "content": "(3)",
+          "label": "Formula"
+        },
+        {
+          "id": "13",
+          "order": 14,
+          "bounding_box": {
+            "x": 0.1111111111111111,
+            "y": 0.7683080808080808,
+            "width": 0.7001633986928104,
+            "height": 0.017676767676767676
+          },
+          "content": "the regression of Y on the X-score space, projected onto the reduced Y-subspace.",
+          "label": "Text"
+        },
+        {
+          "id": "14",
+          "order": 15,
+          "bounding_box": {
+            "x": 0.1111111111111111,
+            "y": 0.7866161616161617,
+            "width": 0.7761437908496732,
+            "height": 0.12815656565656566
+          },
+          "content": "Two features matter downstream. First, the reduction is genuinely multivariate: a single joint model relates all $p$ predictors to all $q$ responses through a shared low-dimensional score space. Second, Serneels (2025) has extended the extraction with soft-thresholding on $\\boldsymbol{w}$ and $\\boldsymbol{v}$, governed by penalties $\\eta_{x}, \\eta_{y} \\in [0,1)$. This produces a sparse, variable-selecting variant, which was first in its kind to produce dimension reduction in which both the number of components and the sparsity can be tuned individually in each block. It is noted that a huge literature exists on sufficient variable selection (see e.g. Menvouta et al. (2022) for",
+          "label": "Text"
+        },
+        {
+          "id": "15",
+          "order": null,
+          "bounding_box": {
+            "x": 0.49264705882352944,
+            "y": 0.9356060606060606,
+            "width": 0.014705882352941176,
+            "height": 0.013888888888888888
+          },
+          "content": "4",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "page_index": 5,
+      "blocks": [
+        {
+          "id": "0",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.11274509803921569,
+            "y": 0.0928030303030303,
+            "width": 0.7728758169934641,
+            "height": 0.09027777777777778
+          },
+          "content": "options based on martingale difference divergence (Shao and Zhang, 2014)), but none of such methods introduce sparsity for each block independently. Further extensions into casewise and cellwise robust estimators are given in Serneels (2026b,a). ttree is agnostic to the choice of base estimator, and its leaves may therefore carry dense or sparse local models. While not pushed in this paper, leaves could even be casewise or cellwise robust twoblock models.",
+          "label": "Text"
+        },
+        {
+          "id": "1",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.1119281045751634,
+            "y": 0.18434343434343434,
+            "width": 0.7736928104575164,
+            "height": 0.10984848484848485
+          },
+          "content": "The single most important property for what follows is that (2) is a second-moment objective: every quantity in the estimator derives from cross-covariances alone. When the data within a node are homogeneous – a single local linear law with Gaussian scatter – the covariance criterion is the right one. When the node instead contains a mixture of regimes, the criterion is no longer sufficient. For that reason, a criterion based on third co-moments is adopted in what follows.",
+          "label": "Text"
+        },
+        {
+          "id": "2",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.11356209150326797,
+            "y": 0.3207070707070707,
+            "width": 0.6437908496732027,
+            "height": 0.02335858585858586
+          },
+          "content": "## 3 A coskewness-based twoblock decomposition",
+          "label": "Text"
+        },
+        {
+          "id": "3",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.11274509803921569,
+            "y": 0.3611111111111111,
+            "width": 0.4166666666666667,
+            "height": 0.020202020202020204
+          },
+          "content": "### 3.1 Why a third-moment objective",
+          "label": "Text"
+        },
+        {
+          "id": "4",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.1111111111111111,
+            "y": 0.39141414141414144,
+            "width": 0.7736928104575164,
+            "height": 0.2178030303030303
+          },
+          "content": "Suppose a node contains two regimes, each a local linear map from X to Y with Gaussian scatter, in proportions  $ \\pi $ and  $ 1 - \\pi $. Along any direction the marginal score distribution is then a two-component Gaussian mixture, which is non-Gaussian whenever the component means differ. The signature of that non-Gaussianity is carried by the higher-order moments: a two-component mixture is, in general, both skewed and heavy-tailed relative to a single Gaussian, and the skewness in particular encodes the asymmetry between the two components. The direction that best separates the regimes is therefore often a direction of large joint skewness, and it need not coincide with – and may be orthogonal to – the direction of large joint covariance. A covariance-based objective such as (2) cannot, by construction, prefer such a direction; a third-moment objective can. This is the motivation for a twoblock decomposition driven by coskeewness, the natural third-order cross-moment between the predictor and response scores.",
+          "label": "Text"
+        },
+        {
+          "id": "5",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.1119281045751634,
+            "y": 0.6098484848484849,
+            "width": 0.7736928104575164,
+            "height": 0.16477272727272727
+          },
+          "content": "At this point, it is noted that dimension reduction based on higher order (co-)moments has been explored before.. For instance, a kurtosis based one-block dimension reduction was illustrated to better reveal cluster in analytical chemical data (Driscoll et al., 2020). Likewise, a criterion that accommodates for higher order comoments was adopted to calculate generalized betas for financial portfolios (Serneels, 2019). However, in both those approaches, a computationally involved projection pursuit algorithm was used. This article is first to extend the use of higher order co-moments into the twoblock simultaneous dimension reduction framework and it is also first to do so based on a computationally very efficient matrix-free power method, as will bne explained in Subsection 3.3.",
+          "label": "Text"
+        },
+        {
+          "id": "6",
+          "order": 7,
+          "bounding_box": {
+            "x": 0.11356209150326797,
+            "y": 0.797979797979798,
+            "width": 0.184640522875817,
+            "height": 0.019570707070707072
+          },
+          "content": "### 3.2 Objectives",
+          "label": "Text"
+        },
+        {
+          "id": "7",
+          "order": 8,
+          "bounding_box": {
+            "x": 0.1119281045751634,
+            "y": 0.827020202020202,
+            "width": 0.7712418300653595,
+            "height": 0.07449494949494949
+          },
+          "content": "Write  $ t = Xw $ and  $ u = Yv $ for a generic pair of score vectors. Beside the covariance  $ \\mathbb{E}[t u] $ that drives (2), the two third-order cross-moments of the pair are  $ \\mathbb{E}[t^2 u] $ and  $ \\mathbb{E}[t u^2] $. The coskewness decomposition retains the architecture of Section 2: two deflation loops, each pairing its own deflated block with the other block in full. However, the second order",
+          "label": "Text"
+        },
+        {
+          "id": "8",
+          "order": null,
+          "bounding_box": {
+            "x": 0.49264705882352944,
+            "y": 0.9356060606060606,
+            "width": 0.013888888888888888,
+            "height": 0.013888888888888888
+          },
+          "content": "5",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "page_index": 6,
+      "blocks": [
+        {
+          "id": "0",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.1119281045751634,
+            "y": 0.09217171717171717,
+            "width": 0.7712418300653595,
+            "height": 0.036616161616161616
+          },
+          "content": "criterion is supplanted by a criterion that involves the third order comoment. With  $ \\mathbf{X}_{0} = \\mathbf{X} $ and  $ \\mathbf{Y}_{0} = \\mathbf{Y} $ as before, the ith  $ \\mathbf{X} $-side weight solves",
+          "label": "Text"
+        },
+        {
+          "id": "1",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.2761437908496732,
+            "y": 0.14204545454545456,
+            "width": 0.4452614379084967,
+            "height": 0.03156565656565657
+          },
+          "content": " $$ \\begin{array}{r l}{w_{i}\\;=\\;\\underset{||w||=||v||=1}{\\mathrm{a r g m a x}}\\;\\mathbb{E}[t^{2}u],\\qquad t=X_{i-1}w,\\quad u=Y v,}\\end{array} $$ ",
+          "label": "Formula"
+        },
+        {
+          "id": "2",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.8570261437908496,
+            "y": 0.1433080808080808,
+            "width": 0.025326797385620915,
+            "height": 0.018308080808080808
+          },
+          "content": "(4)",
+          "label": "Formula"
+        },
+        {
+          "id": "3",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.1111111111111111,
+            "y": 0.1875,
+            "width": 0.7736928104575164,
+            "height": 0.20075757575757575
+          },
+          "content": "where  $ \\mathbb{E}[t^2u] = \\frac{1}{n} \\sum_{k=1}^n t_k^2 u_k $ is the empirical coskewness of the score pair. The auxiliary response weight  $ \\boldsymbol{v} $ is part of the maximization but only  $ \\boldsymbol{w}_i $ is retained – exactly as the covariance criterion (2a) implicitly maximizes over a response direction, which in that case can be eliminated analytically. The  $ j $th  $ \\mathbf{Y} $-side weight  $ \\boldsymbol{v}_j $ symmetrically maximizes  $ \\mathbb{E}[t^2] $ with  $ t = \\mathbf{X}\\boldsymbol{w} $ and  $ u = \\mathbf{Y}_{j-1}\\boldsymbol{v} $. Scores, loadings and the per-block rank-one deflations are exactly those of Section 2, so the two loops may again run to different ranks  $ h $ and  $ g $, and the resulting  $ (\\mathbf{W}, \\mathbf{V}) $ recombine into regression coefficients through (3) unchanged: the coskewness criterion is a drop-in replacement for the covariance criterion inside the twoblock estimator. Because coskewness mixes third-order moments across variables, it is not scale invariant; one has to take care that both blocks are always autoscaled prior to calculating results, so that the objective becomes a moment of standardized scores.",
+          "label": "Text"
+        },
+        {
+          "id": "4",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.1111111111111111,
+            "y": 0.38952020202020204,
+            "width": 0.7745098039215687,
+            "height": 0.05555555555555555
+          },
+          "content": "Third moments are, however, estimated with more sampling variability than second moments, and on data that are close to a single linear law the covariance objective remains preferable. A combined objective interpolates between the two within each loop,",
+          "label": "Text"
+        },
+        {
+          "id": "5",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.2908496732026144,
+            "y": 0.4564393939393939,
+            "width": 0.4150326797385621,
+            "height": 0.029671717171717172
+          },
+          "content": " $$ \\max_{\\|\\boldsymbol{w}\\|=\\|\\boldsymbol{v}\\|=1}\\left(1-\\gamma\\right)\\mathbb{E}[t\\boldsymbol{u}]+\\gamma\\mathbb{E}[t^{2}\\boldsymbol{u}],\\qquad\\gamma\\in[0,1], $$ ",
+          "label": "Formula"
+        },
+        {
+          "id": "6",
+          "order": 7,
+          "bounding_box": {
+            "x": 0.8570261437908496,
+            "y": 0.4583333333333333,
+            "width": 0.025326797385620915,
+            "height": 0.018308080808080808
+          },
+          "content": "(5)",
+          "label": "Formula"
+        },
+        {
+          "id": "7",
+          "order": 8,
+          "bounding_box": {
+            "x": 0.1111111111111111,
+            "y": 0.49936868686868685,
+            "width": 0.7720588235294118,
+            "height": 0.07323232323232323
+          },
+          "content": "on the X-side, and symmetrically with  $ \\mathbb{E}[t u^2] $ on the Y-side, with  $ \\gamma = 0 $ recovering the covariance decomposition of Cook et al. (2023) exactly and  $ \\gamma = 1 $ the pure coskewness objective. The weight  $ \\gamma $ is a single interpretable knob trading regime sensitivity (large  $ \\gamma $) against predictive sharpness on smooth data (small  $ \\gamma $).",
+          "label": "Text"
+        },
+        {
+          "id": "8",
+          "order": 9,
+          "bounding_box": {
+            "x": 0.11029411764705882,
+            "y": 0.5732323232323232,
+            "width": 0.7753267973856209,
+            "height": 0.10984848484848485
+          },
+          "content": "Although the decomposition is defined for arbitrary ranks, the tree induction of Section 5 only ever consumes its leading component: the split at a node is searched along the first  $ \\mathbf{X} $-score  $ t_1 = \\mathbf{X} \\mathbf{w}_1 $, so tree construction solves (4) or (5) in the single-component case  $ i = 1 $, for which no deflation is required. Multi-component coskewness fits arise only when the leaf models themselves are requested under a third-moment objective, which is the coupled variant discussed in Section 5.1.",
+          "label": "Text"
+        },
+        {
+          "id": "9",
+          "order": 10,
+          "bounding_box": {
+            "x": 0.1119281045751634,
+            "y": 0.7058080808080808,
+            "width": 0.5392156862745098,
+            "height": 0.020202020202020204
+          },
+          "content": "### 3.3 A matrix-free higher-order power method",
+          "label": "Text"
+        },
+        {
+          "id": "10",
+          "order": 11,
+          "bounding_box": {
+            "x": 0.1111111111111111,
+            "y": 0.7361111111111112,
+            "width": 0.7736928104575164,
+            "height": 0.14646464646464646
+          },
+          "content": "Each weight extraction in (4) is a best rank-one symmetric tensor problem posed on the current deflated block; this section describes the solver for one such extraction and, without loss of generality, writes  $ \\mathbf{X} $ for the block it acts on. The higher-order power method (HOPM) of De Lathauwer et al. (2000b) is the standard tool. A naïve implementation would form the third-moment tensor  $ \\sum_i \\mathbf{x}_i \\otimes \\mathbf{x}_i \\otimes \\mathbf{y}_i \\in \\mathbb{R}^{p \\times p \\times q} $, which is  $ O(p^2 q) $ in storage and prohibitive for wide predictor blocks. Instead, a matrix-free, block-symmetric alternating scheme that never materializes the tensor itself is used. Fix the current  $ \\mathbf{v} $ (hence  $ \\mathbf{u} = \\mathbf{Y} \\mathbf{v} $). The objective in (5) is linear in  $ \\mathbf{v} $, so the maximizing response weight is the normalized gradient",
+          "label": "Text"
+        },
+        {
+          "id": "11",
+          "order": 12,
+          "bounding_box": {
+            "x": 0.3545751633986928,
+            "y": 0.8939393939393939,
+            "width": 0.2867647058823529,
+            "height": 0.022727272727272728
+          },
+          "content": " $$ \\boldsymbol{v}\\propto\\boldsymbol{Y}^{\\top}\\big[(1-\\gamma)t+\\gamma\\left(t\\odot t\\right)\\big]/n, $$ ",
+          "label": "Formula"
+        },
+        {
+          "id": "12",
+          "order": 13,
+          "bounding_box": {
+            "x": 0.8578431372549019,
+            "y": 0.8958333333333334,
+            "width": 0.02369281045751634,
+            "height": 0.018308080808080808
+          },
+          "content": "(6)",
+          "label": "Formula"
+        },
+        {
+          "id": "13",
+          "order": null,
+          "bounding_box": {
+            "x": 0.4934640522875817,
+            "y": 0.9356060606060606,
+            "width": 0.013071895424836602,
+            "height": 0.013257575757575758
+          },
+          "content": "6",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "page_index": 7,
+      "blocks": [
+        {
+          "id": "0",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.1111111111111111,
+            "y": 0.09217171717171717,
+            "width": 0.7826797385620915,
+            "height": 0.2563131313131313
+          },
+          "content": "where $\\odot$ denotes the Hadamard (or element-wise) matrix product. Fixing $\\boldsymbol{v}$, the pure-coskewness update for $\\boldsymbol{w}$ is the leading eigenvector of the $p\\times p$ matrix $\\boldsymbol{A}(u)=\\boldsymbol{X}^{\\top}\\operatorname{diag}(u)\\boldsymbol{X}/n$, obtained by power iteration through the matrix-free product $\\boldsymbol{A}(u)\\boldsymbol{z}=\\boldsymbol{X}^{\\top}[u\\odot(\\boldsymbol{X}\\boldsymbol{z})]/n$; each step costs $O(n(p+q))$ and no $p\\times p$ matrix is ever stored. The matrix $\\boldsymbol{A}(u)$ is symmetric but indefinite, so the iteration converges to the eigenvector that corresponds to the eigenvalue of largest magnitude. Because $\\mathbb{E}[t^{2}u]$ is odd in $\\boldsymbol{v}$, a negative dominant eigenvalue is resolved by flipping the sign of $\\boldsymbol{v}$. For the combined objective $0<\\gamma<1$ the $\\boldsymbol{w}$-update is a safeguarded normalized-gradient fixed point that ascends (5) monotonically; it reduces continuously to the covariance power method as $\\gamma\\to0$. The alternation is initialized deterministically from the covariance leading singular pair, and run from a small number of deterministic starts (the covariance warm start plus a few coordinate starts at the most promising variables). Note that this is owed to the ascent being only locally convergent. The full procedure is summarized in Algorithm 1; a soft-thresholding step (Serneels, 2025) may be applied to the converged $\\boldsymbol{w}$ to obtain sparse directions, exactly as in the covariance case.",
+          "label": "Text"
+        },
+        {
+          "id": "1",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.11764705882352941,
+            "y": 0.3611111111111111,
+            "width": 0.7679738562091504,
+            "height": 0.26136363636363635
+          },
+          "content": "Algorithm 1 One coskewness direction (matrix-free HOPM), X-side loop.\n\nRequire: Centred, scaled X, Y; weight $\\gamma \\in [0,1];$ tolerances.\n\n1: Initialize $(w, v)$ from the leading singular pair of $X^{\\top}Y/n$.\n\n2: repeat\n\n3: $t \\leftarrow Xw$; update $v \\propto Y^{\\top}[(1-\\gamma)t+\\gamma(t\\odot t)]/n$, renormalize; $u \\leftarrow Yv$.\n\n4: if $\\gamma = 1$ then\n\n5: $w \\leftarrow$ dominant-magnitude eigenvector of $A(u) = X^{\\top}$diag($u$)X/n by matrix-free power iteration;\n\n6: if its Rayleigh quotient is negative, set $v \\leftarrow -v$, $u \\leftarrow -u$.\n\n7: else\n\n8: $w \\leftarrow$ safeguarded normalized-gradient fixed point of (5).\n\n9: end if\n\n10: until the objective (5) stops increasing.\n\n11: return $w$ (optionally soft-thresholded).",
+          "label": "Text"
+        },
+        {
+          "id": "2",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.11356209150326797,
+            "y": 0.6704545454545454,
+            "width": 0.5465686274509803,
+            "height": 0.022727272727272728
+          },
+          "content": "## 4 The coskewness objective in isolation",
+          "label": "Text"
+        },
+        {
+          "id": "3",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.1119281045751634,
+            "y": 0.7083333333333334,
+            "width": 0.7736928104575164,
+            "height": 0.12878787878787878
+          },
+          "content": "Before embedding the coskewness decomposition in a tree, this section presents a limited simulation study that attests that the method based on coskewness can recover the inherent structure the covariance objective cannot, in a controlled setting. A predictor block of six columns is constructed in which a single column drives the response through its square, next to a weak linear decoy. Note that this is a purely third-order relationship. Let $z$ be a standard-Gaussian variable, $x_2$ a second, independent one, and $n_1, \\ldots, n_4$ four independent Gaussian noise columns; set $\\mathbf{X} = [z, x_2, n_1, n_2, n_3, n_4]$ and a single response",
+          "label": "Text"
+        },
+        {
+          "id": "4",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.37173202614379086,
+            "y": 0.8465909090909091,
+            "width": 0.25245098039215685,
+            "height": 0.019570707070707072
+          },
+          "content": " $$ y=(z^{2}-1)+0.1x_{2}+0.05\\varepsilon. $$ ",
+          "label": "Formula"
+        },
+        {
+          "id": "5",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.8570261437908496,
+            "y": 0.8484848484848485,
+            "width": 0.025326797385620915,
+            "height": 0.017676767676767676
+          },
+          "content": "(7)",
+          "label": "Formula"
+        },
+        {
+          "id": "6",
+          "order": 7,
+          "bounding_box": {
+            "x": 0.11274509803921569,
+            "y": 0.8756313131313131,
+            "width": 0.7696078431372549,
+            "height": 0.03787878787878788
+          },
+          "content": "The population moments are decisive:  $ \\mathrm{cov}(z, y) = \\mathbb{E}[z^3] = 0 $ while  $ \\mathbb{E}[z^2 y] = \\mathbb{E}[z^4] - \\mathbb{E}[z^2] = 2 $. The covariance objective is thus unable to rank the planted direction  $ z $ above the decoy  $ x_2 $,",
+          "label": "Text"
+        },
+        {
+          "id": "7",
+          "order": null,
+          "bounding_box": {
+            "x": 0.4934640522875817,
+            "y": 0.9356060606060606,
+            "width": 0.013071895424836602,
+            "height": 0.013888888888888888
+          },
+          "content": "7",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "page_index": 8,
+      "blocks": [
+        {
+          "id": "0",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.1111111111111111,
+            "y": 0.0928030303030303,
+            "width": 0.7736928104575164,
+            "height": 0.07133838383838384
+          },
+          "content": "whereas the coskewness objective sees a strong signal on $z$. Here $z$ is drawn antithetically ($z$ paired with $-z$) so that every odd sample moment of $z$ vanishes exactly and the finite-sample covariance $\\widehat{\\operatorname{cov}}(z,z^2-1)$ is 0 by construction, leaving the decoy as the only linear signal; $n=1000$.",
+          "label": "Text"
+        },
+        {
+          "id": "1",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.1119281045751634,
+            "y": 0.16603535353535354,
+            "width": 0.7745098039215687,
+            "height": 0.16351010101010102
+          },
+          "content": "Fitting a single-component twoblock on the autoscaled data, the covariance objective places almost no weight on the planted direction  $ (|w_z| \\approx 0.04) $ and spreads its energy over the decoy and whatever noise columns happen to correlate with  $ y $ in sample, whereas the coskewness objective loads almost entirely on  $ z(|w_z| \\approx 0.99) $; Figure 1(a). The antithetic sampling is not cosmetic: with an ordinary Gaussian draw the sample third moment of  $ z $ has standard deviation  $ \\sqrt{10/n} \\approx 0.1 $ at  $ n = 1000 $, which is the same size as the decoy's coefficient. Therefore, the covariance objective would “find” the skewed direction through pure sampling noise, thence obscuring the mechanism. Under antithetic sampling the covariance weight on  $ z $ stays below 0.06 across twenty seeds, while the coskewness weight is consistently near one.",
+          "label": "Text"
+        },
+        {
+          "id": "2",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.1119281045751634,
+            "y": 0.3301767676767677,
+            "width": 0.7745098039215687,
+            "height": 0.16540404040404041
+          },
+          "content": "Figure 1(b) illustrates the combined objective (5) on a companion design in which a covariance-attractive direction (carrying a mild skewness of its own) competes with the antithetic coskewness direction. As  $ \\gamma $ increases, the optimum does not blend smoothly between the two: it switches basins sharply, here just above  $ \\gamma \\approx 0.5 $. Below the transition the extra coskewness term is absorbed by the linear direction's own mild skewness; above it, the third-order signal of the planted direction dominates. This basin structure is why the local-convergence safeguard and the deterministic multi-start of Section 3.3 matter: a single covariance-warm-started ascent can remain trapped in the covariance basin even for the pure coskewness objective, and the coordinate restarts are what free it.",
+          "label": "Text"
+        },
+        {
+          "id": "3",
+          "order": null,
+          "bounding_box": {
+            "x": 0.136437908496732,
+            "y": 0.5138888888888888,
+            "width": 0.35866013071895425,
+            "height": 0.1849747474747475
+          },
+          "content": "<div style=\"text-align: center;\"><img src=\"imgs/img_in_chart_box_167_814_606_1107.jpg\" alt=\"Image\" width=\"35%\" />\n\n\n\n</div>\n",
+          "label": "Image"
+        },
+        {
+          "id": "4",
+          "order": null,
+          "bounding_box": {
+            "x": 0.5490196078431373,
+            "y": 0.5126262626262627,
+            "width": 0.20506535947712418,
+            "height": 0.013888888888888888
+          },
+          "content": "<div style=\"text-align: center;\">(b) basin transition, cov+coskew</div>\n",
+          "label": "Image"
+        },
+        {
+          "id": "5",
+          "order": null,
+          "bounding_box": {
+            "x": 0.5024509803921569,
+            "y": 0.5157828282828283,
+            "width": 0.35947712418300654,
+            "height": 0.19381313131313133
+          },
+          "content": "<div style=\"text-align: center;\"><img src=\"imgs/img_in_chart_box_615_817_1055_1124.jpg\" alt=\"Image\" width=\"35%\" />\n\n\n\n</div>\n",
+          "label": "Image"
+        },
+        {
+          "id": "6",
+          "order": null,
+          "bounding_box": {
+            "x": 0.11029411764705882,
+            "y": 0.7323232323232324,
+            "width": 0.7745098039215687,
+            "height": 0.10984848484848485
+          },
+          "content": "<div style=\"text-align: center;\">Figure 1: The coskewness objective in isolation. (a) First X-weight vector (absolute value, unit norm) on the planted-skew design (7): the covariance objective loads on the linear decoy  $ x_{2} $, while the coskewness and combined objectives recover the planted direction  $ z^{*} $. (b) Basin transition of the combined objective on a companion design with a competing covariance-attractive direction: as the coskewness weight  $ \\gamma $ grows, the recovered direction switches sharply from the linear to the skewed axis.</div>\n",
+          "label": "Image"
+        },
+        {
+          "id": "7",
+          "order": null,
+          "bounding_box": {
+            "x": 0.49264705882352944,
+            "y": 0.9349747474747475,
+            "width": 0.013888888888888888,
+            "height": 0.01452020202020202
+          },
+          "content": "8",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "page_index": 9,
+      "blocks": [
+        {
+          "id": "0",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.11356209150326797,
+            "y": 0.08838383838383838,
+            "width": 0.43300653594771243,
+            "height": 0.02335858585858586
+          },
+          "content": "## 5 The twoblock clustering tree",
+          "label": "Text"
+        },
+        {
+          "id": "1",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.1111111111111111,
+            "y": 0.12563131313131312,
+            "width": 0.7753267973856209,
+            "height": 0.27525252525252525
+          },
+          "content": "The twoblock clustering tree (tbtree) introduces a novel, deterministic way to build decision trees for multivariate responses that can result in shallow, highly interpretable models. In a nutshell, the twoblock tree accomplishes this by using the first scores of a twoblock model that accounts for coskewness in each node. Results from the previous paragraph, along with well-established results on properties of the third moment, lead us to assume that including a third order comoment into the split impurity criterion is conducive to a more efficient separation of the groups that then become the next-level nodes. In the leaves, though, prediction of the dependent variable is the objective, such that in most cases, twoblock models based on a covariance-alone criterion are preferable. The default proposed configuration of twoblock clustering trees therefore consists of using twoblock models based on third order comoments as impurity to split the data, but using the regular, covariance based twoblock models as predictive models in the leaves. At this point, it is noted that both split and leaf models can either be dense or sparse, but the latter will only be beneficial if truly uninformative variables are present in the data. Figure 2 shows the resulting structure schematically for a single split.",
+          "label": "Text"
+        },
+        {
+          "id": "2",
+          "order": null,
+          "bounding_box": {
+            "x": 0.16094771241830066,
+            "y": 0.41792929292929293,
+            "width": 0.6764705882352942,
+            "height": 0.2657828282828283
+          },
+          "content": "<div style=\"text-align: center;\"><img src=\"imgs/img_in_image_box_197_662_1025_1083.jpg\" alt=\"Image\" width=\"67%\" />\n\nRoot node (n rows)\ntwoblock coskewness split\nscore  $ t_{1} = x_{i}^{\\top} w_{1} $, threshold  $ \\tau $\n\n $ t_{1} < \\tau $\n $ t_{1} \\geq \\tau $\n\nLeaf  $ \\ell_{1} $: covariance twoblock\n $ \\hat{y}_{i} = x_{i}^{\\top} B_{\\ell_{1}} $\n $ \\hat{y}_{i} = x_{i}^{\\top} B_{\\ell_{2}} $\n\nleaf coefficients  $ B_{\\ell_{1}} $\n $ \\hat{y}_{i} = x_{i}^{\\top} B_{\\ell_{2}} $\n $ \\hat{y}_{i} = x_{i}^{\\top} B_{\\ell_{2}} $\n\n</div>\n",
+          "label": "Image"
+        },
+        {
+          "id": "3",
+          "order": null,
+          "bounding_box": {
+            "x": 0.1111111111111111,
+            "y": 0.7013888888888888,
+            "width": 0.7736928104575164,
+            "height": 0.14583333333333334
+          },
+          "content": "<div style=\"text-align: center;\">Figure 2: Schematic of a depth-one tbtree. The root (ellipse) fits a twoblock model under the coskewness split objective; its first  $ \\mathbf{X} $-score  $ t_1 = \\mathbf{x}_i^\\top \\mathbf{w}_1 $ orders the rows, and a threshold  $ \\tau $ routes each row to one of two leaves (rectangles). Every leaf carries its own covariance twoblock model  $ \\hat{\\mathbf{y}}_i = \\mathbf{x}_i^\\top \\mathbf{B}_\\ell $. The bar charts show, for a hypothetical six-variable predictor block, the coskewness split weights  $ \\mathbf{w}_1 $ and the two leaves' regression coefficients (blue positive, red negative), whose contrast illustrates the distinct local regimes. This figure is purely illustrative: the displayed weights and coefficients are specimen values, not fit to any dataset.</div>\n",
+          "label": "Image"
+        },
+        {
+          "id": "4",
+          "order": null,
+          "bounding_box": {
+            "x": 0.49264705882352944,
+            "y": 0.9349747474747475,
+            "width": 0.013888888888888888,
+            "height": 0.013888888888888888
+          },
+          "content": "9",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "page_index": 10,
+      "blocks": [
+        {
+          "id": "0",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.11356209150326797,
+            "y": 0.09154040404040405,
+            "width": 0.2900326797385621,
+            "height": 0.01893939393939394
+          },
+          "content": "### 5.1 Recursive induction",
+          "label": "Text"
+        },
+        {
+          "id": "1",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.1111111111111111,
+            "y": 0.12121212121212122,
+            "width": 0.7745098039215687,
+            "height": 0.14457070707070707
+          },
+          "content": "The decision tree. A tree  $ \\mathcal{T} $ partitions the rows into a set  $ \\mathcal{L}(\\mathcal{T}) $ of disjoint leaves  $ \\ell $; on each leaf a separate twoblock model  $ (\\mathbf{W}_{\\ell}, \\mathbf{B}_{\\ell}) $ is fit to its members. The twolock clusterin tree grows this tree by recursive top-down induction. At the root, a twoblock model – with the objective of choice, covariance (2), coskewness (4) or the combination (5) – is fitted on all  $ n $ rows; the first score  $ t_1 $ of that model defines a one-dimensional ordering of the rows along which a cut  $ \\tau $ is searched. Once a cut is committed, the rows split into a left child (rows with  $ t_{i1} < \\tau $) and a right child; on each child a new twoblock model is fit and the recursion continues until a stopping rule fires.",
+          "label": "Text"
+        },
+        {
+          "id": "2",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.1111111111111111,
+            "y": 0.26704545454545453,
+            "width": 0.7745098039215687,
+            "height": 0.19886363636363635
+          },
+          "content": "The decomposition objective enters a node in two distinct roles, and tbtree allows them to differ. In its splitting role it shapes the first score  $ t_{1} $ along which the cut is searched: with the covariance objective  $ t_{1} $ is the direction of maximal joint  $ \\mathbf{X}-\\mathbf{Y} $ covariance and tbtree reduces essentially to a twoblock analogue of PLS-Trees (Eriksson et al., 2009); with the coskewness objective  $ t_{1} $ is instead the direction of maximal joint skewness, which is assumed to be the direction along which two regimes are most cleanly separated. In its leaf role the fitted model  $ (\\mathbf{W}_{\\ell}, \\mathbf{B}_{\\ell}) $ supplies the prediction  $ \\hat{\\mathbf{y}}_{i} = \\mathbf{x}_{i}^{\\top} \\mathbf{B}_{\\ell} $. These two roles have opposing ideal objectives: separating regimes is a third-moment property, so the split benefits from coskewness (or the combined objective), whereas predicting inside a leaf is an ordinary regression, for which a skewness-aligned direction is a poor axis – it deliberately trades away the within-regime covariance that a leaf regression needs.",
+          "label": "Text"
+        },
+        {
+          "id": "3",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.1119281045751634,
+            "y": 0.4671717171717172,
+            "width": 0.7736928104575164,
+            "height": 0.23863636363636365
+          },
+          "content": "The recommended, and throughout Sections 6–7 default, configuration therefore decouples the two: the tree is grown and routed with a coskewness or combined split objective, while every leaf model  $ B_{\\ell} $ is fit under the plain covariance objective. Operationally the tree structure and its routing directions  $ w_{1} $ are fixed first, and each leaf is then refit under the covariance objective on its own members; the internal routing, computable from X alone at prediction time, keeps the skewness-aligned split. This decoupled tree retains the regime separation of the third-moment split while paying none of its predictive cost, and it is the form intended whenever a coskewness or cov+coskew tbtree is referred to in the benchmarks below. Using the coskewness objective in the leaves as well is an option, but is preferable only in niche settings where the leaf directions are themselves the object of study. For instance, reading a leaf's third-moment loadings to see which variables drive that regime's asymmetry could be a niche setting in which such a coupled variant would be preferred. Howbeit, on every predictive benchmark investigated here, it was dominated by the decoupled variant.",
+          "label": "Text"
+        },
+        {
+          "id": "4",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.1119281045751634,
+            "y": 0.7253787878787878,
+            "width": 0.7736928104575164,
+            "height": 0.07323232323232323
+          },
+          "content": "Stopping rules. A node becomes a leaf if (i) its depth reaches a user-set  $ d_{\\text{max}} $, (ii) it contains fewer than  $ 2n_{\\text{min}} $ rows, where  $ n_{\\text{min}} $ is the minimum enforced on each child, or (iii) the cross-validation gate of Section 5.3 refuses the candidate split. Otherwise the cut minimizing the chosen impurity is accepted and the recursion continues.",
+          "label": "Text"
+        },
+        {
+          "id": "5",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.1119281045751634,
+            "y": 0.8194444444444444,
+            "width": 0.7712418300653595,
+            "height": 0.07323232323232323
+          },
+          "content": "Prediction. For a new row, tbtree routes it from the root downward by computing the first X-score of each node's fitted model and comparing it to that node's stored cut, until a leaf is reached; the leaf's twoblock model then gives  $ \\hat{y}_i = x_i^\\top B_\\ell $. The routing uses  $ t_1 = x_i^\\top w_1 $, which is computable from X alone at prediction time; this is why the cut is searched on",
+          "label": "Text"
+        },
+        {
+          "id": "6",
+          "order": null,
+          "bounding_box": {
+            "x": 0.48937908496732024,
+            "y": 0.9349747474747475,
+            "width": 0.022058823529411766,
+            "height": 0.01452020202020202
+          },
+          "content": "10",
+          "label": "Text"
+        }
+      ]
+    }
+  ]
+}

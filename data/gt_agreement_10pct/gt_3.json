@@ -1,0 +1,142 @@
+{
+  "file_name": "2bc80d12-3.pdf",
+  "pages": [
+    {
+      "page_index": 4,
+      "blocks": [
+        {
+          "id": "vHKS8aIxAh",
+          "order": null,
+          "bounding_box": {
+            "x": 0.11782708492731446,
+            "y": 0.08166576527852894,
+            "width": 0.7513389441469013,
+            "height": 0.22769064359113034
+          },
+          "block_content": "",
+          "label": "Image"
+        },
+        {
+          "id": "SXjkqgkc2I",
+          "order": null,
+          "bounding_box": {
+            "x": 0.11782708492731446,
+            "y": 0.3207138994050838,
+            "width": 0.7674062739097169,
+            "height": 0.028664142779881017
+          },
+          "block_content": "Figure 2: We evaluate influence estimation from Dolly to BBH samples using SmolLM2-1.7B as the target model. We report mean-aggregated and mean per-anchor spearman coefficients as averages across 3 runs.",
+          "label": "Text"
+        },
+        {
+          "id": "_dhl1uqPWb",
+          "order": null,
+          "bounding_box": {
+            "x": 0.11400153022188217,
+            "y": 0.37155219037317466,
+            "width": 0.37337413925019125,
+            "height": 0.04218496484586263
+          },
+          "block_content": "Table 1: Splits for the time and storage required to process 10K Dolly samples. Experiment performed with SmolLM2-360m on an NVIDIA H100.",
+          "label": "Text"
+        },
+        {
+          "id": "vDkru0HEGP",
+          "order": null,
+          "bounding_box": {
+            "x": 0.5149196633511859,
+            "y": 0.3775013520822066,
+            "width": 0.3710788064269319,
+            "height": 0.028664142779881017
+          },
+          "block_content": "compared to the gradient methods, illustrating the utility of influence as a data attribution mechanism.",
+          "label": "Text"
+        },
+        {
+          "id": "Jn0TMmjN7s",
+          "order": null,
+          "bounding_box": {
+            "x": 0.11859219586840092,
+            "y": 0.5375878853434288,
+            "width": 0.3710788064269319,
+            "height": 0.22011898323418064
+          },
+          "block_content": "of x15 against the closest proxy model, by a factor of x45 against full LoGRA and by a factor of x100 against LESS. Furthermore, again on Influcoder at size 68m, the nearest proxy uses x5 more FLOPs, and full LESS uses x44 as much. We also report that we outperform every method except for reg- ular LESS on the per-anchor spearmans. We also explore the practicality of our initial setup in Ta- ble 1, where we see that the full training for our method only takes 0.73 hours on SmolLM2-360m, which is still quicker than processing LoGRA on 10K samples. Interestingly, it does appear to be the case that with proxy models, the inclusion of the FIM performs significantly better than without.",
+          "label": "Text"
+        },
+        {
+          "id": "cV5QX8s9W7",
+          "order": null,
+          "bounding_box": {
+            "x": 0.11859219586840092,
+            "y": 0.7636560302866414,
+            "width": 0.369548584544759,
+            "height": 0.1568415359653867
+          },
+          "block_content": "In Table 2 we demonstrate that Influcoder has quick inference, while only being slightly behind LESS on both variants. We specify that for DataInf the scores are surprisingly quite low compared to the reported numbers in (Jiao et al., 2025), despite our best efforts. We discuss this in Appendix A.5. The performance for Semantic is unsurprisingly quite low since the semantic similarity might focus on the wrong parts and miss the dangerous aspects. Rep-Sim performs decently well but underperforms",
+          "label": "Text"
+        },
+        {
+          "id": "MNx0zeKJEw",
+          "order": null,
+          "bounding_box": {
+            "x": 0.5172149961744453,
+            "y": 0.5365062195781504,
+            "width": 0.36648814078041314,
+            "height": 0.0578691184424013
+          },
+          "block_content": "Table 2: Each method is given an 8K size dataset from UltraChat (Ding et al., 2023), of which 66 are toxic. Each method is tasked to retrieve the toxic examples through its attribution scores against a reference set.",
+          "label": "Text"
+        },
+        {
+          "id": "po27meLjaQ",
+          "order": null,
+          "bounding_box": {
+            "x": 0.5141545524100994,
+            "y": 0.6203353163872364,
+            "width": 0.12853863810252486,
+            "height": 0.019469983775013522
+          },
+          "block_content": "7 Conclusion",
+          "label": "Text"
+        },
+        {
+          "id": "1UuZhn7eTt",
+          "order": null,
+          "bounding_box": {
+            "x": 0.512624330527927,
+            "y": 0.6473769605191994,
+            "width": 0.37337413925019125,
+            "height": 0.2714981070849108
+          },
+          "block_content": "We have presented our method, Influcoder, as a method for distilling gradient influence rankings into a smaller encoder model and saving on infer- ence time by x15-x100. We also demonstrate that the influence predictions it generates are of suf- ficient quality to perform data filtration at scale. Beyond our findings, there are some unexplored directions that may give paths for future research. Namely, the embeddings we produce are compact at only 768 dimensions. This means that it would be practically possible to do fast vector search with frameworks such as FAISS (Douze et al., 2024). Additionally, we would be interested to explore the possibilities of generalizable influence distillation where an encoder might be able to learn influence characteristics outside of the data distribution and which are inherent to the target model.",
+          "label": "Text"
+        },
+        {
+          "id": "T8jW-MYD9D",
+          "order": null,
+          "bounding_box": {
+            "x": 0.12853863810252486,
+            "y": 0.4267171444023797,
+            "width": 0.3481254781943382,
+            "height": 0.0822065981611682
+          },
+          "block_content": "<table><tr><td rowspan=\"2\">Method</td><td rowspan=\"2\">Stocking (h)</td><td rowspan=\"2\">Train (h)</td><td colspan=\"2\">10K Samples</td></tr><tr><td>Time (h)</td><td>Storage</td></tr><tr><td>LESS {\\tiny (dim=8192)}</td><td>--</td><td>--</td><td>$\\sim$3.5</td><td>320 Mb</td></tr><tr><td>LoGRA {\\tiny (rank=16)}</td><td>--</td><td>--</td><td>$\\sim$0.85</td><td>2.24 Gb</td></tr><tr><td>Influcoder {\\tiny (dim=768)}</td><td>0.63</td><td>0.1</td><td>$\\sim$0.02</td><td>30 Mb</td></tr></table>",
+          "label": "Table"
+        },
+        {
+          "id": "Qq-Y_f_uad",
+          "order": null,
+          "bounding_box": {
+            "x": 0.5149196633511859,
+            "y": 0.42022714981070847,
+            "width": 0.3703136954858455,
+            "height": 0.10708491076257437
+          },
+          "block_content": "<table><tr><td></td><td colspan=\"2\">XSTest-response-Het</td><td colspan=\"2\">XSTest-response-Hom</td></tr><tr><td>Method</td><td>AUPRC</td><td>Time (s)</td><td>AUPRC</td><td>Time (s)</td></tr><tr><td>Influcoder</td><td>0.6981</td><td>32.1</td><td>0.6919</td><td>33.4</td></tr><tr><td>LESS</td><td>0.7075</td><td>2248.5</td><td>0.7562</td><td>2285.6</td></tr><tr><td>DataInf</td><td>0.2157</td><td>3400.5</td><td>0.2260</td><td>3395.7</td></tr><tr><td>Rep Sim</td><td>0.4226</td><td>593.4</td><td>0.4460</td><td>620.6</td></tr><tr><td>Semantic</td><td>0.3543</td><td>23.8</td><td>0.3585</td><td>24.1</td></tr></table>",
+          "label": "Table"
+        }
+      ]
+    }
+  ]
+}

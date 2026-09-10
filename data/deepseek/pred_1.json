@@ -1,0 +1,2161 @@
+{
+  "file_name": "paper_1",
+  "pages": [
+    {
+      "page_index": 1,
+      "blocks": [
+        {
+          "id": "0",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.174,
+            "y": 0.098,
+            "width": 0.626,
+            "height": 0.048
+          },
+          "content": "# GPTQ: ACCURATE POST-TRAINING QUANTIZATION FOR GENERATIVE PRE-TRAINED TRANSFORMERS",
+          "label": "Text"
+        },
+        {
+          "id": "1",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.18,
+            "y": 0.168,
+            "width": 0.615,
+            "height": 0.031
+          },
+          "content": "Elias Frantar\\* Saleh Ashkboos Torsten Hoefler Dan Alistarh IST Austria ETH Zurich ETH Zurich IST Austria & NeuralMagic",
+          "label": "Text"
+        },
+        {
+          "id": "2",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.452,
+            "y": 0.234,
+            "width": 0.092,
+            "height": 0.015
+          },
+          "content": "## ABSTRACT",
+          "label": "Text"
+        },
+        {
+          "id": "3",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.232,
+            "y": 0.264,
+            "width": 0.532,
+            "height": 0.314
+          },
+          "content": "Generative Pre- trained Transformer models, known as GPT or OPT, set themselves apart through breakthrough performance across complex language modelling tasks, but also by their extremely high computational and storage costs. Specifically, due to their massive size, even inference for large, highly- accurate GPT models may require multiple performant GPUs, which limits the usability of such models. While there is emerging work on relieving this pressure via model compression, the applicability and performance of existing compression techniques is limited by the scale and complexity of GPT models. In this paper, we address this challenge, and propose GPTQ, a new one- shot weight quantization method based on approximate second- order information, that is both highly- accurate and highly- efficient. Specifically, GPTQ can quantize GPT models with 175 billion parameters in approximately four GPU hours, reducing the bitwidth down to 3 or 4 bits per weight, with negligible accuracy degradation relative to the uncompressed baseline. Our method more than doubles the compression gains relative to previously- proposed one- shot quantization methods, preserving accuracy, allowing us for the first time to execute an 175 billion- parameter model inside a single GPU for generative inference. Moreover, we also show that our method can still provide reasonable accuracy in the extreme quantization regime, in which weights are quantized to 2- bit or even ternary quantization levels. We show experimentally that these improvements can be leveraged for end- to- end inference speedups over FP16, of around 3.25x when using high- end GPUs (NVIDIA A100) and 4.5x when using more cost- effective ones (NVIDIA A6000). The implementation is available at https://github.com/IST- DASLab/gptq.",
+          "label": "Text"
+        },
+        {
+          "id": "4",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.175,
+            "y": 0.606,
+            "width": 0.161,
+            "height": 0.015
+          },
+          "content": "## 1 INTRODUCTION",
+          "label": "Text"
+        },
+        {
+          "id": "5",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.174,
+            "y": 0.631,
+            "width": 0.649,
+            "height": 0.152
+          },
+          "content": "Pre- trained generative models from the Transformer (Vaswani et al., 2017) family, commonly known as GPT or OPT (Radford et al., 2019; Brown et al., 2020; Zhang et al., 2022), have shown breakthrough performance for complex language modelling tasks, leading to massive academic and practical interest. One major obstacle to their usability is computational and storage cost, which ranks among the highest for known models. For instance, the best- performing model variants, e.g. GPT3- 175B, have in the order of 175 billion parameters and require tens- to- hundreds of GPU years to train (Zhang et al., 2022). Even the simpler task of inferencing over a pre- trained model, which is our focus in this paper, is highly challenging: for instance, the parameters of GPT3- 175B occupy 326GB (counting in multiples of 1024) of memory when stored in a compact float16 format. This exceeds the capacity of even the highest- end single GPUs, and thus inference must be performed using more complex and expensive setups, such as multi- GPU deployments.",
+          "label": "Text"
+        },
+        {
+          "id": "6",
+          "order": 7,
+          "bounding_box": {
+            "x": 0.174,
+            "y": 0.789,
+            "width": 0.649,
+            "height": 0.11
+          },
+          "content": "Although a standard approach to eliminating these overheads is model compression, e.g. (Hoefler et al., 2021; Gholami et al., 2021), surprisingly little is known about compressing such models for inference. One reason is that more complex methods for low- bitwidth quantization or model pruning usually require model retraining, which is extremely expensive for billion- parameter models. Alternatively, post- training methods (Nagel et al., 2020; Wang et al., 2020; Hubara et al., 2020; Nahshan et al., 2021), which compress the model in one shot, without retraining, would be very appealing. Unfortunately, the more accurate variants of such methods (Li et al., 2021; Hubara et al., 2021; Frantar et al., 2022) are complex and challenging to scale to billions of parameters (Yao et al.,",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "page_index": 2,
+      "blocks": [
+        {
+          "id": "0",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.174,
+            "y": 0.102,
+            "width": 0.65,
+            "height": 0.056
+          },
+          "content": "2022). To date, only basic variants of round- to- nearest quantization (Yao et al., 2022; Dettmers et al., 2022) have been applied at the scale of GPT- 175B; while this works well for low compression targets, e.g., 8- bit weights, they fail to preserve accuracy at higher rates. It therefore remains open whether one- shot post- training quantization to higher compression rates is generally- feasible.",
+          "label": "Text"
+        },
+        {
+          "id": "1",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.207,
+            "y": 0.173,
+            "width": 0.582,
+            "height": 0.18
+          },
+          "content": "",
+          "label": "Image"
+        },
+        {
+          "id": "2",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.174,
+            "y": 0.355,
+            "width": 0.648,
+            "height": 0.029
+          },
+          "content": "<center>Figure 1: Quantizing OPT models to 4 and BLOOM models to 3 bit precision, comparing GPTQ with the FP16 baseline and round-to-nearest (RTN) (Yao et al., 2022; Dettmers et al., 2022). </center>",
+          "label": "Text"
+        },
+        {
+          "id": "3",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.174,
+            "y": 0.4,
+            "width": 0.65,
+            "height": 0.085
+          },
+          "content": "Contribution. In this paper, we present a new post- training quantization method, called GPTQ,1 which is efficient enough to execute on models with hundreds of billions of parameters in at most a few hours, and precise enough to compress such models to 3 or 4 bits per parameter without significant loss of accuracy. For illustration, GPTQ can quantize the largest publicly- available models, OPT- 175B and BLOOM- 176B, in approximately four GPU hours, with minimal increase in perplexity, known to be a very stringent accuracy metric.",
+          "label": "Text"
+        },
+        {
+          "id": "4",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.174,
+            "y": 0.49,
+            "width": 0.65,
+            "height": 0.109
+          },
+          "content": "Further, we show that our model can also provide robust results in the extreme quantization regime, in which models are quantized to 2 bits per component, or even ternary values. On the practical side, we develop an execution harness which allows us to execute the resulting compressed models efficiently for generative tasks. Specifically, we are able to run the compressed OPT- 175B model for the first time on a single NVIDIA A100 GPU, or using only two more cost- effective NVIDIA A6000 GPUs. We also implement bespoke GPU kernels which are able to leverage compression for faster memory loading, resulting in speedups of \\(\\approx 3.25 \\times\\) when using A100 GPUs, and \\(4.5 \\times\\) when using A6000 GPUs.",
+          "label": "Text"
+        },
+        {
+          "id": "5",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.174,
+            "y": 0.605,
+            "width": 0.65,
+            "height": 0.096
+          },
+          "content": "To our knowledge, we are the first to show that extremely accurate language models with hundreds of billions of parameters can be quantized to 3- 4 bits/component: prior post- training methods only remain accurate at 8 bits (Yao et al., 2022; Dettmers et al., 2022), while prior training- based techniques have only tackled models that are smaller by one to two orders of magnitude (Wu et al., 2022). This high degree of compression may appear natural, as these networks are overparametrized; yet, as we discuss in our detailed analysis of results, compression induces non- trivial tradeoffs between the accuracy of the language modeling (perplexity), bit- width, and the size of the original model.",
+          "label": "Text"
+        },
+        {
+          "id": "6",
+          "order": 7,
+          "bounding_box": {
+            "x": 0.174,
+            "y": 0.708,
+            "width": 0.65,
+            "height": 0.082
+          },
+          "content": "We hope that our work will stimulate further research in this area, and can be a further step towards making these models available to a wider audience. In terms of limitations, our method currently does not provide speedups for the actual multiplications, due to the lack of hardware support for mixed- precision operands (e.g. FP16 x INT4) on mainstream architectures. Moreover, our current results do not include activation quantization, as they are not a significant bottleneck in our target scenarios; however, this can be supported using orthogonal techniques (Yao et al., 2022).",
+          "label": "Text"
+        },
+        {
+          "id": "7",
+          "order": 8,
+          "bounding_box": {
+            "x": 0.175,
+            "y": 0.81,
+            "width": 0.169,
+            "height": 0.016
+          },
+          "content": "## 2 RELATED WORK",
+          "label": "Text"
+        },
+        {
+          "id": "8",
+          "order": 9,
+          "bounding_box": {
+            "x": 0.175,
+            "y": 0.842,
+            "width": 0.647,
+            "height": 0.056
+          },
+          "content": "Quantization methods fall broadly into two categories: quantization during training, and post- training methods. The former quantize models during typically extensive retraining and/or fine- tuning, using some approximate differentiation mechanism for the rounding operation (Gholami et al., 2021; Nagel et al., 2021). By contrast, post- training (\"one- shot\") methods quantize a pre",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "page_index": 3,
+      "blocks": [
+        {
+          "id": "0",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.174,
+            "y": 0.103,
+            "width": 0.649,
+            "height": 0.042
+          },
+          "content": "trained model using modest resources, typically a few thousand data samples and a few hours of computation. Post- training approaches are particularly interesting for massive models, for which full model training or even finetuning can be expensive. We focus on this scenario here.",
+          "label": "Text"
+        },
+        {
+          "id": "1",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.174,
+            "y": 0.151,
+            "width": 0.649,
+            "height": 0.191
+          },
+          "content": "Post- training Quantization. Most post- training methods have focused on vision models. Usually, accurate methods operate by quantizing either individual layers, or small blocks of consecutive layers. (See Section 3 for more details.) The AdaRound method (Nagel et al., 2020) computes a data- dependent rounding by annealing a penalty term, which encourages weights to move towards grid points corresponding to quantization levels. BitSplit (Wang et al., 2020) constructs quantized values bit- by- bit using a squared error objective on the residual error, while AdaQuant (Hubara et al., 2021) performs direct optimization based on straight- through estimates. BRECQ (Li et al., 2021) introduces Fisher information into the objective, and optimizes layers within a single residual block jointly. Finally, Optimal Brain Quantization (OBQ) (Frantar et al., 2022) generalizes the classic Optimal Brain Surgeon (OBS) second- order weight pruning framework (Hassibi et al., 1993; Singh & Alistarh, 2020; Frantar et al., 2021) to apply to quantization. OBQ quantizes weights one- by- one, in order of quantization error, always adjusting the remaining weights. While these approaches can produce good results for models up to \\(\\approx 100\\) million parameters in a few GPU hours, scaling them to networks orders of magnitude larger is challenging.",
+          "label": "Text"
+        },
+        {
+          "id": "2",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.174,
+            "y": 0.348,
+            "width": 0.649,
+            "height": 0.177
+          },
+          "content": "Large- model Quantization. With the recent open- source releases of language models like BLOOM (Laurençon et al., 2022) or OPT- 175B (Zhang et al., 2022), researchers have started to develop affordable methods for compressing such giant networks for inference. While all existing works—ZeroQuant (Yao et al., 2022), LLM.int8() (Dettmers et al., 2022), and nuQmm (Park et al., 2022)— carefully select quantization granularity, e.g., vector- wise, they ultimately just round weights to the nearest (RTN) quantization level, in order to maintain acceptable runtimes for very large models. ZeroQuant further proposes layer- wise knowledge distillation, similar to AdaQuant, but the largest model it can apply this approach to has only 1.3 billion parameters. At this scale, ZeroQuant already takes \\(\\approx 3\\) hours of compute; GPTQ quantizes models \\(100 \\times\\) larger in \\(\\approx 4\\) hours. LLM.int8() observes that activation outliers in a few feature dimensions break the quantization of larger models, and proposes to fix this problem by keeping those dimensions in higher precision. Lastly, nuQmm develops efficient GPU kernels for a specific binary- coding based quantization scheme.",
+          "label": "Text"
+        },
+        {
+          "id": "3",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.175,
+            "y": 0.532,
+            "width": 0.648,
+            "height": 0.042
+          },
+          "content": "Relative to this line of work, we show that a significantly more complex and accurate quantizer can be implemented efficiently at large model scale. Specifically, GPTQ more than doubles the amount of compression relative to these prior techniques, at similar accuracy.",
+          "label": "Text"
+        },
+        {
+          "id": "4",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.175,
+            "y": 0.586,
+            "width": 0.15,
+            "height": 0.015
+          },
+          "content": "## 3 BACKGROUND",
+          "label": "Text"
+        },
+        {
+          "id": "5",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.174,
+            "y": 0.61,
+            "width": 0.649,
+            "height": 0.1
+          },
+          "content": "Layer- Wise Quantization. At a high level, our method follows the structure of state- of- the- art post- training quantization methods (Nagel et al., 2020; Wang et al., 2020; Hubara et al., 2021; Frantar et al., 2022), by performing quantization layer- by- layer, solving a corresponding reconstruction problem for each layer. Concretely, let \\(\\mathbf{W}_{\\ell}\\) be the weights corresponding to a linear layer \\(\\ell\\) and let \\(\\mathbf{X}_{\\ell}\\) denote the layer input corresponding to a small set of \\(m\\) data points running through the network. Then, the objective is to find a matrix of quantized weights \\(\\widehat{\\mathbf{W}}\\) which minimizes the squared error, relative to the full precision layer output. Formally, this can be restated as",
+          "label": "Text"
+        },
+        {
+          "id": "6",
+          "order": 7,
+          "bounding_box": {
+            "x": 0.404,
+            "y": 0.715,
+            "width": 0.417,
+            "height": 0.02
+          },
+          "content": "\\[\\mathrm{argmin}_{\\widehat{\\mathbf{W}}}||\\mathbf{W}\\mathbf{X} - \\widehat{\\mathbf{W}}\\mathbf{X}||_{2}^{2}. \\quad (1)\\]",
+          "label": "Formula"
+        },
+        {
+          "id": "7",
+          "order": 8,
+          "bounding_box": {
+            "x": 0.175,
+            "y": 0.74,
+            "width": 0.648,
+            "height": 0.044
+          },
+          "content": "Further, similar to (Nagel et al., 2020; Li et al., 2021; Frantar et al., 2022), we assume that the quantization grid for \\(\\widehat{\\mathbf{W}}\\) is fixed before the process, and that individual weights can move freely as in (Hubara et al., 2021; Frantar et al., 2022).",
+          "label": "Text"
+        },
+        {
+          "id": "8",
+          "order": 9,
+          "bounding_box": {
+            "x": 0.175,
+            "y": 0.791,
+            "width": 0.648,
+            "height": 0.069
+          },
+          "content": "Optimal Brain Quantization. Our approach builds on the recently- proposed Optimal Brain Quantization (OBQ) method (Frantar et al., 2022) for solving the layer- wise quantization problem defined above, to which we perform a series of major modifications, which allow it to scale to large language models, providing more than three orders of magnitude computational speedup. To aid understanding, we first briefly summarize the original OBQ method.",
+          "label": "Text"
+        },
+        {
+          "id": "9",
+          "order": 10,
+          "bounding_box": {
+            "x": 0.175,
+            "y": 0.867,
+            "width": 0.648,
+            "height": 0.056
+          },
+          "content": "The OBQ method starts from the observation that Equation (1) can be written as the sum of the squared errors, over each row of \\(\\mathbf{W}\\) . Then, OBQ handles each row \\(\\mathbf{w}\\) independently, quantizing one weight at a time while always updating all not- yet- quantized weights, in order to compensate for the error incurred by quantizing a single weight. Since the corresponding objective is a quadratic,",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "page_index": 4,
+      "blocks": [
+        {
+          "id": "0",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.173,
+            "y": 0.102,
+            "width": 0.65,
+            "height": 0.057
+          },
+          "content": "whose Hessian is \\(\\mathbf{H}_{F} = 2\\mathbf{X}_{F}\\mathbf{X}_{F}^{\\top}\\) , where \\(F\\) denotes the set of remaining full- precision weights, the greedy- optimal weight to quantize next, which we denote by \\(w_{q}\\) , and the corresponding optimal update of all weights in \\(F\\) , denoted by \\(\\delta_{F}\\) , are given by the following formulas, where \\(\\operatorname {quant}(w)\\) rounds \\(w\\) to the nearest value on the quantization grid:",
+          "label": "Text"
+        },
+        {
+          "id": "1",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.246,
+            "y": 0.161,
+            "width": 0.575,
+            "height": 0.04
+          },
+          "content": "\\[w_{q} = \\operatorname {argmin}_{w_{q}}\\frac{(\\operatorname{quant}(w_{q}) - w_{q})^{2}}{[\\mathbf{H}_{F}^{-1}]_{qq}},\\quad \\delta_{F} = -\\frac{w_{q} - \\operatorname{quant}(w_{q})}{[\\mathbf{H}_{F}^{-1}]_{qq}}\\cdot (\\mathbf{H}_{F}^{-1})_{:,q}. \\quad (2)\\]",
+          "label": "Formula"
+        },
+        {
+          "id": "2",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.173,
+            "y": 0.206,
+            "width": 0.65,
+            "height": 0.057
+          },
+          "content": "OBQ quantizes weights iteratively using these two equations, until all the weights of \\(\\mathbf{w}\\) are quantized. This is done efficiently, avoiding expensive full recomputations of \\(\\mathbf{H}^{- 1}\\) , by removing the \\(q\\) th row and column of \\(\\mathbf{H}\\) , which is necessary after quantizing \\(w_{q}\\) , directly in the inverse via one step of Gaussian elimination. Namely, the updated inverse is given by the formula",
+          "label": "Text"
+        },
+        {
+          "id": "3",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.36,
+            "y": 0.266,
+            "width": 0.461,
+            "height": 0.034
+          },
+          "content": "\\[\\mathbf{H}_{-q}^{-1} = \\left(\\mathbf{H}^{-1} - \\frac{1}{[\\mathbf{H}^{-1}]_{qq}}\\mathbf{H}_{:q}^{-1}\\mathbf{H}_{q,:}^{-1}\\right)_{-p}. \\quad (3)\\]",
+          "label": "Formula"
+        },
+        {
+          "id": "4",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.173,
+            "y": 0.304,
+            "width": 0.65,
+            "height": 0.086
+          },
+          "content": "This method comes with a vectorized implementation, handling multiple rows of \\(\\mathbf{W}\\) in parallel. Eventually, the algorithm can achieve reasonable runtimes on medium- sized models: for instance, it can fully quantize the ResNet- 50 model (25M parameters) in \\(\\approx 1\\) hour on a single GPU, which is roughly in line with other post- training methods achieving state- of- the- art accuracy (Frantar et al., 2022). However, the fact that OBQ's runtime for a \\(d_{\\mathrm{row}} \\times d_{\\mathrm{col}}\\) matrix \\(\\mathbf{W}\\) has cubic input dependency \\(O(d_{\\mathrm{row}} \\cdot d_{\\mathrm{col}}^{3})\\) means that applying it to models with billions of parameters is extremely expensive.",
+          "label": "Text"
+        },
+        {
+          "id": "5",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.174,
+            "y": 0.402,
+            "width": 0.237,
+            "height": 0.017
+          },
+          "content": "## 4 THE GPTQ ALGORITHM",
+          "label": "Text"
+        },
+        {
+          "id": "6",
+          "order": 7,
+          "bounding_box": {
+            "x": 0.174,
+            "y": 0.427,
+            "width": 0.649,
+            "height": 0.125
+          },
+          "content": "Step 1: Arbitrary Order Insight. As explained in the previous section, OBQ quantizes weights in greedy order, i.e. it always picks the weight which currently incurs the least additional quantization error. Interestingly, we find that, while this quite natural strategy does indeed seem to perform very well, its improvement over quantizing the weights in arbitrary order is generally small, in particular on large, heavily- parametrized layers. Most likely, this is because the slightly lower number of quantized weights with large individual error is balanced out by those weights being quantized towards the end of the process, when only few other unquantized weights that can be adjusted for compensation remain. As we will now discuss, this insight that any fixed order may perform well, especially on large models, has interesting ramifications.",
+          "label": "Text"
+        },
+        {
+          "id": "7",
+          "order": 8,
+          "bounding_box": {
+            "x": 0.174,
+            "y": 0.558,
+            "width": 0.316,
+            "height": 0.317
+          },
+          "content": "The original OBQ method quantizes rows of \\(\\mathbf{W}\\) independently, in a specific order defined by the corresponding errors. By contrast, we will aim to quantize the weights of all rows in the same order, and will show that this typically yields results with a final squared error that is similar to the original solutions. As a consequence, the set of unquantized weights \\(F\\) and similarly \\(\\mathbf{H}_{F}^{- 1}\\) is always the same for all rows (see Figure 2 for an illustration). In more detail, the latter is due to the fact that \\(\\mathbf{H}_{F}\\) depends only on the layer inputs \\(\\mathbf{X}_{F}\\) , which are the same for all rows, and not on any weights. Therefore, we have to perform the update of \\(\\mathbf{H}_{F}^{- 1}\\) given by Equation (3) only \\(d_{\\mathrm{col}}\\) times, once per column, rather than \\(d_{\\mathrm{row}} \\cdot d_{\\mathrm{col}}\\) times, once per weight. This reduces the overall runtime from \\(O(d_{\\mathrm{row}} \\cdot d_{\\mathrm{col}}^{3})\\) to \\(O(\\max \\{d_{\\mathrm{row}} \\cdot d_{\\mathrm{col}}^{2}, d_{\\mathrm{col}}^{3}\\})\\) , i.e., by a factor of \\(\\min \\{d_{\\mathrm{row}}, d_{\\mathrm{col}}\\}\\) . For larger models, this difference consists of several orders of magnitude. However, before this algorithm can actually be applied to very large models in practice, two additional major problems need to be addressed.",
+          "label": "Text"
+        },
+        {
+          "id": "8",
+          "order": 9,
+          "bounding_box": {
+            "x": 0.512,
+            "y": 0.56,
+            "width": 0.308,
+            "height": 0.19
+          },
+          "content": "",
+          "label": "Image"
+        },
+        {
+          "id": "9",
+          "order": 10,
+          "bounding_box": {
+            "x": 0.501,
+            "y": 0.76,
+            "width": 0.322,
+            "height": 0.109
+          },
+          "content": "<center>Figure 2: GPTQ quantization procedure. Blocks of consecutive columns (bolded) are quantized at a given step, using the inverse Hessian information stored in the Cholesky decomposition, and the remaining weights (blue) are updated at the end of the step. The quantization procedure is applied recursively inside each block: the white middle column is currently being quantized. </center>",
+          "label": "Text"
+        },
+        {
+          "id": "10",
+          "order": 11,
+          "bounding_box": {
+            "x": 0.174,
+            "y": 0.881,
+            "width": 0.648,
+            "height": 0.042
+          },
+          "content": "Step 2: Lazy Batch- Updates. First, a direct implementation of the scheme described previously will not be fast in practice, because the algorithm has a relatively low compute- to- memory- access ratio. For example, Equation (3) needs to update all elements of a potentially huge matrix using just a",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "page_index": 5,
+      "blocks": [
+        {
+          "id": "0",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.173,
+            "y": 0.102,
+            "width": 0.649,
+            "height": 0.029
+          },
+          "content": "few FLOPs for each entry. Such operations cannot properly utilize the massive compute capabilities of modern GPUs, and will be bottlenecked by the significantly lower memory bandwidth.",
+          "label": "Text"
+        },
+        {
+          "id": "1",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.173,
+            "y": 0.136,
+            "width": 0.651,
+            "height": 0.128
+          },
+          "content": "Fortunately, this problem can be resolved by the following observation: The final rounding decisions for column \\(i\\) are only affected by updates performed on this very column, and so updates to later columns are irrelevant at this point in the process. This makes it possible to \"lazily batch\" updates together, thus achieving much better GPU utilization. Concretely, we apply the algorithm to \\(B = 128\\) columns at a time, keeping updates contained to those columns and the corresponding \\(B\\times B\\) block of \\(\\mathbf{H}^{- 1}\\) (see also Figure 2). Only once a block has been fully processed, we perform global updates of the entire \\(\\mathbf{H}^{- 1}\\) and \\(\\mathbf{W}\\) matrices using the multi- weight versions of Equations (2) and (3) given below, with \\(Q\\) denoting a set of indices, and \\(\\mathbf{H}_{- Q}^{- 1}\\) denoting the inverse matrix with the corresponding rows and columns removed:",
+          "label": "Text"
+        },
+        {
+          "id": "2",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.314,
+            "y": 0.268,
+            "width": 0.507,
+            "height": 0.052
+          },
+          "content": "\\[\\begin{array}{r l} & {\\delta_{F} = -(\\mathbf{w}_{Q} - \\mathrm{quant}(\\mathbf{w}_{Q}))([\\mathbf{H}_{F}^{-1}]_{Q Q})^{-1}(\\mathbf{H}_{F}^{-1})_{:,:Q},}\\\\ & {\\mathbf{H}_{-Q}^{-1} = \\left(\\mathbf{H}^{-1} - \\mathbf{H}_{:Q}^{-1}([\\mathbf{H}^{-1}]_{Q Q})^{-1}\\mathbf{H}_{Q:}^{-1}\\right)_{-Q}.} \\end{array} \\quad (5)\\]",
+          "label": "Formula"
+        },
+        {
+          "id": "3",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.174,
+            "y": 0.323,
+            "width": 0.649,
+            "height": 0.043
+          },
+          "content": "Although this strategy does not reduce the theoretical amount of compute, it effectively addresses the memory- throughput bottleneck. This provides an order of magnitude speedup for very large models in practice, making it a critical component of our algorithm.",
+          "label": "Text"
+        },
+        {
+          "id": "4",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.173,
+            "y": 0.371,
+            "width": 0.651,
+            "height": 0.127
+          },
+          "content": "Step 3: Cholesky Reformulation. The final technical issue we have to address is given by numerical inaccuracies, which can become a major problem at the scale of existing models, especially when combined with the block updates discussed in the previous step. Specifically, it can occur that the matrix \\(\\mathbf{H}_{F}^{- 1}\\) becomes indefinite, which we notice can cause the algorithm to aggressively update the remaining weights in incorrect directions, resulting in an arbitrarily- bad quantization of the corresponding layer. In practice, we observed that the probability of this happening increases with model size: concretely, it almost certainly occurs for at least a few layers on models that are larger than a few billion parameters. The main issue appears to be the repeated applications of Equation (5), which accumulate various numerical errors, especially through the additional matrix inversion.",
+          "label": "Text"
+        },
+        {
+          "id": "5",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.174,
+            "y": 0.503,
+            "width": 0.649,
+            "height": 0.043
+          },
+          "content": "For smaller models, applying dampening, that is adding a small constant \\(\\lambda\\) (we always choose \\(1\\%\\) of the average diagonal value) to the diagonal elements of \\(\\mathbf{H}\\) appears to be sufficient to avoid numerical issues. However, larger models require a more robust and general approach.",
+          "label": "Text"
+        },
+        {
+          "id": "6",
+          "order": 7,
+          "bounding_box": {
+            "x": 0.174,
+            "y": 0.551,
+            "width": 0.65,
+            "height": 0.149
+          },
+          "content": "To address this, we begin by noting that the only information required from \\(\\mathbf{H}_{F_{q}}^{- 1}\\) , where \\(F_{q}\\) denotes the set of unquantized weights when quantizing weight \\(q\\) , is row \\(q\\) , or more precisely, the elements in this row starting with the diagonal. The consequence is that we could precompute all of these rows using a more numerically- stable method without any significant increase in memory consumption. Indeed, the row removal via (3) for our symmetric \\(\\mathbf{H}^{- 1}\\) essentially corresponds to taking a Cholesky decomposition, except for the minor difference that the latter divides row \\(q\\) by \\(\\left([\\mathbf{H}_{F_{q}}^{- 1}]_{qq}\\right)^{1 / 2}\\) . Hence, we can leverage state- of- the- art Cholesky kernels to compute all information we will need from \\(\\mathbf{H}^{- 1}\\) upfront. In combination with mild dampening, the resulting method is robust enough to execute on huge models without issues. As a bonus, using a well- optimized Cholesky kernel also yields further speedup. We detail all small changes necessary for the Cholesky version of the algorithm next.",
+          "label": "Text"
+        },
+        {
+          "id": "7",
+          "order": 8,
+          "bounding_box": {
+            "x": 0.174,
+            "y": 0.704,
+            "width": 0.648,
+            "height": 0.03
+          },
+          "content": "The Full Algorithm. Finally, we present the full pseudocode for GPTQ in Algorithm 1, including the optimizations discussed above.",
+          "label": "Text"
+        },
+        {
+          "id": "8",
+          "order": 9,
+          "bounding_box": {
+            "x": 0.174,
+            "y": 0.749,
+            "width": 0.606,
+            "height": 0.018
+          },
+          "content": "Algorithm 1 Quantize \\(\\mathbf{W}\\) given inverse Hessian \\(\\mathbf{H}^{- 1} = (2\\mathbf{X}\\mathbf{X}^{\\top} + \\lambda \\mathbf{I})^{- 1}\\) and blocksize \\(B\\) .",
+          "label": "Text"
+        },
+        {
+          "id": "9",
+          "order": 10,
+          "bounding_box": {
+            "x": 0.184,
+            "y": 0.771,
+            "width": 0.526,
+            "height": 0.143
+          },
+          "content": "\\(\\begin{array}{r l} & {\\mathbf{Q}\\leftarrow 0_{d_{\\mathrm{row}}\\times d_{\\mathrm{col}}}}\\\\ & {\\mathbf{E}\\leftarrow 0_{d_{\\mathrm{row}}\\times B}}\\\\ & {\\mathbf{H}^{-1}\\leftarrow \\mathrm{Cholesky}(\\mathbf{H}^{-1})^{\\top}}\\\\ & {\\mathrm{for}i = 0,B,2B,\\ldots \\mathrm{do}}\\\\ & {\\mathrm{for}j = i,\\ldots ,i + B - 1\\mathrm{do}}\\\\ & {\\qquad \\mathbf{Q}_{:j}\\leftarrow \\mathrm{quant}(\\mathbf{W}_{:j})}\\\\ & {\\qquad \\mathbf{E}_{:j - i}\\leftarrow (\\mathbf{W}_{:j} - \\mathbf{Q}_{:j}) / [\\mathbf{H}^{-1}]_{j j}}\\\\ & {\\qquad \\mathbf{W}_{:j:(i + B)}\\leftarrow \\mathbf{W}_{:j:(i + B)} - \\mathbf{E}_{:j - i}\\cdot \\mathbf{H}_{:j:(i + B)}^{-1}}\\\\ & {\\mathrm{endfor}}\\\\ & {\\mathbf{W}_{:}(i + B)\\leftarrow \\mathbf{W}_{:}(i + B)\\cdot \\mathbf{E}\\cdot \\mathbf{H}_{i:(i + B)}^{-1}(i + B)\\cdot}\\\\ & {\\mathrm{endfor}} \\end{array}\\) // quantized output // block quantization errors // Hessian inverse information // quantize column // quantization error // update weights in block // update all remaining weights",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "page_index": 6,
+      "blocks": [
+        {
+          "id": "0",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.174,
+            "y": 0.102,
+            "width": 0.273,
+            "height": 0.016
+          },
+          "content": "## 5 EXPERIMENTAL VALIDATION",
+          "label": "Text"
+        },
+        {
+          "id": "1",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.174,
+            "y": 0.138,
+            "width": 0.649,
+            "height": 0.151
+          },
+          "content": "Overview. We begin our experiments by validating the accuracy of GPTQ relative to other accurate- but- expensive quantizers, on smaller models, for which these methods provide reasonable runtimes. Next, we examine GPTQ's runtime scaling for very large models. Then, we present 3- and 4- bit quantization results for the entire BLOOM and OPT model families, evaluated via perplexity on challenging language generation tasks. In addition, we show that our method is also stable for 2- bit quantization when the granularity is reduced to small blocks of consecutive weights. To complement this perplexity analysis, we also evaluate the resulting quantized models on a series of standard zero- shot tasks. Finally, we focus on the two largest (and interesting) openly- available models, Bloom- 176B and OPT- 175B, where we perform a detailed evaluation on several tasks. For these models, we also present practical improvements, namely reducing the number of GPUs required for inference as well as end- to- end speedups for generative tasks.",
+          "label": "Text"
+        },
+        {
+          "id": "2",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.174,
+            "y": 0.294,
+            "width": 0.649,
+            "height": 0.125
+          },
+          "content": "Setup. We implemented GPTQ in PyTorch (Paszke et al., 2019) and worked with the HuggingFace integrations of the BLOOM (Laurençon et al., 2022) and OPT (Zhang et al., 2022) model families. We quantized all models (including the 175 billion parameter variants) using a single NVIDIA A100 GPU with 80GB of memory. Our entire GPTQ calibration data consists of 128 random 2048 token segments from the C4 dataset (Raffel et al., 2020), i.e., excerpts from randomly crawled websites, which represents generic text data. We emphasize that this means that GPTQ does not see any task- specific data, and our results thus remain actually \"zero- shot\". We perform standard uniform per- row asymmetric quantization on the min- max grid, similar to Dettmers et al. (2022). Additional evaluation details can be found in Appendix A.2.1.",
+          "label": "Text"
+        },
+        {
+          "id": "3",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.174,
+            "y": 0.425,
+            "width": 0.649,
+            "height": 0.11
+          },
+          "content": "To ensure that the entire compression procedure can be performed with significantly less GPU memory than what would be required to run the full precision model, some care must be taken. Specifically, we always load one Transformer block, consisting of 6 layers, at a time into GPU memory and then accumulate the layer- Hessians and perform quantization. Finally, the current block inputs are sent through the fully quantized block again to produce the new inputs for the quantization of the next block. Hence, the quantization process operates not on the layer inputs in the full precision model but on the actual layer inputs in the already partially quantized one. We find that this brings noticeable improvements at negligible extra cost.",
+          "label": "Text"
+        },
+        {
+          "id": "4",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.174,
+            "y": 0.54,
+            "width": 0.649,
+            "height": 0.137
+          },
+          "content": "Baselines. Our primary baseline, denoted by RTN, consists of rounding all weights to the nearest quantized value on exactly the same asymmetric per- row grid that is also used for GPTQ, meaning that it corresponds precisely to the state- of- the- art weight quantization of LLM.int8(). This is currently the method of choice in all works on quantization of very large language models (Dettmers et al., 2022; Yao et al., 2022; Park et al., 2022): its runtime scales well to networks with many billions of parameters, as it simply performs direct rounding. As we will also discuss further, more accurate methods, such as AdaRound (Nagel et al., 2020) or BRECQ (Li et al., 2021), are currently too slow for models with many billions of parameters, the main focus of this work. Nevertheless, we also show that GPTQ is competitive with such methods for small models, while scaling to huge ones like OPT- 175B as well.",
+          "label": "Text"
+        },
+        {
+          "id": "5",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.174,
+            "y": 0.683,
+            "width": 0.649,
+            "height": 0.164
+          },
+          "content": "Quantizing Small Models. As a first ablation study, we compare GPTQ's performance relative to state- of- the- art post- training quantization (PTQ) methods, on ResNet18 and ResNet50, which are standard PTQ benchmarks, in the same setup as (Frantar et al., 2022). As can be seen in Table 1, GPTQ performs on par at 4- bit, and slightly worse than the most accurate methods at 3- bit. At the same time, it significantly outperforms AdaQuant, the fastest amongst prior PTQ methods. Further, we compare against the full greedy OBQ method on two smaller language models: BERT- base (De- vlin et al., 2019) and OPT- 125M. The results are shown in Appendix Table 8. At 4 bits, both methods perform similarly, and for 3 bits, GPTQ surprisingly performs slightly better. We suspect that this is because some of the additional heuristics used by OBQ, such as early outlier rounding, might require careful adjustments for optimal performance on non- vision models. Overall, GPTQ appears to be competitive with state- of- the- art post- training methods for smaller models, while taking only \\(< 1\\) minute rather than \\(\\approx 1\\) hour. This enables scaling to much larger models.",
+          "label": "Text"
+        },
+        {
+          "id": "6",
+          "order": 7,
+          "bounding_box": {
+            "x": 0.175,
+            "y": 0.853,
+            "width": 0.648,
+            "height": 0.07
+          },
+          "content": "Runtime. Next we measure the full model quantization time (on a single NVIDIA A100 GPU) via GPTQ; the results are shown in Table 2. As can be seen, GPTQ quantizes 1- 3 billion parameter models in a matter of minutes and 175B ones in a few hours. For reference, the straight- through based method ZeroQuant- LKD (Yao et al., 2022) reports a 3 hour runtime (on the same hardware) for a 1.3B model, which would linearly extrapolate to several hundred hours (a few weeks) for 175B",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "page_index": 7,
+      "blocks": [
+        {
+          "id": "0",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.175,
+            "y": 0.103,
+            "width": 0.317,
+            "height": 0.104
+          },
+          "content": "<table><tr><td rowspan=\"2\">Method</td><td colspan=\"2\">RN18 - 69.76 %</td><td colspan=\"2\">RN50 - 76.13 %</td></tr><tr><td>4bit</td><td>3bit</td><td>4bit</td><td>3bit</td></tr><tr><td>AdaRound</td><td>69.34</td><td>68.37</td><td>75.84</td><td>75.14</td></tr><tr><td>AdaQuant</td><td>68.12</td><td>59.21</td><td>74.68</td><td>64.98</td></tr><tr><td>BRECQ</td><td>69.37</td><td>68.47</td><td>75.88</td><td>75.32</td></tr><tr><td>OBQ</td><td>69.56</td><td>68.69</td><td>75.72</td><td>75.24</td></tr><tr><td>GPTQ</td><td>69.37</td><td>67.88</td><td>75.71</td><td>74.87</td></tr></table>",
+          "label": "Table"
+        },
+        {
+          "id": "1",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.173,
+            "y": 0.214,
+            "width": 0.297,
+            "height": 0.026
+          },
+          "content": "Table 1: Comparison with state-of-the-art post-training methods for vision models.",
+          "label": "Text"
+        },
+        {
+          "id": "2",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.525,
+            "y": 0.123,
+            "width": 0.294,
+            "height": 0.071
+          },
+          "content": "<table><tr><td>OPT</td><td>13B</td><td>30B</td><td>66B</td><td>175B</td></tr><tr><td>Runtime</td><td>20.9m</td><td>44.9m</td><td>1.6h</td><td>4.2h</td></tr><tr><td>BLOOM</td><td>1.7B</td><td>3B</td><td>7.1B</td><td>176B</td></tr><tr><td>Runtime</td><td>2.9m</td><td>5.2m</td><td>10.0m</td><td>3.8h</td></tr></table>",
+          "label": "Table"
+        },
+        {
+          "id": "3",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.525,
+            "y": 0.201,
+            "width": 0.295,
+            "height": 0.028
+          },
+          "content": "Table 2: GPTQ runtime for full quantization of the 4 largest OPT and BLOOM models.",
+          "label": "Text"
+        },
+        {
+          "id": "4",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.174,
+            "y": 0.257,
+            "width": 0.648,
+            "height": 0.029
+          },
+          "content": "models. Adaptive rounding- based methods typically employ a lot more SGD steps and would thus be even more expensive (Nagel et al., 2020; Li et al., 2021).",
+          "label": "Text"
+        },
+        {
+          "id": "5",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.174,
+            "y": 0.291,
+            "width": 0.65,
+            "height": 0.179
+          },
+          "content": "Language Generation. We begin our large- scale study by compressing the entire OPT and BLOOM model families to 3- and 4- bit. We then evaluate those models on several language tasks including WikiText2 (Merity et al., 2016) (see Figure 1 as well as Tables 3 and 4), Penn Treebank (PTB) (Marcus et al., 1994) and C4 (Raffel et al., 2020) (both in Appendix A.3). We focus on these perplexity- based tasks, as they are known to be particularly sensitive to model quantization (Yao et al., 2022). On OPT models, GPTQ clearly outperforms RTN, by significant margins. For example, GPTQ loses only 0.03 perplexity at 4- bit on the 175B model, while RTN drops 2.2 points, performing worse than the \\(10 \\times\\) smaller full- precision 13B model. At 3- bit, RTN collapses completely, while GPTQ can still maintain reasonable perplexity, in particular for larger models. BLOOM shows a similar pattern: the gaps between methods are however usually a bit smaller, indicating that this model family might be easier to quantize. One interesting trend (see also Figure 1) is that larger models generally (with the exception of OPT- 66B \\(^2\\) ) appear easier to quantize. This is good news for practical applications, as these are the cases where compression is also the most necessary.",
+          "label": "Text"
+        },
+        {
+          "id": "6",
+          "order": 7,
+          "bounding_box": {
+            "x": 0.178,
+            "y": 0.484,
+            "width": 0.635,
+            "height": 0.111
+          },
+          "content": "<table><tr><td>OPT</td><td>Bits</td><td>125M</td><td>350M</td><td>1.3B</td><td>2.7B</td><td>6.7B</td><td>13B</td><td>30B</td><td>66B</td><td>175B</td></tr><tr><td>full</td><td>16</td><td>27.65</td><td>22.00</td><td>14.63</td><td>12.47</td><td>10.86</td><td>10.13</td><td>9.56</td><td>9.34</td><td>8.34</td></tr><tr><td>RTN</td><td>4</td><td>37.28</td><td>25.94</td><td>48.17</td><td>16.92</td><td>12.10</td><td>11.32</td><td>10.98</td><td>110</td><td>10.54</td></tr><tr><td>GPTQ</td><td>4</td><td>31.12</td><td>24.24</td><td>15.47</td><td>12.87</td><td>11.39</td><td>10.31</td><td>9.63</td><td>9.55</td><td>8.37</td></tr><tr><td>RTN</td><td>3</td><td>1.3e3</td><td>64.57</td><td>1.3e4</td><td>1.6e4</td><td>5.8e3</td><td>3.4e3</td><td>1.6e3</td><td>6.1e3</td><td>7.3e3</td></tr><tr><td>GPTQ</td><td>3</td><td>53.85</td><td>33.79</td><td>20.97</td><td>16.88</td><td>14.86</td><td>11.61</td><td>10.27</td><td>14.16</td><td>8.68</td></tr></table>",
+          "label": "Table"
+        },
+        {
+          "id": "7",
+          "order": 8,
+          "bounding_box": {
+            "x": 0.344,
+            "y": 0.6,
+            "width": 0.306,
+            "height": 0.015
+          },
+          "content": "Table 3: OPT perplexity results on WikiText2.",
+          "label": "Text"
+        },
+        {
+          "id": "8",
+          "order": 9,
+          "bounding_box": {
+            "x": 0.258,
+            "y": 0.628,
+            "width": 0.475,
+            "height": 0.109
+          },
+          "content": "<table><tr><td>BLOOM</td><td>Bits</td><td>560M</td><td>1.1B</td><td>1.7B</td><td>3B</td><td>7.1B</td><td>176B</td></tr><tr><td>full</td><td>16</td><td>22.42</td><td>17.69</td><td>15.39</td><td>13.48</td><td>11.37</td><td>8.11</td></tr><tr><td>RTN</td><td>4</td><td>25.90</td><td>22.00</td><td>16.97</td><td>14.76</td><td>12.10</td><td>8.37</td></tr><tr><td>GPTQ</td><td>4</td><td>24.03</td><td>19.05</td><td>16.48</td><td>14.20</td><td>11.73</td><td>8.21</td></tr><tr><td>RTN</td><td>3</td><td>57.08</td><td>50.19</td><td>63.59</td><td>39.36</td><td>17.38</td><td>571</td></tr><tr><td>GPTQ</td><td>3</td><td>32.31</td><td>25.08</td><td>21.11</td><td>17.40</td><td>13.47</td><td>8.64</td></tr></table>",
+          "label": "Table"
+        },
+        {
+          "id": "9",
+          "order": 10,
+          "bounding_box": {
+            "x": 0.33,
+            "y": 0.743,
+            "width": 0.336,
+            "height": 0.015
+          },
+          "content": "Table 4: BLOOM perplexity results for WikiText2.",
+          "label": "Text"
+        },
+        {
+          "id": "10",
+          "order": 11,
+          "bounding_box": {
+            "x": 0.174,
+            "y": 0.774,
+            "width": 0.65,
+            "height": 0.111
+          },
+          "content": "175 Billion Parameter Models. We now examine BLOOM- 176B and OPT- 175B, the largest dense openly- available models. Table 5 summarizes results across Wikitext- 2, PTB, C4. We observe that, at 4 bits, GPTQ models reach only \\(\\leq 0.25\\) lower perplexity than the full- precision versions, with a large gap to RTN results on OPT- 175B. At 3- bit, RTN collapses, while GPTQ is still able to maintain good performance on most tasks, losing only \\(0.3 - 0.6\\) points for more than \\(5 \\times\\) compression. We note that GPTQ's accuracy can be further improved via finer- granularity grouping (Park et al., 2022): group- size 1024 \\((\\approx 0.02\\) extra bits) improves perplexities by about 0.2 on average and group- size 128 \\((\\approx 0.15\\) extra bits) by another 0.1, which is only \\(0.1 - 0.3\\) off from the uncompressed accuracy.",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "page_index": 8,
+      "blocks": [
+        {
+          "id": "0",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.173,
+            "y": 0.103,
+            "width": 0.651,
+            "height": 0.03
+          },
+          "content": "We note that grouping interacts very well with GPTQ, as the group parameters can be determined during the quantization process of each layer, always using the most current updated weights.",
+          "label": "Text"
+        },
+        {
+          "id": "1",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.195,
+            "y": 0.144,
+            "width": 0.604,
+            "height": 0.141
+          },
+          "content": "<table><tr><td rowspan=\"2\">Method</td><td rowspan=\"2\">Bits</td><td colspan=\"4\">OPT-175B</td><td colspan=\"4\">BLOOM-176B</td></tr><tr><td>Wiki2</td><td>PTB</td><td>C4</td><td>LAMB. ↑</td><td>Wiki2</td><td>PTB</td><td>C4</td><td>LAMB. ↑</td></tr><tr><td>Baseline</td><td>16</td><td>8.34</td><td>12.01</td><td>10.13</td><td>75.59</td><td>8.11</td><td>14.59</td><td>11.71</td><td>67.40</td></tr><tr><td>RTN</td><td>4</td><td>10.54</td><td>14.22</td><td>11.61</td><td>71.34</td><td>8.37</td><td>15.00</td><td>12.04</td><td>66.70</td></tr><tr><td>GPTQ</td><td>4</td><td>8.37</td><td>12.26</td><td>10.28</td><td>76.80</td><td>8.21</td><td>14.75</td><td>11.81</td><td>67.71</td></tr><tr><td>RTN</td><td>3</td><td>7.3e3</td><td>8.0e3</td><td>4.6e3</td><td>0</td><td>571.</td><td>107.</td><td>598.</td><td>0.17</td></tr><tr><td>GPTQ</td><td>3</td><td>8.68</td><td>12.68</td><td>10.67</td><td>76.19</td><td>8.64</td><td>15.57</td><td>12.27</td><td>65.10</td></tr><tr><td>GPTQ</td><td>3/g1024</td><td>8.45</td><td>12.48</td><td>10.47</td><td>77.39</td><td>8.35</td><td>15.01</td><td>11.98</td><td>67.47</td></tr><tr><td>GPTQ</td><td>3/g128</td><td>8.45</td><td>12.37</td><td>10.36</td><td>76.42</td><td>8.26</td><td>14.89</td><td>11.85</td><td>67.86</td></tr></table>",
+          "label": "Table"
+        },
+        {
+          "id": "2",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.173,
+            "y": 0.29,
+            "width": 0.651,
+            "height": 0.029
+          },
+          "content": "Table 5: Results summary for OPT-175B and BLOOM-176B. \"g1024\" and \"g128\" denote results with groupings of size 1024 and 128, respectively.",
+          "label": "Text"
+        },
+        {
+          "id": "3",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.173,
+            "y": 0.332,
+            "width": 0.651,
+            "height": 0.124
+          },
+          "content": "Practical Speedups. Finally, we study practical applications. As an interesting use- case, we focus on the OPT- 175B model: quantized to 3 bits, this model takes approximately 63GB of memory, including the embeddings and the output layer, which are kept in full FP16 precision. Additionally, storing the complete history of keys and values for all layers, a common optimization for generation tasks, consumes another \\(\\approx 9\\mathrm{GB}\\) for the maximum of 2048 tokens. Hence, we can actually fit the entire quantized model into a single 80GB A100 GPU, which can be executed by dynamically dequantizing layers as they are required during inference (the model would not fully fit using 4 bits). For reference, standard FP16 execution requires 5x80GB GPUs, and the state- of- the- art 8bit LLM.int8() quantizer (Dettmers et al., 2022) requires 3 such GPUs.",
+          "label": "Text"
+        },
+        {
+          "id": "4",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.173,
+            "y": 0.461,
+            "width": 0.651,
+            "height": 0.179
+          },
+          "content": "Next, we consider language generation, one of the most appealing applications of these models, with the goal of latency reduction. Unlike LLM.int8(), which reduces memory costs but has the same runtime as the FP16 baseline, we show that our quantized models can achieve significant speedups for this application. For language generation, the model processes and outputs one token at- a- time, which for OPT- 175B can easily take a few 100s of milliseconds per token. Increasing the speed at which the user receives generated results is challenging, as compute is dominated by matrix- vector products. Unlike matrix- matrix products, these are primarily limited by memory bandwidth. We address this problem by developing a quantized- matrix full- precision- vector product kernel which performs a matrix vector product by dynamically dequantizing weights when needed. Most notably, this does not require any activation quantization. While dequantization consumes extra compute, the kernel has to access a lot less memory, leading to significant speedups, as shown in Table 6. We note that almost all of the speedup is due to our kernels, as communication costs are negligible in our standard HuggingFace- accelerate- like setting (see Appendix A.2.2 for details).",
+          "label": "Text"
+        },
+        {
+          "id": "5",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.293,
+            "y": 0.653,
+            "width": 0.404,
+            "height": 0.048
+          },
+          "content": "<table><tr><td>GPU</td><td>FP16</td><td>3bit</td><td>Speedup</td><td>GPU reduction</td></tr><tr><td>A6000 – 48GB</td><td>589ms</td><td>130ms</td><td>4.53×</td><td>8 → 2</td></tr><tr><td>A100 – 80GB</td><td>230ms</td><td>71ms</td><td>3.24×</td><td>5 → 1</td></tr></table>",
+          "label": "Table"
+        },
+        {
+          "id": "6",
+          "order": 7,
+          "bounding_box": {
+            "x": 0.198,
+            "y": 0.707,
+            "width": 0.599,
+            "height": 0.016
+          },
+          "content": "Table 6: Average per- token latency (batch size 1) when generating sequences of length 128.",
+          "label": "Text"
+        },
+        {
+          "id": "7",
+          "order": 8,
+          "bounding_box": {
+            "x": 0.174,
+            "y": 0.737,
+            "width": 0.65,
+            "height": 0.083
+          },
+          "content": "For example, using our kernels, the 3- bit OPT- 175B model obtained via GPTQ running on a single A100 is about \\(3.25 \\times\\) faster than the FP16 version (running on 5 GPUs) in terms of average time per token. More accessible GPUs, such as the NVIDIA A6000, have much lower memory bandwidth, so this strategy is even more effective: executing the 3- bit OPT- 175B model on 2x A6000 GPUs reduces latency from 589 milliseconds for FP16 inference (on 8 GPUs) to 130 milliseconds, a \\(4.5 \\times\\) latency reduction.",
+          "label": "Text"
+        },
+        {
+          "id": "8",
+          "order": 9,
+          "bounding_box": {
+            "x": 0.174,
+            "y": 0.826,
+            "width": 0.65,
+            "height": 0.097
+          },
+          "content": "Zero- Shot Tasks. While our focus is on language generation, we also evaluate the performance of quantized models on some popular zero- shot tasks, namely LAMBADA (Paperno et al., 2016), ARC (Easy and Challenge) (Boratko et al., 2018) and PIQA (Tata & Patel, 2003). Figure 3 visualizes model performance on LAMBADA (and see also \"Lamb.\" results in Table 5). We observe similar behavior as before: the outliers are that 1) quantization appears \"easier\" across the whole spectrum of models at 4- bit, where even RTN performs relatively well, and 2) at 3- bit, RTN breaks down, while GPTQ still provides good accuracy. We provide additional results in Appendix A.4.",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "page_index": 9,
+      "blocks": [
+        {
+          "id": "0",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.207,
+            "y": 0.1,
+            "width": 0.58,
+            "height": 0.162
+          },
+          "content": "",
+          "label": "Image"
+        },
+        {
+          "id": "1",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.195,
+            "y": 0.265,
+            "width": 0.605,
+            "height": 0.015
+          },
+          "content": "<center>Figure 3: The accuracy of OPT and BLOOM models post-GPTQ, measured on LAMBADA. </center>",
+          "label": "Text"
+        },
+        {
+          "id": "2",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.173,
+            "y": 0.305,
+            "width": 0.651,
+            "height": 0.095
+          },
+          "content": "Additional Tricks. While our experiments so far have focused exclusively on vanilla row- wise quantization, we want to emphasize that GPTQ is compatible with essentially any choice of quantization grid. For example, it is easily combined with standard grouping (Alistarh et al., 2017; Park et al., 2022), i.e. applying independent quantization to groups of \\(g\\) consecutive weights. As shown in the last rows of Table 5, this can bring noticeable extra accuracy for the largest models at 3- bit. Further, as visualized in Figure 4, it significantly reduces the accuracy losses for medium sized models at 4- bit precision.",
+          "label": "Text"
+        },
+        {
+          "id": "3",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.177,
+            "y": 0.454,
+            "width": 0.317,
+            "height": 0.05
+          },
+          "content": "<table><tr><td>Model</td><td>FP16</td><td>g128</td><td>g64</td><td>g32</td><td>3-bit</td></tr><tr><td>OPT-175B</td><td>8.34</td><td>9.58</td><td>9.18</td><td>8.94</td><td>8.68</td></tr><tr><td>BLOOM</td><td>8.11</td><td>9.55</td><td>9.17</td><td>8.83</td><td>8.64</td></tr></table>",
+          "label": "Table"
+        },
+        {
+          "id": "4",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.173,
+            "y": 0.51,
+            "width": 0.327,
+            "height": 0.028
+          },
+          "content": "Table 7: 2-bit GPTQ quantization results with varying group-sizes; perplexity on WikiText2.",
+          "label": "Text"
+        },
+        {
+          "id": "5",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.536,
+            "y": 0.414,
+            "width": 0.284,
+            "height": 0.126
+          },
+          "content": "",
+          "label": "Image"
+        },
+        {
+          "id": "6",
+          "order": 7,
+          "bounding_box": {
+            "x": 0.53,
+            "y": 0.542,
+            "width": 0.292,
+            "height": 0.029
+          },
+          "content": "<center>Figure 4: GPTQ at 4-bit with different group-sizes on medium sized OPT models. </center>",
+          "label": "Text"
+        },
+        {
+          "id": "7",
+          "order": 8,
+          "bounding_box": {
+            "x": 0.173,
+            "y": 0.585,
+            "width": 0.651,
+            "height": 0.165
+          },
+          "content": "Extreme Quantization. Lastly, grouping also makes it possible to achieve reasonable performance for extreme quantization, to around 2- bits per component on average. Table 7 shows results on WikiText2 when quantizing the biggest models to 2- bit with varying group- sizes. At \\(\\approx 2.2\\) bit (group- size 128; using FP16 scale and 2- bit zero point per group) the perplexity increase is already less than 1.5 points, while dropping to 0.6 - 0.7 at \\(\\approx 2.6\\) bit (group- size 32), which is only slightly worse than vanilla 3- bit and might be interesting for practical kernel implementations. Further, if we reduce group size to 8, we can apply ternary (- 1, 0, +1) quantization, which achieves 9.20 WikiText2 PPL on OPT- 175B, a less than 1 point drop. While this leads to worse compression on average relative to the 2- bit numbers above, this pattern could be efficiently implemented on custom hardware such as FPGAs. In summary, these results are an encouraging first step towards pushing highly- accurate one- shot compression of very large language models, even lower than 3 bits per value on average.",
+          "label": "Text"
+        },
+        {
+          "id": "8",
+          "order": 9,
+          "bounding_box": {
+            "x": 0.175,
+            "y": 0.769,
+            "width": 0.276,
+            "height": 0.016
+          },
+          "content": "## 6 SUMMARY AND LIMITATIONS",
+          "label": "Text"
+        },
+        {
+          "id": "9",
+          "order": 10,
+          "bounding_box": {
+            "x": 0.174,
+            "y": 0.799,
+            "width": 0.65,
+            "height": 0.124
+          },
+          "content": "We have presented GPTQ, an approximate second- order method for quantizing truly large language models. GPTQ can accurately compress some of the largest publicly- available models down to 3 and 4 bits, which leads to significant usability improvements, and to end- to- end speedups, at low accuracy loss. We hope that our method will make these models accessible to more researchers and practitioners. At the same time, we emphasize some significant limitations: On the technical side, our method obtains speedups from reduced memory movement, and does not lead to computational reductions. In addition, our study focuses on generative tasks, and does not consider activation quantization. These are natural directions for future work, and we believe this can be achieved with carefully- designed GPU kernels and existing techniques (Yao et al., 2022; Wu et al., 2022).",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "page_index": 10,
+      "blocks": [
+        {
+          "id": "0",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.175,
+            "y": 0.102,
+            "width": 0.181,
+            "height": 0.015
+          },
+          "content": "## ACKNOWLEDGMENTS",
+          "label": "Text"
+        },
+        {
+          "id": "1",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.174,
+            "y": 0.132,
+            "width": 0.649,
+            "height": 0.098
+          },
+          "content": "ACKNOWLEDGMENTSElias Frantar and Dan Alistarh gratefully acknowledge funding from the European Research Council (ERC) under the European Union's Horizon 2020 programme (grant agreement No. 805223 ScaleML), as well as experimental support from Eldar Kurtic, and from the IST Austria IT department, in particular Stefano Elefante, Andrei Hornoiu, and Alois Schloegl. The work of Saleh Ashkboos and Torsten Hoefler was supported by the PASC DaCeMI project, received EuroHPC- JU funding under grant MAELSTROM, No. 955513. We thank the Swiss National Supercomputing Center (CSCS) for supporting us with compute infrastructure.",
+          "label": "Text"
+        },
+        {
+          "id": "2",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.175,
+            "y": 0.25,
+            "width": 0.198,
+            "height": 0.015
+          },
+          "content": "## 7 ETHICS STATEMENT",
+          "label": "Text"
+        },
+        {
+          "id": "3",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.174,
+            "y": 0.28,
+            "width": 0.649,
+            "height": 0.165
+          },
+          "content": "7 ETHICS STATEMENTOur work introduces a general method for compressing large language models (LLMs) via quantization, with little- to- no accuracy loss in terms of standard accuracy metrics such as perplexity. Our method is task- agnostic, as it only uses a tiny amount of randomly- chosen data for calibration. We therefore do not foresee any significant ethical implications arising directly from the technical details of our method. However, one possible consideration is that our study focused on \"leading accuracy\" metrics that are standard in the literature, such as perplexity, which is essentially standard in the literature (Dettmers et al., 2022; Yao et al., 2022). We believe a thorough study of the impact of compression upon secondary measures, and in particular bias effects (Bender et al., 2021) is warranted, and may be rendered easier through our work. At the same time, our work makes inference on extremely large language models more accessible, for better or for worse. We believe that, in time, such tools will become much easier to use and deploy, making the need to understand their power and limitations even more stringent.",
+          "label": "Text"
+        },
+        {
+          "id": "4",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.175,
+            "y": 0.465,
+            "width": 0.291,
+            "height": 0.017
+          },
+          "content": "## 8 REPRODUCIBILITY STATEMENT",
+          "label": "Text"
+        },
+        {
+          "id": "5",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.175,
+            "y": 0.496,
+            "width": 0.647,
+            "height": 0.029
+          },
+          "content": "In the Supplementary Materials, we provide code to reproduce all experiments in this paper. More specifically, this includes:",
+          "label": "Text"
+        },
+        {
+          "id": "6",
+          "order": 7,
+          "bounding_box": {
+            "x": 0.216,
+            "y": 0.536,
+            "width": 0.594,
+            "height": 0.094
+          },
+          "content": "Compressing all models from the OPT and BLOOM model families to 2/3/4 bits. Evaluating perplexity of the quantized models. Our 3- bit CUDA kernel together with compressed inference benchmarking features. Code for the ZeroShot experiments. A README file providing sample commands and information on how to run all scripts.",
+          "label": "Text"
+        },
+        {
+          "id": "7",
+          "order": 8,
+          "bounding_box": {
+            "x": 0.174,
+            "y": 0.65,
+            "width": 0.111,
+            "height": 0.016
+          },
+          "content": "## REFERENCES",
+          "label": "Text"
+        },
+        {
+          "id": "8",
+          "order": 9,
+          "bounding_box": {
+            "x": 0.174,
+            "y": 0.673,
+            "width": 0.649,
+            "height": 0.044
+          },
+          "content": "Dan Alistarh, Demjan Grubic, Jerry Li, Ryota Tomioka, and Milan Vojnovic. QSGD: Randomized quantization for communication- efficient stochastic gradient descent. In Conference on Neural Information Processing Systems (NeurIPS), 2017.",
+          "label": "Text"
+        },
+        {
+          "id": "9",
+          "order": 10,
+          "bounding_box": {
+            "x": 0.174,
+            "y": 0.725,
+            "width": 0.649,
+            "height": 0.043
+          },
+          "content": "Emily M Bender, Timnit Gebru, Angelina McMillan- Major, and Shmargaret Shmitchell. On the dangers of stochastic parrots: Can language models be too big? In 2021 ACM Conference on Fairness, Accountability, and Transparency, 2021.",
+          "label": "Text"
+        },
+        {
+          "id": "10",
+          "order": 11,
+          "bounding_box": {
+            "x": 0.174,
+            "y": 0.777,
+            "width": 0.649,
+            "height": 0.056
+          },
+          "content": "Michael Boratko, Harshit Padigela, Divyendra Mikkilineni, Pritish Yuvraj, Rajarshi Das, Andrew McCallum, Maria Chang, Achille Fokoue- Nkoutche, Pavan Kapanipathi, Nicholas Mattei, et al. A systematic classification of knowledge, reasoning, and context within the ARC dataset. arXiv preprint arXiv:1806.00358, 2018.",
+          "label": "Text"
+        },
+        {
+          "id": "11",
+          "order": 12,
+          "bounding_box": {
+            "x": 0.174,
+            "y": 0.842,
+            "width": 0.649,
+            "height": 0.043
+          },
+          "content": "Tom Brown, Benjamin Mann, Nick Ryder, Melanie Subbiah, Jared D Kaplan, Prafulla Dhariwal, Arvind Neelakantan, Pranav Shyam, Girish Sastry, Amanda Askell, et al. Language models are few- shot learners. In Conference on Neural Information Processing Systems (NeurIPS), 2020.",
+          "label": "Text"
+        },
+        {
+          "id": "12",
+          "order": 13,
+          "bounding_box": {
+            "x": 0.174,
+            "y": 0.894,
+            "width": 0.649,
+            "height": 0.029
+          },
+          "content": "Tri Dao, Daniel Y Fu, Stefano Ermon, Atri Rudra, and Christopher Ré. FlashAttention: Fast and memory- efficient exact attention with io- awareness. arXiv preprint arXiv:2205.14135, 2022.",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "page_index": 11,
+      "blocks": [
+        {
+          "id": "0",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.171,
+            "y": 0.102,
+            "width": 0.651,
+            "height": 0.029
+          },
+          "content": "Tim Dettmers, Mike Lewis, Younes Belkada, and Luke Zettlemoyer. LLM.int8(): 8- bit matrix multiplication for transformers at scale. arXiv preprint arXiv:2208.07339, 2022.",
+          "label": "Text"
+        },
+        {
+          "id": "1",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.174,
+            "y": 0.139,
+            "width": 0.648,
+            "height": 0.042
+          },
+          "content": "Jacob Devlin, Ming- Wei Chang, Kenton Lee, and Kristina Toutanova. BERT: Pre- training of deep bidirectional transformers for language understanding. In North American Chapter of the Association for Computational Linguistics (NAACL), 2019.",
+          "label": "Text"
+        },
+        {
+          "id": "2",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.174,
+            "y": 0.189,
+            "width": 0.648,
+            "height": 0.042
+          },
+          "content": "Elias Frantar, Eldar Kurtic, and Dan Alistarh. M- FAC: Efficient matrix- free approximations of second- order information. In Conference on Neural Information Processing Systems (NeurIPS), 2021.",
+          "label": "Text"
+        },
+        {
+          "id": "3",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.174,
+            "y": 0.24,
+            "width": 0.648,
+            "height": 0.042
+          },
+          "content": "Elias Frantar, Sidak Pal Singh, and Dan Alistarh. Optimal Brain Compression: A framework for accurate post- training quantization and pruning. arXiv preprint arXiv:2208.11580, 2022. Accepted to NeurIPS 2022, to appear.",
+          "label": "Text"
+        },
+        {
+          "id": "4",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.174,
+            "y": 0.29,
+            "width": 0.648,
+            "height": 0.042
+          },
+          "content": "Amir Gholami, Sehoon Kim, Zhen Dong, Zhewei Yao, Michael W Mahoney, and Kurt Keutzer. A survey of quantization methods for efficient neural network inference. arXiv preprint arXiv:2103.13630, 2021.",
+          "label": "Text"
+        },
+        {
+          "id": "5",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.174,
+            "y": 0.34,
+            "width": 0.648,
+            "height": 0.029
+          },
+          "content": "Babak Hassibi, David G Stork, and Gregory J Wolff. Optimal brain surgeon and general network pruning. In IEEE International Conference on Neural Networks, 1993.",
+          "label": "Text"
+        },
+        {
+          "id": "6",
+          "order": 7,
+          "bounding_box": {
+            "x": 0.174,
+            "y": 0.377,
+            "width": 0.648,
+            "height": 0.042
+          },
+          "content": "Torsten Hoefler, Dan Alistarh, Tal Ben- Nun, Nikoli Dryden, and Alexandra Peste. Sparsity in deep learning: Pruning and growth for efficient inference and training in neural networks. arXiv preprint arXiv:2102.00554, 2021.",
+          "label": "Text"
+        },
+        {
+          "id": "7",
+          "order": 8,
+          "bounding_box": {
+            "x": 0.174,
+            "y": 0.427,
+            "width": 0.648,
+            "height": 0.042
+          },
+          "content": "Itay Hubara, Yury Nahshan, Yair Hanani, Ron Banner, and Daniel Soudry. Improving post training neural quantization: Layer- wise calibration and integer programming. arXiv preprint arXiv:2006.10518, 2020.",
+          "label": "Text"
+        },
+        {
+          "id": "8",
+          "order": 9,
+          "bounding_box": {
+            "x": 0.174,
+            "y": 0.478,
+            "width": 0.648,
+            "height": 0.042
+          },
+          "content": "Itay Hubara, Yury Nahshan, Yair Hanani, Ron Banner, and Daniel Soudry. Accurate post training quantization with small calibration sets. In International Conference on Machine Learning (ICML), 2021.",
+          "label": "Text"
+        },
+        {
+          "id": "9",
+          "order": 10,
+          "bounding_box": {
+            "x": 0.174,
+            "y": 0.528,
+            "width": 0.648,
+            "height": 0.042
+          },
+          "content": "Hugo Laurençon, Lucile Saulnier, Thomas Wang, Christopher Akiki, Albert Villanova del Moral, Teven Le Scao, Leandro Von Werra, Chenghao Mou, Eduardo González Ponferrada, Huu Nguyen, et al. The BigScience corpus: A 1.6 TB composite multilingual dataset. 2022.",
+          "label": "Text"
+        },
+        {
+          "id": "10",
+          "order": 11,
+          "bounding_box": {
+            "x": 0.174,
+            "y": 0.578,
+            "width": 0.648,
+            "height": 0.042
+          },
+          "content": "Yuhang Li, Ruihao Gong, Xu Tan, Yang Yang, Peng Hu, Qi Zhang, Fengwei Yu, Wei Wang, and Shi Gu. BRECQ: Pushing the limit of post- training quantization by block reconstruction. In International Conference on Learning Representations (ICLR), 2021.",
+          "label": "Text"
+        },
+        {
+          "id": "11",
+          "order": 12,
+          "bounding_box": {
+            "x": 0.174,
+            "y": 0.628,
+            "width": 0.648,
+            "height": 0.056
+          },
+          "content": "Mitch Marcus, Grace Kim, Mary Ann Marcinkiewicz, Robert MacIntyre, Ann Bies, Mark Ferguson, Karen Katz, and Britta Schasberger. The penn treebank: Annotating predicate argument structure. In Human Language Technology: Proceedings of a Workshop held at Plainsboro, New Jersey, March 8- 11, 1994, 1994.",
+          "label": "Text"
+        },
+        {
+          "id": "12",
+          "order": 13,
+          "bounding_box": {
+            "x": 0.174,
+            "y": 0.692,
+            "width": 0.648,
+            "height": 0.028
+          },
+          "content": "Stephen Merity, Caiming Xiong, James Bradbury, and Richard Socher. Pointer sentinel mixture models. arXiv preprint arXiv:1609.07843, 2016.",
+          "label": "Text"
+        },
+        {
+          "id": "13",
+          "order": 14,
+          "bounding_box": {
+            "x": 0.174,
+            "y": 0.729,
+            "width": 0.648,
+            "height": 0.042
+          },
+          "content": "Markus Nagel, Rana Ali Amjad, Mart Van Baalen, Christos Louizos, and Tijmen Blankevoort. Up or down? Adaptive rounding for post- training quantization. In International Conference on Machine Learning (ICML), 2020.",
+          "label": "Text"
+        },
+        {
+          "id": "14",
+          "order": 15,
+          "bounding_box": {
+            "x": 0.174,
+            "y": 0.779,
+            "width": 0.648,
+            "height": 0.042
+          },
+          "content": "Markus Nagel, Marios Fournarakis, Rana Ali Amjad, Yelysei Bondarenko, Mart van Baalen, and Tijmen Blankevoort. A white paper on neural network quantization. arXiv preprint arXiv:2106.08295, 2021.",
+          "label": "Text"
+        },
+        {
+          "id": "15",
+          "order": 16,
+          "bounding_box": {
+            "x": 0.174,
+            "y": 0.83,
+            "width": 0.648,
+            "height": 0.041
+          },
+          "content": "Yury Nahshan, Brian Chmiel, Chaim Baskin, Evgenii Zheltonozhskii, Ron Banner, Alex M Bronstein, and Avi Mendelson. Loss aware post- training quantization. Machine Learning, 110(11): 3245- 3262, 2021.",
+          "label": "Text"
+        },
+        {
+          "id": "16",
+          "order": 17,
+          "bounding_box": {
+            "x": 0.174,
+            "y": 0.88,
+            "width": 0.648,
+            "height": 0.042
+          },
+          "content": "Denis Paperno, Germán Kruszewski, Angeliki Lazaridou, Quan Ngoc Pham, Raffaella Bernardi, Sandro Pezzelle, Marco Baroni, Gemma Boleda, and Raquel Fernández. The LAMBADA dataset: Word prediction requiring a broad discourse context. arXiv preprint arXiv:1606.06031, 2016.",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "page_index": 12,
+      "blocks": [
+        {
+          "id": "0",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.173,
+            "y": 0.103,
+            "width": 0.649,
+            "height": 0.042
+          },
+          "content": "Gunho Park, Baeseong Park, Se Jung Kwon, Byeongwook Kim, Youngjoo Lee, and Dongsoo Lee. nuQmm: Quantized matmul for efficient inference of large- scale generative language models. arXiv preprint arXiv:2206.09557, 2022.",
+          "label": "Text"
+        },
+        {
+          "id": "1",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.174,
+            "y": 0.154,
+            "width": 0.648,
+            "height": 0.056
+          },
+          "content": "Adam Paszke, Sam Gross, Francisco Massa, Adam Lerer, James Bradbury, Gregory Chanan, Trevor Killeen, Zeming Lin, Natalia Gimelshein, Luca Antiga, et al. Pytorch: An imperative style, high- performance deep learning library. In Conference on Neural Information Processing Systems (NeurIPS), 2019.",
+          "label": "Text"
+        },
+        {
+          "id": "2",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.174,
+            "y": 0.218,
+            "width": 0.648,
+            "height": 0.029
+          },
+          "content": "Alec Radford, Jeffrey Wu, Rewon Child, David Luan, Dario Amodei, and Ilya Sutskever. Language models are unsupervised multitask learners. OpenAI blog, 1(8):9, 2019.",
+          "label": "Text"
+        },
+        {
+          "id": "3",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.174,
+            "y": 0.255,
+            "width": 0.648,
+            "height": 0.042
+          },
+          "content": "Colin Raffel, Noam Shazeer, Adam Roberts, Katherine Lee, Sharan Narang, Michael Matena, Yanqi Zhou, Wei Li, and Peter Liu. Exploring the limits of transfer learning with a unified text- to- text transformer. Journal of Machine Learning Research, 21(140):1- 67, 2020.",
+          "label": "Text"
+        },
+        {
+          "id": "4",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.174,
+            "y": 0.306,
+            "width": 0.648,
+            "height": 0.042
+          },
+          "content": "Pranav Rajpurkar, Jian Zhang, Konstantin Lopyrev, and Percy Liang. SQuAD: 100,000+ questions for machine comprehension of text. In Conference on Empirical Methods in Natural Language Processing (EMNLP), 2016.",
+          "label": "Text"
+        },
+        {
+          "id": "5",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.174,
+            "y": 0.356,
+            "width": 0.648,
+            "height": 0.029
+          },
+          "content": "Sidak Pal Singh and Dan Alistarh. WoodFisher: Efficient second- order approximation for neural network compression. In Conference on Neural Information Processing Systems (NeurIPS), 2020.",
+          "label": "Text"
+        },
+        {
+          "id": "6",
+          "order": 7,
+          "bounding_box": {
+            "x": 0.174,
+            "y": 0.393,
+            "width": 0.648,
+            "height": 0.029
+          },
+          "content": "Sandeep Tata and Jignesh M Patel. PiQA: An algebra for querying protein data sets. In International Conference on Scientific and Statistical Database Management, 2003.",
+          "label": "Text"
+        },
+        {
+          "id": "7",
+          "order": 8,
+          "bounding_box": {
+            "x": 0.174,
+            "y": 0.43,
+            "width": 0.648,
+            "height": 0.043
+          },
+          "content": "Ashish Vaswani, Noam Shazeer, Niki Parmar, Jakob Uszkoreit, Llion Jones, Aidan N Gomez, Łukasz Kaiser, and Illia Polosukhin. Attention is all you need. In Conference on Neural Information Processing Systems (NeurIPS), 2017.",
+          "label": "Text"
+        },
+        {
+          "id": "8",
+          "order": 9,
+          "bounding_box": {
+            "x": 0.174,
+            "y": 0.481,
+            "width": 0.648,
+            "height": 0.041
+          },
+          "content": "Peisong Wang, Qiang Chen, Xiangyu He, and Jian Cheng. Towards accurate post- training network quantization via bit- split and stitching. In International Conference on Machine Learning (ICML), 2020.",
+          "label": "Text"
+        },
+        {
+          "id": "9",
+          "order": 10,
+          "bounding_box": {
+            "x": 0.174,
+            "y": 0.531,
+            "width": 0.648,
+            "height": 0.029
+          },
+          "content": "Xiaoxia Wu, Zhewei Yao, Minjia Zhang, Conglong Li, and Yuxiong He. Extreme compression for pre- trained transformers made simple and efficient. arXiv preprint arXiv:2206.01859, 2022.",
+          "label": "Text"
+        },
+        {
+          "id": "10",
+          "order": 11,
+          "bounding_box": {
+            "x": 0.174,
+            "y": 0.568,
+            "width": 0.648,
+            "height": 0.042
+          },
+          "content": "Zhewei Yao, Reza Yazdani Aminabadi, Minjia Zhang, Xiaoxia Wu, Conglong Li, and Yuxiong He. ZeroQuant: Efficient and affordable post- training quantization for large- scale transformers. arXiv preprint arXiv:2206.01861, 2022.",
+          "label": "Text"
+        },
+        {
+          "id": "11",
+          "order": 12,
+          "bounding_box": {
+            "x": 0.174,
+            "y": 0.619,
+            "width": 0.648,
+            "height": 0.042
+          },
+          "content": "Susan Zhang, Stephen Roller, Naman Goyal, Mikel Artetxe, Moya Chen, Shuohui Chen, Christopher Dewan, Mona Diab, Xian Li, Xi Victoria Lin, et al. OPT: Open pre- trained transformer language models. arXiv preprint arXiv:2205.01068, 2022.",
+          "label": "Text"
+        },
+        {
+          "id": "12",
+          "order": 13,
+          "bounding_box": {
+            "x": 0.174,
+            "y": 0.67,
+            "width": 0.648,
+            "height": 0.042
+          },
+          "content": "Lianmin Zheng, Zhuohan Li, Hao Zhang, Yonghao Zhuang, Zhifeng Chen, Yanping Huang, Yida Wang, Yuanzhong Xu, Danyang Zhuo, Joseph E Gonzalez, et al. Alpa: Automating inter- and intra- operator parallelism for distributed deep learning. arXiv preprint arXiv:2201.12023, 2022.",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "page_index": 13,
+      "blocks": [
+        {
+          "id": "0",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.174,
+            "y": 0.102,
+            "width": 0.125,
+            "height": 0.016
+          },
+          "content": "## A APPENDIX",
+          "label": "Text"
+        },
+        {
+          "id": "1",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.174,
+            "y": 0.132,
+            "width": 0.316,
+            "height": 0.015
+          },
+          "content": "## A.1 ADDITIONAL COMPARISON WITH OBQ",
+          "label": "Text"
+        },
+        {
+          "id": "2",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.174,
+            "y": 0.157,
+            "width": 0.65,
+            "height": 0.044
+          },
+          "content": "We now provide an additional comparison between GPTQ and OBQ on BERT- base/SQuAD Rajpurkar et al. (2016) and OPT- 125M/WikiText2, which is one of the largest models to which OBQ can be reasonably applied.",
+          "label": "Text"
+        },
+        {
+          "id": "3",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.345,
+            "y": 0.213,
+            "width": 0.303,
+            "height": 0.082
+          },
+          "content": "<table><tr><td>Method</td><td>BERT-base<br>88.53 F1 ↑<br>4bit</td><td>OPT-125M<br>27.66 PPL ↓<br>4bit 3bit</td></tr><tr><td>OBQ</td><td>88.23 85.29</td><td>32.52 69.32</td></tr><tr><td>GPTQ</td><td>88.18 86.02</td><td>31.12 53.85</td></tr></table>",
+          "label": "Table"
+        },
+        {
+          "id": "4",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.174,
+            "y": 0.3,
+            "width": 0.647,
+            "height": 0.016
+          },
+          "content": "Table 8: Comparison of GPTQ relative to OBQ on BERT- base/SQuAD and OPT- 125M/WikiText2.",
+          "label": "Text"
+        },
+        {
+          "id": "5",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.175,
+            "y": 0.341,
+            "width": 0.2,
+            "height": 0.014
+          },
+          "content": "## A.2 EXPERIMENT DETAILS",
+          "label": "Text"
+        },
+        {
+          "id": "6",
+          "order": 7,
+          "bounding_box": {
+            "x": 0.174,
+            "y": 0.366,
+            "width": 0.648,
+            "height": 0.029
+          },
+          "content": "This section provides additional details about our experiment setup, in particular regarding the model evaluation and the setup of our timing experiments.",
+          "label": "Text"
+        },
+        {
+          "id": "7",
+          "order": 8,
+          "bounding_box": {
+            "x": 0.175,
+            "y": 0.409,
+            "width": 0.148,
+            "height": 0.014
+          },
+          "content": "## A.2.1 EVALUATION",
+          "label": "Text"
+        },
+        {
+          "id": "8",
+          "order": 9,
+          "bounding_box": {
+            "x": 0.174,
+            "y": 0.432,
+            "width": 0.649,
+            "height": 0.083
+          },
+          "content": "For language generation experiments, we calculate the perplexity, in standard fashion like Radford et al. (2019), as follows: First, the entire validation set is concatenated using two linebreaks as separators and encoded using the default HuggingFace tokenizer of each model. Next, the sequence is split into non- overlapping segments of width 2048, the full context size of our models. These are sent through the model to collect the log- probabilities corresponding to the next token each. Their exponentiated average is the final perplexity we report.",
+          "label": "Text"
+        },
+        {
+          "id": "9",
+          "order": 10,
+          "bounding_box": {
+            "x": 0.175,
+            "y": 0.52,
+            "width": 0.648,
+            "height": 0.044
+          },
+          "content": "For zero- shot tasks we follow the EleutherAI evaluation harness<sup>3</sup> in terms of data preprocessing and final score calculation. We note that we evaluate all individual samples separately and thus do not apply any padding.",
+          "label": "Text"
+        },
+        {
+          "id": "10",
+          "order": 11,
+          "bounding_box": {
+            "x": 0.175,
+            "y": 0.578,
+            "width": 0.257,
+            "height": 0.014
+          },
+          "content": "## A.2.2 TIMING EXPERIMENT SETUP",
+          "label": "Text"
+        },
+        {
+          "id": "11",
+          "order": 12,
+          "bounding_box": {
+            "x": 0.174,
+            "y": 0.601,
+            "width": 0.649,
+            "height": 0.098
+          },
+          "content": "Our timing experiments are performed following the standard HuggingFace/accelerate<sup>4</sup> setup also used by the recent work LLM.int8() (Dettmers et al., 2022). In this setting, the model is split by distributing chunks of consecutive layers across GPUs. Importantly, in this setup the communication costs are minimal, \\(< 5\\%\\) of the total runtime even when working with 8 GPUs. This means almost all of the reported speedups are due to our quantized- matrix full- precision vector product kernels. We emphasize that the only difference between the FP16 baseline and our quantized models are the kernels used to perform the underlying matrix- vector products.",
+          "label": "Text"
+        },
+        {
+          "id": "12",
+          "order": 13,
+          "bounding_box": {
+            "x": 0.174,
+            "y": 0.704,
+            "width": 0.649,
+            "height": 0.056
+          },
+          "content": "This means all overheads due to HuggingFace, attention or non- quantized operations like residuals or LayerNorms are exactly the same. Consequently, our quantized models should benefit from more advanced distribution strategies (Zheng et al., 2022) or more efficient attention kernels (Dao et al., 2022) just as much as our baseline.",
+          "label": "Text"
+        },
+        {
+          "id": "13",
+          "order": 14,
+          "bounding_box": {
+            "x": 0.174,
+            "y": 0.766,
+            "width": 0.649,
+            "height": 0.123
+          },
+          "content": "In general, our kernels target generative inference in the low batch- size setting (for simplicity, we consider only batchsize 1) where the underlying (close to) matrix- vector products are memory- bound. For non- generative and large- batch applications, operations may be compute- rather than memory- bound and our kernels thus not directly applicable. Instead, one could simply decompress the matrix before performing the corresponding matrix- matrix calculations: this takes \\(< 1.5\\mathrm{ms}\\) on an A100 and \\(< 3\\mathrm{ms}\\) on an A6000 compared to 76ms/365ms for the subsequent OPT- 175B FC2 layer computation with batchsize \\(16\\times 1024\\) tokens. Hence, for such applications our methods significantly reduce the required number of GPUs at very little computational overhead. This is similar to recent work (Dettmers et al., 2022), but we achieve a \\(2.5\\times\\) higher compression rate.",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "page_index": 14,
+      "blocks": [
+        {
+          "id": "0",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.175,
+            "y": 0.102,
+            "width": 0.383,
+            "height": 0.016
+          },
+          "content": "## A.3 ADDITIONAL LANGUAGE GENERATION RESULTS",
+          "label": "Text"
+        },
+        {
+          "id": "1",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.175,
+            "y": 0.127,
+            "width": 0.505,
+            "height": 0.016
+          },
+          "content": "Tables 9, 10, 11 and 12 show additional results for language generation tasks.",
+          "label": "Text"
+        },
+        {
+          "id": "2",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.175,
+            "y": 0.156,
+            "width": 0.641,
+            "height": 0.111
+          },
+          "content": "<table><tr><td>OPT</td><td>Bits</td><td>125M</td><td>350M</td><td>1.3B</td><td>2.7B</td><td>6.7B</td><td>13B</td><td>30B</td><td>66B</td><td>175B</td></tr><tr><td>full</td><td>16</td><td>38.99</td><td>31.08</td><td>20.29</td><td>17.97</td><td>15.77</td><td>14.52</td><td>14.04</td><td>13.36</td><td>12.01</td></tr><tr><td>RTN</td><td>4</td><td>53.89</td><td>36.79</td><td>57.30</td><td>31.05</td><td>18.84</td><td>16.51</td><td>15.40</td><td>225.66</td><td>14.22</td></tr><tr><td>GPTQ</td><td>4</td><td>45.17</td><td>34.52</td><td>21.85</td><td>19.14</td><td>16.56</td><td>14.94</td><td>14.26</td><td>13.81</td><td>12.26</td></tr><tr><td>RTN</td><td>3</td><td>1.4e3</td><td>88.04</td><td>1.3e4</td><td>1.4e4</td><td>5.7e3</td><td>2.8e3</td><td>1.2e3</td><td>5.0e3</td><td>8.0e3</td></tr><tr><td>GPTQ</td><td>3</td><td>73.19</td><td>47.08</td><td>32.10</td><td>24.81</td><td>21.88</td><td>16.68</td><td>15.36</td><td>28.12</td><td>12.86</td></tr></table>",
+          "label": "Table"
+        },
+        {
+          "id": "3",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.365,
+            "y": 0.272,
+            "width": 0.265,
+            "height": 0.016
+          },
+          "content": "Table 9: OPT perplexity results on PTB.",
+          "label": "Text"
+        },
+        {
+          "id": "4",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.258,
+            "y": 0.31,
+            "width": 0.476,
+            "height": 0.11
+          },
+          "content": "<table><tr><td>BLOOM</td><td>Bits</td><td>560M</td><td>1.1B</td><td>1.7B</td><td>3B</td><td>7.1B</td><td>176B</td></tr><tr><td>full</td><td>16</td><td>43.69</td><td>57.96</td><td>30.00</td><td>25.34</td><td>20.83</td><td>14.59</td></tr><tr><td>RTN</td><td>4</td><td>51.10</td><td>66.85</td><td>33.58</td><td>27.68</td><td>22.42</td><td>15.00</td></tr><tr><td>GPTQ</td><td>4</td><td>46.97</td><td>62.47</td><td>31.84</td><td>26.49</td><td>21.67</td><td>14.75</td></tr><tr><td>RTN</td><td>3</td><td>126.</td><td>185.</td><td>106.</td><td>66.78</td><td>35.04</td><td>107.</td></tr><tr><td>GPTQ</td><td>3</td><td>70.35</td><td>87.04</td><td>46.11</td><td>34.02</td><td>26.14</td><td>15.57</td></tr></table>",
+          "label": "Table"
+        },
+        {
+          "id": "5",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.344,
+            "y": 0.425,
+            "width": 0.306,
+            "height": 0.015
+          },
+          "content": "Table 10: BLOOM perplexity results for PTB.",
+          "label": "Text"
+        },
+        {
+          "id": "6",
+          "order": 7,
+          "bounding_box": {
+            "x": 0.175,
+            "y": 0.462,
+            "width": 0.638,
+            "height": 0.113
+          },
+          "content": "<table><tr><td>OPT</td><td>Bits</td><td>125M</td><td>350M</td><td>1.3B</td><td>2.7B</td><td>6.7B</td><td>13B</td><td>30B</td><td>66B</td><td>175B</td></tr><tr><td>full</td><td>16</td><td>26.56</td><td>22.59</td><td>16.07</td><td>14.34</td><td>12.71</td><td>12.06</td><td>11.44</td><td>10.99</td><td>10.13</td></tr><tr><td>RTN</td><td>4</td><td>33.91</td><td>26.21</td><td>24.51</td><td>18.43</td><td>14.36</td><td>13.36</td><td>13.46</td><td>309.</td><td>11.61</td></tr><tr><td>GPTQ</td><td>4</td><td>29.22</td><td>24.63</td><td>16.97</td><td>15.00</td><td>13.18</td><td>12.26</td><td>11.57</td><td>11.23</td><td>10.28</td></tr><tr><td>RTN</td><td>3</td><td>834</td><td>55.49</td><td>5.2e3</td><td>1.1e4</td><td>5.3e3</td><td>3.1e3</td><td>1.4e3</td><td>3.5e3</td><td>4.6e3</td></tr><tr><td>GPTQ</td><td>3</td><td>42.41</td><td>31.33</td><td>21.63</td><td>18.17</td><td>17.14</td><td>13.34</td><td>12.23</td><td>14.59</td><td>10.67</td></tr></table>",
+          "label": "Table"
+        },
+        {
+          "id": "7",
+          "order": 8,
+          "bounding_box": {
+            "x": 0.173,
+            "y": 0.578,
+            "width": 0.651,
+            "height": 0.029
+          },
+          "content": "Table 11: OPT perplexity results on C4. We note that the calibration data used by GPTQ is sampled from the C4 training set, this task is thus not fully zero-shot.",
+          "label": "Table"
+        },
+        {
+          "id": "8",
+          "order": 9,
+          "bounding_box": {
+            "x": 0.258,
+            "y": 0.63,
+            "width": 0.476,
+            "height": 0.11
+          },
+          "content": "<table><tr><td>BLOOM</td><td>Bits</td><td>560M</td><td>1.1B</td><td>1.7B</td><td>3B</td><td>7.1B</td><td>176B</td></tr><tr><td>full</td><td>16</td><td>26.60</td><td>22.05</td><td>19.49</td><td>17.49</td><td>15.20</td><td>11.71</td></tr><tr><td>RTN</td><td>4</td><td>29.89</td><td>24.44</td><td>21.26</td><td>18.76</td><td>16.06</td><td>12.04</td></tr><tr><td>GPTQ</td><td>4</td><td>28.00</td><td>23.25</td><td>20.55</td><td>18.10</td><td>15.60</td><td>11.81</td></tr><tr><td>RTN</td><td>3</td><td>67.49</td><td>60.71</td><td>113.</td><td>80.49</td><td>22.59</td><td>598.</td></tr><tr><td>GPTQ</td><td>3</td><td>35.78</td><td>28.83</td><td>25.34</td><td>21.25</td><td>17.67</td><td>12.27</td></tr></table>",
+          "label": "Table"
+        },
+        {
+          "id": "9",
+          "order": 10,
+          "bounding_box": {
+            "x": 0.173,
+            "y": 0.744,
+            "width": 0.65,
+            "height": 0.03
+          },
+          "content": "Table 12: BLOOM perplexity results for C4. We note that the calibration data used by GPTQ is sampled from the C4 training set, this task is thus not fully zero-shot.",
+          "label": "Table"
+        }
+      ]
+    },
+    {
+      "page_index": 15,
+      "blocks": [
+        {
+          "id": "0",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.175,
+            "y": 0.102,
+            "width": 0.284,
+            "height": 0.016
+          },
+          "content": "## A.4 ADDITIONAL ZEROSHOT RESULTS",
+          "label": "Text"
+        },
+        {
+          "id": "1",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.175,
+            "y": 0.127,
+            "width": 0.383,
+            "height": 0.016
+          },
+          "content": "This section contains additional results for zero- shot tasks.",
+          "label": "Text"
+        },
+        {
+          "id": "2",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.179,
+            "y": 0.153,
+            "width": 0.633,
+            "height": 0.112
+          },
+          "content": "<table><tr><td>OPT</td><td>Bits</td><td>125M</td><td>350M</td><td>1.3B</td><td>2.7B</td><td>6.7B</td><td>13B</td><td>30B</td><td>66B</td><td>175B</td></tr><tr><td>full</td><td>16</td><td>39.16</td><td>46.67</td><td>58.80</td><td>64.82</td><td>68.72</td><td>70.23</td><td>72.39</td><td>74.93</td><td>75.59</td></tr><tr><td>RTN</td><td>4</td><td>18.34</td><td>40.62</td><td>36.31</td><td>59.27</td><td>64.66</td><td>67.38</td><td>70.48</td><td>13.08</td><td>71.34</td></tr><tr><td>GPTQ</td><td>4</td><td>34.74</td><td>48.38</td><td>56.45</td><td>62.97</td><td>66.37</td><td>69.12</td><td>72.40</td><td>74.50</td><td>76.80</td></tr><tr><td>RTN</td><td>3</td><td>0.10</td><td>27.36</td><td>0.00</td><td>0.00</td><td>0.00</td><td>0.06</td><td>1.46</td><td>2.00</td><td>0.00</td></tr><tr><td>GPTQ</td><td>3</td><td>13.93</td><td>32.31</td><td>37.26</td><td>52.26</td><td>54.98</td><td>64.18</td><td>69.69</td><td>57.02</td><td>76.19</td></tr></table>",
+          "label": "Table"
+        },
+        {
+          "id": "3",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.362,
+            "y": 0.269,
+            "width": 0.271,
+            "height": 0.016
+          },
+          "content": "Table 13: OPT accuracy on LAMBADA.",
+          "label": "Text"
+        },
+        {
+          "id": "4",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.256,
+            "y": 0.306,
+            "width": 0.479,
+            "height": 0.111
+          },
+          "content": "<table><tr><td>BLOOM</td><td>Bits</td><td>560M</td><td>1.1B</td><td>1.7B</td><td>3B</td><td>7.1B</td><td>176B</td></tr><tr><td>full</td><td>16</td><td>34.06</td><td>42.85</td><td>46.71</td><td>52.12</td><td>57.79</td><td>67.40</td></tr><tr><td>RTN</td><td>4</td><td>26.00</td><td>39.06</td><td>41.92</td><td>45.84</td><td>50.48</td><td>66.70</td></tr><tr><td>GPTQ</td><td>4</td><td>31.75</td><td>39.80</td><td>46.28</td><td>51.41</td><td>54.65</td><td>67.71</td></tr><tr><td>RTN</td><td>3</td><td>9.10</td><td>15.95</td><td>15.02</td><td>24.55</td><td>29.90</td><td>0.17</td></tr><tr><td>GPTQ</td><td>3</td><td>21.31</td><td>28.70</td><td>33.65</td><td>43.12</td><td>47.41</td><td>65.10</td></tr></table>",
+          "label": "Table"
+        },
+        {
+          "id": "5",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.35,
+            "y": 0.422,
+            "width": 0.297,
+            "height": 0.016
+          },
+          "content": "Table 14: BLOOM accuracy on LAMBADA.",
+          "label": "Text"
+        },
+        {
+          "id": "6",
+          "order": 7,
+          "bounding_box": {
+            "x": 0.18,
+            "y": 0.459,
+            "width": 0.632,
+            "height": 0.112
+          },
+          "content": "<table><tr><td>OPT</td><td>Bits</td><td>125M</td><td>350M</td><td>1.3B</td><td>2.7B</td><td>6.7B</td><td>13B</td><td>30B</td><td>66B</td><td>175B</td></tr><tr><td>full</td><td>16</td><td>62.02</td><td>64.74</td><td>72.36</td><td>74.81</td><td>76.39</td><td>76.88</td><td>78.18</td><td>79.76</td><td>81.07</td></tr><tr><td>RTN</td><td>4</td><td>61.43</td><td>63.44</td><td>67.63</td><td>73.72</td><td>76.44</td><td>76.01</td><td>77.26</td><td>60.07</td><td>78.23</td></tr><tr><td>GPTQ</td><td>4</td><td>61.26</td><td>63.71</td><td>70.73</td><td>73.99</td><td>76.28</td><td>76.61</td><td>79.00</td><td>79.33</td><td>81.00</td></tr><tr><td>RTN</td><td>3</td><td>56.09</td><td>60.61</td><td>52.77</td><td>51.90</td><td>50.49</td><td>52.99</td><td>56.37</td><td>50.87</td><td>51.25</td></tr><tr><td>GPTQ</td><td>3</td><td>59.25</td><td>61.32</td><td>68.34</td><td>71.38</td><td>73.29</td><td>75.24</td><td>77.58</td><td>71.27</td><td>80.03</td></tr></table>",
+          "label": "Table"
+        },
+        {
+          "id": "7",
+          "order": 8,
+          "bounding_box": {
+            "x": 0.38,
+            "y": 0.576,
+            "width": 0.232,
+            "height": 0.015
+          },
+          "content": "Table 15: OPT accuracy on PIQA.",
+          "label": "Text"
+        },
+        {
+          "id": "8",
+          "order": 9,
+          "bounding_box": {
+            "x": 0.256,
+            "y": 0.612,
+            "width": 0.479,
+            "height": 0.112
+          },
+          "content": "<table><tr><td>BLOOM</td><td>Bits</td><td>560M</td><td>1.1B</td><td>1.7B</td><td>3B</td><td>7.1B</td><td>176B</td></tr><tr><td>full</td><td>16</td><td>65.07</td><td>67.14</td><td>69.97</td><td>70.51</td><td>73.72</td><td>79.16</td></tr><tr><td>RTN</td><td>4</td><td>63.11</td><td>65.29</td><td>67.74</td><td>69.86</td><td>72.69</td><td>79.00</td></tr><tr><td>GPTQ</td><td>4</td><td>64.31</td><td>66.05</td><td>68.77</td><td>69.42</td><td>72.96</td><td>79.00</td></tr><tr><td>RTN</td><td>3</td><td>58.60</td><td>60.80</td><td>60.88</td><td>66.28</td><td>69.70</td><td>53.32</td></tr><tr><td>GPTQ</td><td>3</td><td>61.62</td><td>62.62</td><td>65.18</td><td>68.34</td><td>70.95</td><td>77.70</td></tr></table>",
+          "label": "Table"
+        },
+        {
+          "id": "9",
+          "order": 10,
+          "bounding_box": {
+            "x": 0.37,
+            "y": 0.728,
+            "width": 0.255,
+            "height": 0.016
+          },
+          "content": "Table 16: BLOOM accuracy on PIQA.",
+          "label": "Text"
+        },
+        {
+          "id": "10",
+          "order": 11,
+          "bounding_box": {
+            "x": 0.18,
+            "y": 0.766,
+            "width": 0.632,
+            "height": 0.111
+          },
+          "content": "<table><tr><td>OPT</td><td>Bits</td><td>125M</td><td>350M</td><td>1.3B</td><td>2.7B</td><td>6.7B</td><td>13B</td><td>30B</td><td>66B</td><td>175B</td></tr><tr><td>full</td><td>16</td><td>39.69</td><td>40.36</td><td>50.93</td><td>54.34</td><td>60.14</td><td>61.83</td><td>65.40</td><td>67.26</td><td>71.04</td></tr><tr><td>RTN</td><td>4</td><td>36.32</td><td>38.55</td><td>49.20</td><td>52.90</td><td>57.68</td><td>61.31</td><td>61.11</td><td>40.66</td><td>63.93</td></tr><tr><td>GPTQ</td><td>4</td><td>39.02</td><td>37.92</td><td>59.97</td><td>53.11</td><td>59.72</td><td>61.32</td><td>65.11</td><td>65.35</td><td>68.69</td></tr><tr><td>RTN</td><td>3</td><td>30.43</td><td>36.07</td><td>27.97</td><td>26.05</td><td>25.04</td><td>30.60</td><td>34.22</td><td>25.84</td><td>26.77</td></tr><tr><td>GPTQ</td><td>3</td><td>36.15</td><td>36.91</td><td>46.17</td><td>48.19</td><td>53.41</td><td>56.82</td><td>59.72</td><td>52.44</td><td>65.36</td></tr></table>",
+          "label": "Table"
+        },
+        {
+          "id": "11",
+          "order": 12,
+          "bounding_box": {
+            "x": 0.37,
+            "y": 0.881,
+            "width": 0.256,
+            "height": 0.016
+          },
+          "content": "Table 17: OPT accuracy on ARC-easy.",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "page_index": 16,
+      "blocks": [
+        {
+          "id": "0",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.258,
+            "y": 0.113,
+            "width": 0.476,
+            "height": 0.11
+          },
+          "content": "<table><tr><td>BLOOM</td><td>Bits</td><td>560M</td><td>1.1B</td><td>1.7B</td><td>3B</td><td>7.1B</td><td>176B</td></tr><tr><td>full</td><td>16</td><td>41.71</td><td>45.41</td><td>48.11</td><td>53.24</td><td>57.37</td><td>67.47</td></tr><tr><td>RTN</td><td>4</td><td>39.40</td><td>42.51</td><td>44.70</td><td>51.35</td><td>56.14</td><td>66.33</td></tr><tr><td>GPTQ</td><td>4</td><td>40.24</td><td>44.49</td><td>44.49</td><td>52.82</td><td>56.14</td><td>67.42</td></tr><tr><td>RTN</td><td>3</td><td>45.44</td><td>46.87</td><td>37.58</td><td>45.08</td><td>48.61</td><td>28.87</td></tr><tr><td>GPTQ</td><td>3</td><td>39.14</td><td>41.79</td><td>42.85</td><td>46.63</td><td>51.56</td><td>62.84</td></tr></table>",
+          "label": "Table"
+        },
+        {
+          "id": "1",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.355,
+            "y": 0.229,
+            "width": 0.285,
+            "height": 0.012
+          },
+          "content": "Table 18: BLOOM accuracy on ARC-easy.",
+          "label": "Text"
+        },
+        {
+          "id": "2",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.179,
+            "y": 0.28,
+            "width": 0.633,
+            "height": 0.108
+          },
+          "content": "<table><tr><td>OPT</td><td>Bits</td><td>125M</td><td>350M</td><td>1.3B</td><td>2.7B</td><td>6.7B</td><td>13B</td><td>30B</td><td>66B</td><td>175B</td></tr><tr><td>full</td><td>16</td><td>22.87</td><td>24.06</td><td>29.44</td><td>31.31</td><td>34.56</td><td>35.75</td><td>38.14</td><td>40.02</td><td>43.94</td></tr><tr><td>RTN</td><td>4</td><td>22.44</td><td>23.81</td><td>24.91</td><td>29.18</td><td>32.59</td><td>35.24</td><td>35.41</td><td>22.87</td><td>37.71</td></tr><tr><td>GPTQ</td><td>4</td><td>22.95</td><td>24.83</td><td>28.24</td><td>30.12</td><td>33.70</td><td>34.90</td><td>37.80</td><td>39.16</td><td>42.75</td></tr><tr><td>RTN</td><td>3</td><td>21.76</td><td>22.18</td><td>23.55</td><td>25.43</td><td>25.85</td><td>23.81</td><td>19.97</td><td>25.77</td><td>23.81</td></tr><tr><td>GPTQ</td><td>3</td><td>22.53</td><td>25.09</td><td>27.65</td><td>27.82</td><td>31.91</td><td>33.02</td><td>35.84</td><td>31.66</td><td>41.04</td></tr></table>",
+          "label": "Table"
+        },
+        {
+          "id": "3",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.348,
+            "y": 0.396,
+            "width": 0.296,
+            "height": 0.012
+          },
+          "content": "Table 19: OPT accuracy on ARC-challenge.",
+          "label": "Text"
+        },
+        {
+          "id": "4",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.258,
+            "y": 0.444,
+            "width": 0.476,
+            "height": 0.111
+          },
+          "content": "<table><tr><td>BLOOM</td><td>Bits</td><td>560M</td><td>1.1B</td><td>1.7B</td><td>3B</td><td>7.1B</td><td>176B</td></tr><tr><td>full</td><td>16</td><td>24.15</td><td>25.68</td><td>26.79</td><td>30.55</td><td>33.45</td><td>44.97</td></tr><tr><td>RTN</td><td>4</td><td>23.89</td><td>23.34</td><td>26.45</td><td>29.52</td><td>32.17</td><td>43.17</td></tr><tr><td>GPTQ</td><td>4</td><td>23.46</td><td>25.51</td><td>25.94</td><td>28.92</td><td>32.25</td><td>44.20</td></tr><tr><td>RTN</td><td>3</td><td>21.67</td><td>22.86</td><td>23.29</td><td>27.13</td><td>31.31</td><td>24.74</td></tr><tr><td>GPTQ</td><td>3</td><td>23.21</td><td>24.06</td><td>24.91</td><td>28.58</td><td>30.97</td><td>40.70</td></tr></table>",
+          "label": "Table"
+        },
+        {
+          "id": "5",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.333,
+            "y": 0.561,
+            "width": 0.324,
+            "height": 0.012
+          },
+          "content": "Table 20: BLOOM accuracy on ARC-challenge.",
+          "label": "Text"
+        },
+        {
+          "id": "6",
+          "order": 7,
+          "bounding_box": {
+            "x": 0.179,
+            "y": 0.61,
+            "width": 0.633,
+            "height": 0.11
+          },
+          "content": "<table><tr><td>OPT</td><td>Bits</td><td>125M</td><td>350M</td><td>1.3B</td><td>2.7B</td><td>6.7B</td><td>13B</td><td>30B</td><td>66B</td><td>175B</td></tr><tr><td>full</td><td>16</td><td>59.96</td><td>63.21</td><td>70.78</td><td>71.74</td><td>74.60</td><td>76.64</td><td>77.28</td><td>77.34</td><td>79.82</td></tr><tr><td>RTN</td><td>4</td><td>60.02</td><td>63.08</td><td>59.13</td><td>70.78</td><td>73.65</td><td>74.47</td><td>75.37</td><td>51.24</td><td>78.04</td></tr><tr><td>GPTQ</td><td>4</td><td>59.58</td><td>63.46</td><td>69.64</td><td>70.46</td><td>73.90</td><td>76.19</td><td>77.08</td><td>77.15</td><td>80.08</td></tr><tr><td>RTN</td><td>3</td><td>49.65</td><td>56.78</td><td>47.61</td><td>46.98</td><td>48.12</td><td>49.20</td><td>49.84</td><td>48.19</td><td>46.47</td></tr><tr><td>GPTQ</td><td>3</td><td>57.03</td><td>60.15</td><td>65.25</td><td>68.43</td><td>70.97</td><td>73.07</td><td>75.68</td><td>71.23</td><td>78.04</td></tr></table>",
+          "label": "Table"
+        },
+        {
+          "id": "7",
+          "order": 8,
+          "bounding_box": {
+            "x": 0.366,
+            "y": 0.727,
+            "width": 0.264,
+            "height": 0.012
+          },
+          "content": "Table 21: OPT accuracy on StoryCloze.",
+          "label": "Text"
+        },
+        {
+          "id": "8",
+          "order": 9,
+          "bounding_box": {
+            "x": 0.258,
+            "y": 0.775,
+            "width": 0.476,
+            "height": 0.11
+          },
+          "content": "<table><tr><td>BLOOM</td><td>Bits</td><td>560M</td><td>1.1B</td><td>1.7B</td><td>3B</td><td>7.1B</td><td>176B</td></tr><tr><td>full</td><td>16</td><td>61.94</td><td>63.27</td><td>65.44</td><td>67.79</td><td>71.99</td><td>76.89</td></tr><tr><td>RTN</td><td>4</td><td>60.15</td><td>60.66</td><td>62.95</td><td>67.09</td><td>70.72</td><td>76.00</td></tr><tr><td>GPTQ</td><td>4</td><td>61.17</td><td>62.32</td><td>64.48</td><td>67.22</td><td>71.36</td><td>76.32</td></tr><tr><td>RTN</td><td>3</td><td>54.87</td><td>56.08</td><td>55.79</td><td>59.83</td><td>66.20</td><td>48.50</td></tr><tr><td>GPTQ</td><td>3</td><td>57.80</td><td>59.77</td><td>61.81</td><td>63.97</td><td>69.26</td><td>75.37</td></tr></table>",
+          "label": "Table"
+        },
+        {
+          "id": "9",
+          "order": 10,
+          "bounding_box": {
+            "x": 0.352,
+            "y": 0.892,
+            "width": 0.291,
+            "height": 0.012
+          },
+          "content": "Table 22: BLOOM accuracy on StoryCloze.",
+          "label": "Text"
+        }
+      ]
+    }
+  ]
+}

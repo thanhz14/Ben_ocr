@@ -1,0 +1,735 @@
+{
+    "input_path": "/home/bocchi/Downloads/Paper_Data/Quantitative Biology/2607.20572v1.pdf",
+    "page_index": 0,
+    "page_count": 13,
+    "width": 1191,
+    "height": 1684,
+    "model_settings": {
+        "use_doc_preprocessor": false,
+        "use_layout_detection": true,
+        "use_chart_recognition": false,
+        "use_seal_recognition": false,
+        "use_ocr_for_image_block": true,
+        "format_block_content": true,
+        "merge_layout_blocks": true,
+        "markdown_ignore_labels": [
+            "number",
+            "footnote",
+            "header",
+            "header_image",
+            "footer",
+            "footer_image",
+            "aside_text"
+        ],
+        "return_layout_polygon_points": true
+    },
+    "parsing_res_list": [
+        {
+            "block_label": "aside_text",
+            "block_content": "arXiv:2607.20572v1 [q-bio.GN] 21 Jul 2026",
+            "block_bbox": [
+                37,
+                616,
+                80,
+                1353
+            ],
+            "block_id": 0,
+            "block_order": null,
+            "group_id": 0,
+            "block_polygon_points": [
+                [
+                    37.0,
+                    616.0
+                ],
+                [
+                    80.0,
+                    616.0
+                ],
+                [
+                    80.0,
+                    1353.0
+                ],
+                [
+                    37.0,
+                    1353.0
+                ]
+            ]
+        },
+        {
+            "block_label": "doc_title",
+            "block_content": "# Auditing pretraining contamination in single-cell foundation model benchmarks",
+            "block_bbox": [
+                196,
+                210,
+                995,
+                290
+            ],
+            "block_id": 1,
+            "block_order": 1,
+            "group_id": 1,
+            "block_polygon_points": [
+                [
+                    196.0,
+                    210.0
+                ],
+                [
+                    995.0,
+                    210.0
+                ],
+                [
+                    995.0,
+                    290.0
+                ],
+                [
+                    196.0,
+                    290.0
+                ]
+            ]
+        },
+        {
+            "block_label": "text",
+            "block_content": "Sarwan Ali $ ^{1} $",
+            "block_bbox": [
+                529,
+                321,
+                658,
+                350
+            ],
+            "block_id": 2,
+            "block_order": 2,
+            "group_id": 2,
+            "block_polygon_points": [
+                [
+                    529.0,
+                    321.0
+                ],
+                [
+                    658.0,
+                    321.0
+                ],
+                [
+                    658.0,
+                    350.0
+                ],
+                [
+                    529.0,
+                    350.0
+                ]
+            ]
+        },
+        {
+            "block_label": "text",
+            "block_content": " $ ^{1} $Columbia University Irving Medical Center, New York, USA\n\nsa4559@cumc.columbia.edu",
+            "block_bbox": [
+                275,
+                371,
+                912,
+                437
+            ],
+            "block_id": 3,
+            "block_order": 3,
+            "group_id": 3,
+            "block_polygon_points": [
+                [
+                    275.0,
+                    371.0
+                ],
+                [
+                    912.0,
+                    371.0
+                ],
+                [
+                    912.0,
+                    437.0
+                ],
+                [
+                    275.0,
+                    437.0
+                ]
+            ]
+        },
+        {
+            "block_label": "paragraph_title",
+            "block_content": "## Abstract",
+            "block_bbox": [
+                548,
+                515,
+                642,
+                539
+            ],
+            "block_id": 4,
+            "block_order": 4,
+            "group_id": 4,
+            "block_polygon_points": [
+                [
+                    548.0,
+                    515.0
+                ],
+                [
+                    641.0,
+                    515.0
+                ],
+                [
+                    641.0,
+                    538.0
+                ],
+                [
+                    548.0,
+                    538.0
+                ]
+            ]
+        },
+        {
+            "block_label": "abstract",
+            "block_content": "Single-cell foundation models (scFMs) such as Geneformer, scGPT, and Universal Cell Embeddings (UCE) are pretrained on tens of millions of cells drawn from public repositories. The same repositories underlie widely used integration benchmarks, creating an unmeasured risk that zero-shot benchmark performance reflects pretraining exposure rather than genuine generalization. We introduce scContam, a per-cell audit framework that combines a MinHash-based gene-set fingerprint signal against the explicit pretraining corpus with a loss-based membership inference attack (MIA-scFM). Applied to four scIB benchmarks and three scFMs, we find that two of the most-cited benchmarks, PBMC 3k and the CELLxGENE human pancreatic islet atlas, contain extensive pretraining-overlap evidence (80.4% and 77.0% of cells with fingerprint  $ p < 0.05 $ against Genecorpus-30M), whereas the post-cutoff datasets AIDA v2 and Tahoe-100M show no overlap evidence (0%). A controlled re-pretraining experiment establishes that MIA-scFM AUROC scales monotonically with the model's capacity-to-data ratio (AUROC  $ 0.494 \\rightarrow 0.690 \\rightarrow 0.881 $ across properly-regularized, mildly-overfit, and aggressively-overfit regimes), demonstrating that production scFMs resist instance-level memorization but distributional contamination must be detected separately. A donor-matched, within-cell-type analysis with three architectures shows that contaminated cells embed measurably more tightly than donor-matched clean cells (permutation  $ p = 0.030, 0.014, < 0.002 $, respectively), with a perfectly null AIDA negative control. Pretraining audits are tractable and should accompany scFM benchmark reporting.",
+            "block_bbox": [
+                180,
+                557,
+                1010,
+                1009
+            ],
+            "block_id": 5,
+            "block_order": 5,
+            "group_id": 5,
+            "block_polygon_points": [
+                [
+                    180.0,
+                    557.0
+                ],
+                [
+                    1010.0,
+                    557.0
+                ],
+                [
+                    1010.0,
+                    1009.0
+                ],
+                [
+                    180.0,
+                    1009.0
+                ]
+            ]
+        },
+        {
+            "block_label": "text",
+            "block_content": "Keywords: single-cell foundation models, benchmark contamination, membership inference, scIB, Geneformer, scGPT, UCE",
+            "block_bbox": [
+                179,
+                1017,
+                1007,
+                1064
+            ],
+            "block_id": 6,
+            "block_order": 6,
+            "group_id": 6,
+            "block_polygon_points": [
+                [
+                    179.0,
+                    1017.0
+                ],
+                [
+                    1007.0,
+                    1017.0
+                ],
+                [
+                    1007.0,
+                    1064.0
+                ],
+                [
+                    179.0,
+                    1064.0
+                ]
+            ]
+        },
+        {
+            "block_label": "paragraph_title",
+            "block_content": "## 1 Introduction",
+            "block_bbox": [
+                127,
+                1113,
+                353,
+                1140
+            ],
+            "block_id": 7,
+            "block_order": 7,
+            "group_id": 7,
+            "block_polygon_points": [
+                [
+                    127.0,
+                    1113.0
+                ],
+                [
+                    353.0,
+                    1113.0
+                ],
+                [
+                    353.0,
+                    1140.0
+                ],
+                [
+                    127.0,
+                    1140.0
+                ]
+            ]
+        },
+        {
+            "block_label": "text",
+            "block_content": "Pretrained transformer models for single-cell RNA sequencing (scRNA-seq) data have rapidly become a standard analytical tool. Geneformer (Theodoris et al., 2023), scGPT (Cui et al., 2024), UCE (Rosen et al., 2023), and scFoundation (Hao et al., 2024) now provide cell representations that can be evaluated zero-shot or fine-tuned across a broad set of downstream tasks. A central premise of zero-shot evaluations is that the model has not seen the benchmark data during pretraining; if benchmark cells are in the pretraining corpus, performance estimates conflate generalization with memorization or distributional familiarity.",
+            "block_bbox": [
+                123,
+                1174,
+                1064,
+                1363
+            ],
+            "block_id": 8,
+            "block_order": 8,
+            "group_id": 8,
+            "block_polygon_points": [
+                [
+                    123.0,
+                    1174.0
+                ],
+                [
+                    1064.0,
+                    1174.0
+                ],
+                [
+                    1064.0,
+                    1363.0
+                ],
+                [
+                    123.0,
+                    1363.0
+                ]
+            ]
+        },
+        {
+            "block_label": "text",
+            "block_content": "Pretraining corpora for current scFMs are constructed from CELLxGENE Census (Program et al., 2025), the Human Cell Atlas (Regev et al., 2017), and curated additions, and span tens of millions of cells. Genecorpus-30M (Theodoris et al., 2023) was assembled from publicly available scRNA-seq through mid-2021; the CELLxGENE Census used by scGPT (33M cells) and UCE (33M+ human; 36M cross-species) was a 2023 release. Both corpora draw from the same upstream Gene Expression Omnibus and ArrayExpress deposits that underlie widely cited integration benchmarks, including PBMC 3k (Zheng et al., 2017) and human pancreatic islet atlases (Baron et al., 2016).",
+            "block_bbox": [
+                124,
+                1372,
+                1065,
+                1562
+            ],
+            "block_id": 9,
+            "block_order": 9,
+            "group_id": 9,
+            "block_polygon_points": [
+                [
+                    124.0,
+                    1372.0
+                ],
+                [
+                    1065.0,
+                    1372.0
+                ],
+                [
+                    1065.0,
+                    1562.0
+                ],
+                [
+                    124.0,
+                    1562.0
+                ]
+            ]
+        },
+        {
+            "block_label": "number",
+            "block_content": "1",
+            "block_bbox": [
+                589,
+                1597,
+                601,
+                1615
+            ],
+            "block_id": 10,
+            "block_order": null,
+            "group_id": 10,
+            "block_polygon_points": [
+                [
+                    589.0,
+                    1597.0
+                ],
+                [
+                    600.0,
+                    1597.0
+                ],
+                [
+                    600.0,
+                    1614.0
+                ],
+                [
+                    589.0,
+                    1614.0
+                ]
+            ]
+        }
+    ],
+    "layout_det_res": {
+        "input_path": null,
+        "page_index": null,
+        "boxes": [
+            {
+                "cls_id": 2,
+                "label": "aside_text",
+                "score": 0.8993831872940063,
+                "coordinate": [
+                    37,
+                    616,
+                    80,
+                    1353
+                ],
+                "order": null,
+                "polygon_points": [
+                    [
+                        37.0,
+                        616.0
+                    ],
+                    [
+                        80.0,
+                        616.0
+                    ],
+                    [
+                        80.0,
+                        1353.0
+                    ],
+                    [
+                        37.0,
+                        1353.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 6,
+                "label": "doc_title",
+                "score": 0.9389383792877197,
+                "coordinate": [
+                    196,
+                    210,
+                    995,
+                    290
+                ],
+                "order": 1,
+                "polygon_points": [
+                    [
+                        196.0,
+                        210.0
+                    ],
+                    [
+                        995.0,
+                        210.0
+                    ],
+                    [
+                        995.0,
+                        290.0
+                    ],
+                    [
+                        196.0,
+                        290.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.8051126599311829,
+                "coordinate": [
+                    529,
+                    321,
+                    658,
+                    350
+                ],
+                "order": 2,
+                "polygon_points": [
+                    [
+                        529.0,
+                        321.0
+                    ],
+                    [
+                        658.0,
+                        321.0
+                    ],
+                    [
+                        658.0,
+                        350.0
+                    ],
+                    [
+                        529.0,
+                        350.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.8567118644714355,
+                "coordinate": [
+                    275,
+                    371,
+                    912,
+                    437
+                ],
+                "order": 3,
+                "polygon_points": [
+                    [
+                        275.0,
+                        371.0
+                    ],
+                    [
+                        912.0,
+                        371.0
+                    ],
+                    [
+                        912.0,
+                        437.0
+                    ],
+                    [
+                        275.0,
+                        437.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 17,
+                "label": "paragraph_title",
+                "score": 0.7620193958282471,
+                "coordinate": [
+                    548,
+                    515,
+                    642,
+                    539
+                ],
+                "order": 4,
+                "polygon_points": [
+                    [
+                        548.0,
+                        515.0
+                    ],
+                    [
+                        641.0,
+                        515.0
+                    ],
+                    [
+                        641.0,
+                        538.0
+                    ],
+                    [
+                        548.0,
+                        538.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 0,
+                "label": "abstract",
+                "score": 0.9749060273170471,
+                "coordinate": [
+                    180,
+                    557,
+                    1010,
+                    1009
+                ],
+                "order": 5,
+                "polygon_points": [
+                    [
+                        180.0,
+                        557.0
+                    ],
+                    [
+                        1010.0,
+                        557.0
+                    ],
+                    [
+                        1010.0,
+                        1009.0
+                    ],
+                    [
+                        180.0,
+                        1009.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 15,
+                "label": "inline_formula",
+                "score": 0.326382040977478,
+                "coordinate": [
+                    258,
+                    773,
+                    343,
+                    793
+                ],
+                "order": 6,
+                "polygon_points": [
+                    [
+                        258.0,
+                        773.0
+                    ],
+                    [
+                        258.0,
+                        792.0
+                    ],
+                    [
+                        342.0,
+                        792.0
+                    ],
+                    [
+                        342.0,
+                        773.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.8833800554275513,
+                "coordinate": [
+                    179,
+                    1017,
+                    1007,
+                    1064
+                ],
+                "order": 7,
+                "polygon_points": [
+                    [
+                        179.0,
+                        1017.0
+                    ],
+                    [
+                        1007.0,
+                        1017.0
+                    ],
+                    [
+                        1007.0,
+                        1064.0
+                    ],
+                    [
+                        179.0,
+                        1064.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 17,
+                "label": "paragraph_title",
+                "score": 0.8492586016654968,
+                "coordinate": [
+                    127,
+                    1113,
+                    353,
+                    1140
+                ],
+                "order": 8,
+                "polygon_points": [
+                    [
+                        127.0,
+                        1113.0
+                    ],
+                    [
+                        353.0,
+                        1113.0
+                    ],
+                    [
+                        353.0,
+                        1140.0
+                    ],
+                    [
+                        127.0,
+                        1140.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.9622618556022644,
+                "coordinate": [
+                    123,
+                    1174,
+                    1064,
+                    1363
+                ],
+                "order": 9,
+                "polygon_points": [
+                    [
+                        123.0,
+                        1174.0
+                    ],
+                    [
+                        1064.0,
+                        1174.0
+                    ],
+                    [
+                        1064.0,
+                        1363.0
+                    ],
+                    [
+                        123.0,
+                        1363.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.9651888608932495,
+                "coordinate": [
+                    124,
+                    1372,
+                    1065,
+                    1562
+                ],
+                "order": 10,
+                "polygon_points": [
+                    [
+                        124.0,
+                        1372.0
+                    ],
+                    [
+                        1065.0,
+                        1372.0
+                    ],
+                    [
+                        1065.0,
+                        1562.0
+                    ],
+                    [
+                        124.0,
+                        1562.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 16,
+                "label": "number",
+                "score": 0.6795284152030945,
+                "coordinate": [
+                    589,
+                    1597,
+                    601,
+                    1615
+                ],
+                "order": 11,
+                "polygon_points": [
+                    [
+                        589.0,
+                        1597.0
+                    ],
+                    [
+                        600.0,
+                        1597.0
+                    ],
+                    [
+                        600.0,
+                        1614.0
+                    ],
+                    [
+                        589.0,
+                        1614.0
+                    ]
+                ]
+            }
+        ]
+    }
+}

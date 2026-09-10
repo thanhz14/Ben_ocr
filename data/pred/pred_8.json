@@ -1,0 +1,3358 @@
+{
+  "file_name": "paper_8",
+  "pages": [
+    {
+      "page_index": 1,
+      "blocks": [
+        {
+          "id": "0",
+          "order": null,
+          "bounding_box": {
+            "x": 0.02287581699346405,
+            "y": 0.26452020202020204,
+            "width": 0.035130718954248366,
+            "height": 0.4684343434343434
+          },
+          "content": "arXiv:2607.00091v1 [math.OC] 30 Jun 2026",
+          "label": "Text"
+        },
+        {
+          "id": "1",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.18137254901960784,
+            "y": 0.1414141414141414,
+            "width": 0.636437908496732,
+            "height": 0.050505050505050504
+          },
+          "content": "# A Priori Integral Persistent Excitation in Conservative Polynomial ODEs with Higher-Order Interactions",
+          "label": "Text"
+        },
+        {
+          "id": "2",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.30310457516339867,
+            "y": 0.21338383838383837,
+            "width": 0.17401960784313725,
+            "height": 0.01452020202020202
+          },
+          "content": "Aleksandr Semenov $ ^{*} $",
+          "label": "Text"
+        },
+        {
+          "id": "3",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.5351307189542484,
+            "y": 0.21275252525252525,
+            "width": 0.16911764705882354,
+            "height": 0.015782828282828284
+          },
+          "content": "Alexander Fradkov $ ^{\\dagger} $",
+          "label": "Text"
+        },
+        {
+          "id": "4",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.4616013071895425,
+            "y": 0.27714646464646464,
+            "width": 0.07679738562091504,
+            "height": 0.013888888888888888
+          },
+          "content": "## Abstract",
+          "label": "Text"
+        },
+        {
+          "id": "5",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.1576797385620915,
+            "y": 0.29987373737373735,
+            "width": 0.6821895424836601,
+            "height": 0.10542929292929293
+          },
+          "content": "The paper proposes an approach for verifying integral persistent excitation, which is important in problems of parameter identification and adaptive control in nonlinear dynamical systems. The approach works for conservative polynomial ODEs a priori without knowledge of the parameters. Rigorous proofs of the corresponding theorems are provided. An example of a nonlinear dynamical system with higher-order interactions and the application of the proposed method to it are analyzed. The proof of the main result is formalized in the Lean formal verification language.",
+          "label": "Text"
+        },
+        {
+          "id": "6",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.1119281045751634,
+            "y": 0.4172979797979798,
+            "width": 0.7720588235294118,
+            "height": 0.015782828282828284
+          },
+          "content": "Keywords: persistent excitation, complex systems, parameters estimation, three-wave interactions",
+          "label": "Text"
+        },
+        {
+          "id": "7",
+          "order": 7,
+          "bounding_box": {
+            "x": 0.11437908496732026,
+            "y": 0.4577020202020202,
+            "width": 0.18627450980392157,
+            "height": 0.017676767676767676
+          },
+          "content": "## 1 Introduction",
+          "label": "Text"
+        },
+        {
+          "id": "8",
+          "order": 8,
+          "bounding_box": {
+            "x": 0.1111111111111111,
+            "y": 0.49053030303030304,
+            "width": 0.7745098039215687,
+            "height": 0.0845959595959596
+          },
+          "content": "In physical problems, as well as in problems of chemistry, mechanics, biology, and economics, it is necessary to estimate parameters of dynamical systems [1]. This is precisely the main question of parametric identification theory. Nevertheless, parameter estimation algorithms are often invented outside the cybernetics journals, for example, in physics papers [2, 3], whenever a corresponding need arises.",
+          "label": "Text"
+        },
+        {
+          "id": "9",
+          "order": 9,
+          "bounding_box": {
+            "x": 0.1111111111111111,
+            "y": 0.577020202020202,
+            "width": 0.7736928104575164,
+            "height": 0.06628787878787878
+          },
+          "content": "Besides inventing a method for parameter estimation, it is important to be certain that the obtained estimates are accurate and correct. The performance criterion for identification algorithms is usually the persistent excitation (PE) condition and its various modifications: weak PE, interval excitation, etc. [4–7].",
+          "label": "Text"
+        },
+        {
+          "id": "10",
+          "order": 10,
+          "bounding_box": {
+            "x": 0.1111111111111111,
+            "y": 0.6452020202020202,
+            "width": 0.7736928104575164,
+            "height": 0.1351010101010101
+          },
+          "content": "However, a paradox arises here. First, the PE condition is not easy to prove even for known parameter values, because one needs to verify an inequality for the integral of a function along the trajectory. Second, verifying the PE condition is of interest before the parameters are identified; consequently, one has to work with a system where the parameters are unknown. Coping with these difficulties is hard, and often even in very strong papers the PE condition is introduced as an assumption [8–10] or the question of identifiability is not raised [2]. A priori ways to verify the PE condition are poorly developed [11], and publications on this topic are rare [11–13]. The aim of the present paper is to propose a method to solve these problems for a certain class of systems.",
+          "label": "Text"
+        },
+        {
+          "id": "11",
+          "order": 11,
+          "bounding_box": {
+            "x": 0.11274509803921569,
+            "y": 0.7828282828282829,
+            "width": 0.7728758169934641,
+            "height": 0.049873737373737376
+          },
+          "content": "When identifying parameters of complex autonomous nonlinear systems with higher-order interactions, the question becomes especially acute. In classical approaches, PE is often provided by an input signal (for instance, a sum of sinusoids is fed into the input); however, for a complex system",
+          "label": "Text"
+        },
+        {
+          "id": "12",
+          "order": null,
+          "bounding_box": {
+            "x": 0.1119281045751634,
+            "y": 0.8434343434343434,
+            "width": 0.7728758169934641,
+            "height": 0.026515151515151516
+          },
+          "content": "*Control of complex systems, Institute for problems in mechanical engineering of the Russian Academy of Science, Boljshoy prospekt V.O., Saint Petersburg 199178, Russia. Email: aleksandr.semenov.dm@gmail.com",
+          "label": "Text"
+        },
+        {
+          "id": "13",
+          "order": null,
+          "bounding_box": {
+            "x": 0.11519607843137254,
+            "y": 0.8718434343434344,
+            "width": 0.7696078431372549,
+            "height": 0.026515151515151516
+          },
+          "content": " $ ^{\\dagger} $Control of complex systems, Institute for problems in mechanical engineering of the Russian Academy of Science, Boljshoy prospekt V.O., Saint Petersburg 199178, Russia. Email: fradkov@mail.ru",
+          "label": "Text"
+        },
+        {
+          "id": "14",
+          "order": null,
+          "bounding_box": {
+            "x": 0.13398692810457516,
+            "y": 0.898989898989899,
+            "width": 0.3284313725490196,
+            "height": 0.013257575757575758
+          },
+          "content": " $ ^{†} $These authors contributed equally to this work.",
+          "label": "Text"
+        },
+        {
+          "id": "15",
+          "order": null,
+          "bounding_box": {
+            "x": 0.4934640522875817,
+            "y": 0.9368686868686869,
+            "width": 0.012254901960784314,
+            "height": 0.011994949494949494
+          },
+          "content": "1",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "page_index": 2,
+      "blocks": [
+        {
+          "id": "0",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.1119281045751634,
+            "y": 0.09343434343434344,
+            "width": 0.7736928104575164,
+            "height": 0.06691919191919192
+          },
+          "content": "such an intervention may be too crude, especially since the influence of external inputs on systems with higher-order interactions cannot be considered completely understood [14]. For example, for ecological systems such as an approach would mean regular mass culling of animals alternating with their abundant feeding.",
+          "label": "Text"
+        },
+        {
+          "id": "1",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.1119281045751634,
+            "y": 0.16098484848484848,
+            "width": 0.7728758169934641,
+            "height": 0.05113636363636364
+          },
+          "content": "In the present paper, we restrict ourselves to conservative dynamical systems governed by polynomial ODEs. Furthermore, for simplicity and clarity of exposition (similarly to [11]) we will consider the PE condition for the state variable vector.",
+          "label": "Text"
+        },
+        {
+          "id": "2",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.1111111111111111,
+            "y": 0.21338383838383837,
+            "width": 0.7745098039215687,
+            "height": 0.10227272727272728
+          },
+          "content": "The paper is organized as follows. Section 2 introduces affine integral excitation and its scalar form. Section 3 formulates the problem setting for a polynomial vector field on a compact invariant set. Section 4 presents the main result on the absence of sticking to hyperplanes and affine IPE. Sections 5 and 5.1 consider a resonant triad model and the application of the main theorem to it. Section 6 Concludes the article and is devoted to the development of work ideas. The proof of the main theorem is deferred to the appendix.",
+          "label": "Text"
+        },
+        {
+          "id": "3",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.11356209150326797,
+            "y": 0.3383838383838384,
+            "width": 0.19526143790849673,
+            "height": 0.01893939393939394
+          },
+          "content": "## 2 Preliminaries",
+          "label": "Text"
+        },
+        {
+          "id": "4",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.11274509803921569,
+            "y": 0.3712121212121212,
+            "width": 0.30392156862745096,
+            "height": 0.017676767676767676
+          },
+          "content": "### 2.1 Affine Integral Excitation",
+          "label": "Text"
+        },
+        {
+          "id": "5",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.1119281045751634,
+            "y": 0.39835858585858586,
+            "width": 0.7720588235294118,
+            "height": 0.03409090909090909
+          },
+          "content": "Definition 1 (Affine integral excitation). Let  $ z: [0, \\infty) \\to \\mathbb{R}^n $ be a measurable bounded trajectory. Define the affine regressor as the column",
+          "label": "Text"
+        },
+        {
+          "id": "6",
+          "order": 7,
+          "bounding_box": {
+            "x": 0.40522875816993464,
+            "y": 0.4431818181818182,
+            "width": 0.1854575163398693,
+            "height": 0.03787878787878788
+          },
+          "content": " $$ \\phi_{z}(t)=\\begin{bmatrix}z(t)\\\\ 1\\end{bmatrix}\\in\\mathbb{R}^{n+1}. $$ ",
+          "label": "Formula"
+        },
+        {
+          "id": "7",
+          "order": 8,
+          "bounding_box": {
+            "x": 0.11437908496732026,
+            "y": 0.4930555555555556,
+            "width": 0.7344771241830066,
+            "height": 0.017045454545454544
+          },
+          "content": "We call the trajectory z(t) affinely integrally exciting if there exists a number α > 0 such that",
+          "label": "Text"
+        },
+        {
+          "id": "8",
+          "order": 9,
+          "bounding_box": {
+            "x": 0.3349673202614379,
+            "y": 0.5227272727272727,
+            "width": 0.32679738562091504,
+            "height": 0.036616161616161616
+          },
+          "content": " $$ \\liminf_{T\\to\\infty}\\frac{1}{T}\\int_{0}^{T}\\phi_{z}(t)\\phi_{z}(t)^{\\top}dt>\\alpha I_{n+1}>0. $$ ",
+          "label": "Formula"
+        },
+        {
+          "id": "9",
+          "order": 10,
+          "bounding_box": {
+            "x": 0.8586601307189542,
+            "y": 0.5334595959595959,
+            "width": 0.02369281045751634,
+            "height": 0.016414141414141416
+          },
+          "content": "(1)",
+          "label": "Formula"
+        },
+        {
+          "id": "10",
+          "order": 11,
+          "bounding_box": {
+            "x": 0.1119281045751634,
+            "y": 0.5707070707070707,
+            "width": 0.7736928104575164,
+            "height": 0.03409090909090909
+          },
+          "content": "Lemma 1 (Scalar form of affine IPE). Condition (1) is equivalent to the following property: there exists a number  $ \\alpha > 0 $ such that for any affine hyperplane",
+          "label": "Text"
+        },
+        {
+          "id": "11",
+          "order": 12,
+          "bounding_box": {
+            "x": 0.30637254901960786,
+            "y": 0.6180555555555556,
+            "width": 0.38480392156862747,
+            "height": 0.018308080808080808
+          },
+          "content": " $$ a\\cdot x+b=0,\\qquad\\|a\\|^{2}+b^{2}=1,\\quad a\\in\\mathbb{R}^{n},b\\in\\mathbb{R} $$ ",
+          "label": "Formula"
+        },
+        {
+          "id": "12",
+          "order": 13,
+          "bounding_box": {
+            "x": 0.11437908496732026,
+            "y": 0.6508838383838383,
+            "width": 0.10130718954248366,
+            "height": 0.01452020202020202
+          },
+          "content": "the estimate",
+          "label": "Text"
+        },
+        {
+          "id": "13",
+          "order": 14,
+          "bounding_box": {
+            "x": 0.3660130718954248,
+            "y": 0.6628787878787878,
+            "width": 0.26552287581699346,
+            "height": 0.03598484848484849
+          },
+          "content": " $$ \\liminf_{T\\to\\infty}\\frac{1}{T}\\int_{0}^{T}\\left|a\\cdot z(t)+b\\right|^{2}dt>\\alpha $$ ",
+          "label": "Formula"
+        },
+        {
+          "id": "14",
+          "order": 15,
+          "bounding_box": {
+            "x": 0.8586601307189542,
+            "y": 0.672979797979798,
+            "width": 0.02369281045751634,
+            "height": 0.016414141414141416
+          },
+          "content": "(2)",
+          "label": "Formula"
+        },
+        {
+          "id": "15",
+          "order": 16,
+          "bounding_box": {
+            "x": 0.11356209150326797,
+            "y": 0.7045454545454546,
+            "width": 0.05065359477124183,
+            "height": 0.015151515151515152
+          },
+          "content": "holds.",
+          "label": "Text"
+        },
+        {
+          "id": "16",
+          "order": 17,
+          "bounding_box": {
+            "x": 0.11519607843137254,
+            "y": 0.7253787878787878,
+            "width": 0.7687908496732027,
+            "height": 0.032196969696969696
+          },
+          "content": "Geometrically, this condition means that the trajectory does not stick to any affine hyperplane as  $ t \\to \\infty $.",
+          "label": "Text"
+        },
+        {
+          "id": "17",
+          "order": 18,
+          "bounding_box": {
+            "x": 0.1111111111111111,
+            "y": 0.76010101010101,
+            "width": 0.7736928104575164,
+            "height": 0.03345959595959596
+          },
+          "content": "Affine IPE and its consequences are sufficient conditions for identifiability of constant parameters in many parameter estimation and adaptive control algorithms [5, 7].",
+          "label": "Text"
+        },
+        {
+          "id": "18",
+          "order": 19,
+          "bounding_box": {
+            "x": 0.11356209150326797,
+            "y": 0.8169191919191919,
+            "width": 0.2647058823529412,
+            "height": 0.01893939393939394
+          },
+          "content": "## 3 Problem Statement",
+          "label": "Text"
+        },
+        {
+          "id": "19",
+          "order": 20,
+          "bounding_box": {
+            "x": 0.11356209150326797,
+            "y": 0.8516414141414141,
+            "width": 0.1650326797385621,
+            "height": 0.015151515151515152
+          },
+          "content": "Consider the system",
+          "label": "Text"
+        },
+        {
+          "id": "20",
+          "order": 21,
+          "bounding_box": {
+            "x": 0.3464052287581699,
+            "y": 0.8667929292929293,
+            "width": 0.30310457516339867,
+            "height": 0.01893939393939394
+          },
+          "content": " $$ \\dot{x}=f_{\\xi}(x),\\qquad x\\in\\mathbb{R}^{n},\\quad\\xi\\in\\Xi\\subset\\mathbb{R}^{m}, $$ ",
+          "label": "Formula"
+        },
+        {
+          "id": "21",
+          "order": 22,
+          "bounding_box": {
+            "x": 0.8586601307189542,
+            "y": 0.8680555555555556,
+            "width": 0.02369281045751634,
+            "height": 0.016414141414141416
+          },
+          "content": "(3)",
+          "label": "Formula"
+        },
+        {
+          "id": "22",
+          "order": null,
+          "bounding_box": {
+            "x": 0.49264705882352944,
+            "y": 0.9362373737373737,
+            "width": 0.013888888888888888,
+            "height": 0.012626262626262626
+          },
+          "content": "2",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "page_index": 11,
+      "blocks": [
+        {
+          "id": "0",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.11356209150326797,
+            "y": 0.0928030303030303,
+            "width": 0.3300653594771242,
+            "height": 0.016414141414141416
+          },
+          "content": "If  $ m_{bad} $ is the number of bad blocks, then",
+          "label": "Text"
+        },
+        {
+          "id": "1",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.3276143790849673,
+            "y": 0.11994949494949494,
+            "width": 0.3423202614379085,
+            "height": 0.043560606060606064
+          },
+          "content": " $$ \\frac{m_{\\mathrm{b a d}}}{m}\\cdot\\frac{\\gamma}{8}\\leq\\frac{1}{m}\\sum_{j=1}^{m}v_{j}<\\frac{\\gamma^{2}}{64},\\qquad\\frac{m_{\\mathrm{b a d}}}{m}<\\frac{\\gamma}{8}. $$ ",
+          "label": "Formula"
+        },
+        {
+          "id": "2",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.8496732026143791,
+            "y": 0.13068181818181818,
+            "width": 0.032679738562091505,
+            "height": 0.017045454545454544
+          },
+          "content": "(17)",
+          "label": "Formula"
+        },
+        {
+          "id": "3",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.1119281045751634,
+            "y": 0.1736111111111111,
+            "width": 0.7720588235294118,
+            "height": 0.06818181818181818
+          },
+          "content": "Step 3: fixing the time grid and the number of intersections N. By the Novikov-Yakovenko theorem and Lemma 12: for the chosen  $ T_0 $ and sufficiently small  $ \\varepsilon $ there exists a universal constant  $ N $ such that on each block of length  $ T_0 $ the number of intersections of the trajectory with the surfaces  $ \\{l = \\pm \\varepsilon\\} $ does not exceed  $ N $.",
+          "label": "Text"
+        },
+        {
+          "id": "4",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.11274509803921569,
+            "y": 0.24242424242424243,
+            "width": 0.7720588235294118,
+            "height": 0.03345959595959596
+          },
+          "content": "Consequently, the number of entries into  $ U_{\\varepsilon}(H) $ on one block is at most N/2. Here an entry into  $ U_{\\varepsilon}(H) $ means the initial moment of each continuous interval of stay in  $ U_{\\varepsilon}(H) $.",
+          "label": "Text"
+        },
+        {
+          "id": "5",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.13970588235294118,
+            "y": 0.2765151515151515,
+            "width": 0.4166666666666667,
+            "height": 0.015782828282828284
+          },
+          "content": "Step 4: choice of  $ T_{*} $. Choose  $ T_{*}>0 $ so small that",
+          "label": "Text"
+        },
+        {
+          "id": "6",
+          "order": 7,
+          "bounding_box": {
+            "x": 0.45669934640522875,
+            "y": 0.30303030303030304,
+            "width": 0.08660130718954248,
+            "height": 0.03156565656565657
+          },
+          "content": " $$ \\frac{N}{2}T_{*}<\\frac{\\gamma}{8}. $$ ",
+          "label": "Formula"
+        },
+        {
+          "id": "7",
+          "order": 8,
+          "bounding_box": {
+            "x": 0.8496732026143791,
+            "y": 0.3106060606060606,
+            "width": 0.032679738562091505,
+            "height": 0.017045454545454544
+          },
+          "content": "(18)",
+          "label": "Formula"
+        },
+        {
+          "id": "8",
+          "order": 9,
+          "bounding_box": {
+            "x": 0.11274509803921569,
+            "y": 0.3446969696969697,
+            "width": 0.7712418300653595,
+            "height": 0.03345959595959596
+          },
+          "content": "This is possible because  $ T_* $ in Lemma 10 can be taken arbitrarily small. Next fix  $ \\varepsilon \\leq \\varepsilon_*\\big(\\delta\\big) $ so that the bound on the number of intersections and the exit time estimate are applicable.",
+          "label": "Text"
+        },
+        {
+          "id": "9",
+          "order": 10,
+          "bounding_box": {
+            "x": 0.1119281045751634,
+            "y": 0.37941919191919193,
+            "width": 0.7720588235294118,
+            "height": 0.06565656565656566
+          },
+          "content": "More precisely, the order of choice is as follows: first pick a small range for  $ \\varepsilon $, then obtain the corresponding estimate N from the Novikov–Yakovenko theorem, then choose  $ T_{*} $ so that (18) holds, and then, if necessary, decrease the admissible  $ \\varepsilon $ according to Lemma 10. The estimate N does not increase from such a decrease.",
+          "label": "Text"
+        },
+        {
+          "id": "10",
+          "order": 11,
+          "bounding_box": {
+            "x": 0.1119281045751634,
+            "y": 0.44696969696969696,
+            "width": 0.7720588235294118,
+            "height": 0.03282828282828283
+          },
+          "content": "Step 5: good block, case 1. Consider a good block, i.e., a block for which  $ v_j < \\gamma/8 $. Consider the next entry into  $ U_\\varepsilon(H) $.",
+          "label": "Text"
+        },
+        {
+          "id": "11",
+          "order": 12,
+          "bounding_box": {
+            "x": 0.1111111111111111,
+            "y": 0.4810606060606061,
+            "width": 0.7745098039215687,
+            "height": 0.06628787878787878
+          },
+          "content": "First case: the entry occurs outside  $ W_\\delta $. At the moment of entry  $ x_0 \\notin W_\\delta $, hence by Lemma 10 the trajectory leaves  $ U_\\varepsilon(H) $ in time at most  $ T_\\star $. It does not matter whether it later enters  $ W_\\delta $ during this interval or not: Lemma 10 gives the answer independently of a subsequent entry into  $ W_\\delta $.",
+          "label": "Text"
+        },
+        {
+          "id": "12",
+          "order": 13,
+          "bounding_box": {
+            "x": 0.1119281045751634,
+            "y": 0.5498737373737373,
+            "width": 0.7704248366013072,
+            "height": 0.050505050505050504
+          },
+          "content": "Step 6: good block, case 2. Second case: the entry occurs inside  $ W_\\delta $. Let the trajectory first stay in  $ W_\\delta $ for time  $ \\tau_i $, then leave  $ W_\\delta $ and, as in the first case, leave  $ U_\\varepsilon(H) $ in time at most  $ T_\\star $. Therefore for each such entry we obtain a contribution not exceeding  $ \\tau_i + T_\\star $.",
+          "label": "Text"
+        },
+        {
+          "id": "13",
+          "order": 14,
+          "bounding_box": {
+            "x": 0.13970588235294118,
+            "y": 0.6022727272727273,
+            "width": 0.4338235294117647,
+            "height": 0.015151515151515152
+          },
+          "content": "Summing over all entries, we obtain a sum of the form",
+          "label": "Text"
+        },
+        {
+          "id": "14",
+          "order": 15,
+          "bounding_box": {
+            "x": 0.4452614379084967,
+            "y": 0.6268939393939394,
+            "width": 0.10620915032679738,
+            "height": 0.034722222222222224
+          },
+          "content": " $$ \\sum_{i}(\\tau_{i}+T_{*}). $$ ",
+          "label": "Formula"
+        },
+        {
+          "id": "15",
+          "order": 16,
+          "bounding_box": {
+            "x": 0.11437908496732026,
+            "y": 0.6723484848484849,
+            "width": 0.7704248366013072,
+            "height": 0.034722222222222224
+          },
+          "content": "There are at most  $ N/2 $ entries, so the contribution of the parts after leaving  $ W_\\delta $ does not exceed  $ (N/2)T_\\star $. On a good block the sum of all times  $ \\tau_i $ spent inside  $ W_\\delta $ does not exceed  $ \\gamma/8 $. Hence,",
+          "label": "Text"
+        },
+        {
+          "id": "16",
+          "order": 17,
+          "bounding_box": {
+            "x": 0.4150326797385621,
+            "y": 0.7171717171717171,
+            "width": 0.16830065359477125,
+            "height": 0.032196969696969696
+          },
+          "content": " $$ w_{j}\\leq\\frac{\\gamma}{8}+\\frac{N}{2}T_{*}\\leq\\frac{\\gamma}{4}. $$ ",
+          "label": "Formula"
+        },
+        {
+          "id": "17",
+          "order": 18,
+          "bounding_box": {
+            "x": 0.8504901960784313,
+            "y": 0.7253787878787878,
+            "width": 0.031862745098039214,
+            "height": 0.016414141414141416
+          },
+          "content": "(19)",
+          "label": "Formula"
+        },
+        {
+          "id": "18",
+          "order": 19,
+          "bounding_box": {
+            "x": 0.1119281045751634,
+            "y": 0.7575757575757576,
+            "width": 0.7728758169934641,
+            "height": 0.06818181818181818
+          },
+          "content": "Preventing fast oscillation. To estimate the total time in  $ U_{\\varepsilon}(H) $ via the number of entries, one must exclude too frequent entries and exits. This is precisely why Lemma 12 is used: the number of intersections with the boundaries  $ \\{l = \\pm\\varepsilon\\} $ on each block is bounded above, so the trajectory cannot oscillate arbitrarily many times between the boundaries.",
+          "label": "Text"
+        },
+        {
+          "id": "19",
+          "order": 20,
+          "bounding_box": {
+            "x": 0.1119281045751634,
+            "y": 0.827020202020202,
+            "width": 0.7728758169934641,
+            "height": 0.03409090909090909
+          },
+          "content": "Step 7: final assembly. For good blocks we obtain  $ w_j \\leq \\gamma/4 $; for bad blocks we use the crude bound  $ w_j \\leq 1 $. Then by (17)",
+          "label": "Text"
+        },
+        {
+          "id": "20",
+          "order": 21,
+          "bounding_box": {
+            "x": 0.2883986928104575,
+            "y": 0.8731060606060606,
+            "width": 0.4199346405228758,
+            "height": 0.041666666666666664
+          },
+          "content": " $$ \\frac{1}{m}\\sum_{j=1}^{m}w_{j}\\leq\\frac{m-m_{\\mathrm{b a d}}}{m}\\cdot\\frac{\\gamma}{4}+\\frac{m_{\\mathrm{b a d}}}{m}\\cdot1<\\frac{\\gamma}{4}+\\frac{\\gamma}{8}=\\frac{3\\gamma}{8}. $$ ",
+          "label": "Formula"
+        },
+        {
+          "id": "21",
+          "order": null,
+          "bounding_box": {
+            "x": 0.49019607843137253,
+            "y": 0.9362373737373737,
+            "width": 0.0196078431372549,
+            "height": 0.012626262626262626
+          },
+          "content": "11",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "page_index": 12,
+      "blocks": [
+        {
+          "id": "0",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.1119281045751634,
+            "y": 0.0928030303030303,
+            "width": 0.7712418300653595,
+            "height": 0.03345959595959596
+          },
+          "content": "Thus the fraction of time spent in  $ U_{\\varepsilon}(H) $ does not exceed  $ 3\\gamma/8 $. This contradicts the assumption (15). Consequently, the fraction of time in  $ U_{\\varepsilon}(H) $ tends to zero as  $ \\varepsilon \\to 0 $, i.e., (5) is proved.",
+          "label": "Text"
+        },
+        {
+          "id": "1",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.11274509803921569,
+            "y": 0.1268939393939394,
+            "width": 0.7720588235294118,
+            "height": 0.03409090909090909
+          },
+          "content": "It remains to deduce affine IPE. If the scalar estimate (2) does not hold, then there exist  $ T_j \\to \\infty $ and normalized pairs  $ (a_j, b_j) $,  $ \\|a_j\\|^2 + b_j^2 = 1 $, such that",
+          "label": "Text"
+        },
+        {
+          "id": "2",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.37254901960784315,
+            "y": 0.1736111111111111,
+            "width": 0.25245098039215685,
+            "height": 0.039141414141414144
+          },
+          "content": " $$ \\frac{1}{T_{j}}\\int_{0}^{T_{j}}\\left|a_{j}\\cdot\\Phi^{t}(x)+b_{j}\\right|^{2}d t\\rightarrow0. $$ ",
+          "label": "Formula"
+        },
+        {
+          "id": "3",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.1111111111111111,
+            "y": 0.2222222222222222,
+            "width": 0.7745098039215687,
+            "height": 0.08648989898989899
+          },
+          "content": "Passing to a subsequence, we assume  $ (a_j, b_j) \\to (a, b) $. If  $ a = 0 $, then  $ |b| = 1 $, which is impossible. If  $ a \\neq 0 $, then for the hyperplane  $ H = \\{y : a \\cdot y + b = 0\\} $ property (5) gives a small average fraction of time in  $ U_\\eta(H) $ for sufficiently small  $ \\eta > 0 $, while outside this neighborhood  $ |a \\cdot \\Phi^t(x) + b| \\geq \\|a\\|\\eta $. This yields a positive lower bound for the limit inferior of the mean square, a contradiction. Hence (2), and therefore (6), holds.",
+          "label": "Text"
+        },
+        {
+          "id": "4",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.11437908496732026,
+            "y": 0.3314393939393939,
+            "width": 0.12745098039215685,
+            "height": 0.01893939393939394
+          },
+          "content": "## References",
+          "label": "Text"
+        },
+        {
+          "id": "5",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.12254901960784313,
+            "y": 0.3648989898989899,
+            "width": 0.761437908496732,
+            "height": 0.050505050505050504
+          },
+          "content": "[1] Alexander L. Fradkov, Iliya V. Miroshnik, and Vladimir O. Nikiforov. Nonlinear and Adaptive Control of Complex Systems, volume 491 of Mathematics and Its Applications. Springer Science+Business Media Dordrecht, Dordrecht, 2013. doi: 10.1007/978-94-015-9261-1.",
+          "label": "Text"
+        },
+        {
+          "id": "6",
+          "order": 7,
+          "bounding_box": {
+            "x": 0.12418300653594772,
+            "y": 0.42676767676767674,
+            "width": 0.7581699346405228,
+            "height": 0.050505050505050504
+          },
+          "content": "[2] Björn Kralemann, Laura Cimponeriu, Michael Rosenblum, Arkady Pikovsky, and Ralf Mrowka. Uncovering interaction of coupled oscillators from data. Physical Review E, 76(5):055201, 2007. doi: 10.1103/PhysRevE.76.055201.",
+          "label": "Text"
+        },
+        {
+          "id": "7",
+          "order": 8,
+          "bounding_box": {
+            "x": 0.12418300653594772,
+            "y": 0.48926767676767674,
+            "width": 0.7581699346405228,
+            "height": 0.050505050505050504
+          },
+          "content": "[3] Narendra S. Goel, Samaresh C. Maitra, and Elliott W. Montroll. On the Volterra and other nonlinear models of interacting populations. Reviews of Modern Physics, 43(2):231–276, 1971. doi: 10.1103/RevModPhys.43.231.",
+          "label": "Text"
+        },
+        {
+          "id": "8",
+          "order": 9,
+          "bounding_box": {
+            "x": 0.12418300653594772,
+            "y": 0.5517676767676768,
+            "width": 0.7573529411764706,
+            "height": 0.04924242424242424
+          },
+          "content": "[4] Jian Wang, Denis V. Efimov, and Alexey A. Bobtsov. On robust parameter estimation in finite-time without persistence of excitation. IEEE Transactions on Automatic Control, 65(4):1731–1738, 2020. doi: 10.1109/TAC.2019.2932960.",
+          "label": "Text"
+        },
+        {
+          "id": "9",
+          "order": 10,
+          "bounding_box": {
+            "x": 0.12418300653594772,
+            "y": 0.6136363636363636,
+            "width": 0.7573529411764706,
+            "height": 0.03409090909090909
+          },
+          "content": "[5] Kumpati S. Narendra and Anuradha M. Annaswamy. Persistent excitation in adaptive systems. International Journal of Control, 45(1):127–160, 1987. doi: 10.1080/00207178708933715.",
+          "label": "Text"
+        },
+        {
+          "id": "10",
+          "order": 11,
+          "bounding_box": {
+            "x": 0.125,
+            "y": 0.6590909090909091,
+            "width": 0.7581699346405228,
+            "height": 0.049873737373737376
+          },
+          "content": "[6] Elena Panteley, Antonio Loría, and Andrew R. Teel. Relaxed persistency of excitation for uniform asymptotic stability. IEEE Transactions on Automatic Control, 46(12):1874–1886, 2001. doi: 10.1109/9.975471.",
+          "label": "Text"
+        },
+        {
+          "id": "11",
+          "order": 12,
+          "bounding_box": {
+            "x": 0.125,
+            "y": 0.7215909090909091,
+            "width": 0.7581699346405228,
+            "height": 0.04861111111111111
+          },
+          "content": "[7] Dirk Aeyels and Rodolphe Sepulchre. On the convergence of a time-variant linear differential equation arising in identification. Kybernetika, 30(6):715–723, 1994. URL http://eudml.org/doc/28639.",
+          "label": "Text"
+        },
+        {
+          "id": "12",
+          "order": 13,
+          "bounding_box": {
+            "x": 0.125,
+            "y": 0.7834595959595959,
+            "width": 0.7589869281045751,
+            "height": 0.049873737373737376
+          },
+          "content": "[8] Aleksandra V. Rybalko and Alexander L. Fradkov. Identification of two-neuron FitzHugh–Nagumo model based on the speed-gradient and filtering. Chaos: An Interdisciplinary Journal of Nonlinear Science, 33(8):083126, 2023. doi: 10.1063/5.0159132.",
+          "label": "Text"
+        },
+        {
+          "id": "13",
+          "order": 14,
+          "bounding_box": {
+            "x": 0.125,
+            "y": 0.8459595959595959,
+            "width": 0.7581699346405228,
+            "height": 0.06502525252525253
+          },
+          "content": "[9] Yashan Xing, Jing Na, Ramon Costa-Castelló, and Guanbin Gao. Adaptive parameter estimation-based observer design for nonlinear systems. In Proceedings of the 59th IEEE Conference on Decision and Control (CDC), pages 4170–4175, 2020. doi: 10.1109/CDC42340.2020.9304367.",
+          "label": "Text"
+        },
+        {
+          "id": "14",
+          "order": null,
+          "bounding_box": {
+            "x": 0.48937908496732024,
+            "y": 0.9362373737373737,
+            "width": 0.022058823529411766,
+            "height": 0.012626262626262626
+          },
+          "content": "12",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "page_index": 13,
+      "blocks": [
+        {
+          "id": "0",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.11519607843137254,
+            "y": 0.09217171717171717,
+            "width": 0.7679738562091504,
+            "height": 0.050505050505050504
+          },
+          "content": "[10] Björn Kralemann, Laura Cimponeriu, Michael Rosenblum, Arkady Pikovsky, and Ralf Mrowka. Phase dynamics of coupled oscillators reconstructed from data. Physical Review E, 77(6):066205, 2008. doi: 10.1103/PhysRevE.77.066205.",
+          "label": "Text"
+        },
+        {
+          "id": "1",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.11601307189542484,
+            "y": 0.15467171717171718,
+            "width": 0.7687908496732027,
+            "height": 0.05113636363636364
+          },
+          "content": "[11] Alberto Padoan, Giordano Scariotti, and Alessandro Astolfi. A geometric characterization of the persistence of excitation condition for the solutions of autonomous systems. IEEE Transactions on Automatic Control, 62(11):5666–5677, 2017. doi: 10.1109/TAC.2017.2687760.",
+          "label": "Text"
+        },
+        {
+          "id": "2",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.11519607843137254,
+            "y": 0.21717171717171718,
+            "width": 0.7679738562091504,
+            "height": 0.05113636363636364
+          },
+          "content": "[12] Aleksandr Semenov and Alexander Fradkov. Identification of parameters of conservative multispecies Lotka–Volterra system based on sampled data. Mathematics, 12(2):248, 2024. doi:10.3390/math12020248.",
+          "label": "Text"
+        },
+        {
+          "id": "3",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.11601307189542484,
+            "y": 0.2803030303030303,
+            "width": 0.7671568627450981,
+            "height": 0.05113636363636364
+          },
+          "content": "[13] Aleksandr Semenov and Alexander Fradkov. Indirect adaptive control of invariants of multispecies Lotka–Volterra model. Nonlinear Dynamics, 113(25):35273–35284, 2025. doi:10.1007/s11071-025-11835-4.",
+          "label": "Text"
+        },
+        {
+          "id": "4",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.11601307189542484,
+            "y": 0.3428030303030303,
+            "width": 0.7687908496732027,
+            "height": 0.05113636363636364
+          },
+          "content": "[14] Sajad Jafari, Fatemeh Parastesh, and Eckehard Schöll. Synchronization, routes to synchronization, and collective behaviors in higher-order networks. The European Physical Journal Special Topics, 233(4):739–743, 2024.",
+          "label": "Text"
+        },
+        {
+          "id": "5",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.11601307189542484,
+            "y": 0.4059343434343434,
+            "width": 0.7704248366013072,
+            "height": 0.03345959595959596
+          },
+          "content": "[15] George D. Birkhoff. Proof of the ergodic theorem. Proceedings of the National Academy of Sciences, 17(12):656–660, 1931. doi: 10.1073/pnas.17.12.656.",
+          "label": "Text"
+        },
+        {
+          "id": "6",
+          "order": 7,
+          "bounding_box": {
+            "x": 0.11601307189542484,
+            "y": 0.45075757575757575,
+            "width": 0.7679738562091504,
+            "height": 0.050505050505050504
+          },
+          "content": "[16] I. P. Cornfeld, S. V. Fomin, and Ya. G. Sinai. Ergodic Theory, volume 245 of Grundlehren der Mathematischen Wissenschaften. Springer-Verlag, New York, 1982. doi: 10.1007/978-1-4615-6927-5.",
+          "label": "Text"
+        },
+        {
+          "id": "7",
+          "order": 8,
+          "bounding_box": {
+            "x": 0.11601307189542484,
+            "y": 0.5132575757575758,
+            "width": 0.7671568627450981,
+            "height": 0.050505050505050504
+          },
+          "content": "[17] Dmitry Novikov and Serge Yakovenko. Trajectories of polynomial vector fields and ascending chains of polynomial ideals. Annales de l'Institut Fourier, 49(2):563–609, 1999. doi: 10.5802/aif.1681.",
+          "label": "Text"
+        },
+        {
+          "id": "8",
+          "order": 9,
+          "bounding_box": {
+            "x": 0.11437908496732026,
+            "y": 0.577020202020202,
+            "width": 0.7687908496732027,
+            "height": 0.03282828282828283
+          },
+          "content": "[18] DJ Kaup, A Reiman, and A Bers. Space-time evolution of nonlinear three-wave interactions. i. interaction in a homogeneous medium. Reviews of Modern Physics, 51(2):275, 1979.",
+          "label": "Text"
+        },
+        {
+          "id": "9",
+          "order": null,
+          "bounding_box": {
+            "x": 0.48937908496732024,
+            "y": 0.9356060606060606,
+            "width": 0.022058823529411766,
+            "height": 0.013888888888888888
+          },
+          "content": "13",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "page_index": 3,
+      "blocks": [
+        {
+          "id": "0",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.1119281045751634,
+            "y": 0.09217171717171717,
+            "width": 0.7720588235294118,
+            "height": 0.03409090909090909
+          },
+          "content": "where the components of  $ f_{\\xi} $ are polynomials in x and the parameters enter the right-hand side linearly:",
+          "label": "Text"
+        },
+        {
+          "id": "1",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.42483660130718953,
+            "y": 0.12310606060606061,
+            "width": 0.14624183006535948,
+            "height": 0.036616161616161616
+          },
+          "content": " $$ \\dot{x}_{i}=\\sum_{j}\\xi_{i j}p_{i j}(x). $$ ",
+          "label": "Formula"
+        },
+        {
+          "id": "2",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.8586601307189542,
+            "y": 0.12878787878787878,
+            "width": 0.02369281045751634,
+            "height": 0.016414141414141416
+          },
+          "content": "(4)",
+          "label": "Formula"
+        },
+        {
+          "id": "3",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.11356209150326797,
+            "y": 0.16603535353535354,
+            "width": 0.21650326797385622,
+            "height": 0.015782828282828284
+          },
+          "content": "Here  $ p_{ij}(x) $ are monomials.",
+          "label": "Text"
+        },
+        {
+          "id": "4",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.11274509803921569,
+            "y": 0.1830808080808081,
+            "width": 0.7712418300653595,
+            "height": 0.03345959595959596
+          },
+          "content": "This formulation covers many models of interest, including generalized Lotka–Volterra system, oscillator networks, resonant cascades, and other complex systems.",
+          "label": "Text"
+        },
+        {
+          "id": "5",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.1119281045751634,
+            "y": 0.21717171717171718,
+            "width": 0.7728758169934641,
+            "height": 0.05303030303030303
+          },
+          "content": "In the sequel, we will drop the subscript  $ \\xi $ wherever this causes no confusion and it is clear from the context which parameter value is meant; in particular, we will write  $ f, K, \\mu, \\Phi^{t}, M $, and  $ Q $ instead of  $ f_{\\xi}, K_{\\xi}, \\mu_{\\xi}, \\Phi_{\\xi}^{t}, M_{\\xi} $, and  $ Q_{\\xi} $.",
+          "label": "Text"
+        },
+        {
+          "id": "6",
+          "order": 7,
+          "bounding_box": {
+            "x": 0.11356209150326797,
+            "y": 0.27146464646464646,
+            "width": 0.7712418300653595,
+            "height": 0.03345959595959596
+          },
+          "content": "Assumption 2 (Conditions). Let  $ K \\subset \\mathbb{R}^n $ be a compact invariant set of system (3). Assume that the following conditions hold.",
+          "label": "Text"
+        },
+        {
+          "id": "7",
+          "order": 8,
+          "bounding_box": {
+            "x": 0.11437908496732026,
+            "y": 0.31313131313131315,
+            "width": 0.24183006535947713,
+            "height": 0.018308080808080808
+          },
+          "content": "(A1)  $ \\Phi^t(K) \\subset K $ for all  $ t \\in \\mathbb{R} $.",
+          "label": "Text"
+        },
+        {
+          "id": "8",
+          "order": 9,
+          "bounding_box": {
+            "x": 0.11437908496732026,
+            "y": 0.3402777777777778,
+            "width": 0.7696078431372549,
+            "height": 0.034722222222222224
+          },
+          "content": "(A2) On K there exists an invariant probability measure  $ \\mu $ that is absolutely continuous with respect to the Lebesgue measure, and",
+          "label": "Text"
+        },
+        {
+          "id": "9",
+          "order": 10,
+          "bounding_box": {
+            "x": 0.3235294117647059,
+            "y": 0.38446969696969696,
+            "width": 0.3929738562091503,
+            "height": 0.017676767676767676
+          },
+          "content": " $$ d\\mu=\\rho(x)dx,\\qquad0<c\\leq\\rho(x)\\leq C<\\infty\\quad on K. $$ ",
+          "label": "Formula"
+        },
+        {
+          "id": "10",
+          "order": 11,
+          "bounding_box": {
+            "x": 0.11437908496732026,
+            "y": 0.4166666666666667,
+            "width": 0.16666666666666666,
+            "height": 0.016414141414141416
+          },
+          "content": "(A3) For the matrix",
+          "label": "Text"
+        },
+        {
+          "id": "11",
+          "order": 12,
+          "bounding_box": {
+            "x": 0.3602941176470588,
+            "y": 0.4318181818181818,
+            "width": 0.3194444444444444,
+            "height": 0.020833333333333332
+          },
+          "content": " $$ M(x)=\\left[f(x)\\mid L_{f}f(x)\\mid\\cdots\\mid L_{f}^{n-1}f(x)\\right] $$ ",
+          "label": "Formula"
+        },
+        {
+          "id": "12",
+          "order": 13,
+          "bounding_box": {
+            "x": 0.1568627450980392,
+            "y": 0.45707070707070707,
+            "width": 0.125,
+            "height": 0.016414141414141416
+          },
+          "content": "the polynomial",
+          "label": "Text"
+        },
+        {
+          "id": "13",
+          "order": 14,
+          "bounding_box": {
+            "x": 0.4338235294117647,
+            "y": 0.4734848484848485,
+            "width": 0.17565359477124182,
+            "height": 0.017676767676767676
+          },
+          "content": " $$ Q(x)=\\det M(x)\\not\\equiv0 $$ ",
+          "label": "Formula"
+        },
+        {
+          "id": "14",
+          "order": 15,
+          "bounding_box": {
+            "x": 0.15604575163398693,
+            "y": 0.49684343434343436,
+            "width": 0.5277777777777778,
+            "height": 0.017676767676767676
+          },
+          "content": "is nondegenerate: there exists a point  $ x_*\\in K $ such that  $ Q(x_*) \\neq 0 $.",
+          "label": "Text"
+        },
+        {
+          "id": "15",
+          "order": 16,
+          "bounding_box": {
+            "x": 0.1111111111111111,
+            "y": 0.5227272727272727,
+            "width": 0.7736928104575164,
+            "height": 0.10101010101010101
+          },
+          "content": "Notice that this list of conditions is not overly restrictive. In particular, any Hamiltonian system satisfies the first two conditions. Indeed, let  $ W(x) $ be the Hamiltonian of the system; then the set  $ K = \\{x : c_1 \\leq W(x) \\leq c_2\\} $, where  $ c_1, c_2 > 0 $, is compact and invariant. By Liouville's theorem, a Hamiltonian system preserves the Lebesgue measure. The third condition is technical and can usually be guaranteed for almost all parameter values. For an easy check, the following statement can be applied.",
+          "label": "Text"
+        },
+        {
+          "id": "16",
+          "order": 17,
+          "bounding_box": {
+            "x": 0.1119281045751634,
+            "y": 0.6281565656565656,
+            "width": 0.7720588235294118,
+            "height": 0.03409090909090909
+          },
+          "content": "Proposition 3 (Checking nondegeneracy for almost all parameters). Consider the family (3)-(4) and fix a point  $ x_*\\in\\mathbb{R}^n $. If there exists a parameter  $ \\xi^0\\in\\Xi $ such that",
+          "label": "Text"
+        },
+        {
+          "id": "17",
+          "order": 18,
+          "bounding_box": {
+            "x": 0.44607843137254904,
+            "y": 0.6717171717171717,
+            "width": 0.1053921568627451,
+            "height": 0.01893939393939394
+          },
+          "content": " $$ Q_{\\xi^{0}}(x_{*})\\neq0, $$ ",
+          "label": "Formula"
+        },
+        {
+          "id": "18",
+          "order": 19,
+          "bounding_box": {
+            "x": 0.11356209150326797,
+            "y": 0.6988636363636364,
+            "width": 0.20915032679738563,
+            "height": 0.016414141414141416
+          },
+          "content": "then the set of parameters",
+          "label": "Text"
+        },
+        {
+          "id": "19",
+          "order": 20,
+          "bounding_box": {
+            "x": 0.3872549019607843,
+            "y": 0.7152777777777778,
+            "width": 0.22140522875816993,
+            "height": 0.018308080808080808
+          },
+          "content": " $$ \\Sigma_{x_{*}}=\\left\\{\\xi\\in\\Xi:Q_{\\xi}(x_{*})=0\\right\\} $$ ",
+          "label": "Formula"
+        },
+        {
+          "id": "20",
+          "order": 21,
+          "bounding_box": {
+            "x": 0.11274509803921569,
+            "y": 0.7386363636363636,
+            "width": 0.26715686274509803,
+            "height": 0.016414141414141416
+          },
+          "content": "has zero Lebesgue measure in  $ \\mathbb{R}^m $.",
+          "label": "Text"
+        },
+        {
+          "id": "21",
+          "order": 22,
+          "bounding_box": {
+            "x": 0.1111111111111111,
+            "y": 0.76010101010101,
+            "width": 0.7745098039215687,
+            "height": 0.10164141414141414
+          },
+          "content": "It is proposed to give answers further in measure-theoretic terms: “for almost all”, “up to a set of measure zero”, and the like. The reason is that for any somewhat complicated nonlinear system one can usually choose parameters in a certain degenerate way so that some conclusion fails. Declaring the parameters unknown, one cannot completely exclude degenerate cases (without adding a large number of complicated, hard-to-verify specific conditions); the best one can claim is that the chance of these “bad” cases is zero.",
+          "label": "Text"
+        },
+        {
+          "id": "22",
+          "order": 23,
+          "bounding_box": {
+            "x": 0.1119281045751634,
+            "y": 0.8630050505050505,
+            "width": 0.7712418300653595,
+            "height": 0.05176767676767677
+          },
+          "content": "Thus, we formulate the main question of the paper as follows: suppose Assumption 2 hold for system 3; is it true that for  $ \\mu $-almost every initial condition  $ x \\in K $ the trajectory  $ t \\mapsto \\Phi^t(x) $ is affinely integrally exciting?",
+          "label": "Text"
+        },
+        {
+          "id": "23",
+          "order": null,
+          "bounding_box": {
+            "x": 0.49264705882352944,
+            "y": 0.9362373737373737,
+            "width": 0.013888888888888888,
+            "height": 0.012626262626262626
+          },
+          "content": "3",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "page_index": 4,
+      "blocks": [
+        {
+          "id": "0",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.11356209150326797,
+            "y": 0.09027777777777778,
+            "width": 0.1854575163398693,
+            "height": 0.018308080808080808
+          },
+          "content": "## 4 Main Result",
+          "label": "Text"
+        },
+        {
+          "id": "1",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.11356209150326797,
+            "y": 0.12373737373737374,
+            "width": 0.5915032679738562,
+            "height": 0.016414141414141416
+          },
+          "content": "The answer to the question of the previous section turns out to be positive.",
+          "label": "Text"
+        },
+        {
+          "id": "2",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.14133986928104575,
+            "y": 0.1407828282828283,
+            "width": 0.2916666666666667,
+            "height": 0.015782828282828284
+          },
+          "content": "For an affine hyperplane  $ H \\subset \\mathbb{R}^n $ set",
+          "label": "Text"
+        },
+        {
+          "id": "3",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.3619281045751634,
+            "y": 0.16603535353535354,
+            "width": 0.272875816993464,
+            "height": 0.018308080808080808
+          },
+          "content": " $$ U_{\\varepsilon}(H)=\\{y\\in K:\\mathrm{dist}(y,H)<\\varepsilon\\}. $$ ",
+          "label": "Formula"
+        },
+        {
+          "id": "4",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.11274509803921569,
+            "y": 0.19318181818181818,
+            "width": 0.7745098039215687,
+            "height": 0.06818181818181818
+          },
+          "content": "Theorem 4 (Absence of sticking to hyperplanes and affine IPE). Let system 3 satisfy Assumption 2. Then there exists an invariant set  $ X_0 \\subset K $ of full measure,  $ \\mu(X_0) = 1 $, such that for every  $ x \\in X_0 $ and every affine hyperplane  $ H \\subset \\mathbb{R}^n $ the fraction of time spent in the  $ \\epsilon $-neighborhood of the hyperplane  $ U_\\varepsilon(H) $ tends to zero:",
+          "label": "Text"
+        },
+        {
+          "id": "5",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.35049019607843135,
+            "y": 0.2702020202020202,
+            "width": 0.2949346405228758,
+            "height": 0.037247474747474744
+          },
+          "content": " $$ \\lim_{\\varepsilon\\to0}\\limsup_{T\\to\\infty}\\frac{1}{T}\\int_{0}^{T}\\mathbf{1}_{U_{\\varepsilon}(H)}\\big(\\Phi^{t}x\\big)dt=0. $$ ",
+          "label": "Formula"
+        },
+        {
+          "id": "6",
+          "order": 7,
+          "bounding_box": {
+            "x": 0.8586601307189542,
+            "y": 0.2809343434343434,
+            "width": 0.02369281045751634,
+            "height": 0.016414141414141416
+          },
+          "content": "(5)",
+          "label": "Formula"
+        },
+        {
+          "id": "7",
+          "order": 8,
+          "bounding_box": {
+            "x": 0.1119281045751634,
+            "y": 0.3143939393939394,
+            "width": 0.7736928104575164,
+            "height": 0.034722222222222224
+          },
+          "content": "Proof. The proof of the theorem is given in the Appendix. For simplicity of verification, a reference to a Lean formalization of this proof is also provided there.",
+          "label": "Text"
+        },
+        {
+          "id": "8",
+          "order": 9,
+          "bounding_box": {
+            "x": 0.1119281045751634,
+            "y": 0.35858585858585856,
+            "width": 0.7745098039215687,
+            "height": 0.017676767676767676
+          },
+          "content": "Corollary 5. Consequently, for every  $ x \\in X_0 $ the trajectory  $ t \\mapsto \\Phi^t(x) $ is affinely integrally exciting:",
+          "label": "Text"
+        },
+        {
+          "id": "9",
+          "order": 10,
+          "bounding_box": {
+            "x": 0.369281045751634,
+            "y": 0.38446969696969696,
+            "width": 0.25735294117647056,
+            "height": 0.036616161616161616
+          },
+          "content": " $$ \\liminf_{T\\to\\infty}\\frac{1}{T}\\int_{0}^{T}\\phi_{z}(t)\\phi_{z}(t)^{\\top}dt>0. $$ ",
+          "label": "Formula"
+        },
+        {
+          "id": "10",
+          "order": 11,
+          "bounding_box": {
+            "x": 0.8586601307189542,
+            "y": 0.3952020202020202,
+            "width": 0.02369281045751634,
+            "height": 0.016414141414141416
+          },
+          "content": "(6)",
+          "label": "Formula"
+        },
+        {
+          "id": "11",
+          "order": 12,
+          "bounding_box": {
+            "x": 0.1111111111111111,
+            "y": 0.42803030303030304,
+            "width": 0.7736928104575164,
+            "height": 0.08522727272727272
+          },
+          "content": "As mentioned in the introduction, IPE for the state vector is considered mainly for clarity; the main theorems (the Birkhoff–Khinchin theorem [15, 16] and the Novikov–Yakovenko theorem [17]) used in the proof (see Appendix) allow one to generalize the result of the paper to an arbitrary polynomial regressor and to apply the theorem to the regressor that is used in a concrete work on parameter identification or adaptive control.",
+          "label": "Text"
+        },
+        {
+          "id": "12",
+          "order": 13,
+          "bounding_box": {
+            "x": 0.1388888888888889,
+            "y": 0.5138888888888888,
+            "width": 0.5612745098039216,
+            "height": 0.016414141414141416
+          },
+          "content": "Let us now show how this theorem can be applied to a concrete model.",
+          "label": "Text"
+        },
+        {
+          "id": "13",
+          "order": 14,
+          "bounding_box": {
+            "x": 0.11356209150326797,
+            "y": 0.553030303030303,
+            "width": 0.2761437908496732,
+            "height": 0.019570707070707072
+          },
+          "content": "## 5 Illustrative Example",
+          "label": "Text"
+        },
+        {
+          "id": "14",
+          "order": 15,
+          "bounding_box": {
+            "x": 0.11356209150326797,
+            "y": 0.5871212121212122,
+            "width": 0.7418300653594772,
+            "height": 0.016414141414141416
+          },
+          "content": "As an illustrative example we take a simple ODE system: reduced three-wave interactions [18].",
+          "label": "Text"
+        },
+        {
+          "id": "15",
+          "order": 16,
+          "bounding_box": {
+            "x": 0.2818627450980392,
+            "y": 0.6186868686868687,
+            "width": 0.43300653594771243,
+            "height": 0.020202020202020204
+          },
+          "content": " $$ i\\dot{A}_{1}=\\kappa_{1}\\overline{{A_{2}}}A_{3},\\qquad i\\dot{A}_{2}=\\kappa_{2}\\overline{{A_{1}}}A_{3},\\qquad i\\dot{A}_{3}=\\kappa_{3}A_{1}A_{2}, $$ ",
+          "label": "Formula"
+        },
+        {
+          "id": "16",
+          "order": 17,
+          "bounding_box": {
+            "x": 0.8586601307189542,
+            "y": 0.6212121212121212,
+            "width": 0.02369281045751634,
+            "height": 0.016414141414141416
+          },
+          "content": "(7)",
+          "label": "Formula"
+        },
+        {
+          "id": "17",
+          "order": 18,
+          "bounding_box": {
+            "x": 0.11274509803921569,
+            "y": 0.6439393939393939,
+            "width": 0.2769607843137255,
+            "height": 0.015782828282828284
+          },
+          "content": "where  $ A_1, A_2, A_3 \\in \\mathbb{C}, \\kappa \\in D \\subset \\mathbb{R}^3 $.",
+          "label": "Text"
+        },
+        {
+          "id": "18",
+          "order": 19,
+          "bounding_box": {
+            "x": 0.13970588235294118,
+            "y": 0.6616161616161617,
+            "width": 0.5522875816993464,
+            "height": 0.017045454545454544
+          },
+          "content": "Write Aj = xj + iyj. Then (7) defines a real polynomial system in R6:",
+          "label": "Text"
+        },
+        {
+          "id": "19",
+          "order": 20,
+          "bounding_box": {
+            "x": 0.309640522875817,
+            "y": 0.6881313131313131,
+            "width": 0.37745098039215685,
+            "height": 0.05997474747474747
+          },
+          "content": " $$ \\begin{aligned}\\dot{x}_{1}&=\\kappa_{1}(x_{2}y_{3}-y_{2}x_{3}),\\quad\\dot{y}_{1}=-\\kappa_{1}(x_{2}x_{3}+y_{2}y_{3}),\\\\\\dot{x}_{2}&=\\kappa_{2}(x_{1}y_{3}-y_{1}x_{3}),\\quad\\dot{y}_{2}=-\\kappa_{2}(x_{1}x_{3}+y_{1}y_{3}),\\\\\\dot{x}_{3}&=\\kappa_{3}(x_{1}y_{2}+y_{1}x_{2}),\\quad\\dot{y}_{3}=-\\kappa_{3}(x_{1}x_{2}-y_{1}y_{2}).\\end{aligned} $$ ",
+          "label": "Formula"
+        },
+        {
+          "id": "20",
+          "order": 21,
+          "bounding_box": {
+            "x": 0.8586601307189542,
+            "y": 0.7095959595959596,
+            "width": 0.02369281045751634,
+            "height": 0.016414141414141416
+          },
+          "content": "(8)",
+          "label": "Formula"
+        },
+        {
+          "id": "21",
+          "order": 22,
+          "bounding_box": {
+            "x": 0.14052287581699346,
+            "y": 0.7556818181818182,
+            "width": 0.3700980392156863,
+            "height": 0.015782828282828284
+          },
+          "content": "In the sequel we will work with the real vector",
+          "label": "Text"
+        },
+        {
+          "id": "22",
+          "order": 23,
+          "bounding_box": {
+            "x": 0.24591503267973855,
+            "y": 0.7796717171717171,
+            "width": 0.5065359477124183,
+            "height": 0.021464646464646464
+          },
+          "content": " $$ z=(x_{1},y_{1},x_{2},y_{2},x_{3},y_{3})\\in\\mathbb{R}^{6},\\qquad r_{j}(z)=x_{j}^{2}+y_{j}^{2},\\quad j=1,2,3. $$ ",
+          "label": "Formula"
+        },
+        {
+          "id": "23",
+          "order": 24,
+          "bounding_box": {
+            "x": 0.1119281045751634,
+            "y": 0.8080808080808081,
+            "width": 0.7728758169934641,
+            "height": 0.05113636363636364
+          },
+          "content": "Proposition 6 (Basic properties of the three-waves model). For every fixed  $ \\kappa $, system (8) is polynomial, has zero divergence in  $ R^6 $, and therefore preserves the Lebesgue measure. Moreover, the functions",
+          "label": "Text"
+        },
+        {
+          "id": "24",
+          "order": 25,
+          "bounding_box": {
+            "x": 0.26062091503267976,
+            "y": 0.8566919191919192,
+            "width": 0.47549019607843135,
+            "height": 0.037247474747474744
+          },
+          "content": " $$ I_{13}^{\\kappa}(z)=\\frac{x_{1}^{2}+y_{1}^{2}}{\\kappa_{1}}+\\frac{x_{3}^{2}+y_{3}^{2}}{\\kappa_{3}},\\qquad I_{23}^{\\kappa}(z)=\\frac{x_{2}^{2}+y_{2}^{2}}{\\kappa_{2}}+\\frac{x_{3}^{2}+y_{3}^{2}}{\\kappa_{3}} $$ ",
+          "label": "Formula"
+        },
+        {
+          "id": "25",
+          "order": 26,
+          "bounding_box": {
+            "x": 0.8586601307189542,
+            "y": 0.8680555555555556,
+            "width": 0.02287581699346405,
+            "height": 0.016414141414141416
+          },
+          "content": "(9)",
+          "label": "Formula"
+        },
+        {
+          "id": "26",
+          "order": 27,
+          "bounding_box": {
+            "x": 0.11356209150326797,
+            "y": 0.8970959595959596,
+            "width": 0.3137254901960784,
+            "height": 0.017045454545454544
+          },
+          "content": "are first integrals of the real system (8).",
+          "label": "Text"
+        },
+        {
+          "id": "27",
+          "order": null,
+          "bounding_box": {
+            "x": 0.4934640522875817,
+            "y": 0.9362373737373737,
+            "width": 0.013071895424836602,
+            "height": 0.012626262626262626
+          },
+          "content": "4",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "page_index": 5,
+      "blocks": [
+        {
+          "id": "0",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.1119281045751634,
+            "y": 0.09154040404040405,
+            "width": 0.6413398692810458,
+            "height": 0.017676767676767676
+          },
+          "content": "### 5.1 Application of the Main Theorem to the Three-waves model",
+          "label": "Text"
+        },
+        {
+          "id": "1",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.11356209150326797,
+            "y": 0.11931818181818182,
+            "width": 0.136437908496732,
+            "height": 0.015782828282828284
+          },
+          "content": "Choose numbers",
+          "label": "Text"
+        },
+        {
+          "id": "2",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.3382352941176471,
+            "y": 0.13573232323232323,
+            "width": 0.32107843137254904,
+            "height": 0.016414141414141416
+          },
+          "content": " $$ 0<a_{1}<b_{1},\\qquad0<a_{2}<b_{2},\\qquad\\delta>0, $$ ",
+          "label": "Formula"
+        },
+        {
+          "id": "3",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.1119281045751634,
+            "y": 0.16035353535353536,
+            "width": 0.1650326797385621,
+            "height": 0.015782828282828284
+          },
+          "content": "and consider the set",
+          "label": "Text"
+        },
+        {
+          "id": "4",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.19444444444444445,
+            "y": 0.1875,
+            "width": 0.6078431372549019,
+            "height": 0.020202020202020204
+          },
+          "content": " $$ K_{\\kappa}=\\left\\{z\\in\\mathbb{R}^{6}:a_{1}\\leq I_{13}^{\\kappa}(z)\\leq b_{1},\\quad a_{2}\\leq I_{23}^{\\kappa}(z)\\leq b_{2},\\quad|I_{13}^{\\kappa}(z)-I_{23}^{\\kappa}(z)|\\geq\\delta\\right\\}. $$ ",
+          "label": "Formula"
+        },
+        {
+          "id": "5",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.8496732026143791,
+            "y": 0.1893939393939394,
+            "width": 0.032679738562091505,
+            "height": 0.016414141414141416
+          },
+          "content": "(10)",
+          "label": "Formula"
+        },
+        {
+          "id": "6",
+          "order": 7,
+          "bounding_box": {
+            "x": 0.14052287581699346,
+            "y": 0.21906565656565657,
+            "width": 0.42320261437908496,
+            "height": 0.016414141414141416
+          },
+          "content": "To check nondegeneracy we introduce the polynomial",
+          "label": "Text"
+        },
+        {
+          "id": "7",
+          "order": 8,
+          "bounding_box": {
+            "x": 0.27205882352941174,
+            "y": 0.24494949494949494,
+            "width": 0.4526143790849673,
+            "height": 0.021464646464646464
+          },
+          "content": " $$ Q(z,\\kappa)=\\operatorname*{d e t}\\bigl[z^{(1)}(0;z,\\kappa)\\mid z^{(2)}(0;z,\\kappa)\\mid\\cdots\\mid z^{(6)}(0;z,\\kappa)\\bigr], $$ ",
+          "label": "Formula"
+        },
+        {
+          "id": "8",
+          "order": 9,
+          "bounding_box": {
+            "x": 0.8496732026143791,
+            "y": 0.2481060606060606,
+            "width": 0.032679738562091505,
+            "height": 0.017045454545454544
+          },
+          "content": "(11)",
+          "label": "Formula"
+        },
+        {
+          "id": "9",
+          "order": 10,
+          "bounding_box": {
+            "x": 0.1111111111111111,
+            "y": 0.2765151515151515,
+            "width": 0.45588235294117646,
+            "height": 0.017045454545454544
+          },
+          "content": "where  $ z(t) \\in \\mathbb{R}^6 $ is a trajectory of the real system (8) and",
+          "label": "Text"
+        },
+        {
+          "id": "10",
+          "order": 11,
+          "bounding_box": {
+            "x": 0.39624183006535946,
+            "y": 0.3036616161616162,
+            "width": 0.20506535947712418,
+            "height": 0.039141414141414144
+          },
+          "content": " $$ z^{(j)}(0;z,\\kappa)=\\left.\\frac{d^{j}}{d t^{j}}z(t)\\right|_{t=0} $$ ",
+          "label": "Formula"
+        },
+        {
+          "id": "11",
+          "order": 12,
+          "bounding_box": {
+            "x": 0.1119281045751634,
+            "y": 0.3529040404040404,
+            "width": 0.6854575163398693,
+            "height": 0.017045454545454544
+          },
+          "content": "for the solution with initial condition  $ z(0) = z $. Equivalently, the columns in (11) equal",
+          "label": "Text"
+        },
+        {
+          "id": "12",
+          "order": 13,
+          "bounding_box": {
+            "x": 0.3423202614379085,
+            "y": 0.380050505050505,
+            "width": 0.31209150326797386,
+            "height": 0.020202020202020204
+          },
+          "content": " $$ f(z,\\kappa),\\quad L_{f}f(z,\\kappa),\\quad\\ldots,\\quad L_{f}^{5}f(z,\\kappa). $$ ",
+          "label": "Formula"
+        },
+        {
+          "id": "13",
+          "order": 14,
+          "bounding_box": {
+            "x": 0.14133986928104575,
+            "y": 0.4109848484848485,
+            "width": 0.10457516339869281,
+            "height": 0.016414141414141416
+          },
+          "content": "At the point",
+          "label": "Text"
+        },
+        {
+          "id": "14",
+          "order": 15,
+          "bounding_box": {
+            "x": 0.3382352941176471,
+            "y": 0.42487373737373735,
+            "width": 0.31862745098039214,
+            "height": 0.03535353535353535
+          },
+          "content": " $$ z_{*}=(1,2,3,4,5,6),\\qquad\\kappa^{0}=\\left(\\frac{1}{3},\\frac{1}{3},\\frac{1}{3}\\right) $$ ",
+          "label": "Formula"
+        },
+        {
+          "id": "15",
+          "order": 16,
+          "bounding_box": {
+            "x": 0.8504901960784313,
+            "y": 0.43434343434343436,
+            "width": 0.031862745098039214,
+            "height": 0.016414141414141416
+          },
+          "content": "(12)",
+          "label": "Formula"
+        },
+        {
+          "id": "16",
+          "order": 17,
+          "bounding_box": {
+            "x": 0.11274509803921569,
+            "y": 0.46654040404040403,
+            "width": 0.20098039215686275,
+            "height": 0.016414141414141416
+          },
+          "content": "a direct calculation gives",
+          "label": "Text"
+        },
+        {
+          "id": "17",
+          "order": 18,
+          "bounding_box": {
+            "x": 0.4411764705882353,
+            "y": 0.4823232323232323,
+            "width": 0.11519607843137254,
+            "height": 0.018308080808080808
+          },
+          "content": " $$ Q(z_{*},\\kappa^{0})\\neq0. $$ ",
+          "label": "Formula"
+        },
+        {
+          "id": "18",
+          "order": 19,
+          "bounding_box": {
+            "x": 0.8496732026143791,
+            "y": 0.48358585858585856,
+            "width": 0.031862745098039214,
+            "height": 0.015782828282828284
+          },
+          "content": "(13)",
+          "label": "Formula"
+        },
+        {
+          "id": "19",
+          "order": 20,
+          "bounding_box": {
+            "x": 0.11029411764705882,
+            "y": 0.5069444444444444,
+            "width": 0.7753267973856209,
+            "height": 0.08712121212121213
+          },
+          "content": "Hence, for the fixed point  $ z_* $ the condition of Proposition 3 is satisfied. Therefore, except for a set of parameters  $ \\kappa \\in D $ of zero measure, the nondegeneracy condition of Assumption 2 holds on any band  $ K_\\kappa $ for which  $ z_*\\in K_\\kappa $. In this case, by Theorem 4, for almost all initial conditions  $ z_0\\in K_\\kappa $ the trajectory of the real model does not stick on average to any affine hyperplane in  $ \\mathbb{R}^6 $ and is affinely integrally exciting.",
+          "label": "Text"
+        },
+        {
+          "id": "20",
+          "order": 21,
+          "bounding_box": {
+            "x": 0.11356209150326797,
+            "y": 0.6167929292929293,
+            "width": 0.16830065359477125,
+            "height": 0.018308080808080808
+          },
+          "content": "## 6 Conclusion",
+          "label": "Text"
+        },
+        {
+          "id": "21",
+          "order": 22,
+          "bounding_box": {
+            "x": 0.1111111111111111,
+            "y": 0.6502525252525253,
+            "width": 0.7753267973856209,
+            "height": 0.15467171717171718
+          },
+          "content": "In this paper we have proposed an approach for verifying integral persistent excitation for conservative polynomial ODEs a priori, without knowledge of the parameters. Rigorous proofs of the corresponding statements are provided. Using the three-wave interaction model as an example, we have shown how the method can be applied to systems with higher-order interactions. The reasoning given for the illustrative example can be repeated without much difficulty for substantially more complex models, such as resonant cascades. The authors hope that the community will find these results interesting and will use them for their own models. Future research will be aimed at applying the approach to various concrete problems of identification and adaptive control of complex systems, as well as at extending the results to the case of systems with dissipation.",
+          "label": "Text"
+        },
+        {
+          "id": "22",
+          "order": 23,
+          "bounding_box": {
+            "x": 0.11437908496732026,
+            "y": 0.8276515151515151,
+            "width": 0.21895424836601307,
+            "height": 0.01893939393939394
+          },
+          "content": "## Acknowledgements",
+          "label": "Text"
+        },
+        {
+          "id": "23",
+          "order": 24,
+          "bounding_box": {
+            "x": 0.11274509803921569,
+            "y": 0.8630050505050505,
+            "width": 0.14950980392156862,
+            "height": 0.01893939393939394
+          },
+          "content": "## Declarations",
+          "label": "Text"
+        },
+        {
+          "id": "24",
+          "order": 25,
+          "bounding_box": {
+            "x": 0.11437908496732026,
+            "y": 0.8970959595959596,
+            "width": 0.12009803921568628,
+            "height": 0.016414141414141416
+          },
+          "content": "Not applicable",
+          "label": "Text"
+        },
+        {
+          "id": "25",
+          "order": null,
+          "bounding_box": {
+            "x": 0.49264705882352944,
+            "y": 0.9362373737373737,
+            "width": 0.013888888888888888,
+            "height": 0.012626262626262626
+          },
+          "content": "5",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "page_index": 6,
+      "blocks": [
+        {
+          "id": "0",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.11437908496732026,
+            "y": 0.08964646464646464,
+            "width": 0.27450980392156865,
+            "height": 0.020202020202020204
+          },
+          "content": "## Appendix A Lemma 1",
+          "label": "Text"
+        },
+        {
+          "id": "1",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.11437908496732026,
+            "y": 0.12373737373737374,
+            "width": 0.18627450980392157,
+            "height": 0.015782828282828284
+          },
+          "content": "Proof of Lemma 1. Set",
+          "label": "Text"
+        },
+        {
+          "id": "2",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.3880718954248366,
+            "y": 0.13762626262626262,
+            "width": 0.22140522875816993,
+            "height": 0.037247474747474744
+          },
+          "content": " $$ G_{T}=\\frac{1}{T}\\int_{0}^{T}\\phi_{z}(t)\\phi_{z}(t)^{\\top}d t. $$ ",
+          "label": "Formula"
+        },
+        {
+          "id": "3",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.1119281045751634,
+            "y": 0.18055555555555555,
+            "width": 0.4215686274509804,
+            "height": 0.018308080808080808
+          },
+          "content": "For  $ u = (a, b) \\in \\mathbb{R}^{n+1} $,  $ \\|u\\|^2 = \\|a\\|^2 + b^2 = 1 $, we have",
+          "label": "Text"
+        },
+        {
+          "id": "4",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.31699346405228757,
+            "y": 0.21022727272727273,
+            "width": 0.3619281045751634,
+            "height": 0.020833333333333332
+          },
+          "content": " $$ u^{\\top}\\phi_{z}(t)\\phi_{z}(t)^{\\top}u=(u^{\\top}\\phi_{z}(t))^{2}=|a\\cdot z(t)+b|^{2}. $$ ",
+          "label": "Formula"
+        },
+        {
+          "id": "5",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.11274509803921569,
+            "y": 0.24431818181818182,
+            "width": 0.05555555555555555,
+            "height": 0.015151515151515152
+          },
+          "content": "Hence",
+          "label": "Text"
+        },
+        {
+          "id": "6",
+          "order": 7,
+          "bounding_box": {
+            "x": 0.3668300653594771,
+            "y": 0.2563131313131313,
+            "width": 0.2630718954248366,
+            "height": 0.037247474747474744
+          },
+          "content": " $$ u^{\\top}G_{T}u=\\frac{1}{T}\\int_{0}^{T}\\left|a\\cdot z(t)+b\\right|^{2}d t. $$ ",
+          "label": "Formula"
+        },
+        {
+          "id": "7",
+          "order": 8,
+          "bounding_box": {
+            "x": 0.1119281045751634,
+            "y": 0.2986111111111111,
+            "width": 0.7728758169934641,
+            "height": 0.07007575757575757
+          },
+          "content": "The matrix inequality in (1) is understood in the sense of quadratic forms. Therefore, if (1) holds, then multiplying it from the left by  $ u^\\top $ and from the right by  $ u $ gives (2). Conversely, if (2) holds for all normalized  $ u = (a, b) $, then the last identity gives the same lower bound for all normalized quadratic forms of  $ G_T $. This is precisely (1).",
+          "label": "Text"
+        },
+        {
+          "id": "8",
+          "order": 9,
+          "bounding_box": {
+            "x": 0.11437908496732026,
+            "y": 0.3907828282828283,
+            "width": 0.5759803921568627,
+            "height": 0.020833333333333332
+          },
+          "content": "## Appendix B Proof of Parametric Nondegeneracy",
+          "label": "Text"
+        },
+        {
+          "id": "9",
+          "order": 10,
+          "bounding_box": {
+            "x": 0.11437908496732026,
+            "y": 0.42424242424242425,
+            "width": 0.7704248366013072,
+            "height": 0.054292929292929296
+          },
+          "content": "Proof of Proposition 3. From the linear parametrization (4) it follows that the components of  $ f_{\\xi}(x) $ are polynomials in the joint variables  $ (x, \\xi) $. Therefore  $ L_{f_{\\xi}} f_{\\xi} $,  $ L_{f_{\\xi}}^{2} f_{\\xi} $,  $ \\ldots $,  $ L_{f_{\\xi}}^{n-1} f_{\\xi} $ are also polynomials in  $ (x, \\xi) $. Consequently,",
+          "label": "Text"
+        },
+        {
+          "id": "10",
+          "order": 11,
+          "bounding_box": {
+            "x": 0.3137254901960784,
+            "y": 0.49053030303030304,
+            "width": 0.3668300653594771,
+            "height": 0.021464646464646464
+          },
+          "content": " $$ Q_{\\xi}(x)=\\det\\left[f_{\\xi}(x)\\mid L_{f_{\\xi}}f_{\\xi}(x)\\mid\\cdots\\mid L_{f_{\\xi}}^{n-1}f_{\\xi}(x)\\right] $$ ",
+          "label": "Formula"
+        },
+        {
+          "id": "11",
+          "order": 12,
+          "bounding_box": {
+            "x": 0.1111111111111111,
+            "y": 0.5246212121212122,
+            "width": 0.7736928104575164,
+            "height": 0.052398989898989896
+          },
+          "content": "is a polynomial in $(x,\\xi)$, and for a fixed $x_{\\star}$ the function $\\xi \\mapsto Q_{\\xi}(x_{\\star})$ is a polynomial in the parameters. Since for some $\\xi^{0}$ we have $Q_{\\xi^{0}}(x_{\\star}) \\neq 0$, this polynomial is not identically zero. Its zero set is a proper algebraic set and has zero Lebesgue measure. This proves the claim.",
+          "label": "Text"
+        },
+        {
+          "id": "12",
+          "order": 13,
+          "bounding_box": {
+            "x": 0.11356209150326797,
+            "y": 0.5997474747474747,
+            "width": 0.6388888888888888,
+            "height": 0.020202020202020204
+          },
+          "content": "## Appendix C Technical Lemmas for the Main Theorem",
+          "label": "Text"
+        },
+        {
+          "id": "13",
+          "order": 14,
+          "bounding_box": {
+            "x": 0.1119281045751634,
+            "y": 0.6338383838383839,
+            "width": 0.7696078431372549,
+            "height": 0.032196969696969696
+          },
+          "content": "A Lean formalization (mathlib 4.28.0) of the proof of this theorem can be found at https://github.com/Sashkasem/IPE_proof_lean.",
+          "label": "Text"
+        },
+        {
+          "id": "14",
+          "order": 15,
+          "bounding_box": {
+            "x": 0.1119281045751634,
+            "y": 0.6679292929292929,
+            "width": 0.7728758169934641,
+            "height": 0.03409090909090909
+          },
+          "content": "Throughout this appendix we assume that Assumption 2 holds, the parameter  $ \\xi $ is fixed, and we use the convention of dropping the index introduced above. Set",
+          "label": "Text"
+        },
+        {
+          "id": "15",
+          "order": 16,
+          "bounding_box": {
+            "x": 0.25,
+            "y": 0.7140151515151515,
+            "width": 0.4991830065359477,
+            "height": 0.021464646464646464
+          },
+          "content": " $$ M(x)=\\left[f(x)\\mid L_{f}f(x)\\mid\\cdots\\mid L_{f}^{n-1}f(x)\\right],\\qquad Q(x)=\\det M(x), $$ ",
+          "label": "Formula"
+        },
+        {
+          "id": "16",
+          "order": 17,
+          "bounding_box": {
+            "x": 0.2704248366013072,
+            "y": 0.7455808080808081,
+            "width": 0.4542483660130719,
+            "height": 0.018308080808080808
+          },
+          "content": " $$ Z=\\{x\\in K:Q(x)=0\\},\\qquad W_{\\delta}=\\{x\\in K:|Q(x)|<\\delta\\}. $$ ",
+          "label": "Formula"
+        },
+        {
+          "id": "17",
+          "order": 18,
+          "bounding_box": {
+            "x": 0.11601307189542484,
+            "y": 0.7720959595959596,
+            "width": 0.7671568627450981,
+            "height": 0.03345959595959596
+          },
+          "content": "Lemma 7 (Properties of the singular set). 1. If a trajectory lies entirely in a hyperplane H, then it lies entirely in Z.",
+          "label": "Text"
+        },
+        {
+          "id": "18",
+          "order": 19,
+          "bounding_box": {
+            "x": 0.13398692810457516,
+            "y": 0.8169191919191919,
+            "width": 0.44281045751633985,
+            "height": 0.017045454545454544
+          },
+          "content": "2.  $ \\lambda(Z) = 0 $, hence  $ \\mu(Z) = 0 $, and  $ \\mu(W_\\delta) \\to 0 $ as  $ \\delta \\to 0 $.",
+          "label": "Text"
+        },
+        {
+          "id": "19",
+          "order": 20,
+          "bounding_box": {
+            "x": 0.11519607843137254,
+            "y": 0.8453282828282829,
+            "width": 0.5490196078431373,
+            "height": 0.017676767676767676
+          },
+          "content": "Proof. (1) Let  $ H = \\{y : \\langle v, y \\rangle = c\\} $,  $ v \\neq 0 $. Differentiating the identity",
+          "label": "Text"
+        },
+        {
+          "id": "20",
+          "order": 21,
+          "bounding_box": {
+            "x": 0.44362745098039214,
+            "y": 0.8756313131313131,
+            "width": 0.11437908496732026,
+            "height": 0.01893939393939394
+          },
+          "content": " $$ \\langle v,\\Phi^{t}(x)\\rangle\\equiv c $$ ",
+          "label": "Formula"
+        },
+        {
+          "id": "21",
+          "order": null,
+          "bounding_box": {
+            "x": 0.4934640522875817,
+            "y": 0.9362373737373737,
+            "width": 0.013071895424836602,
+            "height": 0.012626262626262626
+          },
+          "content": "6",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "page_index": 7,
+      "blocks": [
+        {
+          "id": "0",
+          "order": null,
+          "bounding_box": {
+            "x": 0.11356209150326797,
+            "y": 0.09406565656565656,
+            "width": 0.14624183006535948,
+            "height": 0.01452020202020202
+          },
+          "content": "at zero, we obtain",
+          "label": "Text"
+        },
+        {
+          "id": "1",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.35049019607843135,
+            "y": 0.10795454545454546,
+            "width": 0.2965686274509804,
+            "height": 0.019570707070707072
+          },
+          "content": " $$ \\langle v,L_{f}^{k}f(x)\\rangle=0,\\qquad k=0,\\ldots,n-1. $$ ",
+          "label": "Formula"
+        },
+        {
+          "id": "2",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.1111111111111111,
+            "y": 0.13446969696969696,
+            "width": 0.7736928104575164,
+            "height": 0.06755050505050506
+          },
+          "content": "In other words, the nonzero vector v is orthogonal to all columns of the matrix  $ M(x) $. Hence the columns of  $ M(x) $ are linearly dependent and  $ Q(x) = 0 $. This argument applies not only to the initial point but also to any other point of the same trajectory. Therefore, if a trajectory lies entirely in a hyperplane, it lies entirely in Z.",
+          "label": "Text"
+        },
+        {
+          "id": "3",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.11356209150326797,
+            "y": 0.20265151515151514,
+            "width": 0.7712418300653595,
+            "height": 0.06818181818181818
+          },
+          "content": "(2) By Assumption 2 there exists a point  $ x_*\\in K $ such that  $ Q(x_*) \\neq 0 $. Hence the polynomial  $ Q $ is not identically zero. A nonzero polynomial vanishes on a set of zero Lebesgue measure, so  $ \\lambda(Z) = 0 $. The absolute continuity of the measure  $ \\mu $ yields  $ \\mu(Z) = 0 $. Since  $ W_\\delta\\downarrow Z $ as  $ \\delta\\downarrow 0 $, continuity of measure from above gives  $ \\mu(W_\\delta)\\to\\mu(Z)=0 $.",
+          "label": "Text"
+        },
+        {
+          "id": "4",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.11274509803921569,
+            "y": 0.2897727272727273,
+            "width": 0.31781045751633985,
+            "height": 0.017045454545454544
+          },
+          "content": "## Step 0: description of the set  $ X_{0} $",
+          "label": "Text"
+        },
+        {
+          "id": "5",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.11274509803921569,
+            "y": 0.3162878787878788,
+            "width": 0.7728758169934641,
+            "height": 0.032196969696969696
+          },
+          "content": "Proposition 8 (Step 0). There exists an invariant set of full measure  $ X_0 \\subset K $ such that for every  $ x \\in X_0 $",
+          "label": "Text"
+        },
+        {
+          "id": "6",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.36764705882352944,
+            "y": 0.3491161616161616,
+            "width": 0.26143790849673204,
+            "height": 0.03535353535353535
+          },
+          "content": " $$ \\lim_{\\delta\\rightarrow0}\\lim_{T\\rightarrow\\infty}\\frac{1}{T}\\int_{0}^{T}\\mathbf{1}_{W_{\\delta}}(\\Phi^{t}x)dt=0. $$ ",
+          "label": "Formula"
+        },
+        {
+          "id": "7",
+          "order": 7,
+          "bounding_box": {
+            "x": 0.8496732026143791,
+            "y": 0.35858585858585856,
+            "width": 0.032679738562091505,
+            "height": 0.016414141414141416
+          },
+          "content": "(14)",
+          "label": "Formula"
+        },
+        {
+          "id": "8",
+          "order": 8,
+          "bounding_box": {
+            "x": 0.11519607843137254,
+            "y": 0.39330808080808083,
+            "width": 0.7687908496732027,
+            "height": 0.016414141414141416
+          },
+          "content": "Proof. For each δ > 0, by the Birkhoff–Khinchin theorem [15, 16], for almost every x ∈ K the limit",
+          "label": "Text"
+        },
+        {
+          "id": "9",
+          "order": 9,
+          "bounding_box": {
+            "x": 0.3700980392156863,
+            "y": 0.4198232323232323,
+            "width": 0.25735294117647056,
+            "height": 0.037247474747474744
+          },
+          "content": " $$ b_{\\delta}(x)=\\lim_{T\\to\\infty}\\frac{1}{T}\\int_{0}^{T}\\mathbf{1}_{W_{\\delta}}(\\Phi^{t}x)dt $$ ",
+          "label": "Formula"
+        },
+        {
+          "id": "10",
+          "order": 10,
+          "bounding_box": {
+            "x": 0.1111111111111111,
+            "y": 0.4659090909090909,
+            "width": 0.7728758169934641,
+            "height": 0.034722222222222224
+          },
+          "content": "exists. Here the Birkhoff–Khinchin theorem is applied to the indicator of the neighborhood of Z, i.e., to the function  $ g(x) = \\mathbf{1}_{W_\\delta}(x) $. Moreover,",
+          "label": "Text"
+        },
+        {
+          "id": "11",
+          "order": 11,
+          "bounding_box": {
+            "x": 0.34967320261437906,
+            "y": 0.5107323232323232,
+            "width": 0.29983660130718953,
+            "height": 0.03598484848484849
+          },
+          "content": " $$ \\int_{K}b_{\\delta}(x)d\\mu=\\int_{K}\\mathbf{1}_{W_{\\delta}}(x)d\\mu=\\mu(W_{\\delta}). $$ ",
+          "label": "Formula"
+        },
+        {
+          "id": "12",
+          "order": 12,
+          "bounding_box": {
+            "x": 0.13970588235294118,
+            "y": 0.5549242424242424,
+            "width": 0.7459150326797386,
+            "height": 0.017045454545454544
+          },
+          "content": "Since  $ W_\\delta $ decreases as  $ \\delta \\downarrow 0 $, the function  $ \\delta \\mapsto b_\\delta(x) $ is nonincreasing almost everywhere. Define",
+          "label": "Text"
+        },
+        {
+          "id": "13",
+          "order": 13,
+          "bounding_box": {
+            "x": 0.3799019607843137,
+            "y": 0.5827020202020202,
+            "width": 0.2361111111111111,
+            "height": 0.02462121212121212
+          },
+          "content": " $$ b_{0}(x)=\\lim_{\\delta\\to0}b_{\\delta}(x)=\\inf_{\\delta>0}b_{\\delta}(x). $$ ",
+          "label": "Formula"
+        },
+        {
+          "id": "14",
+          "order": 14,
+          "bounding_box": {
+            "x": 0.11356209150326797,
+            "y": 0.6180555555555556,
+            "width": 0.3137254901960784,
+            "height": 0.015782828282828284
+          },
+          "content": "By the monotone convergence theorem,",
+          "label": "Text"
+        },
+        {
+          "id": "15",
+          "order": 15,
+          "bounding_box": {
+            "x": 0.309640522875817,
+            "y": 0.6433080808080808,
+            "width": 0.3790849673202614,
+            "height": 0.034722222222222224
+          },
+          "content": " $$ \\int_{K}b_{0}(x)d\\mu=\\lim_{\\delta\\rightarrow0}\\int_{K}b_{\\delta}(x)d\\mu=\\lim_{\\delta\\rightarrow0}\\mu(W_{\\delta})=0, $$ ",
+          "label": "Formula"
+        },
+        {
+          "id": "16",
+          "order": 16,
+          "bounding_box": {
+            "x": 0.11356209150326797,
+            "y": 0.6868686868686869,
+            "width": 0.5645424836601307,
+            "height": 0.017045454545454544
+          },
+          "content": "because  $ \\mu(W_\\delta) \\to \\mu(Z) = 0 $. Consequently,  $ b_0(x) = 0 $ for  $ \\mu $-almost all  $ x $.",
+          "label": "Text"
+        },
+        {
+          "id": "17",
+          "order": 17,
+          "bounding_box": {
+            "x": 0.29983660130718953,
+            "y": 0.7165404040404041,
+            "width": 0.39624183006535946,
+            "height": 0.037247474747474744
+          },
+          "content": " $$ X_{0}=\\left\\{x\\in K:\\lim_{\\delta\\rightarrow0}\\lim_{T\\rightarrow\\infty}\\frac{1}{T}\\int_{0}^{T}\\mathbf{1}_{W_{\\delta}}(\\Phi^{t}x)dt=0\\right\\}. $$ ",
+          "label": "Formula"
+        },
+        {
+          "id": "18",
+          "order": 18,
+          "bounding_box": {
+            "x": 0.1111111111111111,
+            "y": 0.7588383838383839,
+            "width": 0.7736928104575164,
+            "height": 0.03156565656565657
+          },
+          "content": "Then  $ \\mu(X_0) = 1 $. The invariance of  $ X_0 $ follows from the invariance of time averages with respect to a shift of the initial moment.",
+          "label": "Text"
+        },
+        {
+          "id": "19",
+          "order": 19,
+          "bounding_box": {
+            "x": 0.11274509803921569,
+            "y": 0.7929292929292929,
+            "width": 0.7712418300653595,
+            "height": 0.05113636363636364
+          },
+          "content": "Thus, the set  $ X_0 $ is  $ K $ without the set  $ Z $ and without those points for which the corresponding statement of the Birkhoff–Khinchin ergodic theorem does not hold. For any  $ x \\in X_0 $ and any  $ \\eta > 0 $ there exists  $ \\delta > 0 $ such that",
+          "label": "Text"
+        },
+        {
+          "id": "20",
+          "order": 20,
+          "bounding_box": {
+            "x": 0.35130718954248363,
+            "y": 0.851010101010101,
+            "width": 0.29411764705882354,
+            "height": 0.037247474747474744
+          },
+          "content": " $$ b_{\\delta}(x)=\\lim_{T\\to\\infty}\\frac{1}{T}\\int_{0}^{T}\\mathbf{1}_{W_{\\delta}}(\\Phi^{t}x)dt<\\eta. $$ ",
+          "label": "Formula"
+        },
+        {
+          "id": "21",
+          "order": null,
+          "bounding_box": {
+            "x": 0.494281045751634,
+            "y": 0.9362373737373737,
+            "width": 0.012254901960784314,
+            "height": 0.012626262626262626
+          },
+          "content": "7",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "page_index": 8,
+      "blocks": [
+        {
+          "id": "0",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.11356209150326797,
+            "y": 0.09217171717171717,
+            "width": 0.20915032679738563,
+            "height": 0.017045454545454544
+          },
+          "content": "## Dynamics outside  $ W_{\\delta} $",
+          "label": "Text"
+        },
+        {
+          "id": "1",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.1119281045751634,
+            "y": 0.11868686868686869,
+            "width": 0.7712418300653595,
+            "height": 0.032196969696969696
+          },
+          "content": "Fix a hyperplane  $ H = \\{l(x) = 0\\} $ with  $ l(x) = \\langle a, x \\rangle - c $ and  $ \\|a\\| = 1 $. For  $ x \\in K $ along the trajectory we will write",
+          "label": "Text"
+        },
+        {
+          "id": "2",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.28594771241830064,
+            "y": 0.14898989898989898,
+            "width": 0.4256535947712418,
+            "height": 0.037247474747474744
+          },
+          "content": " $$ x(t)=\\Phi^{t}(x),\\qquad x^{(k)}(0)=\\frac{d^{k}}{d t^{k}}\\Phi^{t}(x)\\bigg|_{t=0}=L_{f}^{k-1}f(x). $$ ",
+          "label": "Formula"
+        },
+        {
+          "id": "3",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.1119281045751634,
+            "y": 0.19128787878787878,
+            "width": 0.7728758169934641,
+            "height": 0.03282828282828283
+          },
+          "content": "From the compactness of K and the polynomial nature of the field it follows that all the derivatives used below are uniformly bounded on K. Denote a common upper bound by M.",
+          "label": "Text"
+        },
+        {
+          "id": "4",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.1111111111111111,
+            "y": 0.22916666666666666,
+            "width": 0.7745098039215687,
+            "height": 0.03345959595959596
+          },
+          "content": "Lemma 9 (Uniform separation of derivatives). For each  $ \\delta > 0 $ there exists  $ c_\\delta > 0 $ such that for all  $ x_0 \\in K \\setminus W_\\delta $ and all unit normals  $ a $,",
+          "label": "Text"
+        },
+        {
+          "id": "5",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.4035947712418301,
+            "y": 0.273989898989899,
+            "width": 0.1919934640522876,
+            "height": 0.027777777777777776
+          },
+          "content": " $$ \\max_{1\\leq k\\leq n}\\left|\\langle a,x^{(k)}(0)\\rangle\\right|\\geq c_{\\delta}. $$ ",
+          "label": "Formula"
+        },
+        {
+          "id": "6",
+          "order": 7,
+          "bounding_box": {
+            "x": 0.11437908496732026,
+            "y": 0.31376262626262624,
+            "width": 0.31862745098039214,
+            "height": 0.016414141414141416
+          },
+          "content": "Proof. Consider the continuous function",
+          "label": "Text"
+        },
+        {
+          "id": "7",
+          "order": 8,
+          "bounding_box": {
+            "x": 0.3815359477124183,
+            "y": 0.34154040404040403,
+            "width": 0.23447712418300654,
+            "height": 0.027777777777777776
+          },
+          "content": " $$ \\Psi(x_{0},a)=\\max_{1\\leq k\\leq n}|\\langle a,x^{(k)}(0)\\rangle| $$ ",
+          "label": "Formula"
+        },
+        {
+          "id": "8",
+          "order": 9,
+          "bounding_box": {
+            "x": 0.1119281045751634,
+            "y": 0.3832070707070707,
+            "width": 0.7728758169934641,
+            "height": 0.049873737373737376
+          },
+          "content": "on the compact set  $ (K \\setminus W_\\delta) \\times S^{n-1} $. We prove by contradiction that its minimum cannot be zero. If the minimum were zero, then for some pair  $ (x_0, a) $ the nonzero vector  $ a $ would be orthogonal to all vectors",
+          "label": "Text"
+        },
+        {
+          "id": "9",
+          "order": 10,
+          "bounding_box": {
+            "x": 0.4207516339869281,
+            "y": 0.432449494949495,
+            "width": 0.15522875816993464,
+            "height": 0.01893939393939394
+          },
+          "content": " $$ x^{(1)}(0),\\cdots,x^{(n)}(0), $$ ",
+          "label": "Formula"
+        },
+        {
+          "id": "10",
+          "order": 11,
+          "bounding_box": {
+            "x": 0.1111111111111111,
+            "y": 0.4595959595959596,
+            "width": 0.7728758169934641,
+            "height": 0.03535353535353535
+          },
+          "content": "i.e., to all columns of  $ M(x_0) $. Then  $ \\det M(x_0) = 0 $, hence  $ x_0 \\in Z \\subset W_\\delta $, contradicting  $ x_0 \\notin W_\\delta $. Therefore the minimum is positive; set  $ c_\\delta := \\min \\Psi > 0 $.",
+          "label": "Text"
+        },
+        {
+          "id": "11",
+          "order": 12,
+          "bounding_box": {
+            "x": 0.1119281045751634,
+            "y": 0.5063131313131313,
+            "width": 0.7736928104575164,
+            "height": 0.03409090909090909
+          },
+          "content": "Lemma 10 (Exit time). For every  $ T_* $ > 0 there exists  $ \\varepsilon_* $ ( $ \\delta $) > 0 such that if  $ x_0 \\notin W_\\delta $, then the trajectory cannot stay continuously in  $ U_\\varepsilon(H) $ longer than  $ T_* $ for all  $ \\varepsilon \\leq \\varepsilon_* $ ( $ \\delta $).",
+          "label": "Text"
+        },
+        {
+          "id": "12",
+          "order": 13,
+          "bounding_box": {
+            "x": 0.11437908496732026,
+            "y": 0.5517676767676768,
+            "width": 0.6053921568627451,
+            "height": 0.016414141414141416
+          },
+          "content": "Proof. Choose  $ T_{*} $. By Lemma 9 there exists a derivative of order k such that",
+          "label": "Text"
+        },
+        {
+          "id": "13",
+          "order": 14,
+          "bounding_box": {
+            "x": 0.4264705882352941,
+            "y": 0.5801767676767676,
+            "width": 0.1454248366013072,
+            "height": 0.020202020202020204
+          },
+          "content": " $$ |\\langle a,x^{(k)}(0)\\rangle|\\geq c_{\\delta}, $$ ",
+          "label": "Formula"
+        },
+        {
+          "id": "14",
+          "order": 15,
+          "bounding_box": {
+            "x": 0.11274509803921569,
+            "y": 0.6142676767676768,
+            "width": 0.2883986928104575,
+            "height": 0.015151515151515152
+          },
+          "content": "where a is the normal to H. Denote",
+          "label": "Text"
+        },
+        {
+          "id": "15",
+          "order": 16,
+          "bounding_box": {
+            "x": 0.42810457516339867,
+            "y": 0.6420454545454546,
+            "width": 0.13970588235294118,
+            "height": 0.019570707070707072
+          },
+          "content": " $$ C_{k}=\\langle a,x^{(k)}(0)\\rangle. $$ ",
+          "label": "Formula"
+        },
+        {
+          "id": "16",
+          "order": 17,
+          "bounding_box": {
+            "x": 0.1119281045751634,
+            "y": 0.6748737373737373,
+            "width": 0.7736928104575164,
+            "height": 0.05176767676767677
+          },
+          "content": "Without loss of generality we assume that this derivative is positive. As noted before, all derivatives can be bounded on the compact set by a common constant M. Hence the k-th derivative keeps its sign for at least time  $ C_k/M $. Consider the time interval  $ [0, \\tau_k] $, where",
+          "label": "Text"
+        },
+        {
+          "id": "17",
+          "order": 18,
+          "bounding_box": {
+            "x": 0.4019607843137255,
+            "y": 0.73989898989899,
+            "width": 0.19281045751633988,
+            "height": 0.018308080808080808
+          },
+          "content": " $$ \\tau_{k}=\\min\\{C_{k}/M,T_{*}/k\\}, $$ ",
+          "label": "Formula"
+        },
+        {
+          "id": "18",
+          "order": 19,
+          "bounding_box": {
+            "x": 0.11356209150326797,
+            "y": 0.7714646464646465,
+            "width": 0.4934640522875817,
+            "height": 0.016414141414141416
+          },
+          "content": "and see how the  $ (k-1) $-st derivative changes during this time.",
+          "label": "Text"
+        },
+        {
+          "id": "19",
+          "order": 20,
+          "bounding_box": {
+            "x": 0.14052287581699346,
+            "y": 0.7891414141414141,
+            "width": 0.4452614379084967,
+            "height": 0.015151515151515152
+          },
+          "content": "On this interval it is monotone and increases by at least",
+          "label": "Text"
+        },
+        {
+          "id": "20",
+          "order": 21,
+          "bounding_box": {
+            "x": 0.3872549019607843,
+            "y": 0.8162878787878788,
+            "width": 0.2238562091503268,
+            "height": 0.03535353535353535
+          },
+          "content": " $$ \\Delta C_{k-1}=\\int_{0}^{\\tau_{k}}(C_{k}-M t)d t. $$ ",
+          "label": "Formula"
+        },
+        {
+          "id": "21",
+          "order": 22,
+          "bounding_box": {
+            "x": 0.11274509803921569,
+            "y": 0.8623737373737373,
+            "width": 0.7720588235294118,
+            "height": 0.03409090909090909
+          },
+          "content": "This expression has a lower bound that depends only on  $ T_*, k $,  $ c_\\delta $, that is, essentially only on  $ \\delta $ and our choice of  $ T_* $. Next observe that either the  $ (k-1) $-st derivative was less than  $ -\\frac{1}{2}\\Delta C_{k-1} $ at time",
+          "label": "Text"
+        },
+        {
+          "id": "22",
+          "order": null,
+          "bounding_box": {
+            "x": 0.4934640522875817,
+            "y": 0.9368686868686869,
+            "width": 0.013071895424836602,
+            "height": 0.011994949494949494
+          },
+          "content": "8",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "page_index": 9,
+      "blocks": [
+        {
+          "id": "0",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.1119281045751634,
+            "y": 0.09217171717171717,
+            "width": 0.7720588235294118,
+            "height": 0.03345959595959596
+          },
+          "content": "0, or it becomes greater than  $ \\frac{1}{2}\\Delta C_{k-1} $ at time  $ \\tau_{k} $. In any case its modulus can be bounded below by the constant",
+          "label": "Text"
+        },
+        {
+          "id": "1",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.3415032679738562,
+            "y": 0.12373737373737374,
+            "width": 0.3145424836601307,
+            "height": 0.03409090909090909
+          },
+          "content": " $$ C_{k-1}=\\frac{1}{2}\\int_{0}^{\\tau_{k}}\\left(C_{k}-M t\\right)d t=\\frac{1}{2}\\Delta C_{k-1}. $$ ",
+          "label": "Formula"
+        },
+        {
+          "id": "2",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.1111111111111111,
+            "y": 0.16540404040404041,
+            "width": 0.7736928104575164,
+            "height": 0.052398989898989896
+          },
+          "content": "Repeating this argument by induction we conclude that with  $ \\varepsilon_{*}(\\delta) = C_{0} $ the trajectory leaves the  $ \\varepsilon $-neighborhood of  $ H $ in time not exceeding the sum of  $ k $ terms, each of which is at most  $ T_{*}/k $ (either  $ \\tau_{k} $ or 0). That is, in time not exceeding  $ T_{*} $. Moreover, this estimate is global.",
+          "label": "Text"
+        },
+        {
+          "id": "3",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.11274509803921569,
+            "y": 0.22727272727272727,
+            "width": 0.7720588235294118,
+            "height": 0.034722222222222224
+          },
+          "content": "Remark 1 (Important remarks on Lemmas 9 and 10). 1. The estimate in Lemma 9 is uniform over all  $ x_0 \\in K \\setminus W_\\delta $ and all unit normals  $ a $.",
+          "label": "Text"
+        },
+        {
+          "id": "4",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.13480392156862744,
+            "y": 0.27335858585858586,
+            "width": 0.75,
+            "height": 0.03409090909090909
+          },
+          "content": "2. In Lemma 10 it is important only that at the initial moment  $ x_0 \\notin W_\\delta $; the subsequent dynamics may enter  $ W_\\delta $ and leave it many times.",
+          "label": "Text"
+        },
+        {
+          "id": "5",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.13316993464052287,
+            "y": 0.3181818181818182,
+            "width": 0.6919934640522876,
+            "height": 0.017676767676767676
+          },
+          "content": "3. The number  $ T_{*} $ can be chosen arbitrarily small and then adjusted to other estimates.",
+          "label": "Text"
+        },
+        {
+          "id": "6",
+          "order": 7,
+          "bounding_box": {
+            "x": 0.11356209150326797,
+            "y": 0.3547979797979798,
+            "width": 0.5220588235294118,
+            "height": 0.017045454545454544
+          },
+          "content": "## Estimate of the number of intersections with surfaces",
+          "label": "Text"
+        },
+        {
+          "id": "7",
+          "order": 8,
+          "bounding_box": {
+            "x": 0.1119281045751634,
+            "y": 0.3819444444444444,
+            "width": 0.7728758169934641,
+            "height": 0.06755050505050506
+          },
+          "content": "To obtain an estimate of the average time, one must exclude the situation where the trajectory frequently leaves and immediately enters  $ U_{\\varepsilon}(H) $. Therefore it is important to bound from above the number of intersections with the boundaries  $ \\{l = \\pm\\varepsilon\\} $ on each time block. The Novikov–Yakovenko theorem is used for this purpose.",
+          "label": "Text"
+        },
+        {
+          "id": "8",
+          "order": 9,
+          "bounding_box": {
+            "x": 0.1119281045751634,
+            "y": 0.4532828282828283,
+            "width": 0.7156862745098039,
+            "height": 0.017676767676767676
+          },
+          "content": "Proposition 11 (Novikov–Yakovenko theorem, autonomous case). Let a polynomial ODE",
+          "label": "Text"
+        },
+        {
+          "id": "9",
+          "order": 10,
+          "bounding_box": {
+            "x": 0.40931372549019607,
+            "y": 0.4842171717171717,
+            "width": 0.17892156862745098,
+            "height": 0.017676767676767676
+          },
+          "content": " $$ \\dot{x}=p(x),\\qquad x\\in\\mathbb{R}^{n}, $$ ",
+          "label": "Formula"
+        },
+        {
+          "id": "10",
+          "order": 11,
+          "bounding_box": {
+            "x": 0.1119281045751634,
+            "y": 0.5157828282828283,
+            "width": 0.7728758169934641,
+            "height": 0.03345959595959596
+          },
+          "content": "be given, where the  $ p_i(x) $ have degree at most  $ d $. Assume that the absolute values of the coefficients of these polynomials are bounded by  $ r $.",
+          "label": "Text"
+        },
+        {
+          "id": "11",
+          "order": 12,
+          "bounding_box": {
+            "x": 0.1119281045751634,
+            "y": 0.5498737373737373,
+            "width": 0.7728758169934641,
+            "height": 0.03282828282828283
+          },
+          "content": "Let  $ 1' : 1 \\to \\mathbb{R}'^n $ be a trajectory on an interval  $ I \\subset \\mathbb{R} $ that is contained in a ball of radius  $ r $. The length of the interval  $ I $ also does not exceed  $ r $.",
+          "label": "Text"
+        },
+        {
+          "id": "12",
+          "order": 13,
+          "bounding_box": {
+            "x": 0.1119281045751634,
+            "y": 0.5839646464646465,
+            "width": 0.7728758169934641,
+            "height": 0.05176767676767677
+          },
+          "content": "Then for any affine hyperplane  $ H \\subset \\mathbb{R}^n $ the number of isolated intersection points of  $ \\Gamma $ with  $ H $ (counting multiplicities) is bounded by a constant  $ \\Omega(r, n, d) \\leq (2 + r)^{B(n, d)} $ that depends only on  $ n $,  $ d $, and  $ r $.",
+          "label": "Text"
+        },
+        {
+          "id": "13",
+          "order": 14,
+          "bounding_box": {
+            "x": 0.1119281045751634,
+            "y": 0.639520202020202,
+            "width": 0.7753267973856209,
+            "height": 0.052398989898989896
+          },
+          "content": "Lemma 12 (Uniform bound on intersections). For a fixed $T_0$ and small $\\delta, \\varepsilon$ there exists a universal constant $N$ such that for any hyperplane $H$ the number of intersections of the trajectory with the surfaces $\\{l = \\pm \\varepsilon\\}$ on any interval of length $T_0$ does not exceed $N$.",
+          "label": "Text"
+        },
+        {
+          "id": "14",
+          "order": 15,
+          "bounding_box": {
+            "x": 0.1111111111111111,
+            "y": 0.7013888888888888,
+            "width": 0.7736928104575164,
+            "height": 0.08522727272727272
+          },
+          "content": "Proof. First fix a hyperplane  $ H $. Consider the two surfaces given by the linear polynomials  $ l(x) \\pm \\varepsilon $. Since  $ K $ is compact,  $ \\varepsilon $ is small, and the hyperplane  $ H $ intersects the compact set  $ K $, the coefficients of all these polynomials are bounded by a constant that does not depend on the concrete small values of  $ \\delta $ and  $ \\varepsilon $. By the Novikov–Yakovenko theorem 11, the number of zeros of each of these polynomials along the trajectory on an interval of length  $ T_0 $ is bounded by some constant  $ N $.",
+          "label": "Text"
+        },
+        {
+          "id": "15",
+          "order": 16,
+          "bounding_box": {
+            "x": 0.1119281045751634,
+            "y": 0.7878787878787878,
+            "width": 0.7736928104575164,
+            "height": 0.06881313131313131
+          },
+          "content": "It remains to observe that choosing another hyperplane changes nothing essential: the Novikov-Yakovenko theorem is insensitive to such a transition — its estimate depends on the degree of the polynomials and the dimension of the space, and on the compact set the coefficients of the corresponding linear polynomials remain uniformly bounded after normalization.",
+          "label": "Text"
+        },
+        {
+          "id": "16",
+          "order": null,
+          "bounding_box": {
+            "x": 0.49264705882352944,
+            "y": 0.9362373737373737,
+            "width": 0.013888888888888888,
+            "height": 0.012626262626262626
+          },
+          "content": "9",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "page_index": 10,
+      "blocks": [
+        {
+          "id": "0",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.11437908496732026,
+            "y": 0.08964646464646464,
+            "width": 0.48366013071895425,
+            "height": 0.020202020202020204
+          },
+          "content": "## Appendix D Proof of the Main Theorem",
+          "label": "Text"
+        },
+        {
+          "id": "1",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.1119281045751634,
+            "y": 0.12373737373737374,
+            "width": 0.7712418300653595,
+            "height": 0.03282828282828283
+          },
+          "content": "Proof of Theorem 4. First we use the set  $ X_0 $ from Proposition 8. Take arbitrary  $ x \\in X_0 $ and an affine hyperplane  $ H = \\{l = 0\\} $.",
+          "label": "Text"
+        },
+        {
+          "id": "2",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.1119281045751634,
+            "y": 0.15782828282828282,
+            "width": 0.7728758169934641,
+            "height": 0.050505050505050504
+          },
+          "content": "Idea of the proof. We prove by contradiction. Assume that for the chosen  $ x \\in X_0 $ and  $ H $ the fraction of time in  $ U_\\varepsilon(H) $ does not tend to zero as  $ \\varepsilon \\to 0 $. For a chosen small  $ \\delta $ we partition time into blocks. In each block the time in  $ U_\\varepsilon(H) $ is split into two parts:",
+          "label": "Text"
+        },
+        {
+          "id": "3",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.36519607843137253,
+            "y": 0.22032828282828282,
+            "width": 0.2679738562091503,
+            "height": 0.017676767676767676
+          },
+          "content": " $$ \\mathrm{(i)~inside~W_{\\delta},\\qquad(ii)~outside~W_{\\delta}.} $$ ",
+          "label": "Formula"
+        },
+        {
+          "id": "4",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.1119281045751634,
+            "y": 0.25,
+            "width": 0.7728758169934641,
+            "height": 0.047979797979797977
+          },
+          "content": "For the first part we already have a small average estimate from Step 0. For the second part we need to show that for sufficiently small  $ \\varepsilon $ the average time outside  $ W_{\\delta} $ can also be made arbitrarily small.",
+          "label": "Text"
+        },
+        {
+          "id": "5",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.13970588235294118,
+            "y": 0.30176767676767674,
+            "width": 0.744281045751634,
+            "height": 0.016414141414141416
+          },
+          "content": "Step 1: choice of  $ \\delta $. Assume the contrary: there exist  $ \\gamma > 0 $ and a sequence  $ \\varepsilon_k \\to 0 $ such that",
+          "label": "Text"
+        },
+        {
+          "id": "6",
+          "order": 7,
+          "bounding_box": {
+            "x": 0.3619281045751634,
+            "y": 0.32765151515151514,
+            "width": 0.27532679738562094,
+            "height": 0.03787878787878788
+          },
+          "content": " $$ \\limsup_{T\\to\\infty}\\frac{1}{T}\\int_{0}^{T}\\mathbf{1}_{U_{\\varepsilon_{k}}(H)}(\\Phi^{t}x)dt\\geq\\gamma. $$ ",
+          "label": "Formula"
+        },
+        {
+          "id": "7",
+          "order": 8,
+          "bounding_box": {
+            "x": 0.8496732026143791,
+            "y": 0.3383838383838384,
+            "width": 0.032679738562091505,
+            "height": 0.017045454545454544
+          },
+          "content": "(15)",
+          "label": "Formula"
+        },
+        {
+          "id": "8",
+          "order": 9,
+          "bounding_box": {
+            "x": 0.11274509803921569,
+            "y": 0.37436868686868685,
+            "width": 0.41013071895424835,
+            "height": 0.015782828282828284
+          },
+          "content": "By the definition of  $ X_{0} $ we can choose  $ \\delta > 0 $ so that",
+          "label": "Text"
+        },
+        {
+          "id": "9",
+          "order": 10,
+          "bounding_box": {
+            "x": 0.34477124183006536,
+            "y": 0.398989898989899,
+            "width": 0.30637254901960786,
+            "height": 0.03787878787878788
+          },
+          "content": " $$ b_{\\delta}(x)=\\lim_{T\\to\\infty}\\frac{1}{T}\\int_{0}^{T}\\mathbf{1}_{W_{\\delta}}(\\Phi^{t}x)dt<\\frac{\\gamma^{2}}{64}. $$ ",
+          "label": "Formula"
+        },
+        {
+          "id": "10",
+          "order": 11,
+          "bounding_box": {
+            "x": 0.8496732026143791,
+            "y": 0.4116161616161616,
+            "width": 0.032679738562091505,
+            "height": 0.016414141414141416
+          },
+          "content": "(16)",
+          "label": "Formula"
+        },
+        {
+          "id": "11",
+          "order": 12,
+          "bounding_box": {
+            "x": 0.11029411764705882,
+            "y": 0.4463383838383838,
+            "width": 0.7696078431372549,
+            "height": 0.016414141414141416
+          },
+          "content": "For this δ we further fix the exit time estimate from Lemma 10 and the constant cδ from Lemma 9.",
+          "label": "Text"
+        },
+        {
+          "id": "12",
+          "order": 13,
+          "bounding_box": {
+            "x": 0.1119281045751634,
+            "y": 0.4633838383838384,
+            "width": 0.7736928104575164,
+            "height": 0.03345959595959596
+          },
+          "content": "Step 2: blocks and bad blocks. Choose the block length  $ T_{0} = 1 $. Consider a large time  $ T = mT_{0} $. The number T is chosen large enough so that the average",
+          "label": "Text"
+        },
+        {
+          "id": "13",
+          "order": 14,
+          "bounding_box": {
+            "x": 0.42401960784313725,
+            "y": 0.5063131313131313,
+            "width": 0.1527777777777778,
+            "height": 0.03851010101010101
+          },
+          "content": " $$ \\frac{1}{T}\\int_{0}^{T}\\mathbf{1}_{W_{\\delta}}(\\Phi^{t}x)dt $$ ",
+          "label": "Formula"
+        },
+        {
+          "id": "14",
+          "order": 15,
+          "bounding_box": {
+            "x": 0.1111111111111111,
+            "y": 0.5542929292929293,
+            "width": 0.559640522875817,
+            "height": 0.016414141414141416
+          },
+          "content": "is sufficiently close to its limit from (16). Partition  $ [0, mT_{0}] $ into blocks",
+          "label": "Text"
+        },
+        {
+          "id": "15",
+          "order": 16,
+          "bounding_box": {
+            "x": 0.34477124183006536,
+            "y": 0.5820707070707071,
+            "width": 0.30718954248366015,
+            "height": 0.018308080808080808
+          },
+          "content": " $$ I_{j}=[(j-1)T_{0},j T_{0}],\\qquad j=1,\\ldots,m. $$ ",
+          "label": "Formula"
+        },
+        {
+          "id": "16",
+          "order": 17,
+          "bounding_box": {
+            "x": 0.11274509803921569,
+            "y": 0.6117424242424242,
+            "width": 0.4076797385620915,
+            "height": 0.015782828282828284
+          },
+          "content": "Denote the fraction of time in  $ W_{\\delta} $ inside a block by",
+          "label": "Text"
+        },
+        {
+          "id": "17",
+          "order": 18,
+          "bounding_box": {
+            "x": 0.40032679738562094,
+            "y": 0.6369949494949495,
+            "width": 0.19607843137254902,
+            "height": 0.037247474747474744
+          },
+          "content": " $$ v_{j}=\\frac{1}{T_{0}}\\int_{I_{j}}\\mathbf{1}_{W_{\\delta}}(\\Phi^{t}x)d t, $$ ",
+          "label": "Formula"
+        },
+        {
+          "id": "18",
+          "order": 19,
+          "bounding_box": {
+            "x": 0.11274509803921569,
+            "y": 0.6849747474747475,
+            "width": 0.2957516339869281,
+            "height": 0.016414141414141416
+          },
+          "content": "and the fraction of time in  $ U_{\\varepsilon}(H) $ by",
+          "label": "Text"
+        },
+        {
+          "id": "19",
+          "order": 20,
+          "bounding_box": {
+            "x": 0.3888888888888889,
+            "y": 0.7108585858585859,
+            "width": 0.21895424836601307,
+            "height": 0.037247474747474744
+          },
+          "content": " $$ w_{j}=\\frac{1}{T_{0}}\\int_{I_{j}}\\mathbf{1}_{U_{\\varepsilon}(H)}(\\Phi^{t}x)d t. $$ ",
+          "label": "Formula"
+        },
+        {
+          "id": "20",
+          "order": 21,
+          "bounding_box": {
+            "x": 0.11356209150326797,
+            "y": 0.7588383838383839,
+            "width": 0.272875816993464,
+            "height": 0.017045454545454544
+          },
+          "content": "We call a block  $ I_j $ bad if  $ v_j \\geq \\gamma/8 $.",
+          "label": "Text"
+        },
+        {
+          "id": "21",
+          "order": 22,
+          "bounding_box": {
+            "x": 0.13970588235294118,
+            "y": 0.7771464646464646,
+            "width": 0.3112745098039216,
+            "height": 0.01452020202020202
+          },
+          "content": "Since  $ x \\in X_0 $, for the chosen  $ \\delta $ we have",
+          "label": "Text"
+        },
+        {
+          "id": "22",
+          "order": 23,
+          "bounding_box": {
+            "x": 0.4150326797385621,
+            "y": 0.803030303030303,
+            "width": 0.16666666666666666,
+            "height": 0.04419191919191919
+          },
+          "content": " $$ \\lim_{m\\to\\infty}\\frac{1}{m}\\sum_{j=1}^{m}v_{j}<\\frac{\\gamma^{2}}{64}. $$ ",
+          "label": "Formula"
+        },
+        {
+          "id": "23",
+          "order": 24,
+          "bounding_box": {
+            "x": 0.11356209150326797,
+            "y": 0.8579545454545454,
+            "width": 0.26715686274509803,
+            "height": 0.015782828282828284
+          },
+          "content": "Hence, for all sufficiently large m,",
+          "label": "Text"
+        },
+        {
+          "id": "24",
+          "order": 25,
+          "bounding_box": {
+            "x": 0.43709150326797386,
+            "y": 0.8718434343434344,
+            "width": 0.12418300653594772,
+            "height": 0.04482323232323232
+          },
+          "content": " $$ \\frac{1}{m}\\sum_{j=1}^{m}v_{j}<\\frac{\\gamma^{2}}{64}. $$ ",
+          "label": "Formula"
+        },
+        {
+          "id": "25",
+          "order": null,
+          "bounding_box": {
+            "x": 0.48937908496732024,
+            "y": 0.9362373737373737,
+            "width": 0.022058823529411766,
+            "height": 0.012626262626262626
+          },
+          "content": "10",
+          "label": "Text"
+        }
+      ]
+    }
+  ]
+}

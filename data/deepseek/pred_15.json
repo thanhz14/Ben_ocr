@@ -1,0 +1,2758 @@
+{
+  "file_name": "paper_15",
+  "pages": [
+    {
+      "page_index": 1,
+      "blocks": [
+        {
+          "id": "0",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.09,
+            "y": 0.07,
+            "width": 0.817,
+            "height": 0.061
+          },
+          "content": "# FISHER: Gradient-Decoupled Hierarchical Multi-Task Learning for Fine-Grained Aquatic Species Recognition",
+          "label": "Text"
+        },
+        {
+          "id": "1",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.16,
+            "y": 0.141,
+            "width": 0.675,
+            "height": 0.018
+          },
+          "content": "Phuc H. Nguyen\\*, Ba Hung Ngo\\*, Mai Phuong Tran, Cuong D. Do and Van- Dinh Nguyen",
+          "label": "Text"
+        },
+        {
+          "id": "2",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.078,
+            "y": 0.206,
+            "width": 0.41,
+            "height": 0.389
+          },
+          "content": "Abstract—Fine- grained recognition of aquatic species is challenging due to subtle morphological differences and long- tailed distributions, where ultra- rare species are underrepresented. A natural solution is to jointly model segmentation, morphological traits, and species classification within a multi- task learning (MTL) framework. However, existing MTL methods suffer from negative transfer caused by gradient conflicts between low- level dense tasks and high- level classification objectives, degrading fine- grained representations. To address this limitation, we identify gradient interference across hierarchical tasks as a fundamental bottleneck and propose FISHER, a gradient- decoupled hierarchical multi- task learning framework. FISHER aligns optimization with the biological hierarchy of aquatic species by enforcing a unidirectional information flow from segmentation to trait prediction and finally to species classification, while explicitly decoupling gradients across task boundaries. This design prevents high- level objectives from corrupting low- level morphological representations, effectively mitigating negative transfer while preserving the benefits of shared supervision. Furthermore, we introduce a prototype- based segmentation head with orthogonality regularization to encourage disentangled anatomical representations, and employ homoscedastic uncertainty weighting to dynamically balance task contributions during training. Our analysis shows that robust trait representations serve as a critical bridge for transferring knowledge to ultra- rare species. Extensive experiments on the Fish- Vista benchmark demonstrate that FISHER achieves \\(97.7\\%\\) mAP for unseen trait identification and improves ultra- rare species classification accuracy by \\(13.4\\%\\) over strong baselines, highlighting the effectiveness of gradient- decoupled hierarchical learning for long- tailed biodiversity recognition.",
+          "label": "Text"
+        },
+        {
+          "id": "3",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.078,
+            "y": 0.603,
+            "width": 0.41,
+            "height": 0.041
+          },
+          "content": "Index Terms—Aquatic species recognition, fine- grained classification, gradient detachment, hierarchical multi- task learning, prototype learning, and semantic segmentation.",
+          "label": "Text"
+        },
+        {
+          "id": "4",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.218,
+            "y": 0.659,
+            "width": 0.131,
+            "height": 0.013
+          },
+          "content": "## I. INTRODUCTION",
+          "label": "Text"
+        },
+        {
+          "id": "5",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.079,
+            "y": 0.68,
+            "width": 0.409,
+            "height": 0.165
+          },
+          "content": "FINE- GRAINED visual recognition in the aquatic domain is an important yet challenging problem in computer vision [1]–[6]. In fish species recognition, inter- class differences are often subtle, involving fine morphological details such as the caudal fin, barbels, scales, or the adipose fin [1], [2]. These challenges are further compounded by water turbidity, variable illumination, diverse body poses, and developmental stages. Accurate aquatic species recognition is therefore critical for applications including fisheries regulation [6], biodiversity monitoring [5], aquaculture management, invasive species detection, and climate- related studies. From underwater track ing systems for endangered species to intelligent aquaculture and illegal fishing surveillance, reliable species identification remains essential for modern aquatic monitoring systems [7]–[9].",
+          "label": "Text"
+        },
+        {
+          "id": "6",
+          "order": 7,
+          "bounding_box": {
+            "x": 0.507,
+            "y": 0.204,
+            "width": 0.41,
+            "height": 0.06
+          },
+          "content": "FINE- GRAINED visual recognition in the aquatic domain is an important yet challenging problem in computer vision [1]–[6]. In fish species recognition, inter- class differences are often subtle, involving fine morphological details such as the caudal fin, barbels, scales, or the adipose fin [1], [2]. These challenges are further compounded by water turbidity, variable illumination, diverse body poses, and developmental stages. Accurate aquatic species recognition is therefore critical for applications including fisheries regulation [6], biodiversity monitoring [5], aquaculture management, invasive species detection, and climate- related studies. From underwater track ing systems for endangered species to intelligent aquaculture and illegal fishing surveillance, reliable species identification remains essential for modern aquatic monitoring systems [7]–[9].",
+          "label": "Text"
+        },
+        {
+          "id": "7",
+          "order": 8,
+          "bounding_box": {
+            "x": 0.507,
+            "y": 0.265,
+            "width": 0.411,
+            "height": 0.179
+          },
+          "content": "Given these challenges, relying solely on a single classification model is insufficient for fine- grained recognition [1], [5]. Instead, the problem naturally decomposes into three interrelated tasks grounded in biological reasoning: 1) semantic segmentation of anatomical structures, 2) morphological trait prediction of discriminative characteristics (e.g., fin shapes, stripe patterns, barbel arrangements), and 3) species classification based on aggregated traits. These tasks exhibit a hierarchical dependency: fine- grained part segmentation provides the basis for inferring traits, while traits serve as high- level cues for species recognition. This bottom- up relationship can be formalized as",
+          "label": "Text"
+        },
+        {
+          "id": "8",
+          "order": 9,
+          "bounding_box": {
+            "x": 0.522,
+            "y": 0.446,
+            "width": 0.394,
+            "height": 0.037
+          },
+          "content": "\\[P(y,t,M|X) = \\underbrace{P(y|t,X)}_{Species}\\cdot \\underbrace{P(t|M,X)}_{Traits}\\cdot \\underbrace{P(M|X)}_{Segmentation} \\quad (1)\\]",
+          "label": "Formula"
+        },
+        {
+          "id": "9",
+          "order": 10,
+          "bounding_box": {
+            "x": 0.507,
+            "y": 0.484,
+            "width": 0.41,
+            "height": 0.075
+          },
+          "content": "where \\(y\\) is the species label, \\(t\\) denotes the vector of morphological traits, \\(M\\) is the dense segmentation mask, and \\(X\\) is the input image. This formulation highlights how low- level morphological details progressively inform higher- level semantic understanding.",
+          "label": "Text"
+        },
+        {
+          "id": "10",
+          "order": 11,
+          "bounding_box": {
+            "x": 0.507,
+            "y": 0.566,
+            "width": 0.096,
+            "height": 0.013
+          },
+          "content": "### A. Motivation",
+          "label": "Text"
+        },
+        {
+          "id": "11",
+          "order": 12,
+          "bounding_box": {
+            "x": 0.507,
+            "y": 0.581,
+            "width": 0.411,
+            "height": 0.211
+          },
+          "content": "From (1), effectively modeling this hierarchy remains challenging in practice. Most existing multi- task learning (MTL) frameworks [4]–[6] adopted a shared backbone jointly optimized across tasks. In this setting, high- level classification tasks produce stronger and more stable gradients than dense tasks such as segmentation or trait prediction, biasing the shared representation toward coarse global features. As a result, fine- grained anatomical details are suppressed, leading to negative transfer. This issue is particularly critical in aquatic recognition, where discriminative cues lie in subtle local structures. Therefore, the key challenge is not only to jointly learn multiple tasks, but also to preserve their hierarchical dependencies while preventing higher- level objectives from corrupting lower- level representations.",
+          "label": "Text"
+        },
+        {
+          "id": "12",
+          "order": 13,
+          "bounding_box": {
+            "x": 0.507,
+            "y": 0.793,
+            "width": 0.411,
+            "height": 0.15
+          },
+          "content": "Despite recent progress, several limitations remain. Existing MTL methods [10], [11] primarily focused on loss balancing or task- specific heads, with limited attention to hierarchical structure and gradient interference. Although gradient detachment techniques have shown effectiveness in self- supervised learning and domain adaptation [12], they are rarely used to enforce biologically consistent task hierarchies. Prototype- based segmentation has shown promising capability in learning compact and interpretable representations [13], but is typically confined to single- task settings. Similarly, although uncertainty",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "page_index": 2,
+      "blocks": [
+        {
+          "id": "0",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.09,
+            "y": 0.07,
+            "width": 0.389,
+            "height": 0.118
+          },
+          "content": "",
+          "label": "Image"
+        },
+        {
+          "id": "1",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.078,
+            "y": 0.2,
+            "width": 0.411,
+            "height": 0.046
+          },
+          "content": "<center>Fig. 1. Comparison of parallel and hierarchical multi-task learning. Parallel MTL learns segmentation \\((M)\\) , traits \\((t)\\) , and species \\((y)\\) independently from shared features, while FISHER models a hierarchical dependency where segmentation informs traits and traits guide classification. </center>",
+          "label": "Text"
+        },
+        {
+          "id": "2",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.079,
+            "y": 0.271,
+            "width": 0.409,
+            "height": 0.044
+          },
+          "content": "weighting (UW) [14] enables adaptive loss balancing, it does not address the risk that lower- level representations may be dominated by high- level classification objectives.",
+          "label": "Text"
+        },
+        {
+          "id": "3",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.079,
+            "y": 0.322,
+            "width": 0.153,
+            "height": 0.014
+          },
+          "content": "### B. Main Contributions",
+          "label": "Text"
+        },
+        {
+          "id": "4",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.08,
+            "y": 0.338,
+            "width": 0.409,
+            "height": 0.328
+          },
+          "content": "To address the gaps above, we propose FISHER (Fine- grained Integrated Segmentation and Hierarchical Learning for Recognition), a gradient- decoupled hierarchical learning framework for fine- grained aquatic species recognition that aligns optimization with the biological hierarchy of aquatic species. As illustrated in Fig. 1, FISHER mitigates the feature competition inherent in conventional parallel MTL by introducing a hierarchy built on two key principles. First, it enforces a unidirectional information flow, where segmentation cues guide trait prediction, and the resulting trait representations are further leveraged for species classification. Second, gradient decoupling is applied at task boundaries to prevent higher- level classification objectives from interfering with lower- level morphological learning, thereby mitigating negative transfer while preserving the benefits of multi- task supervision. To further enhance morphological fidelity, the segmentation head employs learnable prototypes with orthogonality regularization, enabling compact, disentangled, and interpretable anatomical representations. In addition, homoscedastic uncertainty weighting is adopted to dynamically balance dense prediction tasks such as segmentation with higher- level tasks including trait identification and species classification.",
+          "label": "Text"
+        },
+        {
+          "id": "5",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.095,
+            "y": 0.668,
+            "width": 0.346,
+            "height": 0.014
+          },
+          "content": "The main contributions of this work are as follows:",
+          "label": "Text"
+        },
+        {
+          "id": "6",
+          "order": 7,
+          "bounding_box": {
+            "x": 0.095,
+            "y": 0.685,
+            "width": 0.395,
+            "height": 0.24
+          },
+          "content": "- We identify and rigorously analyze gradient conflict between dense morphological segmentation and global species classification as a fundamental source of negative transfer in fine-grained aquatic recognition.- We propose FISHER, a gradient-decoupled hierarchical multi-task framework that enforces biologically consistent unidirectional dependencies and protects low-level representations from high-level gradient interference.- We introduce a prototype-based head with orthogonality constraints, enabling precise, disentangled, and interpretable modeling of fine-grained anatomical structures.- We conduct extensive experiments on the large-scale Fish-Vista dataset, demonstrating that FISHER achieves strong and consistent performance across semantic segmentation, trait prediction, and species classification tasks.",
+          "label": "Text"
+        },
+        {
+          "id": "7",
+          "order": 8,
+          "bounding_box": {
+            "x": 0.095,
+            "y": 0.928,
+            "width": 0.393,
+            "height": 0.015
+          },
+          "content": "The remainder of this paper is organized as follows. Sec",
+          "label": "Text"
+        },
+        {
+          "id": "8",
+          "order": 9,
+          "bounding_box": {
+            "x": 0.506,
+            "y": 0.1,
+            "width": 0.411,
+            "height": 0.315
+          },
+          "content": "<table><tr><td>Symbol</td><td>Description</td></tr><tr><td>Inputs and Targets</td><td></td></tr><tr><td>x ∈ R3×H×W</td><td>Input image</td></tr><tr><td>y s &amp;amp; y s ∈ R K×H×W</td><td>Ground-truth segmentation map and predicted logits</td></tr><tr><td>y t &amp;amp; y t ∈ R T</td><td>Ground-truth trait vector and predicted logits</td></tr><tr><td>y c &amp;amp; y c ∈ R C</td><td>Ground-truth species label and predicted logits</td></tr><tr><td>K, T &amp;amp; C</td><td>Number of semantic classes, morphological traits, and species classes, resp.</td></tr><tr><td>Architecture Components</td><td></td></tr><tr><td>F &amp;amp; {f i}</td><td>Feature extractor and hierarchical multi-scale feature map</td></tr><tr><td>f</td><td>Fused high-resolution feature map via FPN</td></tr><tr><td>P ∈ R K×D</td><td>Learnable prototype matrix for segmentation</td></tr><tr><td>e</td><td>Projected feature embedding for prototype matching</td></tr><tr><td>g</td><td>Global image descriptor from the deepest backbone layer</td></tr><tr><td>p</td><td>Aggregated segmentation evidence vector</td></tr><tr><td>b</td><td>Base context vector (concatenation of g and detached p)</td></tr><tr><td>b c</td><td>Extended context vector for species classification</td></tr><tr><td>h t &amp;amp; h c</td><td>Hidden representations for trait and species heads</td></tr><tr><td>ψ t &amp;amp; ψ c</td><td>MLP projectors for trait and species tasks</td></tr><tr><td>Loss Functions and Parameters</td><td></td></tr><tr><td>L s, L t &amp;amp; L c</td><td>Task-specific losses for segmentation, traits, and species, resp.</td></tr><tr><td>L ortho</td><td>Orthogonality regularization loss for prototypes</td></tr><tr><td>η m (with m ∈ {s, t, c})</td><td>Learnable parameter for uncertainty weighting</td></tr><tr><td>λ</td><td>Hyperparameter balancing the orthogonality loss</td></tr><tr><td>τ</td><td>Temperature scaling parameter for cosine similarity</td></tr><tr><td>c</td><td>Label smoothing factor</td></tr></table>",
+          "label": "Table"
+        },
+        {
+          "id": "9",
+          "order": 10,
+          "bounding_box": {
+            "x": 0.636,
+            "y": 0.07,
+            "width": 0.153,
+            "height": 0.024
+          },
+          "content": "TABLE I NOTATIONS AND SYMBOLS",
+          "label": "Text"
+        },
+        {
+          "id": "10",
+          "order": 11,
+          "bounding_box": {
+            "x": 0.508,
+            "y": 0.433,
+            "width": 0.409,
+            "height": 0.09
+          },
+          "content": "tion II reviews related work. Section III introduces the task formulation and architecture, and Section IV presents the proposed FISHER framework. Section V describes the experimental setup and reports the results. Finally, Section VI concludes the paper and discusses future directions. Key notations are summarized in Table I.",
+          "label": "Text"
+        },
+        {
+          "id": "11",
+          "order": 12,
+          "bounding_box": {
+            "x": 0.641,
+            "y": 0.536,
+            "width": 0.143,
+            "height": 0.014
+          },
+          "content": "## II. RELATED WORK",
+          "label": "Text"
+        },
+        {
+          "id": "12",
+          "order": 13,
+          "bounding_box": {
+            "x": 0.508,
+            "y": 0.557,
+            "width": 0.371,
+            "height": 0.015
+          },
+          "content": "### A. From Closed-Set Taxonomy to Open-World Analysis",
+          "label": "Text"
+        },
+        {
+          "id": "13",
+          "order": 14,
+          "bounding_box": {
+            "x": 0.508,
+            "y": 0.573,
+            "width": 0.41,
+            "height": 0.195
+          },
+          "content": "The field of aquatic visual analysis has evolved from closed- set classification to more complex open- world scenarios. Benchmarks such as WildFish++ [15] and AutoFish [2], which provide high- quality instance segmentation masks, have advanced fine- grained categorization. Similarly, FishNet [4] extended this paradigm by incorporating functional trait prediction across over 17,000 species. Recent progress has further improved performance by transitioning from Convolutional Neural Networks (CNNs) to Vision Transformers (ViTs). For example, Veiga and Rodrigues [16] demonstrated that Swin Transformers with fine- grained modules achieve state- of- the- art (SOTA) results, while Tejaswini et al. [7] showed that ViT- B16 outperforms CNNs for estuarine species classification.",
+          "label": "Text"
+        },
+        {
+          "id": "14",
+          "order": 15,
+          "bounding_box": {
+            "x": 0.508,
+            "y": 0.771,
+            "width": 0.41,
+            "height": 0.12
+          },
+          "content": "Despite these advances, most approaches, including lightweight models such as YOLOv8n- DFG [17] and foundation models like BioCLIP [18], rely heavily on global feature aggregation. While effective for frequent classes, this strategy struggles with ultra- rare species, where global representations are difficult to learn from limited data. In contrast, we argue that explicit morphological segmentation provides a more robust and invariant prior for recognizing rare species.",
+          "label": "Text"
+        },
+        {
+          "id": "15",
+          "order": 16,
+          "bounding_box": {
+            "x": 0.508,
+            "y": 0.898,
+            "width": 0.38,
+            "height": 0.014
+          },
+          "content": "### B. MTL: Shared Representations and Gradient Conflicts",
+          "label": "Text"
+        },
+        {
+          "id": "16",
+          "order": 17,
+          "bounding_box": {
+            "x": 0.508,
+            "y": 0.913,
+            "width": 0.41,
+            "height": 0.03
+          },
+          "content": "MTL aims to improve generalization by exploiting shared representations across related tasks. In aquatic vision, existing",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "page_index": 3,
+      "blocks": [
+        {
+          "id": "0",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.078,
+            "y": 0.066,
+            "width": 0.838,
+            "height": 0.219
+          },
+          "content": "",
+          "label": "Image"
+        },
+        {
+          "id": "1",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.075,
+            "y": 0.3,
+            "width": 0.845,
+            "height": 0.025
+          },
+          "content": "<center>Fig. 2. Overview of the FISHER architecture. Features are extracted by a shared backbone and refined hierarchically from segmentation to trait prediction and species classification. Red dashed lines denote gradient decoupling (stop-gradient) used to mitigate negative transfer. </center>",
+          "label": "Text"
+        },
+        {
+          "id": "2",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.079,
+            "y": 0.35,
+            "width": 0.41,
+            "height": 0.21
+          },
+          "content": "frameworks often integrate multiple objectives; for example, YOLO- FD [19] combines detection and segmentation for fish disease analysis, while DeepSeaVision [20] enhances YOLOv9 with image enhancement techniques (e.g., CLAHE, UCM) for underwater environments. Other works, such as [21], explore hybrid models to preserve low- level features that are often lost in deep architectures. However, shared backbones are inherently limited by negative transfer, where conflicting task objectives degrade performance [22]. This issue is related to challenges in the model- protected MTL [23], where shared parameters can introduce unintended cross- task interference. Moreover, recent studies on long- tailed learning [24] suggest that effective learning often requires decoupling representation learning from classification.",
+          "label": "Text"
+        },
+        {
+          "id": "3",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.079,
+            "y": 0.564,
+            "width": 0.41,
+            "height": 0.105
+          },
+          "content": "Building on this insight, we address the imbalance between dominant global features and subtle local morphological traits. Unlike prior methods that rely on complex gradient manipulation (e.g., PCGrad [25]), FISHER introduces a structural solution through hierarchical gradient decoupling, preventing high- level semantic gradients from interfering with low- level anatomical feature learning.",
+          "label": "Text"
+        },
+        {
+          "id": "4",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.079,
+            "y": 0.68,
+            "width": 0.349,
+            "height": 0.014
+          },
+          "content": "### C. Hierarchical and Interpretable Feature Learning",
+          "label": "Text"
+        },
+        {
+          "id": "5",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.079,
+            "y": 0.699,
+            "width": 0.41,
+            "height": 0.09
+          },
+          "content": "Hierarchical learning has emerged as an effective strategy for handling data scarcity and label ambiguity. Prior work demonstrated that linking coarse body structures with fine- grained features improves fish recognition [26], while hierarchical attention mechanisms help reduce misleading feature focus in fine- grained classification [27].",
+          "label": "Text"
+        },
+        {
+          "id": "6",
+          "order": 7,
+          "bounding_box": {
+            "x": 0.079,
+            "y": 0.793,
+            "width": 0.41,
+            "height": 0.15
+          },
+          "content": "FISHER extends these ideas by explicitly modeling a biologically grounded dependency chain: segmentation (anatomy) informs traits (attributes), which in turn guide species recognition. Unlike Concept Bottleneck Models (CBMs) [28] or weakly supervised attention approaches, our framework enforces structured dependencies through supervised, prototype- based representations. This design improves interpretability and leverages biological priors to learn meaningful feature hierarchies, leading to strong generalization on ultra- rare species, as demonstrated on Fish- Vista [1].",
+          "label": "Text"
+        },
+        {
+          "id": "7",
+          "order": 8,
+          "bounding_box": {
+            "x": 0.548,
+            "y": 0.35,
+            "width": 0.336,
+            "height": 0.014
+          },
+          "content": "## III. TASK FORMULATION AND ARCHITECTURE",
+          "label": "Text"
+        },
+        {
+          "id": "8",
+          "order": 9,
+          "bounding_box": {
+            "x": 0.508,
+            "y": 0.371,
+            "width": 0.411,
+            "height": 0.074
+          },
+          "content": "In this section, we present the core components of a detached hierarchical multi- task framework with learnable prototypes. We first formalize the hierarchical task formulation using a probabilistic hierarchy, then describe the FISHER architecture.",
+          "label": "Text"
+        },
+        {
+          "id": "9",
+          "order": 10,
+          "bounding_box": {
+            "x": 0.508,
+            "y": 0.454,
+            "width": 0.228,
+            "height": 0.014
+          },
+          "content": "### A. Hierarchical Task Formulation",
+          "label": "Text"
+        },
+        {
+          "id": "10",
+          "order": 11,
+          "bounding_box": {
+            "x": 0.508,
+            "y": 0.47,
+            "width": 0.411,
+            "height": 0.074
+          },
+          "content": "Fine- grained fish recognition is challenging due to subtle inter- class differences and intra- class variations in morphological attributes. Given an input image \\(\\pmb {x}\\in \\mathbb{R}^{3\\times H\\times W}\\) with \\(H\\) and \\(W\\) being the height and width of the image, our goal is to jointly learn three related tasks:",
+          "label": "Text"
+        },
+        {
+          "id": "11",
+          "order": 12,
+          "bounding_box": {
+            "x": 0.523,
+            "y": 0.549,
+            "width": 0.397,
+            "height": 0.151
+          },
+          "content": "Semantic segmentation: A per- pixel label map \\(y_{s}\\in\\) \\(\\{0,1,\\ldots ,K - 1\\}^{H\\times W}\\) , where \\(K\\) is the number of semantic classes (e.g., fins, head, and body regions). The label 0 is reserved for background or ignored regions. Morphological trait prediction: A multi- label binary vector \\(y_{t}\\in \\{0,1, - 1\\}^{T}\\) , where \\(T\\) is the number of traits (e.g., shape of caudal fin), and \\(- 1\\) indicates missing or unavailable annotations in partial labels. Species classification: A categorical label \\(y_{c}\\in \\{1,\\ldots ,C\\}\\) , where \\(C\\) is the number of species.",
+          "label": "Text"
+        },
+        {
+          "id": "12",
+          "order": 13,
+          "bounding_box": {
+            "x": 0.508,
+            "y": 0.702,
+            "width": 0.411,
+            "height": 0.078
+          },
+          "content": "These tasks exhibit a natural hierarchical dependency rooted in biological semantics: precise segmentation of morphological parts provides foundational evidence for inferring traits; then, the inferred traits serve as discriminative cues for species identification. This hierarchical dependency can be formally expressed through the following joint posterior factorization:",
+          "label": "Text"
+        },
+        {
+          "id": "13",
+          "order": 14,
+          "bounding_box": {
+            "x": 0.52,
+            "y": 0.782,
+            "width": 0.399,
+            "height": 0.017
+          },
+          "content": "\\[P(y_{s},y_{t},y_{c}|\\pmb {x}) = P(y_{s}|\\pmb {x})\\cdot P(y_{t}|y_{s},\\pmb {x})\\cdot P(y_{c}|y_{t},y_{s},\\pmb {x}) \\quad (2)\\]",
+          "label": "Formula"
+        },
+        {
+          "id": "14",
+          "order": 15,
+          "bounding_box": {
+            "x": 0.508,
+            "y": 0.802,
+            "width": 0.411,
+            "height": 0.058
+          },
+          "content": "where \\(P(y_{s}|\\pmb {x})\\) captures dense pixel- level morphological details, \\(P(y_{t}|y_{s},\\pmb {x})\\) aggregates these into trait- level representations, and \\(P(y_{c}|y_{t},y_{s},\\pmb {x})\\) leverages the aggregated information to clarify global categorization.",
+          "label": "Text"
+        },
+        {
+          "id": "15",
+          "order": 16,
+          "bounding_box": {
+            "x": 0.508,
+            "y": 0.868,
+            "width": 0.16,
+            "height": 0.013
+          },
+          "content": "### B. Overall Architecture",
+          "label": "Text"
+        },
+        {
+          "id": "16",
+          "order": 17,
+          "bounding_box": {
+            "x": 0.507,
+            "y": 0.884,
+            "width": 0.412,
+            "height": 0.059
+          },
+          "content": "As illustrated in Fig. 2, the proposed FISHER framework consists a shared feature extractor \\(\\mathcal{F}\\) that processes the input \\(\\pmb{x}\\) into multi- scale feature maps \\(\\{f_{l}\\}_{l = 1}^{L}\\) , where \\(f_{l}\\in \\mathbb{R}^{C_{l}\\times H_{l}\\times W_{l}}\\) represents the feature map at level \\(l\\) , with \\(C_{l}\\) chan",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "page_index": 4,
+      "blocks": [
+        {
+          "id": "0",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.078,
+            "y": 0.068,
+            "width": 0.412,
+            "height": 0.12
+          },
+          "content": "nels and spatial dimensions \\(H_{l} \\times W_{l}\\) (typically decreasing with \\(l\\) ). These multi- scale features are fused using a lightweight Feature Pyramid Network (FPN) to generate a high- resolution, semantically rich feature map \\(\\pmb {f} \\in \\mathbb{R}^{D \\times H' \\times W'}\\) , where \\(D\\) is the unified channel dimension, and \\(H'\\) and \\(W'\\) are downsampled spatial dimensions. The FPN employs lateral convolutions \\((1 \\times 1)\\) to align channels and top- down upsampling with additions, followed by smoothing convolutions \\((3 \\times 3)\\) .",
+          "label": "Text"
+        },
+        {
+          "id": "1",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.078,
+            "y": 0.19,
+            "width": 0.411,
+            "height": 0.03
+          },
+          "content": "From \\(\\pmb{f}\\) , the model branches hierarchically into three specialized heads:",
+          "label": "Text"
+        },
+        {
+          "id": "2",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.099,
+            "y": 0.23,
+            "width": 0.376,
+            "height": 0.138
+          },
+          "content": "\\(①\\) First, the segmentation head processes \\(\\pmb{f}\\) to produce segmentation logits \\(\\hat{\\pmb{y}}_{s}\\) . \\(②\\) Next, the trait head aggregates segmentation evidence- detached from gradient propagation, together with global image features to infer morphological traits. \\(③\\) Finally, the species head utilizes detached trait embeddings along with shared contextual features to perform species classification.",
+          "label": "Text"
+        },
+        {
+          "id": "3",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.077,
+            "y": 0.378,
+            "width": 0.412,
+            "height": 0.077
+          },
+          "content": "To enforce a unidirectional information flow, gradient detachment is applied at the interfaces between successive heads, preventing gradients from propagating from higher- level tasks to lower- level representations and thereby preserving fine- grained morphological features.",
+          "label": "Text"
+        },
+        {
+          "id": "4",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.212,
+            "y": 0.468,
+            "width": 0.143,
+            "height": 0.015
+          },
+          "content": "## IV. METHODOLOGY",
+          "label": "Text"
+        },
+        {
+          "id": "5",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.077,
+            "y": 0.49,
+            "width": 0.412,
+            "height": 0.076
+          },
+          "content": "We now detail the three specialized heads introduced in Section III- B and Fig. 2, including the prototype- based segmentation head, gradient- detached propagation for morphological trait prediction and species classification, as well as the loss functions and training procedure.",
+          "label": "Text"
+        },
+        {
+          "id": "6",
+          "order": 7,
+          "bounding_box": {
+            "x": 0.078,
+            "y": 0.574,
+            "width": 0.292,
+            "height": 0.014
+          },
+          "content": "### A. Prototype-Based Semantic Segmentation",
+          "label": "Text"
+        },
+        {
+          "id": "7",
+          "order": 8,
+          "bounding_box": {
+            "x": 0.078,
+            "y": 0.59,
+            "width": 0.411,
+            "height": 0.135
+          },
+          "content": "We adopt a learnable prototype- based head to replace conventional convolutional decoders for modeling morphologically accurate part representations. Instead of dense decoding, semantic classes are represented as compact vectors in feature space, enabling clearer separation and more robust segmentation. Let \\(\\pmb {P} \\in \\mathbb{R}^{K \\times D}\\) denote the learnable prototype matrix, where each row \\(\\pmb{P}_{k} \\in \\mathbb{R}^{D}\\) corresponds to class \\(k \\in \\{0, \\ldots , K - 1\\}\\) . The prototypes are initialized orthogonally to promote initial diversity.",
+          "label": "Text"
+        },
+        {
+          "id": "8",
+          "order": 9,
+          "bounding_box": {
+            "x": 0.077,
+            "y": 0.728,
+            "width": 0.411,
+            "height": 0.03
+          },
+          "content": "The head first projects the FPN feature \\(\\pmb{f}\\) into a prototype- aligned embedding space:",
+          "label": "Text"
+        },
+        {
+          "id": "9",
+          "order": 10,
+          "bounding_box": {
+            "x": 0.201,
+            "y": 0.756,
+            "width": 0.287,
+            "height": 0.021
+          },
+          "content": "\\[\\pmb {e} = \\phi (\\pmb {f}) \\in \\mathbb{R}^{D \\times H' \\times W'} \\quad (3)\\]",
+          "label": "Formula"
+        },
+        {
+          "id": "10",
+          "order": 11,
+          "bounding_box": {
+            "x": 0.077,
+            "y": 0.781,
+            "width": 0.412,
+            "height": 0.074
+          },
+          "content": "where \\(\\phi\\) consists of a stacked sequence Conv2D \\((3 \\times 3)\\) , BatchNorm2D, ReLU, followed by Conv2D \\((1 \\times 1)\\) . For each pixel position \\((h, w)\\) , the segmentation logits are computed using normalized cosine similarity scaled by a temperature parameter \\(\\tau > 0\\) , as follows:",
+          "label": "Text"
+        },
+        {
+          "id": "11",
+          "order": 12,
+          "bounding_box": {
+            "x": 0.152,
+            "y": 0.855,
+            "width": 0.336,
+            "height": 0.035
+          },
+          "content": "\\[\\pmb {l}_s(k,h,w) = \\frac{1}{\\tau} \\cdot \\frac{\\pmb{e}(\\cdot ,h,w)^\\top \\pmb{P}_k}{\\| \\pmb{e}(\\cdot ,h,w)\\|_2 \\cdot \\| \\pmb{P}_k\\|_2} \\quad (4)\\]",
+          "label": "Formula"
+        },
+        {
+          "id": "12",
+          "order": 13,
+          "bounding_box": {
+            "x": 0.077,
+            "y": 0.892,
+            "width": 0.412,
+            "height": 0.03
+          },
+          "content": "yielding \\(\\pmb{l}_s \\in \\mathbb{R}^{K \\times H' \\times W'}\\) . The final segmentation logits are obtained via bilinear upsampling",
+          "label": "Text"
+        },
+        {
+          "id": "13",
+          "order": 14,
+          "bounding_box": {
+            "x": 0.168,
+            "y": 0.924,
+            "width": 0.32,
+            "height": 0.018
+          },
+          "content": "\\[\\hat{\\pmb{y}}_s = \\mathrm{UpSample}(\\pmb {l}_s) \\in \\mathbb{R}^{K \\times H \\times W}. \\quad (5)\\]",
+          "label": "Formula"
+        },
+        {
+          "id": "14",
+          "order": 15,
+          "bounding_box": {
+            "x": 0.507,
+            "y": 0.069,
+            "width": 0.412,
+            "height": 0.03
+          },
+          "content": "To ensure distinct and discriminative prototypes, we impose an orthogonality regularization as",
+          "label": "Text"
+        },
+        {
+          "id": "15",
+          "order": 16,
+          "bounding_box": {
+            "x": 0.59,
+            "y": 0.099,
+            "width": 0.327,
+            "height": 0.029
+          },
+          "content": "\\[\\mathcal{L}_{\\mathrm{ortho}} = \\frac{1}{K^2}\\| \\pmb{P}_{\\mathrm{norm}}\\pmb{P}_{\\mathrm{norm}}^\\top -\\pmb {I}_K\\| _F^2 \\quad (6)\\]",
+          "label": "Formula"
+        },
+        {
+          "id": "16",
+          "order": 17,
+          "bounding_box": {
+            "x": 0.508,
+            "y": 0.128,
+            "width": 0.411,
+            "height": 0.195
+          },
+          "content": "where \\(\\pmb{I}_K\\) is the identity matrix, \\(\\pmb{P}_{\\mathrm{norm}}\\) is the row- wise \\(\\ell_2\\) - normalized prototype matrix, and \\(\\| \\cdot \\| _F\\) represents the Frobenius norm. By reducing similarity among prototypes, this loss enforces pairwise orthogonality and promotes a well- separated feature space for capturing subtle morphological variations. For datasets with a background class, orthogonality can be applied only to the \\(K - 1\\) foreground prototypes to avoid constraining non- semantic regions. This prototype- based formulation is particularly advantageous for fine- grained segmentation: it naturally handles class imbalance through similarity- based assignment, provides interpretable representations (e.g., prototypes as class centroids), and reduces parameter overhead compared to dense decoders.",
+          "label": "Text"
+        },
+        {
+          "id": "17",
+          "order": 18,
+          "bounding_box": {
+            "x": 0.508,
+            "y": 0.331,
+            "width": 0.192,
+            "height": 0.014
+          },
+          "content": "### B. Hierarchical Aggregation",
+          "label": "Text"
+        },
+        {
+          "id": "18",
+          "order": 19,
+          "bounding_box": {
+            "x": 0.507,
+            "y": 0.347,
+            "width": 0.412,
+            "height": 0.059
+          },
+          "content": "To propagate hierarchical information while respecting the conditional dependencies, we aggregate context from lower levels for higher tasks. First, a global image descriptor is derived from the deepest backbone feature \\(\\pmb {f}_L \\in \\mathbb{R}^{C_L \\times H_L \\times W_L}\\)",
+          "label": "Text"
+        },
+        {
+          "id": "19",
+          "order": 20,
+          "bounding_box": {
+            "x": 0.58,
+            "y": 0.405,
+            "width": 0.337,
+            "height": 0.02
+          },
+          "content": "\\[\\pmb {g} = \\mathrm{AdaptiveAvgPool2D}(\\pmb {f}_L) \\in \\mathbb{R}^{C_L} \\quad (7)\\]",
+          "label": "Formula"
+        },
+        {
+          "id": "20",
+          "order": 21,
+          "bounding_box": {
+            "x": 0.507,
+            "y": 0.429,
+            "width": 0.412,
+            "height": 0.045
+          },
+          "content": "capturing holistic scene information. Segmentation evidence is summarized as the maximum activation across spatial dimensions for each prototype channel:",
+          "label": "Text"
+        },
+        {
+          "id": "21",
+          "order": 22,
+          "bounding_box": {
+            "x": 0.58,
+            "y": 0.474,
+            "width": 0.337,
+            "height": 0.019
+          },
+          "content": "\\[\\pmb {p} = \\mathrm{AdaptiveMaxPool2D}(\\pmb {l}_s) \\in \\mathbb{R}^{K}. \\quad (8)\\]",
+          "label": "Formula"
+        },
+        {
+          "id": "22",
+          "order": 23,
+          "bounding_box": {
+            "x": 0.507,
+            "y": 0.497,
+            "width": 0.412,
+            "height": 0.044
+          },
+          "content": "This vector represents the strength of presence for each semantic class in the image. The base context vector is then formed by concatenation",
+          "label": "Text"
+        },
+        {
+          "id": "23",
+          "order": 24,
+          "bounding_box": {
+            "x": 0.625,
+            "y": 0.541,
+            "width": 0.292,
+            "height": 0.02
+          },
+          "content": "\\[\\pmb {b} = [\\pmb {g}; \\pmb{p}^{\\mathrm{detach}}] \\in \\mathbb{R}^{C_L + K} \\quad (9)\\]",
+          "label": "Formula"
+        },
+        {
+          "id": "24",
+          "order": 25,
+          "bounding_box": {
+            "x": 0.507,
+            "y": 0.564,
+            "width": 0.412,
+            "height": 0.045
+          },
+          "content": "where \\(\\pmb{p}^{\\mathrm{detach}}\\) denotes the detached tensor (gradient flow stopped), ensuring that downstream task trait or classification optimization does not influence segmentation parameters.",
+          "label": "Text"
+        },
+        {
+          "id": "25",
+          "order": 26,
+          "bounding_box": {
+            "x": 0.508,
+            "y": 0.616,
+            "width": 0.222,
+            "height": 0.014
+          },
+          "content": "### C. Detached Downstream Tasks",
+          "label": "Text"
+        },
+        {
+          "id": "26",
+          "order": 27,
+          "bounding_box": {
+            "x": 0.507,
+            "y": 0.632,
+            "width": 0.412,
+            "height": 0.06
+          },
+          "content": "For morphological trait prediction, the context vector \\(\\pmb{b}\\) is fed into a trait projection module \\(\\psi_t: \\mathbb{R}^{C_L + K} \\to \\mathbb{R}^{d_t}\\) , implemented as a multi- layer perceptron (MLP) with normalization and non- linear activation, as follows:",
+          "label": "Text"
+        },
+        {
+          "id": "27",
+          "order": 28,
+          "bounding_box": {
+            "x": 0.641,
+            "y": 0.694,
+            "width": 0.276,
+            "height": 0.018
+          },
+          "content": "\\[\\pmb {h}_t = \\psi_t(\\pmb {b}) \\in \\mathbb{R}^{d_t}. \\quad (10)\\]",
+          "label": "Formula"
+        },
+        {
+          "id": "28",
+          "order": 29,
+          "bounding_box": {
+            "x": 0.508,
+            "y": 0.716,
+            "width": 0.249,
+            "height": 0.014
+          },
+          "content": "The trait logits are then computed as",
+          "label": "Text"
+        },
+        {
+          "id": "29",
+          "order": 30,
+          "bounding_box": {
+            "x": 0.625,
+            "y": 0.731,
+            "width": 0.292,
+            "height": 0.019
+          },
+          "content": "\\[\\hat{\\pmb{y}}_t = \\pmb {W}_t\\pmb {h}_t + \\pmb {b}_t \\in \\mathbb{R}^T \\quad (11)\\]",
+          "label": "Formula"
+        },
+        {
+          "id": "30",
+          "order": 31,
+          "bounding_box": {
+            "x": 0.507,
+            "y": 0.752,
+            "width": 0.412,
+            "height": 0.105
+          },
+          "content": "where \\(\\pmb{W}_t \\in \\mathbb{R}^{T \\times d_t}\\) is the weight matrix and \\(\\pmb {b}_t \\in \\mathbb{R}^T\\) is the bias vector of the final linear projection. To preserve the morphological fidelity captured by \\(P(\\pmb {y}_s | \\pmb {x})\\) , gradient detachment is applied such that gradients from the trait loss do not propagate back to the segmentation branch, while segmentation- derived features still contribute to trait prediction during forward inference.",
+          "label": "Text"
+        },
+        {
+          "id": "31",
+          "order": 32,
+          "bounding_box": {
+            "x": 0.507,
+            "y": 0.86,
+            "width": 0.412,
+            "height": 0.044
+          },
+          "content": "Building upon this representation, the species classification head further incorporates trait information within the hierarchical structure",
+          "label": "Text"
+        },
+        {
+          "id": "32",
+          "order": 33,
+          "bounding_box": {
+            "x": 0.61,
+            "y": 0.904,
+            "width": 0.307,
+            "height": 0.021
+          },
+          "content": "\\[\\pmb {b}_c = [\\pmb {b}; \\pmb {h}_c^{\\mathrm{detach}}] \\in \\mathbb{R}^{C_L + K + d_t} \\quad (12)\\]",
+          "label": "Formula"
+        },
+        {
+          "id": "33",
+          "order": 34,
+          "bounding_box": {
+            "x": 0.507,
+            "y": 0.927,
+            "width": 0.412,
+            "height": 0.016
+          },
+          "content": "where \\(\\pmb{h}_c^{\\mathrm{detach}}\\) is detached to prevent species gradients from",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "page_index": 5,
+      "blocks": [
+        {
+          "id": "0",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.077,
+            "y": 0.068,
+            "width": 0.413,
+            "height": 0.044
+          },
+          "content": "flowing back to the trait head. This extended context is processed by a MLP species projector \\(\\psi_{c}:\\mathbb{R}^{C_{L} + K + d_{t}}\\to \\mathbb{R}^{d_{c}}\\) as follows",
+          "label": "Text"
+        },
+        {
+          "id": "1",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.214,
+            "y": 0.114,
+            "width": 0.275,
+            "height": 0.019
+          },
+          "content": "\\[\\pmb {h}_c = \\psi_c(\\pmb {b}_c)\\in \\mathbb{R}^{d_c}. \\quad (13)\\]",
+          "label": "Formula"
+        },
+        {
+          "id": "2",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.078,
+            "y": 0.137,
+            "width": 0.272,
+            "height": 0.015
+          },
+          "content": "The final species logits are computed as",
+          "label": "Text"
+        },
+        {
+          "id": "3",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.2,
+            "y": 0.152,
+            "width": 0.289,
+            "height": 0.02
+          },
+          "content": "\\[\\hat{\\pmb{y}}_c = \\pmb {W}_c\\pmb {h}_c + \\beta_c\\in \\mathbb{R}^C \\quad (14)\\]",
+          "label": "Formula"
+        },
+        {
+          "id": "4",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.077,
+            "y": 0.173,
+            "width": 0.413,
+            "height": 0.031
+          },
+          "content": "where \\(\\pmb {W}_c\\in \\mathbb{R}^{C\\times d_c}\\) is the weight matrix and \\(\\beta_{c}\\in \\mathbb{R}^{C}\\) is the bias vector of the final linear projection.",
+          "label": "Text"
+        },
+        {
+          "id": "5",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.077,
+            "y": 0.208,
+            "width": 0.413,
+            "height": 0.06
+          },
+          "content": "This hierarchical detachment strategy ensures that optimization of the species task does not bias intermediate trait representations, while the shared context \\(\\pmb{b}\\) enables the backbone to benefit from supervision across all tasks.",
+          "label": "Text"
+        },
+        {
+          "id": "6",
+          "order": 7,
+          "bounding_box": {
+            "x": 0.078,
+            "y": 0.278,
+            "width": 0.265,
+            "height": 0.015
+          },
+          "content": "### D. Loss Functions and Task Balancing",
+          "label": "Text"
+        },
+        {
+          "id": "7",
+          "order": 8,
+          "bounding_box": {
+            "x": 0.077,
+            "y": 0.297,
+            "width": 0.413,
+            "height": 0.045
+          },
+          "content": "The model is optimized using task- specific loss functions, which are dynamically balanced to mitigate the dominance of easier tasks and ensure stable multi- task learning.",
+          "label": "Text"
+        },
+        {
+          "id": "8",
+          "order": 9,
+          "bounding_box": {
+            "x": 0.077,
+            "y": 0.346,
+            "width": 0.413,
+            "height": 0.06
+          },
+          "content": "Segmentation: We employ a combination of weighted cross- entropy and Dice loss to address class imbalance and improve overlap accuracy. First, the predicted probability \\(p_{i,k}\\) for pixel \\(i\\) and class \\(k\\) is obtained via the softmax function:",
+          "label": "Text"
+        },
+        {
+          "id": "9",
+          "order": 10,
+          "bounding_box": {
+            "x": 0.195,
+            "y": 0.404,
+            "width": 0.294,
+            "height": 0.036
+          },
+          "content": "\\[p_{i,k} = \\frac{\\exp(\\hat{y}_{s,i,k})}{\\sum_{j = 0}^{K - 1}\\exp(\\hat{y}_{s,i,j})} \\quad (15)\\]",
+          "label": "Formula"
+        },
+        {
+          "id": "10",
+          "order": 11,
+          "bounding_box": {
+            "x": 0.077,
+            "y": 0.441,
+            "width": 0.413,
+            "height": 0.03
+          },
+          "content": "where \\(\\hat{y}_{s,i,k}\\) is the segmentation logit for pixel \\(i\\) and class \\(k\\) The weighted cross- entropy is then defined as:",
+          "label": "Text"
+        },
+        {
+          "id": "11",
+          "order": 12,
+          "bounding_box": {
+            "x": 0.135,
+            "y": 0.471,
+            "width": 0.354,
+            "height": 0.037
+          },
+          "content": "\\[\\mathcal{L}_s^{\\mathrm{CE}} = -\\frac{1}{\\sum_{i\\in \\Omega}w_{y_{s,i}}}\\sum_{i\\in \\Omega}w_{y_{s,i}}\\log (p_{i,y_{s,i}}) \\quad (16)\\]",
+          "label": "Formula"
+        },
+        {
+          "id": "12",
+          "order": 13,
+          "bounding_box": {
+            "x": 0.077,
+            "y": 0.513,
+            "width": 0.413,
+            "height": 0.076
+          },
+          "content": "where \\(\\Omega\\) is the set of valid pixels, \\(y_{s,i}\\in \\{0,\\ldots ,K - 1\\}\\) is the ground- truth class index for pixel \\(i\\) \\(w_{k}\\) is the class weight computed as inverse normalized frequencies, and \\(p_{i,y_{s,i}}\\) is the predicted probability corresponding to the ground- truth class \\(y_{s,i}\\)",
+          "label": "Text"
+        },
+        {
+          "id": "13",
+          "order": 14,
+          "bounding_box": {
+            "x": 0.077,
+            "y": 0.593,
+            "width": 0.413,
+            "height": 0.03
+          },
+          "content": "To further encourage region- level consistency, we incorporate the Dice loss, which promotes intersection- over- union",
+          "label": "Text"
+        },
+        {
+          "id": "14",
+          "order": 15,
+          "bounding_box": {
+            "x": 0.128,
+            "y": 0.623,
+            "width": 0.361,
+            "height": 0.043
+          },
+          "content": "\\[\\mathcal{L}_s^{\\mathrm{Dice}} = 1 - \\frac{1}{K}\\sum_{k = 0}^{K - 1}\\frac{2\\sum_{i\\in \\Omega}p_{i,k}\\cdot g_{i,k}}{\\sum_{i\\in \\Omega}p_{i,k} + \\sum_{i\\in \\Omega}g_{i,k}} \\quad (17)\\]",
+          "label": "Formula"
+        },
+        {
+          "id": "15",
+          "order": 16,
+          "bounding_box": {
+            "x": 0.077,
+            "y": 0.668,
+            "width": 0.413,
+            "height": 0.044
+          },
+          "content": "where \\(g_{i,k}\\in \\{0,1\\}\\) is the one- hot encoded ground truth for pixel \\(i\\) and class \\(k\\) . The total segmentation loss is computed as follows:",
+          "label": "Text"
+        },
+        {
+          "id": "16",
+          "order": 17,
+          "bounding_box": {
+            "x": 0.22,
+            "y": 0.713,
+            "width": 0.269,
+            "height": 0.019
+          },
+          "content": "\\[\\mathcal{L}_s = \\mathcal{L}_s^{\\mathrm{CE}} + \\mathcal{L}_s^{\\mathrm{Dice}}. \\quad (18)\\]",
+          "label": "Formula"
+        },
+        {
+          "id": "17",
+          "order": 18,
+          "bounding_box": {
+            "x": 0.077,
+            "y": 0.739,
+            "width": 0.413,
+            "height": 0.045
+          },
+          "content": "Morphological trait prediction: We use a masked binary cross- entropy loss to accommodate partial labels, formulated as follows:",
+          "label": "Text"
+        },
+        {
+          "id": "18",
+          "order": 19,
+          "bounding_box": {
+            "x": 0.108,
+            "y": 0.783,
+            "width": 0.381,
+            "height": 0.062
+          },
+          "content": "\\[\\begin{array}{l}\\mathcal{L}_t = -\\frac{1}{|\\mathcal{M}|}\\sum_{j\\in \\mathcal{M}}\\left[y_{t,j}\\log \\sigma (\\hat{y}_{t,j})\\right.\\\\ \\displaystyle \\left. + (1 - y_{t,j})\\log \\left(1 - \\sigma (\\hat{y}_{t,j})\\right)\\right] \\end{array} \\quad (19)\\]",
+          "label": "Formula"
+        },
+        {
+          "id": "19",
+          "order": 20,
+          "bounding_box": {
+            "x": 0.077,
+            "y": 0.848,
+            "width": 0.413,
+            "height": 0.076
+          },
+          "content": "where \\(\\mathcal{M} = \\{j\\mid y_{t,j}\\neq - 1\\}\\) is the set of valid trait indices. Here, \\(y_{t,j}\\in \\{0,1\\}\\) is the ground- truth binary label for the \\(j\\) - th trait, and \\(\\hat{y}_{t,j}\\) is its corresponding predicted logit (i.e., the \\(j\\) - th element of the vector \\(\\hat{\\pmb{y}}_t\\) defined in (11)). The function \\(\\sigma (z) = 1 / (1 + e^{- z})\\) denotes the sigmoid activation.",
+          "label": "Text"
+        },
+        {
+          "id": "20",
+          "order": 21,
+          "bounding_box": {
+            "x": 0.077,
+            "y": 0.928,
+            "width": 0.413,
+            "height": 0.015
+          },
+          "content": "Species classification: We employ cross- entropy loss with",
+          "label": "Text"
+        },
+        {
+          "id": "21",
+          "order": 22,
+          "bounding_box": {
+            "x": 0.507,
+            "y": 0.068,
+            "width": 0.17,
+            "height": 0.014
+          },
+          "content": "label smoothing given as",
+          "label": "Text"
+        },
+        {
+          "id": "22",
+          "order": 23,
+          "bounding_box": {
+            "x": 0.625,
+            "y": 0.083,
+            "width": 0.293,
+            "height": 0.042
+          },
+          "content": "\\[\\mathcal{L}_c = -\\sum_{k = 1}^{C}\\hat{y}_{c,k}\\log (p_{c,k}) \\quad (20)\\]",
+          "label": "Formula"
+        },
+        {
+          "id": "23",
+          "order": 24,
+          "bounding_box": {
+            "x": 0.506,
+            "y": 0.127,
+            "width": 0.414,
+            "height": 0.045
+          },
+          "content": "where \\(p_{c,k}\\) is the predicted probability for class \\(k\\) obtained by applying the softmax function to the species logit vector \\(\\hat{\\pmb{y}}_c\\in \\mathbb{R}^C\\) . The smoothed ground- truth target \\(\\hat{y}_{c,k}\\) is defined as",
+          "label": "Text"
+        },
+        {
+          "id": "24",
+          "order": 25,
+          "bounding_box": {
+            "x": 0.62,
+            "y": 0.173,
+            "width": 0.298,
+            "height": 0.038
+          },
+          "content": "\\[\\hat{y}_{c,k} = \\left\\{ \\begin{array}{ll}1 - \\epsilon , & \\mathrm{if} k = y_c\\\\ \\frac{\\epsilon}{C - 1}, & \\mathrm{otherwise} \\end{array} \\right. \\quad (21)\\]",
+          "label": "Formula"
+        },
+        {
+          "id": "25",
+          "order": 26,
+          "bounding_box": {
+            "x": 0.507,
+            "y": 0.214,
+            "width": 0.413,
+            "height": 0.091
+          },
+          "content": "where \\(y_{c}\\in \\{1,\\ldots ,C\\}\\) is the ground- truth species class index, and \\(\\epsilon\\) is the label smoothing factor. This formulation encourages the model to produce softer probability distributions, reducing overconfidence and improving generalization, which is particularly beneficial in fine- grained classification tasks with potential label noise or ambiguity.",
+          "label": "Text"
+        },
+        {
+          "id": "26",
+          "order": 27,
+          "bounding_box": {
+            "x": 0.507,
+            "y": 0.306,
+            "width": 0.413,
+            "height": 0.045
+          },
+          "content": "To balance the contributions of different tasks, we adopt uncertainty weighting [14], which addresses imbalance in gradient magnitudes:",
+          "label": "Text"
+        },
+        {
+          "id": "27",
+          "order": 28,
+          "bounding_box": {
+            "x": 0.577,
+            "y": 0.352,
+            "width": 0.341,
+            "height": 0.034
+          },
+          "content": "\\[\\mathcal{L}_{\\mathrm{task}} = \\sum_{m\\in \\{s,t,c\\}}(\\exp (-\\eta_m)\\mathcal{L}_m + \\eta_m) \\quad (22)\\]",
+          "label": "Formula"
+        },
+        {
+          "id": "28",
+          "order": 29,
+          "bounding_box": {
+            "x": 0.507,
+            "y": 0.388,
+            "width": 0.413,
+            "height": 0.076
+          },
+          "content": "where \\(m\\) indexes the three tasks (i.e., segmentation \\(s\\) , trait prediction \\(t\\) , and species classification \\(c\\) ), and \\(\\eta_m = \\log (\\sigma_m^2)\\) are task- specific learnable parameters. Intuitively, this formulation adaptively down- weights noisy or difficult tasks while preventing degenerate solutions through the additive \\(\\eta_m\\) term.",
+          "label": "Text"
+        },
+        {
+          "id": "29",
+          "order": 30,
+          "bounding_box": {
+            "x": 0.507,
+            "y": 0.465,
+            "width": 0.413,
+            "height": 0.06
+          },
+          "content": "The training objective: The overall training objective of the proposed framework consists of multiple task- specific loss terms in (22) together with an orthogonality regularization term in (6), which is formulated as",
+          "label": "Text"
+        },
+        {
+          "id": "30",
+          "order": 31,
+          "bounding_box": {
+            "x": 0.62,
+            "y": 0.528,
+            "width": 0.298,
+            "height": 0.016
+          },
+          "content": "\\[\\mathcal{L}_{\\mathrm{total}} = \\mathcal{L}_{\\mathrm{task}} + \\lambda \\mathcal{L}_{\\mathrm{ortho}} \\quad (23)\\]",
+          "label": "Formula"
+        },
+        {
+          "id": "31",
+          "order": 32,
+          "bounding_box": {
+            "x": 0.507,
+            "y": 0.547,
+            "width": 0.413,
+            "height": 0.06
+          },
+          "content": "where \\(\\lambda\\) controls the strength of the regularization. Together, these losses enable robust optimization by improving segmentation boundary precision, supporting partial supervision, and maintaining classification accuracy.",
+          "label": "Text"
+        },
+        {
+          "id": "32",
+          "order": 33,
+          "bounding_box": {
+            "x": 0.65,
+            "y": 0.62,
+            "width": 0.125,
+            "height": 0.014
+          },
+          "content": "## V. EXPERIMENTS",
+          "label": "Text"
+        },
+        {
+          "id": "33",
+          "order": 34,
+          "bounding_box": {
+            "x": 0.507,
+            "y": 0.641,
+            "width": 0.413,
+            "height": 0.105
+          },
+          "content": "In this section, we evaluate the proposed FISHER framework. We first describe the experimental setup, followed by comparisons with SOTA methods on the Fish- Vista benchmark. We then present results across three tasks, including semantic segmentation, trait identification, and species classification, highlighting the effectiveness of the decoupled learning strategy under long- tailed distributions.",
+          "label": "Text"
+        },
+        {
+          "id": "34",
+          "order": 35,
+          "bounding_box": {
+            "x": 0.507,
+            "y": 0.754,
+            "width": 0.153,
+            "height": 0.014
+          },
+          "content": "### A. Experimental Setup",
+          "label": "Text"
+        },
+        {
+          "id": "35",
+          "order": 36,
+          "bounding_box": {
+            "x": 0.507,
+            "y": 0.77,
+            "width": 0.413,
+            "height": 0.15
+          },
+          "content": "Dataset: We evaluate our method primarily on the Fish- Vista dataset [1], the largest and most diverse benchmark for fine- grained aquatic trait analysis. It comprises 69, 269 images covering 4, 316 fish species, annotated with hierarchical labels (species taxonomy, trait presence, and pixel- level segmentation masks). We adhere to the official evaluation protocol using three test splits: (1) In- Species (seen species), (2) Leave- Out- Species (unseen species, testing Out- Of- Distribution generalization), and (3) Manual- Annotation (high- quality labels verified by experts).",
+          "label": "Text"
+        },
+        {
+          "id": "36",
+          "order": 37,
+          "bounding_box": {
+            "x": 0.507,
+            "y": 0.928,
+            "width": 0.413,
+            "height": 0.015
+          },
+          "content": "Evaluation metrics: To evaluate the proposed framework",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "page_index": 6,
+      "blocks": [
+        {
+          "id": "0",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.084,
+            "y": 0.103,
+            "width": 0.401,
+            "height": 0.282
+          },
+          "content": "<table><tr><td>Configuration</td><td>Value/Setting</td></tr><tr><td>Optimization Setup</td><td></td></tr><tr><td>Optimizer</td><td>AdamW</td></tr><tr><td>Learning rate</td><td>1 × 10−4</td></tr><tr><td>Weight decay</td><td>0.01</td></tr><tr><td>Batch size</td><td>32</td></tr><tr><td>Training epochs</td><td>50</td></tr><tr><td>LR scheduler</td><td>Cosine annealing</td></tr><tr><td>Warmup epochs</td><td>5</td></tr><tr><td>Model Architecture</td><td></td></tr><tr><td>Backbone</td><td>Swin-Base (ImageNet-22k)</td></tr><tr><td>Input size</td><td>224 × 224</td></tr><tr><td>Prototype temperature (τ)</td><td>0.1</td></tr><tr><td>Number of prototypes</td><td>10 (Background + 9 Traits)</td></tr><tr><td>Loss Coefficients</td><td></td></tr><tr><td>Orthogonality Weight (λortho)</td><td>0.5</td></tr><tr><td>Label Smoothing (ε)</td><td>0.1</td></tr></table>",
+          "label": "Table"
+        },
+        {
+          "id": "1",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.106,
+            "y": 0.07,
+            "width": 0.354,
+            "height": 0.026
+          },
+          "content": "TABLE II IMPLEMENTATION DETAILS AND HYPERPARAMETER SETTINGS",
+          "label": "Text"
+        },
+        {
+          "id": "2",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.078,
+            "y": 0.397,
+            "width": 0.411,
+            "height": 0.091
+          },
+          "content": "across hierarchical tasks, we adopt task- specific metrics tailored to each prediction objective. For semantic segmentation, we use mean Intersection- over- Union (mIoU), a standard metric that accounts for pixel- wise accuracy under class imbalance. For each class \\(k\\in \\{1,\\ldots ,K - 1\\}\\) , the IoU is defined as",
+          "label": "Text"
+        },
+        {
+          "id": "3",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.195,
+            "y": 0.485,
+            "width": 0.293,
+            "height": 0.03
+          },
+          "content": "\\[\\mathrm{IoU}_k = \\frac{\\mathrm{TP}_k}{\\mathrm{TP}_k + \\mathrm{FP}_k + \\mathrm{FN}_k} \\quad (24)\\]",
+          "label": "Formula"
+        },
+        {
+          "id": "4",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.078,
+            "y": 0.515,
+            "width": 0.411,
+            "height": 0.045
+          },
+          "content": "where \\(\\mathrm{TP}_k\\) \\(\\mathrm{FP}_k\\) , and \\(\\mathrm{FN}_k\\) denote true positives, false positives, and false negatives for class \\(k\\) , respectively. The mIoU is then computed as the average across classes:",
+          "label": "Text"
+        },
+        {
+          "id": "5",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.191,
+            "y": 0.56,
+            "width": 0.297,
+            "height": 0.042
+          },
+          "content": "\\[\\mathrm{mIoU} = \\frac{1}{K - 1}\\sum_{k = 1}^{K - 1}\\mathrm{IoU}_k. \\quad (25)\\]",
+          "label": "Formula"
+        },
+        {
+          "id": "6",
+          "order": 7,
+          "bounding_box": {
+            "x": 0.077,
+            "y": 0.603,
+            "width": 0.411,
+            "height": 0.045
+          },
+          "content": "This metric evaluates the model's ability to accurately delineate fine- grained anatomical regions, which are critical for downstream tasks.",
+          "label": "Text"
+        },
+        {
+          "id": "7",
+          "order": 8,
+          "bounding_box": {
+            "x": 0.077,
+            "y": 0.65,
+            "width": 0.411,
+            "height": 0.06
+          },
+          "content": "For morphological trait prediction, given its multi- label binary nature, we adopt the macro- averaged F1- score to balance precision and recall across traits. For each trait \\(j\\in \\{1,\\ldots ,T\\}\\) precision and recall are determined as follows",
+          "label": "Text"
+        },
+        {
+          "id": "8",
+          "order": 9,
+          "bounding_box": {
+            "x": 0.192,
+            "y": 0.708,
+            "width": 0.296,
+            "height": 0.069
+          },
+          "content": "\\[\\begin{array}{c}\\mathrm{Precision}_{j} = \\frac{\\mathrm{TP}_{j}}{\\mathrm{TP}_{j} + \\mathrm{FP}_{j}}\\\\ \\mathrm{Recall}_{j} = \\frac{\\mathrm{TP}_{j}}{\\mathrm{TP}_{j} + \\mathrm{FN}_{j}} \\end{array} \\quad (27)\\]",
+          "label": "Formula"
+        },
+        {
+          "id": "9",
+          "order": 10,
+          "bounding_box": {
+            "x": 0.078,
+            "y": 0.777,
+            "width": 0.297,
+            "height": 0.014
+          },
+          "content": "and the corresponding F1- score is given by:",
+          "label": "Text"
+        },
+        {
+          "id": "10",
+          "order": 11,
+          "bounding_box": {
+            "x": 0.163,
+            "y": 0.789,
+            "width": 0.325,
+            "height": 0.033
+          },
+          "content": "\\[\\mathrm{F1}_j = \\frac{2\\cdot\\mathrm{Precision}_j\\cdot\\mathrm{Recall}_j}{\\mathrm{Precision}_j + \\mathrm{Recall}_j}. \\quad (28)\\]",
+          "label": "Formula"
+        },
+        {
+          "id": "11",
+          "order": 12,
+          "bounding_box": {
+            "x": 0.077,
+            "y": 0.825,
+            "width": 0.411,
+            "height": 0.045
+          },
+          "content": "In addition, we employ mean Average Precision (mAP) to evaluate ranking performance across traits. The Average Precision (AP) for each trait \\(j\\) is defined as:",
+          "label": "Text"
+        },
+        {
+          "id": "12",
+          "order": 13,
+          "bounding_box": {
+            "x": 0.184,
+            "y": 0.869,
+            "width": 0.304,
+            "height": 0.042
+          },
+          "content": "\\[\\mathrm{AP}_j = \\sum_{k = 1}^{N}(R_k - R_{k - 1})\\cdot P_k \\quad (29)\\]",
+          "label": "Formula"
+        },
+        {
+          "id": "13",
+          "order": 14,
+          "bounding_box": {
+            "x": 0.077,
+            "y": 0.912,
+            "width": 0.411,
+            "height": 0.031
+          },
+          "content": "where \\(P_{k}\\) and \\(R_{k}\\) denote precision and recall at the \\(k\\) - th threshold when ranking samples by the predicted score \\(\\hat{t}_j\\)",
+          "label": "Text"
+        },
+        {
+          "id": "14",
+          "order": 15,
+          "bounding_box": {
+            "x": 0.525,
+            "y": 0.128,
+            "width": 0.359,
+            "height": 0.262
+          },
+          "content": "<table><tr><td>Model</td><td>F1</td><td>Major</td><td>Neutral</td><td>Minor</td><td>Ultra-R</td></tr><tr><td></td><td></td><td>Acc.</td><td>Acc.</td><td>Acc.</td><td>Acc.</td></tr><tr><td>VGG-19 [29]</td><td>49.7</td><td>93.5</td><td>83.0</td><td>74.2</td><td>45.9</td></tr><tr><td>ResNeXt-50 [30]</td><td>44.4</td><td>91.4</td><td>78.3</td><td>69.8</td><td>39.1</td></tr><tr><td>RegNetY-4G [31]</td><td>43.7</td><td>89.8</td><td>77.4</td><td>68.5</td><td>38.5</td></tr><tr><td>ViT-B16 [32]</td><td>48.3</td><td>88.7</td><td>82.3</td><td>73.3</td><td>43.4</td></tr><tr><td>Swin-B-22k [33]</td><td>55.1</td><td>92.6</td><td>86.2</td><td>79.6</td><td>50.4</td></tr><tr><td>MaxViT-T [34]</td><td>57.8</td><td>94.4</td><td>86.7</td><td>81.4</td><td>53.9</td></tr><tr><td>BioCLIP-LP [18]</td><td>38.2</td><td>75.5</td><td>65.2</td><td>61.3</td><td>31.1</td></tr><tr><td>CLIP-LP [35]</td><td>25.4</td><td>55.9</td><td>49.8</td><td>46.7</td><td>20.9</td></tr><tr><td>DINOv2-LP [36]</td><td>53.1</td><td>89.9</td><td>78.0</td><td>76.0</td><td>47.0</td></tr><tr><td>INTR [37]</td><td>6.1</td><td>92.2</td><td>73.2</td><td>22.6</td><td>0.6</td></tr><tr><td>TransFG [38]</td><td>50.3</td><td>94.5</td><td>86.6</td><td>75.5</td><td>45.3</td></tr><tr><td>MTLSwinB</td><td>57.9</td><td>95.2</td><td>89.0</td><td>85.9</td><td>60.5</td></tr><tr><td>FISHER</td><td>60.8</td><td>95.5</td><td>89.0</td><td>86.2</td><td>63.8</td></tr></table>",
+          "label": "Table"
+        },
+        {
+          "id": "15",
+          "order": 16,
+          "bounding_box": {
+            "x": 0.543,
+            "y": 0.07,
+            "width": 0.329,
+            "height": 0.053
+          },
+          "content": "TABLE III COMPARISON OF CLASSIFICATION PERFORMANCE (IN %). RESULTS ARE COLOR-COED AS BEST, SECOND BEST, WORST, AND SECOND WORST",
+          "label": "Text"
+        },
+        {
+          "id": "16",
+          "order": 17,
+          "bounding_box": {
+            "x": 0.507,
+            "y": 0.426,
+            "width": 0.411,
+            "height": 0.03
+          },
+          "content": "and \\(N\\) is the number of samples. The mAP is then averaged over all traits",
+          "label": "Text"
+        },
+        {
+          "id": "17",
+          "order": 18,
+          "bounding_box": {
+            "x": 0.649,
+            "y": 0.456,
+            "width": 0.269,
+            "height": 0.043
+          },
+          "content": "\\[\\mathrm{mAP} = \\frac{1}{T}\\sum_{j = 1}^{T}\\mathrm{AP}_j. \\quad (30)\\]",
+          "label": "Formula"
+        },
+        {
+          "id": "18",
+          "order": 19,
+          "bounding_box": {
+            "x": 0.507,
+            "y": 0.5,
+            "width": 0.411,
+            "height": 0.03
+          },
+          "content": "This metric complements the macro- F1 score by evaluating the model's ability to rank positive traits effectively.",
+          "label": "Text"
+        },
+        {
+          "id": "19",
+          "order": 20,
+          "bounding_box": {
+            "x": 0.507,
+            "y": 0.536,
+            "width": 0.411,
+            "height": 0.031
+          },
+          "content": "For species classification, we use top- 1 accuracy, which measures the proportion of correctly classified samples",
+          "label": "Text"
+        },
+        {
+          "id": "20",
+          "order": 21,
+          "bounding_box": {
+            "x": 0.568,
+            "y": 0.567,
+            "width": 0.35,
+            "height": 0.043
+          },
+          "content": "\\[\\mathrm{Accuracy} = \\frac{1}{N}\\sum_{i = 1}^{N}\\mathbb{I}(\\mathrm{argmax}\\hat{y}_{c,i,k} = y_{c,i}) \\quad (31)\\]",
+          "label": "Formula"
+        },
+        {
+          "id": "21",
+          "order": 22,
+          "bounding_box": {
+            "x": 0.507,
+            "y": 0.611,
+            "width": 0.411,
+            "height": 0.151
+          },
+          "content": "where \\(N\\) is the number of samples, and \\(\\mathbb{I}(\\cdot)\\) is the indicator function. This straightforward metric evaluates the global categorization performance, benefiting from the hierarchical cues provided by lower- level tasks. Given the extreme class imbalance in Fish- Vista [1], we stratify performance into four frequency- based groups based on numbers of training samples: Majority \\((\\geq 500\\) images), Neutral \\((100 - 499)\\) , Minority \\((10 - 99)\\) , and Ultra- Rare \\((< 10)\\) . The Ultra- Rare metric is of particular interest as it reflects the model's ability to learn from few- shot examples.",
+          "label": "Text"
+        },
+        {
+          "id": "22",
+          "order": 23,
+          "bounding_box": {
+            "x": 0.507,
+            "y": 0.777,
+            "width": 0.411,
+            "height": 0.165
+          },
+          "content": "Implementation details: Our framework is implemented in PyTorch. We utilize a Swin- Transformer Base (Swin- B) [33] pre- trained on ImageNet- 22k as the shared backbone. The input images are resized to \\(224 \\times 224\\) . We train for 50 epochs with a batch size of 32 on a single NVIDIA A5000 GPU using AdamW optimizer (learning rate \\(1 \\times 10^{- 4}\\) , weight decay 0.01), including 5 epochs for the warm- up stage. To manage multi- task optimization, we use homoscedastic uncertainty weighting [14] to dynamically balance \\(\\mathcal{L}_c\\) , \\(\\mathcal{L}_t\\) , and \\(\\mathcal{L}_s\\) as in Eq. (23). The hyperparameter details are summarized in Table II.",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "page_index": 7,
+      "blocks": [
+        {
+          "id": "0",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.12,
+            "y": 0.108,
+            "width": 0.75,
+            "height": 0.149
+          },
+          "content": "<table><tr><td rowspan=\"2\">Model</td><td colspan=\"5\">Average Precision</td><td colspan=\"5\">F1@0.5</td><td colspan=\"5\">F1@optimal threshold</td></tr><tr><td>mAP</td><td>Adip</td><td>Pelv</td><td>Barb</td><td>Dors</td><td>Adip</td><td>Pelv</td><td>Barb</td><td>Dors</td><td>Adip</td><td>Pelv</td><td>Barb</td><td>DORS</td><td></td><td></td></tr><tr><td>ResNext-50</td><td>91.44</td><td>98.53</td><td>74.64</td><td>97.03</td><td>95.54</td><td>96.07</td><td>86.56</td><td>96.32</td><td>94.09</td><td>96.90</td><td>85.23</td><td>96.45</td><td>94.99</td><td></td><td></td></tr><tr><td>ConvNext-Base</td><td>97.46</td><td>99.54</td><td>92.33</td><td>98.67</td><td>99.32</td><td>98.62</td><td>92.31</td><td>98.28</td><td>98.46</td><td>98.62</td><td>95.93</td><td>98.19</td><td>98.45</td><td></td><td></td></tr><tr><td>ViT-B-16</td><td>86.95</td><td>92.93</td><td>67.70</td><td>93.29</td><td>93.89</td><td>91.51</td><td>66.75</td><td>92.41</td><td>92.57</td><td>91.71</td><td>81.23</td><td>92.14</td><td>92.68</td><td></td><td></td></tr><tr><td>SWIN-B-22k</td><td>95.21</td><td>98.05</td><td>86.94</td><td>97.55</td><td>98.28</td><td>95.95</td><td>86.37</td><td>96.07</td><td>96.47</td><td>96.12</td><td>91.29</td><td>96.13</td><td>96.62</td><td></td><td></td></tr><tr><td>Q2L (R34-22k SH)</td><td>97.78</td><td>99.47</td><td>93.91</td><td>98.47</td><td>99.26</td><td>97.65</td><td>97.36</td><td>97.35</td><td>98.27</td><td>97.90</td><td>95.10</td><td>97.73</td><td>98.45</td><td></td><td></td></tr><tr><td>Q2L (SwinB-22k SH)</td><td>98.32</td><td>99.81</td><td>94.94</td><td>99.00</td><td>99.53</td><td>99.09</td><td>97.36</td><td>97.82</td><td>99.19</td><td>98.93</td><td>95.66</td><td>98.03</td><td>99.06</td><td></td><td></td></tr><tr><td>MTLSwinB</td><td>99.38</td><td>99.75</td><td>99.99</td><td>98.47</td><td>99.29</td><td>98.57</td><td>99.97</td><td>97.19</td><td>98.21</td><td>98.87</td><td>99.97</td><td>97.15</td><td>98.43</td><td></td><td></td></tr><tr><td>FISHER</td><td>99.11</td><td>99.58</td><td>99.96</td><td>97.85</td><td>99.03</td><td>99.05</td><td>99.97</td><td>97.67</td><td>98.52</td><td>99.06</td><td>99.98</td><td>97.62</td><td>98.60</td><td></td><td></td></tr></table>",
+          "label": "Table"
+        },
+        {
+          "id": "1",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.12,
+            "y": 0.07,
+            "width": 0.747,
+            "height": 0.028
+          },
+          "content": "TABLE IV TRAIT IDENTIFICATION RESULTS ON IN-SPECIES TEST SET (HIGHLIGHTED AS BEST, SECOND BEST, WORST, SECOND WORST)",
+          "label": "Text"
+        },
+        {
+          "id": "2",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.12,
+            "y": 0.308,
+            "width": 0.75,
+            "height": 0.136
+          },
+          "content": "<table><tr><td rowspan=\"2\">Model</td><td colspan=\"5\">Average Precision</td><td colspan=\"5\">F1@0.5</td><td colspan=\"5\">F1@optimal threshold</td></tr><tr><td>mAP</td><td>Adip</td><td>Pelv</td><td>Barb</td><td>Dors</td><td>Adip</td><td>Pelv</td><td>Barb</td><td>Dors</td><td>Adip</td><td>Pelv</td><td>Barb</td><td>DORS</td><td></td><td></td></tr><tr><td>ResNext-50</td><td>53.00</td><td>91.16</td><td>1.42</td><td>72.86</td><td>46.56</td><td>93.28</td><td>48.29</td><td>81.23</td><td>73.40</td><td>82.29</td><td>48.71</td><td>80.91</td><td>72.85</td><td></td><td></td></tr><tr><td>ViT-B-16</td><td>47.27</td><td>58.54</td><td>40.13</td><td>67.60</td><td>22.82</td><td>69.78</td><td>66.66</td><td>70.20</td><td>62.41</td><td>69.27</td><td>65.89</td><td>76.86</td><td>61.87</td><td></td><td></td></tr><tr><td>SWIN-B-22k</td><td>68.18</td><td>89.00</td><td>59.52</td><td>80.03</td><td>44.18</td><td>92.04</td><td>75.96</td><td>85.03</td><td>57.88</td><td>91.50</td><td>74.77</td><td>83.88</td><td>58.25</td><td></td><td></td></tr><tr><td>Q2L (R34-22k SH)</td><td>79.86</td><td>92.93</td><td>67.54</td><td>89.14</td><td>69.82</td><td>88.54</td><td>85.56</td><td>86.14</td><td>70.02</td><td>92.79</td><td>88.51</td><td>90.09</td><td>78.74</td><td></td><td></td></tr><tr><td>Q2L (SWIN-22k SH)</td><td>88.41</td><td>98.61</td><td>93.06</td><td>97.30</td><td>64.65</td><td>97.84</td><td>92.75</td><td>96.08</td><td>74.50</td><td>97.42</td><td>93.98</td><td>95.22</td><td>75.43</td><td></td><td></td></tr><tr><td>MTLSwinB</td><td>92.71</td><td>98.41</td><td>99.95</td><td>95.74</td><td>76.75</td><td>97.14</td><td>99.90</td><td>91.60</td><td>59.49</td><td>97.87</td><td>99.97</td><td>85.14</td><td>72.57</td><td></td><td></td></tr><tr><td>FISHER</td><td>97.72</td><td>98.62</td><td>99.95</td><td>99.43</td><td>92.90</td><td>98.59</td><td>99.95</td><td>96.30</td><td>85.45</td><td>97.90</td><td>99.95</td><td>97.06</td><td>89.45</td><td></td><td></td></tr></table>",
+          "label": "Table"
+        },
+        {
+          "id": "3",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.101,
+            "y": 0.268,
+            "width": 0.787,
+            "height": 0.022
+          },
+          "content": "TABLE V TRAIT IDENTIFICATION RESULTS ON LEAVE-OUT-SPECIES TEST SET (HIGHLIGHTED AS BEST, SECOND BEST, WORST, SECOND WORST)",
+          "label": "Text"
+        },
+        {
+          "id": "4",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.12,
+            "y": 0.49,
+            "width": 0.75,
+            "height": 0.135
+          },
+          "content": "<table><tr><td rowspan=\"2\">Model</td><td colspan=\"5\">Average Precision</td><td colspan=\"5\">F1@0.5</td><td colspan=\"5\">F1@optimal threshold</td></tr><tr><td>mAP</td><td>Adip</td><td>Pelv</td><td>Barb</td><td>Dors</td><td>Adip</td><td>Pelv</td><td>Barb</td><td>Dors</td><td>Adip</td><td>Pelv</td><td>Barb</td><td>DORS</td><td></td><td></td></tr><tr><td>ResNext-50</td><td>43.25</td><td>57.02</td><td>19.56</td><td>36.62</td><td>59.79</td><td>70.12</td><td>52.37</td><td>63.25</td><td>62.53</td><td>73.58</td><td>52.37</td><td>62.67</td><td>68.89</td><td></td><td></td></tr><tr><td>ViT-B-16</td><td>37.63</td><td>37.69</td><td>26.92</td><td>36.72</td><td>49.20</td><td>64.72</td><td>58.76</td><td>66.35</td><td>66.57</td><td>65.74</td><td>60.47</td><td>66.61</td><td>67.57</td><td></td><td></td></tr><tr><td>SWIN-B-22k</td><td>51.53</td><td>55.55</td><td>32.20</td><td>50.54</td><td>67.82</td><td>72.51</td><td>65.99</td><td>73.78</td><td>75.45</td><td>72.21</td><td>63.00</td><td>71.46</td><td>74.37</td><td></td><td></td></tr><tr><td>Q2L (R34-22k SH)</td><td>55.84</td><td>61.67</td><td>36.80</td><td>50.44</td><td>74.43</td><td>76.16</td><td>67.35</td><td>73.61</td><td>80.07</td><td>75.23</td><td>69.25</td><td>72.76</td><td>79.63</td><td></td><td></td></tr><tr><td>Q2L (SWIN-22k SH)</td><td>59.39</td><td>59.18</td><td>41.65</td><td>63.46</td><td>73.28</td><td>75.74</td><td>70.83</td><td>79.16</td><td>78.69</td><td>74.80</td><td>70.54</td><td>77.78</td><td>78.44</td><td></td><td></td></tr><tr><td>MTLSwinB</td><td>77.34</td><td>74.74</td><td>95.38</td><td>66.85</td><td>72.38</td><td>62.89</td><td>97.14</td><td>63.44</td><td>67.24</td><td>66.06</td><td>97.26</td><td>63.55</td><td>62.59</td><td></td><td></td></tr><tr><td>FISHER</td><td>79.53</td><td>83.65</td><td>95.11</td><td>68.87</td><td>70.50</td><td>75.38</td><td>97.34</td><td>70.70</td><td>67.71</td><td>78.60</td><td>97.29</td><td>70.97</td><td>66.67</td><td></td><td></td></tr></table>",
+          "label": "Table"
+        },
+        {
+          "id": "5",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.097,
+            "y": 0.454,
+            "width": 0.802,
+            "height": 0.022
+          },
+          "content": "TABLE VI TRAIT IDENTIFICATION RESULTS ON MANUAL-ANNOTATION TEST SET (HIGHLIGHTED AS BEST, SECOND BEST, WORST, SECOND WORST).",
+          "label": "Text"
+        },
+        {
+          "id": "6",
+          "order": 7,
+          "bounding_box": {
+            "x": 0.079,
+            "y": 0.642,
+            "width": 0.162,
+            "height": 0.014
+          },
+          "content": "### B. Results on Fish-Vista",
+          "label": "Text"
+        },
+        {
+          "id": "7",
+          "order": 8,
+          "bounding_box": {
+            "x": 0.079,
+            "y": 0.664,
+            "width": 0.41,
+            "height": 0.075
+          },
+          "content": "Species classification: Table III compares FISHER with SOTA FGVC and foundation models. FISHER achieves the best Macro- F1 score of \\(60.8\\%\\) surpassing both the strong Swin- B baseline \\((55.1\\%)\\) and specialized FGVC approaches such as TransFG [38] \\((50.3\\%)\\)",
+          "label": "Text"
+        },
+        {
+          "id": "8",
+          "order": 9,
+          "bounding_box": {
+            "x": 0.079,
+            "y": 0.746,
+            "width": 0.41,
+            "height": 0.197
+          },
+          "content": "A clear trend emerges across class frequencies. While generic models such as MaxViT [34] and Swin- Transformers [33] perform well on Majority classes ( \\(\\sim 94.4\\%\\) and \\(\\sim 92.6\\%\\) ), their performance drops significantly on ultra- rare species (e.g., VGG- 19 falls to \\(45.9\\%\\) ), indicating a bias toward dominant visual patterns. In contrast, FISHER improves ultra- rare accuracy by \\(+13.4\\%\\) over the Swin- B- 22k baseline \\((63.8\\%\\) vs. \\(50.4\\%\\) ). This result supports our negative- transfer hypothesis: by detaching gradient flow, the segmentation and trait modules learn morphological features that are less biased toward frequent classes. As a result, even species with fewer than 10 samples benefit from transferable trait cues (e.g., specific fin shapes), improving recognition in the long tail.",
+          "label": "Text"
+        },
+        {
+          "id": "9",
+          "order": 10,
+          "bounding_box": {
+            "x": 0.506,
+            "y": 0.642,
+            "width": 0.412,
+            "height": 0.06
+          },
+          "content": "Trait identification: We evaluate trait identification across three levels of difficulty, including In- Species, Leave- Out- Species, and Manual- Annotation, as shown in Tables IV, V, and VI, respectively.",
+          "label": "Text"
+        },
+        {
+          "id": "10",
+          "order": 11,
+          "bounding_box": {
+            "x": 0.507,
+            "y": 0.703,
+            "width": 0.411,
+            "height": 0.24
+          },
+          "content": "As shown in Table IV, FISHER performs comparably to the SOTA multi- label transformer Query2Label (Q2L) [44] on the In- Species task, achieving \\(99.11\\%\\) mAP versus \\(97.78\\%\\) mAP of R34- 22k SH, demonstrating strong performance on seen data. In the more challenging Leave- Out- Species setting (Table V), which evaluates out- of- distribution (OOD) generalization, conventional methods exhibit substantial degradation (e.g., ViT- B- 16 drops to \\(47.27\\%\\) mAP). Even the strong baseline Q2L (Swin- 22k SH) decreases to \\(88.41\\%\\) mAP. In contrast, our method maintains high performance at \\(97.72\\%\\) mAP, outperforming Q2L by \\(9.31\\%\\) . At the level of individual traits, it achieves \\(99.95\\%\\) AP for Pelvic fin, compared to \\(92.75\\%\\) from Q2L [44], indicating that the gradient- decoupled design learns generalized anatomical representations rather than species- specific correlations. On the manually annotated dataset (Table VI), the proposed framework remains com",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "page_index": 8,
+      "blocks": [
+        {
+          "id": "0",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.203,
+            "y": 0.12,
+            "width": 0.584,
+            "height": 0.157
+          },
+          "content": "<table><tr><td rowspan=\"2\">Model</td><td rowspan=\"2\">Size</td><td rowspan=\"2\">mIoU</td><td colspan=\"9\">Trait-wise IoU</td></tr><tr><td>BG</td><td>Head</td><td>Eye</td><td>Dorsal</td><td>Pect.</td><td>Pelvic</td><td>Anal</td><td>Caudal</td><td>Adip.</td><td>Barbel</td></tr><tr><td>PSPNet [39]</td><td></td><td>73.8</td><td>94.6</td><td>84.3</td><td>77.7</td><td>85.1</td><td>67.1</td><td>80.5</td><td>83.0</td><td>88.7</td><td>56.9</td><td>20.1</td></tr><tr><td>DeepLabV3+ [40]</td><td>320 × 320</td><td>77.0</td><td>95.4</td><td>86.0</td><td>79.1</td><td>88.1</td><td>71.0</td><td>84.7</td><td>86.2</td><td>89.9</td><td>66.1</td><td>23.7</td></tr><tr><td>Mask2Former [41]</td><td></td><td>81.6</td><td>95.5</td><td>86.4</td><td>79.1</td><td>87.6</td><td>74.2</td><td>76.1</td><td>84.7</td><td>88.8</td><td>59.6</td><td>0.0</td></tr><tr><td>YOLOv8 [42]</td><td></td><td>83.1</td><td>96.8</td><td>84.5</td><td>83.1</td><td>88.0</td><td>78.0</td><td>77.5</td><td>85.6</td><td>89.6</td><td>66.8</td><td>26.7</td></tr><tr><td>MTLSwinB</td><td>224 × 224</td><td>80.4</td><td>96.7</td><td>87.8</td><td>82.7</td><td>91.5</td><td>73.5</td><td>82.9</td><td>88.5</td><td>92.9</td><td>72.7</td><td>34.5</td></tr><tr><td rowspan=\"2\">FISHER</td><td>224 × 224</td><td>79.8</td><td>96.8</td><td>88.3</td><td>83.2</td><td>91.6</td><td>74.0</td><td>83.0</td><td>89.0</td><td>92.9</td><td>66.8</td><td>32.9</td></tr><tr><td>320 × 320</td><td>81.4</td><td>97.0</td><td>88.9</td><td>85.8</td><td>92.4</td><td>76.5</td><td>84.3</td><td>89.4</td><td>93.3</td><td>69.7</td><td>36.3</td></tr><tr><td>MOLMO + SAM [43]</td><td>-</td><td>39.1</td><td>85.3</td><td>37.4</td><td>29.8</td><td>50.3</td><td>29.7</td><td>38.5</td><td>36.1</td><td>83.4</td><td>0.4</td><td>0.6</td></tr></table>",
+          "label": "Table"
+        },
+        {
+          "id": "1",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.22,
+            "y": 0.07,
+            "width": 0.552,
+            "height": 0.04
+          },
+          "content": "TABLE VII SEGMENTATION PERFORMANCE COMPARISON (MIOU IN %) INCLUDING INPUT SIZE. RESULTS ARE HIGHLIGHTED AS BEST, SECOND BEST, & WORST (EXCLUDING ZERO-SHOT).",
+          "label": "Text"
+        },
+        {
+          "id": "2",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.105,
+            "y": 0.319,
+            "width": 0.779,
+            "height": 0.266
+          },
+          "content": "<table><tr><td>Variant</td><td>Configuration / Mechanism</td><td>Species F1</td><td>Ultra-Rare Acc.</td><td>OOD Trait mAP</td><td>Seg mIoU</td><td>Barbel IoU</td></tr><tr><td>Scenario 1. Component Ablation (Removing Modules)</td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>Species Only</td><td>Species Only</td><td>55.1</td><td>50.4</td><td>-</td><td>-</td><td>-</td></tr><tr><td>No Segmentation</td><td>Trait → Species</td><td>54.7</td><td>57.7</td><td>94.2</td><td>-</td><td>-</td></tr><tr><td>No Trait</td><td>Seg → Species</td><td>57.1</td><td>60.0</td><td>-</td><td>78.5</td><td>27.8</td></tr><tr><td>Scenario 2. Order &amp;amp; Connectivity (Changing Topology)</td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>Standard MTL</td><td>Parallel (Shared Backbone)</td><td>57.8</td><td>60.4</td><td>92.7</td><td>80.4</td><td>34.5</td></tr><tr><td>Reverse Order</td><td>Species → Trait → Seg (↓)</td><td>58.5</td><td>62.8</td><td>91.5</td><td>80.1</td><td>33.4</td></tr><tr><td>Fully Connected</td><td>Seg → Trait → Species (↑)</td><td>60.1</td><td>61.4</td><td>94.1</td><td>78.3</td><td>28.9</td></tr><tr><td>Scenario 3. Partial Detachment (Negative Transfer)</td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>Partial A (Seg Connect)</td><td>Seg → Trait ↓ Species</td><td>59.8</td><td>60.1</td><td>86.4</td><td>79.0</td><td>31.3</td></tr><tr><td>Partial B (Trait Connect)</td><td>Seg ↓ Trait → Species</td><td>59.9</td><td>61.1</td><td>87.4</td><td>79.5</td><td>30.7</td></tr><tr><td>Scenario 4. Loss &amp;amp; Weighting (Detached Architecture)</td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>Base Detached</td><td>w/o UW and Ortho. Losses</td><td>58.1</td><td>61.5</td><td>95.7</td><td>79.2</td><td>32.6</td></tr><tr><td>+ Uncertainty</td><td>w/ UW Only</td><td>55.7</td><td>59.6</td><td>95.4</td><td>77.7</td><td>27.3</td></tr><tr><td>+ OrthoLoss</td><td>w/ Orthogonal Loss Only</td><td>58.1</td><td>62.2</td><td>94.5</td><td>79.1</td><td>31.9</td></tr><tr><td>FISHER (Ours)</td><td>Detached + UW + Ortho. Losses</td><td>60.8</td><td>63.8</td><td>97.7</td><td>79.8</td><td>32.9</td></tr></table>",
+          "label": "Table"
+        },
+        {
+          "id": "3",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.078,
+            "y": 0.281,
+            "width": 0.838,
+            "height": 0.027
+          },
+          "content": "TABLE VIII ABLATION STUDY FOR COMPREHENSIVE STRUCTURAL & LOSS. RESULTS ARE HIGHLIGHTED AS BEST, SECOND BEST, WORST, SECOND WORST",
+          "label": "Text"
+        },
+        {
+          "id": "4",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.078,
+            "y": 0.601,
+            "width": 0.411,
+            "height": 0.106
+          },
+          "content": "petitive across traits. Notably, for the Adipose fin, a small and relatively rare trait, it nearly doubles the performance of standard baselines \\((83.65\\%)\\) vs. \\(37.69\\%\\) for ViT- B- 16 [32]), demonstrating robustness to image quality variations and domain shifts. Furthermore, it achieves the best overall mAP of \\(79.53\\%\\) , significantly outperforming the pure classification backbone Swin- B [33] \\((51.53\\%)\\) .",
+          "label": "Text"
+        },
+        {
+          "id": "5",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.078,
+            "y": 0.71,
+            "width": 0.411,
+            "height": 0.181
+          },
+          "content": "Semantic segmentation: Table VIII compares segmentation performance. While FISHER \\((224 \\times 224)\\) achieves comparable results, we evaluate the \\(320 \\times 320\\) variant for fair comparison with previous works as reported in [1]. The higher- resolution model yields balanced results across biological parts. Although the overall mIoU \\((81.4\\%)\\) is slightly lower, likely due to less aggressive background fitting, it achieves \\(36.3\\%\\) IoU on Barbels and competitive performance on the Adipose Fin \\((69.7\\%)\\) . This behavior reflects the benefit of attribute- aware prototypes, which maintain cluster centers for each biological part and help preserve small, rare traits often suppressed by gradients from larger regions.",
+          "label": "Text"
+        },
+        {
+          "id": "6",
+          "order": 7,
+          "bounding_box": {
+            "x": 0.078,
+            "y": 0.898,
+            "width": 0.123,
+            "height": 0.013
+          },
+          "content": "### C. Ablation Study",
+          "label": "Text"
+        },
+        {
+          "id": "7",
+          "order": 8,
+          "bounding_box": {
+            "x": 0.077,
+            "y": 0.913,
+            "width": 0.411,
+            "height": 0.029
+          },
+          "content": "We conduct four variant scenarios to analyze the contribution of each component in the proposed framework. Results",
+          "label": "Text"
+        },
+        {
+          "id": "8",
+          "order": 9,
+          "bounding_box": {
+            "x": 0.51,
+            "y": 0.604,
+            "width": 0.406,
+            "height": 0.185
+          },
+          "content": "",
+          "label": "Image"
+        },
+        {
+          "id": "9",
+          "order": 10,
+          "bounding_box": {
+            "x": 0.507,
+            "y": 0.794,
+            "width": 0.365,
+            "height": 0.014
+          },
+          "content": "<center>Fig. 3. Sensitivity analysis of orthogonality weight \\((\\lambda)\\) in Eq. (23). </center>",
+          "label": "Text"
+        },
+        {
+          "id": "10",
+          "order": 11,
+          "bounding_box": {
+            "x": 0.506,
+            "y": 0.823,
+            "width": 0.412,
+            "height": 0.03
+          },
+          "content": "are summarized in Table VIII, providing empirical evidence of negative transfer in hierarchical fine- grained recognition.",
+          "label": "Text"
+        },
+        {
+          "id": "11",
+          "order": 12,
+          "bounding_box": {
+            "x": 0.507,
+            "y": 0.853,
+            "width": 0.411,
+            "height": 0.09
+          },
+          "content": "We first evaluate the role of the three tasks in Scenario 1. The single- task baseline (species only) performs poorly under long- tailed distributions, achieving only \\(50.4\\%\\) accuracy on ultra- rare species. Removing intermediate semantic stages (i.e., \"no segmentation\" or no \"trait\") also leads to suboptimal performance. This confirms that explicitly modeling",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "page_index": 9,
+      "blocks": [
+        {
+          "id": "0",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.08,
+            "y": 0.07,
+            "width": 0.4,
+            "height": 0.205
+          },
+          "content": "",
+          "label": "Image"
+        },
+        {
+          "id": "1",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.077,
+            "y": 0.289,
+            "width": 0.412,
+            "height": 0.025
+          },
+          "content": "<center>Fig. 4. Evolution of the dynamic task weights defined in Eq. (22), showing the learnable weights \\((1 / 2\\sigma^2)\\) for each task across 50 training epochs. </center>",
+          "label": "Text"
+        },
+        {
+          "id": "2",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.078,
+            "y": 0.336,
+            "width": 0.41,
+            "height": 0.044
+          },
+          "content": "the bottom- up biological hierarchy (segmentation \\(\\rightarrow\\) traits \\(\\rightarrow\\) species) is essential for recognizing rare classes with limited training samples.",
+          "label": "Text"
+        },
+        {
+          "id": "3",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.079,
+            "y": 0.38,
+            "width": 0.409,
+            "height": 0.12
+          },
+          "content": "In Scenario 2, the fully connected variant allows gradients to propagate from the species head to the segmentation module. While it achieves a competitive Species F1 score \\((60.1\\%)\\) , it significantly degrades segmentation quality, with Barbel IoU dropping to \\(28.9\\%\\) (vs. \\(33.4\\%\\) in the detached model). This indicates that without gradient isolation, dominant high- level classification objectives suppress fine- grained morphological learning.",
+          "label": "Text"
+        },
+        {
+          "id": "4",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.079,
+            "y": 0.501,
+            "width": 0.409,
+            "height": 0.104
+          },
+          "content": "The partial detachment settings in Scenario 3 further show that allowing gradient flow between any pair of heads harms generalization, reducing OOD trait mAP to approximately \\(86 - 87\\%\\) . In contrast, the fully detached design maintains OOD mAP above \\(95\\%\\) , demonstrating that gradient isolation is critical for learning generalized, species- agnostic attribute representations.",
+          "label": "Text"
+        },
+        {
+          "id": "5",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.079,
+            "y": 0.606,
+            "width": 0.409,
+            "height": 0.197
+          },
+          "content": "Scenario 4 highlights the interaction between loss mechanisms. Applying uncertainty weighting alone to the detached architecture unexpectedly reduces performance (species F1 drops from \\(58.1\\%\\) to \\(55.7\\%\\) ), suggesting instability or convergence to suboptimal solutions. However, when combined with orthogonality regularization, performance improves substantially, achieving the best results across all metrics (species F1: \\(60.8\\%\\) , ultra- rare Acc: \\(63.8\\%\\) ). This indicates a strong synergy: orthogonality regularizes the feature space by enforcing separation, which stabilizes uncertainty weighting for effective task balancing. The combination of these mechanisms (FISHER) results in a robust model that effectively recognizes ultra- rare species while maintaining high segmentation quality.",
+          "label": "Text"
+        },
+        {
+          "id": "6",
+          "order": 7,
+          "bounding_box": {
+            "x": 0.079,
+            "y": 0.809,
+            "width": 0.266,
+            "height": 0.014
+          },
+          "content": "### D. Hyperparameter Sensitivity Analysis",
+          "label": "Text"
+        },
+        {
+          "id": "7",
+          "order": 8,
+          "bounding_box": {
+            "x": 0.079,
+            "y": 0.824,
+            "width": 0.409,
+            "height": 0.119
+          },
+          "content": "The orthogonality loss weight \\((\\lambda)\\) controls the separation between prototype vectors in the attribute- aware head, preventing feature collapse where distinct anatomical traits overlap in the latent space. We analyze its effect by sweeping \\(\\lambda \\in [0.0,1.0]\\) . Fig. 3 shows classification and segmentation metrics on a dual- axis plot. While overall accuracy (solid purple line with \\(\\bullet\\) marker) remains stable across \\(\\lambda\\) , a clear relationship emerges between segmentation quality (brown line with \\(\\bullet\\) marker)",
+          "label": "Text"
+        },
+        {
+          "id": "8",
+          "order": 9,
+          "bounding_box": {
+            "x": 0.509,
+            "y": 0.068,
+            "width": 0.405,
+            "height": 0.18
+          },
+          "content": "",
+          "label": "Image"
+        },
+        {
+          "id": "9",
+          "order": 10,
+          "bounding_box": {
+            "x": 0.506,
+            "y": 0.26,
+            "width": 0.413,
+            "height": 0.048
+          },
+          "content": "<center>Fig. 5. Gradient Alignment in Shared Backbone. Cosine similarity between classification and segmentation gradients: the baseline (black, dark red) shows frequent conflicts (negative values), while FISHER (yellow) maintains stable positive alignment. </center>",
+          "label": "Text"
+        },
+        {
+          "id": "10",
+          "order": 11,
+          "bounding_box": {
+            "x": 0.506,
+            "y": 0.333,
+            "width": 0.41,
+            "height": 0.029
+          },
+          "content": "and ultra- rare species classification (dashed pink line with \\(\\blacktriangle\\) marker).",
+          "label": "Text"
+        },
+        {
+          "id": "11",
+          "order": 12,
+          "bounding_box": {
+            "x": 0.507,
+            "y": 0.363,
+            "width": 0.411,
+            "height": 0.226
+          },
+          "content": "When orthogonality is low \\((\\lambda < 0.3)\\) , the model struggles to distinguish visually similar parts, yielding a mean IoU of only \\(\\sim 78\\%\\) and lower accuracy for rare species. In contrast, overly large values \\((\\lambda > 0.7)\\) introduce excessive regularization, constraining the feature space and reducing the model's ability to capture intra- class variations. We observe a sharp performance transition peaking at \\(\\lambda = 0.5\\) , where mIoU reaches nearly \\(80\\%\\) and aligns with the maximum ultra- rare accuracy \\((\\sim 64\\%)\\) . This strong correlation supports our detached hierarchical hypothesis: enforcing well- separated morphological representations directly improves rare- species recognition. Based on this analysis, we select \\(\\lambda = 0.5\\) as the final setting, achieving an effective balance between prototype separation and representational flexibility for robust generalization.",
+          "label": "Text"
+        },
+        {
+          "id": "12",
+          "order": 13,
+          "bounding_box": {
+            "x": 0.507,
+            "y": 0.596,
+            "width": 0.268,
+            "height": 0.015
+          },
+          "content": "### E. Analysis of Dynamic Task Weighting",
+          "label": "Text"
+        },
+        {
+          "id": "13",
+          "order": 14,
+          "bounding_box": {
+            "x": 0.507,
+            "y": 0.612,
+            "width": 0.411,
+            "height": 0.165
+          },
+          "content": "A key component of FISHER is the homoscedastic uncertainty weighting strategy, which dynamically balances the losses of the three tasks based on their aleatoric uncertainty. Fig. 4 illustrates the evolution of the learnable weights \\((1 / 2\\sigma_{m}^{2})\\) during training. Notably, FISHER assigns the lowest weight to the species loss (red line, \\(< 1\\%\\) relative importance), indicating that species supervision is treated as a high- variance signal. This aligns with the long- tailed nature of the Fish- Vista dataset, where gradients from rare classes are sparse and unstable, and helps prevent noisy signals from dominating the shared backbone, particularly in early training.",
+          "label": "Text"
+        },
+        {
+          "id": "14",
+          "order": 15,
+          "bounding_box": {
+            "x": 0.507,
+            "y": 0.778,
+            "width": 0.411,
+            "height": 0.165
+          },
+          "content": "In contrast, the weight for trait identification (blue line) increases rapidly and dominates the total loss \\((\\sim 90\\%\\) relative importance), suggesting that binary trait attributes provide a more stable learning signal with lower uncertainty. The segmentation weight (green line) remains moderate, acting as a bridge between pixel- level details and semantic attributes. This weighting pattern reinforces the proposed detached hierarchical design: with gradient detachment, the backbone learns bottom- up morphological cues from segmentation and trait supervision, while the species head performs classification without destabilizing these representations.",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "page_index": 10,
+      "blocks": [
+        {
+          "id": "0",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.117,
+            "y": 0.116,
+            "width": 0.757,
+            "height": 0.094
+          },
+          "content": "<table><tr><td>Method</td><td>Optimization Strategy</td><td>Species F1 (%)</td><td>Ultra-R Acc. (%)</td><td>Trait OOD mAP (%)</td><td>Seg mIoU (%)</td></tr><tr><td>Standard MTL</td><td>Naive Sum (∑Lᵢ)</td><td>53.8</td><td>56.1</td><td>88.8</td><td>76.9</td></tr><tr><td>MTL + UW [14]</td><td>Uncertainty Weighting</td><td>57.8</td><td>60.4</td><td>92.7</td><td>80.4</td></tr><tr><td>MTL + GradNorm [45]</td><td>Gradient Normalization</td><td>22.6</td><td>21.1</td><td>86.5</td><td>71.3</td></tr><tr><td>MTL + PCGrad [25]</td><td>Gradient Projection</td><td>58.1</td><td>59.6</td><td>80.2</td><td>78.3</td></tr><tr><td>FISHER</td><td>Gradient Detachment</td><td>60.8</td><td>63.8</td><td>97.7</td><td>79.8</td></tr></table>",
+          "label": "Table"
+        },
+        {
+          "id": "1",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.087,
+            "y": 0.07,
+            "width": 0.824,
+            "height": 0.036
+          },
+          "content": "TABLE IX ABLATION TO VERIFY THE EFFECTIVENESS OF OUR ARCHITECTURAL DETACHMENT FOR MULTI-TASK LEARNING. ULTRA-R DENOTES ACCURACY ON THE HARDEST ULTRA-RARE SPECIES SUBSET ( \\(< 10\\) SAMPLES). ALL EXPERIMENTAL RESULTS ARE EXTRACTED BY USING THE SWIN-B BACKBONE.",
+          "label": "Text"
+        },
+        {
+          "id": "2",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.08,
+            "y": 0.225,
+            "width": 0.836,
+            "height": 0.108
+          },
+          "content": "",
+          "label": "Image"
+        },
+        {
+          "id": "3",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.079,
+            "y": 0.344,
+            "width": 0.837,
+            "height": 0.025
+          },
+          "content": "<center>Fig. 6. Grad-CAM visualization results on a ntopris rubellus sample. From left to right: Original Image, FISHER (Ours), and ablation baselines: ClsOnly (classification only), NoSeg (without segmentation branch), NoTraits (without attribute-aware prototypes), and Reverse (reversed task hierarchy). </center>",
+          "label": "Text"
+        },
+        {
+          "id": "4",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.078,
+            "y": 0.386,
+            "width": 0.41,
+            "height": 0.174
+          },
+          "content": "",
+          "label": "Image"
+        },
+        {
+          "id": "5",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.077,
+            "y": 0.578,
+            "width": 0.362,
+            "height": 0.013
+          },
+          "content": "<center>Fig. 7. Visualization of segmentation masks generated by FISHER. </center>",
+          "label": "Text"
+        },
+        {
+          "id": "6",
+          "order": 7,
+          "bounding_box": {
+            "x": 0.078,
+            "y": 0.611,
+            "width": 0.411,
+            "height": 0.121
+          },
+          "content": "This behavior is further supported by the ablation study in Table VIII. Removing uncertainty weighting (i.e., using fixed equal weights) causes the species loss to dominate optimization, leading to reduced ultra- rare accuracy \\((63.8\\% \\rightarrow 61.5\\%)\\) and slightly degraded segmentation quality (Barbel IoU: \\(32.9\\% \\rightarrow 32.6\\%\\) ). These results highlight that dynamically prioritizing more stable tasks effectively mitigates noise in fine- grained, long- tailed biological data.",
+          "label": "Text"
+        },
+        {
+          "id": "7",
+          "order": 8,
+          "bounding_box": {
+            "x": 0.078,
+            "y": 0.74,
+            "width": 0.213,
+            "height": 0.014
+          },
+          "content": "### F. Gradient Alignment Analysis",
+          "label": "Text"
+        },
+        {
+          "id": "8",
+          "order": 9,
+          "bounding_box": {
+            "x": 0.077,
+            "y": 0.757,
+            "width": 0.411,
+            "height": 0.059
+          },
+          "content": "To examine negative transfer in the shared SwinTransformer backbone, we analyze gradient dynamics by computing the cosine similarity between the gradients of the classification and segmentation tasks:",
+          "label": "Text"
+        },
+        {
+          "id": "9",
+          "order": 10,
+          "bounding_box": {
+            "x": 0.18,
+            "y": 0.816,
+            "width": 0.203,
+            "height": 0.034
+          },
+          "content": "\\[\\mathcal{S}_{cos} = \\frac{\\nabla_{\\theta}\\mathcal{L}_{spec}\\cdot\\nabla_{\\theta}\\mathcal{L}_{seg}}{\\|\\nabla_{\\theta}\\mathcal{L}_{spec}\\|\\|\\nabla_{\\theta}\\mathcal{L}_{seg}\\|}\\]",
+          "label": "Formula"
+        },
+        {
+          "id": "10",
+          "order": 11,
+          "bounding_box": {
+            "x": 0.077,
+            "y": 0.851,
+            "width": 0.411,
+            "height": 0.045
+          },
+          "content": "where \\(\\theta\\) denotes the parameters at the final layer of the backbone. A negative value ( \\(\\mathcal{S}_{cos} < 0\\) ) indicates gradient conflict, where tasks update parameters in opposing directions.",
+          "label": "Text"
+        },
+        {
+          "id": "11",
+          "order": 12,
+          "bounding_box": {
+            "x": 0.077,
+            "y": 0.899,
+            "width": 0.411,
+            "height": 0.044
+          },
+          "content": "Fig. 5 presents the moving average of \\(\\mathcal{S}_{cos}\\) . To reveal inherent conflicts in standard shared architectures, we evaluate two benchmarks: Baseline (Parallel) (independent task heads) and",
+          "label": "Text"
+        },
+        {
+          "id": "12",
+          "order": 13,
+          "bounding_box": {
+            "x": 0.507,
+            "y": 0.388,
+            "width": 0.412,
+            "height": 0.225
+          },
+          "content": "Baseline (Connected) (FISHER without gradient detachment). As observed, both baselines exhibit frequent and pronounced oscillations into the negative region, indicating persistent gradient conflicts. This suggests that, without proper control, noisy supervision from long- tailed classification interferes with the morphological features learned by the segmentation task. In contrast, the proposed framework effectively mitigates this issue by maintaining a stable and positive gradient alignment ( \\(\\mathcal{S}_{cos} > 0\\) ). Through gradient decoupling at task boundaries, conflicting classification gradients are prevented from propagating into the shared backbone. This design filters out noisy updates induced by rare classes and ensures that the encoder is primarily guided by reliable structural cues from the segmentation task, leading to more robust and generalized feature representations.",
+          "label": "Text"
+        },
+        {
+          "id": "13",
+          "order": 14,
+          "bounding_box": {
+            "x": 0.507,
+            "y": 0.617,
+            "width": 0.411,
+            "height": 0.059
+          },
+          "content": "Overall, this analysis highlights that hierarchical gradient decoupling plays a critical role in stabilizing optimization and preserving meaningful morphological representations in fine- grained multi- task learning.",
+          "label": "Text"
+        },
+        {
+          "id": "14",
+          "order": 15,
+          "bounding_box": {
+            "x": 0.508,
+            "y": 0.685,
+            "width": 0.186,
+            "height": 0.015
+          },
+          "content": "### G. Task Balancing Strategy",
+          "label": "Text"
+        },
+        {
+          "id": "15",
+          "order": 16,
+          "bounding_box": {
+            "x": 0.507,
+            "y": 0.703,
+            "width": 0.411,
+            "height": 0.24
+          },
+          "content": "We benchmark FISHER against state- of- the- art gradient conflict mitigation methods to evaluate the effectiveness of the proposed architecture. As shown in Table IX, general- purpose optimization strategies struggle to capture the semantic hierarchy of biological traits. PCGrad [25], which resolves conflicting gradients via projection, achieves a competitive F1- score \\((58.1\\%)\\) but performs significantly worse on OOD trait identification \\((80.2\\% \\mathrm{mAP}\\) vs. \\(97.7\\%\\) ). This suggests that enforcing gradient agreement across tasks may suppress task- specific morphological cues critical for generalization. Similarly, uncertainty weighting [14] achieves the highest segmentation mIoU \\((80.4\\%)\\) but underperforms on ultra- rare species classification \\((60.4\\% \\mathrm{vs.} 63.8\\%)\\) . This supports the negative transfer hypothesis, indicating that optimizing dominant, pixel- dense tasks does not necessarily benefit rare- species recognition. In contrast, by decoupling gradients across hierarchical",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "page_index": 11,
+      "blocks": [
+        {
+          "id": "0",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.078,
+            "y": 0.101,
+            "width": 0.842,
+            "height": 0.091
+          },
+          "content": "",
+          "label": "Image"
+        },
+        {
+          "id": "1",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.078,
+            "y": 0.201,
+            "width": 0.459,
+            "height": 0.013
+          },
+          "content": "<center>Fig. 8. Visualization results of trait identification extracted by the proposed FISHER. </center>",
+          "label": "Text"
+        },
+        {
+          "id": "2",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.08,
+            "y": 0.23,
+            "width": 0.836,
+            "height": 0.235
+          },
+          "content": "",
+          "label": "Image"
+        },
+        {
+          "id": "3",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.078,
+            "y": 0.472,
+            "width": 0.841,
+            "height": 0.026
+          },
+          "content": "<center>Fig. 9. t-SNE visualization of the semantic features to illustrate the effectiveness of the orthogonality constraint for trait class identification. \\((\\star)\\) denote the learned prototype vectors. (a) without orthogonality \\((\\lambda_{ortho} = 0.0)\\) , (b) moderate orthogonality \\((\\lambda_{ortho} = 0.5)\\) , and (c) strong orthogonality \\((\\lambda_{ortho} = 1.0)\\) . </center>",
+          "label": "Text"
+        },
+        {
+          "id": "4",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.078,
+            "y": 0.523,
+            "width": 0.411,
+            "height": 0.044
+          },
+          "content": "tasks, FISHER slightly reduces segmentation precision \\((0.6\\%)\\) mIoU) while substantially improving generalization to rare and unseen species.",
+          "label": "Text"
+        },
+        {
+          "id": "5",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.078,
+            "y": 0.576,
+            "width": 0.16,
+            "height": 0.014
+          },
+          "content": "### H. Qualitative Analysis",
+          "label": "Text"
+        },
+        {
+          "id": "6",
+          "order": 7,
+          "bounding_box": {
+            "x": 0.078,
+            "y": 0.592,
+            "width": 0.411,
+            "height": 0.06
+          },
+          "content": "Attention analysis: To better understand the learning behavior of FISHER and its ablation variants, we visualize Grad- CAM [46] activation maps in Fig. 6, where red regions indicate high attention.",
+          "label": "Text"
+        },
+        {
+          "id": "7",
+          "order": 8,
+          "bounding_box": {
+            "x": 0.094,
+            "y": 0.658,
+            "width": 0.395,
+            "height": 0.162
+          },
+          "content": "- Precise localization of biological traits. In the Notropis rubellus example, FISHER demonstrates strong spatial awareness by focusing on key morphological regions, particularly the snout/head area and the bases of the dorsal and anal fins. These regions are biologically diagnostic for the Notropis genus. By concentrating on these traits rather than the overall body contour, the model achieves a correct prediction with high confidence \\((83.1\\%)\\) , indicating that the trait identification head effectively guides the classification backbone toward taxonomically relevant features.",
+          "label": "Text"
+        },
+        {
+          "id": "8",
+          "order": 9,
+          "bounding_box": {
+            "x": 0.094,
+            "y": 0.822,
+            "width": 0.395,
+            "height": 0.121
+          },
+          "content": "- Background bias without spatial supervision. Without explicit spatial guidance, the NoSeg (no segmentation branch) baseline fails to attend to the foreground and instead activates strongly near image corners. Similarly, the NoTraits (no trait identification head) variant produces fragmented attention scattered across edges and background regions. As a result, both variants incorrectly predict Notropis atherinoides.",
+          "label": "Text"
+        },
+        {
+          "id": "9",
+          "order": 10,
+          "bounding_box": {
+            "x": 0.525,
+            "y": 0.523,
+            "width": 0.394,
+            "height": 0.134
+          },
+          "content": "- Loss of spatial consistency. The ClsOnly (classification only) baseline exhibits nearly uniform activation with extremely low confidence \\((0.2\\%)\\) , indicating that classification supervision alone provides insufficient spatial guidance. The reverse variant also produces scattered and misaligned attention along the fish flank, failing to capture key diagnostic regions. These observations suggest that high-level labels alone are insufficient to guide reliable low-level feature localization.",
+          "label": "Text"
+        },
+        {
+          "id": "10",
+          "order": 11,
+          "bounding_box": {
+            "x": 0.507,
+            "y": 0.662,
+            "width": 0.412,
+            "height": 0.18
+          },
+          "content": "Segmentation quality and trait identification: Fig. 7 illustrates the segmentation performance. FISHER demonstrates a superior ability to localize fine-grained anatomical structures. Notably, it accurately delineates small and thin parts such as barbels and effectively distinguishes visually similar fins (e.g., Adipose vs. Dorsal), which are often missed or merged by generic baselines. In Fig. 8, we visualize the trait identification results on the Manual Test Set, which contains species not observed during training. While classification performance degrades under this setting, the model remains robust in identifying traits of unseen species, highlighting its strong generalization capability.",
+          "label": "Text"
+        },
+        {
+          "id": "11",
+          "order": 12,
+          "bounding_box": {
+            "x": 0.508,
+            "y": 0.85,
+            "width": 0.166,
+            "height": 0.013
+          },
+          "content": "## I. Latent Space Analysis",
+          "label": "Text"
+        },
+        {
+          "id": "12",
+          "order": 13,
+          "bounding_box": {
+            "x": 0.507,
+            "y": 0.865,
+            "width": 0.412,
+            "height": 0.044
+          },
+          "content": "We investigate the effect of the orthogonality constraint on the learned feature representations through t- SNE visualization and prototype correlation analysis.",
+          "label": "Text"
+        },
+        {
+          "id": "13",
+          "order": 14,
+          "bounding_box": {
+            "x": 0.507,
+            "y": 0.914,
+            "width": 0.412,
+            "height": 0.029
+          },
+          "content": "Effect of orthogonality on feature separation: We use t- SNE [47] to project extracted representations in the feature space as",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "page_index": 12,
+      "blocks": [
+        {
+          "id": "0",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.085,
+            "y": 0.071,
+            "width": 0.385,
+            "height": 0.254
+          },
+          "content": "",
+          "label": "Image"
+        },
+        {
+          "id": "1",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.076,
+            "y": 0.34,
+            "width": 0.413,
+            "height": 0.025
+          },
+          "content": "<center>Fig. 10. Prototype correlation matrix \\((\\lambda_{ortho} = 0.5)\\) . The heatmap shows the cosine similarity between learned prototype vectors. </center>",
+          "label": "Text"
+        },
+        {
+          "id": "2",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.078,
+            "y": 0.393,
+            "width": 0.411,
+            "height": 0.031
+          },
+          "content": "presented in Fig. 9 for analyzing different traits under varying orthogonality weights \\((\\lambda_{ortho})\\) .",
+          "label": "Text"
+        },
+        {
+          "id": "3",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.092,
+            "y": 0.427,
+            "width": 0.398,
+            "height": 0.301
+          },
+          "content": "At \\(\\lambda_{ortho} = 0.0\\) (Fig. 9a), the embeddings form loosely structured clusters in the latent feature space, with considerable overlap between semantically similar parts (e.g., Dorsal and Adipose Fins). Such poor separability in the embedding space leads to ambiguous representations and reduces segmentation precision. At \\(\\lambda_{ortho} = 0.5\\) (Fig. 9b), the embeddings form more compact and well- separated clusters in the latent feature space. The prototype vectors (☆ markers) align with the centers of their corresponding semantic clusters, encouraging intra- class cohesion while improving inter- class separability. At \\(\\lambda_{ortho} = 1.0\\) (Fig. 9c), the embeddings form highly compact clusters with strong inter- class separation in the latent space. However, this overly rigid structure (Separation Score: 58.96) may reduce the model's ability to capture intra- class variations in unseen species, leading to a slight drop in OOD performance as discussed in Section V. In practice, \\(\\lambda_{ortho} = 0.5\\) provides the best trade- off between discriminability and generalization.",
+          "label": "Text"
+        },
+        {
+          "id": "4",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.079,
+            "y": 0.732,
+            "width": 0.411,
+            "height": 0.211
+          },
+          "content": "Prototype correlation analysis: Fig. 10 displays the cosine similarity matrix between learned prototypes at \\(\\lambda_{ortho} = 0.5\\) . Ideally, prototypes representing distinct anatomical parts should be orthogonal (correlation \\(\\approx 0\\) ). The heatmap shows low correlation values \\((< 0.2)\\) for most pairs, confirming that FISHER successfully learns distinct representations for different body parts. Notably, even for spatially adjacent and visually similar parts such as the Anal and Pelvic Fins, the correlation remains low, highlighting the effectiveness of the proposed attribute- aware learning objective. A slight positive correlation exists between Adipose and Barbel (0.67), likely due to their shared property as small, high- frequency texture features, yet they remain sufficiently distinct for accurate segmentation.",
+          "label": "Text"
+        },
+        {
+          "id": "5",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.508,
+            "y": 0.07,
+            "width": 0.404,
+            "height": 0.19
+          },
+          "content": "",
+          "label": "Image"
+        },
+        {
+          "id": "6",
+          "order": 7,
+          "bounding_box": {
+            "x": 0.507,
+            "y": 0.273,
+            "width": 0.336,
+            "height": 0.014
+          },
+          "content": "<center>Fig. 11. Ultra-rare species accuracy versus model complexity. </center>",
+          "label": "Text"
+        },
+        {
+          "id": "7",
+          "order": 8,
+          "bounding_box": {
+            "x": 0.508,
+            "y": 0.302,
+            "width": 0.202,
+            "height": 0.014
+          },
+          "content": "### J. Model Complexity Analysis",
+          "label": "Text"
+        },
+        {
+          "id": "8",
+          "order": 9,
+          "bounding_box": {
+            "x": 0.508,
+            "y": 0.318,
+            "width": 0.411,
+            "height": 0.165
+          },
+          "content": "We analyze model complexity via ultra- rare species performance in Fig. 11, plotting accuracy against model size. Conventional CNN and Transformer baselines show saturation, where larger models do not consistently improve performance on rare classes. In contrast, FISHER achieves significantly higher ultra- rare accuracy with comparable model size. Notably, the Swin- B variant attains the best performance despite having fewer parameters than larger models such as VGG- 19. These results indicate that the gains stem from the proposed hierarchical multi- task design rather than increased model capacity.",
+          "label": "Text"
+        },
+        {
+          "id": "9",
+          "order": 10,
+          "bounding_box": {
+            "x": 0.649,
+            "y": 0.495,
+            "width": 0.127,
+            "height": 0.014
+          },
+          "content": "## VI. CONCLUSION",
+          "label": "Text"
+        },
+        {
+          "id": "10",
+          "order": 11,
+          "bounding_box": {
+            "x": 0.508,
+            "y": 0.515,
+            "width": 0.411,
+            "height": 0.345
+          },
+          "content": "In this work, we have addressed the key challenge of fine- grained aquatic species classification by mitigating destructive gradient interference in hierarchical multi- task learning. We have identified gradient conflict as a primary factor limiting performance, where strong gradients from the classification task disrupted the representations required for segmentation and trait identification. To address this issue, we have introduced FISHER, a hierarchical multi- task framework that enforced a unidirectional information flow from segmentation to traits and then to species classification. Strategic gradient detachment was applied at task boundaries to isolate lower- level representations from higher- level classification gradients, thereby reducing negative transfer. In addition, we have incorporated learnable prototypes with orthogonality constraints to represent morphological parts in the semantic segmentation space, and employed homoscedastic uncertainty weighting to dynamically balance task contributions during training. Extensive experiments on the large- scale Fish- Vista dataset demonstrated that the proposed framework consistently outperformed state- of- the- art baselines in both multi- task and single- task settings. These results highlighted the effectiveness of hierarchical task structuring for learning biologically meaningful representations in long- tailed aquatic datasets.",
+          "label": "Text"
+        },
+        {
+          "id": "11",
+          "order": 12,
+          "bounding_box": {
+            "x": 0.666,
+            "y": 0.874,
+            "width": 0.093,
+            "height": 0.013
+          },
+          "content": "## REFERENCES",
+          "label": "Text"
+        },
+        {
+          "id": "12",
+          "order": 13,
+          "bounding_box": {
+            "x": 0.515,
+            "y": 0.896,
+            "width": 0.404,
+            "height": 0.046
+          },
+          "content": "[1] K. S. Mehrab, M. Maruf, A. Daw et al., \"Fish- vista: A multi- purpose dataset for understanding & identification of traits from images,\" in Proc. IEEE/CVF Conf. Comput. Vis. Pattern Recognit. (CVPR), June 2025, pp. 24 275- 24 285.",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "page_index": 13,
+      "blocks": [
+        {
+          "id": "0",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.077,
+            "y": 0.07,
+            "width": 0.414,
+            "height": 0.87
+          },
+          "content": "[2] S. H. Bengtson, D. Lehotsky, V. Ismiroglou, N. Madsen, T. B. Moeslund, and M. Pedersen, \"Autofish: Dataset and benchmark for fine- grained analysis of fish,\" in Proc. IEEE/CVF Winter Conf. Appl. Comput. Vis. (WACV), February 2025, pp. 1598- 1607. [3] W. Li, Y. Liu, W. Wang, and Z. Li, \"M4FT: Mamba, migratory, mobile and multiple fish tracking,\" IEEE Trans. Circuit Syst. Video Technol., pp. 1- 1, 2026. [4] F. F. Khan et al., \"Fishnet: A large- scale dataset and benchmark for fish recognition, detection, and functional trait prediction,\" in Proc. IEEE/CVF Int. Conf. Comput. Vis. (ICCV), October 2023, pp. 20 496- 20506. [5] A. Saleh, I. H. Laradji, D. A. Konovalov, M. Bradley, D. Vazquez, and M. Sheaves, \"A realistic fish- habitat dataset to evaluate algorithms for underwater visual analysis,\" Scientific Reports, vol. 10, no. 1, p. 14671, 2020. [6] N. Garcia- d'Urso et al., \"The deepfish computer vision dataset for fish instance segmentation, classification, and size estimation,\" Scientific Data, vol. 9, no. 1, p. 287, 2022. [7] H. Tejaswini, M. M. Manohara Pai, and R. M. Pai, \"Automatic estuarine fish species classification system based on deep learning techniques,\" IEEE Access, vol. 12, pp. 140 412- 140 438, 2024. [8] T.- W. Huang, J.- N. Hwang, S. Romain, and F. Wallace, \"Fish tracking and segmentation from stereo videos on the wild sea surface for electronic monitoring of rail fishing,\" IEEE Trans. Circuit Syst. Video Technol., vol. 29, no. 10, pp. 3146- 3158, 2019. [9] S. Shreesha, M. M. M. Pai, U. Verma, and R. M. Pai, \"Fish tracking and continual behavioral pattern clustering using novel sillago sihama vid (ssvid),\" IEEE Access, vol. 11, pp. 29 400- 29 416, 2023. [10] Z. Chen, L. Cao, Q. Wang, and Y. Cai, \"Fishnet: Fish visual recognition with one stage multi- task learning,\" IET Image Processing, vol. 16, no. 12, pp. 3237- 3246, 2022. [11] T. Zhou, X. Peng, and Y. Zhang, \"Mtaffb: a multi- task active learning framework for analyzing fish school feeding behavior,\" Smart Agricultural Technology, vol. 12, p. 101313, 2025. [12] X. Chen and K. He, \"Exploring simple siamese representation learning,\" in Proc. IEEE/CVF Conf. Comput. Vis. Pattern Recognit. (CVPR), 2021. [13] Z. Zhu, L. Fan, M. Pagnucco, and Y. Song, \"Interpretable image classification via non- parametric part prototype learning,\" in Proc. IEEE/CVF Conf. Comput. Vis. Pattern Recognit. (CVPR), June 2025, pp. 9762- 9771. [14] R. Cipolla, Y. Gal, and A. Kendall, \"Multi- task learning using uncertainty to weigh losses for scene geometry and semantics,\" in Proc. IEEE/CVF Conf. Comput. Vis. Pattern Recognit. (CVPR), 2018, pp. 7482- 7491. [15] P. Zhuang, Y. Wang, and Y. Qiao, \"Wildfish++: A comprehensive fish benchmark for multimedia research,\" IEEE Trans. Multi., vol. 23, p. 3603- 3617, 2021. [16] R. J. M. Veiga and J. M. F. Rodrigues, \"Fine- grained fish classification from small to large datasets with vision transformers,\" IEEE Access, vol. 12, pp. 113 642- 113 660, 2024. [17] W. Ren, D. Shi, Y. Chen, L. Song, Q. Hu, and M. Wang, \"A lightweight fine- grained pelagic fish recognition algorithm based on object detection,\" Aquaculture International, vol. 33, no. 2, Jan 2025. [18] S. Stevens et al., \"BioCLIP: A vision foundation model for the tree of life,\" in Proc. IEEE/CVF Conf. Comput. Vis. Pattern Recognit. (CVPR), 2024, pp. 19 412- 19 424. [19] X. Li, S. Zhao, C. Chen, H. Cui, D. Li, and R. Zhao, \"Yolo- fd: An accurate fish disease detection method based on multi- task learning,\" Expert Systems with Applications, vol. 258, p. 125085, Dec 2024. [20] G. Joshita Reddy, K. Reddy, S. Ruthvik Ahtola, S. J. Narayanan, B. Perumal, and G. Kumar Nayak, \"Deepseavision: Enhanced detection and classification of underwater species,\" IEEE Access, vol. 13, pp. 173 347- 173 367, 2025. [21] S. Senthil Pandi, R. Suguna Devi, A. Thanam, and S. M. Keerthana, \"Optimizing fish classification with a hybrid sea- svm model: Performance and evaluation on fish- gres and fish4- knowledge datasets,\" in Proc. Int. Conf. Recent Adv. Sci. Eng. Technol. (ICRASET), 2024, pp. 1- 6. [22] T. Standley, A. Zamir, D. Chen, L. Guibas, S. Savarese, and W. Saxe, \"Which tasks should be learned together in multi- task learning?\" in Proc. Int. Conf. Mach. Learn. (ICML), 2020, pp. 9120- 9132. [23] J. Liang, Z. Liu, J. Zhou, X. Jiang, C. Zhang, and F. Wang, \"Model- protected multi- task learning,\" IEEE Trans. Patt. Anal. and Mach. Intell., vol. 44, no. 2, p. 1002- 1019, Feb 2022. [24] H. Xiong, D. Man, J. Lv, C. Xu, F. Zeng, Y. Shi, M. Lai, and W. Yang, \"Decoupling representation learning and classifier for long-",
+          "label": "Text"
+        },
+        {
+          "id": "1",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.504,
+            "y": 0.07,
+            "width": 0.417,
+            "height": 0.82
+          },
+          "content": "tailed adversarial training,\" Pattern Recognition, vol. 172, p. 112607, Apr 2026. [25] T. Yu, S. Kumar, A. Gupta, S. Levine, K. Hausman, and C. Finn, \"Gradient surgery for multi- task learning,\" in Adv. Neural Inf. Process. Syst. (NeurIPS), 2020. [26] J. Yin, J. Wu, C. Gao, H. Yu, L. Liu, Z. Jiang, and S. Guo, \"Individual fish recognition method with coarse and fine- grained feature linkage learning for precision aquaculture,\" Aquaculture Research, vol. 2023, p. 1- 14, 2023. [27] A. Yeong Han, K. Moo Yi, K. Tae Kim, and J. Young Choi, \"Hierarchical feature attention learning network for detecting object and discriminative parts in fine- grained visual classification,\" IEEE Access, vol. 13, pp. 19 533- 19 544, 2025. [28] P. W. Koh et al., \"Concept bottleneck models,\" in Proc. Int. Conf. Mach. Learn. (ICML), 2020, pp. 5338- 5348. [29] K. Simonyan and A. Zisserman, \"Very deep convolutional networks for large- scale image recognition,\" in Proc. Int. Conf. Learn. Represent. (ICLR), 2015. [30] S. Xie, R. Girshick, P. Dollar, Z. Tu, and K. He, \"Aggregated residual transformations for deep neural networks,\" in Proc. IEEE/CVF Conf. Comput. Vis. Pattern Recognit. (CVPR), 2017, pp. 1492- 1500. [31] I. Radosavovic, R. P. Kosaraju, R. Girshick, K. He, and P. Dollar, \"Designing network design spaces,\" in Proc. IEEE/CVF Conf. Comput. Vis. Pattern Recognit. (CVPR), 2020, pp. 10428- 10436. [32] A. Dosovitskiy et al., \"An image is worth 16x16 words: Transformers for image recognition at scale,\" in Proc. Int. Conf. Learn. Represent. (ICLR), 2021. [33] Z. Liu et al., \"Swin transformer: Hierarchical vision transformer using shifted windows,\" in Proc. IEEE/CVF Int. Conf. Comput. Vis. (ICCV), 2021, pp. 10012- 10022. [34] Z. Tu, H. Talebi, H. Zhang, F. Yang, P. Milanfar, A. Bovik, and Y. Li, \"Maxvit: Multi- axis vision transformer,\" in Proc. Eur. Conf. Comput. Vis. (ECCV). Springer, 2022, pp. 459- 479. [35] A. Radford et al., \"Learning transferable visual models from natural language supervision,\" in Proc. Int. Conf. Mach. Learn. (ICML). PMLR, 2021, pp. 8748- 8763. [36] M. Oquab et al., \"DINOv2: Learning robust visual features without supervision,\" Transactions on Machine Learning Research, 2024. [37] D. Paul et al., \"A simple interpretable transformer for fine- grained image classification and analysis,\" in Proc. Int. Conf. Learn. Represent. (ICLR), 2024. [38] J. He, J.- N. Chen, S. Liu, A. Kortylewski, C. Yang, Y. Bai, and C. Wang, \"Transfg: A transformer architecture for fine- grained recognition,\" in Proc. AAAI Conf. Artif. Intell. (AAAI), vol. 36, 06 2022, pp. 852- 860. [39] H. Zhao, J. Shi, X. Qi, X. Wang, and J. Jia, \"Pyramid scene parsing network,\" in Proc. IEEE/CVF Conf. Comput. Vis. Pattern Recognit. (CVPR), 2017. [40] L.- C. Chen, Y. Zhu, G. Papandreou, F. Schroff, and H. Adam, \"Encoder- decoder with atrous separable convolution for semantic image segmentation,\" in Proc. Eur. Conf. Comput. Vis. (ECCV), 2018. [41] B. Cheng, A. G. Schwing, and A. Kirillov, \"Per- pixel classification is not all you need for semantic segmentation,\" in Adv. Neural Inf. Process. Syst. (NeurIPS), 2021. [42] R. Varghese and M. Sambath, \"Yolov8: A novel object detection algorithm with enhanced performance and robustness,\" in Proc. Int. Conf. Adv. Data Eng. Intell. Comput. Syst. (ADICS). IEEE, 2024, pp. 1- 6. [43] M. Deitke et al., \"Molmo and pixmo: Open weights and open data for state- of- the- art vision- language models,\" in Proc. IEEE/CVF Conf. Comput. Vis. Pattern Recognit. (CVPR), June 2025, pp. 91- 104. [44] S. Liu, L. Zhang, X. Yang, H. Su, and J. Zhu, \"Query2label: A simple transformer way to multi- label classification,\" arXiv preprint arXiv:2107.10834, 2021. [45] Z. Chen, V. Badrinarayanan, C.- Y. Lee, and A. Rabinovich, \"GradNorm: Gradient normalization for adaptive loss balancing in deep multitask networks,\" in Proc. Int. Conf. Mach. Learn. (ICML), 2018. [46] R. R. Selvaraju, M. Cogswell, A. Das, R. Vedantam, D. Parikh, and D. Batra, \"Grad- cam: Visual explanations from deep networks via gradient- based localization,\" in Proc. IEEE Int. Conf. Comp. Vis. (ICCV), Oct 2017. [47] L. Van der Maaten and G. Hinton, \"Visualizing data using t- snes.\" J. Mach. Learn. Res., vol. 9, no. 11, p. 2579- 2605, 2008.",
+          "label": "Text"
+        }
+      ]
+    }
+  ]
+}

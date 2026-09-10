@@ -1,0 +1,459 @@
+{
+    "input_path": "/home/bocchi/Downloads/Paper_Data/Statistics/2607.20760v1.pdf",
+    "page_index": 8,
+    "page_count": 20,
+    "width": 1224,
+    "height": 1584,
+    "model_settings": {
+        "use_doc_preprocessor": false,
+        "use_layout_detection": true,
+        "use_chart_recognition": false,
+        "use_seal_recognition": false,
+        "use_ocr_for_image_block": true,
+        "format_block_content": true,
+        "merge_layout_blocks": true,
+        "markdown_ignore_labels": [
+            "number",
+            "footnote",
+            "header",
+            "header_image",
+            "footer",
+            "footer_image",
+            "aside_text"
+        ],
+        "return_layout_polygon_points": true
+    },
+    "parsing_res_list": [
+        {
+            "block_label": "paragraph_title",
+            "block_content": "## 5 The twoblock clustering tree",
+            "block_bbox": [
+                139,
+                140,
+                669,
+                177
+            ],
+            "block_id": 0,
+            "block_order": 1,
+            "group_id": 0,
+            "block_polygon_points": [
+                [
+                    139.0,
+                    140.0
+                ],
+                [
+                    669.0,
+                    140.0
+                ],
+                [
+                    669.0,
+                    177.0
+                ],
+                [
+                    139.0,
+                    177.0
+                ]
+            ]
+        },
+        {
+            "block_label": "text",
+            "block_content": "The twoblock clustering tree (tbtree) introduces a novel, deterministic way to build decision trees for multivariate responses that can result in shallow, highly interpretable models. In a nutshell, the twoblock tree accomplishes this by using the first scores of a twoblock model that accounts for coskewness in each node. Results from the previous paragraph, along with well-established results on properties of the third moment, lead us to assume that including a third order comoment into the split impurity criterion is conducive to a more efficient separation of the groups that then become the next-level nodes. In the leaves, though, prediction of the dependent variable is the objective, such that in most cases, twoblock models based on a covariance-alone criterion are preferable. The default proposed configuration of twoblock clustering trees therefore consists of using twoblock models based on third order comoments as impurity to split the data, but using the regular, covariance based twoblock models as predictive models in the leaves. At this point, it is noted that both split and leaf models can either be dense or sparse, but the latter will only be beneficial if truly uninformative variables are present in the data. Figure 2 shows the resulting structure schematically for a single split.",
+            "block_bbox": [
+                136,
+                199,
+                1085,
+                635
+            ],
+            "block_id": 1,
+            "block_order": 2,
+            "group_id": 1,
+            "block_polygon_points": [
+                [
+                    136.0,
+                    199.0
+                ],
+                [
+                    1085.0,
+                    199.0
+                ],
+                [
+                    1085.0,
+                    635.0
+                ],
+                [
+                    136.0,
+                    635.0
+                ]
+            ]
+        },
+        {
+            "block_label": "image",
+            "block_content": "<div style=\"text-align: center;\"><img src=\"imgs/img_in_image_box_197_662_1025_1083.jpg\" alt=\"Image\" width=\"67%\" />\n\nRoot node (n rows)\ntwoblock coskewness split\nscore  $ t_{1} = x_{i}^{\\top} w_{1} $, threshold  $ \\tau $\n\n $ t_{1} < \\tau $\n $ t_{1} \\geq \\tau $\n\nLeaf  $ \\ell_{1} $: covariance twoblock\n $ \\hat{y}_{i} = x_{i}^{\\top} B_{\\ell_{1}} $\n $ \\hat{y}_{i} = x_{i}^{\\top} B_{\\ell_{2}} $\n\nleaf coefficients  $ B_{\\ell_{1}} $\n $ \\hat{y}_{i} = x_{i}^{\\top} B_{\\ell_{2}} $\n $ \\hat{y}_{i} = x_{i}^{\\top} B_{\\ell_{2}} $\n\n</div>\n",
+            "block_bbox": [
+                197,
+                662,
+                1025,
+                1083
+            ],
+            "block_id": 2,
+            "block_order": null,
+            "group_id": 2,
+            "block_polygon_points": [
+                [
+                    197.0,
+                    662.0
+                ],
+                [
+                    1025.0,
+                    662.0
+                ],
+                [
+                    1025.0,
+                    1083.0
+                ],
+                [
+                    197.0,
+                    1083.0
+                ]
+            ]
+        },
+        {
+            "block_label": "figure_title",
+            "block_content": "<div style=\"text-align: center;\">Figure 2: Schematic of a depth-one tbtree. The root (ellipse) fits a twoblock model under the coskewness split objective; its first  $ \\mathbf{X} $-score  $ t_1 = \\mathbf{x}_i^\\top \\mathbf{w}_1 $ orders the rows, and a threshold  $ \\tau $ routes each row to one of two leaves (rectangles). Every leaf carries its own covariance twoblock model  $ \\hat{\\mathbf{y}}_i = \\mathbf{x}_i^\\top \\mathbf{B}_\\ell $. The bar charts show, for a hypothetical six-variable predictor block, the coskewness split weights  $ \\mathbf{w}_1 $ and the two leaves' regression coefficients (blue positive, red negative), whose contrast illustrates the distinct local regimes. This figure is purely illustrative: the displayed weights and coefficients are specimen values, not fit to any dataset.</div>\n",
+            "block_bbox": [
+                136,
+                1111,
+                1083,
+                1342
+            ],
+            "block_id": 3,
+            "block_order": null,
+            "group_id": 3,
+            "block_polygon_points": [
+                [
+                    136.0,
+                    1111.0
+                ],
+                [
+                    1083.0,
+                    1111.0
+                ],
+                [
+                    1083.0,
+                    1342.0
+                ],
+                [
+                    136.0,
+                    1342.0
+                ]
+            ]
+        },
+        {
+            "block_label": "number",
+            "block_content": "9",
+            "block_bbox": [
+                603,
+                1481,
+                620,
+                1503
+            ],
+            "block_id": 4,
+            "block_order": null,
+            "group_id": 4,
+            "block_polygon_points": [
+                [
+                    603.0,
+                    1481.0
+                ],
+                [
+                    619.0,
+                    1481.0
+                ],
+                [
+                    619.0,
+                    1502.0
+                ],
+                [
+                    603.0,
+                    1502.0
+                ]
+            ]
+        }
+    ],
+    "layout_det_res": {
+        "input_path": null,
+        "page_index": null,
+        "boxes": [
+            {
+                "cls_id": 17,
+                "label": "paragraph_title",
+                "score": 0.8836326003074646,
+                "coordinate": [
+                    139,
+                    140,
+                    669,
+                    177
+                ],
+                "order": 1,
+                "polygon_points": [
+                    [
+                        139.0,
+                        140.0
+                    ],
+                    [
+                        669.0,
+                        140.0
+                    ],
+                    [
+                        669.0,
+                        177.0
+                    ],
+                    [
+                        139.0,
+                        177.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.9616882801055908,
+                "coordinate": [
+                    136,
+                    199,
+                    1085,
+                    635
+                ],
+                "order": 2,
+                "polygon_points": [
+                    [
+                        136.0,
+                        199.0
+                    ],
+                    [
+                        1085.0,
+                        199.0
+                    ],
+                    [
+                        1085.0,
+                        635.0
+                    ],
+                    [
+                        136.0,
+                        635.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 14,
+                "label": "image",
+                "score": 0.9336915612220764,
+                "coordinate": [
+                    197,
+                    662,
+                    1025,
+                    1083
+                ],
+                "order": null,
+                "polygon_points": [
+                    [
+                        197.0,
+                        662.0
+                    ],
+                    [
+                        1025.0,
+                        662.0
+                    ],
+                    [
+                        1025.0,
+                        1083.0
+                    ],
+                    [
+                        197.0,
+                        1083.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 7,
+                "label": "figure_title",
+                "score": 0.944567859172821,
+                "coordinate": [
+                    136,
+                    1111,
+                    1083,
+                    1342
+                ],
+                "order": null,
+                "polygon_points": [
+                    [
+                        136.0,
+                        1111.0
+                    ],
+                    [
+                        1083.0,
+                        1111.0
+                    ],
+                    [
+                        1083.0,
+                        1342.0
+                    ],
+                    [
+                        136.0,
+                        1342.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 15,
+                "label": "inline_formula",
+                "score": 0.7887459397315979,
+                "coordinate": [
+                    630,
+                    1142,
+                    741,
+                    1167
+                ],
+                "order": 3,
+                "polygon_points": [
+                    [
+                        630.0,
+                        1142.0
+                    ],
+                    [
+                        741.0,
+                        1142.0
+                    ],
+                    [
+                        741.0,
+                        1167.0
+                    ],
+                    [
+                        630.0,
+                        1167.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 15,
+                "label": "inline_formula",
+                "score": 0.32706698775291443,
+                "coordinate": [
+                    141,
+                    1173,
+                    160,
+                    1193
+                ],
+                "order": 4,
+                "polygon_points": [
+                    [
+                        141.0,
+                        1173.0
+                    ],
+                    [
+                        159.0,
+                        1173.0
+                    ],
+                    [
+                        159.0,
+                        1192.0
+                    ],
+                    [
+                        141.0,
+                        1192.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 15,
+                "label": "inline_formula",
+                "score": 0.8438052535057068,
+                "coordinate": [
+                    312,
+                    1197,
+                    434,
+                    1225
+                ],
+                "order": 5,
+                "polygon_points": [
+                    [
+                        312.0,
+                        1197.0
+                    ],
+                    [
+                        434.0,
+                        1197.0
+                    ],
+                    [
+                        434.0,
+                        1225.0
+                    ],
+                    [
+                        312.0,
+                        1225.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 15,
+                "label": "inline_formula",
+                "score": 0.7240484356880188,
+                "coordinate": [
+                    549,
+                    1231,
+                    583,
+                    1254
+                ],
+                "order": 6,
+                "polygon_points": [
+                    [
+                        549.0,
+                        1231.0
+                    ],
+                    [
+                        582.0,
+                        1231.0
+                    ],
+                    [
+                        582.0,
+                        1253.0
+                    ],
+                    [
+                        549.0,
+                        1253.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 16,
+                "label": "number",
+                "score": 0.7014515995979309,
+                "coordinate": [
+                    603,
+                    1481,
+                    620,
+                    1503
+                ],
+                "order": 7,
+                "polygon_points": [
+                    [
+                        603.0,
+                        1481.0
+                    ],
+                    [
+                        619.0,
+                        1481.0
+                    ],
+                    [
+                        619.0,
+                        1502.0
+                    ],
+                    [
+                        603.0,
+                        1502.0
+                    ]
+                ]
+            }
+        ]
+    }
+}

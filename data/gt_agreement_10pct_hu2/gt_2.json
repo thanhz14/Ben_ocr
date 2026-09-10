@@ -1,0 +1,555 @@
+{
+  "file_name": "1afa6bff-2.pdf",
+  "pages": [
+    {
+      "page_index": 5,
+      "blocks": [
+        {
+          "id": "pred-2-5-5_0",
+          "order": "1",
+          "bounding_box": {
+            "x": 0.18,
+            "y": 0.057,
+            "width": 0.614,
+            "height": 0.014
+          },
+          "block_content": "AWQ: Activation-aware Weight Quantization for On-Device LLM Compression and Acceleration",
+          "label": "Text"
+        },
+        {
+          "id": "pred-2-5-5_1",
+          "order": "2",
+          "bounding_box": {
+            "x": 0.12700000000000003,
+            "y": 0.08500000000000003,
+            "width": 0.12600000000000003,
+            "height": 0.0986722268557131
+          },
+          "block_content": "",
+          "label": "Image"
+        },
+        {
+          "id": "pred-2-5-5_2",
+          "order": "3",
+          "bounding_box": {
+            "x": 0.105,
+            "y": 0.193,
+            "width": 0.179,
+            "height": 0.014
+          },
+          "block_content": "",
+          "label": "Image"
+        },
+        {
+          "id": "pred-2-5-5_3",
+          "order": "4",
+          "bounding_box": {
+            "x": 0.303,
+            "y": 0.086,
+            "width": 0.286,
+            "height": 0.101
+          },
+          "block_content": "",
+          "label": "Image"
+        },
+        {
+          "id": "pred-2-5-5_4",
+          "order": "5",
+          "bounding_box": {
+            "x": 0.303,
+            "y": 0.193,
+            "width": 0.327,
+            "height": 0.014
+          },
+          "block_content": "",
+          "label": "Image"
+        },
+        {
+          "id": "pred-2-5-5_5",
+          "order": "6",
+          "bounding_box": {
+            "x": 0.635,
+            "y": 0.087,
+            "width": 0.226,
+            "height": 0.1
+          },
+          "block_content": "",
+          "label": "Image"
+        },
+        {
+          "id": "pred-2-5-5_6",
+          "order": "7",
+          "bounding_box": {
+            "x": 0.651,
+            "y": 0.193,
+            "width": 0.222,
+            "height": 0.014
+          },
+          "block_content": "",
+          "label": "Image"
+        },
+        {
+          "id": "pred-2-5-5_8",
+          "order": "9",
+          "bounding_box": {
+            "x": 0.086,
+            "y": 0.299,
+            "width": 0.363,
+            "height": 0.015
+          },
+          "block_content": "Formally, we want to optimize the following objective:",
+          "label": "Text"
+        },
+        {
+          "id": "pred-2-5-5_9",
+          "order": "10",
+          "bounding_box": {
+            "x": 0.211,
+            "y": 0.32600000000000057,
+            "width": 0.1312505399568034,
+            "height": 0.02800000000000005
+          },
+          "block_content": "\\[\n\\mathbf {s} ^ {*} = \\underset {\\mathbf {s}} {\\arg \\min} \\mathcal {L} (\\mathbf {s}) \\tag {4}\n\\]",
+          "label": "Formula"
+        },
+        {
+          "id": "pred-2-5-5_10",
+          "order": "11",
+          "bounding_box": {
+            "x": 0.104,
+            "y": 0.354,
+            "width": 0.339,
+            "height": 0.017
+          },
+          "block_content": "\\[\n\\mathcal {L} (\\mathbf {s}) = \\| Q (\\mathbf {W} \\cdot \\operatorname{diag} (\\mathbf {s})) (\\operatorname{diag} (\\mathbf {s}) ^ {- 1} \\cdot \\mathbf {X}) - \\mathbf {W X} \\|\n\\]",
+          "label": "Formula"
+        },
+        {
+          "id": "pred-2-5-5_11",
+          "order": "12",
+          "bounding_box": {
+            "x": 0.08607991360691145,
+            "y": 0.383,
+            "width": 0.3909200863930884,
+            "height": 0.19599999999999998
+          },
+          "block_content": "Here Q means the weight quantization function (e.g., INT3/INT4 quantization with group size 128), W is the original weights in FP16, and X is the input features cached from a small calibration set (we take a small calibration set from be pre-training dataset in order not to overfit to a specific task). s is a per-(input) channel scaling factor; for  \\( s^{-1} \\cdot X \\) , it can usually be fused into the previous operator (Wei et al., 2022b; Xiao et al., 2022). Since the quantization function is not differentiable, we are not able to directly optimize the problem with vanilla backpropagation. There are some techniques relying on approximated gradients (Bengio et al., 2013; Esser et al., 2019), which we found still suffers from unstable convergence.",
+          "label": "Text"
+        },
+        {
+          "id": "pred-2-5-5_12",
+          "order": "13",
+          "bounding_box": {
+            "x": 0.085,
+            "y": 0.585,
+            "width": 0.391,
+            "height": 0.093
+          },
+          "block_content": "To make the process more stable, we define a search space for the optimal scale by analyzing the factors that will affect the choice of scaling factor. As shown in the last section, the saliency of weight channels is actually determined by the activation scale (thus “activation-awareness”). Therefore, we simply use a very simple search space:",
+          "label": "Text"
+        },
+        {
+          "id": "pred-2-5-5_13",
+          "order": "14",
+          "bounding_box": {
+            "x": 0.16200000000000003,
+            "y": 0.6899999999999997,
+            "width": 0.23748596112311013,
+            "height": 0.024999999999999988
+          },
+          "block_content": "\\[\n\\mathbf {s} = \\mathbf {s} _ {\\mathbf {X}} ^ {\\alpha}, \\quad \\alpha^ {*} = \\underset {\\alpha} {\\arg \\min} \\mathcal {L} (\\mathbf {s} _ {\\mathbf {X}} ^ {\\alpha}) \\tag {5}\n\\]",
+          "label": "Formula"
+        },
+        {
+          "id": "pred-2-5-5_14",
+          "order": "15",
+          "bounding_box": {
+            "x": 0.085,
+            "y": 0.726,
+            "width": 0.392,
+            "height": 0.181
+          },
+          "block_content": "sX is the average magnitude of activation (per-channel), and we use a single hyper-parameter  \\( \\alpha \\)  to balance between the protection of salient and non-salient channels. We can find the best  \\( \\alpha \\)  by a fast grid search over the interval of [0, 1] (0 means we do not scale; 1 corresponds to the most aggressive scaling in our search space). We further apply weight clipping to minimize the MSE error of quantization. We provide an ablation study on OPT models under INT3-g128 quantization in Table 5; AWQ consistently outperforms round-to-nearest quantization (RTN) and achieves comparable performance as mixed-precision (1% FP16) while being more hardware-friendly.",
+          "label": "Text"
+        },
+        {
+          "id": "pred-2-5-5_15",
+          "order": "16",
+          "bounding_box": {
+            "x": 0.497,
+            "y": 0.299,
+            "width": 0.391,
+            "height": 0.136
+          },
+          "block_content": "Advantages. Our method does not rely on any regression (Frantar et al., 2022) or backpropagation, which is required by many quantization-aware training methods. It has minimal reliance on the calibration set since we only measure the average magnitude per channel, thus preventing over-fitting (Figure 8). Therefore, our method requires fewer data for the quantization process and can preserve LLMs' knowledge outside of the calibration set's distribution. See Section 5.3 for more details.",
+          "label": "Text"
+        },
+        {
+          "id": "pred-2-5-5_16",
+          "order": "17",
+          "bounding_box": {
+            "x": 0.498,
+            "y": 0.448,
+            "width": 0.388,
+            "height": 0.034
+          },
+          "block_content": "4 TINYCHAT: MAPPING AWQ ONTO EDGE PLATFORMS",
+          "label": "Text"
+        },
+        {
+          "id": "pred-2-5-5_17",
+          "order": "18",
+          "bounding_box": {
+            "x": 0.5003196544276458,
+            "y": 0.49599999999999994,
+            "width": 0.38868034557235437,
+            "height": 0.24100000000000005
+          },
+          "block_content": "AWQ can substantially reduce the size of LLMs. However, converting the theoretical memory savings from W4A16 (4-bit weight, 16-bit activation) quantization into measured speedup is non-trivial. Alternative W8A8 quantization methods, such as SmoothQuant (Xiao et al., 2022), maintain the same data precision for both storage and computation. This allows the dequantization procedure to be seamlessly integrated into the computation kernel's epilogue. On the other hand, W4A16 quantization employs different data types for memory access and computation. As a result, its dequantization must be incorporated into the primary computation loop for optimal performance, posing implementation challenges. To tackle this, we introduce TinyChat: a nimble system for AWQ model inference. It boasts a PyTorch frontend and a backend harnessing device-specific instruction sets (e.g., CUDA/PTX, Neon, AVX).",
+          "label": "Text"
+        },
+        {
+          "id": "pred-2-5-5_18",
+          "order": "19",
+          "bounding_box": {
+            "x": 0.497,
+            "y": 0.75,
+            "width": 0.365,
+            "height": 0.015
+          },
+          "block_content": "4.1 Why AWQ Helps Accelerate On-Device LLMs",
+          "label": "Text"
+        },
+        {
+          "id": "pred-2-5-5_19",
+          "order": "20",
+          "bounding_box": {
+            "x": 0.49923974082073425,
+            "y": 0.7789999999999999,
+            "width": 0.38876025917926554,
+            "height": 0.09
+          },
+          "block_content": "To understand the acceleration opportunities in quantized LLMs on the edge, we start by profiling the latency breakdown of LLaMA-7B (Touvron et al., 2023a) model on an RTX 4090 GPU. We adopt an inference batch size of 1, catering for edge use cases, and implement the model in FP16 with NVIDIA FasterTransformer.",
+          "label": "Text"
+        },
+        {
+          "id": "pred-2-5-5_20",
+          "order": "21",
+          "bounding_box": {
+            "x": 0.5002397408207344,
+            "y": 0.8769999999999996,
+            "width": 0.38676025917926565,
+            "height": 0.02999999999999999
+          },
+          "block_content": "Context vs generation latency. As in Figure 3(a), it takes 310 ms to generate 20 tokens, while summarizing a prompt",
+          "label": "Text"
+        },
+        {
+          "id": "UzeBo627uW",
+          "order": null,
+          "bounding_box": {
+            "x": 0.45464362850971923,
+            "y": 0.33894912554285145,
+            "width": 0.020518358531317494,
+            "height": 0.0158465387823186
+          },
+          "block_content": "(4)",
+          "label": "Text"
+        },
+        {
+          "id": "XI2KQTz9-X",
+          "order": null,
+          "bounding_box": {
+            "x": 0.09071274298056156,
+            "y": 0.22051709885394405,
+            "width": 0.7958963282937365,
+            "height": 0.04920767306088407
+          },
+          "block_content": "Figure 3. Bottleneck analysis for Llama-2-7B on NVIDIA RTX 4090. Left : In on-device LLM applications, generation stage is much slower than the context stage. Middle : The generation stage is memory bound and has low arithmetic intensity. W4A16 quantization can effectively improve the arithmetic intensity by 4 × . Right : The amount of weight access is orders of magnitude larger than the amount of activation access. Thus, weight-only quantization is more effective for on-device LLMs.",
+          "label": "Text"
+        },
+        {
+          "id": "pXrSskU2LP",
+          "order": null,
+          "bounding_box": {
+            "x": 0.45464362850971923,
+            "y": 0.6900750829141472,
+            "width": 0.020518358531317494,
+            "height": 0.016680567139282735
+          },
+          "block_content": "(5)",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "page_index": 12,
+      "blocks": [
+        {
+          "id": "pred-2-12-12_0",
+          "order": "1",
+          "bounding_box": {
+            "x": 0.18,
+            "y": 0.057,
+            "width": 0.613,
+            "height": 0.014
+          },
+          "block_content": "AWQ: Activation-aware Weight Quantization for On-Device LLM Compression and Acceleration",
+          "label": "Text"
+        },
+        {
+          "id": "pred-2-12-12_1",
+          "order": "2",
+          "bounding_box": {
+            "x": 0.088,
+            "y": 0.085,
+            "width": 0.39,
+            "height": 0.06
+          },
+          "block_content": "Bengio, Y., Léonard, N., and Courville, A. Estimating or propagating gradients through stochastic neurons for conditional computation. arXiv preprint arXiv:1308.3432, 2013.",
+          "label": "Text"
+        },
+        {
+          "id": "pred-2-12-12_2",
+          "order": "3",
+          "bounding_box": {
+            "x": 0.088,
+            "y": 0.153,
+            "width": 0.39,
+            "height": 0.062
+          },
+          "block_content": "Black, S., Biderman, S., Hallahan, E., Anthony, Q., Gao, L., Golding, L., He, H., Leahy, C., McDonell, K., Phang, J., et al. Gpt-neox-20b: An open-source autoregressive language model. arXiv preprint arXiv:2204.06745, 2022.",
+          "label": "Text"
+        },
+        {
+          "id": "pred-2-12-12_3",
+          "order": "4",
+          "bounding_box": {
+            "x": 0.088,
+            "y": 0.222,
+            "width": 0.399,
+            "height": 0.228
+          },
+          "block_content": "Brown, T., Mann, B., Ryder, N., Subbiah, M., Kaplan, J. D., Dhariwal, P., Neelakantan, A., Shyam, P., Sastry, G., Askell, A., Agarwal, S., Herbert-Voss, A., Krueger, G., Henighan, T., Child, R., Ramesh, A., Ziegler, D., Wu, J., Winter, C., Hesse, C., Chen, M., Sigler, E., Litwin, M., Gray, S., Chess, B., Clark, J., Berner, C., McCandlish, S., Radford, A., Sutskever, I., and Amodei, D. Language models are few-shot learners. In Larochelle, H., Ranzato, M., Hadsell, R., Balcan, M., and Lin, H. (eds.), Advances in Neural Information Processing Systems, volume 33, pp. 1877–1901. Curran Associates, Inc., 2020. URL https://proceedings.neurips.cc/paper/2020/file/1457c0d6bfcb4967418bfb8ac142f64a-Paper.pdf.",
+          "label": "Text"
+        },
+        {
+          "id": "pred-2-12-12_4",
+          "order": "5",
+          "bounding_box": {
+            "x": 0.088,
+            "y": 0.457,
+            "width": 0.39,
+            "height": 0.076
+          },
+          "block_content": "Chen, T., Moreau, T., Jiang, Z., Zheng, L., Yan, E., Shen, H., Cowan, M., Wang, L., Hu, Y., Ceze, L., et al. TVM: An Automated End-to-End Optimizing Compiler for Deep Learning. In 13th USENIX Symposium on Operating Systems Design and Implementation (OSDI), 2018.",
+          "label": "Text"
+        },
+        {
+          "id": "pred-2-12-12_5",
+          "order": "6",
+          "bounding_box": {
+            "x": 0.088,
+            "y": 0.54,
+            "width": 0.39,
+            "height": 0.072
+          },
+          "block_content": "Chen, X., Fang, H., Lin, T.-Y., Vedantam, R., Gupta, S., Dollár, P., and Zitnick, C. L. Microsoft coco captions: Data collection and evaluation server. arXiv preprint arXiv:1504.00325, 2015.",
+          "label": "Text"
+        },
+        {
+          "id": "pred-2-12-12_6",
+          "order": "7",
+          "bounding_box": {
+            "x": 0.088,
+            "y": 0.609,
+            "width": 0.39,
+            "height": 0.09
+          },
+          "block_content": "Chiang, W.-L., Li, Z., Lin, Z., Sheng, Y., Wu, Z., Zhang, H., Zheng, L., Zhuang, S., Zhuang, Y., Gonzalez, J. E., Stoica, I., and Xing, E. P. Vicuna: An open-source chatbot impressing gpt-4 with 90%* chatgpt quality, March 2023. URL https://lmsys.org/blog/2023-03-30-vicuna/.",
+          "label": "Text"
+        },
+        {
+          "id": "pred-2-12-12_7",
+          "order": "8",
+          "bounding_box": {
+            "x": 0.088,
+            "y": 0.707,
+            "width": 0.39,
+            "height": 0.062
+          },
+          "block_content": "Choi, J., Wang, Z., Venkataramani, S., Chuang, P. I.-J., Srinivasan, V., and Gopalakrishnan, K. Pact: Parameterized clipping activation for quantized neural networks. arXiv preprint arXiv:1805.06085, 2018.",
+          "label": "Text"
+        },
+        {
+          "id": "pred-2-12-12_8",
+          "order": "9",
+          "bounding_box": {
+            "x": 0.088,
+            "y": 0.776,
+            "width": 0.39,
+            "height": 0.063
+          },
+          "block_content": "Chung, H. W., Hou, L., Longpre, S., Zoph, B., Tay, Y., Fedus, W., Li, E., Wang, X., Dehghani, M., Brahma, S., et al. Scaling instruction-finetuned language models. arXiv preprint arXiv:2210.11416, 2022.",
+          "label": "Text"
+        },
+        {
+          "id": "pred-2-12-12_9",
+          "order": "10",
+          "bounding_box": {
+            "x": 0.088,
+            "y": 0.846,
+            "width": 0.39,
+            "height": 0.06
+          },
+          "block_content": "Cobbe, K., Kosaraju, V., Bavarian, M., Chen, M., Jun, H., Kaiser, L., Plappert, M., Tworek, J., Hilton, J., Nakano, R., Hesse, C., and Schulman, J. Training verifiers to solve math word problems, 2021.",
+          "label": "Text"
+        },
+        {
+          "id": "pred-2-12-12_10",
+          "order": "11",
+          "bounding_box": {
+            "x": 0.5,
+            "y": 0.085,
+            "width": 0.388,
+            "height": 0.045
+          },
+          "block_content": "Dettmers, T. and Zettlemoyer, L. The case for 4-bit precision: k-bit inference scaling laws. arXiv preprint arXiv:2212.09720, 2022.",
+          "label": "Text"
+        },
+        {
+          "id": "pred-2-12-12_11",
+          "order": "12",
+          "bounding_box": {
+            "x": 0.5,
+            "y": 0.139,
+            "width": 0.388,
+            "height": 0.046
+          },
+          "block_content": "Dettmers, T., Lewis, M., Belkada, Y., and Zettlemoyer, L. Llm.int8(): 8-bit matrix multiplication for transformers at scale. arXiv preprint arXiv:2208.07339, 2022.",
+          "label": "Text"
+        },
+        {
+          "id": "pred-2-12-12_12",
+          "order": "13",
+          "bounding_box": {
+            "x": 0.5,
+            "y": 0.193,
+            "width": 0.388,
+            "height": 0.061
+          },
+          "block_content": "Driess, D., Xia, F., Sajjadi, M. S., Lynch, C., Chowdhery, A., Ichter, B., Wahid, A., Tompson, J., Vuong, Q., Yu, T., et al. Palm-e: An embodied multimodal language model. arXiv preprint arXiv:2303.03378, 2023.",
+          "label": "Text"
+        },
+        {
+          "id": "pred-2-12-12_13",
+          "order": "14",
+          "bounding_box": {
+            "x": 0.5,
+            "y": 0.262,
+            "width": 0.388,
+            "height": 0.046
+          },
+          "block_content": "Esser, S. K., McKinstry, J. L., Bablani, D., Appuswamy, R., and Modha, D. S. Learned step size quantization. arXiv preprint arXiv:1902.08153, 2019.",
+          "label": "Text"
+        },
+        {
+          "id": "pred-2-12-12_14",
+          "order": "15",
+          "bounding_box": {
+            "x": 0.5,
+            "y": 0.316,
+            "width": 0.388,
+            "height": 0.06
+          },
+          "block_content": "Feng, S., Hou, B., Jin, H., Lin, W., Shao, J., Lai, R., Ye, Z., Zheng, L., Yu, C. H., Yu, Y., and Chen, T. TensorIR: An Abstraction for Automatic Tensorized Program Optimization. In ASPLOS, 2023.",
+          "label": "Text"
+        },
+        {
+          "id": "pred-2-12-12_15",
+          "order": "16",
+          "bounding_box": {
+            "x": 0.5,
+            "y": 0.386,
+            "width": 0.388,
+            "height": 0.045
+          },
+          "block_content": "Frankle, J. and Carbin, M. The lottery ticket hypothesis: Finding sparse, trainable neural networks. arXiv preprint arXiv:1803.03635, 2018.",
+          "label": "Text"
+        },
+        {
+          "id": "pred-2-12-12_16",
+          "order": "17",
+          "bounding_box": {
+            "x": 0.5,
+            "y": 0.44,
+            "width": 0.388,
+            "height": 0.059
+          },
+          "block_content": "Frantar, E., Ashkboos, S., Hoefler, T., and Alistarh, D. Gptq: Accurate post-training quantization for generative pre-trained transformers. arXiv preprint arXiv:2210.17323, 2022.",
+          "label": "Text"
+        },
+        {
+          "id": "pred-2-12-12_17",
+          "order": "18",
+          "bounding_box": {
+            "x": 0.5,
+            "y": 0.508,
+            "width": 0.388,
+            "height": 0.076
+          },
+          "block_content": "Fu, C., Chen, P., Shen, Y., Qin, Y., Zhang, M., Lin, X., Yang, J., Zheng, X., Li, K., Sun, X., Wu, Y., and Ji, R. MME: A Comprehensive Evaluation Benchmark for Multimodal Large Language Models. arXiv preprint arXiv:2306.13394, 2023.",
+          "label": "Text"
+        },
+        {
+          "id": "pred-2-12-12_18",
+          "order": "19",
+          "bounding_box": {
+            "x": 0.5,
+            "y": 0.593,
+            "width": 0.388,
+            "height": 0.075
+          },
+          "block_content": "Gao, L., Biderman, S., Black, S., Golding, L., Hoppe, T., Foster, C., Phang, J., He, H., Thite, A., Nabeshima, N., et al. The pile: An 800gb dataset of diverse text for language modeling. arXiv preprint arXiv:2101.00027, 2020.",
+          "label": "Text"
+        },
+        {
+          "id": "pred-2-12-12_19",
+          "order": "20",
+          "bounding_box": {
+            "x": 0.5,
+            "y": 0.677,
+            "width": 0.388,
+            "height": 0.06
+          },
+          "block_content": "Gholami, A., Kim, S., Dong, Z., Yao, Z., Mahoney, M. W., and Keutzer, K. A survey of quantization methods for efficient neural network inference. arXiv preprint arXiv:2103.13630, 2021.",
+          "label": "Text"
+        },
+        {
+          "id": "pred-2-12-12_20",
+          "order": "21",
+          "bounding_box": {
+            "x": 0.5,
+            "y": 0.746,
+            "width": 0.388,
+            "height": 0.077
+          },
+          "block_content": "Goyal, Y., Khot, T., Summers-Stay, D., Batra, D., and Parikh, D. Making the v in vqa matter: Elevating the role of image understanding in visual question answering. In Proceedings of the IEEE conference on computer vision and pattern recognition, pp. 6904–6913, 2017.",
+          "label": "Text"
+        },
+        {
+          "id": "pred-2-12-12_21",
+          "order": "22",
+          "bounding_box": {
+            "x": 0.5,
+            "y": 0.831,
+            "width": 0.388,
+            "height": 0.076
+          },
+          "block_content": "Gurari, D., Li, Q., Stangl, A. J., Guo, A., Lin, C., Grauman, K., Luo, J., and Bigham, J. P. Vizwiz grand challenge: Answering visual questions from blind people. In Proceedings of the IEEE conference on computer vision and pattern recognition, pp. 3608–3617, 2018.",
+          "label": "Text"
+        }
+      ]
+    }
+  ]
+}

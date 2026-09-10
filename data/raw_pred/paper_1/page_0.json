@@ -1,0 +1,766 @@
+{
+    "input_path": "/home/bocchi/Work/Paper-Translate-Personal-Project/input/2210.17323v2.pdf",
+    "page_index": 0,
+    "page_count": 16,
+    "width": 1224,
+    "height": 1584,
+    "model_settings": {
+        "use_doc_preprocessor": false,
+        "use_layout_detection": true,
+        "use_chart_recognition": false,
+        "use_seal_recognition": false,
+        "use_ocr_for_image_block": true,
+        "format_block_content": true,
+        "merge_layout_blocks": true,
+        "markdown_ignore_labels": [
+            "number",
+            "footnote",
+            "header",
+            "header_image",
+            "footer",
+            "footer_image",
+            "aside_text"
+        ],
+        "return_layout_polygon_points": true
+    },
+    "parsing_res_list": [
+        {
+            "block_label": "aside_text",
+            "block_content": "arXiv:2210.17323v2 [cs.LG] 22 Mar 2023",
+            "block_bbox": [
+                28,
+                415,
+                71,
+                1120
+            ],
+            "block_id": 0,
+            "block_order": null,
+            "group_id": 0,
+            "block_polygon_points": [
+                [
+                    28.0,
+                    415.0
+                ],
+                [
+                    71.0,
+                    415.0
+                ],
+                [
+                    71.0,
+                    1120.0
+                ],
+                [
+                    28.0,
+                    1120.0
+                ]
+            ]
+        },
+        {
+            "block_label": "header",
+            "block_content": "Published as a conference paper at ICLR 2023",
+            "block_bbox": [
+                212,
+                53,
+                589,
+                76
+            ],
+            "block_id": 1,
+            "block_order": null,
+            "group_id": 1,
+            "block_polygon_points": [
+                [
+                    212.0,
+                    53.0
+                ],
+                [
+                    589.0,
+                    53.0
+                ],
+                [
+                    589.0,
+                    76.0
+                ],
+                [
+                    212.0,
+                    76.0
+                ]
+            ]
+        },
+        {
+            "block_label": "doc_title",
+            "block_content": "# GPTQ: ACCURATE POST-TRAINING QUANTIZATION FOR GENERATIVE PRE-TRAINED TRANSFORMERS",
+            "block_bbox": [
+                210,
+                159,
+                983,
+                232
+            ],
+            "block_id": 2,
+            "block_order": 1,
+            "group_id": 2,
+            "block_polygon_points": [
+                [
+                    210.0,
+                    159.0
+                ],
+                [
+                    983.0,
+                    159.0
+                ],
+                [
+                    983.0,
+                    232.0
+                ],
+                [
+                    210.0,
+                    232.0
+                ]
+            ]
+        },
+        {
+            "block_label": "text",
+            "block_content": "Elias Frantar* Saleh Ashkboos\n\nIST Austria ETH Zurich\n\nTorsten Hoefler Dan Alistarh\n\nETH Zurich IST Austria & NeuralMagic",
+            "block_bbox": [
+                222,
+                270,
+                526,
+                316
+            ],
+            "block_id": 3,
+            "block_order": 2,
+            "group_id": 3,
+            "block_polygon_points": [
+                [
+                    222.0,
+                    270.0
+                ],
+                [
+                    526.0,
+                    270.0
+                ],
+                [
+                    526.0,
+                    316.0
+                ],
+                [
+                    222.0,
+                    316.0
+                ]
+            ]
+        },
+        {
+            "block_label": "text",
+            "block_content": "",
+            "block_bbox": [
+                566,
+                271,
+                975,
+                317
+            ],
+            "block_id": 4,
+            "block_order": 3,
+            "group_id": 3,
+            "block_polygon_points": [
+                [
+                    566.0,
+                    271.0
+                ],
+                [
+                    975.0,
+                    271.0
+                ],
+                [
+                    975.0,
+                    317.0
+                ],
+                [
+                    566.0,
+                    317.0
+                ]
+            ]
+        },
+        {
+            "block_label": "paragraph_title",
+            "block_content": "## ABSTRACT",
+            "block_bbox": [
+                553,
+                373,
+                671,
+                396
+            ],
+            "block_id": 5,
+            "block_order": 4,
+            "group_id": 5,
+            "block_polygon_points": [
+                [
+                    553.0,
+                    373.0
+                ],
+                [
+                    670.0,
+                    373.0
+                ],
+                [
+                    670.0,
+                    395.0
+                ],
+                [
+                    553.0,
+                    395.0
+                ]
+            ]
+        },
+        {
+            "block_label": "abstract",
+            "block_content": "Generative Pre-trained Transformer models, known as GPT or OPT, set themselves apart through breakthrough performance across complex language modelling tasks, but also by their extremely high computational and storage costs. Specifically, due to their massive size, even inference for large, highly-accurate GPT models may require multiple performant GPUs, which limits the usability of such models. While there is emerging work on relieving this pressure via model compression, the applicability and performance of existing compression techniques is limited by the scale and complexity of GPT models. In this paper, we address this challenge, and propose GPTQ, a new one-shot weight quantization method based on approximate second-order information, that is both highly-accurate and highly-efficient. Specifically, GPTQ can quantize GPT models with 175 billion parameters in approximately four GPU hours, reducing the bitwidth down to 3 or 4 bits per weight, with negligible accuracy degradation relative to the uncompressed baseline. Our method more than doubles the compression gains relative to previously-proposed one-shot quantization methods, preserving accuracy, allowing us for the first time to execute an 175 billion-parameter model inside a single GPU for generative inference. Moreover, we also show that our method can still provide reasonable accuracy in the extreme quantization regime, in which weights are quantized to 2-bit or even ternary quantization levels. We show experimentally that these improvements can be leveraged for end-to-end inference speedups over FP16, of around 3.25x when using high-end GPUs (NVIDIA A100) and 4.5x when using more cost-effective ones (NVIDIA A6000). The implementation is available at https://github.com/IST-DASLab/gptq.",
+            "block_bbox": [
+                283,
+                422,
+                940,
+                923
+            ],
+            "block_id": 6,
+            "block_order": 5,
+            "group_id": 6,
+            "block_polygon_points": [
+                [
+                    283.0,
+                    422.0
+                ],
+                [
+                    940.0,
+                    422.0
+                ],
+                [
+                    940.0,
+                    923.0
+                ],
+                [
+                    283.0,
+                    923.0
+                ]
+            ]
+        },
+        {
+            "block_label": "paragraph_title",
+            "block_content": "## 1 INTRODUCTION",
+            "block_bbox": [
+                214,
+                965,
+                415,
+                988
+            ],
+            "block_id": 7,
+            "block_order": 6,
+            "group_id": 7,
+            "block_polygon_points": [
+                [
+                    214.0,
+                    965.0
+                ],
+                [
+                    415.0,
+                    965.0
+                ],
+                [
+                    415.0,
+                    988.0
+                ],
+                [
+                    214.0,
+                    988.0
+                ]
+            ]
+        },
+        {
+            "block_label": "text",
+            "block_content": "Pre-trained generative models from the Transformer (Vaswani et al., 2017) family, commonly known as GPT or OPT (Radford et al., 2019; Brown et al., 2020; Zhang et al., 2022), have shown breakthrough performance for complex language modelling tasks, leading to massive academic and practical interest. One major obstacle to their usability is computational and storage cost, which ranks among the highest for known models. For instance, the best-performing model variants, e.g. GPT3-175B, have in the order of 175 billion parameters and require tens-to-hundreds of GPU years to train (Zhang et al., 2022). Even the simpler task of inferencing over a pre-trained model, which is our focus in this paper, is highly challenging: for instance, the parameters of GPT3-175B occupy 326GB (counting in multiples of 1024) of memory when stored in a compact float16 format. This exceeds the capacity of even the highest-end single GPUs, and thus inference must be performed using more complex and expensive setups, such as multi-GPU deployments.",
+            "block_bbox": [
+                209,
+                1005,
+                1013,
+                1246
+            ],
+            "block_id": 8,
+            "block_order": 7,
+            "group_id": 8,
+            "block_polygon_points": [
+                [
+                    209.0,
+                    1005.0
+                ],
+                [
+                    1013.0,
+                    1005.0
+                ],
+                [
+                    1013.0,
+                    1246.0
+                ],
+                [
+                    209.0,
+                    1246.0
+                ]
+            ]
+        },
+        {
+            "block_label": "text",
+            "block_content": "Although a standard approach to eliminating these overheads is model compression, e.g. (Hoeffer et al., 2021; Gholami et al., 2021), surprisingly little is known about compressing such models for inference. One reason is that more complex methods for low-bitwidth quantization or model pruning usually require model retraining, which is extremely expensive for billion-parameter models. Alternatively, post-training methods (Nagel et al., 2020; Wang et al., 2020; Hubara et al., 2020; Nahshan et al., 2021), which compress the model in one shot, without retraining, would be very appealing. Unfortunately, the more accurate variants of such methods (Li et al., 2021; Hubara et al., 2021; Frantar et al., 2022) are complex and challenging to scale to billions of parameters (Yao et al.,",
+            "block_bbox": [
+                209,
+                1254,
+                1014,
+                1429
+            ],
+            "block_id": 9,
+            "block_order": 8,
+            "group_id": 9,
+            "block_polygon_points": [
+                [
+                    209.0,
+                    1254.0
+                ],
+                [
+                    1014.0,
+                    1254.0
+                ],
+                [
+                    1014.0,
+                    1429.0
+                ],
+                [
+                    209.0,
+                    1429.0
+                ]
+            ]
+        },
+        {
+            "block_label": "footnote",
+            "block_content": "*Corresponding author: elias.frantar@ist.ac.at",
+            "block_bbox": [
+                234,
+                1444,
+                666,
+                1467
+            ],
+            "block_id": 10,
+            "block_order": null,
+            "group_id": 10,
+            "block_polygon_points": [
+                [
+                    234.0,
+                    1444.0
+                ],
+                [
+                    666.0,
+                    1444.0
+                ],
+                [
+                    666.0,
+                    1467.0
+                ],
+                [
+                    234.0,
+                    1467.0
+                ]
+            ]
+        },
+        {
+            "block_label": "number",
+            "block_content": "1",
+            "block_bbox": [
+                605,
+                1504,
+                619,
+                1523
+            ],
+            "block_id": 11,
+            "block_order": null,
+            "group_id": 11,
+            "block_polygon_points": [
+                [
+                    605.0,
+                    1504.0
+                ],
+                [
+                    618.0,
+                    1504.0
+                ],
+                [
+                    618.0,
+                    1522.0
+                ],
+                [
+                    605.0,
+                    1522.0
+                ]
+            ]
+        }
+    ],
+    "layout_det_res": {
+        "input_path": null,
+        "page_index": null,
+        "boxes": [
+            {
+                "cls_id": 2,
+                "label": "aside_text",
+                "score": 0.8886705040931702,
+                "coordinate": [
+                    28,
+                    415,
+                    71,
+                    1120
+                ],
+                "order": null,
+                "polygon_points": [
+                    [
+                        28.0,
+                        415.0
+                    ],
+                    [
+                        71.0,
+                        415.0
+                    ],
+                    [
+                        71.0,
+                        1120.0
+                    ],
+                    [
+                        28.0,
+                        1120.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 12,
+                "label": "header",
+                "score": 0.8639671802520752,
+                "coordinate": [
+                    212,
+                    53,
+                    589,
+                    76
+                ],
+                "order": null,
+                "polygon_points": [
+                    [
+                        212.0,
+                        53.0
+                    ],
+                    [
+                        589.0,
+                        53.0
+                    ],
+                    [
+                        589.0,
+                        76.0
+                    ],
+                    [
+                        212.0,
+                        76.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 6,
+                "label": "doc_title",
+                "score": 0.9225818514823914,
+                "coordinate": [
+                    210,
+                    159,
+                    983,
+                    232
+                ],
+                "order": 1,
+                "polygon_points": [
+                    [
+                        210.0,
+                        159.0
+                    ],
+                    [
+                        983.0,
+                        159.0
+                    ],
+                    [
+                        983.0,
+                        232.0
+                    ],
+                    [
+                        210.0,
+                        232.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.767756998538971,
+                "coordinate": [
+                    222,
+                    270,
+                    526,
+                    316
+                ],
+                "order": 2,
+                "polygon_points": [
+                    [
+                        222.0,
+                        270.0
+                    ],
+                    [
+                        526.0,
+                        270.0
+                    ],
+                    [
+                        526.0,
+                        316.0
+                    ],
+                    [
+                        222.0,
+                        316.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.5961456894874573,
+                "coordinate": [
+                    566,
+                    271,
+                    975,
+                    317
+                ],
+                "order": 3,
+                "polygon_points": [
+                    [
+                        566.0,
+                        271.0
+                    ],
+                    [
+                        975.0,
+                        271.0
+                    ],
+                    [
+                        975.0,
+                        317.0
+                    ],
+                    [
+                        566.0,
+                        317.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 17,
+                "label": "paragraph_title",
+                "score": 0.7941859364509583,
+                "coordinate": [
+                    553,
+                    373,
+                    671,
+                    396
+                ],
+                "order": 4,
+                "polygon_points": [
+                    [
+                        553.0,
+                        373.0
+                    ],
+                    [
+                        670.0,
+                        373.0
+                    ],
+                    [
+                        670.0,
+                        395.0
+                    ],
+                    [
+                        553.0,
+                        395.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 0,
+                "label": "abstract",
+                "score": 0.9810927510261536,
+                "coordinate": [
+                    283,
+                    422,
+                    940,
+                    923
+                ],
+                "order": 5,
+                "polygon_points": [
+                    [
+                        283.0,
+                        422.0
+                    ],
+                    [
+                        940.0,
+                        422.0
+                    ],
+                    [
+                        940.0,
+                        923.0
+                    ],
+                    [
+                        283.0,
+                        923.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 17,
+                "label": "paragraph_title",
+                "score": 0.8388493657112122,
+                "coordinate": [
+                    214,
+                    965,
+                    415,
+                    988
+                ],
+                "order": 6,
+                "polygon_points": [
+                    [
+                        214.0,
+                        965.0
+                    ],
+                    [
+                        415.0,
+                        965.0
+                    ],
+                    [
+                        415.0,
+                        988.0
+                    ],
+                    [
+                        214.0,
+                        988.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.9647945761680603,
+                "coordinate": [
+                    209,
+                    1005,
+                    1013,
+                    1246
+                ],
+                "order": 7,
+                "polygon_points": [
+                    [
+                        209.0,
+                        1005.0
+                    ],
+                    [
+                        1013.0,
+                        1005.0
+                    ],
+                    [
+                        1013.0,
+                        1246.0
+                    ],
+                    [
+                        209.0,
+                        1246.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.9621888995170593,
+                "coordinate": [
+                    209,
+                    1254,
+                    1014,
+                    1429
+                ],
+                "order": 8,
+                "polygon_points": [
+                    [
+                        209.0,
+                        1254.0
+                    ],
+                    [
+                        1014.0,
+                        1254.0
+                    ],
+                    [
+                        1014.0,
+                        1429.0
+                    ],
+                    [
+                        209.0,
+                        1429.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 10,
+                "label": "footnote",
+                "score": 0.8977091312408447,
+                "coordinate": [
+                    234,
+                    1444,
+                    666,
+                    1467
+                ],
+                "order": null,
+                "polygon_points": [
+                    [
+                        234.0,
+                        1444.0
+                    ],
+                    [
+                        666.0,
+                        1444.0
+                    ],
+                    [
+                        666.0,
+                        1467.0
+                    ],
+                    [
+                        234.0,
+                        1467.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 16,
+                "label": "number",
+                "score": 0.6591087579727173,
+                "coordinate": [
+                    605,
+                    1504,
+                    619,
+                    1523
+                ],
+                "order": 9,
+                "polygon_points": [
+                    [
+                        605.0,
+                        1504.0
+                    ],
+                    [
+                        618.0,
+                        1504.0
+                    ],
+                    [
+                        618.0,
+                        1522.0
+                    ],
+                    [
+                        605.0,
+                        1522.0
+                    ]
+                ]
+            }
+        ]
+    }
+}

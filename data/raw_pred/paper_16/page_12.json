@@ -1,0 +1,670 @@
+{
+    "input_path": "/home/bocchi/Downloads/Paper_Data/Statistics/2607.20760v1.pdf",
+    "page_index": 12,
+    "page_count": 20,
+    "width": 1224,
+    "height": 1584,
+    "model_settings": {
+        "use_doc_preprocessor": false,
+        "use_layout_detection": true,
+        "use_chart_recognition": false,
+        "use_seal_recognition": false,
+        "use_ocr_for_image_block": true,
+        "format_block_content": true,
+        "merge_layout_blocks": true,
+        "markdown_ignore_labels": [
+            "number",
+            "footnote",
+            "header",
+            "header_image",
+            "footer",
+            "footer_image",
+            "aside_text"
+        ],
+        "return_layout_polygon_points": true
+    },
+    "parsing_res_list": [
+        {
+            "block_label": "paragraph_title",
+            "block_content": "### 6.2 Results",
+            "block_bbox": [
+                139,
+                144,
+                322,
+                175
+            ],
+            "block_id": 0,
+            "block_order": 1,
+            "group_id": 0,
+            "block_polygon_points": [
+                [
+                    139.0,
+                    144.0
+                ],
+                [
+                    322.0,
+                    144.0
+                ],
+                [
+                    322.0,
+                    175.0
+                ],
+                [
+                    139.0,
+                    175.0
+                ]
+            ]
+        },
+        {
+            "block_label": "text",
+            "block_content": "Table 1 reports the two objectives that bracket the comparison at each noise level, and Figure 3 shows the full ARI-versus-noise picture. Three findings stand out. First, for regime recovery the coskewness objective is clearly superior, and the effect is strongest with the k-means split: in Scenario A the covariance objective's ARI falls from 0.47 to 0.40 as the noise rises from  $ \\sigma_{\\varepsilon} = 0.1 $ to 0.5, whereas the coskewness k-means variant rises from 0.52 to 0.61 – the advantage grows precisely where the covariance signal decays and the mixture's third-moment signature persists. Second, the coskewness trees are also structurally closer to the truth, using about six leaves for four regimes against the covariance trees' ten to twelve. Third, this regime-recovery gain carries a predictive cost on this deliberately smooth mixture: because each leaf's regression is a linear latent model, a  $ t_{1} $ that maximizes between-regime separation rather than within-regime covariance sacrifices some  $ R^{2} $ (Scenario A,  $ \\sigma_{\\varepsilon} = 0.3 $: 0.39 for coskewness against 0.75 for covariance). The combined objective sits between the two. The same qualitative ordering holds in the regime-jump Scenario B, where the coskewness k-means ARI reaches 0.64 against the covariance objective's 0.44 at the highest noise level.",
+            "block_bbox": [
+                136,
+                191,
+                1084,
+                627
+            ],
+            "block_id": 1,
+            "block_order": 2,
+            "group_id": 1,
+            "block_polygon_points": [
+                [
+                    136.0,
+                    191.0
+                ],
+                [
+                    1084.0,
+                    191.0
+                ],
+                [
+                    1084.0,
+                    627.0
+                ],
+                [
+                    136.0,
+                    627.0
+                ]
+            ]
+        },
+        {
+            "block_label": "figure_title",
+            "block_content": "<div style=\"text-align: center;\">Table 1: Four-regime simulation: regime-recovery ARI (raw leaf partition vs. true regimes) and mean test  $ R^{2} $, averaged over five seeds, for the covariance objective with the exhaustive variance cut and the coskewness objective with the k-means  $ (t_{1}, u_{1}) $ split – the best regime-recovery configuration. The coskewness objective wins on ARI at every noise level and by a growing margin, at a predictive cost on this smooth mixture. The combined objective (not shown) interpolates; the full grid is in Figure 3.</div>\n",
+            "block_bbox": [
+                136,
+                661,
+                1083,
+                836
+            ],
+            "block_id": 2,
+            "block_order": null,
+            "group_id": 2,
+            "block_polygon_points": [
+                [
+                    136.0,
+                    661.0
+                ],
+                [
+                    1083.0,
+                    661.0
+                ],
+                [
+                    1083.0,
+                    836.0
+                ],
+                [
+                    136.0,
+                    836.0
+                ]
+            ]
+        },
+        {
+            "block_label": "table",
+            "block_content": "\n<table border=1 style='margin: auto; word-wrap: break-word;'><tr><td style='text-align: center; word-wrap: break-word;'>Scenario</td><td style='text-align: center; word-wrap: break-word;'>$ \\sigma_{\\varepsilon} $</td><td style='text-align: center; word-wrap: break-word;'>cov, exhaustive</td><td style='text-align: center; word-wrap: break-word;'>coskew,  $ k $-means</td></tr><tr><td style='text-align: center; word-wrap: break-word;'></td><td style='text-align: center; word-wrap: break-word;'></td><td style='text-align: center; word-wrap: break-word;'>ARI /  $ R^{2} $</td><td style='text-align: center; word-wrap: break-word;'>ARI /  $ R^{2} $</td></tr><tr><td style='text-align: center; word-wrap: break-word;'>A (slope only)</td><td style='text-align: center; word-wrap: break-word;'>0.1</td><td style='text-align: center; word-wrap: break-word;'>0.47 / 0.91</td><td style='text-align: center; word-wrap: break-word;'>0.52 / 0.55</td></tr><tr><td style='text-align: center; word-wrap: break-word;'>A</td><td style='text-align: center; word-wrap: break-word;'>0.3</td><td style='text-align: center; word-wrap: break-word;'>0.46 / 0.75</td><td style='text-align: center; word-wrap: break-word;'>0.52 / 0.39</td></tr><tr><td style='text-align: center; word-wrap: break-word;'>A</td><td style='text-align: center; word-wrap: break-word;'>0.5</td><td style='text-align: center; word-wrap: break-word;'>0.40 / 0.47</td><td style='text-align: center; word-wrap: break-word;'>0.61 / 0.28</td></tr><tr><td style='text-align: center; word-wrap: break-word;'>B (regime jump)</td><td style='text-align: center; word-wrap: break-word;'>0.05</td><td style='text-align: center; word-wrap: break-word;'>0.45 / 0.99</td><td style='text-align: center; word-wrap: break-word;'>0.61 / 0.85</td></tr><tr><td style='text-align: center; word-wrap: break-word;'>B</td><td style='text-align: center; word-wrap: break-word;'>0.15</td><td style='text-align: center; word-wrap: break-word;'>0.45 / 0.97</td><td style='text-align: center; word-wrap: break-word;'>0.60 / 0.89</td></tr><tr><td style='text-align: center; word-wrap: break-word;'>B</td><td style='text-align: center; word-wrap: break-word;'>0.30</td><td style='text-align: center; word-wrap: break-word;'>0.44 / 0.91</td><td style='text-align: center; word-wrap: break-word;'>0.64 / 0.82</td></tr></table>",
+            "block_bbox": [
+                284,
+                837,
+                942,
+                1103
+            ],
+            "block_id": 3,
+            "block_order": null,
+            "group_id": 3,
+            "block_polygon_points": [
+                [
+                    284.0,
+                    837.0
+                ],
+                [
+                    942.0,
+                    837.0
+                ],
+                [
+                    942.0,
+                    1103.0
+                ],
+                [
+                    284.0,
+                    1103.0
+                ]
+            ]
+        },
+        {
+            "block_label": "text",
+            "block_content": "Summarizing, the coskewness objective recovers the regimes markedly better than the covariance objective that underlies PLS-Trees for piecewise multivariate linear data, with the advantage widening as noise obscures the first-order structure. When the goal is regime discovery, the coskewness objective with the k-means split is the configuration to use; when pure predictive accuracy on smooth data is the goal, the covariance or combined objective is preferable.",
+            "block_bbox": [
+                137,
+                1141,
+                1084,
+                1314
+            ],
+            "block_id": 4,
+            "block_order": 3,
+            "group_id": 4,
+            "block_polygon_points": [
+                [
+                    137.0,
+                    1141.0
+                ],
+                [
+                    1084.0,
+                    1141.0
+                ],
+                [
+                    1084.0,
+                    1314.0
+                ],
+                [
+                    137.0,
+                    1314.0
+                ]
+            ]
+        },
+        {
+            "block_label": "number",
+            "block_content": "13",
+            "block_bbox": [
+                599,
+                1481,
+                626,
+                1504
+            ],
+            "block_id": 5,
+            "block_order": null,
+            "group_id": 5,
+            "block_polygon_points": [
+                [
+                    599.0,
+                    1481.0
+                ],
+                [
+                    625.0,
+                    1481.0
+                ],
+                [
+                    625.0,
+                    1503.0
+                ],
+                [
+                    599.0,
+                    1503.0
+                ]
+            ]
+        }
+    ],
+    "layout_det_res": {
+        "input_path": null,
+        "page_index": null,
+        "boxes": [
+            {
+                "cls_id": 17,
+                "label": "paragraph_title",
+                "score": 0.8546562194824219,
+                "coordinate": [
+                    139,
+                    144,
+                    322,
+                    175
+                ],
+                "order": 1,
+                "polygon_points": [
+                    [
+                        139.0,
+                        144.0
+                    ],
+                    [
+                        322.0,
+                        144.0
+                    ],
+                    [
+                        322.0,
+                        175.0
+                    ],
+                    [
+                        139.0,
+                        175.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.9573665261268616,
+                "coordinate": [
+                    136,
+                    191,
+                    1084,
+                    627
+                ],
+                "order": 2,
+                "polygon_points": [
+                    [
+                        136.0,
+                        191.0
+                    ],
+                    [
+                        1084.0,
+                        191.0
+                    ],
+                    [
+                        1084.0,
+                        627.0
+                    ],
+                    [
+                        136.0,
+                        627.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 15,
+                "label": "inline_formula",
+                "score": 0.7703876495361328,
+                "coordinate": [
+                    308,
+                    309,
+                    394,
+                    333
+                ],
+                "order": 3,
+                "polygon_points": [
+                    [
+                        308.0,
+                        309.0
+                    ],
+                    [
+                        308.0,
+                        332.0
+                    ],
+                    [
+                        393.0,
+                        332.0
+                    ],
+                    [
+                        393.0,
+                        309.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 15,
+                "label": "inline_formula",
+                "score": 0.6775166988372803,
+                "coordinate": [
+                    800,
+                    455,
+                    822,
+                    478
+                ],
+                "order": 4,
+                "polygon_points": [
+                    [
+                        800.0,
+                        455.0
+                    ],
+                    [
+                        821.0,
+                        455.0
+                    ],
+                    [
+                        821.0,
+                        477.0
+                    ],
+                    [
+                        800.0,
+                        477.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 15,
+                "label": "inline_formula",
+                "score": 0.7354757785797119,
+                "coordinate": [
+                    865,
+                    479,
+                    895,
+                    505
+                ],
+                "order": 5,
+                "polygon_points": [
+                    [
+                        865.0,
+                        479.0
+                    ],
+                    [
+                        894.0,
+                        479.0
+                    ],
+                    [
+                        894.0,
+                        504.0
+                    ],
+                    [
+                        865.0,
+                        504.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 15,
+                "label": "inline_formula",
+                "score": 0.5961441397666931,
+                "coordinate": [
+                    1031,
+                    484,
+                    1079,
+                    507
+                ],
+                "order": 6,
+                "polygon_points": [
+                    [
+                        1030.9998779296875,
+                        484.0
+                    ],
+                    [
+                        1077.9998779296875,
+                        484.0
+                    ],
+                    [
+                        1077.9998779296875,
+                        506.0
+                    ],
+                    [
+                        1030.9998779296875,
+                        506.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 7,
+                "label": "figure_title",
+                "score": 0.9350247383117676,
+                "coordinate": [
+                    136,
+                    661,
+                    1083,
+                    836
+                ],
+                "order": null,
+                "polygon_points": [
+                    [
+                        136.0,
+                        661.0
+                    ],
+                    [
+                        1083.0,
+                        661.0
+                    ],
+                    [
+                        1083.0,
+                        836.0
+                    ],
+                    [
+                        136.0,
+                        836.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 15,
+                "label": "inline_formula",
+                "score": 0.7473157048225403,
+                "coordinate": [
+                    295,
+                    689,
+                    325,
+                    715
+                ],
+                "order": 7,
+                "polygon_points": [
+                    [
+                        295.0,
+                        689.0
+                    ],
+                    [
+                        295.0,
+                        714.0
+                    ],
+                    [
+                        324.0,
+                        714.0
+                    ],
+                    [
+                        324.0,
+                        689.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 15,
+                "label": "inline_formula",
+                "score": 0.754349946975708,
+                "coordinate": [
+                    766,
+                    721,
+                    833,
+                    747
+                ],
+                "order": 8,
+                "polygon_points": [
+                    [
+                        766.0,
+                        721.0
+                    ],
+                    [
+                        832.0,
+                        721.0
+                    ],
+                    [
+                        832.0,
+                        746.0
+                    ],
+                    [
+                        766.0,
+                        746.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 21,
+                "label": "table",
+                "score": 0.9659627676010132,
+                "coordinate": [
+                    284,
+                    837,
+                    942,
+                    1103
+                ],
+                "order": null,
+                "polygon_points": [
+                    [
+                        284.0,
+                        837.0
+                    ],
+                    [
+                        942.0,
+                        837.0
+                    ],
+                    [
+                        942.0,
+                        1103.0
+                    ],
+                    [
+                        284.0,
+                        1103.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 15,
+                "label": "inline_formula",
+                "score": 0.7122355103492737,
+                "coordinate": [
+                    487,
+                    850,
+                    514,
+                    870
+                ],
+                "order": 9,
+                "polygon_points": [
+                    [
+                        487.0,
+                        850.0
+                    ],
+                    [
+                        487.0,
+                        869.0
+                    ],
+                    [
+                        513.0,
+                        869.0
+                    ],
+                    [
+                        513.0,
+                        850.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 15,
+                "label": "inline_formula",
+                "score": 0.5995082855224609,
+                "coordinate": [
+                    653,
+                    870,
+                    682,
+                    897
+                ],
+                "order": 10,
+                "polygon_points": [
+                    [
+                        653.0,
+                        870.0
+                    ],
+                    [
+                        681.0,
+                        870.0
+                    ],
+                    [
+                        681.0,
+                        896.0
+                    ],
+                    [
+                        653.0,
+                        896.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 15,
+                "label": "inline_formula",
+                "score": 0.47679412364959717,
+                "coordinate": [
+                    838,
+                    870,
+                    870,
+                    898
+                ],
+                "order": 11,
+                "polygon_points": [
+                    [
+                        838.0,
+                        870.0
+                    ],
+                    [
+                        869.0,
+                        870.0
+                    ],
+                    [
+                        869.0,
+                        897.0
+                    ],
+                    [
+                        838.0,
+                        897.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.9480527639389038,
+                "coordinate": [
+                    137,
+                    1141,
+                    1084,
+                    1314
+                ],
+                "order": 12,
+                "polygon_points": [
+                    [
+                        137.0,
+                        1141.0
+                    ],
+                    [
+                        1084.0,
+                        1141.0
+                    ],
+                    [
+                        1084.0,
+                        1314.0
+                    ],
+                    [
+                        137.0,
+                        1314.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 16,
+                "label": "number",
+                "score": 0.7429867386817932,
+                "coordinate": [
+                    599,
+                    1481,
+                    626,
+                    1504
+                ],
+                "order": 13,
+                "polygon_points": [
+                    [
+                        599.0,
+                        1481.0
+                    ],
+                    [
+                        625.0,
+                        1481.0
+                    ],
+                    [
+                        625.0,
+                        1503.0
+                    ],
+                    [
+                        599.0,
+                        1503.0
+                    ]
+                ]
+            }
+        ]
+    }
+}

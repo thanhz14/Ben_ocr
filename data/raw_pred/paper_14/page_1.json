@@ -1,0 +1,552 @@
+{
+    "input_path": "/home/bocchi/Downloads/Paper_Data/Quantitative Biology/2607.20572v1.pdf",
+    "page_index": 1,
+    "page_count": 13,
+    "width": 1191,
+    "height": 1684,
+    "model_settings": {
+        "use_doc_preprocessor": false,
+        "use_layout_detection": true,
+        "use_chart_recognition": false,
+        "use_seal_recognition": false,
+        "use_ocr_for_image_block": true,
+        "format_block_content": true,
+        "merge_layout_blocks": true,
+        "markdown_ignore_labels": [
+            "number",
+            "footnote",
+            "header",
+            "header_image",
+            "footer",
+            "footer_image",
+            "aside_text"
+        ],
+        "return_layout_polygon_points": true
+    },
+    "parsing_res_list": [
+        {
+            "block_label": "text",
+            "block_content": "Whether benchmarks are in scFM training corpora, and whether the resulting contamination biases benchmark scores, has not been characterized at per-cell resolution. Three obstacles stand in the way. First, no pretrained model publishes a per-cell manifest of its training data. Second, naive comparison of benchmark performance across datasets confounds dataset biology with pretraining exposure. Third, leakage need not produce overt instance memorization: an scFM may simply embed pretraining-similar cells more tightly without verbatim recall, yielding subtle yet practically consequential benchmark bias.",
+            "block_bbox": [
+                124,
+                133,
+                1066,
+                324
+            ],
+            "block_id": 0,
+            "block_order": 1,
+            "group_id": 0,
+            "block_polygon_points": [
+                [
+                    124.0,
+                    133.0
+                ],
+                [
+                    1066.0,
+                    133.0
+                ],
+                [
+                    1066.0,
+                    324.0
+                ],
+                [
+                    124.0,
+                    324.0
+                ]
+            ]
+        },
+        {
+            "block_label": "text",
+            "block_content": "This paper makes four contributions. (i) We define a tractable per-cell audit, Signal A, that uses MinHash gene-set fingerprints with a permutation null to flag benchmark cells anomalously close to a pretraining corpus. (ii) We define MIA-scFM, a loss-based membership inference statistic, and characterize when it is informative through a controlled three-regime re-pretraining experiment with ground-truth membership. (iii) We apply the audit to four scIB benchmarks against Genecorpus-30M and three scFMs, providing the first per-cell, per-benchmark contamination map. (iv) We quantify the downstream effect of contamination on embedding geometry under rigorous controls (donor, cell-type, permutation null, negative control on a clean dataset). All code, processed audits, and figures are released open-source.",
+            "block_bbox": [
+                125,
+                333,
+                1065,
+                578
+            ],
+            "block_id": 1,
+            "block_order": 2,
+            "group_id": 1,
+            "block_polygon_points": [
+                [
+                    125.0,
+                    333.0
+                ],
+                [
+                    1065.0,
+                    333.0
+                ],
+                [
+                    1065.0,
+                    578.0
+                ],
+                [
+                    125.0,
+                    578.0
+                ]
+            ]
+        },
+        {
+            "block_label": "paragraph_title",
+            "block_content": "## 2 Related Work",
+            "block_bbox": [
+                126,
+                621,
+                374,
+                651
+            ],
+            "block_id": 2,
+            "block_order": 3,
+            "group_id": 2,
+            "block_polygon_points": [
+                [
+                    126.0,
+                    621.0
+                ],
+                [
+                    374.0,
+                    621.0
+                ],
+                [
+                    374.0,
+                    651.0
+                ],
+                [
+                    126.0,
+                    651.0
+                ]
+            ]
+        },
+        {
+            "block_label": "text",
+            "block_content": "Single-cell foundation models. Geneformer (Theodoris et al., 2023) introduced a rank-encoded BERT-style transformer trained with masked-language-modeling on  $ \\approx $ 30M cells. scGPT (Cui et al., 2024) extended this to generative pretraining over 33M CELLxGENE Census cells with binned expression values. UCE (Rosen et al., 2023) departs from gene-token approaches entirely, using ESM2 protein embeddings (Lin et al., 2023) as the input tokens. scFoundation (Hao et al., 2024) and several other models (Boiarsky et al., 2023) have followed in rapid succession. All draw heavily on the same public scRNA-seq repositories.",
+            "block_bbox": [
+                124,
+                682,
+                1065,
+                874
+            ],
+            "block_id": 3,
+            "block_order": 4,
+            "group_id": 3,
+            "block_polygon_points": [
+                [
+                    124.0,
+                    682.0
+                ],
+                [
+                    1065.0,
+                    682.0
+                ],
+                [
+                    1065.0,
+                    874.0
+                ],
+                [
+                    124.0,
+                    874.0
+                ]
+            ]
+        },
+        {
+            "block_label": "text",
+            "block_content": "Benchmark contamination in NLP and vision. Contamination of benchmarks by pretraining data is a well-known concern in NLP and computer vision. Magar and Schwartz (2022) formalized the distinction between memorization and exploitation in NLP benchmark contamination, and Brown et al. (2020); Sainz et al. (2023) documented overlap rates between GPT-class training corpora and downstream evaluations. Carlini et al. (2022) provides the methodological foundation for loss-based membership inference (MIA), which we adapt to the scFM setting. The single-cell community has begun to discuss the issue informally (Kedzierska et al., 2025), but no automated per-cell audit method has been published.",
+            "block_bbox": [
+                124,
+                911,
+                1066,
+                1131
+            ],
+            "block_id": 4,
+            "block_order": 5,
+            "group_id": 4,
+            "block_polygon_points": [
+                [
+                    124.0,
+                    911.0
+                ],
+                [
+                    1066.0,
+                    911.0
+                ],
+                [
+                    1066.0,
+                    1131.0
+                ],
+                [
+                    124.0,
+                    1131.0
+                ]
+            ]
+        },
+        {
+            "block_label": "text",
+            "block_content": "Integration benchmarks and silhouette-based metrics. The scIB benchmark (Luecken et al., 2022) evaluates integration methods using a basket of metrics including average silhouette width (ASW), adjusted Rand index (ARI), normalized mutual information (NMI), and graph connectivity. Recent zero-shot evaluations of scFMs (Boiarsky et al., 2023; Kedzierska et al., 2025) have used the same metrics, but without auditing pretraining exposure. Boiarsky et al. (2023) reported underwhelming zero-shot performance from foundation models across several scIB tasks but did not attribute residual performance to contamination.",
+            "block_bbox": [
+                124,
+                1168,
+                1064,
+                1359
+            ],
+            "block_id": 5,
+            "block_order": 6,
+            "group_id": 5,
+            "block_polygon_points": [
+                [
+                    124.0,
+                    1168.0
+                ],
+                [
+                    1064.0,
+                    1168.0
+                ],
+                [
+                    1064.0,
+                    1359.0
+                ],
+                [
+                    124.0,
+                    1359.0
+                ]
+            ]
+        },
+        {
+            "block_label": "text",
+            "block_content": "MinHash and similarity sketching. MinHash (Broder, 1997) provides an unbiased estimator of Jaccard similarity with variance  $ \\hat{J}(1 - \\hat{J})/m $ for  $ m $ hash functions. Locality-sensitive hashing (Leskovec et al., 2020) enables sublinear nearest-neighbor queries in Jaccard space, making per-cell audits against  $ 10^6 $-cell references computationally tractable on standard hardware.",
+            "block_bbox": [
+                124,
+                1396,
+                1065,
+                1508
+            ],
+            "block_id": 6,
+            "block_order": 7,
+            "group_id": 6,
+            "block_polygon_points": [
+                [
+                    124.0,
+                    1396.0
+                ],
+                [
+                    1065.0,
+                    1396.0
+                ],
+                [
+                    1065.0,
+                    1508.0
+                ],
+                [
+                    124.0,
+                    1508.0
+                ]
+            ]
+        },
+        {
+            "block_label": "number",
+            "block_content": "2",
+            "block_bbox": [
+                587,
+                1595,
+                604,
+                1615
+            ],
+            "block_id": 7,
+            "block_order": null,
+            "group_id": 7,
+            "block_polygon_points": [
+                [
+                    587.0,
+                    1595.0
+                ],
+                [
+                    603.0,
+                    1595.0
+                ],
+                [
+                    603.0,
+                    1614.0
+                ],
+                [
+                    587.0,
+                    1614.0
+                ]
+            ]
+        }
+    ],
+    "layout_det_res": {
+        "input_path": null,
+        "page_index": null,
+        "boxes": [
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.9554301500320435,
+                "coordinate": [
+                    124,
+                    133,
+                    1066,
+                    324
+                ],
+                "order": 1,
+                "polygon_points": [
+                    [
+                        124.0,
+                        133.0
+                    ],
+                    [
+                        1066.0,
+                        133.0
+                    ],
+                    [
+                        1066.0,
+                        324.0
+                    ],
+                    [
+                        124.0,
+                        324.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.9510233402252197,
+                "coordinate": [
+                    125,
+                    333,
+                    1065,
+                    578
+                ],
+                "order": 2,
+                "polygon_points": [
+                    [
+                        125.0,
+                        333.0
+                    ],
+                    [
+                        1065.0,
+                        333.0
+                    ],
+                    [
+                        1065.0,
+                        578.0
+                    ],
+                    [
+                        125.0,
+                        578.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 17,
+                "label": "paragraph_title",
+                "score": 0.8485956192016602,
+                "coordinate": [
+                    126,
+                    621,
+                    374,
+                    651
+                ],
+                "order": 3,
+                "polygon_points": [
+                    [
+                        126.0,
+                        621.0
+                    ],
+                    [
+                        374.0,
+                        621.0
+                    ],
+                    [
+                        374.0,
+                        651.0
+                    ],
+                    [
+                        126.0,
+                        651.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.9534005522727966,
+                "coordinate": [
+                    124,
+                    682,
+                    1065,
+                    874
+                ],
+                "order": 4,
+                "polygon_points": [
+                    [
+                        124.0,
+                        682.0
+                    ],
+                    [
+                        1065.0,
+                        682.0
+                    ],
+                    [
+                        1065.0,
+                        874.0
+                    ],
+                    [
+                        124.0,
+                        874.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.9599195122718811,
+                "coordinate": [
+                    124,
+                    911,
+                    1066,
+                    1131
+                ],
+                "order": 5,
+                "polygon_points": [
+                    [
+                        124.0,
+                        911.0
+                    ],
+                    [
+                        1066.0,
+                        911.0
+                    ],
+                    [
+                        1066.0,
+                        1131.0
+                    ],
+                    [
+                        124.0,
+                        1131.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.9606356620788574,
+                "coordinate": [
+                    124,
+                    1168,
+                    1064,
+                    1359
+                ],
+                "order": 6,
+                "polygon_points": [
+                    [
+                        124.0,
+                        1168.0
+                    ],
+                    [
+                        1064.0,
+                        1168.0
+                    ],
+                    [
+                        1064.0,
+                        1359.0
+                    ],
+                    [
+                        124.0,
+                        1359.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.9450076222419739,
+                "coordinate": [
+                    124,
+                    1396,
+                    1065,
+                    1508
+                ],
+                "order": 7,
+                "polygon_points": [
+                    [
+                        124.0,
+                        1396.0
+                    ],
+                    [
+                        1065.0,
+                        1396.0
+                    ],
+                    [
+                        1065.0,
+                        1508.0
+                    ],
+                    [
+                        124.0,
+                        1508.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 15,
+                "label": "inline_formula",
+                "score": 0.4356006681919098,
+                "coordinate": [
+                    478,
+                    1422,
+                    598,
+                    1450
+                ],
+                "order": 8,
+                "polygon_points": [
+                    [
+                        478.0,
+                        1422.0
+                    ],
+                    [
+                        598.0,
+                        1422.0
+                    ],
+                    [
+                        598.0,
+                        1450.0
+                    ],
+                    [
+                        478.0,
+                        1450.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 16,
+                "label": "number",
+                "score": 0.7047945857048035,
+                "coordinate": [
+                    587,
+                    1595,
+                    604,
+                    1615
+                ],
+                "order": 9,
+                "polygon_points": [
+                    [
+                        587.0,
+                        1595.0
+                    ],
+                    [
+                        603.0,
+                        1595.0
+                    ],
+                    [
+                        603.0,
+                        1614.0
+                    ],
+                    [
+                        587.0,
+                        1614.0
+                    ]
+                ]
+            }
+        ]
+    }
+}

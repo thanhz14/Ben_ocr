@@ -1,0 +1,550 @@
+{
+  "file_name": "3d6588d9-15.pdf",
+  "pages": [
+    {
+      "page_index": 4,
+      "blocks": [
+        {
+          "id": "o7FXpgSlFH",
+          "order": null,
+          "bounding_box": {
+            "x": 0.07851517187060601,
+            "y": 0.07332753596566845,
+            "width": 0.41394825646794153,
+            "height": 0.1155516941789748
+          },
+          "block_content": "nels and spatial dimensions H l × W l (typically decreasing with l ). These multi-scale features are fused using a lightweight Feature Pyramid Network (FPN) to generate a high-resolution, semantically rich feature map f ∈ R D × H ′ × W ′ , where D is the unified channel dimension, and H ′ and W ′ are downsampled spatial dimensions. The FPN employs lateral convolutions ( 1 × 1 ) to align channels and top-down upsampling with additions, followed by smoothing convolutions ( 3 × 3 ).",
+          "label": "Text"
+        },
+        {
+          "id": "kRdF67URd2",
+          "order": null,
+          "bounding_box": {
+            "x": 0.07851517187060601,
+            "y": 0.19235446906731918,
+            "width": 0.41169853768278963,
+            "height": 0.029539530842745437
+          },
+          "block_content": "From f , the model branches hierarchically into three spe- cialized heads:",
+          "label": "Text"
+        },
+        {
+          "id": "yBURb6YVCn",
+          "order": null,
+          "bounding_box": {
+            "x": 0.10326207850727644,
+            "y": 0.23145091357591566,
+            "width": 0.37232845894263217,
+            "height": 0.030408340573414423
+          },
+          "block_content": "1 First, the segmentation head processes f to produce segmentation logits ˆ y s .",
+          "label": "Text"
+        },
+        {
+          "id": "DZEjhNFnH4",
+          "order": null,
+          "bounding_box": {
+            "x": 0.10326207850727644,
+            "y": 0.26272806387999903,
+            "width": 0.37232845894263217,
+            "height": 0.05821025195482189
+          },
+          "block_content": "s 2 Next, the trait head aggregates segmentation evidence- detached from gradient propagation, to- gether with global image features to infer morpho- logical traits.",
+          "label": "Text"
+        },
+        {
+          "id": "3-bHH7Lwzs",
+          "order": null,
+          "bounding_box": {
+            "x": 0.10326207850727644,
+            "y": 0.3218071255654899,
+            "width": 0.37232845894263217,
+            "height": 0.045178105994787145
+          },
+          "block_content": "logical traits. 3 Finally, the species head utilizes detached trait em- beddings along with shared contextual features to perform species classification.",
+          "label": "Text"
+        },
+        {
+          "id": "oqvzFyr1GB",
+          "order": null,
+          "bounding_box": {
+            "x": 0.07851517187060601,
+            "y": 0.3808861872509808,
+            "width": 0.4128233970753656,
+            "height": 0.07558644656820157
+          },
+          "block_content": "To enforce a unidirectional information flow, gradient detach- ment is applied at the interfaces between successive heads, preventing gradients from propagating from higher-level tasks to lower-level representations and thereby preserving fine- grained morphological features.",
+          "label": "Text"
+        },
+        {
+          "id": "QPK6Hyv1Mm",
+          "order": null,
+          "bounding_box": {
+            "x": 0.21124858019456552,
+            "y": 0.4703735961383783,
+            "width": 0.1439820022497188,
+            "height": 0.013032145960034752
+          },
+          "block_content": "IV. M ETHODOLOGY",
+          "label": "Text"
+        },
+        {
+          "id": "hxo8BnKv0h",
+          "order": null,
+          "bounding_box": {
+            "x": 0.07626545308545417,
+            "y": 0.49122502967443393,
+            "width": 0.41394825646794153,
+            "height": 0.07558644656820157
+          },
+          "block_content": "We now detail the three specialized heads introduced in Sec- tion III-B and Fig. 2, including the prototype-based segmen- tation head, gradient-detached propagation for morphological trait prediction and species classification , as well as the loss functions and training procedure.",
+          "label": "Text"
+        },
+        {
+          "id": "U_L2GsdlX1",
+          "order": null,
+          "bounding_box": {
+            "x": 0.07626545308545417,
+            "y": 0.5746307505616719,
+            "width": 0.2958380202474691,
+            "height": 0.015638575152041704
+          },
+          "block_content": "A. Prototype-Based Semantic Segmentation",
+          "label": "Text"
+        },
+        {
+          "id": "57jEENAtoX",
+          "order": null,
+          "bounding_box": {
+            "x": 0.07626545308545417,
+            "y": 0.5946133743670585,
+            "width": 0.4150731158605174,
+            "height": 0.13119026933101652
+          },
+          "block_content": "We adopt a learnable prototype-based head to replace con- ventional convolutional decoders for modeling morphologi- cally accurate part representations. Instead of dense decod- ing, semantic classes are represented as compact vectors in feature space, enabling clearer separation and more robust segmentation. Let P ∈ R K × D denote the learnable prototype matrix, where each row P k ∈ R D corresponds to class k ∈ { 0 , . . . , K − 1 } . The prototypes are initialized orthogonally to promote initial diversity.",
+          "label": "Text"
+        },
+        {
+          "id": "ko045RHaSE",
+          "order": null,
+          "bounding_box": {
+            "x": 0.07851517187060601,
+            "y": 0.73014769235142,
+            "width": 0.4128233970753656,
+            "height": 0.02780191138140747
+          },
+          "block_content": "The head first projects the FPN feature f into a prototype- aligned embedding space:",
+          "label": "Text"
+        },
+        {
+          "id": "-660xv17zS",
+          "order": null,
+          "bounding_box": {
+            "x": 0.07739031247803009,
+            "y": 0.783145085922228,
+            "width": 0.4128233970753656,
+            "height": 0.0738488271068636
+          },
+          "block_content": "where ϕ consists of a stacked sequence Conv2D ( 3 × 3 ), BatchNorm2D , ReLU , followed by Conv2D ( 1 × 1 ). For each pixel position ( h, w ) , the segmentation logits are computed using normalized cosine similarity scaled by a temperature parameter τ > 0 , as follows:",
+          "label": "Text"
+        },
+        {
+          "id": "u4D4aAsx2u",
+          "order": null,
+          "bounding_box": {
+            "x": 0.07626545308545417,
+            "y": 0.8938314403066627,
+            "width": 0.41394825646794153,
+            "height": 0.03127715030408341
+          },
+          "block_content": "yielding l s ∈ R K × H ′ × W ′ . The final segmentation logits are obtained via bilinear upsampling",
+          "label": "Text"
+        },
+        {
+          "id": "OWl1O6BW6n",
+          "order": null,
+          "bounding_box": {
+            "x": 0.4058492551102011,
+            "y": 0.0281494299708813,
+            "width": 0.5163104611923509,
+            "height": 0.014769765421372719
+          },
+          "block_content": "SUBMITTED TO IEEE TRANSACTIONS ON CIRCUITS AND SYSTEMS FOR VIDEO TECHNOLOGY",
+          "label": "Text"
+        },
+        {
+          "id": "s_9EFAGlxZ",
+          "order": null,
+          "bounding_box": {
+            "x": 0.07176601551515045,
+            "y": 0.027280620240212314,
+            "width": 0.020247469066366704,
+            "height": 0.014769765421372719
+          },
+          "block_content": "4",
+          "label": "Text"
+        },
+        {
+          "id": "mrNKZ2qqws",
+          "order": null,
+          "bounding_box": {
+            "x": 0.5070866004420346,
+            "y": 0.06898348731232352,
+            "width": 0.4150731158605174,
+            "height": 0.029539530842745437
+          },
+          "block_content": "To ensure distinct and discriminative prototypes, we impose an orthogonality regularization as",
+          "label": "Text"
+        },
+        {
+          "id": "gV0qFpPFLg",
+          "order": null,
+          "bounding_box": {
+            "x": 0.8985376690584576,
+            "y": 0.10807992519242778,
+            "width": 0.023622047244094488,
+            "height": 0.014769765421372719
+          },
+          "block_content": "(6)",
+          "label": "Text"
+        },
+        {
+          "id": "6dv1pAdL9u",
+          "order": null,
+          "bounding_box": {
+            "x": 0.5082114598346105,
+            "y": 0.13066897818982134,
+            "width": 0.41394825646794153,
+            "height": 0.19287576683700655
+          },
+          "block_content": "where I K is the identity matrix, P norm is the row-wise ℓ 2 -normalized prototype matrix, and ∥ · ∥ F represents the Frobenius norm. By reducing similarity among prototypes, this loss enforces pairwise orthogonality and promotes a well- separated feature space for capturing subtle morphological variations. For datasets with a background class, orthogonality can be applied only to the K − 1 foreground prototypes to avoid constraining non-semantic regions. This prototype-based for- mulation is particularly advantageous for fine-grained segmen- tation : it naturally handles class imbalance through similarity- based assignment, provides interpretable representations ( e.g. , prototypes as class centroids), and reduces parameter overhead compared to dense decoders.",
+          "label": "Text"
+        },
+        {
+          "id": "nuO22zUTPY",
+          "order": null,
+          "bounding_box": {
+            "x": 0.5059617410494587,
+            "y": 0.3296264118986685,
+            "width": 0.19460067491563554,
+            "height": 0.016507384882710686
+          },
+          "block_content": "B. Hierarchical Aggregation",
+          "label": "Text"
+        },
+        {
+          "id": "GZaeZf1pgQ",
+          "order": null,
+          "bounding_box": {
+            "x": 0.5070866004420346,
+            "y": 0.3496090357040551,
+            "width": 0.4150731158605174,
+            "height": 0.059079061685490875
+          },
+          "block_content": "To propagate hierarchical information while respecting the conditional dependencies, we aggregate context from lower levels for higher tasks. First, a global image descriptor is derived from the deepest backbone feature f L ∈ R C L × H L × W L",
+          "label": "Text"
+        },
+        {
+          "id": "xQaRj2LJR0",
+          "order": null,
+          "bounding_box": {
+            "x": 0.5082114598346105,
+            "y": 0.43127715825827406,
+            "width": 0.41394825646794153,
+            "height": 0.04170286707211121
+          },
+          "block_content": "capturing holistic scene information. Segmentation evidence is summarized as the maximum activation across spatial dimen- sions for each prototype channel:",
+          "label": "Text"
+        },
+        {
+          "id": "_YeQ09U_qh",
+          "order": null,
+          "bounding_box": {
+            "x": 0.5070866004420346,
+            "y": 0.4964378880584478,
+            "width": 0.4150731158605174,
+            "height": 0.045178105994787145
+          },
+          "block_content": "This vector represents the strength of presence for each semantic class in the image. The base context vector is then formed by concatenation",
+          "label": "Text"
+        },
+        {
+          "id": "L_MMCPKvlR",
+          "order": null,
+          "bounding_box": {
+            "x": 0.5070866004420346,
+            "y": 0.5650738567812975,
+            "width": 0.41169853768278963,
+            "height": 0.044309296264118156
+          },
+          "block_content": "where p detach denotes the detached tensor (gradient flow stopped), ensuring that downstream task trait or classification optimization does not influence segmentation parameters.",
+          "label": "Text"
+        },
+        {
+          "id": "yiHUMcQOmQ",
+          "order": null,
+          "bounding_box": {
+            "x": 0.5048368816568828,
+            "y": 0.6189400468257901,
+            "width": 0.22384701912260968,
+            "height": 0.013900955690703735
+          },
+          "block_content": "C. Detached Downstream Tasks",
+          "label": "Text"
+        },
+        {
+          "id": "xCZFHGsUCe",
+          "order": null,
+          "bounding_box": {
+            "x": 0.5093363192271865,
+            "y": 0.6354474317085007,
+            "width": 0.4128233970753656,
+            "height": 0.05647263249348393
+          },
+          "block_content": "For morphological trait prediction, the context vector b is fed into a trait projection module ψ t : R C L + K → R d t , imple- mented as a multi-layer perceptron (MLP) with normalization and non-linear activation, as follows:",
+          "label": "Text"
+        },
+        {
+          "id": "AgLP6XhhWG",
+          "order": null,
+          "bounding_box": {
+            "x": 0.5115860380123383,
+            "y": 0.7171155463913852,
+            "width": 0.24859392575928008,
+            "height": 0.014769765421372719
+          },
+          "block_content": "The trait logits are then computed as",
+          "label": "Text"
+        },
+        {
+          "id": "B17LZ24shO",
+          "order": null,
+          "bounding_box": {
+            "x": 0.8940382314881539,
+            "y": 0.6971329225859986,
+            "width": 0.0281214848143982,
+            "height": 0.014769765421372719
+          },
+          "block_content": "(10)",
+          "label": "Text"
+        },
+        {
+          "id": "tw6uz7Xwil",
+          "order": null,
+          "bounding_box": {
+            "x": 0.46546680291672526,
+            "y": 0.7605560329248344,
+            "width": 0.02699662542182227,
+            "height": 0.016507384882710686
+          },
+          "block_content": "(3)",
+          "label": "Text"
+        },
+        {
+          "id": "ASnmBbYvxA",
+          "order": null,
+          "bounding_box": {
+            "x": 0.4722159592721808,
+            "y": 0.8660295289252552,
+            "width": 0.01687289088863892,
+            "height": 0.019113814074717638
+          },
+          "block_content": "(4)",
+          "label": "Text"
+        },
+        {
+          "id": "QMGvwcIBIj",
+          "order": null,
+          "bounding_box": {
+            "x": 0.46996624048702895,
+            "y": 0.928583829533422,
+            "width": 0.024746906636670417,
+            "height": 0.018245004344048653
+          },
+          "block_content": "(5)",
+          "label": "Text"
+        },
+        {
+          "id": "IvWSm_7RtG",
+          "order": null,
+          "bounding_box": {
+            "x": 0.8962879502733057,
+            "y": 0.7339704498635697,
+            "width": 0.0281214848143982,
+            "height": 0.019113814074717638
+          },
+          "block_content": "(11)",
+          "label": "Text"
+        },
+        {
+          "id": "esgQyncJlE",
+          "order": null,
+          "bounding_box": {
+            "x": 0.5070866004420346,
+            "y": 0.7556906931302944,
+            "width": 0.4150731158605174,
+            "height": 0.10512597741094701
+          },
+          "block_content": "where W t ∈ R T × d t is the weight matrix and b t ∈ R T is the bias vector of the final linear projection. To preserve the morphological fidelity captured by P ( y s | x ) , gradient detachment is applied such that gradients from the trait loss do not propagate back to the segmentation branch, while segmentation-derived features still contribute to trait prediction during forward inference.",
+          "label": "Text"
+        },
+        {
+          "id": "AlY0IkS53X",
+          "order": null,
+          "bounding_box": {
+            "x": 0.5104611786197624,
+            "y": 0.8642919094639172,
+            "width": 0.41169853768278963,
+            "height": 0.04257167680278019
+          },
+          "block_content": "Building upon this representation, the species classification head further incorporates trait information within the hierar- chical structure",
+          "label": "Text"
+        },
+        {
+          "id": "_MxlO7g6Nu",
+          "order": null,
+          "bounding_box": {
+            "x": 0.5082114598346105,
+            "y": 0.928583829533422,
+            "width": 0.41394825646794153,
+            "height": 0.014769765421372719
+          },
+          "block_content": "where h detach t is detached to prevent species gradients from",
+          "label": "Text"
+        },
+        {
+          "id": "bMZ5shvbWg",
+          "order": null,
+          "bounding_box": {
+            "x": 0.8929133720955779,
+            "y": 0.9112076349200423,
+            "width": 0.0281214848143982,
+            "height": 0.013900955690703735
+          },
+          "block_content": "(12)",
+          "label": "Text"
+        },
+        {
+          "id": "DErxnGLY2U",
+          "order": null,
+          "bounding_box": {
+            "x": 0.20337456444653404,
+            "y": 0.7617723612449772,
+            "width": 0.16197975253093364,
+            "height": 0.01737619461337967
+          },
+          "block_content": "\\boldsymbol{e} = \\phi(\\boldsymbol{f}) \\in \\mathbb{R}^{D \\times H' \\times W'}",
+          "label": "Formula"
+        },
+        {
+          "id": "ZOtM_1kW_j",
+          "order": null,
+          "bounding_box": {
+            "x": 0.14938131360288948,
+            "y": 0.8608166705412416,
+            "width": 0.2710911136107986,
+            "height": 0.03127715030408359
+          },
+          "block_content": "\\boldsymbol{l}_s(k, h, w) = \\frac{1}{\\tau} \\cdot \\frac{\\boldsymbol{e}(\\cdot, h, w)^\\top \\boldsymbol{P}_k}{\\|\\boldsymbol{e}(\\cdot, h, w)\\|_2 \\cdot \\|\\boldsymbol{P}_k\\|_2}\n",
+          "label": "Formula"
+        },
+        {
+          "id": "7XYhjNf9cF",
+          "order": null,
+          "bounding_box": {
+            "x": 0.16737906388410434,
+            "y": 0.926846210072084,
+            "width": 0.23284589426321708,
+            "height": 0.016507384882710686
+          },
+          "block_content": "\\hat{\\boldsymbol{y}}_s = \\mathtt{Upsample}(\\boldsymbol{l}_s) \\in \\mathbb{R}^{K \\times H \\times W}.\n",
+          "label": "Formula"
+        },
+        {
+          "id": "qM-TufOWc0",
+          "order": null,
+          "bounding_box": {
+            "x": 0.5903261954926533,
+            "y": 0.10147697919353416,
+            "width": 0.24634420697412823,
+            "height": 0.026064291920069503
+          },
+          "block_content": "\\mathcal{L}_{\\mathtt{ortho}} = \\frac{1}{K^2} \\big\\| \\boldsymbol{P}_\\mathtt{norm} \\boldsymbol{P}_\\mathtt{norm}^\\top - \\boldsymbol{I}_K \\big\\|_F^2\n",
+          "label": "Formula"
+        },
+        {
+          "id": "6zAurbL1ZH",
+          "order": null,
+          "bounding_box": {
+            "x": 0.5824521797446217,
+            "y": 0.4107732433116923,
+            "width": 0.26321709786276715,
+            "height": 0.01737619461337967
+          },
+          "block_content": "\\boldsymbol{g} = \\mathtt{AdaptiveAvgPool2D}(\\boldsymbol{f}_L) \\in \\mathbb{R}^{C_L}\n",
+          "label": "Formula"
+        },
+        {
+          "id": "M8eQwe6wr1",
+          "order": null,
+          "bounding_box": {
+            "x": 0.5858267579223495,
+            "y": 0.478540402303873,
+            "width": 0.25534308211473566,
+            "height": 0.014769765421372719
+          },
+          "block_content": "\\boldsymbol{p} = \\mathtt{AdaptiveMaxPool2D}(\\boldsymbol{l}_s) \\in \\mathbb{R}^K.",
+          "label": "Formula"
+        },
+        {
+          "id": "tWmOroOQmc",
+          "order": null,
+          "bounding_box": {
+            "x": 0.6240719772699311,
+            "y": 0.5445699418347157,
+            "width": 0.18222722159730034,
+            "height": 0.018245004344048653
+          },
+          "block_content": "\\boldsymbol{b} = [\\boldsymbol{g}; \\boldsymbol{p}^\\mathtt{detach}] \\in \\mathbb{R}^{C_L + K}",
+          "label": "Formula"
+        },
+        {
+          "id": "wtL4i2GjEb",
+          "order": null,
+          "bounding_box": {
+            "x": 0.6476940245140256,
+            "y": 0.6966116579587722,
+            "width": 0.13498312710911137,
+            "height": 0.019113814074717638
+          },
+          "block_content": "\\boldsymbol{h}_t = \\psi_t(\\boldsymbol{b}) \\in \\mathbb{R}^{d_t}.",
+          "label": "Formula"
+        },
+        {
+          "id": "mppZXGtmTL",
+          "order": null,
+          "bounding_box": {
+            "x": 0.6319459930179626,
+            "y": 0.7339704763775385,
+            "width": 0.16197975253093364,
+            "height": 0.01737619461337967
+          },
+          "block_content": "\\hat{\\boldsymbol{y}}_t = \\boldsymbol{W}_t \\boldsymbol{h}_t + \\boldsymbol{b}_t \\in \\mathbb{R}^T",
+          "label": "Formula"
+        },
+        {
+          "id": "mvEqKILvM2",
+          "order": null,
+          "bounding_box": {
+            "x": 0.6116985239515959,
+            "y": 0.9094700154587044,
+            "width": 0.20247469066366705,
+            "height": 0.015638575152041704
+          },
+          "block_content": "\\boldsymbol{b}_c = [\\boldsymbol{b}; \\boldsymbol{h}_t^\\mathtt{detach}] \\in \\mathbb{R}^{C_L + K + d_t}",
+          "label": "Formula"
+        }
+      ]
+    }
+  ]
+}

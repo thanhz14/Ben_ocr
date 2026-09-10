@@ -1,0 +1,2690 @@
+{
+  "file_name": "paper_19",
+  "pages": [
+    {
+      "page_index": 1,
+      "blocks": [
+        {
+          "id": "0",
+          "order": null,
+          "bounding_box": {
+            "x": 0.03022875816993464,
+            "y": 0.3630050505050505,
+            "width": 0.03349673202614379,
+            "height": 0.45454545454545453
+          },
+          "content": "arXiv:2607.20939v1 [eess.SY] 23 Jul 2026",
+          "label": "Text"
+        },
+        {
+          "id": "1",
+          "order": null,
+          "bounding_box": {
+            "x": 0.07679738562091504,
+            "y": 0.029671717171717172,
+            "width": 0.059640522875817,
+            "height": 0.011994949494949494
+          },
+          "content": "PREPRINT",
+          "label": "Text"
+        },
+        {
+          "id": "2",
+          "order": null,
+          "bounding_box": {
+            "x": 0.9125816993464052,
+            "y": 0.03156565656565657,
+            "width": 0.008986928104575163,
+            "height": 0.010101010101010102
+          },
+          "content": "1",
+          "label": "Text"
+        },
+        {
+          "id": "3",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.12254901960784313,
+            "y": 0.07196969696969698,
+            "width": 0.7532679738562091,
+            "height": 0.09722222222222222
+          },
+          "content": "# Interaction Dynamics Modeling and Predictive Control for Safe Steerable Catheter–Tissue Interaction",
+          "label": "Text"
+        },
+        {
+          "id": "4",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.4477124183006536,
+            "y": 0.18434343434343434,
+            "width": 0.10457516339869281,
+            "height": 0.017045454545454544
+          },
+          "content": "Yongyan Cao",
+          "label": "Text"
+        },
+        {
+          "id": "5",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.07598039215686274,
+            "y": 0.2518939393939394,
+            "width": 0.41830065359477125,
+            "height": 0.380050505050505
+          },
+          "content": "Abstract—Safe steerable catheter control is fundamentally a problem of interaction dynamics: the tip must follow a planned motion, remain compliant against moving tissue, reject friction and hysteresis, and respect a clinically meaningful never-exceed contact-force bound. We formulate catheter-tissue interaction dynamics in the scalar tip-normal coordinate of a single-segment single-tendon catheter. A partial-physics feedforward cancels only the reliable nominal bending dynamics, exposing a configuration-invariant linear interaction-dynamics model whose input gain varies through the scalar catheter inertia. A predictive optimizer then regulates this interaction state subject to hard contact-force, tendon-force, and curvature constraints. An augmented Kalman filter compresses contact, friction, and modeling error into one sensor-free disturbance state, giving nominal offset-free regulation in free space while leaving force safety to the explicit constraint. The unconstrained and disturbance-free limit recovers classical catheter impedance as a special realization of the same interaction dynamics, rather than as the main design object. In a MuJoCo distributed-compliance simulation of an eight-link tendon-driven catheter, disturbance augmentation cuts free-space approach error by 90%, and only the force-constrained predictive interaction-dynamics controller reconciles tracking with the 0.5 N bound: the unconstrained controller drives contact force to 0.60 N against a penetrating target, while the constrained one holds 0.47 N at identical tracking. These results show that offset-free motion regulation and contact-force safety are coupled interaction-dynamics objectives, and that the explicit predictive constraint resolves their tension under stiff tissue contact. The bound also holds under 0.5 mm, 1.2 Hz cardiac motion. Hardware validation is future work.",
+          "label": "Text"
+        },
+        {
+          "id": "6",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.07598039215686274,
+            "y": 0.6369949494949495,
+            "width": 0.41748366013071897,
+            "height": 0.03977272727272727
+          },
+          "content": "Index Terms—Steerable catheter, continuum robot, interaction dynamics, predictive control, Kalman filter, contact-force safety, offset-free regulation, cardiac ablation.",
+          "label": "Text"
+        },
+        {
+          "id": "7",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.2181372549019608,
+            "y": 0.6982323232323232,
+            "width": 0.13316993464052287,
+            "height": 0.012626262626262626
+          },
+          "content": "### I. INTRODUCTION",
+          "label": "Text"
+        },
+        {
+          "id": "8",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.07679738562091504,
+            "y": 0.7178030303030303,
+            "width": 0.1576797385620915,
+            "height": 0.013257575757575758
+          },
+          "content": "### A. Clinical Motivation",
+          "label": "Text"
+        },
+        {
+          "id": "9",
+          "order": 7,
+          "bounding_box": {
+            "x": 0.07516339869281045,
+            "y": 0.7361111111111112,
+            "width": 0.41830065359477125,
+            "height": 0.15214646464646464
+          },
+          "content": "S TEERABLE catheters are the primary tool for cardiac electrophysiology (EP) procedures including radiofrequency ablation, where the tip must be positioned precisely at target tissue while maintaining controlled, stable contact. The central control problem is therefore not merely tip tracking and not merely force regulation; it is the regulation of catheter-tissue interaction dynamics. The interaction state must encode how the tip moves relative to tissue, how persistent friction and contact forces bias that motion, and how safety limits reshape what motion is physically allowable.\n\nExisting methods regulate these interaction dynamics through different mechanisms. Classical impedance control [1] shapes the tip port as a virtual mechanical impedance  $ Z(s) = M_d s^2 + D_d s + K_d $, providing passive compliance without an explicit contact model. It is an important interaction-dynamics realization, but three limitations matter clinically: (i) the contact-force safety bound  $ \\|F_{\\text{tip}}\\| \\leq F_{\\text{safe}} $ is not enforced as a prediction-horizon constraint; (ii) persistent contact force produces a steady-state tip error  $ e_\\infty = K_d^{-1} F_{\\text{contact}} $; and (iii) the controller cannot anticipate trajectory curvature, impending contact, or force saturation.",
+          "label": "Text"
+        },
+        {
+          "id": "10",
+          "order": 8,
+          "bounding_box": {
+            "x": 0.5032679738562091,
+            "y": 0.25126262626262624,
+            "width": 0.4199346405228758,
+            "height": 0.16792929292929293
+          },
+          "content": "",
+          "label": "Text"
+        },
+        {
+          "id": "11",
+          "order": 9,
+          "bounding_box": {
+            "x": 0.505718954248366,
+            "y": 0.43686868686868685,
+            "width": 0.24673202614379086,
+            "height": 0.01452020202020202
+          },
+          "content": "### B. Challenges Specific to Catheters",
+          "label": "Text"
+        },
+        {
+          "id": "12",
+          "order": 10,
+          "bounding_box": {
+            "x": 0.5040849673202614,
+            "y": 0.4551767676767677,
+            "width": 0.4199346405228758,
+            "height": 0.24116161616161616
+          },
+          "content": "Catheters present challenges absent in rigid-body robots. Model uncertainty: the mechanics follow a variant of the Cosserat rod equations [3], [4], with distributed elasticity, sheath friction, tendon backlash, and hysteresis that vary widely across specimens, making full-model inversion impractical. Cardiac motion: the heart moves  $ \\sim $10–15 mm per cycle at  $ \\sim $1 Hz; after gross target tracking, the local residual wall-normal motion still produces quasi-periodic contact-force disturbances with known frequency but unknown phase and amplitude. Limited sensing: most clinical catheters carry no force sensor; tip position is available via electromagnetic (EM) tracking, fluoroscopy, or intracardiac echocardiography at moderate latency (10–50 ms). Safety criticality: a perforation force threshold of  $ \\sim $0.3–0.5 N is clinically relevant [12], making hard force-constraint enforcement—not soft penalization—essential.",
+          "label": "Text"
+        },
+        {
+          "id": "13",
+          "order": 11,
+          "bounding_box": {
+            "x": 0.5065359477124183,
+            "y": 0.7159090909090909,
+            "width": 0.119281045751634,
+            "height": 0.013888888888888888
+          },
+          "content": "### C. Related Work",
+          "label": "Text"
+        },
+        {
+          "id": "14",
+          "order": 12,
+          "bounding_box": {
+            "x": 0.5032679738562091,
+            "y": 0.7348484848484849,
+            "width": 0.4199346405228758,
+            "height": 0.14962121212121213
+          },
+          "content": "Catheter and continuum-robot control has progressed from PID and Jacobian-based kinematic regulation [5], [6] to modelless feedback [6] and predictive interaction-dynamics optimization. Cosserat-based predictive control can model rich catheter dynamics but requires online nonlinear-program solution, limiting update rates to  $ \\sim $10–20Hz. Constant-curvature kinematics [2] underlie most reduced-order interaction models. Learning-based approaches improve robustness to model uncertainty but usually do not provide formal stability or hard interaction-constraint guarantees.",
+          "label": "Text"
+        },
+        {
+          "id": "15",
+          "order": 13,
+          "bounding_box": {
+            "x": 0.5032679738562091,
+            "y": 0.8857323232323232,
+            "width": 0.4199346405228758,
+            "height": 0.061237373737373736
+          },
+          "content": "Sensor-free contact-force control is a directly relevant line. Jolaei et al. [14] regulate the contact force of a tendon-driven ablation catheter without a force sensor via position control plus a displacement-based viscoelastic contact model.",
+          "label": "Text"
+        },
+        {
+          "id": "16",
+          "order": null,
+          "bounding_box": {
+            "x": 0.07516339869281045,
+            "y": 0.8983585858585859,
+            "width": 0.4166666666666667,
+            "height": 0.023989898989898988
+          },
+          "content": "Preprint, June 2026. This work has been submitted for possible publication; copyright may be transferred without notice.",
+          "label": "Text"
+        },
+        {
+          "id": "17",
+          "order": null,
+          "bounding_box": {
+            "x": 0.07598039215686274,
+            "y": 0.9217171717171717,
+            "width": 0.4166666666666667,
+            "height": 0.02462121212121212
+          },
+          "content": "Y. Cao is with Voryx Robotic LLC, San Jose, CA 95136, USA. Corresponding author: Yongyan Cao (e-mail: yongyancao@gmail.com).",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "page_index": 2,
+      "blocks": [
+        {
+          "id": "0",
+          "order": null,
+          "bounding_box": {
+            "x": 0.07679738562091504,
+            "y": 0.030303030303030304,
+            "width": 0.059640522875817,
+            "height": 0.010732323232323232
+          },
+          "content": "PREPRINT",
+          "label": "Text"
+        },
+        {
+          "id": "1",
+          "order": null,
+          "bounding_box": {
+            "x": 0.9117647058823529,
+            "y": 0.03156565656565657,
+            "width": 0.010620915032679739,
+            "height": 0.00946969696969697
+          },
+          "content": "2",
+          "label": "Text"
+        },
+        {
+          "id": "2",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.07434640522875817,
+            "y": 0.07007575757575757,
+            "width": 0.41911764705882354,
+            "height": 0.10542929292929293
+          },
+          "content": "(0.03–0.05 N RMS), and Kesner and Howe [15] combine ultrasound guidance with force control on a moving cardiac target ( $ \\sim $0.08 N RMS). These works regulate one component of the interaction dynamics—force—to a setpoint. The present framework instead treats force as a hard never-exceed interaction-dynamics constraint while regulating the tip-motion state, a complementary objective (Section VI-B).",
+          "label": "Text"
+        },
+        {
+          "id": "3",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.07434640522875817,
+            "y": 0.17676767676767677,
+            "width": 0.41911764705882354,
+            "height": 0.08964646464646464
+          },
+          "content": "Virtual-impedance interaction shaping has been demonstrated for catheter tip-force regulation with empirically tuned parameters. In the terminology of this paper, impedance is one way to realize interaction dynamics, but the configuration-dependent effective inertia and compliance are typically not addressed, giving inconsistent behavior across the workspace.",
+          "label": "Text"
+        },
+        {
+          "id": "4",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.07434640522875817,
+            "y": 0.2676767676767677,
+            "width": 0.41830065359477125,
+            "height": 0.10479797979797979
+          },
+          "content": "Disturbance rejection in flexible robots can also be interpreted as interaction-dynamics regulation. Active disturbance rejection control (ADRC) and its extended state observer [8] lump unknown dynamics into an estimated disturbance state. The connection to offset-free predictive control [9], [10] provides a formal framework for combining disturbance estimation with constraint-aware interaction optimization [7].",
+          "label": "Text"
+        },
+        {
+          "id": "5",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.07516339869281045,
+            "y": 0.37247474747474746,
+            "width": 0.41830065359477125,
+            "height": 0.16603535353535354
+          },
+          "content": "Base framework. This work builds on the interaction-dynamics framework introduced for redundant-manipulator physical human–robot interaction [13]: nonlinear robot dynamics are transformed into a configuration-invariant linear interaction model, then regulated by predictive optimization with disturbance augmentation and safety constraints. We carry that hierarchy—Interaction Dynamics → Configuration-Invariant Dynamics → Predictive Optimization—to the steerable-catheter setting, addressing the catheter-specific challenges of single-DOF actuation, severe model uncertainty, and hard contact-force safety.",
+          "label": "Text"
+        },
+        {
+          "id": "6",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.0923202614379085,
+            "y": 0.5391414141414141,
+            "width": 0.24428104575163398,
+            "height": 0.013257575757575758
+          },
+          "content": "## The contributions of this paper are:",
+          "label": "Text"
+        },
+        {
+          "id": "7",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.07434640522875817,
+            "y": 0.5536616161616161,
+            "width": 0.41830065359477125,
+            "height": 0.07449494949494949
+          },
+          "content": "Correct single-DOF formulation. A single-tendon catheter has one controllable DOF (the curvature); we control the scalar tip-normal coordinate, avoiding the common overparameterization that treats the 2-D tip as independently actuable.",
+          "label": "Text"
+        },
+        {
+          "id": "8",
+          "order": 7,
+          "bounding_box": {
+            "x": 0.07434640522875817,
+            "y": 0.6300505050505051,
+            "width": 0.41830065359477125,
+            "height": 0.17929292929292928
+          },
+          "content": "Configuration-invariant interaction dynamics. The partial-physics feedforward cancels only the known nominal stiffness and damping, reformulating the uncertain catheter mechanics into a configuration-invariant linear interaction-dynamics model. The double integrator is the resulting model, not the contribution itself; the residual is absorbed by the disturbance state. Under the Disturbance Compression Principle (Remark 1) the estimator tracks only the observer-accessible low-frequency projection  $ \\mathcal{P}_{\\mathcal{D}}(\\Delta) $ of the residual, so d = 0 is an equivalent-disturbance model, not a physical claim—making one integrator state legitimate across friction, contact, and cardiac effects.",
+          "label": "Text"
+        },
+        {
+          "id": "9",
+          "order": 8,
+          "bounding_box": {
+            "x": 0.07434640522875817,
+            "y": 0.8099747474747475,
+            "width": 0.41830065359477125,
+            "height": 0.07512626262626262
+          },
+          "content": "Predictive interaction-dynamics optimization. We establish (Theorem 1) that the unconstrained, disturbance-free realization recovers the classical catheter impedance law while the constrained predictive realization adds offset-free rejection and explicit interaction-constraint enforcement.",
+          "label": "Text"
+        },
+        {
+          "id": "10",
+          "order": 9,
+          "bounding_box": {
+            "x": 0.07434640522875817,
+            "y": 0.88510101010101,
+            "width": 0.41830065359477125,
+            "height": 0.061237373737373736
+          },
+          "content": "Hard interaction-dynamics constraints. The QP enforces the predicted tip-normal force bound over the horizon through the tendon-to-tip transmission, together with tendon and curvature limits.",
+          "label": "Text"
+        },
+        {
+          "id": "11",
+          "order": null,
+          "bounding_box": {
+            "x": 0.5089869281045751,
+            "y": 0.07196969696969698,
+            "width": 0.40522875816993464,
+            "height": 0.15467171717171718
+          },
+          "content": "<div style=\"text-align: center;\"><img src=\"imgs/img_in_image_box_623_114_1119_359.jpg\" alt=\"Image\" width=\"40%\" />\n\ntissue wall  $ (k_{t}, b_{t}) $\n\n $ \\begin{aligned} R &= 1/\\kappa \\quad \\uparrow n \\\\ + & \\quad \\kappa L \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad \\uparrow p \\\\ & \\quad\n\n</div>\n",
+          "label": "Image"
+        },
+        {
+          "id": "12",
+          "order": null,
+          "bounding_box": {
+            "x": 0.5040849673202614,
+            "y": 0.24431818181818182,
+            "width": 0.41911764705882354,
+            "height": 0.11616161616161616
+          },
+          "content": "<div style=\"text-align: center;\">Fig. 1. Single-segment tendon-actuated catheter plant, mapping the variables of this section onto the physical parts: tendon displacement  $ u $ (control input) drives the curvature  $ \\kappa $ of a length-L bending segment with effective bending inertia  $ M $, damping  $ C $, and hysteretic stiffness  $ K $ (1); the constant-curvature arc has radius  $ R = 1/\\kappa $ and subtends  $ \\kappa L $. The tip position  $ p $ and its controlled normal coordinate  $ y = n^T p $ press on a Kelvin–Voigt tissue wall ( $ k_t, b_t $), producing the normal contact force  $ F_n $ held under the hard safety bound  $ F_{\\text{safe}} $. Sheath friction, tendon backlash, hysteresis, and contact are lumped into the disturbance  $ d_{\\text{cat}} $, compressed by the augmented Kalman estimator into the observed state  $ d $ (Remark 1).</div>\n",
+          "label": "Image"
+        },
+        {
+          "id": "13",
+          "order": 10,
+          "bounding_box": {
+            "x": 0.5040849673202614,
+            "y": 0.3838383838383838,
+            "width": 0.41911764705882354,
+            "height": 0.10795454545454546
+          },
+          "content": "Honest characterization. Simulation on a distributed-compliance physics plant shows prediction's dominant benefit is interaction-constraint enforcement, that offset-free rejection helps mainly in free space, and that offset-free motion regulation without a force constraint still breaches the safety bound (far milder on the compliant catheter than a stiff lumped model predicts, but breached).",
+          "label": "Text"
+        },
+        {
+          "id": "14",
+          "order": 11,
+          "bounding_box": {
+            "x": 0.5555555555555556,
+            "y": 0.5063131313131313,
+            "width": 0.31699346405228757,
+            "height": 0.01452020202020202
+          },
+          "content": "### II. INTERACTION DYNAMICS FORMULATION",
+          "label": "Text"
+        },
+        {
+          "id": "15",
+          "order": 12,
+          "bounding_box": {
+            "x": 0.5049019607843137,
+            "y": 0.5258838383838383,
+            "width": 0.3341503267973856,
+            "height": 0.01452020202020202
+          },
+          "content": "### A. Catheter Mechanics and Degrees of Freedom",
+          "label": "Text"
+        },
+        {
+          "id": "16",
+          "order": 13,
+          "bounding_box": {
+            "x": 0.5032679738562091,
+            "y": 0.5454545454545454,
+            "width": 0.41830065359477125,
+            "height": 0.05997474747474747
+          },
+          "content": "Consider a planar single-segment tendon-actuated catheter; tip position  $ p \\in \\mathbb{R}^2 $ is set by tendon displacement  $ u \\in \\mathbb{R} $ (positive pull gives curvature  $ \\kappa > 0 $). The dominant bending dynamics take the rigid-body-analogous form",
+          "label": "Text"
+        },
+        {
+          "id": "17",
+          "order": 14,
+          "bounding_box": {
+            "x": 0.5784313725490197,
+            "y": 0.6130050505050505,
+            "width": 0.27124183006535946,
+            "height": 0.015782828282828284
+          },
+          "content": " $$ M(\\kappa)\\ddot{\\kappa}+C(\\kappa,\\dot{\\kappa})\\dot{\\kappa}+K(\\kappa)=u+d_{\\mathrm{c a t}}, $$ ",
+          "label": "Formula"
+        },
+        {
+          "id": "18",
+          "order": 15,
+          "bounding_box": {
+            "x": 0.8995098039215687,
+            "y": 0.6142676767676768,
+            "width": 0.021241830065359478,
+            "height": 0.013257575757575758
+          },
+          "content": "(1)",
+          "label": "Formula"
+        },
+        {
+          "id": "19",
+          "order": 16,
+          "bounding_box": {
+            "x": 0.5040849673202614,
+            "y": 0.6363636363636364,
+            "width": 0.41911764705882354,
+            "height": 0.15088383838383837
+          },
+          "content": "with effective bending inertia M, damping C, nonlinear (hysteretic) stiffness K, and a lumped term  $ d_{cat} $ collecting tissue contact, friction, backlash, and hysteresis. This equation is not used as a full Cosserat model; it is the starting point for constructing a low-dimensional interaction-dynamics state. The correspondence  $ \\kappa \\leftrightarrow q $,  $ K \\leftrightarrow G $ bridges to the configuration-invariant interaction-dynamics framework established for redundant manipulators in physical human–robot interaction [13]; the present paper specializes that hierarchy to the single-DOF catheter setting.",
+          "label": "Text"
+        },
+        {
+          "id": "20",
+          "order": 17,
+          "bounding_box": {
+            "x": 0.5040849673202614,
+            "y": 0.788510101010101,
+            "width": 0.41911764705882354,
+            "height": 0.11931818181818182
+          },
+          "content": "Degrees of freedom. With a single tendon, the only controllable coordinate is  $ \\kappa $; the tip pose  $ p(\\kappa) $ traces a one-parameter curve, so the two tip coordinates are not independently actuable—only motion along the Jacobian direction  $ J_{\\kappa} $ is. We therefore control a scalar coordinate (the curvature, or equivalently the tip displacement y along the contact normal) and recover the 2-D pose through the kinematics of Section II-B.",
+          "label": "Text"
+        },
+        {
+          "id": "21",
+          "order": 18,
+          "bounding_box": {
+            "x": 0.5040849673202614,
+            "y": 0.9160353535353535,
+            "width": 0.41748366013071897,
+            "height": 0.030934343434343436
+          },
+          "content": "Remark 1 (Disturbance Compression Principle). The true residual after partial-physics cancellation,  $ \\Delta(t) = f_{real} - f_{real} $",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "page_index": 3,
+      "blocks": [
+        {
+          "id": "0",
+          "order": null,
+          "bounding_box": {
+            "x": 0.07679738562091504,
+            "y": 0.029671717171717172,
+            "width": 0.059640522875817,
+            "height": 0.011994949494949494
+          },
+          "content": "PREPRINT",
+          "label": "Text"
+        },
+        {
+          "id": "1",
+          "order": null,
+          "bounding_box": {
+            "x": 0.9117647058823529,
+            "y": 0.030934343434343436,
+            "width": 0.010620915032679739,
+            "height": 0.010732323232323232
+          },
+          "content": "3",
+          "label": "Text"
+        },
+        {
+          "id": "2",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.07434640522875817,
+            "y": 0.07007575757575757,
+            "width": 0.41911764705882354,
+            "height": 0.07702020202020202
+          },
+          "content": " $ f_{nominal} $, superposes effects on disparate timescales—quasistatic sheath friction and hysteresis, fast tissue contact, and  $ \\sim $1 Hz quasi-periodic cardiac loading. We do not claim a single integrator physically represents all of these. Rather, the augmented estimator realizes the projection",
+          "label": "Text"
+        },
+        {
+          "id": "3",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.23284313725490197,
+            "y": 0.15404040404040403,
+            "width": 0.10049019607843138,
+            "height": 0.015151515151515152
+          },
+          "content": " $$ d=\\mathcal{P}_{\\mathcal{D}}(\\Delta), $$ ",
+          "label": "Formula"
+        },
+        {
+          "id": "4",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.46895424836601307,
+            "y": 0.15467171717171718,
+            "width": 0.022058823529411766,
+            "height": 0.013888888888888888
+          },
+          "content": "(2)",
+          "label": "Formula"
+        },
+        {
+          "id": "5",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.0727124183006536,
+            "y": 0.17803030303030304,
+            "width": 0.4207516339869281,
+            "height": 0.22853535353535354
+          },
+          "content": "onto the observer-accessible subspace D—the low-frequency band set by the Kalman bandwidth and the integrating internal model. The model  $ \\dot{d}=0 $ is thus a statement about  $ \\mathcal{P}_{\\mathcal{D}}(\\Delta) $, the equivalent disturbance the observer can track and the MPC reject offset-free, not about the physics of  $ \\Delta $. Components outside  $ \\mathcal{D} $—the fast contact-onset transient, an unpredicted cardiac harmonic—are handled instead by the hard force constraint ( $ \\S $VI-F(4)) or an enlarged internal model ( $ \\S $V-A, Option B). This makes “model only what is observed and slowly varying” a precise design rule: partial cancellation need only move the dominant part of  $ \\Delta $ into  $ \\mathcal{D} $, and the offset-free guarantee then applies to  $ \\mathcal{P}_{\\mathcal{D}}(\\Delta) $ exactly. We call this the Disturbance Compression Principle; it lets a deliberately reduced model (1) of an infinite-dimensional Cosserat system carry a formal offset-free guarantee.",
+          "label": "Text"
+        },
+        {
+          "id": "6",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.07516339869281045,
+            "y": 0.42613636363636365,
+            "width": 0.13071895424836602,
+            "height": 0.01452020202020202
+          },
+          "content": "### B. Tip Kinematics",
+          "label": "Text"
+        },
+        {
+          "id": "7",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.09068627450980392,
+            "y": 0.44507575757575757,
+            "width": 0.28022875816993464,
+            "height": 0.01452020202020202
+          },
+          "content": "For a constant-curvature arc of length L,",
+          "label": "Text"
+        },
+        {
+          "id": "8",
+          "order": 7,
+          "bounding_box": {
+            "x": 0.14705882352941177,
+            "y": 0.4659090909090909,
+            "width": 0.27124183006535946,
+            "height": 0.030303030303030304
+          },
+          "content": " $$ p_{x}=\\frac{\\sin(\\kappa L)}{\\kappa},\\qquad p_{z}=\\frac{1-\\cos(\\kappa L)}{\\kappa}, $$ ",
+          "label": "Formula"
+        },
+        {
+          "id": "9",
+          "order": 8,
+          "bounding_box": {
+            "x": 0.46977124183006536,
+            "y": 0.47474747474747475,
+            "width": 0.021241830065359478,
+            "height": 0.013888888888888888
+          },
+          "content": "(3)",
+          "label": "Formula"
+        },
+        {
+          "id": "10",
+          "order": 9,
+          "bounding_box": {
+            "x": 0.07434640522875817,
+            "y": 0.49936868686868685,
+            "width": 0.41830065359477125,
+            "height": 0.061237373737373736
+          },
+          "content": "with continuous limits  $ p_x \\to L $,  $ p_z \\to 0 $ as  $ \\kappa \\to 0 $. Let  $ J_\\kappa(\\kappa) = dp/d\\kappa \\in \\mathbb{R}^{2 \\times 1} $ be the translational Jacobian and let  $ n $ be the controlled tip-normal direction. The scalar normal coordinate is  $ y = n^\\top p $, with",
+          "label": "Text"
+        },
+        {
+          "id": "11",
+          "order": 10,
+          "bounding_box": {
+            "x": 0.14950980392156862,
+            "y": 0.5681818181818182,
+            "width": 0.17565359477124182,
+            "height": 0.027146464646464648
+          },
+          "content": " $$ J_{n}(\\kappa)=\\frac{d y}{d\\kappa}=n^{\\top}J_{\\kappa}(\\kappa), $$ ",
+          "label": "Formula"
+        },
+        {
+          "id": "12",
+          "order": 11,
+          "bounding_box": {
+            "x": 0.47058823529411764,
+            "y": 0.5744949494949495,
+            "width": 0.0196078431372549,
+            "height": 0.013888888888888888
+          },
+          "content": "(4)",
+          "label": "Formula"
+        },
+        {
+          "id": "13",
+          "order": 12,
+          "bounding_box": {
+            "x": 0.14705882352941177,
+            "y": 0.5965909090909091,
+            "width": 0.27369281045751637,
+            "height": 0.020202020202020204
+          },
+          "content": " $$ \\Lambda_{n}(\\kappa)=\\left(J_{n}(\\kappa)M^{-1}(\\kappa)J_{n}(\\kappa)\\right)^{-1}>0, $$ ",
+          "label": "Formula"
+        },
+        {
+          "id": "14",
+          "order": 13,
+          "bounding_box": {
+            "x": 0.47058823529411764,
+            "y": 0.601010101010101,
+            "width": 0.0196078431372549,
+            "height": 0.013257575757575758
+          },
+          "content": "(5)",
+          "label": "Formula"
+        },
+        {
+          "id": "15",
+          "order": 14,
+          "bounding_box": {
+            "x": 0.07434640522875817,
+            "y": 0.6237373737373737,
+            "width": 0.41830065359477125,
+            "height": 0.046085858585858584
+          },
+          "content": "away from configurations where  $ J_{n} = 0 $. This scalar operational-space inertia normalizes the effective tip impedance in the controllable direction.",
+          "label": "Text"
+        },
+        {
+          "id": "16",
+          "order": 15,
+          "bounding_box": {
+            "x": 0.07598039215686274,
+            "y": 0.6893939393939394,
+            "width": 0.4166666666666667,
+            "height": 0.015151515151515152
+          },
+          "content": "### C. Contact Model and the Force-Safety Interaction Constraint",
+          "label": "Text"
+        },
+        {
+          "id": "17",
+          "order": 16,
+          "bounding_box": {
+            "x": 0.0727124183006536,
+            "y": 0.7032828282828283,
+            "width": 0.4199346405228758,
+            "height": 0.1571969696969697
+          },
+          "content": "During contact, a tip force  $ F_{tip} $ acts at the tip; in simulation the tissue is Kelvin–Voigt,  $ F_{tissue} = k_t \\delta + b_t \\dot{\\delta} $, with penetration  $ \\delta = \\max(0, p_{\\text{surf}} - p) $, tissue stiffness  $ k_t \\approx 2-20\\,\\text{kN/m} $, and damping  $ b_t $. The contact maps to curvature through virtual work,  $ \\tau_{\\text{ext}} = J_{\\kappa}^{\\top} F_{\\text{tip}} $; along the controlled normal this reduces to  $ \\tau_{\\text{ext}} = J_n F_n $, where  $ F_n = n^\\top F_{\\text{tip}} $. The clinically relevant perforation threshold  $ F_{\\text{safe}} \\approx 0.5\\,\\text{N}\\, [12] $ motivates a hard predicted normal-force bound,  $ |F_n(t)| \\leq F_{\\text{safe}} $, with additional approach-velocity limits needed for environment-induced impact transients (Section VI-F).",
+          "label": "Text"
+        },
+        {
+          "id": "18",
+          "order": 17,
+          "bounding_box": {
+            "x": 0.07516339869281045,
+            "y": 0.8813131313131313,
+            "width": 0.2426470588235294,
+            "height": 0.01452020202020202
+          },
+          "content": "### D. Interaction-Dynamics Objective",
+          "label": "Text"
+        },
+        {
+          "id": "19",
+          "order": 18,
+          "bounding_box": {
+            "x": 0.0727124183006536,
+            "y": 0.9008838383838383,
+            "width": 0.4199346405228758,
+            "height": 0.046085858585858584
+          },
+          "content": "Given a reference $(p_d, \\dot{p}_d, \\ddot{p}_d)$, define the scalar interaction state $x = [e, \\dot{e}]^\\top$, where $e = y_d - y$ is the error in the controllable normal coordinate. This state characterizes the regulated catheter-tissue interaction dynamics: motion error, velocity error, persistent unknown loading, and the constraints that limit allowable contact. The objective is to choose $u(t)$ so $e(t) \\to 0$ in the nominal free-space limit while respecting tendon limits $u_{\\mathrm{lo}} \\leq u \\leq u_{\\mathrm{hi}}$, predicted normal-force safety $|F_n| \\leq F_{\\mathrm{safe}}$, and curvature limits $\\kappa_{\\mathrm{lo}} \\leq \\kappa \\leq \\kappa_{\\mathrm{max}}$ under bounded unknown contact, friction, and hysteresis.",
+          "label": "Text"
+        },
+        {
+          "id": "20",
+          "order": 19,
+          "bounding_box": {
+            "x": 0.5032679738562091,
+            "y": 0.0707070707070707,
+            "width": 0.41911764705882354,
+            "height": 0.10164141414141414
+          },
+          "content": "",
+          "label": "Text"
+        },
+        {
+          "id": "21",
+          "order": 20,
+          "bounding_box": {
+            "x": 0.5220588235294118,
+            "y": 0.19318181818181818,
+            "width": 0.3815359477124183,
+            "height": 0.015151515151515152
+          },
+          "content": "### III. PREDICTIVE INTERACTION DYNAMICS CONTROL",
+          "label": "Text"
+        },
+        {
+          "id": "22",
+          "order": 21,
+          "bounding_box": {
+            "x": 0.5212418300653595,
+            "y": 0.21401515151515152,
+            "width": 0.27450980392156865,
+            "height": 0.01452020202020202
+          },
+          "content": "The control architecture has two layers:",
+          "label": "Text"
+        },
+        {
+          "id": "23",
+          "order": 22,
+          "bounding_box": {
+            "x": 0.5098039215686274,
+            "y": 0.2380050505050505,
+            "width": 0.40522875816993464,
+            "height": 0.034722222222222224
+          },
+          "content": " $$ \\begin{array}{r l r}{u=}&{{}}&{\\underbrace{u_{\\mathrm{f f}}}_{\\mathrm{L a y e r~1:~i n t e r a c t i o n-d y n a m i c s~n o r m a l i z a t i o n}}+\\underbrace{J_{n}F_{\\mathrm{m p c}}}_{\\mathrm{L a y e r~2:~p r e d i c t i v e~c o r r e c t i o n}},}\\\\ &{}&\\end{array} $$ ",
+          "label": "Formula"
+        },
+        {
+          "id": "24",
+          "order": 23,
+          "bounding_box": {
+            "x": 0.8986928104575164,
+            "y": 0.2720959595959596,
+            "width": 0.021241830065359478,
+            "height": 0.011994949494949494
+          },
+          "content": "(6)",
+          "label": "Formula"
+        },
+        {
+          "id": "25",
+          "order": 24,
+          "bounding_box": {
+            "x": 0.5040849673202614,
+            "y": 0.2840909090909091,
+            "width": 0.41911764705882354,
+            "height": 0.15088383838383837
+          },
+          "content": "with feedforward  $ u_{\\mathrm{ff}} = \\hat{C}(\\kappa, \\dot{\\kappa}) \\dot{\\kappa} + \\hat{K}(\\kappa) + J_n \\Lambda_n(\\kappa) \\ddot{y}_d $ canceling the nominal dynamics. In the single-DOF setting  $ F_{\\mathrm{mpc}} \\in \\mathbb{R} $ is the scalar corrective force along the controlled tip-normal; the transmitted generalized input is  $ J_n F_{\\mathrm{mpc}} $, dimensionally consistent with  $ u $. In the remainder we write  $ J_n $ for the scalar normal Jacobian and reserve  $ J_\\kappa $ for the full translational Jacobian. For a rigid robot Layer 1 is exact; for a catheter  $ \\hat{C} $,  $ \\hat{K} $ are uncertain, so the cancellation is partial and the residual is absorbed by the disturbance estimate—more robust than inverting an unreliable model.",
+          "label": "Text"
+        },
+        {
+          "id": "26",
+          "order": 25,
+          "bounding_box": {
+            "x": 0.5040849673202614,
+            "y": 0.43686868686868685,
+            "width": 0.4199346405228758,
+            "height": 0.046085858585858584
+          },
+          "content": "Since the system is single-DOF (Section II), the error  $ e = y_d - y $ and the corrective input  $ F_{\\text{mpc}} \\in \\mathbb{R} $ are scalar. With  $ x_e = [e, \\dot{e}]^\\top \\in \\mathbb{R}^2 $,",
+          "label": "Text"
+        },
+        {
+          "id": "27",
+          "order": 26,
+          "bounding_box": {
+            "x": 0.5253267973856209,
+            "y": 0.48674242424242425,
+            "width": 0.3562091503267974,
+            "height": 0.05555555555555555
+          },
+          "content": " $$ \\dot{x}_{e}=\\underbrace{\\begin{bmatrix}{{{0}}}&{{{1}}} \\\\{{{0}}}&{{{0}}}\\end{bmatrix}}_{A_{c}\\left(\\mathrm{c o n s t}\\right)}x_{e}+\\underbrace{\\begin{bmatrix}{{{0}}} \\\\{{{-\\Lambda_{n}^{-1}(\\kappa)}}}\\end{bmatrix}}_{B_{c}(\\kappa)}F_{\\mathrm{m p c}}+\\underbrace{\\begin{bmatrix}{{{0}}} \\\\{{{1}}}\\end{bmatrix}}_{E_{c}\\left(\\mathrm{c o n s t}\\right)}d(t), $$ ",
+          "label": "Formula"
+        },
+        {
+          "id": "28",
+          "order": 27,
+          "bounding_box": {
+            "x": 0.8995098039215687,
+            "y": 0.4981060606060606,
+            "width": 0.021241830065359478,
+            "height": 0.013888888888888888
+          },
+          "content": "(7)",
+          "label": "Formula"
+        },
+        {
+          "id": "29",
+          "order": 28,
+          "bounding_box": {
+            "x": 0.5040849673202614,
+            "y": 0.5473484848484849,
+            "width": 0.41911764705882354,
+            "height": 0.15151515151515152
+          },
+          "content": "where $d$ lumps modeling error, contact, and the kinematic coupling $\\dot{J}_n\\dot{\\kappa}$, normalized to acceleration units. This is the key configuration-invariant interaction-dynamics model: $A_c$ is constant, while only the scalar gain $B_c(\\kappa)$ varies through $\\Lambda_n(\\kappa)$. The double integrator is the resulting normalized interaction model, not the main claim. The same constant-$A_d$, parameter-varying-$B_d$ structure exploited in the base framework [13] and, earlier, in min-max MPC under input saturation [11], enables offline precomputation of the prediction matrices. Because $A_c$ is nilpotent, the exact ZOH discretization is closed-form:",
+          "label": "Text"
+        },
+        {
+          "id": "30",
+          "order": 29,
+          "bounding_box": {
+            "x": 0.5424836601307189,
+            "y": 0.7039141414141414,
+            "width": 0.34068627450980393,
+            "height": 0.03409090909090909
+          },
+          "content": " $$ A_{d}=\\begin{bmatrix}1&\\Delta t\\\\ 0&1\\end{bmatrix},\\quad B_{d}(\\kappa_{k})=\\begin{bmatrix}-\\frac{1}{2}\\Lambda_{n}^{-1}(\\kappa_{k})\\Delta t^{2}\\\\ -\\Lambda_{n}^{-1}(\\kappa_{k})\\Delta t\\end{bmatrix}. $$ ",
+          "label": "Formula"
+        },
+        {
+          "id": "31",
+          "order": 30,
+          "bounding_box": {
+            "x": 0.8995098039215687,
+            "y": 0.7140151515151515,
+            "width": 0.021241830065359478,
+            "height": 0.01452020202020202
+          },
+          "content": "(8)",
+          "label": "Formula"
+        },
+        {
+          "id": "32",
+          "order": 31,
+          "bounding_box": {
+            "x": 0.5220588235294118,
+            "y": 0.7455808080808081,
+            "width": 0.3660130718954248,
+            "height": 0.015782828282828284
+          },
+          "content": "Augment with a scalar integrating disturbance  $ \\hat{d} \\in \\mathbb{R} $:",
+          "label": "Text"
+        },
+        {
+          "id": "33",
+          "order": 32,
+          "bounding_box": {
+            "x": 0.5326797385620915,
+            "y": 0.7670454545454546,
+            "width": 0.34558823529411764,
+            "height": 0.03535353535353535
+          },
+          "content": " $$ \\begin{bmatrix}x_{e,k+1}\\\\ \\hat{d}_{k+1}\\end{bmatrix}=\\begin{bmatrix}A_{d}&G_{d}\\\\ 0&1\\end{bmatrix}\\begin{bmatrix}x_{e,k}\\\\ \\hat{d}_{k}\\end{bmatrix}+\\begin{bmatrix}B_{d}(\\kappa_{k})\\\\ 0\\end{bmatrix}F_{\\mathrm{mpc},k}, $$ ",
+          "label": "Formula"
+        },
+        {
+          "id": "34",
+          "order": 33,
+          "bounding_box": {
+            "x": 0.8995098039215687,
+            "y": 0.7784090909090909,
+            "width": 0.021241830065359478,
+            "height": 0.013257575757575758
+          },
+          "content": "(9)",
+          "label": "Formula"
+        },
+        {
+          "id": "35",
+          "order": 34,
+          "bounding_box": {
+            "x": 0.5040849673202614,
+            "y": 0.8087121212121212,
+            "width": 0.41830065359477125,
+            "height": 0.07891414141414141
+          },
+          "content": "with  $ G_d = \\left[\\frac{1}{2}\\Delta t^2, \\Delta t\\right]^\\top $ the ZOH of  $ E_c $—distinct from  $ B_d $, which carries the  $ -\\Lambda_n^{-1} $ input gain (d is in acceleration units, so  $ G_d $ is not  $ \\Lambda_n^{-1} $-scaled). A steady-state Kalman filter estimates  $ \\hat{d} $ from tip-error measurements; the pair is observable with  $ C_{\\text{aug}} = [I_2, 0] $ since  $ G_d \\neq 0 $. No force sensor is required.",
+          "label": "Text"
+        },
+        {
+          "id": "36",
+          "order": 35,
+          "bounding_box": {
+            "x": 0.5024509803921569,
+            "y": 0.8857323232323232,
+            "width": 0.41911764705882354,
+            "height": 0.06186868686868687
+          },
+          "content": "A predictive interaction-dynamics QP can be constructed from the augmented dynamics (9) and an input-centered cost. For a frozen or predicted inertia sequence, let  $ U_d(\\hat{d}) = [\\Lambda_{n,0}\\hat{d}, \\ldots, \\Lambda_{n,N-1}\\hat{d}]^\\top $ be the steady force sequence that",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "page_index": 4,
+      "blocks": [
+        {
+          "id": "0",
+          "order": null,
+          "bounding_box": {
+            "x": 0.07679738562091504,
+            "y": 0.029671717171717172,
+            "width": 0.059640522875817,
+            "height": 0.011994949494949494
+          },
+          "content": "PREPRINT",
+          "label": "Text"
+        },
+        {
+          "id": "1",
+          "order": null,
+          "bounding_box": {
+            "x": 0.9109477124183006,
+            "y": 0.03156565656565657,
+            "width": 0.011437908496732025,
+            "height": 0.00946969696969697
+          },
+          "content": "4",
+          "label": "Text"
+        },
+        {
+          "id": "2",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.07352941176470588,
+            "y": 0.07007575757575757,
+            "width": 0.41911764705882354,
+            "height": 0.030934343434343436
+          },
+          "content": "cancels the estimated acceleration disturbance in (7). The condensed QP is",
+          "label": "Text"
+        },
+        {
+          "id": "3",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.08088235294117647,
+            "y": 0.10795454545454546,
+            "width": 0.37663398692810457,
+            "height": 0.026515151515151516
+          },
+          "content": " $$ \\min_{U}\\frac{1}{2}U^{\\top}H U+\\Big(\\Gamma^{\\top}\\bar{Q}\\big(\\Phi x_{e,k}+\\Delta(\\hat{d})\\big)-\\bar{R}U_{d}(\\hat{d})\\Big)^{\\top}U, $$ ",
+          "label": "Formula"
+        },
+        {
+          "id": "4",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.4624183006535948,
+            "y": 0.11426767676767677,
+            "width": 0.028594771241830064,
+            "height": 0.01452020202020202
+          },
+          "content": "(10)",
+          "label": "Formula"
+        },
+        {
+          "id": "5",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.07434640522875817,
+            "y": 0.1414141414141414,
+            "width": 0.4166666666666667,
+            "height": 0.06186868686868687
+          },
+          "content": "with $U = [F_{\\mathrm{mpc},0}; \\ldots; F_{\\mathrm{mpc},N-1}] \\in \\mathbb{R}^N$, $H = \\Gamma^\\top \\bar{Q} \\Gamma + \\bar{R}$, $Q = \\mathrm{diag}(K_d, D_d)$, and $\\Phi \\in \\mathbb{R}^{2N \\times 2}$, $\\Gamma$ precomputed once (constant $A_d$). When no interaction constraint is active the solution is the closed form",
+          "label": "Text"
+        },
+        {
+          "id": "6",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.10947712418300654,
+            "y": 0.2077020202020202,
+            "width": 0.3202614379084967,
+            "height": 0.02335858585858586
+          },
+          "content": " $$ U^{\\star}=-H^{-1}\\Big\\lceil\\Gamma^{\\top}\\bar{Q}\\big(\\Phi x_{e}+\\Delta(\\hat{d})\\big)-\\bar{R}U_{d}(\\hat{d})\\Big\\rceil, $$ ",
+          "label": "Formula"
+        },
+        {
+          "id": "7",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.4616013071895425,
+            "y": 0.21275252525252525,
+            "width": 0.029411764705882353,
+            "height": 0.01452020202020202
+          },
+          "content": "(11)",
+          "label": "Formula"
+        },
+        {
+          "id": "8",
+          "order": 7,
+          "bounding_box": {
+            "x": 0.07352941176470588,
+            "y": 0.2380050505050505,
+            "width": 0.41911764705882354,
+            "height": 0.10479797979797979
+          },
+          "content": "a matrix–vector multiply. With constant  $ \\Lambda_n $ over the horizon,  $ \\Delta(\\hat{d}) + \\Gamma U_d(\\hat{d}) = 0 $, so the change of variables  $ V = U - U_d $ reduces the optimizer to the nominal interaction-dynamics regulator in  $ V $. When a constraint binds, OSQP [16] solves the condensed QP reusing the cached factorization. The minimization is subject to tendon limits, curvature limits, and the contact-force interaction bound.",
+          "label": "Text"
+        },
+        {
+          "id": "9",
+          "order": 8,
+          "bounding_box": {
+            "x": 0.07598039215686274,
+            "y": 0.3440656565656566,
+            "width": 0.4158496732026144,
+            "height": 0.10606060606060606
+          },
+          "content": "Force-safety interaction constraint. The corrective input  $ F_{\\mathrm{mpc}} $ is the tip-normal force, and the two-layer command is realized as the tendon tension  $ T_k = -(u_{\\mathrm{ff},k} + F_{\\mathrm{mpc},k}) / J_n (\\kappa_k) $ with the tip-space elastic feedforward  $ u_{\\mathrm{ff}} = k_{\\mathrm{eff}} y_d $ ( $ J_n $ bounded away from zero; Section VI-B). The predicted normal contact force—the applied tip force beyond the catheter's own elastic restoring—is then",
+          "label": "Text"
+        },
+        {
+          "id": "10",
+          "order": 9,
+          "bounding_box": {
+            "x": 0.10457516339869281,
+            "y": 0.45707070707070707,
+            "width": 0.3349673202614379,
+            "height": 0.017676767676767676
+          },
+          "content": " $$ \\hat{F}_{n,k}=J_{n}(\\kappa_{k})\\left|T_{k}\\right|-k_{\\mathrm{e f f}}\\left|y_{k}\\right|=k_{\\mathrm{e f f}}e_{k}+F_{\\mathrm{m p c},k}, $$ ",
+          "label": "Formula"
+        },
+        {
+          "id": "11",
+          "order": 10,
+          "bounding_box": {
+            "x": 0.4624183006535948,
+            "y": 0.45896464646464646,
+            "width": 0.028594771241830064,
+            "height": 0.013888888888888888
+          },
+          "content": "(12)",
+          "label": "Formula"
+        },
+        {
+          "id": "12",
+          "order": 11,
+          "bounding_box": {
+            "x": 0.07516339869281045,
+            "y": 0.48169191919191917,
+            "width": 0.41748366013071897,
+            "height": 0.09154040404040405
+          },
+          "content": "with any calibrated free-space friction bias absorbed into the disturbance estimate  $ \\hat{d} $ (Remark 1). Because the compliant elastic term  $ k_{\\mathrm{eff}}e_k $ is small over the workspace ( $ |k_{\\mathrm{eff}}e_k| \\ll F_{\\mathrm{safe}} $), the hard predicted-force bound  $ |\\hat{F}_n, k| \\leq F_{\\mathrm{safe}} $ is enforced to leading order by the box constraint on the corrective force,",
+          "label": "Text"
+        },
+        {
+          "id": "13",
+          "order": 12,
+          "bounding_box": {
+            "x": 0.20016339869281047,
+            "y": 0.5732323232323232,
+            "width": 0.16830065359477125,
+            "height": 0.016414141414141416
+          },
+          "content": " $$ -F_{\\mathrm{s a f e}}\\leq F_{\\mathrm{m p c},k}\\leq F_{\\mathrm{s a f e}}, $$ ",
+          "label": "Formula"
+        },
+        {
+          "id": "14",
+          "order": 13,
+          "bounding_box": {
+            "x": 0.4624183006535948,
+            "y": 0.5744949494949495,
+            "width": 0.028594771241830064,
+            "height": 0.013888888888888888
+          },
+          "content": "(13)",
+          "label": "Formula"
+        },
+        {
+          "id": "15",
+          "order": 14,
+          "bounding_box": {
+            "x": 0.07352941176470588,
+            "y": 0.5978535353535354,
+            "width": 0.41911764705882354,
+            "height": 0.06060606060606061
+          },
+          "content": "applied directly in the QP. This bounds the controller-induced/predicted quasi-static normal force; fast environment-induced damping spikes are handled by approach-velocity limits (Section VI-F).",
+          "label": "Text"
+        },
+        {
+          "id": "16",
+          "order": 15,
+          "bounding_box": {
+            "x": 0.0727124183006536,
+            "y": 0.6660353535353535,
+            "width": 0.4199346405228758,
+            "height": 0.1976010101010101
+          },
+          "content": "Theorem 1 (LQR-impedance equivalence). In the unconstrained, disturbance-free limit (d ≡ 0, no active constraints) the receding-horizon law is the static linear state feedback  $ F_{mpc} = K_{eff} e + D_{eff} \\dot{e} - \\text{the LQR-realized instance of the classical catheter impedance law } u_{imp} = \\hat{C} \\dot{k} + \\hat{K} + J_n (K_{eff} e + D_{eff} \\dot{e}) $, realizing the effective tip-normal impedance  $ Z_{eff}(s, \\kappa) \\approx \\Lambda_n(\\kappa) s^2 + D_{eff} s + K_{eff} - \\text{where the realized gains } (K_{eff}, D_{eff}) $ are the unconstrained LQR feedback for the weights (Q, R). The unconstrained predictive interaction controller is therefore an LQR-tuned classical impedance, with the realized gains the Riccati image of the cost weights (Remark 2); it is not a free rendering of a prescribed  $ (K_d, D_d) $ (following [13], Theorem 1).",
+          "label": "Text"
+        },
+        {
+          "id": "17",
+          "order": 16,
+          "bounding_box": {
+            "x": 0.07352941176470588,
+            "y": 0.8699494949494949,
+            "width": 0.41911764705882354,
+            "height": 0.07702020202020202
+          },
+          "content": "Proof sketch: Without constraints and with  $ d \\equiv 0 $ the QP minimizer is the unconstrained stationary point  $ U^* = -H^{-1}\\Gamma^\\top\\bar{Q}\\Phi_{e} $, whose first block is a static gain  $ F_{\\mathrm{mpc}} = K_{\\mathrm{eff}}e + D_{\\mathrm{eff}}e $; with the DARE terminal cost this is the infinite-horizon LQR feedback for  $ (Q, R) $, independent of  $ N $. After Layer-1 cancellation the residual plant is  $ \\ddot{e} = -\\Lambda_n^{-1}(\\kappa)F_{\\mathrm{mpc}} + d $; multiplying by  $ \\Lambda_n(\\kappa) $ gives  $ \\Lambda_n\\ddot{e} + D_{\\mathrm{eff}}\\dot{e} + K_{\\mathrm{eff}}e = \\Lambda_n d $, the stated impedance, and adding the feedforward  $ u_{\\mathrm{ff}} = \\hat{C}\\hat{k} + \\hat{K} + J_n\\Lambda_n\\ddot{y}_d $ recovers  $ u_{\\mathrm{imp}} $. When constraints are active or  $ d \\neq 0 $, the MPC departs from this static law—precisely its advantage.",
+          "label": "Text"
+        },
+        {
+          "id": "18",
+          "order": 17,
+          "bounding_box": {
+            "x": 0.5040849673202614,
+            "y": 0.07007575757575757,
+            "width": 0.41830065359477125,
+            "height": 0.09027777777777778
+          },
+          "content": "",
+          "label": "Text"
+        },
+        {
+          "id": "19",
+          "order": 18,
+          "bounding_box": {
+            "x": 0.5049019607843137,
+            "y": 0.1691919191919192,
+            "width": 0.4199346405228758,
+            "height": 0.13636363636363635
+          },
+          "content": "Remark 2 (Prescribed vs. realized gains). The cost weights  $ Q = \\text{diag}(K_d, D_d) $,  $ R $ are design penalties; the realized impedance ( $ K_{\\text{eff}} $,  $ D_{\\text{eff}} $) is their LQR (Riccati) image, so in general ( $ K_{\\text{eff}} $,  $ D_{\\text{eff}} $)  $ \\neq $ ( $ K_d $,  $ D_d $)—in particular the cheap-control limit  $ R \\rightarrow 0 $ yields a plant-determined gain, not ( $ K_d $,  $ D_d $). To render a specific ( $ K_d $,  $ D_d $) exactly, prescribe the impedance gain directly ( $ F_{mpc} = K_d e + D_d e $), making the equivalence exact at the cost of the predictive look-ahead (cf. [13], Remark 2).",
+          "label": "Text"
+        },
+        {
+          "id": "20",
+          "order": 19,
+          "bounding_box": {
+            "x": 0.6209150326797386,
+            "y": 0.3244949494949495,
+            "width": 0.18709150326797386,
+            "height": 0.01452020202020202
+          },
+          "content": "### IV. STABILITY ANALYSIS",
+          "label": "Text"
+        },
+        {
+          "id": "21",
+          "order": 20,
+          "bounding_box": {
+            "x": 0.5032679738562091,
+            "y": 0.34595959595959597,
+            "width": 0.4207516339869281,
+            "height": 0.13636363636363635
+          },
+          "content": "Theorem 2 (Nominal stability). With terminal cost  $ Q_f $ the DARE solution at a nominal configuration  $ \\kappa_0 $, if the QP is feasible at  $ k = 0 $ and the LPV variation  $ \\|B_d(\\kappa_k) - B_d(\\kappa_0)\\| $ is sufficiently small—quantified for this scalar plant in closed form as  $ \\rho = \\Lambda_{n,ref}/\\Lambda_{n,true} < \\rho^* \\approx 3.4 $ (Proposition 1, derived in Appendix B), comfortably satisfied by the  $ 1.4\\times $ workspace variation—the closed loop is asymptotically stable and  $ x_e(k) \\to 0 $ (no disturbance), provided recursive feasibility holds.",
+          "label": "Text"
+        },
+        {
+          "id": "22",
+          "order": 21,
+          "bounding_box": {
+            "x": 0.5049019607843137,
+            "y": 0.48863636363636365,
+            "width": 0.41830065359477125,
+            "height": 0.18371212121212122
+          },
+          "content": "Theorem 3 (ISS / offset-free). If  $ \\|d(t)\\| \\leq \\bar{d} $, the augmented system is observable, and the input-centered QP (10) is feasible,  $ (x_e, \\hat{d}) $ is input-to-state stable with an error bound that scales with the unmodeled time variation of  $ d $. For constant matched disturbances in the nominal, free-space limit,  $ \\hat{d} \\to d_\\infty $ implies  $ U_d = 1_N \\Lambda_n d_\\infty $ and  $ \\Delta(d_\\infty) + \\Gamma U_d = 0 $, hence the unconstrained law becomes  $ F_{mpc} = \\Lambda_n d_\\infty + K_{eff} e + D_{eff} \\dot{e} $ and the steady error is exactly zero. For slowly varying disturbances the residual error scales with  $ \\|\\dot{d}\\| $. Under stiff contact the achievable steady-state error is additionally bounded by the force constraint and is therefore nonzero (Section VI-B confirms a contact-limited residual).",
+          "label": "Text"
+        },
+        {
+          "id": "23",
+          "order": 22,
+          "bounding_box": {
+            "x": 0.5024509803921569,
+            "y": 0.6792929292929293,
+            "width": 0.4215686274509804,
+            "height": 0.09154040404040405
+          },
+          "content": "Proof status. Theorem 1 is supported by the sketch above. Theorems 2–3 follow standard arguments—terminal-cost/recursive-feasibility stability for constrained MPC [7] and the augmented-observer offset-free result [9]—specialized to the constant- $ A_d $ scalar plant with the input-centering identity  $ \\Delta(\\hat{d}) + \\Gamma U_d(\\hat{d}) = 0 $.",
+          "label": "Text"
+        },
+        {
+          "id": "24",
+          "order": 23,
+          "bounding_box": {
+            "x": 0.5049019607843137,
+            "y": 0.7777777777777778,
+            "width": 0.41830065359477125,
+            "height": 0.09217171717171717
+          },
+          "content": "Proposition 1 (LPV stability margin). For the scalar plant (8), let  $ K = [k_1, k_2] $ be a gain designed at  $ \\Lambda_{n,ref} $ (normalized to  $ \\Lambda_{n,ref} = 1 $) and applied where the true inertia is  $ \\Lambda_{n,true} $, giving the closed loop  $ A_{cl}(\\rho) = A_d - \\rho B_d (\\Lambda_{n,ref}) K $ with  $ \\rho = \\Lambda_{n,ref} / \\Lambda_{n,true} $ (since  $ B_d \\propto \\Lambda_n^{-1} $). Then  $ A_{cl}(\\rho) $ is Schur for all  $ \\rho \\in (0, \\rho^*) $ with",
+          "label": "Text"
+        },
+        {
+          "id": "25",
+          "order": 24,
+          "bounding_box": {
+            "x": 0.5735294117647058,
+            "y": 0.8756313131313131,
+            "width": 0.2777777777777778,
+            "height": 0.06755050505050506
+          },
+          "content": " $$ \\begin{align*}\\rho^{\\star}&=\\min\\Biggl\\{\\frac{2}{\\Delta t\\left|k_{2}\\right|},\\frac{2}{\\Delta t\\left|k_{2}-\\frac{1}{2}\\Delta t k_{1}\\right|}\\Biggr\\}\\\\&=\\frac{2}{\\Delta t\\left|k_{2}\\right|},\\end{align*} $$ ",
+          "label": "Formula"
+        },
+        {
+          "id": "26",
+          "order": 25,
+          "bounding_box": {
+            "x": 0.8913398692810458,
+            "y": 0.9191919191919192,
+            "width": 0.029411764705882353,
+            "height": 0.01452020202020202
+          },
+          "content": "(14)",
+          "label": "Formula"
+        }
+      ]
+    },
+    {
+      "page_index": 5,
+      "blocks": [
+        {
+          "id": "0",
+          "order": null,
+          "bounding_box": {
+            "x": 0.07679738562091504,
+            "y": 0.030303030303030304,
+            "width": 0.059640522875817,
+            "height": 0.011363636363636364
+          },
+          "content": "PREPRINT",
+          "label": "Text"
+        },
+        {
+          "id": "1",
+          "order": null,
+          "bounding_box": {
+            "x": 0.9117647058823529,
+            "y": 0.03156565656565657,
+            "width": 0.010620915032679739,
+            "height": 0.010101010101010102
+          },
+          "content": "5",
+          "label": "Text"
+        },
+        {
+          "id": "2",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.07434640522875817,
+            "y": 0.07007575757575757,
+            "width": 0.41830065359477125,
+            "height": 0.07702020202020202
+          },
+          "content": "the first bound binding as a real pole exits through $z = -1$; the second corresponds to $\\det = -1$. For the benchmark gain $(k_2 = -294.9, \\Delta t = 2\\mathrm{ms})$ this gives $\\rho^* \\approx 3.39$, agreeing with the simulated spectral-radius sweep (Appendix B; simulation/catheter_verify.py).",
+          "label": "Text"
+        },
+        {
+          "id": "3",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.07352941176470588,
+            "y": 0.1527777777777778,
+            "width": 0.4199346405228758,
+            "height": 0.15214646464646464
+          },
+          "content": "Remark 3 (Workspace margin). Over the workspace  $ \\Lambda_n(\\kappa) $ varies only  $ 1.4\\times $, i.e.  $ \\rho \\in [0.70,1.0] $, a margin of more than  $ 3\\times $ to  $ \\rho^* \\approx 3.4 $ ( $ \\Lambda_n, true > 0.29 \\Lambda_n, ref $); under-estimates ( $ \\Lambda_n, true > \\Lambda_n, ref $,  $ \\rho < 1 $) are always stable since  $ \\rho^* > 1 $. A single fixed gain is therefore robustly stable, and the  $ \\Lambda_n(\\kappa) $-normalized gain holds the closed-loop poles nearly configuration-invariant (spread  $ \\sim 2 \\times 10^{-6} $, Section VI-F). The nominal-limit caveat on Theorem 3 is essential: as the simulation shows (Section VI-B; Appendix A), offset-free tracking does not hold under stiff contact or fast cardiac motion.",
+          "label": "Text"
+        },
+        {
+          "id": "4",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.22630718954248366,
+            "y": 0.3194444444444444,
+            "width": 0.11764705882352941,
+            "height": 0.013888888888888888
+          },
+          "content": "### V. Discussion",
+          "label": "Text"
+        },
+        {
+          "id": "5",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.07352941176470588,
+            "y": 0.3383838383838384,
+            "width": 0.4158496732026144,
+            "height": 0.015151515151515152
+          },
+          "content": "### A. Predictive Interaction Optimization and the  $ \\dot{d}=0 $ Model",
+          "label": "Text"
+        },
+        {
+          "id": "6",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.07352941176470588,
+            "y": 0.35795454545454547,
+            "width": 0.4199346405228758,
+            "height": 0.22727272727272727
+          },
+          "content": "The primary value of prediction here is interaction-constraint enforcement and trajectory feedforward, not contact-force forecasting: the feedforward  $ \\ddot{p}_d $ and the known constraint bounds are exact, the Kalman disturbance estimate moderate, and force prediction near-useless (the tissue is unknown). A zero-order-hold  $ \\hat{d}(k+i) = \\hat{d}(k) $ is therefore adopted, and the offset-free guarantee holds at steady state regardless of prediction quality. This integrating model is a worst-case approximation for any slowly-varying disturbance; the  $ \\sim $1 Hz cardiac force could instead be predicted by (A) raising the process-noise covariance for faster adaptation, or (B) an ECG-gated periodic model  $ \\hat{d}(k+1) = \\hat{d}_{\\text{DC}}(k) + A_{\\text{card}} \\sin(\\omega_{\\text{heart}}(k+1)\\Delta t + \\phi) $—left to future work. During first contact the estimate lags a few samples; the hard force constraint is the safety backstop in that transient.",
+          "label": "Text"
+        },
+        {
+          "id": "7",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.07679738562091504,
+            "y": 0.6022727272727273,
+            "width": 0.1772875816993464,
+            "height": 0.015151515151515152
+          },
+          "content": "### B. Modeling and Sensing",
+          "label": "Text"
+        },
+        {
+          "id": "8",
+          "order": 7,
+          "bounding_box": {
+            "x": 0.07434640522875817,
+            "y": 0.6212121212121212,
+            "width": 0.41911764705882354,
+            "height": 0.1527777777777778
+          },
+          "content": "Partial cancellation. Catheter stiffness  $ K(\\kappa) $ suffers hysteresis and specimen variability, so inverting an inaccurate  $ \\hat{K} $ can increase the disturbance; we cancel only reliably-estimated components and let the residual add to  $ d(t) $, including a feedforward term only if its omission would exceed the Kalman bandwidth. Sensing. Tip position for the Kalman updates is available from EM tracking, fluoroscopy, intracardiac echocardiography, or FBG shape sensing ( $ \\sim0.5 $ mm); no force sensor is required, though an available FBG force estimate can be injected to reduce contact-transient lag.",
+          "label": "Text"
+        },
+        {
+          "id": "9",
+          "order": 8,
+          "bounding_box": {
+            "x": 0.07598039215686274,
+            "y": 0.7910353535353535,
+            "width": 0.3300653594771242,
+            "height": 0.01452020202020202
+          },
+          "content": "### C. Robustness to Contact-Normal Misalignment",
+          "label": "Text"
+        },
+        {
+          "id": "10",
+          "order": 9,
+          "bounding_box": {
+            "x": 0.0718954248366013,
+            "y": 0.8099747474747475,
+            "width": 0.4215686274509804,
+            "height": 0.1369949494949495
+          },
+          "content": "The scalar $y$ is taken along an assumed contact normal; proximal deflections can rotate the true normal by $\\theta$. The effective contact stiffness along the assumed axis scales as $k_t \\cos^2 \\theta$ (a 7% change at $15^\\circ$), a slowly-varying mismatch $\\hat{d}$ absorbs, while the off-axis $\\sim F \\sin \\theta$ does not enter the regulated coordinate, leaving offset-free and ISS intact. For the safety bound the projection underestimates the true normal force by $1 / \\cos \\theta$, so a misalignment-aware design tightens $F_{\\mathrm{safe}}$ by $\\cos \\theta_{\\mathrm{max}}$. Tested on the MuJoCo benchmark: the",
+          "label": "Text"
+        },
+        {
+          "id": "11",
+          "order": null,
+          "bounding_box": {
+            "x": 0.6862745098039216,
+            "y": 0.07196969696969698,
+            "width": 0.056372549019607844,
+            "height": 0.010732323232323232
+          },
+          "content": "<div style=\"text-align: center;\">TABLE I</div>\n",
+          "label": "Image"
+        },
+        {
+          "id": "12",
+          "order": null,
+          "bounding_box": {
+            "x": 0.5212418300653595,
+            "y": 0.08333333333333333,
+            "width": 0.3839869281045752,
+            "height": 0.022727272727272728
+          },
+          "content": "<div style=\"text-align: center;\">INTERACTION-DYNAMICS COMPARISON UNDER FREE MOTION AND CONTACT</div>\n",
+          "label": "Image"
+        },
+        {
+          "id": "13",
+          "order": null,
+          "bounding_box": {
+            "x": 0.5318627450980392,
+            "y": 0.11868686868686869,
+            "width": 0.36519607843137253,
+            "height": 0.08080808080808081
+          },
+          "content": "<table><tr><td rowspan=\"2\">Controller</td><td>Approach</td><td>Max</td><td>$ F_{\\text{safe}} $</td><td>Hold err.</td></tr><tr><td>RMS (mm)</td><td>$ F $ (N)</td><td>viol.?</td><td>(mm)</td></tr><tr><td>Classical impedance</td><td>0.28</td><td>0.17</td><td>No</td><td>1.48</td></tr><tr><td>Predictive ID (no FC)</td><td>0.03</td><td>0.60</td><td>Yes</td><td>1.41</td></tr><tr><td>Predictive ID (with FC)</td><td>0.03</td><td>0.47</td><td>No</td><td>1.41</td></tr><tr><td>Joint-space PD</td><td>1.82</td><td>0.00</td><td>No</td><td>3.76</td></tr></table>",
+          "label": "Table"
+        },
+        {
+          "id": "14",
+          "order": 10,
+          "bounding_box": {
+            "x": 0.5049019607843137,
+            "y": 0.22727272727272727,
+            "width": 0.41830065359477125,
+            "height": 0.07575757575757576
+          },
+          "content": "worst-case admissible true force  $ F_{\\text{safe}}/\\cos\\theta $ grows to 0.577 N at  $ \\theta = 30^\\circ $ (realized 0.54 N)—a 15% breach—whereas the  $ \\cos\\theta_{\\text{max}} $-tightened bound  $ (\\theta_{\\text{max}} = 30^\\circ) $ holds it  $ \\leq 0.50 $ N for all  $ \\theta \\leq 30^\\circ $ (realized  $ \\leq 0.46 $ N). Tracking under large, time-varying  $ \\theta $ remains future work.",
+          "label": "Text"
+        },
+        {
+          "id": "15",
+          "order": 11,
+          "bounding_box": {
+            "x": 0.5073529411764706,
+            "y": 0.3207070707070707,
+            "width": 0.397875816993464,
+            "height": 0.03535353535353535
+          },
+          "content": "#### VI. INTERACTION-DYNAMICS SIMULATION RESULTS A. Setup",
+          "label": "Text"
+        },
+        {
+          "id": "16",
+          "order": 12,
+          "bounding_box": {
+            "x": 0.5024509803921569,
+            "y": 0.3667929292929293,
+            "width": 0.4223856209150327,
+            "height": 0.4810606060606061
+          },
+          "content": "in the MuJoCo physics engine: an eight-link pseudo-rigid-body (PRB) tendon-driven catheter (each joint a torsional spring approximating the segment flexural rigidity, total length 5 cm), actuated through a routed spatial tendon (tension-only), pressing on a Kelvin–Voigt tissue wall ( $ k_t = 5 \\text{kN/m} $,  $ b_t = 40 \\text{N·s/m} $, applied analytically on the tip so the stiff contact is faithful—MuJoCo’s regularized soft contact cannot represent it). This plant genuinely violates the reduced-order assumptions: eight elastic DOFs, a configuration-dependent tendon transmission, and distributed bending the scalar model lumps away. The scalar operational-space inertia  $ \\Lambda_n(\\kappa) $ and tendon-to-tip-normal transmission  $ J_n(\\kappa) $ are read from the model (mass matrix and tip Jacobian on the contact normal):  $ \\Lambda_n \\approx 3.5 \\times 10^{-3} $,  $ J_n \\approx 0.087 $, catheter tip stiffness  $ k_{\\text{eff}} \\approx 8.4 \\text{N/m} $. Two specializations carry the scalar design onto this plant: the impedance gains are  $ \\Lambda_n $-scaled to the measured inertia (preserving  $ \\omega \\approx 30 \\text{rad/s} $), and the corrective force  $ F_{\\text{mpc}} $ is realized in tendon space,  $ T = -(u_{\\text{ff}} + F_{\\text{mpc}})/J_n $ with Layer-1 feedforward  $ u_{\\text{ff}} = k_{\\text{eff}} y_d $, so the hard bound (13) is the box  $ |F_{\\text{mpc}}| \\leq F_{\\text{safe}} $ on the corrective force (the elastic  $ k_{\\text{eff}} \\epsilon $ contribution to  $ \\hat{F}_n $ is negligible on the compliant catheter). By Theorem 1 the unconstrained controller is the static impedance feedback and the scalar force-magnitude QP reduces to the predicted-force clip used here; the offset-free disturbance is an integrating estimator on the tip error. Control rate 500 Hz; tendon limit  $ \\pm 8 \\text{N} $;  $ F_{\\text{safe}} = 0.5 \\text{N} $. The reference approaches the surface (1s), presses to a target 1.5 mm past it ( $ \\approx 7.5 \\text{N} $ if tracked rigidly—far beyond what an 8N tendon delivers through  $ J_n $), holds 1s, and retracts, deliberately stressing the safety mechanism. Reproducible: simulation/catheter_benchmark_mujoco.py.",
+          "label": "Text"
+        },
+        {
+          "id": "17",
+          "order": 13,
+          "bounding_box": {
+            "x": 0.5065359477124183,
+            "y": 0.8630050505050505,
+            "width": 0.18382352941176472,
+            "height": 0.015151515151515152
+          },
+          "content": "### B. Controller Comparison",
+          "label": "Text"
+        },
+        {
+          "id": "18",
+          "order": 14,
+          "bounding_box": {
+            "x": 0.5228758169934641,
+            "y": 0.8825757575757576,
+            "width": 0.1977124183006536,
+            "height": 0.015151515151515152
+          },
+          "content": "Key results (Table I, Fig. 2):",
+          "label": "Text"
+        },
+        {
+          "id": "19",
+          "order": 15,
+          "bounding_box": {
+            "x": 0.5220588235294118,
+            "y": 0.9002525252525253,
+            "width": 0.4011437908496732,
+            "height": 0.04734848484848485
+          },
+          "content": "• Offset-free rejection of the model-reduction residual (free space). The uncancelled higher-order bending dynamics and configuration-dependent  $ J_{n} $ act as a slowly-varying",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "page_index": 6,
+      "blocks": [
+        {
+          "id": "0",
+          "order": null,
+          "bounding_box": {
+            "x": 0.07761437908496732,
+            "y": 0.030934343434343436,
+            "width": 0.058823529411764705,
+            "height": 0.010101010101010102
+          },
+          "content": "PREPRINT",
+          "label": "Text"
+        },
+        {
+          "id": "1",
+          "order": null,
+          "bounding_box": {
+            "x": 0.9125816993464052,
+            "y": 0.032196969696969696,
+            "width": 0.00980392156862745,
+            "height": 0.008838383838383838
+          },
+          "content": "6",
+          "label": "Text"
+        },
+        {
+          "id": "2",
+          "order": null,
+          "bounding_box": {
+            "x": 0.08251633986928104,
+            "y": 0.07512626262626262,
+            "width": 0.4035947712418301,
+            "height": 0.1919191919191919
+          },
+          "content": "<div style=\"text-align: center;\"><img src=\"imgs/img_in_chart_box_101_119_595_423.jpg\" alt=\"Image\" width=\"40%\" />\n\n\n\n</div>\n",
+          "label": "Image"
+        },
+        {
+          "id": "3",
+          "order": null,
+          "bounding_box": {
+            "x": 0.07516339869281045,
+            "y": 0.2859848484848485,
+            "width": 0.41830065359477125,
+            "height": 0.11553030303030302
+          },
+          "content": "<div style=\"text-align: center;\">Fig. 2. Catheter tip tracking (top) and contact force (bottom) for the four controllers of Table I over the approach–press–hold–retract task, on the MuJoCo distributed-compliance plant. The shaded band marks the contact-hold window. The force-constrained predictive interaction-dynamics controller (green) tracks the reference and holds the contact force below the 0.5N safety bound (dashed); the unconstrained offset-free controller (blue) tracks identically but drives to 0.60N—over the bound—to eliminate position error against the penetrating target. Classical impedance (red) stays gentle (0.17N) but mistracks, and joint-space PD (gray), lacking the Layer-1 feedforward, cannot overcome the distributed elasticity to reach the tissue.</div>\n",
+          "label": "Image"
+        },
+        {
+          "id": "4",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.10702614379084967,
+            "y": 0.44823232323232326,
+            "width": 0.38562091503267976,
+            "height": 0.059343434343434344
+          },
+          "content": "residual; classical impedance leaves a 0.28 mm approach error against it, which the offset-free integrator drives to 0.03 mm (90% reduction)—rejecting genuine model-reduction error, not a synthetic bias.",
+          "label": "Text"
+        },
+        {
+          "id": "5",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.09068627450980392,
+            "y": 0.5082070707070707,
+            "width": 0.4027777777777778,
+            "height": 0.12058080808080808
+          },
+          "content": "- Force safety is the decisive interaction constraint. Only the force-constrained predictive interaction-dynamics controller achieves both accurate tracking (0.03 mm) and the 0.5 N bound (peak 0.47 N). Classical impedance (0.17 N) and joint-space PD (no contact) stay under the bound only by being too soft to track the penetrating target—safety bought with accuracy, the trade the constraint removes.",
+          "label": "Text"
+        },
+        {
+          "id": "6",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.08986928104575163,
+            "y": 0.6294191919191919,
+            "width": 0.4027777777777778,
+            "height": 0.16540404040404041
+          },
+          "content": "• Offset-free motion regulation without a force limit overshoots the bound. The unconstrained predictive controller, driving hard to eliminate position error against the penetrating target, pushes the contact force to 0.60N (0.595N precisely)—19% over  $ F_{safe} $. This is far milder than the multi-newton overshoot a stiff lumped plant predicts (the compliant catheter and 8N tendon cap the realizable force below 1N), but the bound is still breached: offset-free motion regulation and force safety remain in tension, resolved only by the hard interaction constraint (0.60→0.47N at identical tracking).",
+          "label": "Text"
+        },
+        {
+          "id": "7",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.08905228758169935,
+            "y": 0.7954545454545454,
+            "width": 0.40441176470588236,
+            "height": 0.15151515151515152
+          },
+          "content": "• Hold error is contact-limited. The tracking controllers retain  $ \\sim $1.41 mm hold error because the commanded depth needs >7N the tendon cannot deliver. Joint-space PD, lacking the Layer-1 feedforward, cannot even reach the tissue at a stably-rescaled gain (1.82 mm approach, no contact)—evidence that the feedforward, not raw gain, overcomes the distributed elasticity. The simulation thus does not support a blanket “zero steady-state error” claim under stiff contact—offset-free holds in free space and in the nominal limit.",
+          "label": "Text"
+        },
+        {
+          "id": "8",
+          "order": null,
+          "bounding_box": {
+            "x": 0.684640522875817,
+            "y": 0.07196969696969698,
+            "width": 0.059640522875817,
+            "height": 0.010732323232323232
+          },
+          "content": "<div style=\"text-align: center;\">TABLE II</div>\n",
+          "label": "Image"
+        },
+        {
+          "id": "9",
+          "order": null,
+          "bounding_box": {
+            "x": 0.5089869281045751,
+            "y": 0.11742424242424243,
+            "width": 0.4084967320261438,
+            "height": 0.11174242424242424
+          },
+          "content": "<table><tr><td>Method</td><td>Model</td><td>Rate</td><td>Hard F</td><td>Offset-free</td><td>Force sens.</td><td>Stab.</td></tr><tr><td>Class. imp. [1]</td><td>port imp.</td><td>kHz</td><td>No</td><td>No</td><td>opt.</td><td>passiv.</td></tr><tr><td>Jacob. [5], [6]</td><td>kinematic</td><td>10-100 Hz</td><td>No</td><td>No</td><td>local</td><td>partial</td></tr><tr><td>Cosserat [4]</td><td>Cosserat</td><td>10-20 Hz</td><td>soft</td><td>varies</td><td>yes</td><td>NLP-dep.</td></tr><tr><td>Learning</td><td>data</td><td>high</td><td>No</td><td>No</td><td>varies</td><td>none</td></tr><tr><td>ADRC [8]</td><td>lumped-dist.</td><td>kHz</td><td>No</td><td>yes</td><td>yes</td><td>yes</td></tr><tr><td>This work</td><td>int.-dyn.+Kal.</td><td>500 Hz</td><td>Yes</td><td>yes</td><td>no</td><td>DARE</td></tr></table>",
+          "label": "Table"
+        },
+        {
+          "id": "10",
+          "order": null,
+          "bounding_box": {
+            "x": 0.5081699346405228,
+            "y": 0.08333333333333333,
+            "width": 0.4117647058823529,
+            "height": 0.02335858585858586
+          },
+          "content": "<div style=\"text-align: center;\">Capability Comparison with Representative Catheter-Control Methods</div>\n",
+          "label": "Image"
+        },
+        {
+          "id": "11",
+          "order": null,
+          "bounding_box": {
+            "x": 0.6821895424836601,
+            "y": 0.25126262626262624,
+            "width": 0.06454248366013073,
+            "height": 0.011363636363636364
+          },
+          "content": "<div style=\"text-align: center;\">TABLE III</div>\n",
+          "label": "Image"
+        },
+        {
+          "id": "12",
+          "order": null,
+          "bounding_box": {
+            "x": 0.5359477124183006,
+            "y": 0.26262626262626265,
+            "width": 0.3570261437908497,
+            "height": 0.02462121212121212
+          },
+          "content": "<div style=\"text-align: center;\">QUANTITATIVE COMPARISON WITH REPORTED SENSOR-FREE / FORCE-CONTROLLED CATHETER RESULTS</div>\n",
+          "label": "Image"
+        },
+        {
+          "id": "13",
+          "order": null,
+          "bounding_box": {
+            "x": 0.5351307189542484,
+            "y": 0.29608585858585856,
+            "width": 0.3611111111111111,
+            "height": 0.08143939393939394
+          },
+          "content": "<table><tr><td>Work</td><td>Objective</td><td>Sensing</td><td>Force result</td><td>Hard bound</td></tr><tr><td>[14]</td><td>force reg.</td><td>sensor-free</td><td>0.03-0.05 N RMSE</td><td>no</td></tr><tr><td>[15]</td><td>force reg.</td><td>sensor+US</td><td>$ \\sim $0.08 N RMSE</td><td>no</td></tr><tr><td>This work (safety)</td><td>pos. track</td><td>sensor-free</td><td>peak 0.47 N (≤ 0.5)</td><td>yes</td></tr></table>",
+          "label": "Table"
+        },
+        {
+          "id": "14",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.505718954248366,
+            "y": 0.4078282828282828,
+            "width": 0.4158496732026144,
+            "height": 0.01452020202020202
+          },
+          "content": "### C. Comparison with Published Catheter-Control Approaches",
+          "label": "Text"
+        },
+        {
+          "id": "15",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.5040849673202614,
+            "y": 0.4305555555555556,
+            "width": 0.4199346405228758,
+            "height": 0.15151515151515152
+          },
+          "content": "Table II positions the proposed predictive interaction-dynamics framework against representative classes of catheter/continuum-robot control from the literature. Direct numerical comparison is limited—reported conditions (platform, sensing, contact, metric) differ substantially—so the table compares capabilities and order-of-magnitude characteristics rather than asserting head-to-head accuracy. The row for this work is from the MuJoCo simulation in Section VI-B; the literature rows summarize the cited methods at a capability level rather than reproducing their experiments.",
+          "label": "Text"
+        },
+        {
+          "id": "16",
+          "order": 7,
+          "bounding_box": {
+            "x": 0.5032679738562091,
+            "y": 0.5827020202020202,
+            "width": 0.4207516339869281,
+            "height": 0.2859848484848485
+          },
+          "content": "Observations. (1) Among the surveyed classes, only the proposed framework provides a hard contact-force interaction constraint with formal feasibility, the clinically essential capability (Section VI-B). Here “hard” means a horizon-wise force bound enforced inside the optimization; input saturation on a non-predictive law (e.g. ADRC with a clamped command) limits the command, not the predicted contact force, and cannot guarantee feasibility against a penetrating reference, so the “No” entries are in this stronger, predictive sense. (2) It retains a high update rate (500 Hz) because the configuration-invariant  $ A_{d} $ structure makes the unconstrained step a matrix-vector multiply, unlike Cosserat predictive control whose online NLP limits rates to  $ \\sim10-20 $ Hz. (3) It requires no force sensor, unlike ADRC formulations that key off a measured force channel. (4) Its formal guarantees (ISS, DARE-based stability) exceed those of learning-based and purely kinematic controllers. The trade-off is reduced model fidelity relative to full Cosserat predictive control—mitigated by the disturbance-compression principle (Remark 1).",
+          "label": "Text"
+        },
+        {
+          "id": "17",
+          "order": 8,
+          "bounding_box": {
+            "x": 0.5040849673202614,
+            "y": 0.8699494949494949,
+            "width": 0.4199346405228758,
+            "height": 0.05997474747474747
+          },
+          "content": "Quantitative reading. Table III places the present work against the closest published baselines—the sensor-free tendon-driven ablation-catheter force controllers of Jolaei et al. [14] and Kesner and Howe [15].",
+          "label": "Text"
+        },
+        {
+          "id": "18",
+          "order": 9,
+          "bounding_box": {
+            "x": 0.5212418300653595,
+            "y": 0.9311868686868687,
+            "width": 0.4019607843137255,
+            "height": 0.015151515151515152
+          },
+          "content": "A direct head-to-head is not meaningful: [14], [15] regulate",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "page_index": 7,
+      "blocks": [
+        {
+          "id": "0",
+          "order": null,
+          "bounding_box": {
+            "x": 0.07679738562091504,
+            "y": 0.030303030303030304,
+            "width": 0.059640522875817,
+            "height": 0.011363636363636364
+          },
+          "content": "PREPRINT",
+          "label": "Text"
+        },
+        {
+          "id": "1",
+          "order": null,
+          "bounding_box": {
+            "x": 0.9109477124183006,
+            "y": 0.030934343434343436,
+            "width": 0.011437908496732025,
+            "height": 0.010101010101010102
+          },
+          "content": "7",
+          "label": "Text"
+        },
+        {
+          "id": "2",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.07434640522875817,
+            "y": 0.07007575757575757,
+            "width": 0.4199346405228758,
+            "height": 0.19696969696969696
+          },
+          "content": "contact force to a setpoint (30–80 mN, hardware results), whereas this work tracks a position trajectory while bounding the contact force as a hard constraint—so the comparison is by capability, not by the force-error column. The same formulation can also regulate force, but we make no claim of regulation parity: with the offset-free position drive propagated through the horizon the two objectives compete, and 1 Hz cardiac motion degrades regulation further (characterized in Appendix A, motivating the cardiac-phase-aware periodic model of Section V-A). The distinct contribution is the unification of offset-free position tracking with a hard predicted-force bound and feasibility guarantees in one constrained optimization—which setpoint force regulation does not provide.",
+          "label": "Text"
+        },
+        {
+          "id": "3",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.07679738562091504,
+            "y": 0.2878787878787879,
+            "width": 0.18709150326797386,
+            "height": 0.013888888888888888
+          },
+          "content": "### D. Disturbance Estimation",
+          "label": "Text"
+        },
+        {
+          "id": "4",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.07434640522875817,
+            "y": 0.3061868686868687,
+            "width": 0.41830065359477125,
+            "height": 0.0928030303030303
+          },
+          "content": "The Kalman filter converges within a few sample periods; during the contact-onset transient the estimate lags, but the tendon-force cap prevents bound violation before convergence—the constraint, not the estimate, provides the safety guarantee. The disturbance estimate improves tracking; the hard constraint provides safety.",
+          "label": "Text"
+        },
+        {
+          "id": "5",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.07598039215686274,
+            "y": 0.4185606060606061,
+            "width": 0.2630718954248366,
+            "height": 0.01452020202020202
+          },
+          "content": "### E. Safety Under Cardiac Wall Motion",
+          "label": "Text"
+        },
+        {
+          "id": "6",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.07434640522875817,
+            "y": 0.43813131313131315,
+            "width": 0.4199346405228758,
+            "height": 0.36237373737373735
+          },
+          "content": "The headline result (Table I) is a position-tracking task with a hard force bound; its dependence on cardiac motion is fundamentally different from the force-regulation mode of Appendix A, and far more benign. We test it directly by re-running the force-constrained predictive interaction-dynamics controller with a beating wall (Table IV, Fig. 3). The bound is respected across all tested conditions—static, 0.3 mm at 1 Hz, and 0.5 mm at 1.2 Hz with measurement noise (peak ≈ 0.47 N throughout, no violation)—for an instructive physical reason: the catheter tip compliance ( $ k_{eff} \\approx 8 $ N/m) is ~600× softer than the tissue ( $ k_t = 5 $ kN/m), so the distributed catheter rides with the moving wall and the contact-force variation from even a 0.5 mm wall excursion is small (peak essentially unchanged from static). The hard constraint continues to cap the controller-induced force regardless of the  $ \\dot{d} = 0 $ model, and the contact-onset impact transients  $ b_t(\\dot{y} - \\dot{y}_{\\text{wall}}) $ remain under the bound because the compliant tip closes on the wall gently. The compliant continuum is thus inherently more forgiving of cardiac motion than a stiff lumped model suggests: the safety guarantee on controller-induced force is robust to cardiac motion, and the residual environment-induced force is buffered by catheter compliance rather than entering the impact-transient regime. Tight force regulation (Appendix A) is the part that additionally requires predicting the motion.",
+          "label": "Text"
+        },
+        {
+          "id": "7",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.07598039215686274,
+            "y": 0.8207070707070707,
+            "width": 0.24428104575163398,
+            "height": 0.013888888888888888
+          },
+          "content": "### F. Verification of Structural Claims",
+          "label": "Text"
+        },
+        {
+          "id": "8",
+          "order": 7,
+          "bounding_box": {
+            "x": 0.07434640522875817,
+            "y": 0.8402777777777778,
+            "width": 0.4166666666666667,
+            "height": 0.06060606060606061
+          },
+          "content": "Four further checks—structural properties of the discrete-time controller and contact law, plus an approach-velocity qualification on the current MuJoCo plant—complete the picture (simulation/catheter_verify.py):",
+          "label": "Text"
+        },
+        {
+          "id": "9",
+          "order": 8,
+          "bounding_box": {
+            "x": 0.07516339869281045,
+            "y": 0.9002525252525253,
+            "width": 0.41748366013071897,
+            "height": 0.046085858585858584
+          },
+          "content": "(1) Configuration-adaptive compliance. Computing  $ \\Lambda_n(\\kappa) $ from the scalar normal Jacobian (5) over  $ \\kappa \\in [2, 25] \\, \\text{m}^{-1} $ (a  $ 1.4 \\times $ inertia variation), the  $ \\Lambda_n(\\kappa) $-normalized controller",
+          "label": "Text"
+        },
+        {
+          "id": "10",
+          "order": null,
+          "bounding_box": {
+            "x": 0.6813725490196079,
+            "y": 0.07196969696969698,
+            "width": 0.06454248366013073,
+            "height": 0.010732323232323232
+          },
+          "content": "<div style=\"text-align: center;\">TABLE IV</div>\n",
+          "label": "Image"
+        },
+        {
+          "id": "11",
+          "order": null,
+          "bounding_box": {
+            "x": 0.5318627450980392,
+            "y": 0.08270202020202021,
+            "width": 0.3619281045751634,
+            "height": 0.023989898989898988
+          },
+          "content": "<div style=\"text-align: center;\">SAFETY MODE (PREDICTIVE ID + FORCE CONSTRAINT) UNDER CARDIAC WALL MOTION</div>\n",
+          "label": "Image"
+        },
+        {
+          "id": "12",
+          "order": null,
+          "bounding_box": {
+            "x": 0.5522875816993464,
+            "y": 0.11868686868686869,
+            "width": 0.32107843137254904,
+            "height": 0.06944444444444445
+          },
+          "content": "<table><tr><td rowspan=\"2\">Wall condition</td><td>Approach</td><td>Peak</td><td>$ F_{\\text{safe}} $</td><td>$ F_{\\text{safe}} $</td></tr><tr><td>RMS (mm)</td><td>F (N)</td><td>viol.?</td><td></td></tr><tr><td>Static (Table I baseline)</td><td>0.03</td><td>0.47</td><td>No</td><td></td></tr><tr><td>0.3 mm @ 1 Hz</td><td>0.03</td><td>0.47</td><td>No</td><td></td></tr><tr><td>0.5 mm @ 1.2 Hz + noise</td><td>0.06</td><td>0.47</td><td>No</td><td></td></tr></table>",
+          "label": "Table"
+        },
+        {
+          "id": "13",
+          "order": null,
+          "bounding_box": {
+            "x": 0.5130718954248366,
+            "y": 0.2159090909090909,
+            "width": 0.39950980392156865,
+            "height": 0.14015151515151514
+          },
+          "content": "<div style=\"text-align: center;\"><img src=\"imgs/img_in_chart_box_628_342_1117_564.jpg\" alt=\"Image\" width=\"39%\" />\n\n\n\n</div>\n",
+          "label": "Image"
+        },
+        {
+          "id": "14",
+          "order": null,
+          "bounding_box": {
+            "x": 0.5040849673202614,
+            "y": 0.37436868686868685,
+            "width": 0.41911764705882354,
+            "height": 0.09154040404040405
+          },
+          "content": "<div style=\"text-align: center;\">Fig. 3. Contact force for the force-constrained predictive interaction-dynamics controller (position-tracking safety mode) under a beating tissue wall (Table IV), on the MuJoCo plant. All three conditions—static (green), 0.3 mm/1 Hz (blue), and 0.5 mm/1.2 Hz with noise (red)—stay below the 0.5 N bound (dashed) with peak ≈ 0.47 N, because the compliant catheter ( $ k_{eff} \\approx 8 $ N/m) rides with the moving wall and the contact-onset impact spikes  $ b_t(\\hat{y} - \\hat{y}_{\\text{wall}}) $ remain bounded. The hard constraint caps the controller-induced force throughout.</div>\n",
+          "label": "Image"
+        },
+        {
+          "id": "15",
+          "order": null,
+          "bounding_box": {
+            "x": 0.511437908496732,
+            "y": 0.4842171717171717,
+            "width": 0.40522875816993464,
+            "height": 0.11616161616161616
+          },
+          "content": "<div style=\"text-align: center;\"><img src=\"imgs/img_in_chart_box_626_767_1122_951.jpg\" alt=\"Image\" width=\"40%\" />\n\n\n\n</div>\n",
+          "label": "Image"
+        },
+        {
+          "id": "16",
+          "order": null,
+          "bounding_box": {
+            "x": 0.5032679738562091,
+            "y": 0.6123737373737373,
+            "width": 0.41911764705882354,
+            "height": 0.08017676767676768
+          },
+          "content": "<div style=\"text-align: center;\">Fig. 4. Dominant closed-loop pole magnitude versus curvature  $ \\kappa $ (left) and pole drift relative to  $ \\kappa = 2 \\, m^{-1} $ (right). The  $ \\Lambda_n(\\kappa) $-normalized gain (green) holds the pole spread to  $ \\sim 2 \\times 10^{-6} $ across the  $ 1.4 \\times $ inertia variation,  $ \\sim 80 \\times $ tighter than the fixed- $ \\Lambda_n $ gain (red)—confirming that the scalar operational-space inertia normalization (a closed-form gain scaling, equivalent here to per-configuration redesign) is what makes the tip compliance configuration-invariant.</div>\n",
+          "label": "Image"
+        },
+        {
+          "id": "17",
+          "order": 9,
+          "bounding_box": {
+            "x": 0.5049019607843137,
+            "y": 0.7178030303030303,
+            "width": 0.41830065359477125,
+            "height": 0.16666666666666666
+          },
+          "content": "holds the closed-loop pole spread to  $ \\sim2 \\times 10^{-6} $—roughly  $ 80 \\times $ tighter than a fixed- $ \\Lambda_n $ gain's  $ \\sim1.5 \\times 10^{-4} $ drift (which grows with control authority); Fig. 4 plots both pole loci. The normalization is a closed-form gain scaling by  $ \\Lambda_n(\\kappa) $—equivalent for this plant to a per-configuration LQR redesign, since the optimal gain scales with  $ \\Lambda_n $—and it is this  $ \\Lambda_n $-awareness, absent from a single fixed gain, that renders the tip compliance configuration-independent. The magnitude of the fixed-gain drift is modest for a single segment's  $ 1.4 \\times $ range but grows for the larger inertia variation of multi-segment catheters (Section VII).",
+          "label": "Text"
+        },
+        {
+          "id": "18",
+          "order": 10,
+          "bounding_box": {
+            "x": 0.5049019607843137,
+            "y": 0.8857323232323232,
+            "width": 0.41830065359477125,
+            "height": 0.061237373737373736
+          },
+          "content": "(2) Hard constraint via the QP. For a 3 mm error the unconstrained step demands  $ |F_{\\mathrm{mpc}}| = 1.99 \\, \\mathrm{N} $; solving the condensed QP with OSQP under a 0.5 N limit returns  $ |F_{\\mathrm{mpc}}| = 0.50 \\, \\mathrm{N} $ (constraint respected), and reproduces the closed-form solution",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "page_index": 8,
+      "blocks": [
+        {
+          "id": "0",
+          "order": null,
+          "bounding_box": {
+            "x": 0.07679738562091504,
+            "y": 0.030303030303030304,
+            "width": 0.059640522875817,
+            "height": 0.011363636363636364
+          },
+          "content": "PREPRINT",
+          "label": "Text"
+        },
+        {
+          "id": "1",
+          "order": null,
+          "bounding_box": {
+            "x": 0.9117647058823529,
+            "y": 0.03156565656565657,
+            "width": 0.010620915032679739,
+            "height": 0.00946969696969697
+          },
+          "content": "8",
+          "label": "Text"
+        },
+        {
+          "id": "2",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.07434640522875817,
+            "y": 0.07007575757575757,
+            "width": 0.41830065359477125,
+            "height": 0.05997474747474747
+          },
+          "content": "to  $ 10^{-3} $ when the constraint is inactive. This verifies that the actuator/safety limits are genuinely enforced by the QP, with the closed-form step of (10) recovered when no constraint binds.",
+          "label": "Text"
+        },
+        {
+          "id": "3",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.07352941176470588,
+            "y": 0.13131313131313133,
+            "width": 0.4199346405228758,
+            "height": 0.08964646464646464
+          },
+          "content": "(3) Real-time feasibility. The unconstrained closed-form step runs in  $ \\approx 0.9 $  $ \\mu $s and the warm-started OSQP solve in  $ \\approx 28 $  $ \\mu $s per step on a desktop CPU—both far inside the 2 ms (500 Hz) budget, supporting the real-time claim with margin for embedded hardware. (Embedded-target timing remains future work.)",
+          "label": "Text"
+        },
+        {
+          "id": "4",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.07434640522875817,
+            "y": 0.2215909090909091,
+            "width": 0.41911764705882354,
+            "height": 0.22664141414141414
+          },
+          "content": "(4) Approach-velocity safety qualification. A constant-velocity approach sweep with the force-constrained controller on the current MuJoCo compliant plant remains below  $ F_{safe} $ across the tested approach speeds; the compliant catheter rides with the wall and the QP caps the controller-induced component. The qualification is nevertheless important for the safety claim: the hard constraint bounds controller-induced force, but a fast impact can inject an environment-induced  $ b_{t} \\dot{y} $ transient that no input limit can prevent within one sample. The damping-only bound  $ v < F_{safe} / b_{t} = 12.5 \\, \\text{mm/s} $ is therefore a planning-scale guide, not a controller certificate. Safe operation still requires velocity-limited approach or contact-onset detection with reference ramping; the cardiac tests in Section VI-E show that the present compliant MuJoCo plant stays below the bound under the tested wall motions.",
+          "label": "Text"
+        },
+        {
+          "id": "5",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.07598039215686274,
+            "y": 0.4678030303030303,
+            "width": 0.3300653594771242,
+            "height": 0.01452020202020202
+          },
+          "content": "### G. Robustness to Unmodeled Tendon Hysteresis",
+          "label": "Text"
+        },
+        {
+          "id": "6",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.07434640522875817,
+            "y": 0.48674242424242425,
+            "width": 0.4199346405228758,
+            "height": 0.2878787878787879
+          },
+          "content": "The offset-free integrator above rejects the slowly-varying model-reduction residual; we separately stress it with an unmodeled Coulomb tendon-sheath friction added to the MuJoCo plant (sign-dependent hysteresis, 0.3N), with the controller still tuned on the nominal frictionless model. On a free-space sinusoidal tracking task, the offset-free state cuts the tracking RMS from 0.27 mm to 0.011 mm with no friction (a 96% reduction, consistent with the headline benchmark), but with the 0.3N Coulomb friction it cuts it only from 0.81 mm to 0.47 mm: the constant-bias internal model trivially absorbs the DC offset, but the integrating estimate lags each motion reversal, leaving a residual hysteresis error the  $ \\dot{d}=0 $ model cannot cancel. This is the genuine cost the scalar constant- $ F_{fric} $ assumption hid, and—together with the configuration dependence of  $ J_n(\\kappa) $—it motivates a hysteresis-aware disturbance model (Section VII, future work (vi)) that augments the integrating state to capture the sign-dependent component. The qualitative safety conclusion is unaffected: the hard constraint, not the estimate, bounds the contact force.",
+          "label": "Text"
+        },
+        {
+          "id": "7",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.21650326797385622,
+            "y": 0.7910353535353535,
+            "width": 0.1380718954248366,
+            "height": 0.013888888888888888
+          },
+          "content": "### VII. Conclusion",
+          "label": "Text"
+        },
+        {
+          "id": "8",
+          "order": 7,
+          "bounding_box": {
+            "x": 0.07434640522875817,
+            "y": 0.8099747474747475,
+            "width": 0.4199346405228758,
+            "height": 0.13762626262626262
+          },
+          "content": "Rather than viewing steerable catheter control as an impedance-control problem, this work formulates it as an interaction-dynamics regulation problem. The catheter-tissue interaction is first reduced to the correct scalar tip-normal state, then normalized into configuration-invariant linear dynamics, and finally regulated by predictive optimization with disturbance augmentation and hard interaction constraints. Classical impedance appears as the unconstrained, disturbance-free special case; the clinically relevant controller departs from it when offset-free motion regulation, tendon limits, curvature limits, and contact-force safety compete.",
+          "label": "Text"
+        },
+        {
+          "id": "9",
+          "order": 8,
+          "bounding_box": {
+            "x": 0.5040849673202614,
+            "y": 0.0707070707070707,
+            "width": 0.41830065359477125,
+            "height": 0.02904040404040404
+          },
+          "content": "",
+          "label": "Text"
+        },
+        {
+          "id": "10",
+          "order": 9,
+          "bounding_box": {
+            "x": 0.5032679738562091,
+            "y": 0.10101010101010101,
+            "width": 0.4207516339869281,
+            "height": 0.2398989898989899
+          },
+          "content": "A MuJoCo distributed-compliance simulation of an eight-link tendon-driven catheter shows that disturbance augmentation cuts free-space approach error by 90%, but the decisive result is interaction safety: only the force-constrained predictive interaction-dynamics controller delivers both accurate tracking and the 0.5N contact-force bound (peak 0.47N), whereas the unconstrained offset-free controller drives to 0.60N. We characterized this honestly: on the realistic compliant plant the unconstrained overshoot is milder than a stiff lumped model predicts, but offset-free motion regulation and contact-force safety remain in tension under stiff contact, and the hard interaction constraint is what resolves it. The resulting framework provides a unified foundation for compliant catheter motion, constraint handling, and safety-critical tissue interaction, and is extensible to multi-segment catheters, surgical robotics, rehabilitation, whole-body control, and dexterous manipulation.",
+          "label": "Text"
+        },
+        {
+          "id": "11",
+          "order": 10,
+          "bounding_box": {
+            "x": 0.5040849673202614,
+            "y": 0.3421717171717172,
+            "width": 0.4199346405228758,
+            "height": 0.18055555555555555
+          },
+          "content": "Our future work includes: (i) hardware validation on a tendon-actuated catheter with EM tracking; (ii) FBG-based force estimation as a direct disturbance channel; (iii) cardiac-phase-aware periodic disturbance models; (iv) extension to multi-segment catheters with m independent tendons (an m-DOF version with configuration-varying operational-space inertia); (v) energy-budget augmentation toward certified passivity during aggressive contact; and (vi) a hysteresis-aware disturbance model that augments the integrating state to capture the sign-dependent (Coulomb) component of tendon-sheath friction, which the constant-bias model rejects only partially (Section VI-G).",
+          "label": "Text"
+        },
+        {
+          "id": "12",
+          "order": 11,
+          "bounding_box": {
+            "x": 0.5130718954248366,
+            "y": 0.5372474747474747,
+            "width": 0.4011437908496732,
+            "height": 0.041035353535353536
+          },
+          "content": "## APPENDIX A FORCE-REGULATION MODE AND ITS CARDIAC-MOTION LIMIT",
+          "label": "Text"
+        },
+        {
+          "id": "13",
+          "order": 12,
+          "bounding_box": {
+            "x": 0.5032679738562091,
+            "y": 0.5827020202020202,
+            "width": 0.4199346405228758,
+            "height": 0.21148989898989898
+          },
+          "content": "The safety contribution of this paper bounds the predicted controller-induced contact force; the setpoint controllers of [14], [15] regulate contact force. To compare like-for-like we add a force-regulation mode to the same controller on the MuJoCo plant: during free-space approach it tracks position as before, and during contact it regulates a sensor-free contact-force estimate (the commanded tip force beyond the modeled elasticity,  $ \\hat{F}_c = J_n |T| - k_{\\text{eff}} |y| $) to a clinical target of 0.2N via an integral law on the tendon command, while the hard predicted-force bound (13) remains active. This mode is not a claimed contribution—the hardware results of [14], [15] (30–80 mN) are better—but it characterizes what the framework does and does not provide. Two conditions are run over the contact-hold window:",
+          "label": "Text"
+        },
+        {
+          "id": "14",
+          "order": 13,
+          "bounding_box": {
+            "x": 0.5179738562091504,
+            "y": 0.7948232323232324,
+            "width": 0.40604575163398693,
+            "height": 0.1527777777777778
+          },
+          "content": "• Idealized (slowly varying disturbance): force RMSE  $ \\sim $140 mN about the 0.2 N target. With the offset-free position drive propagated through the horizon, the position-tracking and force-regulation objectives compete (the controller simultaneously tries to reach the penetrating position target and hold 0.2 N), so the simple integral law no longer regulates tightly; recovering low force RMSE requires re-tuning the force-regulation gain or an explicit position/force task hierarchy (future work). The hard predicted-force bound is unaffected.",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "page_index": 9,
+      "blocks": [
+        {
+          "id": "0",
+          "order": null,
+          "bounding_box": {
+            "x": 0.07679738562091504,
+            "y": 0.030303030303030304,
+            "width": 0.059640522875817,
+            "height": 0.011363636363636364
+          },
+          "content": "PREPRINT",
+          "label": "Text"
+        },
+        {
+          "id": "1",
+          "order": null,
+          "bounding_box": {
+            "x": 0.9117647058823529,
+            "y": 0.03156565656565657,
+            "width": 0.010620915032679739,
+            "height": 0.00946969696969697
+          },
+          "content": "9",
+          "label": "Text"
+        },
+        {
+          "id": "2",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.08905228758169935,
+            "y": 0.07007575757575757,
+            "width": 0.4035947712418301,
+            "height": 0.12058080808080808
+          },
+          "content": "• Realistic (1 Hz cardiac wall motion, 0.3 mm amplitude, plus 0.2 mm position noise): force RMSE is ~170 mN. The zero-order-hold  $ \\dot{d} = 0 $ model cannot anticipate the periodic motion (Section V-A), so the estimate lags. This is worse than the reported hardware controllers and identifies the cardiac-phase-aware periodic disturbance model (Section V-A, Option B) as essential future work for force-regulation use—not merely an enhancement.",
+          "label": "Text"
+        },
+        {
+          "id": "3",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.07352941176470588,
+            "y": 0.19444444444444445,
+            "width": 0.4207516339869281,
+            "height": 0.16603535353535354
+          },
+          "content": "In both force-regulation conditions the peak measured force stays under  $ F_{safe} $ ( $ \\sim $0.35 N idealized,  $ \\sim $0.43 N with cardiac motion): unlike the stiff reduced model—where the integral force law drove the command toward the cap and an environment-induced  $ b_{t}ij $ impact transient pushed the peak past  $ F_{safe} $—the compliant catheter closes on the wall gently, so the regulation error shows up as a poorly-regulated (not unsafe) force. The hard predicted-force bound caps the controller-induced command throughout, and the position-tracking safety mode holds the bound even more comfortably under the same cardiac motion (Section VI-E, Table IV).",
+          "label": "Text"
+        },
+        {
+          "id": "4",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.2369281045751634,
+            "y": 0.3787878787878788,
+            "width": 0.09395424836601307,
+            "height": 0.012626262626262626
+          },
+          "content": "## APPENDIX B",
+          "label": "Text"
+        },
+        {
+          "id": "5",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.11029411764705882,
+            "y": 0.39330808080808083,
+            "width": 0.3472222222222222,
+            "height": 0.015151515151515152
+          },
+          "content": "## DERIVATION OF THE LPV STABILITY MARGIN  $ \\rho^{\\star} $",
+          "label": "Text"
+        },
+        {
+          "id": "6",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.07434640522875817,
+            "y": 0.41414141414141414,
+            "width": 0.41830065359477125,
+            "height": 0.05997474747474747
+          },
+          "content": "This appendix proves Proposition 1 in closed form, replacing the “computing the spectral radius” assertion with an explicit Jury analysis. After the exact ZOH discretization (8) the scalar error plant has the constant",
+          "label": "Text"
+        },
+        {
+          "id": "7",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.08986928104575163,
+            "y": 0.48042929292929293,
+            "width": 0.38480392156862747,
+            "height": 0.03535353535353535
+          },
+          "content": " $$ A_{d}=\\begin{bmatrix}1&\\Delta t\\\\ 0&1\\end{bmatrix},\\qquad B_{d}(\\Lambda_{n})=-\\frac{1}{\\Lambda_{n}}b,\\quad b=\\begin{bmatrix}\\frac{1}{2}\\Delta t^{2}\\\\ \\Delta t\\end{bmatrix}. $$ ",
+          "label": "Formula"
+        },
+        {
+          "id": "8",
+          "order": 7,
+          "bounding_box": {
+            "x": 0.07434640522875817,
+            "y": 0.5208333333333334,
+            "width": 0.41748366013071897,
+            "height": 0.0625
+          },
+          "content": "A gain  $ K = [k_1, k_2] $ synthesized at  $ \\Lambda_{n,\\text{ref}} = 1 $ but acting where the true inertia is  $ \\Lambda_{n,\\text{true}} $ gives, using  $ B_d(\\Lambda_{n,\\text{true}}) = (\\Lambda_{n,\\text{ref}}/\\Lambda_{n,\\text{true}}) B_d(\\Lambda_{n,\\text{ref}}) = \\rho B_d(\\Lambda_{n,\\text{ref}}) $ with  $ \\rho = \\Lambda_{n,\\text{ref}}/\\Lambda_{n,\\text{true}} $,",
+          "label": "Text"
+        },
+        {
+          "id": "9",
+          "order": 8,
+          "bounding_box": {
+            "x": 0.13398692810457516,
+            "y": 0.5909090909090909,
+            "width": 0.3006535947712418,
+            "height": 0.05366161616161616
+          },
+          "content": " $$ \\begin{align*}A_{cl}(\\rho)&=A_{d}-\\rho B_{d}(1)K=A_{d}+\\rho bK\\\\&=\\begin{bmatrix}1+\\frac{1}{2}\\rho\\Delta t^{2}k_{1}&\\Delta t+\\frac{1}{2}\\rho\\Delta t^{2}k_{2}\\\\ \\rho\\Delta t k_{1}&1+\\rho\\Delta t k_{2}\\end{bmatrix}.\\end{align*} $$ ",
+          "label": "Formula"
+        },
+        {
+          "id": "10",
+          "order": 9,
+          "bounding_box": {
+            "x": 0.4624183006535948,
+            "y": 0.6205808080808081,
+            "width": 0.028594771241830064,
+            "height": 0.013888888888888888
+          },
+          "content": "(15)",
+          "label": "Formula"
+        },
+        {
+          "id": "11",
+          "order": 10,
+          "bounding_box": {
+            "x": 0.07516339869281045,
+            "y": 0.6515151515151515,
+            "width": 0.4158496732026144,
+            "height": 0.030303030303030304
+          },
+          "content": "Its characteristic polynomial is  $ \\chi(z) = z^{2} - \\mathrm{tr}(\\rho)z + \\det(\\rho) $ with",
+          "label": "Text"
+        },
+        {
+          "id": "12",
+          "order": 11,
+          "bounding_box": {
+            "x": 0.1772875816993464,
+            "y": 0.6912878787878788,
+            "width": 0.22140522875816993,
+            "height": 0.017045454545454544
+          },
+          "content": " $$ \\mathrm{t r}(\\rho)=2+\\rho\\Delta t\\big(k_{2}+\\textstyle{\\frac{1}{2}}\\Delta t k_{1}\\big), $$ ",
+          "label": "Formula"
+        },
+        {
+          "id": "13",
+          "order": 12,
+          "bounding_box": {
+            "x": 0.4624183006535948,
+            "y": 0.6931818181818182,
+            "width": 0.027777777777777776,
+            "height": 0.013257575757575758
+          },
+          "content": "(16)",
+          "label": "Formula"
+        },
+        {
+          "id": "14",
+          "order": 13,
+          "bounding_box": {
+            "x": 0.16911764705882354,
+            "y": 0.7102272727272727,
+            "width": 0.2295751633986928,
+            "height": 0.017676767676767676
+          },
+          "content": " $$ \\operatorname*{d e t}(\\rho)=1+\\rho\\Delta t\\big(k_{2}-\\textstyle{\\frac{1}{2}}\\Delta t k_{1}\\big). $$ ",
+          "label": "Formula"
+        },
+        {
+          "id": "15",
+          "order": 14,
+          "bounding_box": {
+            "x": 0.4624183006535948,
+            "y": 0.711489898989899,
+            "width": 0.027777777777777776,
+            "height": 0.013257575757575758
+          },
+          "content": "(17)",
+          "label": "Formula"
+        },
+        {
+          "id": "16",
+          "order": 15,
+          "bounding_box": {
+            "x": 0.07352941176470588,
+            "y": 0.7348484848484849,
+            "width": 0.41748366013071897,
+            "height": 0.06060606060606061
+          },
+          "content": "(The  $ \\rho^{2} $ terms in det cancel because  $ A_{d} $ is unipotent and bK is rank one—the same constant- $ A_{d} $ structure exploited throughout.) By Jury’s criterion a monic second-order  $ \\chi $ is Schur iff",
+          "label": "Text"
+        },
+        {
+          "id": "17",
+          "order": 16,
+          "bounding_box": {
+            "x": 0.18382352941176472,
+            "y": 0.8036616161616161,
+            "width": 0.20261437908496732,
+            "height": 0.05555555555555555
+          },
+          "content": " $$ \\begin{aligned}\\left|\\det(\\rho)\\right|<1,\\\\\\chi(1)&=1-\\mathrm{tr}+\\det>0,\\\\\\chi(-1)&=1+\\mathrm{tr}+\\det>0.\\end{aligned} $$ ",
+          "label": "Formula"
+        },
+        {
+          "id": "18",
+          "order": 17,
+          "bounding_box": {
+            "x": 0.09068627450980392,
+            "y": 0.88510101010101,
+            "width": 0.4019607843137255,
+            "height": 0.029671717171717172
+          },
+          "content": "•  $ z = +1 $:  $ \\chi(1) = -\\rho \\Delta t^2 k_1 > 0 $ for all  $ \\rho > 0 $ (since  $ k_1 < 0 $)—never binds.",
+          "label": "Text"
+        },
+        {
+          "id": "19",
+          "order": 18,
+          "bounding_box": {
+            "x": 0.4616013071895425,
+            "y": 0.8440656565656566,
+            "width": 0.028594771241830064,
+            "height": 0.013257575757575758
+          },
+          "content": "(18)",
+          "label": "Formula"
+        },
+        {
+          "id": "20",
+          "order": 19,
+          "bounding_box": {
+            "x": 0.07598039215686274,
+            "y": 0.8674242424242424,
+            "width": 0.3194444444444444,
+            "height": 0.01452020202020202
+          },
+          "content": "Substituting (16)–(17) into the three crossings:",
+          "label": "Text"
+        },
+        {
+          "id": "21",
+          "order": 20,
+          "bounding_box": {
+            "x": 0.09068627450980392,
+            "y": 0.9160353535353535,
+            "width": 0.39950980392156865,
+            "height": 0.030303030303030304
+          },
+          "content": "- $z = -1: \\chi(-1) = 4 + 2\\rho\\Delta t k_2$, which vanishes at $\\rho = -2/(\\Delta t k_2) = 2/(\\Delta t |k_2|)$ (a real pole reaching $-1$).\n\n- $\\left|\\det\\right| = 1: \\det(\\rho) < 1$ holds for all $\\rho > 0$ (as $k_2 - \\frac{1}{2}\\Delta t k_1 < 0$), and $\\det(\\rho) = -1$ at $\\rho = 2/(\\Delta t |k_2 - \\frac{1}{2}\\Delta t k_1|)$.",
+          "label": "Text"
+        },
+        {
+          "id": "22",
+          "order": 21,
+          "bounding_box": {
+            "x": 0.5196078431372549,
+            "y": 0.07007575757575757,
+            "width": 0.39869281045751637,
+            "height": 0.04734848484848485
+          },
+          "content": "",
+          "label": "Text"
+        },
+        {
+          "id": "23",
+          "order": 22,
+          "bounding_box": {
+            "x": 0.5040849673202614,
+            "y": 0.11931818181818182,
+            "width": 0.4199346405228758,
+            "height": 0.043560606060606064
+          },
+          "content": "The stability boundary is the smallest positive crossing, giving (14). For the benchmark gains  $ k_1 = -2.04 \\times 10^3 $,  $ k_2 = -294.9 $ and  $ \\Delta t = 2 $ ms,",
+          "label": "Text"
+        },
+        {
+          "id": "24",
+          "order": 23,
+          "bounding_box": {
+            "x": 0.553921568627451,
+            "y": 0.1672979797979798,
+            "width": 0.32107843137254904,
+            "height": 0.03282828282828283
+          },
+          "content": " $$ \\frac{2}{\\Delta t\\left|k_{2}\\right|}=3.39,\\qquad\\frac{2}{\\Delta t\\left|k_{2}-\\frac{1}{2}\\Delta t k_{1}\\right|}=3.42, $$ ",
+          "label": "Formula"
+        },
+        {
+          "id": "25",
+          "order": 24,
+          "bounding_box": {
+            "x": 0.5024509803921569,
+            "y": 0.20517676767676768,
+            "width": 0.4207516339869281,
+            "height": 0.09217171717171717
+          },
+          "content": "so  $ \\rho^* = 3.39 $ (the  $ z = -1 $ flip binds), exactly the value returned by the brute-force spectral-radius sweep over  $ \\rho \\in [1, 40] $ in catheter_verify.py ( $ \\rho_{\\text{max}} = 3.39 $). The margin is governed by the velocity gain  $ k_2 $ and the step  $ \\Delta t $ alone; with the workspace  $ \\rho \\in [0.70, 1.0] $ the loop is robustly stable with  $ > 3 \\times $ margin (Remark 3).",
+          "label": "Text"
+        },
+        {
+          "id": "26",
+          "order": 25,
+          "bounding_box": {
+            "x": 0.6658496732026143,
+            "y": 0.31376262626262624,
+            "width": 0.09722222222222222,
+            "height": 0.013257575757575758
+          },
+          "content": "## REFERENCES",
+          "label": "Text"
+        },
+        {
+          "id": "27",
+          "order": 26,
+          "bounding_box": {
+            "x": 0.5122549019607843,
+            "y": 0.33396464646464646,
+            "width": 0.4084967320261438,
+            "height": 0.03345959595959596
+          },
+          "content": "[1] N. Hogan, “Impedance control: An approach to manipulation, Parts I–III,” ASME J. Dyn. Syst. Meas. Control, vol. 107, no. 1, pp. 1–24, Mar. 1985.",
+          "label": "Text"
+        },
+        {
+          "id": "28",
+          "order": 27,
+          "bounding_box": {
+            "x": 0.5130718954248366,
+            "y": 0.3686868686868687,
+            "width": 0.4084967320261438,
+            "height": 0.03282828282828283
+          },
+          "content": "[2] R. J. Webster III and B. A. Jones, \"Design and kinematic modeling of constant curvature continuum robots: A review,\" Int. J. Robot. Res., vol. 29, no. 13, pp. 1661–1683, 2010.",
+          "label": "Text"
+        },
+        {
+          "id": "29",
+          "order": 28,
+          "bounding_box": {
+            "x": 0.5138888888888888,
+            "y": 0.40214646464646464,
+            "width": 0.4068627450980392,
+            "height": 0.022727272727272728
+          },
+          "content": "[3] S. S. Antman, Nonlinear Problems of Elasticity, 2nd ed. New York: Springer, 1995.",
+          "label": "Text"
+        },
+        {
+          "id": "30",
+          "order": 29,
+          "bounding_box": {
+            "x": 0.5147058823529411,
+            "y": 0.4255050505050505,
+            "width": 0.4068627450980392,
+            "height": 0.03282828282828283
+          },
+          "content": "[4] D. C. Rucker and R. J. Webster III, “Statics and dynamics of continuum robots with general tendon routing and external loading,” IEEE Trans. Robot., vol. 27, no. 6, pp. 1033–1044, 2011.",
+          "label": "Text"
+        },
+        {
+          "id": "31",
+          "order": 30,
+          "bounding_box": {
+            "x": 0.5138888888888888,
+            "y": 0.4595959595959596,
+            "width": 0.4084967320261438,
+            "height": 0.03345959595959596
+          },
+          "content": "[5] D. B. Camarillo, C. F. Milne, C. R. Carlson, M. R. Zinn, and J. K. Salisbury, \"Mechanics modeling of tendon-driven continuum manipulators,\" IEEE Trans. Robot., vol. 24, no. 6, pp. 1262–1273, 2008.",
+          "label": "Text"
+        },
+        {
+          "id": "32",
+          "order": 31,
+          "bounding_box": {
+            "x": 0.5147058823529411,
+            "y": 0.4936868686868687,
+            "width": 0.4084967320261438,
+            "height": 0.03282828282828283
+          },
+          "content": "[6] M. C. Yip and D. B. Camarillo, \"Model-less feedback control of continuum manipulators in constrained environments,\" IEEE Trans. Robot., vol. 30, no. 4, pp. 880–889, 2014.",
+          "label": "Text"
+        },
+        {
+          "id": "33",
+          "order": 32,
+          "bounding_box": {
+            "x": 0.5138888888888888,
+            "y": 0.5271464646464646,
+            "width": 0.4084967320261438,
+            "height": 0.022727272727272728
+          },
+          "content": "[7] J. B. Rawlings, D. Q. Mayne, and M. Diehl, Model Predictive Control: Theory, Computation, and Design, 2nd ed. Madison, WI: Nob Hill, 2017.",
+          "label": "Text"
+        },
+        {
+          "id": "34",
+          "order": 33,
+          "bounding_box": {
+            "x": 0.5138888888888888,
+            "y": 0.5505050505050505,
+            "width": 0.4076797385620915,
+            "height": 0.021464646464646464
+          },
+          "content": "[8] J. Han, “From PID to active disturbance rejection control,” IEEE Trans. Ind. Electron., vol. 56, no. 3, pp. 900–906, 2009.",
+          "label": "Text"
+        },
+        {
+          "id": "35",
+          "order": 34,
+          "bounding_box": {
+            "x": 0.511437908496732,
+            "y": 0.5732323232323232,
+            "width": 0.41094771241830064,
+            "height": 0.03156565656565657
+          },
+          "content": "[9] G. Pannocchia and J. B. Rawlings, “Disturbance models for offset-free model-predictive control,” AIChE J., vol. 49, no. 2, pp. 426–437, Feb. 2003.",
+          "label": "Text"
+        },
+        {
+          "id": "36",
+          "order": 35,
+          "bounding_box": {
+            "x": 0.5065359477124183,
+            "y": 0.6054292929292929,
+            "width": 0.4150326797385621,
+            "height": 0.02335858585858586
+          },
+          "content": "[10] U. Maeder, F. Borrelli, and M. Morari, \"Linear offset-free model predictive control,\" Automatica, vol. 45, no. 10, pp. 2214–2222, 2009.",
+          "label": "Text"
+        },
+        {
+          "id": "37",
+          "order": 36,
+          "bounding_box": {
+            "x": 0.5073529411764706,
+            "y": 0.6294191919191919,
+            "width": 0.4150326797385621,
+            "height": 0.03282828282828283
+          },
+          "content": "[11] Y.-Y. Cao and Z. Lin, \"Min-max MPC algorithm for LPV systems subject to input saturation,\" IEE Proc. Control Theory Appl., vol. 152, no. 3, pp. 266–272, 2005.",
+          "label": "Text"
+        },
+        {
+          "id": "38",
+          "order": 37,
+          "bounding_box": {
+            "x": 0.5065359477124183,
+            "y": 0.663510101010101,
+            "width": 0.4150326797385621,
+            "height": 0.043560606060606064
+          },
+          "content": "[12] H. Yokoyama, H. Nakagawa, J. Kautzner et al., “Novel contact force sensor incorporated in irrigated radiofrequency ablation catheter predicts lesion size and incidence of steam pop and thrombus,” Circ. Arrhythm. Electrophysiol., vol. 1, no. 5, pp. 354–362, 2008.",
+          "label": "Text"
+        },
+        {
+          "id": "39",
+          "order": 38,
+          "bounding_box": {
+            "x": 0.5073529411764706,
+            "y": 0.7083333333333334,
+            "width": 0.41421568627450983,
+            "height": 0.03282828282828283
+          },
+          "content": "[13] Y. Cao and J. Tang, “Impedance MPC for physical human–robot interaction: Predictive disturbance rejection with joint-limit safety,” arXiv:2606.08281, Jun. 2026.",
+          "label": "Text"
+        },
+        {
+          "id": "40",
+          "order": 39,
+          "bounding_box": {
+            "x": 0.5081699346405228,
+            "y": 0.7424242424242424,
+            "width": 0.4133986928104575,
+            "height": 0.04419191919191919
+          },
+          "content": "[14] M. Jolaei, A. Hooshiar, A. Sayadi, J. Dargahi, and M. Packirisamy, \"Sensor-free force control of tendon-driven ablation catheters through position control and contact modeling,\" in Proc. 42nd Annu. Int. Conf. IEEE Eng. Med. Biol. Soc. (EMBC), 2020, pp. 5248–5251.",
+          "label": "Text"
+        },
+        {
+          "id": "41",
+          "order": 40,
+          "bounding_box": {
+            "x": 0.5065359477124183,
+            "y": 0.7872474747474747,
+            "width": 0.4150326797385621,
+            "height": 0.03345959595959596
+          },
+          "content": "[15] S. B. Kesner and R. D. Howe, \"Robotic catheter cardiac ablation combining ultrasound guidance and force control,\" Int. J. Robot. Res., vol. 33, no. 4, pp. 631–644, 2014.",
+          "label": "Text"
+        },
+        {
+          "id": "42",
+          "order": 41,
+          "bounding_box": {
+            "x": 0.5065359477124183,
+            "y": 0.821969696969697,
+            "width": 0.4150326797385621,
+            "height": 0.03409090909090909
+          },
+          "content": "[16] B. Stellato, G. Banjac, P. Goulart, A. Bemporad, and S. Boyd, \"OSQP: An operator splitting solver for quadratic programs,\" Math. Program. Comput., vol. 12, no. 4, pp. 637–672, 2020.",
+          "label": "Text"
+        }
+      ]
+    }
+  ]
+}

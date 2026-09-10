@@ -1,0 +1,2338 @@
+{
+  "file_name": "paper_11",
+  "pages": [
+    {
+      "page_index": 1,
+      "blocks": [
+        {
+          "id": "0",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.195,
+            "y": 0.15,
+            "width": 0.607,
+            "height": 0.031
+          },
+          "content": "# Operational Non-identifiability of Single-epoch Low-rank RFI Mitigation: Controlled Failure-mode Analysis and HERA Evidence",
+          "label": "Text"
+        },
+        {
+          "id": "1",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.452,
+            "y": 0.19,
+            "width": 0.086,
+            "height": 0.014
+          },
+          "content": "YUJIN KIM $^{1}$",
+          "label": "Text"
+        },
+        {
+          "id": "2",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.265,
+            "y": 0.213,
+            "width": 0.465,
+            "height": 0.013
+          },
+          "content": "$^{1}$ Department of Data Science, Jeju National University, Jeju, South Korea",
+          "label": "Text"
+        },
+        {
+          "id": "3",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.451,
+            "y": 0.241,
+            "width": 0.097,
+            "height": 0.014
+          },
+          "content": "## ABSTRACT",
+          "label": "Text"
+        },
+        {
+          "id": "4",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.132,
+            "y": 0.261,
+            "width": 0.731,
+            "height": 0.236
+          },
+          "content": "Low-rank decomposition (singular value decomposition / principal component analysis based) is widely used as a first-line tool for mitigating radio-frequency interference (RFI) in low-frequency radio astronomy, both in operational pipelines and methodological studies. In the single-epoch regime when only one time-frequency dynamic spectrum $D(t,\\nu)$ is available there is no structural guarantee that science and interference can be separated by rank selection alone. We model the observation as $D=S+I+N$ ,where S is approximately low-rank science signal, I is sparse but spectrally structured RFI, and N is noise. When S and I substantially share the same singular-vector subspace (mixed singular directions), no choice of rank can simultaneously suppress residual RFI contamination and preserve the science signal; we call this operational non-identifiability. Using controlled synthetic experiments with satellite-like harmonic-comb RFI and weak spectral features, and 420 calibrated HERA snapshots over 50-225 MHz, we show that truncated SVD can produce band-wide bias, while frequency-weighted SVD shifts the trade-off to safer operating points but does not remove the bias floor. Rather than proposing a new subtraction method, we provide compact diagnostics-mixed-mode inspection, rank sweeps, and Pareto views-to assess single-epoch low-rank cleaning in real-world pipelines.",
+          "label": "Text"
+        },
+        {
+          "id": "5",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.135,
+            "y": 0.53,
+            "width": 0.656,
+            "height": 0.015
+          },
+          "content": "Keywords: radio astronomy — radio frequency interference — reionization — data analysis",
+          "label": "Text"
+        },
+        {
+          "id": "6",
+          "order": 7,
+          "bounding_box": {
+            "x": 0.206,
+            "y": 0.56,
+            "width": 0.159,
+            "height": 0.014
+          },
+          "content": "## 1. INTRODUCTION",
+          "label": "Text"
+        },
+        {
+          "id": "7",
+          "order": 8,
+          "bounding_box": {
+            "x": 0.076,
+            "y": 0.582,
+            "width": 0.418,
+            "height": 0.251
+          },
+          "content": "Low-frequency radio observations increasingly face spectrally structured radio-frequency interference (RFI), including unintentional electromagnetic radiation (UEMR) from low-Earth-orbit (LEO) satellite constellations, which can contaminate Epoch of Reionization (EoR) experiments (e.g., Fridman & Baan 2001; Di Vruno et al. 2023; Bassa et al. 2024). For arrays such as HERA (DeBoer et al. 2017; Abdurashidova et al. 2022), the cosmological 21 cm signal is fragile to weak contamination and subject to stringent protection criteria (e.g., ITU-R 2005). Because of their speed and interpretability, low-rank subspace methods based on singular value decomposition (SVD) and principal component analysis (PCA) are commonly used in pipelines, often alongside automated flagging (e.g., AOFlagger) (Offringa et al. 2010, 2012) and related mitigation techniques (Leshem et al. 2000; Fridman",
+          "label": "Text"
+        },
+        {
+          "id": "8",
+          "order": 9,
+          "bounding_box": {
+            "x": 0.504,
+            "y": 0.56,
+            "width": 0.417,
+            "height": 0.111
+          },
+          "content": "& Baan 2001). Deep-learning approaches can perform RFI detection/mitigation on time-frequency data (e.g., Akeret et al. 2017; Wilensky et al. 2019; Kerrigan et al. 2019; Yang et al. 2020; Vafaei Sadr et al. 2020; Connor & van Leeuwen 2018), but typically rely on large labeled data sets and diversity across epochs or instruments. This work instead targets the single-epoch, fixed-baseline configuration.",
+          "label": "Text"
+        },
+        {
+          "id": "9",
+          "order": 10,
+          "bounding_box": {
+            "x": 0.613,
+            "y": 0.685,
+            "width": 0.202,
+            "height": 0.013
+          },
+          "content": "## 1.1. Relation to prior work",
+          "label": "Text"
+        },
+        {
+          "id": "10",
+          "order": 11,
+          "bounding_box": {
+            "x": 0.504,
+            "y": 0.705,
+            "width": 0.418,
+            "height": 0.204
+          },
+          "content": "A substantial literature uses low-rank and lowrank+sparse decompositions for mitigating foregrounds and RFI (Leshem et al. 2000; Fridman & Baan 2001; Candes et al. 2011; Chandrasekaran et al. 2011), and related extensions such as independent component analysis (ICA), non-negative matrix factorization (NMF), and robust principal component analysis (RPCA) variants for 21 cm analysis and RFI suppression (e.g., Datta et al. 2010; Parsons et al. 2012; Morales et al. 2012; Pober et al. 2014). Many formulations implicitly rely on conditions that limit subspace overlap between the science and contaminant components and on perturbation bounds for singular vectors (e.g., Wedin 1972; Golub & Van Loan",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "page_index": 2,
+      "blocks": [
+        {
+          "id": "0",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.077,
+            "y": 0.081,
+            "width": 0.417,
+            "height": 0.174
+          },
+          "content": "2013) . This paper does not propose a new algorithm. Instead, we ask a meta-level question: in the single-epoch regime—a single dynamic spectrum for a fixed baseline and polarization—are the science and interference components operationally identifiable under any choice of rank? We show that when the science signal and structured RFI share singular-vector directions, rank selection cannot simultaneously achieve low residual contamination and low distortion. This limitation is therefore not specific to one implementation, but reflects a structural constraint on single-epoch, subspace-based cleaning.",
+          "label": "Text"
+        },
+        {
+          "id": "1",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.138,
+            "y": 0.263,
+            "width": 0.3,
+            "height": 0.015
+          },
+          "content": "## 1.2. Single-epoch focus and contributions",
+          "label": "Text"
+        },
+        {
+          "id": "2",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.077,
+            "y": 0.284,
+            "width": 0.416,
+            "height": 0.252
+          },
+          "content": "We focus on decisions made from a single time frequency matrix, without time/baseline diversity or strong external priors (e.g., ephemerides; cf. Dillon et al. 2020; Abdurashidova et al. 2022). In this setting, subspace overlap can dominate performance. Using controlled synthetic experiments and HERA snapshots, we expose operational non-identifiability via mixed-mode inspection, rank sweeps, and Pareto diagnostics, and we propose a minimal, reproducible quality-assurance (QA) framework for reporting the operational risk of any chosen single-epoch cleaning configuration. Figure 1 provides a synthetic illustration of the single-epoch failure mechanism considered in this paper: when foreground-like and RFIlike structure co-occupy the leading singular mode, lowrank subtraction cannot cleanly separate contamination removal from scientific preservation.",
+          "label": "Text"
+        },
+        {
+          "id": "3",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.198,
+            "y": 0.543,
+            "width": 0.174,
+            "height": 0.014
+          },
+          "content": "## 2. PROBLEM SETUP",
+          "label": "Text"
+        },
+        {
+          "id": "4",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.151,
+            "y": 0.565,
+            "width": 0.271,
+            "height": 0.014
+          },
+          "content": "## 2.1. Single-epoch observation matrix",
+          "label": "Text"
+        },
+        {
+          "id": "5",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.077,
+            "y": 0.585,
+            "width": 0.415,
+            "height": 0.076
+          },
+          "content": "We consider a single-epoch time-frequency snapshot obtained by fixing an interferometric baseline and polarization. The observation is represented as a matrix $D\\in\\mathbb{R}^{T\\times F}$ with T time samples and F frequency channels,",
+          "label": "Text"
+        },
+        {
+          "id": "6",
+          "order": 7,
+          "bounding_box": {
+            "x": 0.157,
+            "y": 0.664,
+            "width": 0.258,
+            "height": 0.015
+          },
+          "content": "$$\nD (t, \\nu) = S (t, \\nu) + I (t, \\nu) + N (t, \\nu),\n$$",
+          "label": "Formula"
+        },
+        {
+          "id": "7",
+          "order": 8,
+          "bounding_box": {
+            "x": 0.469,
+            "y": 0.664,
+            "width": 0.021,
+            "height": 0.015
+          },
+          "content": "(1) ",
+          "label": "Formula"
+        },
+        {
+          "id": "8",
+          "order": 9,
+          "bounding_box": {
+            "x": 0.076,
+            "y": 0.684,
+            "width": 0.417,
+            "height": 0.094
+          },
+          "content": "where $S ( t,\\nu)$ is the scientific component, $I(t,\\nu)$ is structured RFI, and $N(t,\\nu)$ is noise. In the single-epoch regime we assume no additional diversity from repeated epochs or external information (e.g., satellite ephemerides or auxiliary observations): D alone must support any separation between S and I.",
+          "label": "Text"
+        },
+        {
+          "id": "9",
+          "order": 10,
+          "bounding_box": {
+            "x": 0.128,
+            "y": 0.786,
+            "width": 0.316,
+            "height": 0.016
+          },
+          "content": "## 2.2. Low-rank (subspace) cleaning operator",
+          "label": "Text"
+        },
+        {
+          "id": "10",
+          "order": 11,
+          "bounding_box": {
+            "x": 0.076,
+            "y": 0.805,
+            "width": 0.416,
+            "height": 0.081
+          },
+          "content": "Let $D=U\\Sigma V^{\\top}$ be the SVD, with left singular vectors $U\\in \\mathbb{R}^{T\\times T}$ , right singular vectors $V\\in \\mathbb{R}^{F\\times F}$ , and singular values $\\Sigma=\\operatorname{diag}(\\sigma_{1},\\dots,\\sigma_{\\min (T,F)})$ ordered nonincreasingly. For a chosen rank k, the truncated SVD approximation is",
+          "label": "Text"
+        },
+        {
+          "id": "11",
+          "order": 12,
+          "bounding_box": {
+            "x": 0.215,
+            "y": 0.892,
+            "width": 0.14,
+            "height": 0.018
+          },
+          "content": "$$\nD _ {k} = U _ {1: k} \\Sigma_ {1: k} V _ {1: k} ^ {\\top},\n$$",
+          "label": "Formula"
+        },
+        {
+          "id": "12",
+          "order": 13,
+          "bounding_box": {
+            "x": 0.468,
+            "y": 0.893,
+            "width": 0.022,
+            "height": 0.016
+          },
+          "content": "(2) ",
+          "label": "Formula"
+        },
+        {
+          "id": "13",
+          "order": 14,
+          "bounding_box": {
+            "x": 0.505,
+            "y": 0.082,
+            "width": 0.376,
+            "height": 0.015
+          },
+          "content": "and the corresponding residual (\"cleaned\" result) is",
+          "label": "Text"
+        },
+        {
+          "id": "14",
+          "order": 15,
+          "bounding_box": {
+            "x": 0.638,
+            "y": 0.113,
+            "width": 0.15,
+            "height": 0.016
+          },
+          "content": "$$\nD _ {\\mathrm {c l e a n}} (k) = D - D _ {k}.\n$$",
+          "label": "Formula"
+        },
+        {
+          "id": "15",
+          "order": 16,
+          "bounding_box": {
+            "x": 0.896,
+            "y": 0.113,
+            "width": 0.021,
+            "height": 0.016
+          },
+          "content": "(3) ",
+          "label": "Formula"
+        },
+        {
+          "id": "16",
+          "order": 17,
+          "bounding_box": {
+            "x": 0.505,
+            "y": 0.143,
+            "width": 0.416,
+            "height": 0.094
+          },
+          "content": "Throughout the paper we use \"truncated SVD\" and \"standard SVD cleaning\" interchangeably to denote this rank- $k$ truncation of the SVD (e.g., Golub & Van Loan 2013). We avoid the abbreviation \"TSVD\" to prevent confusion with the temporally smoothed variant (TempSVD) introduced below.",
+          "label": "Text"
+        },
+        {
+          "id": "17",
+          "order": 18,
+          "bounding_box": {
+            "x": 0.504,
+            "y": 0.239,
+            "width": 0.417,
+            "height": 0.171
+          },
+          "content": "In the idealized low-rank + sparse setting studied in the robust PCA literature, the scientific component S and the interference component I are assumed to occupy sufficiently disjoint or incoherent subspaces, and I is assumed to be sparse in the canonical time-frequency basis (e.g., Candès et al. 2011; Chandrasekaran et al. 2011). Under these assumptions, there exists a decomposition in which the low-rank term captures S and the sparse term captures I, and, equivalently, there exists a rank choice $k_{\\star}$ for which $D_{\\mathrm{clean}} \\left(k_{\\star}\\right)$ is science-dominated while $D_{k_{\\star}}$ is RFIDominated.",
+          "label": "Text"
+        },
+        {
+          "id": "18",
+          "order": 19,
+          "bounding_box": {
+            "x": 0.504,
+            "y": 0.411,
+            "width": 0.417,
+            "height": 0.189
+          },
+          "content": "In practice, a variety of data-driven rules have been proposed for choosing k, including profile-likelihood and scree-plot methods (e.g., Zhu & Ghodsi 2006), optimal hard thresholds on singular values (e.g., Gavish & Donoho 2014), and eigenvalue-distribution criteria for factor models (e.g., Onatski 2010). These approaches are extremely useful when the underlying low-rank structure is well separated from noise or when the goal is dimension reduction, but they implicitly rely on assumptions that do not hold in the regime we study here—most notably, that the dominant singular subspace can be interpreted as either \"signal\" or \"interference\" but not as a mixture of both.",
+          "label": "Text"
+        },
+        {
+          "id": "19",
+          "order": 20,
+          "bounding_box": {
+            "x": 0.504,
+            "y": 0.601,
+            "width": 0.418,
+            "height": 0.235
+          },
+          "content": "Our focus in this work is the opposite regime: mixed singular directions, where S and I substantially overlap in the singular-vector subspaces U and V. In this mixed-subspace regime, each dominant singular mode contains a nontrivial combination of scientific signal and structured RFI. As a result, varying the truncation rank k inevitably trades off science preservation against interference suppression. Accordingly, we interpret the rank k not as a uniquely determined quantity, but as an operational hyperparameter whose effect must be assessed empirically in the single-epoch setting. We therefore treat k as an operational hyperparameter that moves configurations along a Pareto front between under-cleaning and over-cleaning, rather than as a quantity that can be uniquely determined from single-epoch statistics alone.",
+          "label": "Text"
+        },
+        {
+          "id": "20",
+          "order": 21,
+          "bounding_box": {
+            "x": 0.542,
+            "y": 0.851,
+            "width": 0.341,
+            "height": 0.03
+          },
+          "content": "## 3. BAND DEFINITION AND EVALUATION METRICS",
+          "label": "Text"
+        },
+        {
+          "id": "21",
+          "order": 22,
+          "bounding_box": {
+            "x": 0.585,
+            "y": 0.888,
+            "width": 0.256,
+            "height": 0.016
+          },
+          "content": "3. 1. Fixed Science Band and Core",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "page_index": 3,
+      "blocks": [
+        {
+          "id": "0",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.084,
+            "y": 0.116,
+            "width": 0.276,
+            "height": 0.188
+          },
+          "content": "",
+          "label": "Image"
+        },
+        {
+          "id": "1",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.365,
+            "y": 0.117,
+            "width": 0.263,
+            "height": 0.187
+          },
+          "content": "",
+          "label": "Image"
+        },
+        {
+          "id": "2",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.635,
+            "y": 0.118,
+            "width": 0.277,
+            "height": 0.185
+          },
+          "content": "",
+          "label": "Image"
+        },
+        {
+          "id": "3",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.076,
+            "y": 0.318,
+            "width": 0.844,
+            "height": 0.112
+          },
+          "content": "Figure 1. Synthetic illustration of the failure mechanism of single-epoch low-rank cleaning. (a) A toy single-epoch timefrequency matrix $X$ composed of a smooth foreground-like component, intermittent comb-like narrowband RFI, a faint structured science ripple, and noise. (b) First singular-mode reconstruction, $X_{1}=\\sigma_{1} u_{1} v_{1}^{\\top}$ , capturing the dominant mixed structure. (c) Second singular-mode reconstruction, $X_{2}=\\sigma_{2} u_{2} v_{2}^{\\top}$ , illustrating additional mixed components. For visual clarity, this figure uses a visualization-oriented realization based on the same components described in Table 2 and Section 3, with simplified amplitudes and enhanced contrast; it is intended for qualitative interpretation rather than quantitative evaluation. Leading singular modes do not correspond to physically separable components, but instead span mixed directions that simultaneously encode astrophysical signal and RFI, illustrating the operational non-identifiability of single-epoch low-rank separation.",
+          "label": "Text"
+        },
+        {
+          "id": "4",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.077,
+            "y": 0.437,
+            "width": 0.416,
+            "height": 0.08
+          },
+          "content": "To avoid \"moving goalposts,\" where evaluation windows shift between experiments, we explicitly fix the science band and protected core throughout all synthetic tests. In the controlled toy experiments, we use F=240 frequency channels spanning 0-12 MHz, with a channel spacing of",
+          "label": "Text"
+        },
+        {
+          "id": "5",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.224,
+            "y": 0.528,
+            "width": 0.122,
+            "height": 0.015
+          },
+          "content": "$$\n\\Delta \\nu = 0. 0 5 \\mathrm {M H z}.\n$$",
+          "label": "Formula"
+        },
+        {
+          "id": "6",
+          "order": 7,
+          "bounding_box": {
+            "x": 0.468,
+            "y": 0.528,
+            "width": 0.022,
+            "height": 0.015
+          },
+          "content": "(4) ",
+          "label": "Formula"
+        },
+        {
+          "id": "7",
+          "order": 8,
+          "bounding_box": {
+            "x": 0.078,
+            "y": 0.555,
+            "width": 0.416,
+            "height": 0.143
+          },
+          "content": "This spacing was chosen so that each synthetic combRFI line $\\sigma_{\\nu}=0. 0 2 \\mathrm{M H z}$; Table 2) is sampled by at least two channel widths, a minimal Nyquist-like criterion. The comb line width of 20 kHz is comparable to the narrowband unintentional electromagnetic radiation (UEMR) features reported in satellite observations, where individual spectral peaks are confined within single 12 kHz channels (e.g., Di Vruno et al. 2023; Bassa et al. 2024). We define three disjoint spectral regions:",
+          "label": "Text"
+        },
+        {
+          "id": "8",
+          "order": 9,
+          "bounding_box": {
+            "x": 0.104,
+            "y": 0.706,
+            "width": 0.388,
+            "height": 0.032
+          },
+          "content": "- Science band (evaluation window): 5.5-6.5 MHz.",
+          "label": "Text"
+        },
+        {
+          "id": "9",
+          "order": 10,
+          "bounding_box": {
+            "x": 0.104,
+            "y": 0.748,
+            "width": 0.383,
+            "height": 0.016
+          },
+          "content": "- Science core (protected region): 5.8-6.2 MHz.",
+          "label": "Text"
+        },
+        {
+          "id": "10",
+          "order": 11,
+          "bounding_box": {
+            "x": 0.104,
+            "y": 0.774,
+            "width": 0.388,
+            "height": 0.031
+          },
+          "content": "- Outside band (fitting region): all remaining channels.",
+          "label": "Text"
+        },
+        {
+          "id": "11",
+          "order": 12,
+          "bounding_box": {
+            "x": 0.077,
+            "y": 0.815,
+            "width": 0.416,
+            "height": 0.095
+          },
+          "content": "Conceptually, the science band is the frequency window over which recovery performance is evaluated, while the science core represents the highest-priority region whose spectral fidelity is most critical. The outside band is primarily used to learn low-rank structure and interference patterns. The fixed science band and protected core",
+          "label": "Text"
+        },
+        {
+          "id": "12",
+          "order": 13,
+          "bounding_box": {
+            "x": 0.504,
+            "y": 0.437,
+            "width": 0.416,
+            "height": 0.093
+          },
+          "content": "play a role analogous to protected EoR windows used in foreground-avoidance analyses (e.g., Datta et al. 2010; Parsons et al. 2012; Morales et al. 2012; Pober et al. 2014), but are defined here purely for controlled single-epoch diagnostics rather than for direct cosmological interpretation.",
+          "label": "Text"
+        },
+        {
+          "id": "13",
+          "order": 14,
+          "bounding_box": {
+            "x": 0.581,
+            "y": 0.54,
+            "width": 0.264,
+            "height": 0.014
+          },
+          "content": "## 3.2. Primary Metric: Relative Bias",
+          "label": "Text"
+        },
+        {
+          "id": "14",
+          "order": 15,
+          "bounding_box": {
+            "x": 0.504,
+            "y": 0.56,
+            "width": 0.416,
+            "height": 0.03
+          },
+          "content": "Our primary metric is the channel-wise relative bias, defined as",
+          "label": "Text"
+        },
+        {
+          "id": "15",
+          "order": 16,
+          "bounding_box": {
+            "x": 0.605,
+            "y": 0.595,
+            "width": 0.216,
+            "height": 0.036
+          },
+          "content": "$$\nB (\\nu) = 1 0 0 \\times \\frac {\\hat {S} (\\nu) - S (\\nu)}{\\max \\left(| S (\\nu) | , \\epsilon\\right)},\n$$",
+          "label": "Formula"
+        },
+        {
+          "id": "16",
+          "order": 17,
+          "bounding_box": {
+            "x": 0.897,
+            "y": 0.605,
+            "width": 0.02,
+            "height": 0.015
+          },
+          "content": "(5) ",
+          "label": "Formula"
+        },
+        {
+          "id": "17",
+          "order": 18,
+          "bounding_box": {
+            "x": 0.505,
+            "y": 0.64,
+            "width": 0.417,
+            "height": 0.207
+          },
+          "content": "expressed in percent. Here $\\hat{S} (\\nu)$ is the recovered spectrum obtained from the rank- k cleaned dynamic spectrum $D_{\\mathrm{clean}}^{(k)}$ , $S(\\nu)$ is the injected (true) science spectrum, and the stabilization constant $\\epsilon=10^{-5}$ is a small denominator floor introduced to avoid unstable relative-bias values in channels where the injected science spectrum is close to zero. In our normalized setup, this floor is used only to regularize near-zero denominators and does not set the scale of the reported bias in channels where $|S(\\nu)|\\gg\\epsilon$ . The recovered spectrum $\\hat{S}(\\nu)$ is obtained by time-averaging the residual matrix $D_{\\mathrm{clean}}^{(k)}$ along the time axis using a NaN-safe mean when masking is applied. We also track the absolute error",
+          "label": "Text"
+        },
+        {
+          "id": "18",
+          "order": 19,
+          "bounding_box": {
+            "x": 0.638,
+            "y": 0.853,
+            "width": 0.15,
+            "height": 0.017
+          },
+          "content": "$$\nA (\\nu) = \\hat {S} (\\nu) - S (\\nu),\n$$",
+          "label": "Formula"
+        },
+        {
+          "id": "19",
+          "order": 20,
+          "bounding_box": {
+            "x": 0.897,
+            "y": 0.854,
+            "width": 0.02,
+            "height": 0.015
+          },
+          "content": "(6) ",
+          "label": "Formula"
+        },
+        {
+          "id": "20",
+          "order": 21,
+          "bounding_box": {
+            "x": 0.504,
+            "y": 0.878,
+            "width": 0.417,
+            "height": 0.031
+          },
+          "content": "which complements the relative bias by retaining information about the absolute scale of the distortion. Both",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "page_index": 4,
+      "blocks": [
+        {
+          "id": "0",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.079,
+            "y": 0.082,
+            "width": 0.413,
+            "height": 0.048
+          },
+          "content": "B( $\\nu$ ) and A( $\\nu$ ) are summarized over the science band and science core using medians, percentiles, or simple channelwise sums, depending on the diagnostic being performed.",
+          "label": "Text"
+        },
+        {
+          "id": "1",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.201,
+            "y": 0.141,
+            "width": 0.17,
+            "height": 0.014
+          },
+          "content": "## 3.3. Auxiliary Metrics",
+          "label": "Text"
+        },
+        {
+          "id": "2",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.077,
+            "y": 0.162,
+            "width": 0.415,
+            "height": 0.047
+          },
+          "content": "To connect Monte Carlo summaries to scientific impact, we use two additional aggregate metrics. First, we define the integrated absolute error over the science core as",
+          "label": "Text"
+        },
+        {
+          "id": "3",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.173,
+            "y": 0.216,
+            "width": 0.222,
+            "height": 0.032
+          },
+          "content": "$$\n\\mathrm {I A E} _ {\\mathrm {c o r e}} = \\sum_ {\\nu \\in \\mathrm {c o r e}} \\left| \\hat {S} (\\nu) - S (\\nu) \\right|,\n$$",
+          "label": "Formula"
+        },
+        {
+          "id": "4",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.468,
+            "y": 0.22,
+            "width": 0.022,
+            "height": 0.015
+          },
+          "content": "(7) ",
+          "label": "Formula"
+        },
+        {
+          "id": "5",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.077,
+            "y": 0.258,
+            "width": 0.416,
+            "height": 0.047
+          },
+          "content": "which serves as a channel-summed proxy (i.e., a discrete sum over channels, with no explicit $\\Delta\\nu$ factor) within the protected region.",
+          "label": "Text"
+        },
+        {
+          "id": "6",
+          "order": 7,
+          "bounding_box": {
+            "x": 0.092,
+            "y": 0.305,
+            "width": 0.337,
+            "height": 0.015
+          },
+          "content": "Second, we define the detection failure rate as",
+          "label": "Text"
+        },
+        {
+          "id": "7",
+          "order": 8,
+          "bounding_box": {
+            "x": 0.232,
+            "y": 0.329,
+            "width": 0.103,
+            "height": 0.032
+          },
+          "content": "$$\np _ {\\mathrm {f a i l}} = \\frac {N _ {\\mathrm {f a i l}}}{N _ {\\mathrm {t r i a l}}},\n$$",
+          "label": "Formula"
+        },
+        {
+          "id": "8",
+          "order": 9,
+          "bounding_box": {
+            "x": 0.468,
+            "y": 0.337,
+            "width": 0.022,
+            "height": 0.016
+          },
+          "content": "(8) ",
+          "label": "Formula"
+        },
+        {
+          "id": "9",
+          "order": 10,
+          "bounding_box": {
+            "x": 0.077,
+            "y": 0.369,
+            "width": 0.415,
+            "height": 0.111
+          },
+          "content": "where $N_{\\mathrm{trial}}$ is the total number of injection-recovery trials and $N_{\\mathrm{fail}}$ is the number of trials in which a Gaussian line fit to the recovered spectrum within the science core either fails to converge or yields a fitted amplitude below the adopted detection threshold. This metric quantifies missed recovery of the injected science feature rather than generic spectral-shape errors.",
+          "label": "Text"
+        },
+        {
+          "id": "10",
+          "order": 11,
+          "bounding_box": {
+            "x": 0.229,
+            "y": 0.49,
+            "width": 0.113,
+            "height": 0.014
+          },
+          "content": "## 4. METHODS",
+          "label": "Text"
+        },
+        {
+          "id": "11",
+          "order": 12,
+          "bounding_box": {
+            "x": 0.077,
+            "y": 0.51,
+            "width": 0.414,
+            "height": 0.048
+          },
+          "content": "We now define the low-rank cleaning methods considered for a single-epoch matrix $D\\in\\mathbb{R}^{T\\times F}$ and the comparison references.",
+          "label": "Text"
+        },
+        {
+          "id": "12",
+          "order": 13,
+          "bounding_box": {
+            "x": 0.136,
+            "y": 0.569,
+            "width": 0.299,
+            "height": 0.016
+          },
+          "content": "## 4.1. Frequency-weighted SVD (FWSVD)",
+          "label": "Text"
+        },
+        {
+          "id": "13",
+          "order": 14,
+          "bounding_box": {
+            "x": 0.078,
+            "y": 0.59,
+            "width": 0.414,
+            "height": 0.047
+          },
+          "content": "To suppress variance explanation in the protected channels, we introduce a diagonal weight matrix $W\\in\\mathbb{R}^{F\\times F}$ along the frequency axis. Channel weights are",
+          "label": "Text"
+        },
+        {
+          "id": "14",
+          "order": 15,
+          "bounding_box": {
+            "x": 0.134,
+            "y": 0.65,
+            "width": 0.301,
+            "height": 0.061
+          },
+          "content": "$$\nw (\\nu) = \\left\\{ \\begin{array}{l l} w _ {\\mathrm {c o r e}}, & \\nu \\in \\mathrm {s i c i e n c e c o r e}, \\\\ w _ {\\mathrm {p r o t}}, & \\nu \\in \\mathrm {s i c i e n c e b a n d} \\backslash \\mathrm {c o r e}, \\\\ 1, & \\mathrm {o t h e r w i s e}, \\end{array} \\right.\n$$",
+          "label": "Formula"
+        },
+        {
+          "id": "15",
+          "order": 16,
+          "bounding_box": {
+            "x": 0.469,
+            "y": 0.672,
+            "width": 0.021,
+            "height": 0.016
+          },
+          "content": "(9) ",
+          "label": "Formula"
+        },
+        {
+          "id": "16",
+          "order": 17,
+          "bounding_box": {
+            "x": 0.075,
+            "y": 0.724,
+            "width": 0.418,
+            "height": 0.032
+          },
+          "content": "with $0 < w_{\\mathrm{core}} \\leq w_{\\mathrm{prot}} \\leq 1$ , and $W=\\operatorname{diag}\\big(w(\\nu)\\big).$ We define the frequency-weighted snapshot as",
+          "label": "Text"
+        },
+        {
+          "id": "17",
+          "order": 18,
+          "bounding_box": {
+            "x": 0.234,
+            "y": 0.766,
+            "width": 0.103,
+            "height": 0.017
+          },
+          "content": "$$\nD ^ {(W)} \\equiv D W,\n$$",
+          "label": "Formula"
+        },
+        {
+          "id": "18",
+          "order": 19,
+          "bounding_box": {
+            "x": 0.461,
+            "y": 0.768,
+            "width": 0.029,
+            "height": 0.015
+          },
+          "content": "(10) ",
+          "label": "Formula"
+        },
+        {
+          "id": "19",
+          "order": 20,
+          "bounding_box": {
+            "x": 0.077,
+            "y": 0.795,
+            "width": 0.167,
+            "height": 0.015
+          },
+          "content": "and compute its SVD,",
+          "label": "Text"
+        },
+        {
+          "id": "20",
+          "order": 21,
+          "bounding_box": {
+            "x": 0.226,
+            "y": 0.819,
+            "width": 0.119,
+            "height": 0.017
+          },
+          "content": "$$\nD ^ {(W)} \\approx \\tilde {U} \\tilde {\\Sigma} \\tilde {V} ^ {\\top}.\n$$",
+          "label": "Formula"
+        },
+        {
+          "id": "21",
+          "order": 22,
+          "bounding_box": {
+            "x": 0.461,
+            "y": 0.821,
+            "width": 0.029,
+            "height": 0.016
+          },
+          "content": "(11) ",
+          "label": "Formula"
+        },
+        {
+          "id": "22",
+          "order": 23,
+          "bounding_box": {
+            "x": 0.077,
+            "y": 0.847,
+            "width": 0.414,
+            "height": 0.034
+          },
+          "content": "For rank k, the rank- $k$ approximation in the weighted space is $\\tilde{U}_{1:k}\\tilde{\\Sigma}_{1:k}\\tilde{V}_{1:k}^{\\top}$ , and we subtract",
+          "label": "Text"
+        },
+        {
+          "id": "23",
+          "order": 24,
+          "bounding_box": {
+            "x": 0.144,
+            "y": 0.889,
+            "width": 0.281,
+            "height": 0.022
+          },
+          "content": "$$\nD _ {\\mathrm {c l e a n}} ^ {(\\mathrm {F W S V D})} (k) = D - \\tilde {U} _ {1: k} \\tilde {\\Sigma} _ {1: k} \\tilde {V} _ {1: k} ^ {\\top} W ^ {- 1}.\n$$",
+          "label": "Formula"
+        },
+        {
+          "id": "24",
+          "order": 25,
+          "bounding_box": {
+            "x": 0.461,
+            "y": 0.894,
+            "width": 0.029,
+            "height": 0.015
+          },
+          "content": "(12) ",
+          "label": "Formula"
+        },
+        {
+          "id": "25",
+          "order": 26,
+          "bounding_box": {
+            "x": 0.551,
+            "y": 0.082,
+            "width": 0.324,
+            "height": 0.015
+          },
+          "content": "## 4.2. Temporally smoothed SVD (TempSVD)",
+          "label": "Text"
+        },
+        {
+          "id": "26",
+          "order": 27,
+          "bounding_box": {
+            "x": 0.504,
+            "y": 0.103,
+            "width": 0.417,
+            "height": 0.109
+          },
+          "content": "To benchmark the effect of imposing temporal regularity on the fitted low-rank component, we include a simple temporally smoothed SVD reference method. Let $K \\in \\mathbb{R}^{T\\times T}$ be a linear smoothing operator acting along time (we use a symmetric boxcar moving-average window of width m samples, normalized to unit row sum). We form the smoothed matrix",
+          "label": "Text"
+        },
+        {
+          "id": "27",
+          "order": 28,
+          "bounding_box": {
+            "x": 0.661,
+            "y": 0.225,
+            "width": 0.103,
+            "height": 0.016
+          },
+          "content": "$$\nD ^ {(\\mathrm {s m})} = K D,\n$$",
+          "label": "Formula"
+        },
+        {
+          "id": "28",
+          "order": 29,
+          "bounding_box": {
+            "x": 0.888,
+            "y": 0.226,
+            "width": 0.029,
+            "height": 0.016
+          },
+          "content": "(13) ",
+          "label": "Formula"
+        },
+        {
+          "id": "29",
+          "order": 30,
+          "bounding_box": {
+            "x": 0.505,
+            "y": 0.256,
+            "width": 0.415,
+            "height": 0.047
+          },
+          "content": "compute its rank- $k$ truncated-SVD approximation $(D^{\\mathrm{(sm)}} )_{k}$ , and subtract this fit from the original (unsmoothed) snapshot,",
+          "label": "Text"
+        },
+        {
+          "id": "30",
+          "order": 31,
+          "bounding_box": {
+            "x": 0.597,
+            "y": 0.314,
+            "width": 0.232,
+            "height": 0.022
+          },
+          "content": "$$\nD _ {\\mathrm {c l e a n}} ^ {(\\mathrm {T e m p S V D})} (k) = D - \\left(D ^ {(\\mathrm {s m})}\\right) _ {k}.\n$$",
+          "label": "Formula"
+        },
+        {
+          "id": "31",
+          "order": 32,
+          "bounding_box": {
+            "x": 0.888,
+            "y": 0.319,
+            "width": 0.029,
+            "height": 0.016
+          },
+          "content": "(14) ",
+          "label": "Formula"
+        },
+        {
+          "id": "32",
+          "order": 33,
+          "bounding_box": {
+            "x": 0.504,
+            "y": 0.347,
+            "width": 0.416,
+            "height": 0.079
+          },
+          "content": "The window width m controls the strength of temporal averaging: larger m suppresses fast time variability but can introduce horizontal (time-smeared) residual structure. We treat TempSVD as an illustrative regularized reference method, not as a proposed default.",
+          "label": "Text"
+        },
+        {
+          "id": "33",
+          "order": 34,
+          "bounding_box": {
+            "x": 0.504,
+            "y": 0.426,
+            "width": 0.417,
+            "height": 0.063
+          },
+          "content": "In practice, for TempSVD we use an alternating leastsquares solver for the rank-1 case for numerical stability and computational efficiency, while retaining the same conceptual structure.",
+          "label": "Text"
+        },
+        {
+          "id": "34",
+          "order": 35,
+          "bounding_box": {
+            "x": 0.504,
+            "y": 0.49,
+            "width": 0.417,
+            "height": 0.078
+          },
+          "content": "To summarize the trade-off between science distortion and residual RFI contamination, we define two scalar Pareto proxies over the science band. For clarity, 'residual RFI contamination' denotes signal remaining after cleaning, not instrumental spectral leakage or ADC artifacts.",
+          "label": "Text"
+        },
+        {
+          "id": "35",
+          "order": 36,
+          "bounding_box": {
+            "x": 0.521,
+            "y": 0.569,
+            "width": 0.213,
+            "height": 0.015
+          },
+          "content": "The science-distortion proxy,",
+          "label": "Text"
+        },
+        {
+          "id": "36",
+          "order": 37,
+          "bounding_box": {
+            "x": 0.611,
+            "y": 0.595,
+            "width": 0.203,
+            "height": 0.038
+          },
+          "content": "$$\n\\mathrm {B i a s} ^ {-} = 1 - \\frac {\\sum_ {\\nu \\in \\mathrm {b a n d}} \\hat {S} (\\nu)}{\\sum_ {\\nu \\in \\mathrm {b a n d}} S (\\nu)},\n$$",
+          "label": "Formula"
+        },
+        {
+          "id": "37",
+          "order": 38,
+          "bounding_box": {
+            "x": 0.888,
+            "y": 0.606,
+            "width": 0.029,
+            "height": 0.016
+          },
+          "content": "(15) ",
+          "label": "Formula"
+        },
+        {
+          "id": "38",
+          "order": 39,
+          "bounding_box": {
+            "x": 0.504,
+            "y": 0.644,
+            "width": 0.417,
+            "height": 0.094
+          },
+          "content": "measures the signed fractional change of the injected science component after cleaning (Bias $^{-}$ =0 for perfect preservation). Negative values correspond to net amplification rather than loss. In Pareto plots we therefore use $|\\mathrm{Bias}^{-}|$ as a distortion magnitude, while retaining the sign in tabulated summaries.",
+          "label": "Text"
+        },
+        {
+          "id": "39",
+          "order": 40,
+          "bounding_box": {
+            "x": 0.52,
+            "y": 0.739,
+            "width": 0.251,
+            "height": 0.014
+          },
+          "content": "The residual-contamination proxy,",
+          "label": "Text"
+        },
+        {
+          "id": "40",
+          "order": 41,
+          "bounding_box": {
+            "x": 0.625,
+            "y": 0.765,
+            "width": 0.174,
+            "height": 0.037
+          },
+          "content": "$$\n\\mathrm {B i a s} ^ {+} = \\frac {\\sum_ {\\nu \\in \\mathrm {b a n d}} \\hat {I} (\\nu)}{\\sum_ {\\nu \\in \\mathrm {b a n d}} I (\\nu)},\n$$",
+          "label": "Formula"
+        },
+        {
+          "id": "41",
+          "order": 42,
+          "bounding_box": {
+            "x": 0.888,
+            "y": 0.776,
+            "width": 0.029,
+            "height": 0.016
+          },
+          "content": "(16) ",
+          "label": "Formula"
+        },
+        {
+          "id": "42",
+          "order": 43,
+          "bounding_box": {
+            "x": 0.506,
+            "y": 0.813,
+            "width": 0.415,
+            "height": 0.098
+          },
+          "content": "is evaluated using dedicated RFI-only trials in which the science component is set to $S=0$ , so that $D= I+N.$ In these trials, the time-averaged residual $\\hat{I} (\\nu)=\\left\\langle D_{\\mathrm{clean}}^{(k)}(t,\\nu)\\right\\rangle_{t}$ directly estimates the residual RFI contamination that survives rank- k subtraction. The denominator $\\sum_{\\nu\\in\\mathrm{band}}I(\\nu)$ is the corresponding time-average of the",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "page_index": 5,
+      "blocks": [
+        {
+          "id": "0",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.078,
+            "y": 0.082,
+            "width": 0.416,
+            "height": 0.063
+          },
+          "content": "injected RFI spectrum $I ( t,\\nu)$ , which is known in the synthetic testbed. Smaller values of Bias $^{+}$ and Bias $^{-}$ are desirable; in practice, mixed subspaces prevent the Pareto front from approaching (0,0).",
+          "label": "Text"
+        },
+        {
+          "id": "1",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.114,
+            "y": 0.157,
+            "width": 0.344,
+            "height": 0.014
+          },
+          "content": "## 4.3. Additional reference methods and masking",
+          "label": "Text"
+        },
+        {
+          "id": "2",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.078,
+            "y": 0.176,
+            "width": 0.415,
+            "height": 0.284
+          },
+          "content": "To test whether the observed behavior is SVD-specific, we also include NMF (Lee & Seung 1999), ICA (Hyvärinen & Oja 2000), and RPCA (Candès et al. 2011). In the overlap regimes considered here, NMF frequently fails to converge stably, and RPCA often exceeds iteration and time budgets; moreover, the incoherence and sparsity assumptions underpinning RPCA are explicitly violated when science and RFI share the same singular subspace. We therefore report core-bias statistics only for truncated SVD, FWSVD, ICA, and a conservative hard-mask reference, and treat NMF/RPCA as negative results that support the same non-identifiability picture. As a conservative reference, hard masking sets contaminated time-frequency pixels to NaN and estimates the spectrum via NaN-robust averages. This sacrifices coverage to prioritize scientific integrity and serves as an external comparison for residual-contamination control rather than a point on the low-rank Pareto front.",
+          "label": "Text"
+        },
+        {
+          "id": "3",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.184,
+            "y": 0.472,
+            "width": 0.203,
+            "height": 0.015
+          },
+          "content": "## 4.4. Operational QA recipe",
+          "label": "Text"
+        },
+        {
+          "id": "4",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.094,
+            "y": 0.492,
+            "width": 0.331,
+            "height": 0.016
+          },
+          "content": "We propose the following minimal QA recipe:",
+          "label": "Text"
+        },
+        {
+          "id": "5",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.104,
+            "y": 0.517,
+            "width": 0.345,
+            "height": 0.015
+          },
+          "content": "- Fix and document the science band and core.",
+          "label": "Text"
+        },
+        {
+          "id": "6",
+          "order": 7,
+          "bounding_box": {
+            "x": 0.105,
+            "y": 0.542,
+            "width": 0.386,
+            "height": 0.064
+          },
+          "content": "- For any configuration, report (i) a science-core bias metric (e.g., median $B(\\nu)$ or IAEcore; see Equations (5) and (7)) and (ii) a detection failure rate $p_{\\mathrm{fail}}$ (Equation (8)) across realizations or snapshots.",
+          "label": "Text"
+        },
+        {
+          "id": "7",
+          "order": 8,
+          "bounding_box": {
+            "x": 0.105,
+            "y": 0.615,
+            "width": 0.387,
+            "height": 0.031
+          },
+          "content": "- When masking is used, also report the retained coverage in the science band and core.",
+          "label": "Text"
+        },
+        {
+          "id": "8",
+          "order": 9,
+          "bounding_box": {
+            "x": 0.078,
+            "y": 0.655,
+            "width": 0.414,
+            "height": 0.078
+          },
+          "content": "Indicative thresholds tuned on our synthetic testbed are median core bias $\\lesssim 20\\%$ and $p_{\\mathrm{fail}} \\lesssim 5\\%$ ; if these are not met, we recommend falling back to conservative masking and, where possible, deferring interpretation to multi-epoch or multi-baseline analyses.",
+          "label": "Text"
+        },
+        {
+          "id": "9",
+          "order": 10,
+          "bounding_box": {
+            "x": 0.103,
+            "y": 0.744,
+            "width": 0.364,
+            "height": 0.015
+          },
+          "content": "## 5. RESULTS ON SYNTHETIC EXPERIMENTS",
+          "label": "Text"
+        },
+        {
+          "id": "10",
+          "order": 11,
+          "bounding_box": {
+            "x": 0.077,
+            "y": 0.765,
+            "width": 0.415,
+            "height": 0.095
+          },
+          "content": "We now present results from the synthetic single-epoch testbed, focusing on (i) mixed singular modes, (ii) reference method behavior under controlled overlap, and (iii) rank and weight sensitivity summarized through Pareto geometry. The configuration is summarized in Appendix A.",
+          "label": "Text"
+        },
+        {
+          "id": "11",
+          "order": 12,
+          "bounding_box": {
+            "x": 0.098,
+            "y": 0.87,
+            "width": 0.376,
+            "height": 0.031
+          },
+          "content": "5. 1. Reference method comparison under controlled overlap",
+          "label": "Text"
+        },
+        {
+          "id": "12",
+          "order": 13,
+          "bounding_box": {
+            "x": 0.518,
+            "y": 0.082,
+            "width": 0.384,
+            "height": 0.015
+          },
+          "content": "Table 1. Relative bias on the science core $\\left( N_{\\mathrm{trial}}=200\\right) .$",
+          "label": "Text"
+        },
+        {
+          "id": "13",
+          "order": 14,
+          "bounding_box": {
+            "x": 0.511,
+            "y": 0.112,
+            "width": 0.4,
+            "height": 0.095
+          },
+          "content": "<table border=\"1\"><tr><td>Method</td><td>Median</td><td>Mean</td><td>Max</td><td>Trials</td></tr><tr><td>Truncated SVD</td><td>70.83</td><td>109.28</td><td>572.12</td><td>200</td></tr><tr><td>FWSVD</td><td>62.63</td><td>93.52</td><td>571.90</td><td>200</td></tr><tr><td>ICA</td><td>$5.8\\times 10^{4}$</td><td>$2.2\\times 10^{5}$</td><td>$9.8\\times 10^{5}$</td><td>200</td></tr><tr><td>Hard mask</td><td>N/A</td><td>N/A</td><td>N/A</td><td>200</td></tr></table>",
+          "label": "Table"
+        },
+        {
+          "id": "14",
+          "order": 15,
+          "bounding_box": {
+            "x": 0.505,
+            "y": 0.231,
+            "width": 0.415,
+            "height": 0.078
+          },
+          "content": "For a representative overlap configuration (e.g., SNR = 1.0 with high-dynamic-range comb amplitude), we compare methods using relative bias on the science core. A typical Monte Carlo summary $\\left(N_{\\mathrm{trial}}=200\\right)$ trials is shown in Table 1.",
+          "label": "Text"
+        },
+        {
+          "id": "15",
+          "order": 16,
+          "bounding_box": {
+            "x": 0.504,
+            "y": 0.312,
+            "width": 0.418,
+            "height": 0.501
+          },
+          "content": "FWSVD reduces the median and mean bias relative to standard truncated SVD and suppresses catastrophic failures, but substantial distortions persist in the overlapping regime. Even in the best case, the median science-core bias remains at $\\approx 60\\%$ , reinforcing the presence of a nonzero bias floor. In contrast, the ICA reference exhibits a qualitatively different, pathological failure mode: the median and mean science-core biases blow up to $\\sim 10^{4}-10^{5}\\%$ and the maximum bias reaches $\\sim 10^{6}\\%$ (Table 1). This behavior is consistent with known limitations of ICA in extremely high-dynamic-range mixtures. The algorithm assumes that the latent components are statistically independent and non-Gaussian, and it is only defined up to arbitrary rescaling and permutation of the recovered sources. In our controlled single-epoch setting, a very bright, spectrally structured RFI component, Gaussian thermal noise, and a faint, approximately Gaussian cosmological signal are linearly mixed with dynamic range $\\gtrsim 10^{4}$ . Under these conditions, the scale indeterminacy of ICA and the contrast function used to enforce non-Gaussianity can drive the optimization into local minima in which the faint science component is effectively absorbed or over-subtracted in one of the recovered independent components. The resulting demixing matrix amplifies small modeling errors by orders of magnitude, producing the catastrophic bias values reported in the table. NMF and RPCA exhibit similar sensitivity to the extreme dynamic range and masking, frequently suffering from convergence and runtime failures, and we therefore treat them only as qualitative supporting evidence for non-identifiability rather than as operational reference methods.",
+          "label": "Text"
+        },
+        {
+          "id": "16",
+          "order": 17,
+          "bounding_box": {
+            "x": 0.635,
+            "y": 0.826,
+            "width": 0.157,
+            "height": 0.014
+          },
+          "content": "## 5.2. Rank sensitivity",
+          "label": "Text"
+        },
+        {
+          "id": "17",
+          "order": 18,
+          "bounding_box": {
+            "x": 0.504,
+            "y": 0.846,
+            "width": 0.417,
+            "height": 0.064
+          },
+          "content": "Rank sweeps reveal a monotonic trade-off between residual RFI contamination and science loss: increasing rank suppresses interference while increasingly distorting the science signal (Figure 2). The same trade-off is shown",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "page_index": 6,
+      "blocks": [
+        {
+          "id": "0",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.082,
+            "y": 0.088,
+            "width": 0.405,
+            "height": 0.17
+          },
+          "content": "",
+          "label": "Image"
+        },
+        {
+          "id": "1",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.078,
+            "y": 0.272,
+            "width": 0.415,
+            "height": 0.084
+          },
+          "content": "Figure 2. Rank sweep on the synthetic comb + broadband ripple + sloped background case. The trade-off between RFI leakage and science distortion is shown as a function of rank k . Lower ranks suppress large-scale structure but retain RFI, while higher ranks increasingly distort the science signal.",
+          "label": "Text"
+        },
+        {
+          "id": "2",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.078,
+            "y": 0.375,
+            "width": 0.416,
+            "height": 0.095
+          },
+          "content": "in Pareto projection in Figure 4a, where each point represents a different rank and the two axes correspond to the contamination and distortion proxies from Figure 2. No extended rank range exists in which both effects are simultaneously small, so rank choice becomes a risk management decision rather than a pure optimization.",
+          "label": "Text"
+        },
+        {
+          "id": "3",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.124,
+            "y": 0.495,
+            "width": 0.324,
+            "height": 0.016
+          },
+          "content": "## 5.3. Weight sensitivity and Pareto geometry",
+          "label": "Text"
+        },
+        {
+          "id": "4",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.078,
+            "y": 0.515,
+            "width": 0.415,
+            "height": 0.126
+          },
+          "content": "Figure 3 shows that for SNR $\\lesssim1$ in our synthetic configuration, $w_{\\mathrm{core}}\\simeq0.03-0.05$ and $w_{\\mathrm{prot}}\\simeq0.3-0.6$ lie close to the minimum median bias across the grid. Lighter down-weighting rapidly reduces protection of the core, while more aggressive weights provide only marginal gains but increase sensitivity to numerical issues. These values therefore define a practical operating range for FWSVD in this testbed.",
+          "label": "Text"
+        },
+        {
+          "id": "5",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.077,
+            "y": 0.641,
+            "width": 0.417,
+            "height": 0.269
+          },
+          "content": "The Pareto projection of the same trade-off is shown in Figure 4, where each panel plots $| \\mathrm{Bias}^{-} |$ (science distortion) against $\\mathrm{Bias}^{+}$ (residual contamination) for each trial. The knee of the Pareto front—identified as the point of maximum curvature on the convex hull of the trial cloud, marked by open circles-separates a regime in which increasing rank primarily reduces contamination (below the knee) from one in which it primarily increases distortion (above the knee). The knee is not sharp because the underlying singular-value spectrum decays gradually rather than exhibiting a clear gap, so that successive rank increments produce diminishing marginal returns in contamination reduction. This gradual transition is a direct consequence of the mixed-subspace structure: when science and RFI energy are distributed across multiple singular modes with comparable amplitudes, no single rank increment can decisively separate the two components.",
+          "label": "Text"
+        },
+        {
+          "id": "6",
+          "order": 7,
+          "bounding_box": {
+            "x": 0.516,
+            "y": 0.085,
+            "width": 0.395,
+            "height": 0.22
+          },
+          "content": "",
+          "label": "Image"
+        },
+        {
+          "id": "7",
+          "order": 8,
+          "bounding_box": {
+            "x": 0.505,
+            "y": 0.324,
+            "width": 0.415,
+            "height": 0.07
+          },
+          "content": "Figure 3. FWSVD sensitivity to $( w_{\\mathrm{core}} , w_{\\mathrm{prot}} )$ . Median relative bias in the science band as a function of $w_{\\mathrm{prot}}$ for several fixed values of $w_{\\mathrm{core}}$ . Stronger down-weighting of the science core (smaller $w_{\\mathrm{core}}$ ) reduces the median bias, but gains saturate once $w_{\\mathrm{core}} \\lesssim 0.03-0.05$",
+          "label": "Text"
+        },
+        {
+          "id": "8",
+          "order": 9,
+          "bounding_box": {
+            "x": 0.574,
+            "y": 0.413,
+            "width": 0.277,
+            "height": 0.014
+          },
+          "content": "## 6. APPLICATION TO HERA DATA",
+          "label": "Text"
+        },
+        {
+          "id": "9",
+          "order": 10,
+          "bounding_box": {
+            "x": 0.504,
+            "y": 0.435,
+            "width": 0.418,
+            "height": 0.203
+          },
+          "content": "We now apply the diagnostics developed on the synthetic testbed to real single-epoch HERA snapshots. Our goals are (i) to test whether the mixed singular-subspace structure, the contamination-distortion trade-off, and the resulting error floor observed in controlled experiments also appear in real data, and (ii) to define a minimal QA procedure that can be deployed in operational pipelines. As operational proxies we use (1) the residual power in heavily flagged channels and (2) deviations from spectral smoothness within the protected science band. In the HERA application, the residual-contamination proxy is operationalized as residual power in heavily flagged channels.",
+          "label": "Text"
+        },
+        {
+          "id": "10",
+          "order": 11,
+          "bounding_box": {
+            "x": 0.576,
+            "y": 0.653,
+            "width": 0.275,
+            "height": 0.014
+          },
+          "content": "## 6.1. Data Products and Construction",
+          "label": "Text"
+        },
+        {
+          "id": "11",
+          "order": 12,
+          "bounding_box": {
+            "x": 0.504,
+            "y": 0.673,
+            "width": 0.417,
+            "height": 0.172
+          },
+          "content": "We use single-epoch dynamic spectra from the 2022 April 3 HERA observations, drawn from the publicly available dataset of Mesarcik et al. (2022), archived at Zenodo DOI: 10.5281/zenodo.6724065). We analyze $N_{\\mathrm{snap}}=4 2 0$ snapshots from the first array, each with （ $T_{\\mathrm{raw}}, F$ ）= (512,512), and use a trimmed subset of $T=4 2 0$ time samples after removing edge segments with elevated flagging (DeBoer et al. 2017). We fix a single interferometric baseline (index 0) and the stored polarization (XX). A summary of the HERA data products and preprocessing is provided in Table 3.",
+          "label": "Text"
+        },
+        {
+          "id": "12",
+          "order": 13,
+          "bounding_box": {
+            "x": 0.504,
+            "y": 0.846,
+            "width": 0.417,
+            "height": 0.064
+          },
+          "content": "We collapse the calibrated complex visibility $V(t,\\nu)$ into its amplitude $|V(t,\\nu)|$ , which serves as a real-valued proxy for the power in each time-frequency pixel. The final analysis matrix $D\\in\\mathbb{R}^{T\\times F}$ is constructed after median-MAD",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "page_index": 7,
+      "blocks": [
+        {
+          "id": "0",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.081,
+            "y": 0.084,
+            "width": 0.403,
+            "height": 0.214
+          },
+          "content": "",
+          "label": "Image"
+        },
+        {
+          "id": "1",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.514,
+            "y": 0.085,
+            "width": 0.401,
+            "height": 0.213
+          },
+          "content": "",
+          "label": "Image"
+        },
+        {
+          "id": "2",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.075,
+            "y": 0.31,
+            "width": 0.846,
+            "height": 0.112
+          },
+          "content": "Figure 4. Bias-distortion trade-off in synthetic single-epoch experiments. (a) Standard SVD and (b) frequencyweighted SVD (FWSVD) under rank sweep. Each curve corresponds to one synthetic realization; each point is a rank choice. The knee of each curve (filled marker) is identified as the point of maximum curvature in the $\\mathrm{B i a s}^{+}-|\\mathrm{B i a s}^{-}|$ plane. In both panels the trade-off curves are shallow rather than L-shaped: no rank choice simultaneously achieves low residual RFI contamination and low science distortion. This flatness arises because the available rank budget is insufficient to isolate the interference subspace—the leading singular modes mix foreground, RFI, and science-band structure, so each additional rank removed carries both RFI suppression and science loss in roughly equal measure (Section 5). Frequency weighting shifts the Pareto frontier toward lower distortion at matched contamination levels, but does not eliminate the underlying trade-off.",
+          "label": "Text"
+        },
+        {
+          "id": "3",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.077,
+            "y": 0.429,
+            "width": 0.417,
+            "height": 0.173
+          },
+          "content": "normalization. The snapshots cover the 50-225 MHz band with uniform channel spacing $\\Delta\\nu\\approx 0.3418$ MHz and time resolution $\\Delta t=1.0$ s. For the HERA analysis, we define the science core as 140-160MHz,the science band as 130-170MHz,and the outside band as the remaining channels. The synthetic channel spacing $(\\Delta\\nu=0.05$ MHz) is finer than the HERA spacing $(\\approx 0.34$ MHz) in order to resolve narrowband RFI more clearly; this affects the apparent rank of narrowband structure but not the underlying non-identifiability mechanism, which is driven by subspace overlap.",
+          "label": "Text"
+        },
+        {
+          "id": "4",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.171,
+            "y": 0.621,
+            "width": 0.23,
+            "height": 0.014
+          },
+          "content": "## 6.2. Evidence for mixed modes",
+          "label": "Text"
+        },
+        {
+          "id": "5",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.077,
+            "y": 0.642,
+            "width": 0.417,
+            "height": 0.203
+          },
+          "content": "Our first diagnostic is a mixed-mode inspection. The leading singular modes exhibit co-located foreground/instrument-like smooth structure and narrowband or comb-like RFI signatures within the same modes (Figure 5a). This is the real-data analogue of the synthetic mixed-mode structure shown in Figure 1b: in both cases the dominant singular mode captures a superposition of smooth and narrowband components. This implies that the HERA snapshots occupy the same mixed-subspace regime as the synthetic testbed: low-rank projection that removes the leading modes necessarily suppresses RFI at the cost of unavoidable distortion in the protected science band.",
+          "label": "Text"
+        },
+        {
+          "id": "6",
+          "order": 7,
+          "bounding_box": {
+            "x": 0.077,
+            "y": 0.847,
+            "width": 0.417,
+            "height": 0.062
+          },
+          "content": "We note that the synthetic testbed models only narrowband comb-like RFI, whereas real HERA data also contain broadband RFI (e.g., from digital electronics or wideband transmitters). Broadband interference that is",
+          "label": "Text"
+        },
+        {
+          "id": "7",
+          "order": 8,
+          "bounding_box": {
+            "x": 0.503,
+            "y": 0.43,
+            "width": 0.418,
+            "height": 0.172
+          },
+          "content": "spectrally smooth will tend to be absorbed into the same low-rank subspace as the astrophysical foreground, reinforcing rather than alleviating the mixed-mode structure. If the broadband RFI has temporal structure distinct from the foreground, it may occupy additional singular modes, but this increases the effective rank of the contaminant without removing the subspace overlap with science. Our narrowband-only synthetic model therefore represents a conservative scenario; the inclusion of broadband RFI would generally strengthen the non-identifiability conclusion.",
+          "label": "Text"
+        },
+        {
+          "id": "8",
+          "order": 9,
+          "bounding_box": {
+            "x": 0.527,
+            "y": 0.621,
+            "width": 0.373,
+            "height": 0.015
+          },
+          "content": "## 6.3. Rank sweeps, proxy metrics, and Pareto views",
+          "label": "Text"
+        },
+        {
+          "id": "9",
+          "order": 10,
+          "bounding_box": {
+            "x": 0.504,
+            "y": 0.642,
+            "width": 0.418,
+            "height": 0.267
+          },
+          "content": "We perform rank sweeps over k and summarize the contamination-distortion trade-off in a Pareto view using the two proxy metrics above. For calibration, we additionally construct pseudo-snapshots by injecting a weak EoR-like spectral feature into a subset of snapshots; in this case the injected science spectrum is known and the recovery error can be measured directly as a function of rank. For both TempSVD- and FWSVD-type variants, the science-core RMSE decreases rapidly from $k=1$ to $k\\simeq 3-5$ and then saturates, revealing an error floor beyond which increasing rank yields little or no improvement. Frequency weighting shifts the operating point toward a relatively safer region and improves robustness, but does not remove the floor. For real snapshots the true sky spectrum is unknown, so an absolute bias cannot be computed; instead, the rank dependence of the proxies and the Pareto frontier (Figure 5) demonstrate the same non-",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "page_index": 8,
+      "blocks": [
+        {
+          "id": "0",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.078,
+            "y": 0.081,
+            "width": 0.416,
+            "height": 0.159
+          },
+          "content": "identifiability geometry. In particular, the HERA Pareto envelope shows a knee and does not approach the origin indicating that single-epoch low-rank cleaning is structurally non-identifiable rather than merely under-tuned. The Pareto projection for HERA (Figure 5b) should be compared directly with the synthetic Pareto panels in Figure 4: both exhibit the same qualitative structure-a nonzero error floor and a knee that prevents the operating point from reaching the origin—confirming that the nond identifiability is not an artifact of the synthetic setup.",
+          "label": "Text"
+        },
+        {
+          "id": "1",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.181,
+            "y": 0.263,
+            "width": 0.211,
+            "height": 0.015
+          },
+          "content": "## 6.4. Limits of proxy metrics",
+          "label": "Text"
+        },
+        {
+          "id": "2",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.077,
+            "y": 0.284,
+            "width": 0.416,
+            "height": 0.172
+          },
+          "content": "In the HERA injection tests we can directly compare the proxy metrics to the true injection-recovery error. While a rank-level average trend is present, the correlation weakens at the level of individual snapshots (Figure 6). Even when the Pearson correlation is large on average (e.g., $\\gtrsim0.8$ across many snapshots), there exists a tail of cases in which proxy values appear benign while science distortion is substantial. Proxy metrics should therefore be interpreted not as per-snapshot estimators of true error, but as operational risk indicators used to summarize rank trends and to define QA envelopes.",
+          "label": "Text"
+        },
+        {
+          "id": "3",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.077,
+            "y": 0.455,
+            "width": 0.417,
+            "height": 0.364
+          },
+          "content": "Mathematically, this behavior can be traced to the normalization and masking structure of the proxy metrics. Recall that the science-distortion metric ultimately derives from the channel-wise bias $B(\\nu)$ defined in Equation (5) and the integrated absolute error IAE $^{\\mathrm{core}}$ in Equation (7). In heavily flagged intervals, AOFlagger and subsequent masking effectively remove the most contaminated channels from both the numerator and the denominator of these expressions, while the remaining channels are renormalized by a fixed dynamic-range scale (e.g., a MADbased estimator) and the stabilizing constant $\\epsilon$ defined in Equation (5). When the true science spectrum $S(\\nu)$ is very small in the surviving channels, the denominator $\\max(|S(\\nu)|,\\epsilon)$ saturates at $\\epsilon$ and the proxy becomes insensitive to additional suppression of $S(\\nu)$ , even though the absolute error $|\\hat{S}(\\nu)-S(\\nu)|$ remains large. Conversely, when bright residual RFI contamination is confined to a small number of heavily masked channels, the residual-power proxy can be driven to deceptively low values. These effects explain why rank-averaged diagnostics can exhibit a tight correlation between proxy and injected error, while snapshot-level realizations develop a long tail of under-estimated failures.",
+          "label": "Text"
+        },
+        {
+          "id": "4",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.077,
+            "y": 0.861,
+            "width": 0.415,
+            "height": 0.048
+          },
+          "content": "The HERA results motivate the following minimum QA procedure for any single-epoch low-rank cleaning configuration:",
+          "label": "Text"
+        },
+        {
+          "id": "5",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.178,
+            "y": 0.841,
+            "width": 0.216,
+            "height": 0.015
+          },
+          "content": "## 6.5. Minimum QA procedure",
+          "label": "Text"
+        },
+        {
+          "id": "6",
+          "order": 7,
+          "bounding_box": {
+            "x": 0.529,
+            "y": 0.082,
+            "width": 0.392,
+            "height": 0.063
+          },
+          "content": "1. Mixed-mode check: inspect the spectral structure of the leading singular vectors to determine whether protected science features plausibly contaminate the modes slated for subtraction.",
+          "label": "Text"
+        },
+        {
+          "id": "7",
+          "order": 8,
+          "bounding_box": {
+            "x": 0.528,
+            "y": 0.155,
+            "width": 0.393,
+            "height": 0.078
+          },
+          "content": "2. Rank sweep & Pareto view: run rank sweeps on a small set of representative snapshots and plot contamination-distortion proxies in a Pareto diagram to identify the presence of an error floor and the relative \"safer\" rank region.",
+          "label": "Text"
+        },
+        {
+          "id": "8",
+          "order": 9,
+          "bounding_box": {
+            "x": 0.527,
+            "y": 0.242,
+            "width": 0.394,
+            "height": 0.063
+          },
+          "content": "3. Proxy calibration: calibrate chosen proxy metrics against bias/failure diagnostics on a validation subset; then monitor the proxies as low-cost QA signals in large-scale processing.",
+          "label": "Text"
+        },
+        {
+          "id": "9",
+          "order": 10,
+          "bounding_box": {
+            "x": 0.504,
+            "y": 0.313,
+            "width": 0.417,
+            "height": 0.109
+          },
+          "content": "In summary, frequency weighting can be a practical tuning knob that moves the operating point along the Pareto front, but because a non-zero error floor persists it should not be presented as a solution to the single-epoch nonidentifiability. Operational pipelines should therefore document the adopted weights, the induced Pareto shift, and the parameter ranges that satisfy the QA envelope.",
+          "label": "Text"
+        },
+        {
+          "id": "10",
+          "order": 11,
+          "bounding_box": {
+            "x": 0.505,
+            "y": 0.423,
+            "width": 0.416,
+            "height": 0.047
+          },
+          "content": "Figure 7 illustrates the method-dependent residual structure after rank-2 truncation on a representative HERA snapshot with an injected EoR-like signal.",
+          "label": "Text"
+        },
+        {
+          "id": "11",
+          "order": 12,
+          "bounding_box": {
+            "x": 0.577,
+            "y": 0.479,
+            "width": 0.273,
+            "height": 0.015
+          },
+          "content": "## 7. CONCLUSION AND OUTLOOK",
+          "label": "Text"
+        },
+        {
+          "id": "12",
+          "order": 13,
+          "bounding_box": {
+            "x": 0.504,
+            "y": 0.501,
+            "width": 0.417,
+            "height": 0.282
+          },
+          "content": "Using controlled synthetic experiments and HERA single-epoch data, we have shown that low-rank (SVD/PCA-family) RFI mitigation in the single-epoch regime faces an operational non-identifiability: when the scientific component and structured RFI share the same singular subspace, no rank choice can simultaneously suppress residual RFI contamination and preserve the science signal. This manifests as mixed singular modes, rank sweeps with monotonic under/over cleaning trade-offs, and Pareto fronts with non-zero bias floors. Frequency-weighted SVD and related variants can shift the operational trade-off—moving the Pareto knee to safer regions and reducing sensitivity to small fluctuations—but do not eliminate the bias floor when subspace overlap is strong. Applying the same diagnostics to HERA single- epoch snapshots reveals the same structure as in the synthetic testbed, bridging the gap between controlled failure-mode analysis and real data.",
+          "label": "Text"
+        },
+        {
+          "id": "13",
+          "order": 14,
+          "bounding_box": {
+            "x": 0.504,
+            "y": 0.784,
+            "width": 0.418,
+            "height": 0.126
+          },
+          "content": "Our analysis is intentionally conservative. We focus on a single-epoch, single-baseline, single-polarization configuration; any diversity across time, baseline length, or polarization is treated as external to the problem rather than as an additional axis for identifiability. In a full EoR analysis this diversity can and should be exploited, and our results should be interpreted as a lower bound on what is achievable without it. The synthetic testbed is",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "page_index": 9,
+      "blocks": [
+        {
+          "id": "0",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.1,
+            "y": 0.083,
+            "width": 0.398,
+            "height": 0.268
+          },
+          "content": "",
+          "label": "Image"
+        },
+        {
+          "id": "1",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.498,
+            "y": 0.083,
+            "width": 0.402,
+            "height": 0.267
+          },
+          "content": "",
+          "label": "Image"
+        },
+        {
+          "id": "2",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.078,
+            "y": 0.364,
+            "width": 0.842,
+            "height": 0.07
+          },
+          "content": "Figure 5. HERA single-epoch rank sweep and Pareto proxy diagnostics. (a) Residual-contamination proxy (blue, lower is better) decreases with increasing rank while science-distortion proxy (orange, lower is better) increases. The shaded region indicates the non-identifiable rank range (approximately k=5-20) where both errors remain high. (b) Pareto projection of the same proxies (colored by rank). The front exhibits a clear knee and non-zero error floor, showing that no single rank simultaneously minimizes residual contamination and distortion. Compare with the synthetic Pareto panels in Figure 4.",
+          "label": "Text"
+        },
+        {
+          "id": "3",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.088,
+            "y": 0.443,
+            "width": 0.394,
+            "height": 0.272
+          },
+          "content": "",
+          "label": "Image"
+        },
+        {
+          "id": "4",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.077,
+            "y": 0.734,
+            "width": 0.416,
+            "height": 0.11
+          },
+          "content": "Figure 6. Validation of the residual-based proxy metric on HERA injection tests. The reported correlations are conditional on restricting to the unsaturated regime (excluding trials with proxy $> 95$ and applying the same detection/thresholding rules used in the analysis). Within this unsaturated dynamic range the proxy tracks the true injection-recovery error closely (Spearman $\\rho=0.98$ , Pearson $r=0.98$ ), but saturation and threshold effects can break snapshot-level calibration.",
+          "label": "Text"
+        },
+        {
+          "id": "5",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.077,
+            "y": 0.863,
+            "width": 0.416,
+            "height": 0.031
+          },
+          "content": "anchored on a harmonic-comb RFI model motivated by recent satellite work (e.g., Di Vruno et al. 2023; Bassa",
+          "label": "Text"
+        },
+        {
+          "id": "6",
+          "order": 7,
+          "bounding_box": {
+            "x": 0.503,
+            "y": 0.441,
+            "width": 0.418,
+            "height": 0.141
+          },
+          "content": "et al. 2024) and on a single, time-invariant spectral feature; broadband, drifting, or bursty RFI scenarios may introduce additional structure but do not remove the possibility of mixed singular directions. In the HERA application the true science signal is unknown, so we rely on proxy metrics (smoothness, residual structure in heavily flagged regions) rather than direct bias measurements, and we explicitly demonstrate that such proxies cannot be interpreted as realization-level error estimators.",
+          "label": "Text"
+        },
+        {
+          "id": "7",
+          "order": 8,
+          "bounding_box": {
+            "x": 0.505,
+            "y": 0.582,
+            "width": 0.415,
+            "height": 0.11
+          },
+          "content": "These caveats point to future work: (i) quantifying how much multi-epoch and multi-baseline diversity is needed to move Pareto fronts closer to the origin; (ii) combining low-rank decompositions with physical priors or non-linear models of the foregrounds, beam, or instrument; and (iii) extending the synthetic testbed to a broader class of RFI morphologies and to other low-frequency arrays.",
+          "label": "Text"
+        },
+        {
+          "id": "8",
+          "order": 9,
+          "bounding_box": {
+            "x": 0.52,
+            "y": 0.694,
+            "width": 0.254,
+            "height": 0.015
+          },
+          "content": "A simple operational rule emerges:",
+          "label": "Text"
+        },
+        {
+          "id": "9",
+          "order": 10,
+          "bounding_box": {
+            "x": 0.528,
+            "y": 0.72,
+            "width": 0.392,
+            "height": 0.064
+          },
+          "content": "1. Inspect the leading singular modes: if they clearly mix smooth foreground-like structure and narrowband or comb-like RFI, treat the snapshot as intrinsically non-identifiable a priori.",
+          "label": "Text"
+        },
+        {
+          "id": "10",
+          "order": 11,
+          "bounding_box": {
+            "x": 0.528,
+            "y": 0.8,
+            "width": 0.392,
+            "height": 0.061
+          },
+          "content": "2. Run a short rank sweep and check whether both a science-core bias metric and a residual-contamination proxy fall below pre-defined QA thresholds.",
+          "label": "Text"
+        },
+        {
+          "id": "11",
+          "order": 12,
+          "bounding_box": {
+            "x": 0.527,
+            "y": 0.878,
+            "width": 0.394,
+            "height": 0.031
+          },
+          "content": "3. If no such rank exists, avoid aggressive low-rank subtraction and rely instead on conservative masking",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "page_index": 10,
+      "blocks": [
+        {
+          "id": "0",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.113,
+            "y": 0.078,
+            "width": 0.78,
+            "height": 0.166
+          },
+          "content": "",
+          "label": "Image"
+        },
+        {
+          "id": "1",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.105,
+            "y": 0.249,
+            "width": 0.778,
+            "height": 0.095
+          },
+          "content": "",
+          "label": "Image"
+        },
+        {
+          "id": "2",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.077,
+            "y": 0.361,
+            "width": 0.847,
+            "height": 0.196
+          },
+          "content": "Figure 7. Rank-2 truncation failure on HERA data. Residual structure after rank-k = 2 low-rank truncation on a single-epoch HERA dynamic spectrum with an injected EoR-like signal at 150 MHz (amplitude = 0.4 in MAD-normalized units; see Appendix B for the injection model and amplitude choice). Top: Time-frequency residual matrices $D-D_{k}$ for SVD, FWSVD, and TempSVD. While all methods remove the dominant low-rank foreground modes, each leaves distinct method-dependent artifacts: standard SVD retains broadband foreground residuals; FWSVD redistributes variance outside the weighted core; and TempSVD introduces horizontal smoothing features associated with temporal averaging. The dark vertical stripes visible in the SVD and FWSVD panels (e.g., near time bins ~75, 250, and 410) correspond to short intervals of elevated RFI activity or instrumental instability that are not fully captured by the rank-2 model; these stripes are absent in the TempSVD panel because the temporal smoothing kernel averages over such transient features, effectively spreading their energy across neighboring time bins. Bottom: Frequency-averaged residual spectra overlaid with the injected signal (blue). Vertical shading marks the protected EoR window （140-160MHz），with the dashed line indicating the injection frequency. Despite comparable core RMSE values (SVD: 0.10, FWSVD: 0.11, TempSVD: 0.06), none of the methods cleanly isolates the injected signal from foreground residuals. The qualitative differences in distortion patterns, without a clear ordering in performance, illustrate the operational non-identifiability of single-epoch low-rank foreground cleaning.",
+          "label": "Text"
+        },
+        {
+          "id": "3",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.117,
+            "y": 0.564,
+            "width": 0.375,
+            "height": 0.031
+          },
+          "content": "and on multi-epoch or multi-baseline diversity for scientific interpretation.",
+          "label": "Text"
+        },
+        {
+          "id": "4",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.077,
+            "y": 0.607,
+            "width": 0.416,
+            "height": 0.093
+          },
+          "content": "In this view, single-epoch low-rank cleaning is a riskmanaged tool with an explicit QA envelope, not a universally safe default, complementing existing protection criteria and RFI-mitigation practice in radio astronomy (e.g., ITU-R 2005; Fridman & Baan 2001; Offringa et al. 2010, 2012).",
+          "label": "Text"
+        },
+        {
+          "id": "5",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.191,
+            "y": 0.715,
+            "width": 0.19,
+            "height": 0.014
+          },
+          "content": "## ACKNOWLEDGMENTS",
+          "label": "Text"
+        },
+        {
+          "id": "6",
+          "order": 7,
+          "bounding_box": {
+            "x": 0.077,
+            "y": 0.737,
+            "width": 0.416,
+            "height": 0.03
+          },
+          "content": "The author thanks colleagues and community discussions on RFI impacts and mitigation practices that motivated this diagnostic framing. This work makes use of data from the Hydrogen Epoch of Reionization Array (HERA; https://reionization.org/), which is supported by the National Science Foundation and the Gordon and Betty Moore Foundation. We gratefully acknowledge the HERA collaboration for making their data products accessible. HERA is hosted by the South African Radio Astronomy Observatory, which is a facility of the National Research Foundation, an agency of the Department of Science and Innovation. This work builds upon exploratory experiments conducted in the public code repository https://github.com/kimeujin03-droid single-epoch-rfi-mitigation.",
+          "label": "Text"
+        },
+        {
+          "id": "7",
+          "order": 8,
+          "bounding_box": {
+            "x": 0.452,
+            "y": 0.783,
+            "width": 0.095,
+            "height": 0.014
+          },
+          "content": "## APPENDIX",
+          "label": "Text"
+        },
+        {
+          "id": "8",
+          "order": 9,
+          "bounding_box": {
+            "x": 0.199,
+            "y": 0.841,
+            "width": 0.601,
+            "height": 0.014
+          },
+          "content": "## A. SYNTHETIC DATA PARAMETERS AND SIGNAL-GENERATION RECIPE",
+          "label": "Text"
+        },
+        {
+          "id": "9",
+          "order": 10,
+          "bounding_box": {
+            "x": 0.077,
+            "y": 0.862,
+            "width": 0.845,
+            "height": 0.048
+          },
+          "content": "Table 2 lists the fixed synthetic-data parameters used throughout the controlled toy experiments, unless stated otherwise. The configuration matches the simulation settings used to generate all synthetic figures in this work Our synthetic testbed follows standard practice in time-frequency modelling by combining smooth astrophysical com-",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "page_index": 11,
+      "blocks": [
+        {
+          "id": "0",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.195,
+            "y": 0.081,
+            "width": 0.607,
+            "height": 0.057
+          },
+          "content": "Table 2. Synthetic dynamic-spectrum parameters used in the controlled comb+line experiments (Figures 2-4). Values match the configuration used in the SVD diagnostics setup. The listed FWSVD weights are the nominal values used to render Figures 2-4; Section 5 explores a wider weight grid and reports a practical operating range.",
+          "label": "Text"
+        },
+        {
+          "id": "1",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.201,
+            "y": 0.146,
+            "width": 0.591,
+            "height": 0.357
+          },
+          "content": "<table border=\"1\"><tr><td>Quantity</td><td>Value</td></tr><tr><td>Time resolution $\\Delta t$</td><td>1.0s</td></tr><tr><td>Total duration</td><td>60s($T=60$ samples)</td></tr><tr><td>Frequency range</td><td>0-12MHz</td></tr><tr><td>Channel width$\\Delta \\nu$</td><td>50kHz($F=240$ channels)</td></tr><tr><td>Science feature</td><td>Time-invariant Gaussian line in frequency</td></tr><tr><td>Science line center</td><td>6.0MHz</td></tr><tr><td>Science line width</td><td>$\\sigma_{\\nu}=0.2$MHz</td></tr><tr><td>Science amplitudes</td><td>Broad pedestal 0.03,line peak 0.10(arb.units)</td></tr><tr><td>Science band(evaluation window)</td><td>5.5-6.5MHz</td></tr><tr><td>Protected core band</td><td>5.8-6.2MHz</td></tr><tr><td>Comb interference lines</td><td>5lines at5.6,5.8,6.0,6.2,6.4MHz</td></tr><tr><td>Comb line width</td><td>$\\sigma_{\\nu}=0.02$MHz</td></tr><tr><td>Comb peak amplitude</td><td>10.0(grid:5,10,15,20)</td></tr><tr><td>Time-localized burst envelope</td><td>Gaussian in time,center5s,width1s</td></tr><tr><td>Broadband spectral slope</td><td>0.03acrossband</td></tr><tr><td>Sinusoidal ripple amplitude</td><td>0.03</td></tr><tr><td>Sinusoidal ripple period</td><td>1.5MHz</td></tr><tr><td>Thermal noise$\\sigma$</td><td>0.001,i.i.d.Gaussian</td></tr><tr><td>Default truncation rankk</td><td>k=1(sweep:k=1-50)</td></tr><tr><td>Example FWSVD weights(Figs.2-4)</td><td>wcore=0.1,wprot=0.3</td></tr></table>",
+          "label": "Table"
+        },
+        {
+          "id": "2",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.078,
+            "y": 0.554,
+            "width": 0.842,
+            "height": 0.033
+          },
+          "content": "ponents with narrowband and comb-like RFI structures (e.g., Leshem et al. 2000), while allowing full control over signal-to-interference overlap and relative amplitudes. The signal-generation recipe is:",
+          "label": "Text"
+        },
+        {
+          "id": "3",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.228,
+            "y": 0.636,
+            "width": 0.544,
+            "height": 0.015
+          },
+          "content": "## B. EOR-LIKE INJECTION MODEL FOR HERA PROXY VALIDATION",
+          "label": "Text"
+        },
+        {
+          "id": "4",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.077,
+            "y": 0.658,
+            "width": 0.842,
+            "height": 0.047
+          },
+          "content": "For the HERA injection-recovery tests (Figures 6 and 7), we inject a narrowband Gaussian spectral feature centered at $150\\mathrm{MHz}$ with a width $\\sigma_{\\nu}=0.5\\mathrm{MHz}$ and a peak amplitude of 0.4 in MAD-normalized units (after rescaling the EoR window to unit RMS). The feature is constant in time and added to the amplitude matrix $|V(t,\\nu)|$ after normalization.",
+          "label": "Text"
+        },
+        {
+          "id": "5",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.078,
+            "y": 0.704,
+            "width": 0.842,
+            "height": 0.095
+          },
+          "content": "This injection is intentionally simple: it is designed as a controlled probe of the recovery fidelity of single-epoch lowrank cleaning, not as a physically realistic model of the 21 cm signal. The true EoR signal is broadband $(\\Delta \\nu\\gtrsim 10\\mathrm{MHz})$ and spectrally complex (e.g., Furlanetto et al. 2006; Morales & Wyithe 2010); however, a localized spectral probe provides a sharper, unambiguous recovery metric than a broadband signal whose distortion could be confused with residual foreground structure. Crucially, a narrowband injection represents an easier recovery target: if single-epoch low-rank cleaning distorts even this simple feature, it will necessarily also distort the broader, weaker true EoR signal.",
+          "label": "Text"
+        },
+        {
+          "id": "6",
+          "order": 7,
+          "bounding_box": {
+            "x": 0.078,
+            "y": 0.8,
+            "width": 0.844,
+            "height": 0.11
+          },
+          "content": "The amplitude of 0.4 (in EoR-window-RMS-normalized units) was chosen to place the probe at a signal-to-residual ratio of order unity—comparable to the residual foreground fluctuations in the science band after rank-2 subtraction so that the injection is neither trivially recoverable nor completely buried. This regime is the most informative for diagnosing non-identifiability: at much higher amplitude the probe would survive any cleaning method, while at much lower amplitude detection failure would be attributable to noise rather than to subspace mixing. We did not explore a grid of injection amplitudes in this work; varying the amplitude would shift the detection failure rate $p_{\\mathrm{fail}}$ but would not change the qualitative structure of the Pareto front or the presence of the bias floor, which are the primary conclusions.",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "page_index": 12,
+      "blocks": [
+        {
+          "id": "0",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.255,
+            "y": 0.082,
+            "width": 0.487,
+            "height": 0.014
+          },
+          "content": "Table 3. HERA single-epoch data product and preprocessing summary.",
+          "label": "Text"
+        },
+        {
+          "id": "1",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.171,
+            "y": 0.1,
+            "width": 0.701,
+            "height": 0.372
+          },
+          "content": "<table border=\"1\"><tr><td>Item</td><td>Value</td><td>Notes</td></tr><tr><td>Instrument / date</td><td>HERA, 2022-04-03</td><td>single-epoch snapshots</td></tr><tr><td>Data source</td><td>Mesarcik et al.(2022), Zenodo</td><td>DOI:10.5281/zenodo.6724065</td></tr><tr><td>Observation window</td><td>~19:42-20:42 UTC</td><td>from Zenodo metadata</td></tr><tr><td>Data format</td><td>Python pickle(list of 4 arrays)</td><td>loaded via pd.read_pickle</td></tr><tr><td>Array 0 shape</td><td>(420,512,512,1) float16</td><td>visibility amplitude</td></tr><tr><td>Array 1 shape</td><td>(420,512,512,1) bool</td><td>AOFlagger mask</td></tr><tr><td>Number of snapshots $N_{\\mathrm{snap}}$</td><td>420</td><td>first axis of array 0</td></tr><tr><td>Per-snapshot matrix size</td><td>$T=420,F=512$</td><td>time samples $\\times$ frequency channels</td></tr><tr><td>Frequency span</td><td>50-225 MHz</td><td>stated analysis band</td></tr><tr><td>Channel spacing $\\Delta \\nu$</td><td>0.341796875 MHz</td><td>measured from frequency axis</td></tr><tr><td>Time resolution $\\Delta t$</td><td>1.0 s</td><td>verified from metadata/header</td></tr><tr><td>Snapshot duration $T_{\\mathrm{snap}}$</td><td>420 s</td><td>$T_{\\mathrm{snap}}=T\\times\\Delta t$</td></tr><tr><td>Baseline</td><td>Baseline index 0</td><td>fixed per snapshot</td></tr><tr><td>Polarization</td><td>XX</td><td>fixed</td></tr><tr><td>Input quantity</td><td>$|V(t,\\nu)|$</td><td>amplitude of calibrated visibility</td></tr><tr><td>Normalization</td><td>median-MAD</td><td>applied to form $D\\in\\mathbb{R}^{T\\times F}$</td></tr><tr><td>RFI mask</td><td>AOFlagger boolean mask</td><td>separate array (not NaNs)</td></tr><tr><td>Flagged fraction</td><td>mean 2.75%, median 2.24%</td><td>10/90%：1.13/5.88%</td></tr><tr><td>Science core(protected)</td><td>140-160 MHz</td><td>redshifted 21 cm at $z\\approx 7.9-9.1$</td></tr><tr><td>Science band(evaluation)</td><td>130-170 MHz</td><td>core $\\pm 10$ MHz</td></tr><tr><td>Injection example</td><td>150 MHz，amp = 0.4，$\\sigma_{\\nu}=0.5$ MHz</td><td>rank-2 proxy validation</td></tr></table>",
+          "label": "Table"
+        },
+        {
+          "id": "2",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.08,
+            "y": 0.497,
+            "width": 0.84,
+            "height": 0.048
+          },
+          "content": "The protected EoR window of 140-160 MHz corresponds to the redshifted 21 cm line at $z\\approx 7.9-9.1$ , consistent with the frequency range commonly targeted by HERA foreground-avoidance analyses (e.g., DeBoer et al. 2017; Abdurashidova et al. 2022).",
+          "label": "Text"
+        },
+        {
+          "id": "3",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.441,
+            "y": 0.568,
+            "width": 0.118,
+            "height": 0.017
+          },
+          "content": "## REFERENCES",
+          "label": "Text"
+        },
+        {
+          "id": "4",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.077,
+            "y": 0.595,
+            "width": 0.406,
+            "height": 0.307
+          },
+          "content": "Abdurashidova, Z., Aguirre, J. E., Alexander, P., et al. 2022 The Astrophysical Journal, 925, 221\n\nAkeret, J., Chang, C., Lucchi, A., & Refregier, A. 2017 Astronomy and Computing, 18, 35\n\nBassa, C. G., Di Vruno, F., Prabu, T., et al. 2024, Astronom & Astrophysics, 689, L10\n\nCandès, E. J., Li, X., Ma, Y., & Wright, J. 2011, Journal of the ACM, 58, 11\n\nChandrasekaran, V., Sanghavi, S., Parrilo, P. A., & Willsky, A. S. 2011, SIAM Journal on Optimization, 21, 572\n\nConnor, L., & van Leeuwen, J. 2018, The Astronomical Journal, 156, 256\n\nDatta, A., Bowman, J. D., & Carilli, C. L. 2010, The Astrophysical Journal, 724, 526\n\nDeBoer, D. R., Parsons, A. R., Aguirre, J. E., et al. 2017 Publications of the Astronomical Society of the Pacific, 129, 045001\n\nDi Vruno, F., Winkel, B., Bassa, C. G., et al. 2023, Astronomy & Astrophysics, 676, A75",
+          "label": "Text"
+        },
+        {
+          "id": "5",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.507,
+            "y": 0.593,
+            "width": 0.41,
+            "height": 0.311
+          },
+          "content": "Dillon, J. S., Kerrigan, J., Kohn, S. A., et al. 2020, Monthly Notices of the Royal Astronomical Society, 499, 5840\n\nFridman, P. A., & Baan, W. A. 2001, Astronomy & Astrophysics, 378, 327\n\nFurlanetto, S. R., Oh, S. P., & Briggs, F. H. 2006, Cosmology at low frequencies: The 21 cm transition and the high-redshift Universe, Vol. 433, 181-301,\n\ndoi: 10.1016/j.physrep.2006.08.002\n\nGavish, M., & Donoho, D. L. 2014, IEEE Transactions on Information Theory, 60, 5040,\n\ndoi: 10.1109/TIT.2014.2323359\n\nGolub, G. H., & Van Loan, C. F. 2013, Matrix Computations, 4th edn. (Baltimore: Johns Hopkins University Press)\n\nHyvärinen, A., & Oja, E. 2000, Neural Networks, 13, 411\n\nITU-R. 2005, Recommendation ITU-R RA.769-2: Protection criteria used for radio astronomical measurements,\n\nRecommendation RA.769-2, International Telecommunication Union",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "page_index": 13,
+      "blocks": [
+        {
+          "id": "0",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.078,
+            "y": 0.083,
+            "width": 0.407,
+            "height": 0.314
+          },
+          "content": "Kerrigan, J., La Plante, P., Kohn, S., et al. 2019, Monthly Notices of the Royal Astronomical Society, 488, 2605\n\nLee, D. D., & Seung, H. S. 1999, Nature, 401, 788\n\nLeshem, A., van der Veen, A. J., & Boonstra, A. J. 2000, Th Astrophysical Journal Supplement Series, 131, 355\n\nMesarcik, M., Boonstra, A.-J., van Nieuwpoort, R., & Ranguelova, E. 2022, Learning to detect RFI in radio astronomy without seeing it, Zenodo,\n\ndoi: 10.5281/zenodo.6724065\n\nMorales, M. F., Hazelton, B., Sullivan, I., & Beardsley, A. 2012, The Astrophysical Journal, 752, 137\n\nMorales, M. F., & Wyithe, J. S. B. 2010, Annual Review of Astronomy and Astrophysics, 48, 127,\n\ndoi: 10.1146/annurev-astro-081309-130936\n\nOffringa, A. R., de Bruyn, A. G., Biehl, M., et al. 2010, Monthly Notices of the Royal Astronomical Society, 405, 155",
+          "label": "Text"
+        },
+        {
+          "id": "1",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.506,
+            "y": 0.083,
+            "width": 0.402,
+            "height": 0.307
+          },
+          "content": "Offringa, A. R., van de Gronde, J. J., & Roerdink, J. B. T. M. 2012, Astronomy & Astrophysics, 539, A95\n\nOnatski, A. 2010, The Review of Economics and Statistics, 92, 1004, doi: 10.1162/REST_a_00039\n\nParsons, A. R., Pober, J. C., Aguirre, J. E., et al. 2012, The Astrophysical Journal, 753, 81\n\nPober, J. C., Liu, A., Dillon, J. S., et al. 2014, The Astrophysical Journal, 782, 66\n\nVafaei Sadr, A., Bassett, B. A., Oozeer, N., Fantaye, Y., & Finlay, C. 2020, Monthly Notices of the Royal Astronomical Society, 499, 379\n\nWedin, P.-A. 1972, BIT Numerical Mathematics, 12, 99\n\nWilensky, M. J., Morales, M. F., Hazelton, B. J., et al. 2019 Publications of the Astronomical Society of the Pacific, 131, 114507\n\nYang, Z., Zhang, Y., Li, D., et al. 2020, Monthly Notices of the Royal Astronomical Society, 492, 1421\n\nZhu, M., & Ghodsi, A. 2006, Computational Statistics & Data Analysis, 51, 918, doi: 10.1016/j.csda.2005.09.010",
+          "label": "Text"
+        }
+      ]
+    }
+  ]
+}

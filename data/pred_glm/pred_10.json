@@ -1,0 +1,2400 @@
+{
+  "file_name": "paper_10",
+  "pages": [
+    {
+      "page_index": 1,
+      "blocks": [
+        {
+          "id": "0",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.089,
+            "y": 0.15,
+            "width": 0.821,
+            "height": 0.032
+          },
+          "content": "# Born in the Dark: The Catastrophic Collapse of Fuzzy Dark Matter Solitons as the Origin of Little Red Dots",
+          "label": "Text"
+        },
+        {
+          "id": "1",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.428,
+            "y": 0.186,
+            "width": 0.135,
+            "height": 0.014
+          },
+          "content": "TAK-PONG WOO $^{1,2}$",
+          "label": "Text"
+        },
+        {
+          "id": "2",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.255,
+            "y": 0.209,
+            "width": 0.482,
+            "height": 0.028
+          },
+          "content": "$^{1}$ Institute of Astrophysics, National Taiwan University, Taipei 10617, Taiwan $^{2}$ Department of Physics, National Taiwan University, Taipei 10617, Taiwan",
+          "label": "Text"
+        },
+        {
+          "id": "3",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.311,
+            "y": 0.252,
+            "width": 0.377,
+            "height": 0.014
+          },
+          "content": "(Accepted for publication in The Astrophysical Journal)",
+          "label": "Text"
+        },
+        {
+          "id": "4",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.451,
+            "y": 0.281,
+            "width": 0.097,
+            "height": 0.014
+          },
+          "content": "## ABSTRACT",
+          "label": "Text"
+        },
+        {
+          "id": "5",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.131,
+            "y": 0.302,
+            "width": 0.733,
+            "height": 0.251
+          },
+          "content": "JWST surveys have uncovered a population of compact, red sources (\"Little Red Dots,\" LRDs) at $z\\geq 5$ that exhibit broad Balmer emission yet remain X-ray faint, implying heavy obscuration with $N_{\\mathrm{H}} \\geq 10^{24}\\mathrm{cm}^{-2}$ . We propose that LRDs trace a short-lived, obscured phase associated with rapid baryonic inflow inside the deep solitonic cores of fuzzy dark matter (FDM) halos. Combining the soliton size scaling with the observed compact radii ($r_{e}\\sim 30-100$ pc), we find that while a particle mass of $m\\sim 2\\times 10^{-22}$ eV provides a direct match for mature systems, the observed size-mass relation is fully consistent with heavier bosons ($m_{22}\\gtrsim 20$ , satisfying Lyman-$\\alpha$ constraints) if LRDs represent a progenitor phase where the central black hole is still growing ($M_{\\mathrm{BH}}<M_{c}$ ). We adopt $m_{22}=2$ as a fiducial baseline to demonstrate the thermodynamic instability. A conservative mass-budget estimate indicates that configurations reaching $N_{\\mathrm{H}}\\geq 10^{24}-10^{25}\\mathrm{cm}^{-2}$ require densities for which radiative losses (cooling and/or diffusion) occur faster than the dynamical time, suggesting that a long-lived static hot atmosphere is unlikely (an \"Opacity Crisis\") and that rapid inflow or radiation-pressure-driven evolution is favored. Using $512^{3}$ pseudo-spectral Schrödinger-Poisson simulations of idealized soliton mergers, we illustrate that compact, high-density soliton cores form robustly under representative scalings. We discuss observational implications and tests, and outline the need for future radiation-hydrodynamic modeling to predict demographics and detailed spectra.",
+          "label": "Text"
+        },
+        {
+          "id": "6",
+          "order": 7,
+          "bounding_box": {
+            "x": 0.135,
+            "y": 0.585,
+            "width": 0.727,
+            "height": 0.03
+          },
+          "content": "Keywords: dark matter (353); early universe (432); quasars (1319); high-redshift galaxies (734); star formation (1569)",
+          "label": "Text"
+        },
+        {
+          "id": "7",
+          "order": 8,
+          "bounding_box": {
+            "x": 0.2,
+            "y": 0.631,
+            "width": 0.158,
+            "height": 0.014
+          },
+          "content": "## 1. INTRODUCTION",
+          "label": "Text"
+        },
+        {
+          "id": "8",
+          "order": 9,
+          "bounding_box": {
+            "x": 0.077,
+            "y": 0.652,
+            "width": 0.404,
+            "height": 0.189
+          },
+          "content": "The origin of supermassive black holes (SMBHs) residing in the centers of galaxies remains one of the most puzzling questions in modern astrophysics. The detection of quasars at redshift $z > 7$ with black hole masses exceeding $10^{9} M_{\\odot}$ (Mortlock et al.2011; Banados et al. 2018)—together with the growing set of JWST- and X-ray-selected massive black hole candidates at $z\\gtrsim4-10$ (e.g., Yang et al.2020; Larson et al.2023; Kokorev et al. 2023; Kovács et al.2024; Bogdán et al.2024; Bosman et al. 2024; Suh et al. 2025)—places stringent timing constraints on their growth. Standard scenarios, such as light seeds from Pop III stars or heavy seeds from Direct Collapse Black Holes (DCBH), face significant challenges regarding accretion rates and rare environmental requirements (Bromm 2013). The advent of the James Webb Space Telescope (JWST) has added a new layer of complexity. JWST surveys have revealed a ubiquitous population of \"Little Red Dots\" (LRDs) at $z \\sim 5-10$ （Labbé et al. 2023; Greene et al. 2024). These objects are characterized by their compact morphology, with effective (half-light) radii $r_{e} \\lesssim 50-100$ pc, extremely red spectral energy distributions (SEDs), and broad H $\\alpha$ lines indicating SMBH masses of $10^{7}-10^{9} M_{\\odot}$ . Crucially, despite their apparent black hole activity, many LRDs are surprisingly X-ray faint (Maiolino et al. 2024, 2025), consistent with Compton-thick obscuration with column densities $N_{\\mathrm{H}}>10^{24}\\mathrm{cm}^{-2}$ (e.g., Setton et al. 2025; Ji et al. 2025; Inayoshi & Maiolino 2025). Fuzzy Dark Matter (FDM) provides a novel framework for address-",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "page_index": 2,
+      "blocks": [
+        {
+          "id": "0",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.078,
+            "y": 0.082,
+            "width": 0.402,
+            "height": 0.378
+          },
+          "content": "ing these issues. Recent simulations have highlighted how FDM filaments can naturally reproduce the prolate morphology of high-redshift galaxies (Pozo et al. 2025). Complementary to this large-scale picture, FDM halos host a stable, dense ground-state solution known as a soliton (Schive et al. 2014a). In this paper, we propose that LRDs are the direct observational signatures of the catastrophic breakdown of the hydrostatic atmosphere triggered by FDM soliton thermodynamics. We identify a regime of \"Opacity Crisis\" where the static atmosphere becomes unphysical. We present analytic derivations and 3D numerical simulations to show that: (1) deep solitonic potential wells form robustly, and (2) gas within these wells must undergo rapid cooling and inflow. We organize the paper as follows. Section 2 develops the analytic framework connecting soliton scaling, achievable columns, and the timescale-based \"Opacity Crisis.\" Section 3 discusses radiative implications and a parameterized clumpy cocoon geometry. Sections 4 and 5 describe our Schrödinger-Poisson simulations and demonstrate robust formation of compact soliton cores. Section 6 connects the model to Lyman- $\\alpha$ constraints, size-mass trends, and demographic duty-cycle requirements, and Section 7 summarizes.",
+          "label": "Text"
+        },
+        {
+          "id": "1",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.16,
+            "y": 0.468,
+            "width": 0.237,
+            "height": 0.015
+          },
+          "content": "## 2. ANALYTIC FRAMEWORK",
+          "label": "Text"
+        },
+        {
+          "id": "2",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.104,
+            "y": 0.49,
+            "width": 0.349,
+            "height": 0.015
+          },
+          "content": "## 2.1. Soliton Scaling and Parameter Constraints",
+          "label": "Text"
+        },
+        {
+          "id": "3",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.079,
+            "y": 0.511,
+            "width": 0.399,
+            "height": 0.03
+          },
+          "content": "The FDM soliton radius $r_{\\mathrm{c}}$ scales inversely with the boson mass m and soliton mass $M_{\\mathrm{s}}$ (Schive et al. 2014a):",
+          "label": "Text"
+        },
+        {
+          "id": "4",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.164,
+            "y": 0.55,
+            "width": 0.227,
+            "height": 0.035
+          },
+          "content": "$$\nr _ {\\mathrm {c}} \\approx 1 6 0 \\mathrm {p c} m _ {2 2} ^ {- 2} \\left(\\frac {M _ {\\mathrm {s}}}{1 0 ^ {9} M _ {\\odot}}\\right) ^ {- 1},\n$$",
+          "label": "Formula"
+        },
+        {
+          "id": "5",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.455,
+            "y": 0.56,
+            "width": 0.021,
+            "height": 0.016
+          },
+          "content": "(1) ",
+          "label": "Formula"
+        },
+        {
+          "id": "6",
+          "order": 7,
+          "bounding_box": {
+            "x": 0.077,
+            "y": 0.592,
+            "width": 0.402,
+            "height": 0.095
+          },
+          "content": "where $m_{2 2}=m / 10^{-2 2}$ eV. We constrain $m_{2 2}$ by requiring consistency with LRD observables: compact sizes ($r_{\\mathrm{e}} \\sim3 0-1 0 0$ pc) and Compton-thick obscuration （ $N_{\\mathrm{H}}>10^{24}\\mathrm{cm}^{-2}$ ). For a typical LRD host halo, the core-halo relation implies $M_{\\mathrm{s}}\\sim10^{9}M_{\\odot}$ (e.g., Schive et al. 2014b; Chan et al. 2018).",
+          "label": "Text"
+        },
+        {
+          "id": "7",
+          "order": 8,
+          "bounding_box": {
+            "x": 0.077,
+            "y": 0.688,
+            "width": 0.403,
+            "height": 0.222
+          },
+          "content": "As shown in Figure 1, we identify the parameter space where FDM is consistent with observations. To ensure robustness, we also perform a sensitivity analysis regarding the baryon loading parameters. We note that the derived constraints depend on the assumption that the observed effective radius $r_{e}$ traces the soliton core scale $r_{c}$ (i.e., $\\eta_{r}\\equiv r_{e}/r_{c}\\sim\\mathcal{O}(1)$ ). For the soliton scaling in Eq. (1), one finds $m_{22}\\propto r_{c}^{-1 / 2}\\propto\\eta_{r}^{1 / 2}$ at fixed $( r_{e}, M_{s})$ thus an uncertainty $\\eta_{r}\\sim0.5-3$ shifts the inferred $m_{22}$ by a factor of $\\sim0.7-1.7$ . If $r_{e}$ corresponds to a larger scattering photosphere, or if the black hole is in an early progenitor phase where it does not yet trace the full soliton mass $(M_{\\mathrm{BH}}<M_{c})$ , the constraints would shift significantly. However, under the direct mapping assumption $( M_{\\mathrm{BH}} \\approx M_{c} )$ , a fiducial window around $m_{2 2}\\approx 2$ emerges.",
+          "label": "Text"
+        },
+        {
+          "id": "8",
+          "order": 9,
+          "bounding_box": {
+            "x": 0.524,
+            "y": 0.084,
+            "width": 0.387,
+            "height": 0.205
+          },
+          "content": "",
+          "label": "Image"
+        },
+        {
+          "id": "9",
+          "order": 10,
+          "bounding_box": {
+            "x": 0.517,
+            "y": 0.3,
+            "width": 0.404,
+            "height": 0.334
+          },
+          "content": "Figure 1. Constraints on boson mass $( m_{2 2} )$ from combining the soliton size scaling (Eq. 1) with an opacity (column) requirement. The vertical axis shows a characteristic physical scale; we compare the observed effective radius range of LRDs (green band, $r_{e}\\sim 3 0-1 0 0 \\mathrm{p c}$ ）with the soliton core radius predicted for $M_{s}=1 0^{8}-1 0^{9} M_{\\odot}$ （blue band; dashed boundaries follow $r_{c}\\propto m_{2 2}^{-2}$ ). The red hatched region (\"Too transparent\"/\"Generic transparency\") marks parameters for which even a maximally loaded core $( f_{g}=1 )$ confined within $r_{\\mathrm{e}}=\\xi r_{c}$ with $\\xi=1$ cannot reach $N_{\\mathrm{H}}=1 0^{2 4} \\mathrm{c m}^{-2}$ . The opacity boundary is evaluated for a representative $M_{s}\\sim 1 0^{9} M_{\\odot}$ （typical of LRD hosts). The orange shaded area illustrates sensitivity to baryon-loading uncertainties by adopting conservative values $( f_{g}=0. 1,$ $\\xi=3 )$ . The viable region is the overlap between the observed size band and the non-transparent (Compton-thick-capable) region; The region outside the red-shaded area corresponds entirely to the non-transparent (Compton-thick capable) regime. The \"Viable Region\" is specifically the parallelogram defined by the overlap between the observed size band and this non-transparent regime. under the directmapping assumption $( r_{e}\\sim r_{c})$ this favors $m_{2 2}\\sim$ few, and we adopt $m_{2 2}=2$ as a fiducial baseline for subsequent figures.",
+          "label": "Text"
+        },
+        {
+          "id": "10",
+          "order": 11,
+          "bounding_box": {
+            "x": 0.584,
+            "y": 0.747,
+            "width": 0.273,
+            "height": 0.014
+          },
+          "content": "## 2.2. Derivation of the Opacity Crisis",
+          "label": "Text"
+        },
+        {
+          "id": "11",
+          "order": 12,
+          "bounding_box": {
+            "x": 0.518,
+            "y": 0.768,
+            "width": 0.403,
+            "height": 0.142
+          },
+          "content": "We ask whether a quasi-static baryonic atmosphere inside a soliton can simultaneously (i) produce Compton-thick obscuration and (ii) remain pressure-supported on a dynamical time. Rather than assuming a unique static solution, we explicitly parameterize the baryon loading and show that the regime required for obscuration generically implies rapid radiative losses, invalidating the long-lived hydrostatic picture. We define the relevant dynamical timescale at radius $r$ as determined by",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "page_index": 3,
+      "blocks": [
+        {
+          "id": "0",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.078,
+            "y": 0.082,
+            "width": 0.206,
+            "height": 0.015
+          },
+          "content": "the enclosed mass potential,",
+          "label": "Text"
+        },
+        {
+          "id": "1",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.191,
+            "y": 0.108,
+            "width": 0.173,
+            "height": 0.039
+          },
+          "content": "$$\nt _ {\\mathrm {d y n}} (r) \\equiv \\sqrt {\\frac {r ^ {3}}{G M _ {\\mathrm {e n c}} (r)}},\n$$",
+          "label": "Formula"
+        },
+        {
+          "id": "2",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.455,
+            "y": 0.121,
+            "width": 0.021,
+            "height": 0.016
+          },
+          "content": "(2) ",
+          "label": "Formula"
+        },
+        {
+          "id": "3",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.075,
+            "y": 0.157,
+            "width": 0.406,
+            "height": 0.285
+          },
+          "content": "where $M_{\\mathrm{enc}}(r)$ is the enclosed gravitating mass. In the BH-dominated (\"naked\") limit at $r\\sim r_{\\mathrm{e}},$ $M_{\\mathrm{enc}}\\approx M_{\\mathrm{BH}}$ , whereas in the soliton-dominated case $M_{\\mathrm{enc}}\\approx M_{\\mathrm{BH}}+M_{\\mathrm{sol}}(< r)\\geq M_{\\mathrm{BH}}$ . At fixed physical radius $r\\sim r_{\\mathrm{e}}\\sim \\mathcal{O}(r_{c})$ this implies $t_{\\mathrm{dyn,sol}}\\leq t_{\\mathrm{dyn,BH}}$ . Since the instability is diagnosed by radiative losses/redistribution not being slow compared to dynamical support (i.e., $t_{\\mathrm{rad}}\\lesssim t_{\\mathrm{dyn}}$ ), the conclusion that a long-lived hydrostatic atmosphere is untenable in the soliton case implies the same conclusion a fortiori in the BH-only limit, where the dynamical time is longer. The role of the soliton is therefore not to \"save\" a static atmosphere, but to define the characteristic LRD scale and to motivate considering a quasi-spherical, volume-filling configuration at $r\\sim 50-100$ pc in the first place. In what follows, we identify the characteristic physical extent of the obscurer/atmosphere directly with the observed effective radius $r_{\\mathrm{e}}$ , and assume $r_{\\mathrm{e}}\\sim \\mathcal{O}(r_{c}).$",
+          "label": "Text"
+        },
+        {
+          "id": "4",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.078,
+            "y": 0.45,
+            "width": 0.402,
+            "height": 0.125
+          },
+          "content": "A conservative column estimate from the baryon mass budget. -Let a gas mass $M_{g}=f_{g} f_{b} M_{s}$ be loaded into an obscuring region of radius $r_{\\mathrm{e}}=\\xi r_{c}$ , where $f_{g}\\leq 1$ is the loaded fraction of the cosmic baryon budget (we explore $f_{g}\\sim0.1-1$ to bracket feedback-driven depletion; e.g., Hopkins et al.2014), $f_{b}\\simeq0.16$ (Planck Collaboration et al.2020), and $\\xi\\sim1$ -few. A geometry-limited characteristic column is",
+          "label": "Text"
+        },
+        {
+          "id": "5",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.153,
+            "y": 0.58,
+            "width": 0.251,
+            "height": 0.035
+          },
+          "content": "$$\nN _ {\\mathrm {H}} \\simeq \\frac {M _ {g}}{\\pi r _ {\\mathrm {e}} ^ {2} \\mu_ {\\mathrm {H}} m _ {p}} = \\frac {f _ {g} f _ {b} M _ {s}}{\\pi (\\xi r _ {c}) ^ {2} \\mu_ {\\mathrm {H}} m _ {p}},\n$$",
+          "label": "Formula"
+        },
+        {
+          "id": "6",
+          "order": 7,
+          "bounding_box": {
+            "x": 0.455,
+            "y": 0.59,
+            "width": 0.02,
+            "height": 0.015
+          },
+          "content": "(3) ",
+          "label": "Formula"
+        },
+        {
+          "id": "7",
+          "order": 8,
+          "bounding_box": {
+            "x": 0.077,
+            "y": 0.623,
+            "width": 0.403,
+            "height": 0.174
+          },
+          "content": "with $\\mu_{\\mathrm{H}} \\simeq 1.4$ accounting for He. Using the soliton scaling (Eq. (1)), this implies that for fixed $(f_{g},\\xi)$ the achievable column increases rapidly with deeper, more compact cores. In Fig. 1 we define the \"Generic Transparency\" region by $N_{\\mathrm{H,\\max}}(f_{g}=1,\\xi=1)<10^{24}\\mathrm{cm}^{-2}.$ As shown by the orange band in Fig. 1, adopting conservative values $(f_{g}=0.1,\\xi=3)$ shifts this threshold, but $m_{22} \\approx 2$ remains a plausible solution for $M_{s}\\sim 10^{9}M_{\\odot}$ We note that Eq. (3) is a conservative geometric estimate; gas clumping would increase the effective line-of-sight column, while feedback might reduce $f_{g}.$",
+          "label": "Text"
+        },
+        {
+          "id": "8",
+          "order": 9,
+          "bounding_box": {
+            "x": 0.077,
+            "y": 0.805,
+            "width": 0.403,
+            "height": 0.047
+          },
+          "content": "Relation to hydrostatic stratification.For reference, an isothermal atmosphere in hydrostatic equilibrium satisfies $\\nabla P=-\\rho_{g}\\nabla\\Phi_{s}$ , with",
+          "label": "Text"
+        },
+        {
+          "id": "9",
+          "order": 10,
+          "bounding_box": {
+            "x": 0.091,
+            "y": 0.86,
+            "width": 0.37,
+            "height": 0.036
+          },
+          "content": "$$\n\\rho_ {g} (r) = \\rho_ {g, 0} \\exp \\left[ - \\frac {\\Phi_ {s} (r) - \\Phi_ {s} (0)}{c _ {s} ^ {2}} \\right], \\quad c _ {s} ^ {2} = \\frac {k _ {B} T}{\\mu m _ {p}}.\n$$",
+          "label": "Formula"
+        },
+        {
+          "id": "10",
+          "order": 11,
+          "bounding_box": {
+            "x": 0.456,
+            "y": 0.894,
+            "width": 0.021,
+            "height": 0.015
+          },
+          "content": "(4) ",
+          "label": "Formula"
+        },
+        {
+          "id": "11",
+          "order": 12,
+          "bounding_box": {
+            "x": 0.518,
+            "y": 0.082,
+            "width": 0.403,
+            "height": 0.063
+          },
+          "content": "This becomes a closed problem only after specifying a normalization. Hydrostatic stratification can increase the central line-of-sight column relative to Eq. (3); we therefore treat Eq. (3) as a conservative baseline.",
+          "label": "Text"
+        },
+        {
+          "id": "12",
+          "order": 13,
+          "bounding_box": {
+            "x": 0.518,
+            "y": 0.158,
+            "width": 0.403,
+            "height": 0.078
+          },
+          "content": "Cooling versus dynamical support. The mean density corresponding to a loaded core is $\\bar{n}\\simeq\\bar{\\rho} /\\mu m_{p}.$ For the dense cores relevant here $(\\bar{n}\\gtrsim 10^{4}-10^{5}\\mathrm{cm}^{-3})$ , optically thin metal-line cooling at $T\\sim 10^{6}$ K implies a short cooling time,",
+          "label": "Text"
+        },
+        {
+          "id": "13",
+          "order": 14,
+          "bounding_box": {
+            "x": 0.647,
+            "y": 0.236,
+            "width": 0.143,
+            "height": 0.032
+          },
+          "content": "$$\nt _ {\\mathrm {c o o l}} \\sim \\frac {3 k _ {B} T}{2 \\bar {n} \\Lambda (T , Z)},\n$$",
+          "label": "Formula"
+        },
+        {
+          "id": "14",
+          "order": 15,
+          "bounding_box": {
+            "x": 0.897,
+            "y": 0.244,
+            "width": 0.02,
+            "height": 0.016
+          },
+          "content": "(5) ",
+          "label": "Formula"
+        },
+        {
+          "id": "15",
+          "order": 16,
+          "bounding_box": {
+            "x": 0.517,
+            "y": 0.277,
+            "width": 0.404,
+            "height": 0.11
+          },
+          "content": "where $\\Lambda ( T, Z )$ is the radiative cooling function (we use the tabulations of Sutherland & Dopita 1993), which can be much shorter than the potential-defined dynamical time $t_{\\mathrm{dyn}}(r_{\\mathrm{e}})$ (Eq.2). For reference, a self-gravitating free-fall time would scale as $\\sim ( G\\bar{\\rho} )^{-1/2}$ ; in the soliton case the relevant support time is set by the enclosed （BH+soliton）potential.",
+          "label": "Text"
+        },
+        {
+          "id": "16",
+          "order": 17,
+          "bounding_box": {
+            "x": 0.518,
+            "y": 0.405,
+            "width": 0.403,
+            "height": 0.089
+          },
+          "content": "Radiative trapping: electron scattering vs. IR dust opacity. In an optically thick core, radiative losses may be limited by diffusion rather than by optically thin cooling. A conservative lower bound is the diffusion time due to electron scattering, where $\\tau_{T}\\equiv\\sigma_{T}N_{H}$ is the Thomson optical depth,",
+          "label": "Text"
+        },
+        {
+          "id": "17",
+          "order": 18,
+          "bounding_box": {
+            "x": 0.586,
+            "y": 0.505,
+            "width": 0.266,
+            "height": 0.065
+          },
+          "content": "$$\n\\begin{array}{l} t _ {\\mathrm {d i f f , e s}} \\sim \\frac {\\tau_ {T} r _ {\\mathrm {e}}}{c} = \\frac {\\sigma_ {T} N _ {H} r _ {\\mathrm {e}}}{c} \\\\ \\simeq 1. 6 \\times 1 0 ^ {3} \\mathrm {y r} \\left(\\frac {\\tau_ {T}}{1 0}\\right) \\left(\\frac {r _ {\\mathrm {e}}}{5 0 \\mathrm {p c}}\\right), \\\\ \\end{array}\n$$",
+          "label": "Formula"
+        },
+        {
+          "id": "18",
+          "order": 19,
+          "bounding_box": {
+            "x": 0.896,
+            "y": 0.53,
+            "width": 0.021,
+            "height": 0.015
+          },
+          "content": "(6) ",
+          "label": "Formula"
+        },
+        {
+          "id": "19",
+          "order": 20,
+          "bounding_box": {
+            "x": 0.518,
+            "y": 0.581,
+            "width": 0.404,
+            "height": 0.111
+          },
+          "content": "which is typically shorter than $t_{\\mathrm{dyn}}$ in the parameter range where Compton-thick columns are attainable. If the gas cools and becomes dusty, UV/optical photons can be efficiently reprocessed into the IR, and the relevant mass opacity can be much larger than the electron-scattering opacity $\\kappa_{\\mathrm{es}}\\simeq 0.34\\mathrm{cm}^{2}\\mathrm{g}^{-1}$ . In that regime an upper-range diffusion estimate is",
+          "label": "Text"
+        },
+        {
+          "id": "20",
+          "order": 21,
+          "bounding_box": {
+            "x": 0.535,
+            "y": 0.702,
+            "width": 0.347,
+            "height": 0.029
+          },
+          "content": "$$\nt _ {\\mathrm {d i f f}, \\mathrm {I R}} \\sim \\frac {\\tau_ {\\mathrm {I R}} r _ {\\mathrm {e}}}{c}, \\quad \\tau_ {\\mathrm {I R}} = \\kappa_ {\\mathrm {I R}} \\Sigma , \\quad \\Sigma = \\mu_ {H} m _ {p} N _ {H},\n$$",
+          "label": "Formula"
+        },
+        {
+          "id": "21",
+          "order": 22,
+          "bounding_box": {
+            "x": 0.897,
+            "y": 0.708,
+            "width": 0.02,
+            "height": 0.015
+          },
+          "content": "(7) ",
+          "label": "Formula"
+        },
+        {
+          "id": "22",
+          "order": 23,
+          "bounding_box": {
+            "x": 0.519,
+            "y": 0.741,
+            "width": 0.056,
+            "height": 0.014
+          },
+          "content": "so that",
+          "label": "Text"
+        },
+        {
+          "id": "23",
+          "order": 24,
+          "bounding_box": {
+            "x": 0.589,
+            "y": 0.766,
+            "width": 0.259,
+            "height": 0.069
+          },
+          "content": "$$\n\\begin{array}{l} t _ {\\mathrm {d i f f}, \\mathrm {I R}} \\simeq 3. 8 \\times 1 0 ^ {4} \\mathrm {y r} \\left(\\frac {\\kappa_ {\\mathrm {I R}}}{1 0 \\mathrm {c m} ^ {2} \\mathrm {g} ^ {- 1}}\\right) \\\\ \\times \\left(\\frac {N _ {H}}{1 0 ^ {2 5} \\mathrm {c m} ^ {- 2}}\\right) \\left(\\frac {r _ {\\mathrm {e}}}{5 0 \\mathrm {p c}}\\right). \\\\ \\end{array}\n$$",
+          "label": "Formula"
+        },
+        {
+          "id": "24",
+          "order": 25,
+          "bounding_box": {
+            "x": 0.896,
+            "y": 0.793,
+            "width": 0.021,
+            "height": 0.015
+          },
+          "content": "(8) ",
+          "label": "Formula"
+        },
+        {
+          "id": "25",
+          "order": 26,
+          "bounding_box": {
+            "x": 0.518,
+            "y": 0.846,
+            "width": 0.403,
+            "height": 0.064
+          },
+          "content": "We stress that dust opacity is only relevant once the gas has cooled to temperatures where dust can survive; in an initially hot $( T\\sim T_{\\mathrm{vir}})$ phase, electron scattering provides the appropriate minimal trapping floor.",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "page_index": 4,
+      "blocks": [
+        {
+          "id": "0",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.078,
+            "y": 0.082,
+            "width": 0.403,
+            "height": 0.22
+          },
+          "content": "Working definition of the \"Opacity Crisis.\"—We use \"Opacity Crisis\" to denote the breakdown of a long-lived, hot hydrostatic atmosphere inside the soliton: in the same parameter space where $N_{H}\\gtrsim 10^{24}\\mathrm{cm}^{-2}$ is achievable within $r_{\\mathrm{e}}\\sim O(r_{c})$ , the effective radiative-loss or energy-redistribution time $t_{\\mathrm{rad}}\\equiv \\max (t_{\\mathrm{cool}},t_{\\mathrm{diff,es}})$ is not $\\gg t_{\\mathrm{dyn}}$ . The system therefore cannot remain as a quasi-static hot atmosphere; it must evolve dynamically, either via rapid cooling-driven collapse （ $t_{\\mathrm{cool}}\\ll t_{\\mathrm{dyn}}$ ）or into a radiation-pressure-supported optically thick inflow/envelope if IR trapping becomes important $(t_{\\mathrm{diff,IR}}\\gtrsim t_{\\mathrm{dyn}}).$ In either case, the initial static HSE picture is invalid in the regime relevant for LRD-like obscuration.",
+          "label": "Text"
+        },
+        {
+          "id": "1",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.134,
+            "y": 0.312,
+            "width": 0.29,
+            "height": 0.015
+          },
+          "content": "## 2.3. Timescale analysis and inflow rate",
+          "label": "Text"
+        },
+        {
+          "id": "2",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.078,
+            "y": 0.333,
+            "width": 0.402,
+            "height": 0.11
+          },
+          "content": "Figure 2 summarizes the timescale hierarchy for our fiducial choice $m_{22}=2.0$ . In the parameter space where Eq. (3) allows $N_{\\mathrm{H}} \\gtrsim 10^{24} \\mathrm{c m}^{-2}$ , radiative losses are rapid compared to dynamical support. A direct implication is that the effective sound speed can drop substantially during collapse, enhancing the capture rate For a black hole of mass $M_{\\mathrm{BH}}$ , the Bondi rate is",
+          "label": "Text"
+        },
+        {
+          "id": "3",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.202,
+            "y": 0.45,
+            "width": 0.153,
+            "height": 0.035
+          },
+          "content": "$$\n\\dot {M} _ {\\mathrm {B}} = 4 \\pi \\lambda \\frac {G ^ {2} M _ {\\mathrm {B H}} ^ {2} \\rho}{c _ {s} ^ {3}}.\n$$",
+          "label": "Formula"
+        },
+        {
+          "id": "4",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.456,
+            "y": 0.46,
+            "width": 0.02,
+            "height": 0.015
+          },
+          "content": "(9) ",
+          "label": "Formula"
+        },
+        {
+          "id": "5",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.077,
+            "y": 0.491,
+            "width": 0.404,
+            "height": 0.064
+          },
+          "content": "Here $\\lambda$ is the usual dimensionless Bondi factor (order unity, depending on the equation of state), and $\\eta$ is the radiative efficiency used in defining $\\dot{M}_{\\mathrm{Edd}}$ . The ratio to the Eddington rate is",
+          "label": "Text"
+        },
+        {
+          "id": "6",
+          "order": 7,
+          "bounding_box": {
+            "x": 0.14,
+            "y": 0.562,
+            "width": 0.278,
+            "height": 0.073
+          },
+          "content": "$$\n\\begin{array}{l} \\frac {\\dot {M} _ {\\mathrm {B}}}{\\dot {M} _ {\\mathrm {E d d}}} \\approx 1 0 ^ {3} \\left(\\frac {\\lambda}{1}\\right) \\left(\\frac {\\eta}{0 . 1}\\right) \\left(\\frac {M _ {\\mathrm {B H}}}{1 0 ^ {8} M _ {\\odot}}\\right) \\\\ \\times \\left(\\frac {n}{1 0 ^ {5} \\mathrm {c m} ^ {- 3}}\\right) \\left(\\frac {T}{1 0 ^ {6} \\mathrm {K}}\\right) ^ {- 3 / 2}, \\\\ \\end{array}\n$$",
+          "label": "Formula"
+        },
+        {
+          "id": "7",
+          "order": 8,
+          "bounding_box": {
+            "x": 0.447,
+            "y": 0.591,
+            "width": 0.029,
+            "height": 0.015
+          },
+          "content": "(10) ",
+          "label": "Formula"
+        },
+        {
+          "id": "8",
+          "order": 9,
+          "bounding_box": {
+            "x": 0.08,
+            "y": 0.644,
+            "width": 0.4,
+            "height": 0.188
+          },
+          "content": "indicating that inflow at the capture scale can exceed $\\dot{M}_{\\mathrm{Edd}}$ in dense cores. In the soliton scenario, the compact potential well both confines baryons within $r\\sim r_{c}$ (raising n for a given loaded mass) and sets the dynamical boundary condition for collapse, so that once cooling reduces $c_{s}$ the Bondi rate enhancement in Eq. (10) is naturally realized at the LRD scale; in a more weakly bound BH-only or extended-halo configuration the same column would correspond to a less compact reservoir and a smaller capture enhancement. Granule-driven fluctuations (Quantum Bondi Boost) may further modulate this (Chiu et al. 2025).",
+          "label": "Text"
+        },
+        {
+          "id": "9",
+          "order": 10,
+          "bounding_box": {
+            "x": 0.102,
+            "y": 0.841,
+            "width": 0.355,
+            "height": 0.031
+          },
+          "content": "## 2.4. Thermodynamic Instability and the Cooling Catastrophe",
+          "label": "Text"
+        },
+        {
+          "id": "10",
+          "order": 11,
+          "bounding_box": {
+            "x": 0.077,
+            "y": 0.878,
+            "width": 0.403,
+            "height": 0.032
+          },
+          "content": "Figure 2 summarizes the hierarchy between the dynamical timescale $t_{\\mathrm{dyn}}$ and the radiative cooling",
+          "label": "Text"
+        },
+        {
+          "id": "11",
+          "order": 12,
+          "bounding_box": {
+            "x": 0.53,
+            "y": 0.087,
+            "width": 0.379,
+            "height": 0.25
+          },
+          "content": "",
+          "label": "Image"
+        },
+        {
+          "id": "12",
+          "order": 13,
+          "bounding_box": {
+            "x": 0.777,
+            "y": 0.084,
+            "width": 0.038,
+            "height": 0.012
+          },
+          "content": "$$\nT _ {\\mathrm {v i r}} [ \\mathrm {K} ]\n$$",
+          "label": "Formula"
+        },
+        {
+          "id": "13",
+          "order": 14,
+          "bounding_box": {
+            "x": 0.517,
+            "y": 0.356,
+            "width": 0.404,
+            "height": 0.29
+          },
+          "content": "Figure 2. Timescale hierarchy in soliton cores. Comparison between the dynamical time $t_{\\mathrm{dyn}}$ (blue solid line, $t_{\\mathrm{dyn}}\\propto M_{s}^{-2}$ ) and the optically thin cooling time $t_{\\mathrm{cool}}$ (red dashed line; this corresponds strictly to the optically thin cooling time defined in Equation (5), not the effective diffusion-limited time $t_{\\mathrm{rad}}$ ) as a function of soliton mass $M_{s}$ . The top axis explicitly provides the corresponding virial temperature $T_{\\mathrm{vir}}$ to guide physical intuition. At low masses （ $T_{\\mathrm{vir}}<10^{4}\\mathrm{K}$ ）, the exponential suppression of atomic cooling in primordial gas leads to a stable regime where $t_{\\mathrm{cool}}>t_{\\mathrm{dyn}}$ As the soliton mass increases, the gas is heated above the atomic cooling threshold, causing a sharp drop in $t_{\\mathrm{cool}}$ . A critical mass emerges at $M_{\\mathrm{crit}}\\approx 2.8\\times 10^{7}M_{\\odot}$ , identified exactly at the intersection where the condition $t_{\\mathrm{cool}}=t_{\\mathrm{dyn}}$ is satisfied; this threshold is obtained analytically by solving $t_{\\mathrm{cool}}=t_{\\mathrm{dyn}}$ using the cooling function adopted in our model (see Appendix B). Above this mass threshold, the system enters the cooling-dominated regime （ $t_{\\mathrm{cool}}<t_{\\mathrm{dyn}}$ ）. For the massive regime relevant to Little Red Dots （ $M_{s}\\gtrsim 10^{8}M_{\\odot}$ ）, the cooling time is orders of magnitude shorter than the dynamical time, inevitably triggering a catastrophic collapse.",
+          "label": "Text"
+        },
+        {
+          "id": "14",
+          "order": 15,
+          "bounding_box": {
+            "x": 0.519,
+            "y": 0.665,
+            "width": 0.399,
+            "height": 0.047
+          },
+          "content": "timescale $t_{\\mathrm{cool}}$ within the soliton core. Here we provide a scaling argument for why a crossover $t_{\\mathrm{cool}} < t_{\\mathrm{dyn}}$ is unavoidable at sufficiently large soliton masses.",
+          "label": "Text"
+        },
+        {
+          "id": "15",
+          "order": 16,
+          "bounding_box": {
+            "x": 0.518,
+            "y": 0.72,
+            "width": 0.402,
+            "height": 0.047
+          },
+          "content": "Potential-defined dynamical time. The relevant dynamical timescale at radius r is set by the enclosed gravitating mass,",
+          "label": "Text"
+        },
+        {
+          "id": "16",
+          "order": 17,
+          "bounding_box": {
+            "x": 0.632,
+            "y": 0.767,
+            "width": 0.172,
+            "height": 0.038
+          },
+          "content": "$$\nt _ {\\mathrm {d y n}} (r) \\equiv \\sqrt {\\frac {r ^ {3}}{G M _ {\\mathrm {e n c}} (r)}}.\n$$",
+          "label": "Formula"
+        },
+        {
+          "id": "17",
+          "order": 18,
+          "bounding_box": {
+            "x": 0.888,
+            "y": 0.779,
+            "width": 0.029,
+            "height": 0.016
+          },
+          "content": "(11) ",
+          "label": "Formula"
+        },
+        {
+          "id": "18",
+          "order": 19,
+          "bounding_box": {
+            "x": 0.519,
+            "y": 0.812,
+            "width": 0.4,
+            "height": 0.032
+          },
+          "content": "Evaluated at the core scale $( r\\sim r_{c} )$ in the soliton dominated regime, we estimate",
+          "label": "Text"
+        },
+        {
+          "id": "19",
+          "order": 20,
+          "bounding_box": {
+            "x": 0.531,
+            "y": 0.855,
+            "width": 0.372,
+            "height": 0.04
+          },
+          "content": "$$\nt _ {\\mathrm {d y n}} \\left(r _ {c}\\right) \\sim \\sqrt {\\frac {r _ {c} ^ {3}}{G M _ {\\mathrm {e n c}} \\left(r _ {c}\\right)}} \\simeq \\sqrt {\\frac {r _ {c} ^ {3}}{G \\left[ M _ {\\mathrm {B H}} + \\mathcal {O} (1) M _ {s} \\right]}}.\n$$",
+          "label": "Formula"
+        },
+        {
+          "id": "20",
+          "order": 21,
+          "bounding_box": {
+            "x": 0.888,
+            "y": 0.895,
+            "width": 0.029,
+            "height": 0.014
+          },
+          "content": "(12) ",
+          "label": "Formula"
+        }
+      ]
+    },
+    {
+      "page_index": 5,
+      "blocks": [
+        {
+          "id": "0",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.077,
+            "y": 0.081,
+            "width": 0.401,
+            "height": 0.049
+          },
+          "content": "Using the soliton scaling $r_{c}\\propto m_{2 2}^{-2} M_{s}^{-1}$ (Schive et al. 2014a), for fixed particle mass $m_{2 2}$ this implies $t_{\\mathrm{dyn}}\\propto M_{s}^{-2}$ （and $t_{\\mathrm{dyn}}\\propto m_{2 2}^{-3}$ at fixed $M_{s}$).",
+          "label": "Text"
+        },
+        {
+          "id": "1",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.08,
+            "y": 0.138,
+            "width": 0.4,
+            "height": 0.045
+          },
+          "content": "Cooling time for a hydrostatic atmosphere.—If a gas mass $M_{g}=f_{g} f_{b} M_{s}$ is distributed within $r_{\\mathrm{e}}=\\xi r_{c}$ , the characteristic number density scales as",
+          "label": "Text"
+        },
+        {
+          "id": "2",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.162,
+            "y": 0.191,
+            "width": 0.232,
+            "height": 0.034
+          },
+          "content": "$$\nn \\propto \\frac {M _ {g}}{r _ {\\mathrm {e}} ^ {3}} \\propto \\frac {f _ {g} M _ {s}}{(\\xi r _ {c}) ^ {3}} \\propto f _ {g} \\xi^ {- 3} M _ {s} ^ {4},\n$$",
+          "label": "Formula"
+        },
+        {
+          "id": "3",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.447,
+            "y": 0.201,
+            "width": 0.029,
+            "height": 0.016
+          },
+          "content": "(13) ",
+          "label": "Formula"
+        },
+        {
+          "id": "4",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.077,
+            "y": 0.233,
+            "width": 0.401,
+            "height": 0.032
+          },
+          "content": "and the characteristic temperature for a hydrostatic atmosphere is set by the potential depth,",
+          "label": "Text"
+        },
+        {
+          "id": "5",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.082,
+            "y": 0.272,
+            "width": 0.388,
+            "height": 0.033
+          },
+          "content": "$$\nT \\sim T _ {\\mathrm {v i r}} \\propto \\frac {M _ {\\mathrm {e n c}}}{r _ {c}} \\propto M _ {s} ^ {2} \\quad (\\mathrm {s o l i t o n - d o m i n a t e d r e g i m e}).\n$$",
+          "label": "Formula"
+        },
+        {
+          "id": "6",
+          "order": 7,
+          "bounding_box": {
+            "x": 0.447,
+            "y": 0.302,
+            "width": 0.029,
+            "height": 0.015
+          },
+          "content": "(14) ",
+          "label": "Formula"
+        },
+        {
+          "id": "7",
+          "order": 8,
+          "bounding_box": {
+            "x": 0.078,
+            "y": 0.316,
+            "width": 0.401,
+            "height": 0.049
+          },
+          "content": "The cooling time is $t_{\\mathrm{cool}} \\sim (n k_{B} T) /( n^{2}\\Lambda).$ In the high-temperature regime where thermal bremsstrahlung is a good scaling proxy $(\\Lambda\\propto T^{1/2})$ , this gives",
+          "label": "Text"
+        },
+        {
+          "id": "8",
+          "order": 9,
+          "bounding_box": {
+            "x": 0.198,
+            "y": 0.375,
+            "width": 0.159,
+            "height": 0.031
+          },
+          "content": "$$\nt _ {\\mathrm {c o o l}} \\propto \\frac {T ^ {1 / 2}}{n} \\propto M _ {s} ^ {- 3}.\n$$",
+          "label": "Formula"
+        },
+        {
+          "id": "9",
+          "order": 10,
+          "bounding_box": {
+            "x": 0.447,
+            "y": 0.384,
+            "width": 0.029,
+            "height": 0.016
+          },
+          "content": "(15) ",
+          "label": "Formula"
+        },
+        {
+          "id": "10",
+          "order": 11,
+          "bounding_box": {
+            "x": 0.077,
+            "y": 0.414,
+            "width": 0.403,
+            "height": 0.032
+          },
+          "content": "Figure 2 uses the full cooling function for the numerical estimate; the scalings above are provided for intuition.",
+          "label": "Text"
+        },
+        {
+          "id": "11",
+          "order": 12,
+          "bounding_box": {
+            "x": 0.076,
+            "y": 0.454,
+            "width": 0.405,
+            "height": 0.454
+          },
+          "content": "Inevitable crossover and the role of the soliton. In primordial gas lacking molecular or metal coolants, radiative cooling is exponentially suppressed below $T\\sim 10^{4}\\mathrm{K}$ due to the Boltzmann factor associated with hydrogen collisional excitation (Lyman- $\\alpha$ cooling). Consequently, lowmass solitons （ $M_{s}\\lesssim 10^{7}M_{\\odot},T_{\\mathrm{vir}}<10^{4}\\mathrm{K}$ ）can maintain a stable, quasi-static atmosphere where the cooling time strictly exceeds the dynamical time （ $t_{\\mathrm{cool}}>t_{\\mathrm{dyn}}$ ）. However, as the soliton mass increases, the deeper potential well heats the gas above the $10^{4}\\mathrm{K}$ threshold, triggering highly efficient atomic cooling. In the high-temperature regime, $t_{\\mathrm{cool}}$ decreases more steeply with soliton mass (e.g., $\\propto M_{s}^{-3}$ for bremsstrahlung) than $t_{\\mathrm{dyn}}(\\propto M_{s}^{-2})$ . This guarantees a crossover where $t_{\\mathrm{cool}}<t_{\\mathrm{dyn}}$ . As illustrated in the updated Figure 2, this transition defines a critical mass scale at $M_{\\mathrm{crit}}\\approx 2.8\\times 10^{7}M_{\\odot}$ . The massive FDM cores relevant to LRDs （ $M_{s}\\gtrsim 10^{8}M_{\\odot}$ ）already reside deeply within this cooling-dominated region. In this unstable regime, the gas loses thermal support faster than the potential-defined dynamical time, triggering rapid inflow or collapse rather than maintaining a long-lived hot atmosphere. For comparison, at the same physical radius $r\\sim r_{c}$ , a BH-only (\"naked\") potential has $M_{\\mathrm{enc}}\\approx M_{\\mathrm{BH}}$ and therefore a longer dynamical time than the soliton case (because $M_{\\mathrm{enc,sol}}\\geq M_{\\mathrm{BH}}$ ). Thus, if $t_{\\mathrm{cool}}\\lesssim t_{\\mathrm{dyn}}$ holds in the soliton container, it holds a fortiori in the BH-only limit. The role of the soliton is therefore not to stabilize the gas, but to define the characteristic $\\sim 50-100$ pc scale relevant to LRDs",
+          "label": "Text"
+        },
+        {
+          "id": "12",
+          "order": 13,
+          "bounding_box": {
+            "x": 0.517,
+            "y": 0.082,
+            "width": 0.403,
+            "height": 0.032
+          },
+          "content": "and to motivate considering a quasi-spherical, volumefilling atmosphere at that scale.",
+          "label": "Text"
+        },
+        {
+          "id": "13",
+          "order": 14,
+          "bounding_box": {
+            "x": 0.594,
+            "y": 0.126,
+            "width": 0.251,
+            "height": 0.015
+          },
+          "content": "## 3. RADIATIVE IMPLICATIONS",
+          "label": "Text"
+        },
+        {
+          "id": "14",
+          "order": 15,
+          "bounding_box": {
+            "x": 0.635,
+            "y": 0.148,
+            "width": 0.171,
+            "height": 0.015
+          },
+          "content": "## 3.1. X-ray obscuration",
+          "label": "Text"
+        },
+        {
+          "id": "15",
+          "order": 16,
+          "bounding_box": {
+            "x": 0.517,
+            "y": 0.168,
+            "width": 0.403,
+            "height": 0.159
+          },
+          "content": "The primary observational puzzle of LRDs is their X-ray faintness. Using the conservative estimate in Eq. (3), typical columns can reach $N_{\\mathrm{H}} \\sim 10^{24}- 10^{25} \\mathrm{cm}^{-2}.$ The Thomson optical depth is $\\tau_{T}=\\sigma_{T}N_{\\mathrm{H}}\\simeq 0.67\\left(N_{\\mathrm{H}}/10^{24}\\mathrm{cm}^{-2}\\right).$ For $\\tau_{T}\\gtrsim 1$ , the direct soft X-ray continuum is strongly suppressed. We expect the observed X-ray signal to be dominated by a scattered fraction $f_{\\mathrm{scat}}.$ For typical AGN geometries, $f_{\\mathrm{scat}}\\sim 1-5\\%$ implying a suppression of the apparent $L_{X}$ by $\\sim 1.5-2$ dex, consistent with Maiolino et al. (2024).",
+          "label": "Text"
+        },
+        {
+          "id": "16",
+          "order": 17,
+          "bounding_box": {
+            "x": 0.542,
+            "y": 0.34,
+            "width": 0.355,
+            "height": 0.015
+          },
+          "content": "## 3.2. Dust Attenuation and Broad Line Visibility",
+          "label": "Text"
+        },
+        {
+          "id": "17",
+          "order": 18,
+          "bounding_box": {
+            "x": 0.518,
+            "y": 0.36,
+            "width": 0.404,
+            "height": 0.157
+          },
+          "content": "Recent analyses suggest that LRDs are best described as young SMBHs embedded in compact, physically thick obscurers (\"dense ionized cocoons\" and/or heavy dust shrouds) with column densities $N_{\\mathrm{H}} \\gtrsim 10^{24} \\mathrm{~cm}^{-2}$ (e.g., Rusakov et al. 2026). Our FDM soliton framework provides a natural origin for such a geometry: unlike a rotationally supported thin disk, the soliton produces a quasi-spherical potential well on the characteristic scale $r_{c}\\sim 50-100$ pc, so gas inflowing into the core can initially fill a large fraction of the volume.",
+          "label": "Text"
+        },
+        {
+          "id": "18",
+          "order": 19,
+          "bounding_box": {
+            "x": 0.518,
+            "y": 0.527,
+            "width": 0.402,
+            "height": 0.048
+          },
+          "content": "A simple parameterized cocoon geometry. We parameterize the obscurer as extending from an inner dust sublimation scale $r_{\\mathrm{in}}$ to an observable effective radius",
+          "label": "Text"
+        },
+        {
+          "id": "19",
+          "order": 20,
+          "bounding_box": {
+            "x": 0.682,
+            "y": 0.589,
+            "width": 0.073,
+            "height": 0.015
+          },
+          "content": "$$\nr _ {\\mathrm {e}} \\simeq \\xi r _ {c},\n$$",
+          "label": "Formula"
+        },
+        {
+          "id": "20",
+          "order": 21,
+          "bounding_box": {
+            "x": 0.887,
+            "y": 0.588,
+            "width": 0.03,
+            "height": 0.015
+          },
+          "content": "(16) ",
+          "label": "Formula"
+        },
+        {
+          "id": "21",
+          "order": 22,
+          "bounding_box": {
+            "x": 0.518,
+            "y": 0.616,
+            "width": 0.403,
+            "height": 0.127
+          },
+          "content": "with a line-of-sight covering factor $f_{\\mathrm{cov}} \\gtrsim 0.5$ . A convenient phenomenological description is a biconical polar opening with half-opening angle $\\theta$ , for which $f_{\\mathrm{cov}}\\simeq \\cos \\theta$ . In this picture, broad lines remain visible either through low-column sightlines (gaps) or via scattering into the line of sight, while the high covering factor naturally accounts for the high detection rate of obscured LRDs (e.g., Greene et al.2024).",
+          "label": "Text"
+        },
+        {
+          "id": "22",
+          "order": 23,
+          "bounding_box": {
+            "x": 0.518,
+            "y": 0.752,
+            "width": 0.404,
+            "height": 0.158
+          },
+          "content": "Granularity and clumpiness in the soliton core.—A specific ingredient of the FDM core is its intrinsic time-dependent granularity arising from wave interference. Order-unity density fluctuations (\"granules\"; $\\delta\\rho/\\rho\\sim1$ ) produce persistent gravitational stirring on timescales comparable to the soliton dynamical/oscillation time. These perturbations can promote and help maintain a clumpy cocoon/torus morphology, providing a complementary route to clumpiness beyond magnetic or radiation-driven instabilities.",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "page_index": 6,
+      "blocks": [
+        {
+          "id": "0",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.077,
+            "y": 0.083,
+            "width": 0.403,
+            "height": 0.219
+          },
+          "content": "How cocoon observables can constrain the FDM scenario. In this framework the \"Opacity Crisis\" describes the global collapse/evolution of a (possibly clumpy) atmosphere once $t_{\\mathrm{rad}} \\lesssim t_{\\mathrm{dyn}}$ . Over time, feedback may carve polar channels and reduce $f_{\\mathrm{cov}}$ , but the deeper potential of a soliton can qualitatively help retain a high-column equatorial component longer than a shallow, baryondominated halo. Observables such as the broad-line visibility fraction, polarization, and inferred covering factors/opening angles (and their evolution with mass and redshift) therefore provide potential empirical constraints on the depth of the central potential and, by extension, the allowed range of $m_{22}$ (see also Delvecchio et al. 2025).",
+          "label": "Text"
+        },
+        {
+          "id": "1",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.155,
+            "y": 0.317,
+            "width": 0.247,
+            "height": 0.014
+          },
+          "content": "## 3.3. Thermodynamic Equilibrium",
+          "label": "Text"
+        },
+        {
+          "id": "2",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.077,
+            "y": 0.336,
+            "width": 0.404,
+            "height": 0.268
+          },
+          "content": "Assuming the obscured luminosity is re-radiated in the IR, a characteristic effective temperature follows from the Stefan-Boltzmann law. For $L_{\\mathrm{bol}} \\sim 10^{4 6} \\mathrm{erg s}^{-1}$ and a photospheric scale $R_{\\mathrm{ph}} \\sim \\mathcal{O}(r_{c})$ , we obtain $T_{\\mathrm{eff}} \\approx 150-200\\mathrm{K}$ , implying a rest-frame mid-IR bump (peak near $\\sim 20 \\mu\\mathrm{m}$ ). The very red JWST colors at shorter wavelengths likely require an additional hotter dust component (near the sublimation radius) and/or anisotropic leakage/scattering through a non-uniform cocoon; quantifying the detailed SED requires radiative-transfer/radiation-hydrodynamic modeling. In this context the soliton potential primarily sets the outer scale and confinement (through $r_{c}$ and $r_{\\mathrm{e}}$ ); it does not by itself determine the dust microphysics at $r_{\\mathrm{in}}$ , so the need for a hot dust component and its dependence on halo/core properties ultimately requires dedicated radiation-hydrodynamic simulations.",
+          "label": "Text"
+        },
+        {
+          "id": "3",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.143,
+            "y": 0.618,
+            "width": 0.272,
+            "height": 0.014
+          },
+          "content": "## 4. NUMERICAL METHODOLOGY",
+          "label": "Text"
+        },
+        {
+          "id": "4",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.078,
+            "y": 0.639,
+            "width": 0.401,
+            "height": 0.046
+          },
+          "content": "Our analytic picture requires that deep, compact solitonic potentials form robustly. We validate this using 3D simulations.",
+          "label": "Text"
+        },
+        {
+          "id": "5",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.156,
+            "y": 0.7,
+            "width": 0.246,
+            "height": 0.014
+          },
+          "content": "## 4.1. Setup and Initial Conditions",
+          "label": "Text"
+        },
+        {
+          "id": "6",
+          "order": 7,
+          "bounding_box": {
+            "x": 0.077,
+            "y": 0.721,
+            "width": 0.404,
+            "height": 0.188
+          },
+          "content": "We solve the Schrödinger-Poisson system using a pseudo-spectral code on a $N=5 1 2^{3}$ grid with periodic boundary conditions (see Schive et al. 2014a). Our aim is not to claim the discovery of soliton formation, but to demonstrate that compact cores with LRD-like scales form robustly in this setup. To model the formation of the potential well, we initialize the wavefunction with eight identical ground-state solitons with zero initial phases (free-fall merger). While we use zero phase for demonstration, previous studies have shown soliton formation is robust against random phase fluctuations (Schive et al. 2014b). The simulations were executed on",
+          "label": "Text"
+        },
+        {
+          "id": "7",
+          "order": 8,
+          "bounding_box": {
+            "x": 0.64,
+            "y": 0.083,
+            "width": 0.187,
+            "height": 0.012
+          },
+          "content": "Figure 3: Soliton Profile Validation",
+          "label": "Text"
+        },
+        {
+          "id": "8",
+          "order": 9,
+          "bounding_box": {
+            "x": 0.531,
+            "y": 0.097,
+            "width": 0.377,
+            "height": 0.2
+          },
+          "content": "",
+          "label": "Image"
+        },
+        {
+          "id": "9",
+          "order": 10,
+          "bounding_box": {
+            "x": 0.518,
+            "y": 0.316,
+            "width": 0.402,
+            "height": 0.125
+          },
+          "content": "Figure 3. Validation of a compact soliton core in an idealized merger. Radial density profile of the simulated core (red points) compared to the analytic soliton solution (black line; fitted $r_{c}=2.32$ in code units). Both axes are shown in code units; the corresponding physical scaling for $m_{22}=2$ is given in Section 4 (yielding $r_{c}\\simeq 51$ pc and $M_{c}\\simeq 7.8\\times 10^{8}M_{\\odot}$ ). The deviation at large radii reflects unrelaxed merger debris and finite-box/periodic-boundary effects, and does not affect the inner soliton core relevant for our analytic estimates.",
+          "label": "Text"
+        },
+        {
+          "id": "10",
+          "order": 11,
+          "bounding_box": {
+            "x": 0.519,
+            "y": 0.46,
+            "width": 0.401,
+            "height": 0.03
+          },
+          "content": "an NVIDIA RTX 3080, requiring approximately one day of runtime.",
+          "label": "Text"
+        },
+        {
+          "id": "11",
+          "order": 12,
+          "bounding_box": {
+            "x": 0.642,
+            "y": 0.504,
+            "width": 0.158,
+            "height": 0.014
+          },
+          "content": "## 4.2. Physical Scaling",
+          "label": "Text"
+        },
+        {
+          "id": "12",
+          "order": 13,
+          "bounding_box": {
+            "x": 0.518,
+            "y": 0.525,
+            "width": 0.402,
+            "height": 0.093
+          },
+          "content": "For $m_{2 2}=2. 0$ , we scale our simulation box to $L_{\\mathrm{phys}}=$ 2.0 kpc. This maps our initial configuration to 8 solitons of mass $M_{\\mathrm{i n i}}\\approx 3. 9\\times1 0^{8} M_{\\odot}$ each. The final central soliton contains $M_{\\mathrm{c}}\\approx 7. 8\\times1 0^{8} M_{\\odot}$ with a radius $r_{\\mathrm{c}}\\approx 5 1$ pc. This creates a representative scaling consistent with LRDs.",
+          "label": "Text"
+        },
+        {
+          "id": "13",
+          "order": 14,
+          "bounding_box": {
+            "x": 0.614,
+            "y": 0.63,
+            "width": 0.213,
+            "height": 0.015
+          },
+          "content": "## 5. SIMULATION RESULTS",
+          "label": "Text"
+        },
+        {
+          "id": "14",
+          "order": 15,
+          "bounding_box": {
+            "x": 0.518,
+            "y": 0.652,
+            "width": 0.403,
+            "height": 0.11
+          },
+          "content": "Figure 3 shows the density profile of the final core. The inner region is well described by the soliton profile, illustrating that violent relaxation in idealized mergers can form a compact solitonic potential well. Under our representative physical scaling, the core has $M_{c}\\sim 8\\times10^{8}M_{\\odot}$ and $r_{c}\\sim 50$ pc, placing it in the range considered in our analytic estimates.",
+          "label": "Text"
+        },
+        {
+          "id": "15",
+          "order": 16,
+          "bounding_box": {
+            "x": 0.656,
+            "y": 0.773,
+            "width": 0.128,
+            "height": 0.014
+          },
+          "content": "## 6. DISCUSSION",
+          "label": "Text"
+        },
+        {
+          "id": "16",
+          "order": 17,
+          "bounding_box": {
+            "x": 0.572,
+            "y": 0.795,
+            "width": 0.296,
+            "height": 0.014
+          },
+          "content": "## 6.1. Resolution of the Lyman-$\\alpha$ Tension",
+          "label": "Text"
+        },
+        {
+          "id": "17",
+          "order": 18,
+          "bounding_box": {
+            "x": 0.518,
+            "y": 0.815,
+            "width": 0.402,
+            "height": 0.095
+          },
+          "content": "While a fiducial boson mass of $m_{2 2} \\approx 2$ allows for a direct mapping where the black hole mass tracks the soliton mass $(M_{\\mathrm{BH}} \\approx M_{c})$ , our analysis of the size-mass relation (Figure 4) reveals that the observed data are fully compatible with higher particle masses (e.g., $m_{2 2} \\sim 2 0- 5 0$ , consistent with Lyman-$\\alpha$ forest constraints; see, e.g.,",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "page_index": 7,
+      "blocks": [
+        {
+          "id": "0",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.076,
+            "y": 0.08,
+            "width": 0.406,
+            "height": 0.554
+          },
+          "content": "Irsič et al. 2017; Rogers & Peiris 2021) if LRDs represent an early progenitor phase where the central black hole has not yet consumed the entire soliton core. We note that the precise Lyman-$\\alpha$ bound depends on assumptions about the IGM thermal history and on whether FDM constitutes all of the dark matter; mixed-DM scenarios with a subdominant FDM fraction can weaken the constraint (e.g., Kobayashi et al. 2017). In this scenario, the total soliton mass $M_{c}$ remains larger than the growing black hole mass $M_{\\mathrm{BH}}$ . By relaxing the strict assumption of $M_{\\mathrm{BH}}=M_{c}$ and interpreting the horizontal scatter in Figure 4 (where the axis represents observed $M_{\\mathrm{BH}}$ ) as a reflection of evolutionary stages $(M_{\\mathrm{BH}}<M_{c})$ , the parameter space naturally opens up. To clarify the apparent tension with Section 2.1: the $m_{22}\\approx 2$ baseline is strictly derived under a mature, direct-mapping assumption $(M_{\\mathrm{BH}}\\approx M_{c})$ . However, during the formation stage, the host soliton mass can be substantially larger than the growing black hole $(M_{c}\\gg M_{\\mathrm{BH}})$ . Therefore, the horizontal distribution of the observational data reflects black hole growth (increasing $M_{\\mathrm{BH}}$ ) within larger, fixed soliton cores (fixed $m_{22}$ ), rather than varying $m_{22}$ at a fixed evolutionary stage. Under this progenitor interpretation, $m_{22}\\gtrsim 20$ is fully consistent with both LRD sizes and Lyman-$\\alpha$ limits, without contradicting the fiducial mature-phase estimate. The soliton provides the deep, compact potential well required to trigger the opacity crisis, while the observed black hole mass reflects only the collapsed fraction. Consequently, the apparent tension between the compact sizes of LRDs and the Lyman $\\alpha$ constraints may be substantially alleviated, suggesting that the FDM framework remains compatible with both the observed small-scale structure of LRDs and large-scale Lyman $\\alpha$ forest data.",
+          "label": "Text"
+        },
+        {
+          "id": "1",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.169,
+            "y": 0.682,
+            "width": 0.221,
+            "height": 0.014
+          },
+          "content": "## 6.2. Observational Signatures",
+          "label": "Text"
+        },
+        {
+          "id": "2",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.094,
+            "y": 0.703,
+            "width": 0.329,
+            "height": 0.016
+          },
+          "content": "We provide specific observational predictions:",
+          "label": "Text"
+        },
+        {
+          "id": "3",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.103,
+            "y": 0.767,
+            "width": 0.377,
+            "height": 0.143
+          },
+          "content": "- Inverse Size-Mass Relation: For soliton cores at fixed $m_{2 2}$ , the soliton scaling implies $r_{c}\\propto M_{c}^{-1}.$ Figure 4 illustrates this compactness floor and the observed population above it. Establishing an intrinsic inverse $r_{c}-M_{c}$ relation as a discriminator will require independent constraints on host/core masses (beyond virial $M_{\\mathrm{BH}}$ estimates) and careful modeling of how radiative transfer maps the intrinsic core scale to the observed $r_{e}.$",
+          "label": "Text"
+        },
+        {
+          "id": "4",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.546,
+            "y": 0.082,
+            "width": 0.374,
+            "height": 0.047
+          },
+          "content": "- Polarization: Our clumpy dust cocoon model inevitably imprints a polarization signal on the broad emission lines (e.g., Greene et al. 2024).",
+          "label": "Text"
+        },
+        {
+          "id": "5",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.544,
+            "y": 0.13,
+            "width": 0.377,
+            "height": 0.109
+          },
+          "content": "- Compact Hot Dust vs. ALMA Nondetections: Recent ALMA observations constrain the cold dust mass $M_{dust}\\lesssim 10^{6}M_{\\odot}$ Casey et al.2025). The \"Opacity Crisis\" creates extreme gas column densities within a tiny volume, consistent with low total dust mass despite high optical depth.",
+          "label": "Text"
+        },
+        {
+          "id": "6",
+          "order": 7,
+          "bounding_box": {
+            "x": 0.591,
+            "y": 0.247,
+            "width": 0.259,
+            "height": 0.014
+          },
+          "content": "## 6.3. Demographics and Duty Cycle",
+          "label": "Text"
+        },
+        {
+          "id": "7",
+          "order": 8,
+          "bounding_box": {
+            "x": 0.517,
+            "y": 0.266,
+            "width": 0.404,
+            "height": 0.158
+          },
+          "content": "A key question is whether the transient obscured phase implied by the \"Opacity Crisis\" can match the observed abundance of LRDs, $n_{\\mathrm{L R D}} \\sim 10^{-5}$ comoving Mpc $^{-3}$ (here cMpc denotes comoving Mpc). For massive halos at $z\\sim 5-7$ , a representative number density is $n_{\\mathrm{halo}}\\sim 10^{-4}\\mathrm{cMpc}^{-3}$ (e.g., Kokorev et al.2024), suggesting an instantaneous occupancy fraction of order $f_{\\mathrm{o c c}}\\equiv n_{\\mathrm{L R D}}/n_{\\mathrm{halo}}\\sim 0.1$ . More generally, the occupancy can be written as a time-averaged duty cycle,",
+          "label": "Text"
+        },
+        {
+          "id": "8",
+          "order": 9,
+          "bounding_box": {
+            "x": 0.599,
+            "y": 0.423,
+            "width": 0.239,
+            "height": 0.032
+          },
+          "content": "$$\nn _ {\\mathrm {L R D}} \\simeq n _ {\\mathrm {h a l o}} P _ {\\mathrm {t r i g}} N _ {\\mathrm {e v t}} \\left(\\frac {t _ {\\mathrm {e v t}}}{t _ {H}}\\right),\n$$",
+          "label": "Formula"
+        },
+        {
+          "id": "9",
+          "order": 10,
+          "bounding_box": {
+            "x": 0.888,
+            "y": 0.431,
+            "width": 0.029,
+            "height": 0.016
+          },
+          "content": "(17) ",
+          "label": "Formula"
+        },
+        {
+          "id": "10",
+          "order": 11,
+          "bounding_box": {
+            "x": 0.517,
+            "y": 0.457,
+            "width": 0.404,
+            "height": 0.205
+          },
+          "content": "where $P_{\\mathrm{trig}}$ is the probability that a given halo experiences an LRD-triggering event within the relevant redshift window, $N_{\\mathrm{evt}}$ is the number of such episodes per halo, $t_{\\mathrm{evt}}$ is the observable duration of each episode, and $t_{H}$ is the Hubble time at that epoch. While the characteristic dynamical time of the dense core can be short $\\left(t_{\\mathrm{dyn}}\\sim \\sqrt{r_{c}^{3}/(GM_{\\mathrm{enc}})}\\right)\\sim 10^{5}$ yr for $r_{c}\\sim 50$ pc and $M_{\\mathrm{enc}}\\sim 10^{9}M_{\\odot}$ ), feedback, clumpy obscuration, and/or repeated episodes can extend the effective observable duration to $t_{\\mathrm{evt}}\\sim 10^{6}-10^{7}$ yr. Matching $f_{\\mathrm{occ}}\\sim 0.1$ then requires $P_{\\mathrm{trig}}N_{\\mathrm{evt}}$ to be of order unity to several, motivating multiple merger-driven or inflow-driven obscured episodes during early assembly.",
+          "label": "Text"
+        },
+        {
+          "id": "11",
+          "order": 12,
+          "bounding_box": {
+            "x": 0.651,
+            "y": 0.668,
+            "width": 0.139,
+            "height": 0.014
+          },
+          "content": "## 7. CONCLUSION",
+          "label": "Text"
+        },
+        {
+          "id": "12",
+          "order": 13,
+          "bounding_box": {
+            "x": 0.518,
+            "y": 0.69,
+            "width": 0.403,
+            "height": 0.221
+          },
+          "content": "We have presented a compact model in which LRDlike systems arise during a transient, heavily obscured phase inside FDM soliton cores. Combining size scaling with opacity constraints suggests $m_{2 2} \\sim$ few. A conservative column estimate, including sensitivity analysis for baryon loading, indicates that reaching $N_{\\mathrm{H}} \\gtrsim 10^{24}\\mathrm{cm}^{-2}$ typically implies radiative losses faster than dynamical support (or radiation-pressure dominance), disfavoring a long-lived static hot atmosphere and motivating rapid inflow or radiation-pressure-driven evolution. In progenitor-phase interpretations where $M_{\\mathrm{B H}}<M_{c}$ , the observed LRD population may also remain consistent with heavier boson masses （ $m_{2 2} \\gtrsim 2 0$ ）, while still triggering the same opacity-crisis collapse mechanism.",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "page_index": 8,
+      "blocks": [
+        {
+          "id": "0",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.188,
+            "y": 0.102,
+            "width": 0.211,
+            "height": 0.01
+          },
+          "content": "Figure 4: Formation Boundary (m22=1-52)",
+          "label": "Text"
+        },
+        {
+          "id": "1",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.087,
+            "y": 0.109,
+            "width": 0.383,
+            "height": 0.218
+          },
+          "content": "",
+          "label": "Image"
+        },
+        {
+          "id": "2",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.077,
+            "y": 0.345,
+            "width": 0.404,
+            "height": 0.304
+          },
+          "content": "Figure 4. The size-mass plane of Little Red Dots (LRDs), comparing observed effective radii $r_{e}$ with illustrative FDM soliton compactness limits. The red shaded region indicates a \"Soliton Formation Zone,\" defined by the minimum radii implied by the soliton scaling for different boson masses. The horizontal axis represents the observed black hole mass （ $M_{\\mathrm{BH}}$ ）, which does not necessarily equal the underlying soliton mass （ $M_{c}$ ）during the early progenitor phase. The dashed red line shows our fiducial baseline （ $m_{22}=2$ ）under the direct-mapping assumption （ $M_{\\mathrm{BH}}\\approx M_{c}$ ）. LRD measurements from Greene et al. (2024) and Kokorev et al. (2024) are overplotted. In the progenitor phase interpretation （ $M_{\\mathrm{BH}}<M_{c}$ ）, the horizontal scatter of the observational data reflects the growth track of black holes at a fixed $m_{22}$ within larger, fixed soliton cores （ $M_{c}\\gg M_{\\mathrm{BH}}$ ）rather than a varying $m_{22}$ . This resolves the apparent tension with the $m_{22}\\approx 2$ estimate in Section 2.1, which strictly assumes a mature, direct-mapping （ $M_{\\mathrm{BH}}\\approx M_{c}$ ）scenario. This interpretation allows the observed LRDs to be consistent with heavier boson masses （ $m_{22}\\gtrsim 20$ , consistent with Lyman-$\\alpha$ constraints） while still utilizing the deep soliton potential to trigger the initial collapse.",
+          "label": "Text"
+        },
+        {
+          "id": "3",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.454,
+            "y": 0.7,
+            "width": 0.093,
+            "height": 0.015
+          },
+          "content": "## APPENDIX",
+          "label": "Text"
+        },
+        {
+          "id": "4",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.134,
+            "y": 0.809,
+            "width": 0.731,
+            "height": 0.016
+          },
+          "content": "## SUPPLEMENTARY NOTES: DETAILED DERIVATIONS AND PHYSICAL INTERPRETATIONS",
+          "label": "Text"
+        },
+        {
+          "id": "5",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.078,
+            "y": 0.83,
+            "width": 0.844,
+            "height": 0.08
+          },
+          "content": "This document provides rigorous mathematical derivations for the scaling laws and physical timescales presented in the revised manuscript. Specifically, we explicitly derive the dynamical timescale based on the soliton gravitational potential and compare it with the radiative cooling timescale. We demonstrate that the inclusion of the soliton potential significantly deepens the central well compared to a naked black hole; however, even with this enhanced gravitational support, radiative losses dominate for massive cores, leading to the unavoidable \"Opacity Crisis.\"",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "page_index": 9,
+      "blocks": [
+        {
+          "id": "0",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.321,
+            "y": 0.082,
+            "width": 0.356,
+            "height": 0.015
+          },
+          "content": "## A. SOLITON SCALING LAWS (SECTION 2.1)",
+          "label": "Text"
+        },
+        {
+          "id": "1",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.342,
+            "y": 0.103,
+            "width": 0.316,
+            "height": 0.015
+          },
+          "content": "A. 1. Equation 1: The Soliton Core Radius",
+          "label": "Text"
+        },
+        {
+          "id": "2",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.093,
+            "y": 0.124,
+            "width": 0.087,
+            "height": 0.015
+          },
+          "content": "Equation:",
+          "label": "Text"
+        },
+        {
+          "id": "3",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.387,
+            "y": 0.142,
+            "width": 0.222,
+            "height": 0.035
+          },
+          "content": "$$\nr _ {c} \\approx 1 6 0 \\mathrm {p c} m _ {2 2} ^ {- 2} \\left(\\frac {M _ {s}}{1 0 ^ {9} M _ {\\odot}}\\right) ^ {- 1}\n$$",
+          "label": "Formula"
+        },
+        {
+          "id": "4",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.883,
+            "y": 0.153,
+            "width": 0.034,
+            "height": 0.016
+          },
+          "content": "(A1)",
+          "label": "Formula"
+        },
+        {
+          "id": "5",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.077,
+            "y": 0.187,
+            "width": 0.844,
+            "height": 0.064
+          },
+          "content": "Derivation: The Fuzzy Dark Matter (FDM) soliton represents the ground-state solution of the Schrödinger-Poisson system. The scale arises from the balance between quantum pressure (uncertainty principle) and self-gravity. The de Broglie wavelength is $\\lambda_{dB}\\sim\\frac{\\hbar}{mv}$ . For a self-gravitating system, the virial velocity is $v\\sim\\sqrt{GM/r}$ . Equating the quantum pressure scale $r\\sim\\lambda_{dB}$ with the gravitational scale:",
+          "label": "Text"
+        },
+        {
+          "id": "6",
+          "order": 7,
+          "bounding_box": {
+            "x": 0.295,
+            "y": 0.263,
+            "width": 0.404,
+            "height": 0.035
+          },
+          "content": "$$\nr \\sim \\frac {\\hbar}{m \\sqrt {G M / r}} \\Rightarrow r ^ {1 / 2} \\sim \\frac {\\hbar}{m \\sqrt {G M}} \\Rightarrow r \\sim \\frac {\\hbar^ {2}}{G m ^ {2} M}\n$$",
+          "label": "Formula"
+        },
+        {
+          "id": "7",
+          "order": 8,
+          "bounding_box": {
+            "x": 0.883,
+            "y": 0.273,
+            "width": 0.034,
+            "height": 0.015
+          },
+          "content": "(A2)",
+          "label": "Formula"
+        },
+        {
+          "id": "8",
+          "order": 9,
+          "bounding_box": {
+            "x": 0.077,
+            "y": 0.313,
+            "width": 0.523,
+            "height": 0.017
+          },
+          "content": "Substituting physical constants yields the inverse scaling $r_{c}\\propto m^{-2}M_{s}^{-1}.$",
+          "label": "Text"
+        },
+        {
+          "id": "9",
+          "order": 10,
+          "bounding_box": {
+            "x": 0.227,
+            "y": 0.346,
+            "width": 0.543,
+            "height": 0.015
+          },
+          "content": "## B. TIMESCALE HIERARCHY AND STABILITY (SECTIONS 2.2 & 2.4)",
+          "label": "Text"
+        },
+        {
+          "id": "10",
+          "order": 11,
+          "bounding_box": {
+            "x": 0.29,
+            "y": 0.367,
+            "width": 0.42,
+            "height": 0.015
+          },
+          "content": "## B.1. Dynamical Timescale: Soliton vs. Naked Black Hole",
+          "label": "Text"
+        },
+        {
+          "id": "11",
+          "order": 12,
+          "bounding_box": {
+            "x": 0.079,
+            "y": 0.388,
+            "width": 0.843,
+            "height": 0.047
+          },
+          "content": "Definition: We define the dynamical time at the core radius $r_{c}$ based on the gravitational potential of the total enclosed mass. This distinguishes the \"Soliton Container\" scenario from a naked black hole scenario. Derivation: The dynamical time is defined as:",
+          "label": "Text"
+        },
+        {
+          "id": "12",
+          "order": 13,
+          "bounding_box": {
+            "x": 0.413,
+            "y": 0.439,
+            "width": 0.169,
+            "height": 0.039
+          },
+          "content": "$$\nt _ {d y n} (r) \\equiv \\sqrt {\\frac {r ^ {3}}{G M _ {e n c} (r)}}\n$$",
+          "label": "Formula"
+        },
+        {
+          "id": "13",
+          "order": 14,
+          "bounding_box": {
+            "x": 0.884,
+            "y": 0.451,
+            "width": 0.033,
+            "height": 0.016
+          },
+          "content": "(B3)",
+          "label": "Formula"
+        },
+        {
+          "id": "14",
+          "order": 15,
+          "bounding_box": {
+            "x": 0.078,
+            "y": 0.508,
+            "width": 0.486,
+            "height": 0.014
+          },
+          "content": "## Case A: Soliton-Dominated Potential (The LRD Scenario)",
+          "label": "Text"
+        },
+        {
+          "id": "15",
+          "order": 16,
+          "bounding_box": {
+            "x": 0.078,
+            "y": 0.523,
+            "width": 0.842,
+            "height": 0.047
+          },
+          "content": "For a black hole embedded in a soliton, $M_{enc} ( r_{c})\\approx M_{BH}+M_{s}(<r_{c}).$ In the progenitor phase or massive soliton limit where $M_{s}\\gtrsim M_{BH},$ the potential is dominated by the soliton mass $M_{s}.$ Substituting the soliton scaling relation $r_{c}\\propto m^{-2}M_{s}^{-1}:$",
+          "label": "Text"
+        },
+        {
+          "id": "16",
+          "order": 17,
+          "bounding_box": {
+            "x": 0.308,
+            "y": 0.576,
+            "width": 0.382,
+            "height": 0.038
+          },
+          "content": "$$\nt _ {d y n, s o l} \\propto \\sqrt {\\frac {(m ^ {- 2} M _ {s} ^ {- 1}) ^ {3}}{M _ {s}}} = \\sqrt {m ^ {- 6} M _ {s} ^ {- 4}} = m ^ {- 3} M _ {s} ^ {- 2}\n$$",
+          "label": "Formula"
+        },
+        {
+          "id": "17",
+          "order": 18,
+          "bounding_box": {
+            "x": 0.884,
+            "y": 0.589,
+            "width": 0.033,
+            "height": 0.016
+          },
+          "content": "(B4)",
+          "label": "Formula"
+        },
+        {
+          "id": "18",
+          "order": 19,
+          "bounding_box": {
+            "x": 0.079,
+            "y": 0.624,
+            "width": 0.509,
+            "height": 0.015
+          },
+          "content": "Thus, for a fixed boson mass $m$ , the dynamical support time scales as:",
+          "label": "Text"
+        },
+        {
+          "id": "19",
+          "order": 20,
+          "bounding_box": {
+            "x": 0.452,
+            "y": 0.654,
+            "width": 0.094,
+            "height": 0.017
+          },
+          "content": "$$\nt _ {d y n} \\propto M _ {s} ^ {- 2}\n$$",
+          "label": "Formula"
+        },
+        {
+          "id": "20",
+          "order": 21,
+          "bounding_box": {
+            "x": 0.884,
+            "y": 0.655,
+            "width": 0.033,
+            "height": 0.015
+          },
+          "content": "(B5)",
+          "label": "Formula"
+        },
+        {
+          "id": "21",
+          "order": 22,
+          "bounding_box": {
+            "x": 0.077,
+            "y": 0.687,
+            "width": 0.843,
+            "height": 0.031
+          },
+          "content": "This indicates that more massive solitons have quadratically shorter dynamical times due to their deeper and more compact potentials.",
+          "label": "Text"
+        },
+        {
+          "id": "22",
+          "order": 23,
+          "bounding_box": {
+            "x": 0.078,
+            "y": 0.736,
+            "width": 0.494,
+            "height": 0.015
+          },
+          "content": "## Case B: Naked Black Hole (Comparison for Major Point 1)",
+          "label": "Text"
+        },
+        {
+          "id": "23",
+          "order": 24,
+          "bounding_box": {
+            "x": 0.078,
+            "y": 0.752,
+            "width": 0.839,
+            "height": 0.032
+          },
+          "content": "In the absence of a soliton (a \"naked\" black hole), the enclosed mass at the same radius $r_{c}$ is simply $M_{enc}\\approx M_{BH}.$ Since $M_{enc,sol}>M_{enc,BH}$ (often significantly, as $M_{s}\\sim 10^{9}M_{\\odot}$ while $M_{BH}$ may be growing), we have:",
+          "label": "Text"
+        },
+        {
+          "id": "24",
+          "order": 25,
+          "bounding_box": {
+            "x": 0.432,
+            "y": 0.8,
+            "width": 0.132,
+            "height": 0.016
+          },
+          "content": "$$\nt _ {d y n, s o l} < t _ {d y n, B H}\n$$",
+          "label": "Formula"
+        },
+        {
+          "id": "25",
+          "order": 26,
+          "bounding_box": {
+            "x": 0.884,
+            "y": 0.799,
+            "width": 0.033,
+            "height": 0.015
+          },
+          "content": "(B6)",
+          "label": "Formula"
+        },
+        {
+          "id": "26",
+          "order": 27,
+          "bounding_box": {
+            "x": 0.078,
+            "y": 0.83,
+            "width": 0.843,
+            "height": 0.079
+          },
+          "content": "The soliton creates a deeper potential well, providing stronger gravitational support (shorter collapse time) than the black hole alone. The fact that the \"Opacity Crisis\" (instability) occurs even in the soliton case $( t_{cool} < t_{dyn,sol})$ implies that a static atmosphere is a fortiori impossible in the naked black hole case, where the dynamical support is weaker (longer $t_{dyn}$ ). The role of the soliton is therefore to define the compact physical scale $( r_{c}\\sim 50 \\mathrm{pc})$ and density threshold where this crisis manifests.",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "page_index": 10,
+      "blocks": [
+        {
+          "id": "0",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.371,
+            "y": 0.082,
+            "width": 0.259,
+            "height": 0.015
+          },
+          "content": "## B.2. Cooling Timescale Derivation",
+          "label": "Text"
+        },
+        {
+          "id": "1",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.091,
+            "y": 0.103,
+            "width": 0.73,
+            "height": 0.016
+          },
+          "content": "Gas Properties: We assume the gas initially traces the soliton potential in hydrostatic equilibrium.",
+          "label": "Text"
+        },
+        {
+          "id": "2",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.102,
+            "y": 0.126,
+            "width": 0.356,
+            "height": 0.02
+          },
+          "content": "- Virial Temperature: $T\\propto \\frac{M_{s}}{r_{c}} \\propto \\frac{M_{s}}{M_{s}^{-1}} \\propto M_{s}^{2}.$",
+          "label": "Text"
+        },
+        {
+          "id": "3",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.104,
+            "y": 0.156,
+            "width": 0.481,
+            "height": 0.016
+          },
+          "content": "- Gas Density: Assuming gas mass $M_{g}\\propto M_{s}$ fills the volume $r_{c}^{3}:$",
+          "label": "Text"
+        },
+        {
+          "id": "4",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.415,
+            "y": 0.181,
+            "width": 0.208,
+            "height": 0.035
+          },
+          "content": "$$\nn \\approx \\frac {M _ {g}}{m _ {p} r _ {c} ^ {3}} \\propto \\frac {M _ {s}}{\\left(M _ {s} ^ {- 1}\\right) ^ {3}} \\propto M _ {s} ^ {4}\n$$",
+          "label": "Formula"
+        },
+        {
+          "id": "5",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.884,
+            "y": 0.19,
+            "width": 0.033,
+            "height": 0.015
+          },
+          "content": "(B7)",
+          "label": "Formula"
+        },
+        {
+          "id": "6",
+          "order": 7,
+          "bounding_box": {
+            "x": 0.076,
+            "y": 0.23,
+            "width": 0.843,
+            "height": 0.036
+          },
+          "content": "Cooling Time and Multiphase Scaling: The cooling timescale is given by $t_{\\mathrm{cool}} \\sim \\frac{k_{B} T}{n\\Lambda (T)}$ . Given $n\\propto M_{s}^{4}$ and $T\\propto M_{s}^{2}$ , the scaling depends on the cooling function $\\Lambda (T)$ :",
+          "label": "Text"
+        },
+        {
+          "id": "7",
+          "order": 8,
+          "bounding_box": {
+            "x": 0.102,
+            "y": 0.277,
+            "width": 0.819,
+            "height": 0.048
+          },
+          "content": "- Atomic Cooling Threshold （ $T<10^{4}$ K）：For $M_{s}<2.8\\times 10^{7}M_{\\odot},$ $\\Lambda (T)$ is exponentially suppressed by the Boltzmann factor. Consequently, $t_{\\mathrm{cool}}$ increases sharply as $M_{s}$ decreases, exceeding the dynamical time and creating a stable regime.",
+          "label": "Text"
+        },
+        {
+          "id": "8",
+          "order": 9,
+          "bounding_box": {
+            "x": 0.105,
+            "y": 0.334,
+            "width": 0.815,
+            "height": 0.031
+          },
+          "content": "- Line Cooling Regime $( 10^{4}<T<10^{7}\\mathrm{K})$ : As implemented in our numerical model, $\\Lambda(T)\\propto T^{-0.6}$ in this interval. The scaling becomes:",
+          "label": "Text"
+        },
+        {
+          "id": "9",
+          "order": 10,
+          "bounding_box": {
+            "x": 0.362,
+            "y": 0.374,
+            "width": 0.313,
+            "height": 0.034
+          },
+          "content": "$$\nt _ {\\mathrm {c o o l}} \\propto \\frac {T}{n \\Lambda (T)} \\propto \\frac {T ^ {1 . 6}}{n} \\propto \\frac {\\left(M _ {s} ^ {2}\\right) ^ {1 . 6}}{M _ {s} ^ {4}} = M _ {s} ^ {- 0. 8}\n$$",
+          "label": "Formula"
+        },
+        {
+          "id": "10",
+          "order": 11,
+          "bounding_box": {
+            "x": 0.884,
+            "y": 0.384,
+            "width": 0.033,
+            "height": 0.015
+          },
+          "content": "(B8)",
+          "label": "Formula"
+        },
+        {
+          "id": "11",
+          "order": 12,
+          "bounding_box": {
+            "x": 0.118,
+            "y": 0.418,
+            "width": 0.63,
+            "height": 0.015
+          },
+          "content": "This explains the shallower slope of the cooling curve in the middle section of Figure 2.",
+          "label": "Text"
+        },
+        {
+          "id": "12",
+          "order": 13,
+          "bounding_box": {
+            "x": 0.105,
+            "y": 0.443,
+            "width": 0.814,
+            "height": 0.031
+          },
+          "content": "- Bremsstrahlung Regime $( T > 10^{7} \\mathrm{~K})$ : For massive cores $( M_{s}\\sim 10^{9} M_{\\odot})$ , thermal bremsstrahlung dominates, so $\\Lambda ( T )\\propto T^{1 / 2}$ . Substituting the scalings yields:",
+          "label": "Text"
+        },
+        {
+          "id": "13",
+          "order": 14,
+          "bounding_box": {
+            "x": 0.401,
+            "y": 0.484,
+            "width": 0.236,
+            "height": 0.034
+          },
+          "content": "$$\nt _ {\\mathrm {c o o l}} \\propto \\frac {T ^ {1 / 2}}{n} \\propto \\frac {\\left(M _ {s} ^ {2}\\right) ^ {1 / 2}}{M _ {s} ^ {4}} = M _ {s} ^ {- 3}\n$$",
+          "label": "Formula"
+        },
+        {
+          "id": "14",
+          "order": 15,
+          "bounding_box": {
+            "x": 0.884,
+            "y": 0.495,
+            "width": 0.033,
+            "height": 0.015
+          },
+          "content": "(B9)",
+          "label": "Formula"
+        },
+        {
+          "id": "15",
+          "order": 16,
+          "bounding_box": {
+            "x": 0.118,
+            "y": 0.53,
+            "width": 0.626,
+            "height": 0.015
+          },
+          "content": "This confirms the steep slope $t_{\\mathrm{cool}} \\propto M_{s}^{-3}$ shown in Figure 2 for the high-mass regime.",
+          "label": "Text"
+        },
+        {
+          "id": "16",
+          "order": 17,
+          "bounding_box": {
+            "x": 0.348,
+            "y": 0.556,
+            "width": 0.304,
+            "height": 0.016
+          },
+          "content": "## B.3. The Crossover (The Opacity Crisis)",
+          "label": "Text"
+        },
+        {
+          "id": "17",
+          "order": 18,
+          "bounding_box": {
+            "x": 0.092,
+            "y": 0.578,
+            "width": 0.494,
+            "height": 0.016
+          },
+          "content": "Comparing the slopes derived above against the dynamical support:",
+          "label": "Text"
+        },
+        {
+          "id": "18",
+          "order": 19,
+          "bounding_box": {
+            "x": 0.104,
+            "y": 0.602,
+            "width": 0.257,
+            "height": 0.017
+          },
+          "content": "- Dynamical Support: $t_{\\mathrm{dyn}} \\propto M_{s}^{-2}$",
+          "label": "Text"
+        },
+        {
+          "id": "19",
+          "order": 20,
+          "bounding_box": {
+            "x": 0.102,
+            "y": 0.628,
+            "width": 0.579,
+            "height": 0.017
+          },
+          "content": "- Radiative Cooling: $t_{\\mathrm{cool}} \\propto M_{s}^{-0.8}$ (intermediate) and $t_{\\mathrm{cool}} \\propto M_{s}^{-3}$ (high-mass)",
+          "label": "Text"
+        },
+        {
+          "id": "20",
+          "order": 21,
+          "bounding_box": {
+            "x": 0.077,
+            "y": 0.653,
+            "width": 0.84,
+            "height": 0.031
+          },
+          "content": "The intersection $t_{\\mathrm{dyn}}=t_{\\mathrm{cool}}$ defines the stability limit. Numerically solving for our fiducial parameters （ $m_{2 2}=2. 0$ ）, we find a critical mass scale:",
+          "label": "Text"
+        },
+        {
+          "id": "21",
+          "order": 22,
+          "bounding_box": {
+            "x": 0.422,
+            "y": 0.684,
+            "width": 0.155,
+            "height": 0.016
+          },
+          "content": "$$\nM _ {\\mathrm {c r i t}} \\approx 2. 8 \\times 1 0 ^ {7} M _ {\\odot}\n$$",
+          "label": "Formula"
+        },
+        {
+          "id": "22",
+          "order": 23,
+          "bounding_box": {
+            "x": 0.876,
+            "y": 0.685,
+            "width": 0.041,
+            "height": 0.015
+          },
+          "content": "(B10)",
+          "label": "Formula"
+        },
+        {
+          "id": "23",
+          "order": 24,
+          "bounding_box": {
+            "x": 0.078,
+            "y": 0.706,
+            "width": 0.842,
+            "height": 0.033
+          },
+          "content": "For $M_{s} > M_{\\mathrm{crit}}$ , the gas loses thermal energy faster than the potential can dynamically readjust （ $t_{\\mathrm{cool}}<t_{\\mathrm{dyn}}$ ）. This leads to catastrophic collapse rather than a static hot atmosphere, confirming the \"Opacity Crisis\".",
+          "label": "Text"
+        },
+        {
+          "id": "24",
+          "order": 25,
+          "bounding_box": {
+            "x": 0.093,
+            "y": 0.792,
+            "width": 0.086,
+            "height": 0.015
+          },
+          "content": "Equation:",
+          "label": "Text"
+        },
+        {
+          "id": "25",
+          "order": 26,
+          "bounding_box": {
+            "x": 0.354,
+            "y": 0.75,
+            "width": 0.29,
+            "height": 0.015
+          },
+          "content": "## C. DEMOGRAPHICS (SECTION 6.3)",
+          "label": "Text"
+        },
+        {
+          "id": "26",
+          "order": 27,
+          "bounding_box": {
+            "x": 0.357,
+            "y": 0.771,
+            "width": 0.287,
+            "height": 0.016
+          },
+          "content": "C. 1. Equation 17: Occupancy Fraction",
+          "label": "Text"
+        },
+        {
+          "id": "27",
+          "order": 28,
+          "bounding_box": {
+            "x": 0.385,
+            "y": 0.805,
+            "width": 0.226,
+            "height": 0.033
+          },
+          "content": "$$\nn _ {L R D} \\simeq n _ {h a l o} P _ {t r i g} N _ {e v t} \\left(\\frac {t _ {e v t}}{t _ H}\\right)\n$$",
+          "label": "Formula"
+        },
+        {
+          "id": "28",
+          "order": 29,
+          "bounding_box": {
+            "x": 0.876,
+            "y": 0.814,
+            "width": 0.041,
+            "height": 0.016
+          },
+          "content": "(C11)",
+          "label": "Formula"
+        },
+        {
+          "id": "29",
+          "order": 30,
+          "bounding_box": {
+            "x": 0.078,
+            "y": 0.843,
+            "width": 0.63,
+            "height": 0.016
+          },
+          "content": "Derivation: This is a standard duty-cycle argument based on the Ergodic Hypothesis.",
+          "label": "Text"
+        },
+        {
+          "id": "30",
+          "order": 31,
+          "bounding_box": {
+            "x": 0.112,
+            "y": 0.869,
+            "width": 0.346,
+            "height": 0.015
+          },
+          "content": "- $n_{halo}$ : Number density of potential host halos.",
+          "label": "Text"
+        },
+        {
+          "id": "31",
+          "order": 32,
+          "bounding_box": {
+            "x": 0.11,
+            "y": 0.893,
+            "width": 0.432,
+            "height": 0.016
+          },
+          "content": "- $P_{trig}$ : Probability that a halo is triggered to host an LRD.",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "page_index": 11,
+      "blocks": [
+        {
+          "id": "0",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.117,
+            "y": 0.082,
+            "width": 0.313,
+            "height": 0.015
+          },
+          "content": "$N_{evt}$ : Number of events per triggered halo.",
+          "label": "Text"
+        },
+        {
+          "id": "1",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.109,
+            "y": 0.109,
+            "width": 0.539,
+            "height": 0.015
+          },
+          "content": "- $t_{evt} / t_{H}$ : The fractional duration of the event relative to the Hubble time.",
+          "label": "Text"
+        },
+        {
+          "id": "2",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.077,
+            "y": 0.135,
+            "width": 0.843,
+            "height": 0.03
+          },
+          "content": "The observed number density is simply the total halo density weighted by the probability of catching a halo in the active, obscured LRD phase.",
+          "label": "Text"
+        },
+        {
+          "id": "3",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.078,
+            "y": 0.221,
+            "width": 0.384,
+            "height": 0.323
+          },
+          "content": "Bahados, E., et al. 2018, Nature, 553, 473\n\nBromm, V. 2013, Rep. Prog. Phys., 76, 112901\n\nCasey, C. M., et al. 2025, ApJL, 990, L61\n\nChan, J. H. H., Schive, H.-Y., Chiueh, T., & Broadhurst,\n\nT. 2018, MNRAS, 478, 2686\n\nChiu, H.-H. S., et al. 2025, Phys. Rev. Lett., 134, 051402\n\nGreene, J. E., et al. 2024, ApJ, 964, 39\n\nIrsič, V., et al. 2017, Phys. Rev. Lett., 119, 031302\n\nKokorev, V., et al. 2024, ApJ, 963, 2\n\nLabbé, I., et al. 2023, Nature, 616, 266\n\nMaiolino, R. et al. 2024, Nature, 627, 792\n\nPozo, A., Broadhurst, T., Emami, R., Mocz, P.\n\nVogelsberger, M., et al. 2025, Nat. Astron.\n\nMortlock, D. J., et al. 2011, Nature, 474, 616\n\nSchive, H.-Y., Chiueh, T., & Broadhurst, T. 2014a, Nat.\n\nPhys., 10, 496\n\nSchive, H.-Y., et al. 2014b, Phys. Rev. Lett., 113, 261302\n\nSutherland, R. S., & Dopita, M. A. 1993, ApJS, 88, 253\n\nDelvecchio, I., Daddi, E., Magnelli, B., et al. 2025, A&A,\n\n704. A313",
+          "label": "Text"
+        },
+        {
+          "id": "4",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.441,
+            "y": 0.19,
+            "width": 0.117,
+            "height": 0.014
+          },
+          "content": "## REFERENCES",
+          "label": "Text"
+        },
+        {
+          "id": "5",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.079,
+            "y": 0.215,
+            "width": 0.283,
+            "height": 0.013
+          },
+          "content": "Banados, E., et al. 2018, Nature, 553, 473",
+          "label": "Text"
+        },
+        {
+          "id": "6",
+          "order": 7,
+          "bounding_box": {
+            "x": 0.519,
+            "y": 0.213,
+            "width": 0.399,
+            "height": 0.322
+          },
+          "content": "Rusakov, V., Watson, D., Nikopoulos, G. P., et al. 2026 Nature, 649, 574\n\nBogdán, Á., et al. 2024, Nat. Astron., 8, 126\n\nBosman, S. E. I., et al. 2024, Nat. Astron., 8, 1054\n\nHopkins, P. F., et al. 2014, MNRAS, 445, 581\n\nInayoshi, K., & Maiolino, R. 2025, ApJL, 980, L27\n\nJi, X., et al. 2025, arXiv e-prints, arXiv:2507.23774\n\nKobayashi, T., Murgia, R., De Simone, A., Irsič, V., & Viel, M. 2017, Phys. Rev. D, 96, 123514\n\nKokorev, V., et al. 2023, ApJL, 957, L7\n\nKovács, O. E., et al. 2024, ApJL, 965, L21\n\nLarson, R. L., et al. 2023, ApJL, 953, L29\n\nMaiolino, R., et al. 2025, MNRAS, 538, 1921\n\nPlanck Collaboration, Aghanim, N., et al. 2020, A&A, 641, A6\n\nRogers, K. K., & Peiris, H. V. 2021, Phys. Rev. Lett., 126, 071302\n\nSetton, D. J., et al. 2025, ApJ, 995, 118\n\nSuh, H., et al. 2025, Nat. Astron., 9, 271\n\nYang, J. et al. 2020, ApJL, 897, L14",
+          "label": "Text"
+        },
+        {
+          "id": "7",
+          "order": 8,
+          "bounding_box": {
+            "x": 0.521,
+            "y": 0.526,
+            "width": 0.251,
+            "height": 0.014
+          },
+          "content": "Yang, J., et al. 2020, ApJL, 897, L14",
+          "label": "Text"
+        }
+      ]
+    }
+  ]
+}

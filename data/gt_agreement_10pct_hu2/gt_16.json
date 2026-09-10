@@ -1,0 +1,135 @@
+{
+  "file_name": "8b1a9926-16.pdf",
+  "pages": [
+    {
+      "page_index": 14,
+      "blocks": [
+        {
+          "id": "pred-16-14-14_0",
+          "order": "1",
+          "bounding_box": {
+            "x": 0.14,
+            "y": 0.254,
+            "width": 0.719,
+            "height": 0.385
+          },
+          "block_content": "",
+          "label": "Image"
+        },
+        {
+          "id": "pred-16-14-14_2",
+          "order": "3",
+          "bounding_box": {
+            "x": 0.49,
+            "y": 0.934,
+            "width": 0.021,
+            "height": 0.014
+          },
+          "block_content": "14",
+          "label": "Text"
+        },
+        {
+          "id": "f-eVnUZz4D",
+          "order": null,
+          "bounding_box": {
+            "x": 0.11771058315334773,
+            "y": 0.6642201783957334,
+            "width": 0.7667386609071274,
+            "height": 0.0884070058381985
+          },
+          "block_content": "Figure 3: Coskewness and regime recovery on the four-regime simulation (Scenario A): regime-recovery ARI against noise level for the three objectives (colour) under the exhaustive variance cut (solid) and the k -means ( t 1 , u 1 ) split (dashed). The coskewness and combined objectives with the k -means split give the highest ARI, and their margin over the covariance objective grows with noise.",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "page_index": 18,
+      "blocks": [
+        {
+          "id": "pred-16-18-18_0",
+          "order": "1",
+          "bounding_box": {
+            "x": 0.11639956803455725,
+            "y": 0.092,
+            "width": 0.767600431965443,
+            "height": 0.08899999999999997
+          },
+          "block_content": "dictor and response scores rather than their covariance, solved by a matrix-free higher-order power method that never forms a moment tensor. The motivation is a simple statistical observation: a node that straddles two regimes is a mixture, mixtures are non-normal, and the between-regime separation surfaces in the third-order joint moments before it dominates the second-order ones.",
+          "label": "Text"
+        },
+        {
+          "id": "pred-16-18-18_1",
+          "order": "2",
+          "bounding_box": {
+            "x": 0.117,
+            "y": 0.184,
+            "width": 0.768,
+            "height": 0.345
+          },
+          "block_content": "The empirical study confirms the positioning. A controlled simulation shows the coskewness objective recovering a planted skewed direction that the covariance objective is provably blind to. Inside the tree, on a four-regime piecewise-linear simulation, the coskewness objective recovers the regimes more faithfully than the covariance objective, with the advantage widening as noise erodes the first-order signal. On two real-world regressions the decoupled tree, which consists of a coskewness or combined split with covariance leaves, then delivers competitive prediction. On the energy-efficiency benchmark the combined-split tree gives the best single-tree accuracy observed (\\(R^{2} = 0.975\\)), matching a random forest and a multilayer perceptron to within noise at one to three orders of magnitude fewer parameters. On the gas-turbine emissions benchmark, under a temporal split with genuine operating-condition drift, the coskewness-split tree attains the lowest scale-weighted error of any method – ahead of a random forest, a multilayer perceptron and a temporal convolutional network – while remaining a single tree of sixteen interpretable local emission models. Decoupling is what reconciles the two goals: the third-moment split supplies regime-aware routing while the covariance leaves supply predictive sharpness, so on the predictive benchmarks the coskewness split costs little or nothing relative to a covariance tree yet retains its regime structure. The covariance and coskewness roles thus occupy complementary ends of a single interpretable dial: a coskewness (or combined) split for regime-aligned structure, covariance leaves for predictive accuracy.",
+          "label": "Text"
+        },
+        {
+          "id": "pred-16-18-18_2",
+          "order": "3",
+          "bounding_box": {
+            "x": 0.11531965442764579,
+            "y": 0.5300000000000004,
+            "width": 0.7686803455723544,
+            "height": 0.145
+          },
+          "block_content": "In spite of the good results reported, it is noted that third order moments are estimated with more sampling variability than second moments, so the coskewness objective needs a reasonable sample size to pay off. On a small concrete-slump benchmark that merely consists of 78 training rows (Yeh, 2007) it degraded rather than improved both recovery and prediction; the covariance objective remains the right default on small-n problems. The regime-recovery gains on piecewise data also come with a predictive cost that only the combined objective and the k-means split partly mitigate; choosing  \\( \\gamma \\)  and the split by cross-validation for a given dataset is the pragmatic recommendation.",
+          "label": "Text"
+        },
+        {
+          "id": "pred-16-18-18_3",
+          "order": "4",
+          "bounding_box": {
+            "x": 0.11423974082073436,
+            "y": 0.6769999999999998,
+            "width": 0.7697602591792657,
+            "height": 0.126
+          },
+          "block_content": "Several extensions are natural. The coskewness objective is presently available only with the dense and sparse twoblock bases; extending it to the robust and cellwise-robust bases (Serneels, 2026b,a) would combine regime discovery with outlier resistance. A plane search in  \\( ct_{2}+(1-|c|)t_{1} \\)  along the lines of Eriksson et al. (2009)'s §5.4.1 would relax the axis-aligned cut. Finally, higher-order objectives beyond coskewness – cokurtosis, or a joint independent-component criterion (De Lathauwer et al., 2000a) – are a natural continuation of the same programme.",
+          "label": "Text"
+        },
+        {
+          "id": "pred-16-18-18_4",
+          "order": "5",
+          "bounding_box": {
+            "x": 0.11415982721382288,
+            "y": 0.831,
+            "width": 0.32184017278617716,
+            "height": 0.025
+          },
+          "block_content": "9 Software availability",
+          "label": "Text"
+        },
+        {
+          "id": "pred-16-18-18_5",
+          "order": "6",
+          "bounding_box": {
+            "x": 0.11639956803455727,
+            "y": 0.869,
+            "width": 0.7676004319654429,
+            "height": 0.037
+          },
+          "block_content": "tbtree and the coskewness twoblock decomposition are implemented in the open-source Python package twoblock, with source on GitHub at https://github.com/SvenSerneels/",
+          "label": "Text"
+        },
+        {
+          "id": "pred-16-18-18_6",
+          "order": "7",
+          "bounding_box": {
+            "x": 0.489,
+            "y": 0.934,
+            "width": 0.022,
+            "height": 0.014
+          },
+          "block_content": "18",
+          "label": "Text"
+        }
+      ]
+    }
+  ]
+}

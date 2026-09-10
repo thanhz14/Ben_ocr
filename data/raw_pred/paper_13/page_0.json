@@ -1,0 +1,795 @@
+{
+    "input_path": "/home/bocchi/Downloads/Paper_Data/Quantitative Biology/2607.20915v1.pdf",
+    "page_index": 0,
+    "page_count": 14,
+    "width": 1224,
+    "height": 1584,
+    "model_settings": {
+        "use_doc_preprocessor": false,
+        "use_layout_detection": true,
+        "use_chart_recognition": false,
+        "use_seal_recognition": false,
+        "use_ocr_for_image_block": true,
+        "format_block_content": true,
+        "merge_layout_blocks": true,
+        "markdown_ignore_labels": [
+            "number",
+            "footnote",
+            "header",
+            "header_image",
+            "footer",
+            "footer_image",
+            "aside_text"
+        ],
+        "return_layout_polygon_points": true
+    },
+    "parsing_res_list": [
+        {
+            "block_label": "aside_text",
+            "block_content": "arXiv:2607.20915v1 [q-bio.PE] 23 Jul 2026",
+            "block_bbox": [
+                37,
+                574,
+                80,
+                1305
+            ],
+            "block_id": 0,
+            "block_order": null,
+            "group_id": 0,
+            "block_polygon_points": [
+                [
+                    37.0,
+                    574.0
+                ],
+                [
+                    80.0,
+                    574.0
+                ],
+                [
+                    80.0,
+                    1305.0
+                ],
+                [
+                    37.0,
+                    1305.0
+                ]
+            ]
+        },
+        {
+            "block_label": "doc_title",
+            "block_content": "# Evolutionary Le Chatelier's Principle: Phenotypic Plasticity and Genetic Assimilation via Timescale Separation in the Price Equation",
+            "block_bbox": [
+                104,
+                102,
+                1126,
+                158
+            ],
+            "block_id": 1,
+            "block_order": 1,
+            "group_id": 1,
+            "block_polygon_points": [
+                [
+                    104.0,
+                    102.0
+                ],
+                [
+                    1126.0,
+                    102.0
+                ],
+                [
+                    1126.0,
+                    158.0
+                ],
+                [
+                    104.0,
+                    158.0
+                ]
+            ]
+        },
+        {
+            "block_label": "text",
+            "block_content": "Tetsuhiro S. Hatakeyama $ ^{*} $",
+            "block_bbox": [
+                493,
+                182,
+                738,
+                204
+            ],
+            "block_id": 2,
+            "block_order": 2,
+            "group_id": 2,
+            "block_polygon_points": [
+                [
+                    493.0,
+                    182.0
+                ],
+                [
+                    738.0,
+                    182.0
+                ],
+                [
+                    738.0,
+                    204.0
+                ],
+                [
+                    493.0,
+                    204.0
+                ]
+            ]
+        },
+        {
+            "block_label": "text",
+            "block_content": "Earth-Life Science Institute, Institute of Future Science, Institute of Science Tokyo,\n\n2-12-1-IE-1 Ookayama, Meguro-ku, Tokyo 152-8550, Japan\n\n(Dated: July 2026)",
+            "block_bbox": [
+                266,
+                205,
+                964,
+                267
+            ],
+            "block_id": 3,
+            "block_order": 3,
+            "group_id": 3,
+            "block_polygon_points": [
+                [
+                    266.0,
+                    205.0
+                ],
+                [
+                    964.0,
+                    205.0
+                ],
+                [
+                    964.0,
+                    267.0
+                ],
+                [
+                    266.0,
+                    267.0
+                ]
+            ]
+        },
+        {
+            "block_label": "abstract",
+            "block_content": "Phenotypic plasticity and genetic assimilation play key roles in adaptive evolution, yet their underlying mechanism has lacked a unified physical description. A major theoretical difficulty lies in the fundamental difference in timescales, as phenotypic plasticity occurs rapidly within a generation whereas genetic changes accumulate slowly across generations. Here, we formalize these processes by bridging the continuous-time Price equation, a foundational equation of evolutionary dynamics, with the physical concept of timescale separation. A sudden environmental change induces a fast plastic displacement of the phenotype relative to the slow genotypic variable. Through genotype-phenotype coupling, this displacement generates an internal genetic stress. We demonstrate that genetic assimilation is a dynamical relaxation process in which the genotype evolves to resolve this self-generated stress. These evolutionary dynamics mathematically realize Le Chatelier's principle, where the slow genetic response naturally amplifies the initial plastic shift in the same direction. The theory predicts that a weaker restoring force, which can manifest as larger clonal phenotypic fluctuations, requires a longer evolutionary timescale for assimilation. In the ideal limit of cost-free, perfectly adaptive plasticity, the relaxation time diverges, so assimilation effectively stalls. This formulation provides a macroscopic physical mechanism for genetic assimilation, offering a universal response law for evolutionary systems in which rapid phenotypic responses precede slower genetic change.",
+            "block_bbox": [
+                212,
+                280,
+                1019,
+                637
+            ],
+            "block_id": 4,
+            "block_order": 4,
+            "group_id": 4,
+            "block_polygon_points": [
+                [
+                    212.0,
+                    280.0
+                ],
+                [
+                    1019.0,
+                    280.0
+                ],
+                [
+                    1019.0,
+                    637.0
+                ],
+                [
+                    212.0,
+                    637.0
+                ]
+            ]
+        },
+        {
+            "block_label": "paragraph_title",
+            "block_content": "### I. INTRODUCTION",
+            "block_bbox": [
+                244,
+                676,
+                460,
+                697
+            ],
+            "block_id": 5,
+            "block_order": 5,
+            "group_id": 5,
+            "block_polygon_points": [
+                [
+                    244.0,
+                    676.0
+                ],
+                [
+                    459.0,
+                    676.0
+                ],
+                [
+                    459.0,
+                    696.0
+                ],
+                [
+                    244.0,
+                    696.0
+                ]
+            ]
+        },
+        {
+            "block_label": "text",
+            "block_content": "Phenotypic plasticity allows organisms to rapidly alter their traits in response to sudden environmental changes, providing a buffer for survival [1]. From a biophysical perspective, plasticity can be viewed as a strategy to process environmental information and optimize population growth in fluctuating environments [2, 3]. Its evolutionary role extends beyond survival; it is increasingly recognized that plasticity can act as a driver of adaptive evolution [4, 5]. A classic manifestation of this is genetic assimilation, first proposed by Waddington [6–8] and Schmalhausen [9]. In this process, a phenotypic trait initially expressed via plasticity in response to an environmental shift often represents an incomplete adaptation to novel conditions [10]. This trait is later genetically stabilized, eventually becoming constitutive even in the absence of the original environmental trigger [6, 11] or direct selection for the phenotype itself [12]. While this phenomenon has been empirically demonstrated [7, 13], the mechanistic link between the initial plastic response and the subsequent genetic evolution remains a subject of ongoing debate. Furthermore, while maintaining and expressing phenotypic plasticity often incurs inherent fitness costs [14, 15], the dynamic role of this plasticity cost in driving genetic assimilation has not been fully formulated.",
+            "block_bbox": [
+                100,
+                728,
+                602,
+                1299
+            ],
+            "block_id": 6,
+            "block_order": 6,
+            "group_id": 6,
+            "block_polygon_points": [
+                [
+                    100.0,
+                    728.0
+                ],
+                [
+                    602.0,
+                    728.0
+                ],
+                [
+                    602.0,
+                    1299.0
+                ],
+                [
+                    100.0,
+                    1299.0
+                ]
+            ]
+        },
+        {
+            "block_label": "text",
+            "block_content": "The central difficulty in understanding genetic assimilation as a general phenomenon lies in the difference in timescales between phenotypic and genetic processes. Phenotypic plasticity is a rapid, intra-generational response, while genetic changes accumulate slowly across generations; the dynamic interplay between these separated timescales has long been recognized as a key driver of evolution  $ [16] $. Classical quantitative genetics  $ [17–19] $ and recent mechanistic models  $ [20–22] $ describe these evolutionary trajectories by assuming specific microscopic genetic architectures or developmental processes. For instance, quantitative models often treat the degree of plasticity as an evolving genetic locus, and mechanistic models rely on explicit equations for developmental networks to simulate evolutionary updates. These approaches depend on microscopic details of the system, which makes it difficult to identify the underlying physical dynamics of assimilation. While Waddington intuitively conceptualized such macroscopic dynamics through the metaphor of an “epigenetic landscape”  $ [8] $, a macroscopic formulation based on timescale separation is required. This framework should describe the response to external perturbations independently of microscopic details.",
+            "block_bbox": [
+                101,
+                1300,
+                601,
+                1371
+            ],
+            "block_id": 7,
+            "block_order": 7,
+            "group_id": 7,
+            "block_polygon_points": [
+                [
+                    101.0,
+                    1300.0
+                ],
+                [
+                    601.0,
+                    1300.0
+                ],
+                [
+                    601.0,
+                    1371.0
+                ],
+                [
+                    101.0,
+                    1371.0
+                ]
+            ]
+        },
+        {
+            "block_label": "text",
+            "block_content": "",
+            "block_bbox": [
+                626,
+                674,
+                1128,
+                1136
+            ],
+            "block_id": 8,
+            "block_order": 8,
+            "group_id": 7,
+            "block_polygon_points": [
+                [
+                    626.0,
+                    674.0
+                ],
+                [
+                    1128.0,
+                    674.0
+                ],
+                [
+                    1128.0,
+                    1136.0
+                ],
+                [
+                    626.0,
+                    1136.0
+                ]
+            ]
+        },
+        {
+            "block_label": "text",
+            "block_content": "In physics, thermodynamics provides macroscopic laws that inherently incorporate timescale separation. Specifically, the Le Chatelier-Braun principle (hereafter referred to simply as Le Chatelier's principle) dictates that a system's long-term response to an external perturbation is amplified when its internal slow variables are allowed to relax, compared to its short-term response where these variables are constrained [23]. This principle is a mathematical property of any system undergoing constrained optimization, including economic systems [24]. Given the mathematical analogies between evolutionary dynamics and statistical mechanics [25–27], applying Le Chatelier's principle to evolutionary responses has been a viable hy",
+            "block_bbox": [
+                626,
+                1153,
+                1129,
+                1455
+            ],
+            "block_id": 9,
+            "block_order": 9,
+            "group_id": 9,
+            "block_polygon_points": [
+                [
+                    626.0,
+                    1153.0
+                ],
+                [
+                    1129.0,
+                    1153.0
+                ],
+                [
+                    1129.0,
+                    1455.0
+                ],
+                [
+                    626.0,
+                    1455.0
+                ]
+            ]
+        },
+        {
+            "block_label": "footnote",
+            "block_content": " $ ^{*} $ hatakeyama@elsi.jp",
+            "block_bbox": [
+                107,
+                1424,
+                272,
+                1447
+            ],
+            "block_id": 10,
+            "block_order": null,
+            "group_id": 10,
+            "block_polygon_points": [
+                [
+                    107.0,
+                    1424.0
+                ],
+                [
+                    272.0,
+                    1424.0
+                ],
+                [
+                    272.0,
+                    1447.0
+                ],
+                [
+                    107.0,
+                    1447.0
+                ]
+            ]
+        }
+    ],
+    "layout_det_res": {
+        "input_path": null,
+        "page_index": null,
+        "boxes": [
+            {
+                "cls_id": 2,
+                "label": "aside_text",
+                "score": 0.8939355611801147,
+                "coordinate": [
+                    37,
+                    574,
+                    80,
+                    1305
+                ],
+                "order": null,
+                "polygon_points": [
+                    [
+                        37.0,
+                        574.0
+                    ],
+                    [
+                        80.0,
+                        574.0
+                    ],
+                    [
+                        80.0,
+                        1305.0
+                    ],
+                    [
+                        37.0,
+                        1305.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 6,
+                "label": "doc_title",
+                "score": 0.9209409356117249,
+                "coordinate": [
+                    104,
+                    102,
+                    1126,
+                    158
+                ],
+                "order": 1,
+                "polygon_points": [
+                    [
+                        104.0,
+                        102.0
+                    ],
+                    [
+                        1126.0,
+                        102.0
+                    ],
+                    [
+                        1126.0,
+                        158.0
+                    ],
+                    [
+                        104.0,
+                        158.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.7590535879135132,
+                "coordinate": [
+                    493,
+                    182,
+                    738,
+                    204
+                ],
+                "order": 2,
+                "polygon_points": [
+                    [
+                        493.0,
+                        182.0
+                    ],
+                    [
+                        738.0,
+                        182.0
+                    ],
+                    [
+                        738.0,
+                        204.0
+                    ],
+                    [
+                        493.0,
+                        204.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.42627808451652527,
+                "coordinate": [
+                    267,
+                    205,
+                    962,
+                    227
+                ],
+                "order": 3,
+                "polygon_points": [
+                    [
+                        267.0,
+                        205.0
+                    ],
+                    [
+                        962.0,
+                        205.0
+                    ],
+                    [
+                        962.0,
+                        227.0
+                    ],
+                    [
+                        267.0,
+                        227.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.42448267340660095,
+                "coordinate": [
+                    266,
+                    205,
+                    964,
+                    267
+                ],
+                "order": 4,
+                "polygon_points": [
+                    [
+                        266.0,
+                        205.0
+                    ],
+                    [
+                        964.0,
+                        205.0
+                    ],
+                    [
+                        964.0,
+                        267.0
+                    ],
+                    [
+                        266.0,
+                        267.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.3300425708293915,
+                "coordinate": [
+                    366,
+                    227,
+                    866,
+                    248
+                ],
+                "order": 5,
+                "polygon_points": [
+                    [
+                        366.0,
+                        227.0
+                    ],
+                    [
+                        866.0,
+                        227.0
+                    ],
+                    [
+                        866.0,
+                        248.0
+                    ],
+                    [
+                        366.0,
+                        248.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.5719781517982483,
+                "coordinate": [
+                    535,
+                    248,
+                    696,
+                    269
+                ],
+                "order": 6,
+                "polygon_points": [
+                    [
+                        535.0,
+                        248.0
+                    ],
+                    [
+                        695.0,
+                        248.0
+                    ],
+                    [
+                        695.0,
+                        268.0
+                    ],
+                    [
+                        535.0,
+                        268.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 0,
+                "label": "abstract",
+                "score": 0.9768157005310059,
+                "coordinate": [
+                    212,
+                    280,
+                    1019,
+                    637
+                ],
+                "order": 7,
+                "polygon_points": [
+                    [
+                        212.0,
+                        280.0
+                    ],
+                    [
+                        1019.0,
+                        280.0
+                    ],
+                    [
+                        1019.0,
+                        637.0
+                    ],
+                    [
+                        212.0,
+                        637.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 17,
+                "label": "paragraph_title",
+                "score": 0.8401920795440674,
+                "coordinate": [
+                    244,
+                    676,
+                    460,
+                    697
+                ],
+                "order": 8,
+                "polygon_points": [
+                    [
+                        244.0,
+                        676.0
+                    ],
+                    [
+                        459.0,
+                        676.0
+                    ],
+                    [
+                        459.0,
+                        696.0
+                    ],
+                    [
+                        244.0,
+                        696.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.972074031829834,
+                "coordinate": [
+                    100,
+                    728,
+                    602,
+                    1299
+                ],
+                "order": 9,
+                "polygon_points": [
+                    [
+                        100.0,
+                        728.0
+                    ],
+                    [
+                        602.0,
+                        728.0
+                    ],
+                    [
+                        602.0,
+                        1299.0
+                    ],
+                    [
+                        100.0,
+                        1299.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.9316732287406921,
+                "coordinate": [
+                    101,
+                    1300,
+                    601,
+                    1371
+                ],
+                "order": 10,
+                "polygon_points": [
+                    [
+                        101.0,
+                        1300.0
+                    ],
+                    [
+                        601.0,
+                        1300.0
+                    ],
+                    [
+                        601.0,
+                        1371.0
+                    ],
+                    [
+                        101.0,
+                        1371.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.9702891707420349,
+                "coordinate": [
+                    626,
+                    674,
+                    1128,
+                    1136
+                ],
+                "order": 11,
+                "polygon_points": [
+                    [
+                        626.0,
+                        674.0
+                    ],
+                    [
+                        1128.0,
+                        674.0
+                    ],
+                    [
+                        1128.0,
+                        1136.0
+                    ],
+                    [
+                        626.0,
+                        1136.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.9665753841400146,
+                "coordinate": [
+                    626,
+                    1153,
+                    1129,
+                    1455
+                ],
+                "order": 12,
+                "polygon_points": [
+                    [
+                        626.0,
+                        1153.0
+                    ],
+                    [
+                        1129.0,
+                        1153.0
+                    ],
+                    [
+                        1129.0,
+                        1455.0
+                    ],
+                    [
+                        626.0,
+                        1455.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 10,
+                "label": "footnote",
+                "score": 0.8409122824668884,
+                "coordinate": [
+                    107,
+                    1424,
+                    272,
+                    1447
+                ],
+                "order": null,
+                "polygon_points": [
+                    [
+                        107.0,
+                        1424.0
+                    ],
+                    [
+                        272.0,
+                        1424.0
+                    ],
+                    [
+                        272.0,
+                        1447.0
+                    ],
+                    [
+                        107.0,
+                        1447.0
+                    ]
+                ]
+            }
+        ]
+    }
+}

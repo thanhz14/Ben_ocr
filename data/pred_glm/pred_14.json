@@ -1,0 +1,1630 @@
+{
+  "file_name": "paper_14",
+  "pages": [
+    {
+      "page_index": 1,
+      "blocks": [
+        {
+          "id": "0",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.163,
+            "y": 0.124,
+            "width": 0.673,
+            "height": 0.048
+          },
+          "content": "# Auditing pretraining contamination in single-cell foundation model benchmarks",
+          "label": "Text"
+        },
+        {
+          "id": "1",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.444,
+            "y": 0.19,
+            "width": 0.107,
+            "height": 0.017
+          },
+          "content": "Sarwan Ali $^{1}$",
+          "label": "Text"
+        },
+        {
+          "id": "2",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.23,
+            "y": 0.22,
+            "width": 0.536,
+            "height": 0.039
+          },
+          "content": "$^{1}$ Columbia University Irving Medical Center, New York, USA sa4559@cumc.columbia.edu",
+          "label": "Text"
+        },
+        {
+          "id": "3",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.46,
+            "y": 0.306,
+            "width": 0.078,
+            "height": 0.013
+          },
+          "content": "## Abstract",
+          "label": "Text"
+        },
+        {
+          "id": "4",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.151,
+            "y": 0.33,
+            "width": 0.697,
+            "height": 0.268
+          },
+          "content": "Single-cell foundation models (scFMs) such as Geneformer, scGPT, and Universal Cell Embeddings (UCE) are pretrained on tens of millions of cells drawn from public repositories. The same repositories underlie widely used integration benchmarks, creating an unmeasured risk that zero-shot benchmark performance reflects pretraining exposure rather than genuine generalization. We introduce scContam, a per-cell audit framework that combines a MinHash-based gene-set fingerprint signal against the explicit pretraining corpus with a loss-based membership inference attack (MIA-scFM). Applied to four scIB benchmarks and three scFMs, we find that two of the most-cited benchmarks, PBMC 3k and the CELLxGENE human pancreatic islet atlas, contain extensive pretraining-overlap evidence （80.4% and 77.0% of cells with fingerprint p < 0.05 against Genecorpus-30M), whereas the post-cutoff datasets AIDA v2 and Tahoe-100M show no overlap evidence (0%). A controlled re-pretraining experiment establishes that MIA-scFM AUROC scales monotonically with the model's capacity-to-data ratio （AUROC $0.494\\rightarrow 0.690\\rightarrow 0.881$ across properly-regularized, mildly-overfit, and aggressivelyoverfit regimes), demonstrating that production scFMs resist instance-level memorization but distributional contamination must be detected separately. A donor-matched, within-cell-type analysis with three architectures shows that contaminated cells embed measurably more tightly than donor-matched clean cells (permutation $p=0.030,0.014,<0.002$ , respectively), with a perfectly null AIDA negative control. Pretraining audits are tractable and should accompany scFM benchmark reporting.",
+          "label": "Text"
+        },
+        {
+          "id": "5",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.15,
+            "y": 0.603,
+            "width": 0.696,
+            "height": 0.028
+          },
+          "content": "Keywords: single-cell foundation models, benchmark contamination, membership inference, scIB, Geneformer, scGPT, UCE",
+          "label": "Text"
+        },
+        {
+          "id": "6",
+          "order": 7,
+          "bounding_box": {
+            "x": 0.106,
+            "y": 0.66,
+            "width": 0.19,
+            "height": 0.016
+          },
+          "content": "## 1 Introduction",
+          "label": "Text"
+        },
+        {
+          "id": "7",
+          "order": 8,
+          "bounding_box": {
+            "x": 0.103,
+            "y": 0.696,
+            "width": 0.79,
+            "height": 0.112
+          },
+          "content": "Pretrained transformer models for single-cell RNA sequencing (scRNA-seq) data have rapidly become a standard analytical tool. Geneformer (Theodoris et al., 2023), scGPT (Cui et al., 2024), UCE (Rosen et al., 2023), and scFoundation (Hao et al., 2024) now provide cell representations that can be evaluated zero-shot or fine-tuned across a broad set of downstream tasks. A central premise of zero-shot evaluations is that the model has not seen the benchmark data during pretraining; if benchmark cells are in the pretraining corpus, performance estimates conflate generalization with memorization or distributional familiarity.",
+          "label": "Text"
+        },
+        {
+          "id": "8",
+          "order": 9,
+          "bounding_box": {
+            "x": 0.103,
+            "y": 0.814,
+            "width": 0.791,
+            "height": 0.112
+          },
+          "content": "Pretraining corpora for current scFMs are constructed from CELLxGENE Census (Program et al., 2025), the Human Cell Atlas (Regev et al., 2017), and curated additions, and span tens of millions of cells. Genecorpus-30M (Theodoris et al., 2023) was assembled from publicly available scRNA-seq through mid-2021; the CELLxGENE Census used by scGPT (33M cells) and UCE (33M+ human; 36M cross-species) was a 2023 release. Both corpora draw from the same upstream Gene Expression Omnibus and ArrayExpress deposits that underlie widely cited integration benchmarks, including PBMC 3k (Zheng et al., 2017) and human pancreatic islet atlases (Baron et al., 2016).",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "page_index": 2,
+      "blocks": [
+        {
+          "id": "0",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.103,
+            "y": 0.079,
+            "width": 0.791,
+            "height": 0.113
+          },
+          "content": "Whether benchmarks are in scFM training corpora, and whether the resulting contamination biases benchmark scores, has not been characterized at per-cell resolution. Three obstacles stand in the way. First, no pretrained model publishes a per-cell manifest of its training data. Second, naive comparison of benchmark performance across datasets confounds dataset biology with pretraining exposure. Third, leakage need not produce overt instance memorization: an scFM may simply embed pretraining-similar cells more tightly without verbatim recall, yielding subtle yet practically consequential benchmark bias.",
+          "label": "Text"
+        },
+        {
+          "id": "1",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.104,
+            "y": 0.196,
+            "width": 0.79,
+            "height": 0.146
+          },
+          "content": "This paper makes four contributions. (i) We define a tractable per-cell audit, Signal A, that uses MinHash gene-set fingerprints with a permutation null to flag benchmark cells anomalously close to a pretraining corpus. (ii) We define MIA-scFM, a loss-based membership inference statistic, and characterize when it is informative through a controlled three-regime re-pretraining experiment with ground-truth membership. (iii) We apply the audit to four scIB benchmarks against Genecorpus 30M and three scFMs, providing the first per-cell, per-benchmark contamination map. (iv) We quantify the downstream effect of contamination on embedding geometry under rigorous controls (donor, cell-type, permutation null, negative control on a clean dataset). All code, processed audits, and figures are released open-source.",
+          "label": "Text"
+        },
+        {
+          "id": "2",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.105,
+            "y": 0.368,
+            "width": 0.208,
+            "height": 0.018
+          },
+          "content": "## 2 Related Work",
+          "label": "Text"
+        },
+        {
+          "id": "3",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.103,
+            "y": 0.404,
+            "width": 0.791,
+            "height": 0.115
+          },
+          "content": "Single-cell foundation models. Geneformer (Theodoris et al., 2023) introduced a rank-encoded BERT-style transformer trained with masked-language-modeling on $\\approx$ 30M cells. scGPT (Cui et al., 2024) extended this to generative pretraining over 33M CELLxGENE Census cells with binned expression values. UCE (Rosen et al., 2023) departs from gene-token approaches entirely, using ESM2 protein embeddings (Lin et al., 2023) as the input tokens. scFoundation (Hao et al., 2024) and several other models (Boiarsky et al., 2023) have followed in rapid succession. All draw heavily on the same public scRNA-seq repositories.",
+          "label": "Text"
+        },
+        {
+          "id": "4",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.103,
+            "y": 0.54,
+            "width": 0.791,
+            "height": 0.131
+          },
+          "content": "Benchmark contamination in NLP and vision. Contamination of benchmarks by pretraining data is a well-known concern in NLP and computer vision. Magar and Schwartz (2022) formalized the distinction between memorization and exploitation in NLP benchmark contamination, and Brown et al. (2020); Sainz et al. (2023) documented overlap rates between GPT-class training corpora and downstream evaluations. Carlini et al. (2022) provides the methodological foundation for loss-based membership inference (MIA), which we adapt to the scFM setting. The single-cell community has begun to discuss the issue informally (Kedzierska et al., 2025), but no automated per-cell audit method has been published.",
+          "label": "Text"
+        },
+        {
+          "id": "5",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.103,
+            "y": 0.693,
+            "width": 0.789,
+            "height": 0.113
+          },
+          "content": "Integration benchmarks and silhouette-based metrics. The scIB benchmark (Luecken et al., 2022) evaluates integration methods using a basket of metrics including average silhouette width (ASW), adjusted Rand index (ARI), normalized mutual information (NMI), and graph connectivity. Recent zero-shot evaluations of scFMs (Boiarsky et al., 2023; Kedzierska et al., 2025) have used the same metrics, but without auditing pretraining exposure. Boiarsky et al. (2023) reported underwhelming zero-shot performance from foundation models across several scIB tasks but did not attribute residual performance to contamination.",
+          "label": "Text"
+        },
+        {
+          "id": "6",
+          "order": 7,
+          "bounding_box": {
+            "x": 0.103,
+            "y": 0.829,
+            "width": 0.791,
+            "height": 0.065
+          },
+          "content": "MinHash and similarity sketching. MinHash (Broder, 1997) provides an unbiased estimator of Jaccard similarity with variance $\\hat{J} ( 1-\\hat{J} ) / m$ for m hash functions. Locality-sensitive hashing (Leskovec et al., 2020) enables sublinear nearest-neighbor queries in Jaccard space, making per-cell audits against $10^{6}$ -cell references computationally tractable on standard hardware.",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "page_index": 3,
+      "blocks": [
+        {
+          "id": "0",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.106,
+            "y": 0.076,
+            "width": 0.196,
+            "height": 0.018
+          },
+          "content": "## 3 Methodology",
+          "label": "Text"
+        },
+        {
+          "id": "1",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.103,
+            "y": 0.112,
+            "width": 0.789,
+            "height": 0.065
+          },
+          "content": "scContam labels every cell c in a benchmark $\\mathcal{B}$ with a contamination score against a reference pretraining corpus $\\mathcal{R}.$ Two complementary signals operate at different scales: Signal A (gene-set fingerprint) detects distributional contamination; MIA-scFM detects instance-level memorization. The full pipeline is summarized in Algorithm 1.",
+          "label": "Text"
+        },
+        {
+          "id": "2",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.104,
+            "y": 0.199,
+            "width": 0.35,
+            "height": 0.016
+          },
+          "content": "## 3.1 Signal A: gene-set fingerprint",
+          "label": "Text"
+        },
+        {
+          "id": "3",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.104,
+            "y": 0.229,
+            "width": 0.788,
+            "height": 0.049
+          },
+          "content": "Definition 1 (Cell fingerprint). Let c be a benchmark cell over gene vocabulary $\\mathcal{V}$ . For rankencoded models, the fingerprint $S(c)\\subseteq\\mathcal{V}$ is the top-K expressed genes (default K=2048, matching Geneformer's pretraining context length). For value-encoded models, $S(c)=\\{g\\in\\mathcal{V}:x_{c,g}>0\\}.$",
+          "label": "Text"
+        },
+        {
+          "id": "4",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.104,
+            "y": 0.289,
+            "width": 0.519,
+            "height": 0.016
+          },
+          "content": "For a hash family $\\{h_{i}\\}_{i=1}^{m}$ with m = 128, the MinHash sketch is",
+          "label": "Text"
+        },
+        {
+          "id": "5",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.334,
+            "y": 0.311,
+            "width": 0.326,
+            "height": 0.025
+          },
+          "content": "$$\n\\mathrm {M H} _ {i} (c) = \\min _ {g \\in S (c)} h _ {i} (g), \\quad i = 1, \\dots , m.\n$$",
+          "label": "Formula"
+        },
+        {
+          "id": "6",
+          "order": 7,
+          "bounding_box": {
+            "x": 0.865,
+            "y": 0.312,
+            "width": 0.025,
+            "height": 0.016
+          },
+          "content": "(1) ",
+          "label": "Formula"
+        },
+        {
+          "id": "7",
+          "order": 8,
+          "bounding_box": {
+            "x": 0.104,
+            "y": 0.344,
+            "width": 0.784,
+            "height": 0.017
+          },
+          "content": "Proposition 1 (Broder, 1997). For independent uniform random hash functions $h_{i}:\\mathcal{V}\\rightarrow \\{0,1\\}^{64},$",
+          "label": "Text"
+        },
+        {
+          "id": "8",
+          "order": 9,
+          "bounding_box": {
+            "x": 0.347,
+            "y": 0.369,
+            "width": 0.302,
+            "height": 0.038
+          },
+          "content": "$$\n\\hat {J} (c, r) = \\frac {1}{m} \\sum_ {i = 1} ^ {m} \\mathbb {1} [ \\mathrm {M H} _ {i} (c) = \\mathrm {M H} _ {i} (r) ]\n$$",
+          "label": "Formula"
+        },
+        {
+          "id": "9",
+          "order": 10,
+          "bounding_box": {
+            "x": 0.866,
+            "y": 0.379,
+            "width": 0.023,
+            "height": 0.016
+          },
+          "content": "(2) ",
+          "label": "Formula"
+        },
+        {
+          "id": "10",
+          "order": 11,
+          "bounding_box": {
+            "x": 0.105,
+            "y": 0.415,
+            "width": 0.739,
+            "height": 0.018
+          },
+          "content": "is an unbiased estimator of $J ( c,r)=| S ( c ) \\cap S ( r ) | / | S ( c ) \\cup S ( r ) |$ , with $\\operatorname{V a r} [ \\hat {J} ]=J(1-J)/m.$",
+          "label": "Text"
+        },
+        {
+          "id": "11",
+          "order": 12,
+          "bounding_box": {
+            "x": 0.104,
+            "y": 0.444,
+            "width": 0.608,
+            "height": 0.016
+          },
+          "content": "The audit statistic for cell c is the maximum Jaccard against the reference:",
+          "label": "Text"
+        },
+        {
+          "id": "12",
+          "order": 13,
+          "bounding_box": {
+            "x": 0.414,
+            "y": 0.466,
+            "width": 0.166,
+            "height": 0.023
+          },
+          "content": "$$\nJ ^ {*} (c) = \\max _ {r \\in \\mathcal {R}} \\hat {J} (c, r).\n$$",
+          "label": "Formula"
+        },
+        {
+          "id": "13",
+          "order": 14,
+          "bounding_box": {
+            "x": 0.866,
+            "y": 0.468,
+            "width": 0.023,
+            "height": 0.015
+          },
+          "content": "(3) ",
+          "label": "Formula"
+        },
+        {
+          "id": "14",
+          "order": 15,
+          "bounding_box": {
+            "x": 0.104,
+            "y": 0.495,
+            "width": 0.789,
+            "height": 0.067
+          },
+          "content": "The maximum is computed efficiently via locality-sensitive hashing of $\\mathcal{R}$ into b=16 bands of r=8 rows each (Leskovec et al., 2020): any two cells whose MinHash agrees on all 8 rows of any band become a candidate pair, after which we re-rank candidates exactly. This reduces the per-query cost from $O(|\\mathcal{R}|)$ to expected $O(|\\mathcal{R}|^{\\rho})$ where $\\rho=\\log(1/b)/\\log(1/(br))$ .",
+          "label": "Text"
+        },
+        {
+          "id": "15",
+          "order": 16,
+          "bounding_box": {
+            "x": 0.103,
+            "y": 0.581,
+            "width": 0.79,
+            "height": 0.05
+          },
+          "content": "Null distribution. For each c, we draw B = 1000 random fingerprints $\\tilde{S}^{(b)}(c)$ , with genes uniformly resampled from V subject to $|\\tilde{S}^{(b)}|=|S(c)|$ . This preserves per-cell sparsity while breaking any biological structure. The p-value is",
+          "label": "Text"
+        },
+        {
+          "id": "16",
+          "order": 17,
+          "bounding_box": {
+            "x": 0.359,
+            "y": 0.636,
+            "width": 0.275,
+            "height": 0.033
+          },
+          "content": "$$\np _ {c} = \\frac {1 + \\# \\left\\{b : \\tilde {J} ^ {* , (b)} (c) \\geq J ^ {*} (c) \\right\\}}{B + 1}.\n$$",
+          "label": "Formula"
+        },
+        {
+          "id": "17",
+          "order": 18,
+          "bounding_box": {
+            "x": 0.865,
+            "y": 0.646,
+            "width": 0.024,
+            "height": 0.017
+          },
+          "content": "(4) ",
+          "label": "Formula"
+        },
+        {
+          "id": "18",
+          "order": 19,
+          "bounding_box": {
+            "x": 0.105,
+            "y": 0.676,
+            "width": 0.894,
+            "height": 0.018
+          },
+          "content": "A benchmark cell is flagged if $p_{c} < 0.05$ . The audit summary for $\\mathcal{B}$ comprises $\\left(\\#\\{c:p_{c}<0.05\\}/|\\mathcal{B}|,\\overline{J^{*}},\\max_{c} J^{*}\\right).$",
+          "label": "Text"
+        },
+        {
+          "id": "19",
+          "order": 20,
+          "bounding_box": {
+            "x": 0.104,
+            "y": 0.715,
+            "width": 0.504,
+            "height": 0.016
+          },
+          "content": "## 3.2 MIA-scFM: loss-based membership inference",
+          "label": "Text"
+        },
+        {
+          "id": "20",
+          "order": 21,
+          "bounding_box": {
+            "x": 0.105,
+            "y": 0.745,
+            "width": 0.789,
+            "height": 0.049
+          },
+          "content": "Definition 2 (Per-cell pretraining loss). For model $\\theta$ with masked-language-modeling (or masked-value-prediction) head $f_{\\theta}$ ,mask ratio $\\rho$ ,and mask realization M,the per-cell loss is the mean prediction error over masked positions:",
+          "label": "Text"
+        },
+        {
+          "id": "21",
+          "order": 22,
+          "bounding_box": {
+            "x": 0.347,
+            "y": 0.799,
+            "width": 0.301,
+            "height": 0.036
+          },
+          "content": "$$\n\\ell_ {\\theta} (c \\mid M) = \\frac {1}{| M |} \\sum_ {i \\in M} \\mathcal {L} \\left(f _ {\\theta} \\left(c _ {\\backslash M}\\right) _ {i}, c _ {i}\\right),\n$$",
+          "label": "Formula"
+        },
+        {
+          "id": "22",
+          "order": 23,
+          "bounding_box": {
+            "x": 0.866,
+            "y": 0.806,
+            "width": 0.023,
+            "height": 0.016
+          },
+          "content": "(5) ",
+          "label": "Formula"
+        },
+        {
+          "id": "23",
+          "order": 24,
+          "bounding_box": {
+            "x": 0.104,
+            "y": 0.842,
+            "width": 0.788,
+            "height": 0.047
+          },
+          "content": "where $\\mathcal{L}$ is cross-entropy for rank-encoded models (Geneformer) and squared error on binned values for value-encoded models(scGPT). The MIA-scFM statistic averages over K independent realizations:",
+          "label": "Text"
+        },
+        {
+          "id": "24",
+          "order": 25,
+          "bounding_box": {
+            "x": 0.386,
+            "y": 0.887,
+            "width": 0.221,
+            "height": 0.042
+          },
+          "content": "$$\n\\bar {\\ell} _ {\\theta} (c) = \\frac {1}{K} \\sum_ {k = 1} ^ {K} \\ell_ {\\theta} \\left(c \\mid M ^ {(k)}\\right).\n$$",
+          "label": "Formula"
+        },
+        {
+          "id": "25",
+          "order": 26,
+          "bounding_box": {
+            "x": 0.866,
+            "y": 0.9,
+            "width": 0.023,
+            "height": 0.016
+          },
+          "content": "(6) ",
+          "label": "Formula"
+        }
+      ]
+    },
+    {
+      "page_index": 4,
+      "blocks": [
+        {
+          "id": "0",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.103,
+            "y": 0.077,
+            "width": 0.79,
+            "height": 0.051
+          },
+          "content": "For a target set with ground-truth membership labels $\\{(c_{j},y_{j})\\}_{j=1}^{N} (y_{j}\\in\\{\\mathrm{in,out}\\})$ , the MIA-scFM AUROC is computed against $-\\bar{\\ell}_{\\theta}(c)$ as the score. The convention is that members (held-in) should have lower loss than non-members (held-out).",
+          "label": "Text"
+        },
+        {
+          "id": "1",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.103,
+            "y": 0.15,
+            "width": 0.509,
+            "height": 0.018
+          },
+          "content": "## 3.3 Embedding tightness and donor-matched gap",
+          "label": "Text"
+        },
+        {
+          "id": "2",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.103,
+            "y": 0.18,
+            "width": 0.785,
+            "height": 0.034
+          },
+          "content": "Definition 3 (Tightness). For a cell set $\\mathcal{S} \\subseteq\\mathbb{R}^{d}$ in model $\\theta$ 's embedding, with centroid $\\mu_{\\mathcal{S}}=| \\mathcal{S}|^{-1}\\sum_{c\\in\\mathcal{S}} c$ , the tightness is the mean cosine to the centroid:",
+          "label": "Text"
+        },
+        {
+          "id": "3",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.39,
+            "y": 0.225,
+            "width": 0.213,
+            "height": 0.037
+          },
+          "content": "$$\nT _ {\\theta} (\\mathcal {S}) = \\frac {1}{| \\mathcal {S} |} \\sum_ {c \\in \\mathcal {S}} \\frac {\\langle c , \\mu_ {\\mathcal {S}} \\rangle}{\\| c \\| \\| \\mu_ {\\mathcal {S}} \\|}.\n$$",
+          "label": "Formula"
+        },
+        {
+          "id": "4",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.865,
+            "y": 0.235,
+            "width": 0.024,
+            "height": 0.016
+          },
+          "content": "(7) ",
+          "label": "Formula"
+        },
+        {
+          "id": "5",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.103,
+            "y": 0.28,
+            "width": 0.789,
+            "height": 0.048
+          },
+          "content": "For each (cell-type t, donor d) pair containing $\\geq n_{\\mathrm{min}}$ contaminated and $\\geq n_{\\mathrm{min}}$ clean cells (default $n_{\\mathrm{min}}=5$ , stratification thresholds $-\\log_{10} p\\geq 2.0$ for contaminated and $< 1.0$ for clean), we compute the per-pair relative tightness gap",
+          "label": "Text"
+        },
+        {
+          "id": "6",
+          "order": 7,
+          "bounding_box": {
+            "x": 0.327,
+            "y": 0.34,
+            "width": 0.338,
+            "height": 0.052
+          },
+          "content": "$$\n\\Delta_ {(t, d), \\theta} = 1 0 0 \\cdot \\frac {T _ {\\theta} \\left(\\mathcal {C} _ {t , d} ^ {\\mathrm {c o n t a m}}\\right) - T _ {\\theta} \\left(\\mathcal {C} _ {t , d} ^ {\\mathrm {c l e a n}}\\right)}{T _ {\\theta} \\left(\\mathcal {C} _ {t , d} ^ {\\mathrm {c l e a n}}\\right)}.\n$$",
+          "label": "Formula"
+        },
+        {
+          "id": "7",
+          "order": 8,
+          "bounding_box": {
+            "x": 0.866,
+            "y": 0.359,
+            "width": 0.023,
+            "height": 0.016
+          },
+          "content": "(8) ",
+          "label": "Formula"
+        },
+        {
+          "id": "8",
+          "order": 9,
+          "bounding_box": {
+            "x": 0.104,
+            "y": 0.414,
+            "width": 0.787,
+            "height": 0.05
+          },
+          "content": "Permutation null. For $B=500$ trials, contamination labels within each (t,d) group are independently shuffled, preserving the marginal contaminated/clean ratio per group. The per-permutation mean gap $\\bar{\\Delta}^{(b)}$ is recorded; the one-sided p-value is $\\left(1+\\#\\{b:\\bar{\\Delta}^{(b)}\\geq\\bar{\\Delta}^{\\mathrm{obs}}\\}\\right)/(B+1).$",
+          "label": "Text"
+        },
+        {
+          "id": "9",
+          "order": 10,
+          "bounding_box": {
+            "x": 0.103,
+            "y": 0.485,
+            "width": 0.789,
+            "height": 0.051
+          },
+          "content": "Negative control. For AIDA v2 (a Signal-A-clean benchmark), we assign random pseudocontamination scores $\\tilde{s}_{c}\\sim\\mathcal{U}(0,3)$ and apply the same stratification and analysis. A correctly calibrated test should produce mean gaps near zero with sign-test $p\\rightarrow1.$",
+          "label": "Text"
+        },
+        {
+          "id": "10",
+          "order": 11,
+          "bounding_box": {
+            "x": 0.107,
+            "y": 0.551,
+            "width": 0.784,
+            "height": 0.279
+          },
+          "content": "Algorithm 1: scContam audit pipeline\n\nInput: Benchmark $\\mathcal{B}$ , reference subsample $\\mathcal{R}$ , scFM $\\theta$ , donor and cell-type metadata.\n\nOutput: Per-cell { $J^{*} (c), p_{c}$ }; donor-matched gap statistics and permutation $p$ .\n\nStep 1 (Signal A): Compute MinHash sketch ($m=128$ ) for each $c\\in\\mathcal{B}\\cup\\mathcal{R}$ ;\n\nfor $c\\in\\mathcal{B}$ do\n\nCompute $J^{*} (c)$ via banded LSH ($b=16, r=8$ ) on $\\mathcal{R}$ ;\n\nDraw 1000 permutation sketches; compute $p_{c}$ from Eq. 4;\n\nend\n\nStep 2 (Embedding): Extract $\\theta$ -embedding $\\mathbf{e}_{c}$ for all $c\\in\\mathcal{B}$ ;\n\nStep 3 (Donor-matched gap):;\n\nfor each $(t,d)$ pair with $n_{clean},n_{contam}\\geq n_{\\min}$ do\n\nCompute $\\Delta_{(t,d),\\theta}$ via Eq. 8;\n\nend\n\nStep 4 (Permutation null): Shuffle contamination labels within each $(t,d)$ group,\n\nrepeat Step 3, $B=500$ trials;\n\nStep 5 (Negative control, optional): Repeat Steps 3-4 on a Signal-A-clean dataset\n\nwith random pseudo-contamination;",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "page_index": 5,
+      "blocks": [
+        {
+          "id": "0",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.105,
+            "y": 0.076,
+            "width": 0.278,
+            "height": 0.019
+          },
+          "content": "## 4 Experimental Setup",
+          "label": "Text"
+        },
+        {
+          "id": "1",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.104,
+            "y": 0.112,
+            "width": 0.244,
+            "height": 0.017
+          },
+          "content": "## 4.1 Pretraining corpus",
+          "label": "Text"
+        },
+        {
+          "id": "2",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.103,
+            "y": 0.143,
+            "width": 0.806,
+            "height": 0.08
+          },
+          "content": "We use Genecorpus-30M (Theodoris et al., 2023), downloaded from HuggingFace, comprising 27,406,216 rank-encoded single-cell transcriptomes assembled from public scRNA-seq deposits through mid-2021. A uniform random subsample of $|\\mathcal{R}|=10^{6}$ cells serves as the reference for Signal A. We confirmed that the audit statistics are stable at this reference size: doubling to $2\\times 10^{6}$ changes $\\overline{J^{*}}$ by less than 0.005 on PBMC 3k.",
+          "label": "Text"
+        },
+        {
+          "id": "3",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.105,
+            "y": 0.246,
+            "width": 0.258,
+            "height": 0.016
+          },
+          "content": "## 4.2 Benchmark datasets",
+          "label": "Text"
+        },
+        {
+          "id": "4",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.105,
+            "y": 0.277,
+            "width": 0.709,
+            "height": 0.015
+          },
+          "content": "Four benchmarks were selected to span the expected contamination spectrum (Table 1):",
+          "label": "Text"
+        },
+        {
+          "id": "5",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.105,
+            "y": 0.3,
+            "width": 0.788,
+            "height": 0.046
+          },
+          "content": "- PBMC 3k (Zheng et al., 2017): a canonical immune-cell integration benchmark from 10x Genomics, originally released in 2017 and re-used in dozens of subsequent benchmarks. n = 2,700 cells.",
+          "label": "Text"
+        },
+        {
+          "id": "6",
+          "order": 7,
+          "bounding_box": {
+            "x": 0.105,
+            "y": 0.348,
+            "width": 0.794,
+            "height": 0.063
+          },
+          "content": "- Human pancreatic islet: a combined version of two CELLxGENE Census collections (37b21763, 3294d050), filtered to canonical islet cell types and stratified-subsampled to a maximum of 1,500 cells per type. n = 11,583 cells, 10 expert-annotated cell types, 29 donors. The underlying single-cell deposits predate Genecorpus-30M's mid-2021 cutoff.",
+          "label": "Text"
+        },
+        {
+          "id": "7",
+          "order": 8,
+          "bounding_box": {
+            "x": 0.105,
+            "y": 0.412,
+            "width": 0.786,
+            "height": 0.032
+          },
+          "content": "- AIDA v2 (Kock et al., 2025): the Asian Immune Diversity Atlas, a post-cutoff multi-ancestry healthy PBMC reference. n = 50,000 subsampled.",
+          "label": "Text"
+        },
+        {
+          "id": "8",
+          "order": 9,
+          "bounding_box": {
+            "x": 0.105,
+            "y": 0.445,
+            "width": 0.786,
+            "height": 0.064
+          },
+          "content": "- Tahoe-100M (Zhang et al., 2025): a single-cell perturbation atlas profiling 50 cancer cell lines under $\\sim 1, 2 0 0$ drug perturbations, released by Tahoe Therapeutics (formerly Vevo Therapeutics) in February 2025. Both post-cutoff and structurally excluded from Genecorpus-30M, which explicitly removed immortalized lines. n = 50,000 subsampled.",
+          "label": "Text"
+        },
+        {
+          "id": "9",
+          "order": 10,
+          "bounding_box": {
+            "x": 0.115,
+            "y": 0.522,
+            "width": 0.767,
+            "height": 0.082
+          },
+          "content": "<table border=\"1\"><tr><td>Benchmark</td><td>ncells</td><td>ngenes</td><td>ntypes</td><td>Year</td><td>Donor metadata</td><td>Expected contam.</td></tr><tr><td>PBMC3k</td><td>2,700</td><td>32,738</td><td>—(8byk-means)</td><td>2017</td><td>—</td><td>Yes</td></tr><tr><td>Pancreatic islet</td><td>11,583</td><td>61,497</td><td>10</td><td>2016-2022</td><td>29 donors</td><td>Yes(partial)</td></tr><tr><td>AIDA v2</td><td>50,000</td><td>61,497</td><td>30+</td><td>2024</td><td>Donor+ancestry</td><td>No</td></tr><tr><td>Tahoe-100M</td><td>50,000</td><td>62,710</td><td>—(cell lines)</td><td>2025</td><td>Cell line ID</td><td>No</td></tr></table>",
+          "label": "Table"
+        },
+        {
+          "id": "10",
+          "order": 11,
+          "bounding_box": {
+            "x": 0.105,
+            "y": 0.617,
+            "width": 0.786,
+            "height": 0.048
+          },
+          "content": "Table 1: Benchmark datasets used in this study. \"Expected contam.\" reflects whether the underlying scRNA-seq predates Genecorpus-30M's mid-2021 cutoff and was deposited in public repositories accessible to that corpus.",
+          "label": "Text"
+        },
+        {
+          "id": "11",
+          "order": 12,
+          "bounding_box": {
+            "x": 0.105,
+            "y": 0.699,
+            "width": 0.245,
+            "height": 0.017
+          },
+          "content": "## 4.3 Foundation models",
+          "label": "Text"
+        },
+        {
+          "id": "12",
+          "order": 13,
+          "bounding_box": {
+            "x": 0.103,
+            "y": 0.73,
+            "width": 0.787,
+            "height": 0.032
+          },
+          "content": "Three scFMs spanning two architectural families and three pretraining corpora are evaluated (Table 2):",
+          "label": "Text"
+        },
+        {
+          "id": "13",
+          "order": 14,
+          "bounding_box": {
+            "x": 0.115,
+            "y": 0.774,
+            "width": 0.767,
+            "height": 0.059
+          },
+          "content": "<table border=\"1\"><tr><td>Model</td><td>Parameters</td><td>Architecture</td><td>Tokenization</td><td>Pretraining corpus</td><td>Year</td></tr><tr><td>Geneformer V1</td><td>10M</td><td>Rank-encoded BERT</td><td>Top-$K$ gene rank</td><td>Genecorpus-30M(27M)</td><td>2023</td></tr><tr><td>scGPT-human</td><td>52M</td><td>Generative transformer</td><td>Gene $ \\times $ binned value</td><td>CELLxGENE Census(33M)</td><td>2024</td></tr><tr><td>UCE-4L</td><td>$\\approx$850M</td><td>Protein-embedding transformer</td><td>ESM2 protein token</td><td>CELLxGENE Census(36M)</td><td>2023</td></tr></table>",
+          "label": "Table"
+        },
+        {
+          "id": "14",
+          "order": 15,
+          "bounding_box": {
+            "x": 0.105,
+            "y": 0.845,
+            "width": 0.788,
+            "height": 0.032
+          },
+          "content": "Table 2: Single-cell foundation models evaluated. UCE-4L uses the publicly available 4-layer variant; we did not use the 33-layer variant due to its 80 GB GPU memory requirement.",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "page_index": 6,
+      "blocks": [
+        {
+          "id": "0",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.103,
+            "y": 0.078,
+            "width": 0.791,
+            "height": 0.146
+          },
+          "content": "Scope of analyses across models. Not all analyses apply uniformly to all three architectures. Signal A (Section 3.1) and MIA-scFM (Section 3.2) are evaluated on Geneformer V1 only: Signal A's audit reference is Geneformer's published Genecorpus-30M, and MIA-scFM requires direct access to the standard masked-language-modeling loss, which differs in scGPT (masked value prediction) and is not a primary objective in UCE. The embedding-geometry analyses (dataset-level ASW comparison in Section 5.3 and donor-matched tightness gap in Section 5.4) operate on cell embeddings alone and therefore extend to all three architectures. The cross-architecture comparison of the donor-matched gap is the central test of whether Genecorpus-30M-derived contamination labels carry over to models trained on the overlapping CELLxGENE Census corpus.",
+          "label": "Text"
+        },
+        {
+          "id": "1",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.104,
+            "y": 0.246,
+            "width": 0.285,
+            "height": 0.016
+          },
+          "content": "## 4.4 Hardware and runtime",
+          "label": "Text"
+        },
+        {
+          "id": "2",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.104,
+            "y": 0.276,
+            "width": 0.79,
+            "height": 0.081
+          },
+          "content": "All inference and the controlled re-pretraining experiment ran on a single NVIDIA A10G GPU (24 GB). Signal A audits ran on CPU and used the datasketch library for banded LSH. Average wallclock times: $\\approx 1 5$ min for a Signal A audit against $|\\mathcal{R}|=10^{6}$; $\\approx 1$ min for Geneformer inference on 11,583 cells; $\\approx 5$ min for scGPT inference on 50,000 cells; $\\approx 1 5$ min for UCE inference on 50,000 cells.",
+          "label": "Text"
+        },
+        {
+          "id": "3",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.103,
+            "y": 0.38,
+            "width": 0.427,
+            "height": 0.016
+          },
+          "content": "## 4.5 Controlled re-pretraining experiment",
+          "label": "Text"
+        },
+        {
+          "id": "4",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.104,
+            "y": 0.41,
+            "width": 0.788,
+            "height": 0.065
+          },
+          "content": "To characterize MIA-scFM sensitivity as a function of overfitting, we trained a small scFM (BERT-style encoder; $L=4$ layers, $d=128$ embedding, $h=4$ heads, $d_{\\mathrm{ff}}=512$ $4.3\\times10^{6}$ parameters; mask ratio $\\rho=0.15$ ) from scratch under three regimes on disjoint Genecorpus-30M subsets, with known held-in / held-out membership labels (Table 3).",
+          "label": "Text"
+        },
+        {
+          "id": "5",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.107,
+            "y": 0.488,
+            "width": 0.781,
+            "height": 0.069
+          },
+          "content": "<table border=\"1\"><tr><td>Regime</td><td>n train</td><td>Epochs</td><td>Dropout</td><td>WD</td><td>LR</td><td>Capacity/cell</td><td>Held-in/Held-out</td></tr><tr><td>Properly trained</td><td>50,000</td><td>10</td><td>0.1</td><td>0.01</td><td>$5\\times 10^{-4}$</td><td>96</td><td>45,000/5,000</td></tr><tr><td>Mild overfit</td><td>5,000</td><td>50</td><td>0</td><td>0</td><td>$5\\times 10^{-4}$</td><td>956</td><td>4,500/500</td></tr><tr><td>Aggressive overfit</td><td>1,000</td><td>100</td><td>0</td><td>0</td><td>$3\\times 10^{-4}$</td><td>4,778</td><td>900/100</td></tr></table>",
+          "label": "Table"
+        },
+        {
+          "id": "6",
+          "order": 7,
+          "bounding_box": {
+            "x": 0.104,
+            "y": 0.57,
+            "width": 0.788,
+            "height": 0.049
+          },
+          "content": "Table 3: Three regimes for the controlled re-pretraining experiment. Capacity/cell is computed as model parameters divided by the held-in training set size, and serves as a proxy for the expected magnitude of memorization.",
+          "label": "Text"
+        },
+        {
+          "id": "7",
+          "order": 8,
+          "bounding_box": {
+            "x": 0.104,
+            "y": 0.652,
+            "width": 0.266,
+            "height": 0.016
+          },
+          "content": "## 4.6 Statistical evaluation",
+          "label": "Text"
+        },
+        {
+          "id": "8",
+          "order": 9,
+          "bounding_box": {
+            "x": 0.104,
+            "y": 0.682,
+            "width": 0.79,
+            "height": 0.082
+          },
+          "content": "ASW was computed using the scIB convention (Luecken et al., 2022), rescaled to [0,1] as $( 1+s) / 2$ where s is the silhouette coefficient. Bootstrap 95% confidence intervals used $n_{\\mathrm{boot}}=100$ subsamples of size $\\leq 2,500$ cells with percentile intervals. Permutation tests used B = 500 resamples with one-sided p-values reported as the fraction of permutations with statistic $\\geq$ observed. No multiple-comparison correction was applied for the three model-level tests.",
+          "label": "Text"
+        },
+        {
+          "id": "9",
+          "order": 10,
+          "bounding_box": {
+            "x": 0.104,
+            "y": 0.79,
+            "width": 0.313,
+            "height": 0.018
+          },
+          "content": "## 5 Results and Discussion",
+          "label": "Text"
+        },
+        {
+          "id": "10",
+          "order": 11,
+          "bounding_box": {
+            "x": 0.104,
+            "y": 0.827,
+            "width": 0.788,
+            "height": 0.033
+          },
+          "content": "## 5.1 Two widely-used benchmarks contain extensive pretraining-overlap evidence",
+          "label": "Text"
+        },
+        {
+          "id": "11",
+          "order": 12,
+          "bounding_box": {
+            "x": 0.104,
+            "y": 0.873,
+            "width": 0.788,
+            "height": 0.049
+          },
+          "content": "Applying Signal A against the $10^{6}$ -cell Genecorpus-30M reference reveals a stark contrast between the contaminated and clean benchmarks (Table 4, Fig. 1). PBMC 3k and the human pancreatic islet atlas show 80.4% and 77.0% of cells flagged at p < 0.05, with mean nearest-neighbor Jaccard",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "page_index": 7,
+      "blocks": [
+        {
+          "id": "0",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.103,
+            "y": 0.077,
+            "width": 0.789,
+            "height": 0.034
+          },
+          "content": "$\\bar{J}^{*} \\approx 0.47$ 0.49. AIDA v2 and Tahoe-100M, both post-cutoff or structurally excluded, show 0% flagged and $\\bar{J}^{*} \\leq 0.16.$",
+          "label": "Text"
+        },
+        {
+          "id": "1",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.171,
+            "y": 0.122,
+            "width": 0.655,
+            "height": 0.085
+          },
+          "content": "<table border=\"1\"><tr><td>Benchmark</td><td>n</td><td>$\\overline{J^{*}}$</td><td>max $J^{*}$</td><td>%p&lt;0.05</td><td>%p&lt;0.01</td><td>Status</td></tr><tr><td>PBMC3k</td><td>2700</td><td>0.494</td><td>0.656</td><td>80.4%</td><td>2.85%</td><td>Contaminated</td></tr><tr><td>Pancreatic islet</td><td>11583</td><td>0.473</td><td>0.672</td><td>77.0%</td><td>4.20%</td><td>Contaminated</td></tr><tr><td>AIDA v2</td><td>50000</td><td>0.155</td><td>0.383</td><td>0.0%</td><td>0.00%</td><td>Clean</td></tr><tr><td>Tahoe-100M</td><td>50000</td><td>0.028</td><td>0.336</td><td>0.0%</td><td>0.00%</td><td>Clean</td></tr></table>",
+          "label": "Table"
+        },
+        {
+          "id": "2",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.104,
+            "y": 0.219,
+            "width": 0.788,
+            "height": 0.051
+          },
+          "content": "Table 4: Signal A audit of four benchmarks against Genecorpus-30M. Per-cell nearestneighbor Jaccard against the $1 0^{6}$ -cell reference, with permutation-derived p-values from B=1000 sparsity-preserving null draws per cell.",
+          "label": "Text"
+        },
+        {
+          "id": "3",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.11,
+            "y": 0.292,
+            "width": 0.251,
+            "height": 0.157
+          },
+          "content": "",
+          "label": "Image"
+        },
+        {
+          "id": "4",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.367,
+            "y": 0.293,
+            "width": 0.256,
+            "height": 0.151
+          },
+          "content": "",
+          "label": "Image"
+        },
+        {
+          "id": "5",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.627,
+            "y": 0.292,
+            "width": 0.259,
+            "height": 0.155
+          },
+          "content": "",
+          "label": "Image"
+        },
+        {
+          "id": "6",
+          "order": 7,
+          "bounding_box": {
+            "x": 0.102,
+            "y": 0.463,
+            "width": 0.794,
+            "height": 0.099
+          },
+          "content": "Figure 1: Signal A audit results across four benchmarks. (a) Distribution of per-cell maximum Jaccard $J^{*}$ for each benchmark. PBMC 3k and pancreatic islet show a high-Jaccard mode centered near 0.5; AIDA and Tahoe show single low-Jaccard modes. (b) Percentage of cells flagged at p < 0.05 per benchmark, color-coded by contamination status (red = contaminated; green = clean). (c) The two contaminated benchmarks (PBMC 3k, pancreatic islet) versus the two clean negative controls (AIDA v2, Tahoe-100M) summarized as n, mean Jaccard, and % flagged.",
+          "label": "Text"
+        },
+        {
+          "id": "7",
+          "order": 8,
+          "bounding_box": {
+            "x": 0.103,
+            "y": 0.577,
+            "width": 0.791,
+            "height": 0.098
+          },
+          "content": "The result is consistent with what is publicly known about each benchmark: PBMC 3k has been a standard immune-cell test set since 2017 and is present in CELLxGENE Census re-curations under multiple dataset IDs; the CELLxGENE pancreatic islet atlas combines data deposits from 2016 (Baron et al.) and 2022 (Multiomics islet paper). Both classes of cells fall within Genecorpus-30M's mid-2021 cutoff and within its inclusion criteria. AIDA v2 was released in 2024, post-dating the cutoff entirely; Tahoe-100M profiles cancer cell lines, which Genecorpus-30M explicitly excluded.",
+          "label": "Text"
+        },
+        {
+          "id": "8",
+          "order": 9,
+          "bounding_box": {
+            "x": 0.103,
+            "y": 0.697,
+            "width": 0.789,
+            "height": 0.032
+          },
+          "content": "## 5.2 MIA-scFM is sensitive to overfitting but not to distributional contamination",
+          "label": "Text"
+        },
+        {
+          "id": "9",
+          "order": 10,
+          "bounding_box": {
+            "x": 0.103,
+            "y": 0.743,
+            "width": 0.791,
+            "height": 0.081
+          },
+          "content": "The natural experiment, comparing held-out PBMC and pancreas losses against the AIDA calibration set on Geneformer V1, returned no positive MIA signal (PBMC: mean MIA score 0.42 fraction > 0.95: 3.7%; pancreas: 0.41, 2.4%). To assess whether this null reflects an absence of memorization rather than a limitation of the attack, we ran the controlled re-pretraining experiment (Section 4.5).",
+          "label": "Text"
+        },
+        {
+          "id": "10",
+          "order": 11,
+          "bounding_box": {
+            "x": 0.104,
+            "y": 0.828,
+            "width": 0.79,
+            "height": 0.082
+          },
+          "content": "MIA-scFM AUROC scales monotonically with the overfitting regime (Table 5, Fig. 2): 0.494 (chance) for properly-trained, 0.690 for mildly overfit, and 0.881 for aggressively overfit models. TPR at FPR= 0.10 rises from 9.3% to 30.0% to 85.0%. The training-time gap between held-in and held-out mean loss grows from +0.008 to +0.447 to +2.282, exactly tracking the AUROC progression.",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "page_index": 8,
+      "blocks": [
+        {
+          "id": "0",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.116,
+            "y": 0.077,
+            "width": 0.765,
+            "height": 0.068
+          },
+          "content": "<table border=\"1\"><tr><td>Regime</td><td>Capacity/cell</td><td>Train-holdout gap</td><td>AUROC</td><td>TPR@FPR=0.01</td><td>TPR@FPR=0.10</td></tr><tr><td>Properly trained</td><td>96</td><td>+0.008</td><td>0.494</td><td>0.009</td><td>0.093</td></tr><tr><td>Mild overfit</td><td>956</td><td>+0.447</td><td>0.690</td><td>0.026</td><td>0.300</td></tr><tr><td>Aggressive overfit</td><td>4,778</td><td>+2.282</td><td>0.881</td><td>0.020</td><td>0.850</td></tr></table>",
+          "label": "Table"
+        },
+        {
+          "id": "1",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.105,
+            "y": 0.157,
+            "width": 0.787,
+            "height": 0.066
+          },
+          "content": "Table 5: MIA-scFM dose-response in the controlled re-pretraining experiment. Each row is a separate small-scFM training run on a known Genecorpus-30M held-in/held-out split. AUROC and TPR are computed against the ground-truth membership labels using the per-cell loss from Eq. 6 with K=8 (mild) or K=16 (aggressive) mask realizations.",
+          "label": "Text"
+        },
+        {
+          "id": "2",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.288,
+            "y": 0.239,
+            "width": 0.422,
+            "height": 0.018
+          },
+          "content": "MIA-scFM methodological finding: loss-based MIA detects only memorization-style leakage which occurs when models are overfit (high capacity / few cells / no regularization)",
+          "label": "Text"
+        },
+        {
+          "id": "3",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.11,
+            "y": 0.268,
+            "width": 0.354,
+            "height": 0.169
+          },
+          "content": "",
+          "label": "Image"
+        },
+        {
+          "id": "4",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.469,
+            "y": 0.27,
+            "width": 0.417,
+            "height": 0.176
+          },
+          "content": "",
+          "label": "Image"
+        },
+        {
+          "id": "5",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.103,
+            "y": 0.462,
+            "width": 0.791,
+            "height": 0.082
+          },
+          "content": "Figure 2: MIA-scFM is sensitive to overfitting but not properly-regularized training. (a) AUROC bar chart across the three regimes, with chance (0.5) marked. (b) Dose-response: AUROC versus capacity-to-data ratio (params/cell) on a log axis. The monotonic scaling demonstrates that loss-based MIA detects memorization when it exists; production scFMs operating in the properly-regularized regime are intrinsically resistant.",
+          "label": "Text"
+        },
+        {
+          "id": "6",
+          "order": 7,
+          "bounding_box": {
+            "x": 0.103,
+            "y": 0.568,
+            "width": 0.791,
+            "height": 0.113
+          },
+          "content": "This dose-response has a clear methodological consequence. When applied to a production scFM trained with standard regularization on tens of millions of cells (capacity/cell $\\ll100$ ), loss-based MIA is expected to return chance-level AUROC even when the model has seen the test cells. Detecting distributional contamination therefore requires the orthogonal approach of Signal A. The MIA-scFM result on Geneformer V1 (null on both PBMC 3k and pancreas) is consistent with this: contamination is present (Signal A confirms it), but it does not manifest as instance memorization.",
+          "label": "Text"
+        },
+        {
+          "id": "7",
+          "order": 8,
+          "bounding_box": {
+            "x": 0.103,
+            "y": 0.703,
+            "width": 0.741,
+            "height": 0.017
+          },
+          "content": "## 5.3 Dataset-level ASW comparisons are confounded by labeling protocol",
+          "label": "Text"
+        },
+        {
+          "id": "8",
+          "order": 9,
+          "bounding_box": {
+            "x": 0.103,
+            "y": 0.734,
+            "width": 0.79,
+            "height": 0.065
+          },
+          "content": "A direct comparison of model ASW on PBMC 3k against AIDA v2 using k-means with matched k on both datasets reveals that earlier reports of large dataset-level ASW inflation are confounded by labeling asymmetry. Table 6 shows the matched- $k$ ASW differences for the three models at $k \\in\\{8,15,25\\}。$",
+          "label": "Text"
+        },
+        {
+          "id": "9",
+          "order": 10,
+          "bounding_box": {
+            "x": 0.104,
+            "y": 0.803,
+            "width": 0.788,
+            "height": 0.049
+          },
+          "content": "We conclude that naive dataset-level ASW comparisons cannot reliably attribute differences to contamination, and the field should adopt design-based approaches (within-cell-type, donor-matched) as in the next subsection.",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "page_index": 9,
+      "blocks": [
+        {
+          "id": "0",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.211,
+            "y": 0.076,
+            "width": 0.573,
+            "height": 0.09
+          },
+          "content": "<table border=\"1\"><tr><td></td><td colspan=\"2\">k=8</td><td colspan=\"2\">k=15</td><td colspan=\"2\">k=25</td></tr><tr><td>Model</td><td>ΔASW</td><td>$\\Delta_{\\mathrm{rel}}$</td><td>ΔASW</td><td>$\\Delta_{\\mathrm{rel}}$</td><td>ΔASW</td><td>$\\Delta_{\\mathrm{rel}}$</td></tr><tr><td>Geneformer V1</td><td>+0.006</td><td>+1.0%</td><td>-0.003</td><td>-0.6%</td><td>-0.006</td><td>-1.0%</td></tr><tr><td>scGPT-human</td><td>+0.028</td><td>+4.8%</td><td>+0.018</td><td>+3.2%</td><td>+0.005</td><td>+0.9%</td></tr><tr><td>UCE-4L</td><td>-0.012</td><td>-2.0%</td><td>-0.024</td><td>-4.2%</td><td>-0.027</td><td>-4.8%</td></tr></table>",
+          "label": "Table"
+        },
+        {
+          "id": "1",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.105,
+            "y": 0.179,
+            "width": 0.787,
+            "height": 0.098
+          },
+          "content": "Table 6: Matched- $k$ ASW differences between PBMC 3k and AIDA v2 for three scFMs. $\\Delta=\\mathrm{ASW}_{\\mathrm{PBMC}}-\\mathrm{ASW}_{\\mathrm{AIDA}}; \\Delta_{\\mathrm{rel}}=100\\cdot\\Delta/\\mathrm{ASW}_{\\mathrm{AIDA}}$ . Bootstrap 95% confidence intervals (not shown) place all values within $\\pm0.01$ ASW. Without matched- $k$ control (PBMC using $k$ -means, AIDA using 30+ ontology labels), the apparent inflation reaches $+10\\%$ $-+14\\%$ . The matched- $k$ values are small and not consistent in sign across models or $k$ choices, indicating that dataset-level ASW comparison is a poor benchmark for the contamination effect.",
+          "label": "Text"
+        },
+        {
+          "id": "2",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.103,
+            "y": 0.301,
+            "width": 0.667,
+            "height": 0.017
+          },
+          "content": "## 5.4 Donor-matched contamination effect on embedding geometry",
+          "label": "Text"
+        },
+        {
+          "id": "3",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.104,
+            "y": 0.331,
+            "width": 0.788,
+            "height": 0.066
+          },
+          "content": "The pancreatic islet benchmark, which has 29 donors with cells spanning the full Signal A range permits a within-donor, within-cell-type analysis (Section 3.3). After applying the stratification thresholds $-\\log_{10} p<1.0$ (clean) and $\\geq 2.0$ (contaminated), nine (cell-type, donor) pairs were eligible with at least $n_{\\mathrm{min}}=5$ cells in both strata.",
+          "label": "Text"
+        },
+        {
+          "id": "4",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.104,
+            "y": 0.401,
+            "width": 0.786,
+            "height": 0.065
+          },
+          "content": "All three models showed positive mean gaps that exceeded their permutation null (Table 7, Fig. 3). Geneformer V1: $+0.72\\%$ （ $p=0.030$ ）,scGPT-human: $+0.36\\%$ （ $p=0.014$ ）,and UCE-4L: $+6.40\\%$ （ $p<0.002$ ). The negative control on AIDA v2, using random pseudo-contamination scores, returned mean gaps of $-0.00\\%$ , $-0.00\\%$ , and $+0.17\\%$ confirming the test is correctly calibrated.",
+          "label": "Text"
+        },
+        {
+          "id": "5",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.166,
+            "y": 0.477,
+            "width": 0.667,
+            "height": 0.148
+          },
+          "content": "<table border=\"1\"><tr><td>Model</td><td>n pairs</td><td>Real $\\bar{\\Delta}$</td><td>Sign+/n</td><td>Null mean</td><td>Null 95% CI</td><td>Perm. p</td></tr><tr><td colspan=\"7\">Pancreatic islet (real contamination labels):</td></tr><tr><td>Geneformer V1</td><td>9</td><td>+0.72%</td><td>5/9</td><td>-0.12%</td><td>[-1.01, +0.78]</td><td>0.030</td></tr><tr><td>scGPT-human</td><td>9</td><td>+0.36%</td><td>5/9</td><td>-0.07%</td><td>[-0.46, +0.31]</td><td>0.014</td></tr><tr><td>UCE-4L</td><td>9</td><td>+6.40%</td><td>8/9</td><td>-0.31%</td><td>[-1.96, +1.42]</td><td>&lt;0.002</td></tr><tr><td colspan=\"7\">AIDA v2(random pseudo-contamination, negative control):</td></tr><tr><td>Geneformer V1</td><td>147</td><td>-0.00%</td><td>66/147</td><td>—</td><td>—</td><td>—</td></tr><tr><td>scGPT-human</td><td>147</td><td>-0.00%</td><td>70/147</td><td>—</td><td>—</td><td>—</td></tr><tr><td>UCE-4L</td><td>147</td><td>+0.17%</td><td>73/147</td><td>—</td><td>—</td><td>—</td></tr></table>",
+          "label": "Table"
+        },
+        {
+          "id": "6",
+          "order": 7,
+          "bounding_box": {
+            "x": 0.105,
+            "y": 0.637,
+            "width": 0.786,
+            "height": 0.066
+          },
+          "content": "Table 7: Donor-matched within-cell-type contamination effect on embedding tightness. $\\bar{\\Delta}$ is the mean of per-pair relative tightness gaps (Eq.8). Permutation null: contamination labels shuffled within each (cell-type, donor) group, B=500 trials. Negative control on AIDA: random uniform pseudo-contamination scores assigned to each cell.",
+          "label": "Text"
+        },
+        {
+          "id": "7",
+          "order": 8,
+          "bounding_box": {
+            "x": 0.104,
+            "y": 0.719,
+            "width": 0.79,
+            "height": 0.113
+          },
+          "content": "UCE-4L shows an effect roughly an order of magnitude larger than the rank-encoding models (Geneformer V1, scGPT-human). One interpretation is that UCE's protein-embedding architecture preserves finer-grained transcriptional similarity than gene-token-based models, so contamination produces a larger geometric footprint. An alternative is that UCE's pretraining corpus (CELLxGENE Census, 36M cells) has a higher cell-by-cell overlap with our benchmarks than Genecorpus 30M; characterizing this would require an analogous Signal A audit against CELLxGENE Census directly, which we leave for future work.",
+          "label": "Text"
+        },
+        {
+          "id": "8",
+          "order": 9,
+          "bounding_box": {
+            "x": 0.103,
+            "y": 0.837,
+            "width": 0.791,
+            "height": 0.049
+          },
+          "content": "The cross-architecture replication, all three models reach permutation-significance with the same sign, and the perfectly null negative control together support the interpretation that the gap reflects pretraining exposure rather than artifacts of clustering, normalization, or donor batch.",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "page_index": 10,
+      "blocks": [
+        {
+          "id": "0",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.11,
+            "y": 0.077,
+            "width": 0.403,
+            "height": 0.215
+          },
+          "content": "",
+          "label": "Image"
+        },
+        {
+          "id": "1",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.515,
+            "y": 0.08,
+            "width": 0.371,
+            "height": 0.211
+          },
+          "content": "",
+          "label": "Image"
+        },
+        {
+          "id": "2",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.104,
+            "y": 0.305,
+            "width": 0.79,
+            "height": 0.082
+          },
+          "content": "Figure 3: Donor-matched within-cell-type contamination effect across three foundation models. (a) Per-pair tightness gap (each dot is one (cell-type, donor) pair from the pancreatic islet benchmark); black bar marks the mean. UCE-4L shows the largest effect. (b) Real mean gap (solid) versus permutation null mean (hatched) for each model, with $n_{+}/n$ sign-test counts and permutation p-values annotated. All three models exceed their null at $p\\leq0.03.$",
+          "label": "Text"
+        },
+        {
+          "id": "3",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.105,
+            "y": 0.41,
+            "width": 0.278,
+            "height": 0.017
+          },
+          "content": "## 5.5 Cross-model summary",
+          "label": "Text"
+        },
+        {
+          "id": "4",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.103,
+            "y": 0.44,
+            "width": 0.79,
+            "height": 0.13
+          },
+          "content": "Figure 4 integrates the three findings into a single overview: a side-by-side dataset-level ASW comparison (panel A), the within-cell-type tightness gap (panel B), and the Signal A audit (panel C). Three claims are now defensible: (i) two of the most-cited integration benchmarks contain extensive pretraining-overlap evidence in Geneformer V1's training corpus; (ii) production scFMs do not exhibit instance memorization detectable by loss-based MIA; (iii) pretraining exposure nonetheless leaves a measurable, donor-controlled, cross-architecture footprint in embedding geometry. The magnitude is small for rank-encoding models $\\approx1\\%$ )and an order of magnitude larger for the protein-embedding architecture $\\approx6\\%$ ).",
+          "label": "Text"
+        },
+        {
+          "id": "5",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.105,
+            "y": 0.592,
+            "width": 0.171,
+            "height": 0.016
+          },
+          "content": "## 5.6 Limitations",
+          "label": "Text"
+        },
+        {
+          "id": "6",
+          "order": 7,
+          "bounding_box": {
+            "x": 0.103,
+            "y": 0.622,
+            "width": 0.791,
+            "height": 0.081
+          },
+          "content": "Statistical power. The donor-matched analysis yields nine eligible (cell-type,donor) pairs on pancreas. With richer donor-stratified benchmarks the same procedure would yield tighter confidence intervals. We do not interpret the small Geneformer and scGPT effect sizes （ $\\approx 0.7\\%$ and 0.4%) as upper bounds on the field-wide contamination effect; they are point estimates on the single benchmark with donor-matched structure.",
+          "label": "Text"
+        },
+        {
+          "id": "7",
+          "order": 8,
+          "bounding_box": {
+            "x": 0.103,
+            "y": 0.726,
+            "width": 0.791,
+            "height": 0.097
+          },
+          "content": "Reference corpus. Signal A operates against an explicit pretraining corpus. Geneformer V1 publishes its corpus on HuggingFace; scGPT and UCE report training on CELLxGENE Census, against which the audit can be repeated. Closed-corpus models cannot be audited by this approach. Because PBMC 3k and pancreatic islet data predate all three models' corpus cutoffs and originate from the same public deposits, the Genecorpus-30M audit is a defensible proxy for \"cell exists in the pretraining set\" across all three architectures.",
+          "label": "Text"
+        },
+        {
+          "id": "8",
+          "order": 9,
+          "bounding_box": {
+            "x": 0.103,
+            "y": 0.845,
+            "width": 0.791,
+            "height": 0.081
+          },
+          "content": "Magnitude calibration. The donor-controlled magnitudes (+0.72% to +6.40%) cannot be directly translated into \"percentage inflation of scIB metrics\" without further benchmark-specific analyses; the effect on ARI/NMI depends on clustering granularity, label source, and integration method choice. Future work characterizing this translation across multiple integration benchmarks would strengthen the practical recommendation.",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "page_index": 11,
+      "blocks": [
+        {
+          "id": "0",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.109,
+            "y": 0.076,
+            "width": 0.249,
+            "height": 0.159
+          },
+          "content": "",
+          "label": "Image"
+        },
+        {
+          "id": "1",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.363,
+            "y": 0.077,
+            "width": 0.265,
+            "height": 0.162
+          },
+          "content": "",
+          "label": "Image"
+        },
+        {
+          "id": "2",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.638,
+            "y": 0.077,
+            "width": 0.249,
+            "height": 0.153
+          },
+          "content": "",
+          "label": "Image"
+        },
+        {
+          "id": "3",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.103,
+            "y": 0.253,
+            "width": 0.791,
+            "height": 0.209
+          },
+          "content": "Figure 4: Cross-model summary of contamination findings. (a) Dataset-level ASW comparison between PBMC 3k (contaminated) and AIDA v2 (clean) for Geneformer V1 and scGPT-human. Note: this naive between-dataset comparison is confounded by labeling asymmetry (PBMC labels from k-means on 8 clusters versus AIDA labels from 30+ ontology terms); the matched-k analysis in Table 6 shows the apparent inflation collapses to $\\leq 5\\%$ under matched labels, and the rigorous donor-controlled effect is reported in Section 5.4 and Fig. 3. Panel shown for completeness. (b) Within-cell-type tightness gap per pancreatic cell type without donor matching, for Geneformer V1 (6/7 cell types positive, mean +1.28%) and scGPT-human (7/7 positive, mean +0.75%). UCE-4L's larger magnitude is shown separately in Fig. 3. This analysis is informative but does not control for donor identity; the donor-matched analysis in Table 7 and Fig. 3 provides the statistically rigorous effect-size estimate. (c) Signal A audit: % of cells flagged at p < 0.05 for each benchmark, color-coded by contamination status (red: contaminated; green: clean).",
+          "label": "Text"
+        },
+        {
+          "id": "4",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.105,
+            "y": 0.486,
+            "width": 0.173,
+            "height": 0.017
+          },
+          "content": "## 6 Conclusion",
+          "label": "Text"
+        },
+        {
+          "id": "5",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.103,
+            "y": 0.522,
+            "width": 0.79,
+            "height": 0.161
+          },
+          "content": "We have introduced scContam, a tractable per-cell audit framework for pretraining contamination in single-cell foundation model benchmarks. The framework combines a gene-set fingerprint signal (Signal A) against the explicit pretraining corpus, validated on $10^{6}$ Genecorpus-30M reference cells, with a loss-based membership inference attack (MIA-scFM) whose sensitivity is characterized via a controlled three-regime re-pretraining experiment. The audit identifies two widely-used benchmarks (PBMC 3k, pancreatic islet) as extensively in Geneformer's training corpus and two post-cutoff benchmarks (AIDA v2, Tahoe-100M) as clean. A donor-matched within-cell-type analysis on pancreas shows that contaminated cells embed measurably more tightly than donor-matched clean cells across three foundation model architectures, with a permutation p $\\leq 0.03$ in all three models and a perfectly null negative control.",
+          "label": "Text"
+        },
+        {
+          "id": "6",
+          "order": 7,
+          "bounding_box": {
+            "x": 0.104,
+            "y": 0.688,
+            "width": 0.789,
+            "height": 0.049
+          },
+          "content": "The single-cell foundation model field is now at a point where multiple architectures, multiple pretraining corpora, and multiple benchmarks are all in circulation. Per-cell pretraining audits should accompany zero-shot benchmark reporting.",
+          "label": "Text"
+        },
+        {
+          "id": "7",
+          "order": 8,
+          "bounding_box": {
+            "x": 0.105,
+            "y": 0.764,
+            "width": 0.131,
+            "height": 0.017
+          },
+          "content": "## References",
+          "label": "Text"
+        },
+        {
+          "id": "8",
+          "order": 9,
+          "bounding_box": {
+            "x": 0.106,
+            "y": 0.796,
+            "width": 0.787,
+            "height": 0.106
+          },
+          "content": "Maayan Baron, Adrian Veres, Samuel L Wolock, Aubrey L Faust, Renaud Gaujoux, Amedeo Vetere, Jennifer Hyoje Ryu, Bridget K Wagner, Shai S Shen-Orr, Allon M Klein, et al. A single-cell transcriptomic map of the human and mouse pancreas reveals inter-and intra-cell population structure. Cell systems, 3(4):346-360, 2016.\n\nRebecca Boiarsky, Nalini Singh, Alejandro Buendia, Gad Getz, and David Sontag. A deep dive into single-cell rna sequencing foundation models. BioRxiv, pages 2023-10, 2023.",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "page_index": 12,
+      "blocks": [
+        {
+          "id": "0",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.107,
+            "y": 0.081,
+            "width": 0.784,
+            "height": 0.845
+          },
+          "content": "Andrei Z Broder. On the resemblance and containment of documents. In Proceedings. Compression and Complexity of SEQUENCES 1997 (Cat. No. 97TB100171), pages 21-29. IEEE, 1997.\n\nTom Brown, Benjamin Mann, Nick Ryder, Melanie Subbiah, Jared D Kaplan, Prafulla Dhiwari, Arvind Neelakantan, Pranav Shyam, Girish Sastry, Amanda Askell, et al. Language models are few-shot learners. Advances in neural information processing systems, 33;1877-1901, 2020.\n\nNicholas Carliñ, Steve Chien, Milad Nasr, Shuang Song, Andreas Teresis, and Florian Tramer. Membership inference attacks from first principles. In Symposium on security and privacy (SP), pages 1897-1914. IEEE, 2022.\n\nHaotian Cui, Chloe Wang, Hassaan Maan, Kuan Pang, Fengning Luo, Nan Duan, and Bo Wang, scgpt: toward building a foundation model for single-cell multi-onics using generative ai. Nature methods, 21(8):1470-1480, 2024.\n\nMinsheng Hao, Jing Gong, Xin Zeng, Chiming Liu, Yucheng Guo, Xingyi Cheng, Taifeng Wang, Jiazhuha Xue, Xuegong Zhang, and Le Song. Large-scale foundation model on single-cell transcriptomics. Nature methods, 21(8):1481-1491, 2024.\n\nKasia Z Kedzierska, Lorin Crawford, Ava P Amini, and Alex X Lu. Zero-shot evaluation reveals limitations of single-cell foundation models. Genome Biology, 26(1):101, 2025.\n\nKian Hong Kock, Kyung Yeon Han, Yoshinari Ando, Damita Jevapatarakul, Ankita Chatterjee, Quy Xiao Xuan Lin, Eliora Violain Buyami, Radhika Sonthalia, Deepa Rajagopal, Yoshiikho Tomofuji, et al. Asian diversity in human immune cells. Cell, 188(8):2288-2306, 2025.\n\nJure Leskovec, Anand Rajaraman, and David Ullman. Minning of massive data sets. Cambridge university press, 2020.\n\nZeming Lin, Halil Akin, Roshan Rao, Brian Hie, Zhongkai Zhu, Wenting Lu, Nikita Smetanin, Robert Verkuil, Ori Kabeli, Yaniv Shmueli, et al. Evolutionary-scale prediction of atomic-level protein structure with a language model. Science, 379(6637):1123-1130, 2023.\n\nMalte D Luecken, Maren Bütttner, Kridsadakorn Chaichoompu, Anna Danese, Marta Interlandi, Michaela F Miller, Daniel C Strobl, Luke Zappia, Martin Dugas, Maria Colomé-Tatché, et al. Benchmarking atlas-level data integration in single-cell genomics. Nature methods, 19(1):41-50, 2022.\n\nInbal Magar and Roy Schwartz. Data contamination: From memorization to exploitation. In Annual Meeting of the Association for Computational Linguistics (Volume 2: Short Papers), pages 157-165, 2022.\n\nCZI Cell Science Program, Shibla Abdulla, Brian Aevermann, Pedro Assis, Seve Badajoz, Sidney M Bell, Emanule Bezzeli, Batuhun Cakir, Jim Chaffer, Signe Chambers, et al. Cz cellxgene discover: a single-cell data platform for scalable exploration, analysis and modeling of aggregated data. Nucleic acids research, 53(D1):D886-D900, 2025.\n\nAviv Regev, Sahur A Teichmann, Eric S Lander, Ido Amit, Christophe Benoist, Ewan Birney, Bernd Bodenniller, Peter Campbell, Piero Carninci, Menna Clatworthy, et al. The human cell atlas. life, 6:e27041, 2017.\n\nYanay Rosen, Yusuf Roohani, Ayush Agarwal, Leon Samotorcan, Tabula Sapiens Consortium, Stephen R Quake, and Jure Leskovec. Universal cell embeddings: A foundation model for cell biology. BioRivi, pages 2023-11, 2023.\n\nOscar Sainzon, Jon Campos, Iker García-Ferrero, Julen Etxaniz, Oier Lopez de Lacalle, and Eneko Agirre. Nlp evaluation in trouble: On the need to measure llm data contamination for each benchmark. In Findings of the Association for Computational Linguistics: EMNLP 2023, pages 10776-10787, 2023.",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "page_index": 13,
+      "blocks": [
+        {
+          "id": "0",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.107,
+            "y": 0.078,
+            "width": 0.785,
+            "height": 0.181
+          },
+          "content": "Christina V Theodoris, Ling Xiao, Anant Chopra, Mark D Chaffin, Zeina R Al Sayed, Matthew C Hill, Helene Mantineo, Elizabeth M Brydon, Zexian Zeng, X Shirley Liu, et al. Transfer learning enables predictions in network biology. Nature, 618(7965):616-624, 2023.\n\nJesse Zhang, Airol A Ubas, Richard De Borja, Valentine Svensson, Nicole Thomas, Neha Thakar, Ian Lai, Aidan Winters, Umair Khan, Matthew G Jones, et al. Tahoe-100m: A giga-scale single-cell perturbation atlas for context-dependent gene function and cellular modeling. BioRxiv, pages 2025-02, 2025.\n\nGrace XY Zheng, Jessica M Terry, Phillip Belgrader, Paul Ryvkin, Zachary W Bent, Ryan Wilson, Solongo B Ziraldo, Tobias D Wheeler, Geoff P McDermott, Junjie Zhu, et al. Massively parallel digital transcriptional profiling of single cells. Nature communications, 8(1):14049, 2017.",
+          "label": "Text"
+        }
+      ]
+    }
+  ]
+}

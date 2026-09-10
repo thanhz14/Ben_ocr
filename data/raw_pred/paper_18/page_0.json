@@ -1,0 +1,1101 @@
+{
+    "input_path": "/home/bocchi/Downloads/Paper_Data/Electrical Engineering and Systems Science/2607.20909v1.pdf",
+    "page_index": 0,
+    "page_count": 14,
+    "width": 1224,
+    "height": 1584,
+    "model_settings": {
+        "use_doc_preprocessor": false,
+        "use_layout_detection": true,
+        "use_chart_recognition": false,
+        "use_seal_recognition": false,
+        "use_ocr_for_image_block": true,
+        "format_block_content": true,
+        "merge_layout_blocks": true,
+        "markdown_ignore_labels": [
+            "number",
+            "footnote",
+            "header",
+            "header_image",
+            "footer",
+            "footer_image",
+            "aside_text"
+        ],
+        "return_layout_polygon_points": true
+    },
+    "parsing_res_list": [
+        {
+            "block_label": "aside_text",
+            "block_content": "arXiv:2607.20909v1 [eess.SP] 23 Jul 2026",
+            "block_bbox": [
+                37,
+                581,
+                78,
+                1295
+            ],
+            "block_id": 0,
+            "block_order": null,
+            "group_id": 0,
+            "block_polygon_points": [
+                [
+                    42.12492370605469,
+                    580.783203125
+                ],
+                [
+                    77.17387390136719,
+                    581.03759765625
+                ],
+                [
+                    72.00001525878906,
+                    1294.0
+                ],
+                [
+                    36.95106506347656,
+                    1293.74560546875
+                ]
+            ]
+        },
+        {
+            "block_label": "number",
+            "block_content": "1",
+            "block_bbox": [
+                1116,
+                50,
+                1128,
+                66
+            ],
+            "block_id": 1,
+            "block_order": null,
+            "group_id": 1,
+            "block_polygon_points": [
+                [
+                    1116.0,
+                    50.0
+                ],
+                [
+                    1127.0,
+                    50.0
+                ],
+                [
+                    1127.0,
+                    65.0
+                ],
+                [
+                    1116.0,
+                    65.0
+                ]
+            ]
+        },
+        {
+            "block_label": "doc_title",
+            "block_content": "# RadioTrace: Transmitter-Aware Diffusion for Radio Map Estimation without Deployment-Time Fine-Tuning",
+            "block_bbox": [
+                110,
+                114,
+                1115,
+                273
+            ],
+            "block_id": 2,
+            "block_order": 1,
+            "group_id": 2,
+            "block_polygon_points": [
+                [
+                    110.0,
+                    114.0
+                ],
+                [
+                    1115.0,
+                    114.0
+                ],
+                [
+                    1115.0,
+                    273.0
+                ],
+                [
+                    110.0,
+                    273.0
+                ]
+            ]
+        },
+        {
+            "block_label": "text",
+            "block_content": "Liu Yang, Qiang Li, Zhuo Cao, Weijie Xiong, Guomin Sun and Jingran Lin",
+            "block_bbox": [
+                245,
+                293,
+                977,
+                321
+            ],
+            "block_id": 3,
+            "block_order": 2,
+            "group_id": 3,
+            "block_polygon_points": [
+                [
+                    245.0,
+                    293.0
+                ],
+                [
+                    977.0,
+                    293.0
+                ],
+                [
+                    977.0,
+                    321.0
+                ],
+                [
+                    245.0,
+                    321.0
+                ]
+            ]
+        },
+        {
+            "block_label": "abstract",
+            "block_content": "Abstract—Radio map (RM) estimation aims to reconstruct the spatial distribution of wireless signal characteristics, such as received signal strength (RSS), from sparse measurements, a task that is critical for spectrum management, interference mitigation, and localization in modern wireless networks. Traditional approaches, including interpolation and deep learning, either struggle to capture complex propagation effects or require large-scale retraining for each new sampling pattern, which limits their generalization. More recently, prior-based methods have combined pre-trained generative models with measurements to reduce the need for deployment-time model fine-tuning, but they typically treat the prior as a simple regularizer and lack explicit transmitter-aware integration. In this paper, we propose RadioTrace, a novel RM estimation framework without deployment-time fine-tuning that tightly integrates sparse RSS measurements with a frozen pre-trained diffusion prior. RadioTrace incorporates transmitter (Tx) location estimation directly into the denoising loop, iteratively refining Tx coordinates based on reconstruction quality to guide the generative process. To further enhance robustness, we introduce a propagation-guided K-means initialization that mitigates poor local minima in the Tx update and provides a geometry-consistent starting point. Moreover, we provide a stochastic stability analysis for the Tx-coordinate refinement component, showing that the Tx update remains stable under perturbations induced by diffusion sampling and Tx-map relaxation. Extensive experiments demonstrate that RadioTrace achieves competitive performance with state-of-the-art learning-based methods under random sampling, and maintains strong reconstruction quality under restricted-area sampling, highlighting its adaptability, robustness, and practical relevance.",
+            "block_bbox": [
+                93,
+                399,
+                604,
+                1040
+            ],
+            "block_id": 4,
+            "block_order": 3,
+            "group_id": 4,
+            "block_polygon_points": [
+                [
+                    93.0,
+                    399.0
+                ],
+                [
+                    604.0,
+                    399.0
+                ],
+                [
+                    604.0,
+                    1040.0
+                ],
+                [
+                    93.0,
+                    1040.0
+                ]
+            ]
+        },
+        {
+            "block_label": "text",
+            "block_content": "Index Terms—radio map estimation, diffusion, transmitter localization",
+            "block_bbox": [
+                92,
+                1048,
+                602,
+                1090
+            ],
+            "block_id": 5,
+            "block_order": 4,
+            "group_id": 5,
+            "block_polygon_points": [
+                [
+                    92.0,
+                    1048.0
+                ],
+                [
+                    602.0,
+                    1048.0
+                ],
+                [
+                    602.0,
+                    1090.0
+                ],
+                [
+                    92.0,
+                    1090.0
+                ]
+            ]
+        },
+        {
+            "block_label": "paragraph_title",
+            "block_content": "### I. Introduction",
+            "block_bbox": [
+                280,
+                1120,
+                417,
+                1141
+            ],
+            "block_id": 6,
+            "block_order": 5,
+            "group_id": 6,
+            "block_polygon_points": [
+                [
+                    280.0,
+                    1120.0
+                ],
+                [
+                    416.0,
+                    1120.0
+                ],
+                [
+                    416.0,
+                    1140.0
+                ],
+                [
+                    280.0,
+                    1140.0
+                ]
+            ]
+        },
+        {
+            "block_label": "text",
+            "block_content": "Radio maps (RMs) characterize the spatial distribution of wireless signal attributes, such as received signal strength (RSS), signal-to-noise ratio (SNR), and power spectral density (PSD). They provide radio-environment information for spectrum management, interference monitoring, base-station planning, localization, and adaptive network optimization. RMs are also relevant to wireless digital twins and integrated sensing and communication (ISAC), where propagation knowledge supports both communication and environmental awareness [2]–[6]. This paper focuses on RM reconstruction from limited RSS measurements and investigates how prior propagation knowledge can be incorporated into this task.",
+            "block_bbox": [
+                92,
+                1149,
+                604,
+                1245
+            ],
+            "block_id": 7,
+            "block_order": 6,
+            "group_id": 7,
+            "block_polygon_points": [
+                [
+                    92.0,
+                    1149.0
+                ],
+                [
+                    604.0,
+                    1149.0
+                ],
+                [
+                    604.0,
+                    1245.0
+                ],
+                [
+                    92.0,
+                    1245.0
+                ]
+            ]
+        },
+        {
+            "block_label": "text",
+            "block_content": "",
+            "block_bbox": [
+                617,
+                398,
+                1130,
+                614
+            ],
+            "block_id": 8,
+            "block_order": 7,
+            "group_id": 7,
+            "block_polygon_points": [
+                [
+                    617.0,
+                    398.0
+                ],
+                [
+                    1130.0,
+                    398.0
+                ],
+                [
+                    1130.0,
+                    614.0
+                ],
+                [
+                    617.0,
+                    614.0
+                ]
+            ]
+        },
+        {
+            "block_label": "text",
+            "block_content": "Existing RM reconstruction studies can be roughly divided into two lines. The first line is measurement-free RM generation, which synthesizes complete RMs from environmental priors, such as building layouts, material assumptions, and transmitter (Tx) locations. Classical ray-tracing methods provide physically interpretable predictions based on geometric propagation models [7]. Recent learning-based methods, including U-Net-based generators [8] and diffusion models such as RadioDiff [9], improve generation efficiency by learning propagation patterns from data. Although these methods do not directly solve sparse-measurement-based RM estimation, they provide useful generative priors for radio propagation modeling.",
+            "block_bbox": [
+                617,
+                614,
+                1130,
+                925
+            ],
+            "block_id": 9,
+            "block_order": 8,
+            "group_id": 9,
+            "block_polygon_points": [
+                [
+                    617.0,
+                    614.0
+                ],
+                [
+                    1130.0,
+                    614.0
+                ],
+                [
+                    1130.0,
+                    925.0
+                ],
+                [
+                    617.0,
+                    925.0
+                ]
+            ]
+        },
+        {
+            "block_label": "text",
+            "block_content": "The second line directly estimates RMs from sparse RSS measurements. Classical interpolation methods, such as Kriging [10], [11], exploit spatial correlation among samples but are limited in complex environments with blockage, shadowing, and multipath effects. Supervised deep models, including auto-encoder-based methods [12], generative adversarial networks [13], [14], and diffusion-based estimators [15], [16], learn nonlinear mappings from sparse observations to complete RMs. More recently, inverse reconstruction methods have been explored to reduce the need for deployment-time fine-tuning. For example, LaPnP combines measurement consistency with latent-domain plug-and-play denoising [17], while RadioDiff-Inverse formulates sparse-measurement RM reconstruction as a Bayesian inverse problem with a diffusion prior [18].",
+            "block_bbox": [
+                617,
+                925,
+                1131,
+                1308
+            ],
+            "block_id": 10,
+            "block_order": 9,
+            "group_id": 10,
+            "block_polygon_points": [
+                [
+                    617.0,
+                    925.0
+                ],
+                [
+                    1131.0,
+                    925.0
+                ],
+                [
+                    1131.0,
+                    1308.0
+                ],
+                [
+                    617.0,
+                    1308.0
+                ]
+            ]
+        },
+        {
+            "block_label": "footnote",
+            "block_content": "A preliminary version of this work was presented at 35th IEEE International Workshop on Machine Learning for Signal Processing (MLSP) [1].",
+            "block_bbox": [
+                93,
+                1262,
+                604,
+                1317
+            ],
+            "block_id": 11,
+            "block_order": null,
+            "group_id": 11,
+            "block_polygon_points": [
+                [
+                    93.0,
+                    1262.0
+                ],
+                [
+                    604.0,
+                    1262.0
+                ],
+                [
+                    604.0,
+                    1317.0
+                ],
+                [
+                    93.0,
+                    1317.0
+                ]
+            ]
+        },
+        {
+            "block_label": "text",
+            "block_content": "Despite these advances, existing methods still face several limitations in practical sparse-measurement RM estimation. First, measurement-free generative models can provide strong propagation priors, but they often rely on source-related conditions, especially accurate Tx locations. In civilian spectrum monitoring with covert unauthorized Tx or in military scenarios involving hostile emitters, such information may be unavailable or deliberately concealed.",
+            "block_bbox": [
+                616,
+                1307,
+                1131,
+                1500
+            ],
+            "block_id": 12,
+            "block_order": 10,
+            "group_id": 12,
+            "block_polygon_points": [
+                [
+                    616.0,
+                    1307.0
+                ],
+                [
+                    1131.0,
+                    1307.0
+                ],
+                [
+                    1131.0,
+                    1500.0
+                ],
+                [
+                    616.0,
+                    1500.0
+                ]
+            ]
+        },
+        {
+            "block_label": "footnote",
+            "block_content": "This work was supported by the National Natural Science Foundation of China under Grant 62301115.",
+            "block_bbox": [
+                93,
+                1317,
+                603,
+                1352
+            ],
+            "block_id": 13,
+            "block_order": null,
+            "group_id": 13,
+            "block_polygon_points": [
+                [
+                    93.0,
+                    1317.0
+                ],
+                [
+                    603.0,
+                    1317.0
+                ],
+                [
+                    603.0,
+                    1352.0
+                ],
+                [
+                    93.0,
+                    1352.0
+                ]
+            ]
+        },
+        {
+            "block_label": "footnote",
+            "block_content": "L. Yang, Z. Cao and W. Xiong are with School of Information and Communication Engineering, University of Electronic Science and Technology of China, Chengdu, China, 611731.",
+            "block_bbox": [
+                92,
+                1352,
+                603,
+                1407
+            ],
+            "block_id": 14,
+            "block_order": null,
+            "group_id": 14,
+            "block_polygon_points": [
+                [
+                    92.0,
+                    1352.0
+                ],
+                [
+                    603.0,
+                    1352.0
+                ],
+                [
+                    603.0,
+                    1407.0
+                ],
+                [
+                    92.0,
+                    1407.0
+                ]
+            ]
+        },
+        {
+            "block_label": "footnote",
+            "block_content": "Q. Li, G. Sun and J. Lin are with School of Information and Communication Engineering, University of Electronic Science and Technology of China, Chengdu, China, 611731, and also with Tianfu Jiangxi Laboratory, Chengdu, China, 641419.",
+            "block_bbox": [
+                92,
+                1406,
+                603,
+                1479
+            ],
+            "block_id": 15,
+            "block_order": null,
+            "group_id": 15,
+            "block_polygon_points": [
+                [
+                    92.0,
+                    1406.0
+                ],
+                [
+                    603.0,
+                    1406.0
+                ],
+                [
+                    603.0,
+                    1479.0
+                ],
+                [
+                    92.0,
+                    1479.0
+                ]
+            ]
+        },
+        {
+            "block_label": "footnote",
+            "block_content": "Q. Li is the corresponding author. E-mail: lq@uestc.edu.cn.",
+            "block_bbox": [
+                108,
+                1478,
+                560,
+                1498
+            ],
+            "block_id": 16,
+            "block_order": null,
+            "group_id": 16,
+            "block_polygon_points": [
+                [
+                    108.0,
+                    1497.0
+                ],
+                [
+                    553.0,
+                    1497.0
+                ],
+                [
+                    559.0,
+                    1478.0
+                ],
+                [
+                    108.0,
+                    1478.0
+                ]
+            ]
+        }
+    ],
+    "layout_det_res": {
+        "input_path": null,
+        "page_index": null,
+        "boxes": [
+            {
+                "cls_id": 2,
+                "label": "aside_text",
+                "score": 0.9000534415245056,
+                "coordinate": [
+                    37,
+                    581,
+                    78,
+                    1295
+                ],
+                "order": null,
+                "polygon_points": [
+                    [
+                        42.12492370605469,
+                        580.783203125
+                    ],
+                    [
+                        77.17387390136719,
+                        581.03759765625
+                    ],
+                    [
+                        72.00001525878906,
+                        1294.0
+                    ],
+                    [
+                        36.95106506347656,
+                        1293.74560546875
+                    ]
+                ]
+            },
+            {
+                "cls_id": 16,
+                "label": "number",
+                "score": 0.6066781282424927,
+                "coordinate": [
+                    1116,
+                    50,
+                    1128,
+                    66
+                ],
+                "order": 1,
+                "polygon_points": [
+                    [
+                        1116.0,
+                        50.0
+                    ],
+                    [
+                        1127.0,
+                        50.0
+                    ],
+                    [
+                        1127.0,
+                        65.0
+                    ],
+                    [
+                        1116.0,
+                        65.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 6,
+                "label": "doc_title",
+                "score": 0.943500280380249,
+                "coordinate": [
+                    110,
+                    114,
+                    1115,
+                    273
+                ],
+                "order": 2,
+                "polygon_points": [
+                    [
+                        110.0,
+                        114.0
+                    ],
+                    [
+                        1115.0,
+                        114.0
+                    ],
+                    [
+                        1115.0,
+                        273.0
+                    ],
+                    [
+                        110.0,
+                        273.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.8437502384185791,
+                "coordinate": [
+                    245,
+                    293,
+                    977,
+                    321
+                ],
+                "order": 3,
+                "polygon_points": [
+                    [
+                        245.0,
+                        293.0
+                    ],
+                    [
+                        977.0,
+                        293.0
+                    ],
+                    [
+                        977.0,
+                        321.0
+                    ],
+                    [
+                        245.0,
+                        321.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 17,
+                "label": "paragraph_title",
+                "score": 0.6531099081039429,
+                "coordinate": [
+                    117,
+                    400,
+                    190,
+                    420
+                ],
+                "order": 4,
+                "polygon_points": [
+                    [
+                        117.0,
+                        400.0
+                    ],
+                    [
+                        189.0,
+                        400.0
+                    ],
+                    [
+                        189.0,
+                        419.0
+                    ],
+                    [
+                        117.0,
+                        419.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 0,
+                "label": "abstract",
+                "score": 0.9861837029457092,
+                "coordinate": [
+                    93,
+                    399,
+                    604,
+                    1040
+                ],
+                "order": 5,
+                "polygon_points": [
+                    [
+                        93.0,
+                        399.0
+                    ],
+                    [
+                        604.0,
+                        399.0
+                    ],
+                    [
+                        604.0,
+                        1040.0
+                    ],
+                    [
+                        93.0,
+                        1040.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.866239607334137,
+                "coordinate": [
+                    92,
+                    1048,
+                    602,
+                    1090
+                ],
+                "order": 6,
+                "polygon_points": [
+                    [
+                        92.0,
+                        1048.0
+                    ],
+                    [
+                        602.0,
+                        1048.0
+                    ],
+                    [
+                        602.0,
+                        1090.0
+                    ],
+                    [
+                        92.0,
+                        1090.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 17,
+                "label": "paragraph_title",
+                "score": 0.8110635280609131,
+                "coordinate": [
+                    280,
+                    1120,
+                    417,
+                    1141
+                ],
+                "order": 7,
+                "polygon_points": [
+                    [
+                        280.0,
+                        1120.0
+                    ],
+                    [
+                        416.0,
+                        1120.0
+                    ],
+                    [
+                        416.0,
+                        1140.0
+                    ],
+                    [
+                        280.0,
+                        1140.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.9405274987220764,
+                "coordinate": [
+                    92,
+                    1149,
+                    604,
+                    1245
+                ],
+                "order": 8,
+                "polygon_points": [
+                    [
+                        92.0,
+                        1149.0
+                    ],
+                    [
+                        604.0,
+                        1149.0
+                    ],
+                    [
+                        604.0,
+                        1245.0
+                    ],
+                    [
+                        92.0,
+                        1245.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.9666959047317505,
+                "coordinate": [
+                    617,
+                    398,
+                    1130,
+                    614
+                ],
+                "order": 9,
+                "polygon_points": [
+                    [
+                        617.0,
+                        398.0
+                    ],
+                    [
+                        1130.0,
+                        398.0
+                    ],
+                    [
+                        1130.0,
+                        614.0
+                    ],
+                    [
+                        617.0,
+                        614.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.9701671004295349,
+                "coordinate": [
+                    617,
+                    614,
+                    1130,
+                    925
+                ],
+                "order": 10,
+                "polygon_points": [
+                    [
+                        617.0,
+                        614.0
+                    ],
+                    [
+                        1130.0,
+                        614.0
+                    ],
+                    [
+                        1130.0,
+                        925.0
+                    ],
+                    [
+                        617.0,
+                        925.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.9707532525062561,
+                "coordinate": [
+                    617,
+                    925,
+                    1131,
+                    1308
+                ],
+                "order": 11,
+                "polygon_points": [
+                    [
+                        617.0,
+                        925.0
+                    ],
+                    [
+                        1131.0,
+                        925.0
+                    ],
+                    [
+                        1131.0,
+                        1308.0
+                    ],
+                    [
+                        617.0,
+                        1308.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 10,
+                "label": "footnote",
+                "score": 0.9408117532730103,
+                "coordinate": [
+                    93,
+                    1262,
+                    604,
+                    1317
+                ],
+                "order": null,
+                "polygon_points": [
+                    [
+                        93.0,
+                        1262.0
+                    ],
+                    [
+                        604.0,
+                        1262.0
+                    ],
+                    [
+                        604.0,
+                        1317.0
+                    ],
+                    [
+                        93.0,
+                        1317.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.9640942215919495,
+                "coordinate": [
+                    616,
+                    1307,
+                    1131,
+                    1500
+                ],
+                "order": 12,
+                "polygon_points": [
+                    [
+                        616.0,
+                        1307.0
+                    ],
+                    [
+                        1131.0,
+                        1307.0
+                    ],
+                    [
+                        1131.0,
+                        1500.0
+                    ],
+                    [
+                        616.0,
+                        1500.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 10,
+                "label": "footnote",
+                "score": 0.9372076988220215,
+                "coordinate": [
+                    93,
+                    1317,
+                    603,
+                    1352
+                ],
+                "order": null,
+                "polygon_points": [
+                    [
+                        93.0,
+                        1317.0
+                    ],
+                    [
+                        603.0,
+                        1317.0
+                    ],
+                    [
+                        603.0,
+                        1352.0
+                    ],
+                    [
+                        93.0,
+                        1352.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 10,
+                "label": "footnote",
+                "score": 0.9423583149909973,
+                "coordinate": [
+                    92,
+                    1352,
+                    603,
+                    1407
+                ],
+                "order": null,
+                "polygon_points": [
+                    [
+                        92.0,
+                        1352.0
+                    ],
+                    [
+                        603.0,
+                        1352.0
+                    ],
+                    [
+                        603.0,
+                        1407.0
+                    ],
+                    [
+                        92.0,
+                        1407.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 10,
+                "label": "footnote",
+                "score": 0.9485529065132141,
+                "coordinate": [
+                    92,
+                    1406,
+                    603,
+                    1479
+                ],
+                "order": null,
+                "polygon_points": [
+                    [
+                        92.0,
+                        1406.0
+                    ],
+                    [
+                        603.0,
+                        1406.0
+                    ],
+                    [
+                        603.0,
+                        1479.0
+                    ],
+                    [
+                        92.0,
+                        1479.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 10,
+                "label": "footnote",
+                "score": 0.8156685829162598,
+                "coordinate": [
+                    108,
+                    1478,
+                    560,
+                    1498
+                ],
+                "order": null,
+                "polygon_points": [
+                    [
+                        108.0,
+                        1497.0
+                    ],
+                    [
+                        553.0,
+                        1497.0
+                    ],
+                    [
+                        559.0,
+                        1478.0
+                    ],
+                    [
+                        108.0,
+                        1478.0
+                    ]
+                ]
+            }
+        ]
+    }
+}

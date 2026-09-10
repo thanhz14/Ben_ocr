@@ -1,0 +1,339 @@
+{
+  "file_name": "73ee7956-2210.17323v2.pdf",
+  "pages": [
+    {
+      "page_index": 5,
+      "blocks": [
+        {
+          "id": "RR4iDvIpFq",
+          "order": null,
+          "bounding_box": {
+            "x": 0.17521040550879877,
+            "y": 0.03368794326241135,
+            "width": 0.30527926549349654,
+            "height": 0.011229314420803783
+          },
+          "block_content": "Published as a conference paper at ICLR 2023",
+          "label": "Text"
+        },
+        {
+          "id": "wdoNzxx9Xt",
+          "order": null,
+          "bounding_box": {
+            "x": 0.17674062739097168,
+            "y": 0.10342789598108747,
+            "width": 0.6495791889824024,
+            "height": 0.027777777777777776
+          },
+          "block_content": "few FLOPs for each entry. Such operations cannot properly utilize the massive compute capabilities of modern GPUs, and will be bottlenecked by the signiﬁcantly lower memory bandwidth.",
+          "label": "Text"
+        },
+        {
+          "id": "5EqsqXeKOu",
+          "order": null,
+          "bounding_box": {
+            "x": 0.17521040550879877,
+            "y": 0.1400709219858156,
+            "width": 0.6503442999234889,
+            "height": 0.12411347517730496
+          },
+          "block_content": "Fortunately, this problem can be resolved by the following observation: The ﬁnal rounding decisions for column i are only affected by updates performed on this very column, and so updates to later columns are irrelevant at this point in the process. This makes it possible to “lazily batch” updates together, thus achieving much better GPU utilization. Concretely, we apply the algorithm to B = 128 columns at a time, keeping updates contained to those columns and the corresponding B × B block of H − 1 (see also Figure 2). Only once a block has been fully processed, we perform global updates of the entire H − 1 and W matrices using the multi-weight versions of Equations (2) and (3) given below, with Q denoting a set of indices, and H − 1 − Q denoting the inverse matrix with the corresponding rows and columns removed:",
+          "label": "Text"
+        },
+        {
+          "id": "xKNTF4zSgQ",
+          "order": null,
+          "bounding_box": {
+            "x": 0.306044376434583,
+            "y": 0.27364066193853426,
+            "width": 0.37796480489671,
+            "height": 0.04609929078014184
+          },
+          "block_content": " \\boldsymbol{\\delta}_F &= -\\Big(\\mathbf{w}_Q - \\text{quant}(\\mathbf{w}_Q)\\Big)([\\mathbf{H}_F^{-1}]_{QQ})^{-1} (\\mathbf{H}_F^{-1})_{:, Q}, \\\\ \n    \\mathbf{H}_{-Q}^{-1} &= \\Big(\\mathbf{H}^{-1} - \\mathbf{H}^{-1}_{:, Q} ([\\mathbf{H}^{-1}]_{QQ})^{-1} \\mathbf{H}^{-1}_{Q, :} \\Big)_{-Q}.",
+          "label": "Formula"
+        },
+        {
+          "id": "Xx6I9ZXxJy",
+          "order": null,
+          "bounding_box": {
+            "x": 0.8033664881407804,
+            "y": 0.27541371158392436,
+            "width": 0.020657995409334353,
+            "height": 0.01182033096926714
+          },
+          "block_content": "(4)",
+          "label": "Text"
+        },
+        {
+          "id": "jE-JhImEf0",
+          "order": null,
+          "bounding_box": {
+            "x": 0.8064269319051263,
+            "y": 0.29728132387706857,
+            "width": 0.02142310635042081,
+            "height": 0.014775413711583925
+          },
+          "block_content": "(5)",
+          "label": "Text"
+        },
+        {
+          "id": "vFRf6W6ZTD",
+          "order": null,
+          "bounding_box": {
+            "x": 0.17444529456771232,
+            "y": 0.32742316784869974,
+            "width": 0.6511094108645754,
+            "height": 0.041371158392434985
+          },
+          "block_content": "Although this strategy does not reduce the theoretical amount of compute, it effectively addresses the memory-throughput bottleneck. This provides an order of magnitude speedup for very large models in practice, making it a critical component of our algorithm.",
+          "label": "Text"
+        },
+        {
+          "id": "JPi8lCfhUQ",
+          "order": null,
+          "bounding_box": {
+            "x": 0.17444529456771232,
+            "y": 0.375886524822695,
+            "width": 0.6511094108645754,
+            "height": 0.1235224586288416
+          },
+          "block_content": "Step 3: Cholesky Reformulation. The ﬁnal technical issue we have to address is given by numeri- cal inaccuracies, which can become a major problem at the scale of existing models, especially when combined with the block updates discussed in the previous step. Speciﬁcally, it can occur that the matrix H − 1 F becomes indeﬁnite, which we notice can cause the algorithm to aggressively update the remaining weights in incorrect directions, resulting in an arbitrarily-bad quantization of the corre- sponding layer. In practice, we observed that the probability of this happening increases with model size: concretely, it almost certainly occurs for at least a few layers on models that are larger than a few billion parameters. The main issue appears to be the repeated applications of Equation (5), which accumulate various numerical errors, especially through the additional matrix inversion.",
+          "label": "Text"
+        },
+        {
+          "id": "CJhCEZRaHC",
+          "order": null,
+          "bounding_box": {
+            "x": 0.17674062739097168,
+            "y": 0.5059101654846335,
+            "width": 0.6495791889824024,
+            "height": 0.04018912529550828
+          },
+          "block_content": "For smaller models, applying dampening, that is adding a small constant λ (we always choose 1% of the average diagonal value) to the diagonal elements of H appears to be sufﬁcient to avoid numerical issues. However, larger models require a more robust and general approach.",
+          "label": "Text"
+        },
+        {
+          "id": "TlfjVcVacM",
+          "order": null,
+          "bounding_box": {
+            "x": 0.17597551644988524,
+            "y": 0.557919621749409,
+            "width": 0.6518745218056619,
+            "height": 0.14361702127659576
+          },
+          "block_content": "To address this, we begin by noting that the only information required from H − 1 F q , where F q denotes the set of unquantized weights when quantizing weight q , is row q , or more precisely, the elements in this row starting with the diagonal. The consequence is that we could precompute all of these rows using a more numerically-stable method without any signiﬁcant increase in memory consumption. Indeed, the row removal via (3) for our symmetric H − 1 essentially corresponds to taking a Cholesky decomposition, except for the minor difference that the latter divides row q by ([ H − 1 F q ] qq ) 1 / 2 . Hence, we can leverage state-of-the-art Cholesky kernels to compute all information we will need from H − 1 upfront. In combination with mild dampening, the resulting method is robust enough to execute on huge models without issues. As a bonus, using a well-optimized Cholesky kernel also yields further speedup. We detail all small changes necessary for the Cholesky version of the algorithm next.",
+          "label": "Text"
+        },
+        {
+          "id": "EPc_Dx7lFq",
+          "order": null,
+          "bounding_box": {
+            "x": 0.1729150726855394,
+            "y": 0.7074468085106383,
+            "width": 0.6503442999234889,
+            "height": 0.026004728132387706
+          },
+          "block_content": "The Full Algorithm. Finally, we present the full pseudocode for GPTQ in Algorithm 1, including the optimizations discussed above.",
+          "label": "Text"
+        },
+        {
+          "id": "US7dA8cFt3",
+          "order": null,
+          "bounding_box": {
+            "x": 0.1767406273909714,
+            "y": 0.7496882303596343,
+            "width": 0.6449885233358831,
+            "height": 0.17229758524320285
+          },
+          "block_content": "<table><tr><td>\\begin{algorithmic} \\STATE $\\mathbf{Q} \\gets \\mathbf{0}_{d_\\text{row} \\times d_\\text{col}}$ \\quad \\COMMENT{quantized output} \\STATE $\\mathbf{E} \\gets \\mathbf{0}_{d_\\text{row} \\times B}$ \\quad \\COMMENT{block quantization errors} \\STATE $\\mathbf{H}^{-1} \\gets \\text{Cholesky} (\\mathbf{H}^{-1})$ \\COMMENT{Hessian inverse information} \\FOR {$i = 0, B, 2B, \\dots$} \\FOR {$j = i, \\dots, i + B - 1$} \\STATE $\\mathbf{Q}_{:, j} \\gets \\text{quant}(\\mathbf{W}_{:, j})$ \\quad \\COMMENT{quantize column} \\STATE $\\mathbf{E}_{:, j - i} \\gets (\\mathbf{W}_{:, j} - \\mathbf{Q}_{:, j}) \\, / \\, [\\mathbf{H}^{-1}]_{jj}$ \\COMMENT{quantization error} \\STATE $\\mathbf{W}_{:, j:(i + B)} \\gets \\mathbf{E}_{:, j - i} \\cdot \\mathbf{H}^{-1}_{j, j:(i + B)}$ \\COMMENT{update weights in block} \\ENDFOR \\STATE $\\mathbf{W}_{:, (i + B):} \\gets \\mathbf{E} \\cdot \\mathbf{H}^{-1}_{i:(i + B), (i + B):}$ \\COMMENT{update all remaining weights} \\ENDFOR \\end{algorithmic}</td></tr></table>",
+          "label": "Table"
+        },
+        {
+          "id": "FlLlodBBcO",
+          "order": null,
+          "bounding_box": {
+            "x": 0.4957918898240245,
+            "y": 0.9485815602836879,
+            "width": 0.009946442234123947,
+            "height": 0.012411347517730497
+          },
+          "block_content": "5",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "page_index": 12,
+      "blocks": [
+        {
+          "id": "a0ReeBFciO",
+          "order": null,
+          "bounding_box": {
+            "x": 0.16908951798010713,
+            "y": 0.028959810874704492,
+            "width": 0.31293037490436115,
+            "height": 0.02009456264775414
+          },
+          "block_content": "Published as a conference paper at ICLR 2023",
+          "label": "Text"
+        },
+        {
+          "id": "h77ozMQLbn",
+          "order": null,
+          "bounding_box": {
+            "x": 0.17444529456771232,
+            "y": 0.10401891252955082,
+            "width": 0.6518745218056619,
+            "height": 0.04018912529550828
+          },
+          "block_content": "Gunho Park, Baeseong Park, Se Jung Kwon, Byeongwook Kim, Youngjoo Lee, and Dongsoo Lee. nuQmm: Quantized matmul for efﬁcient inference of large-scale generative language models. arXiv preprint arXiv:2206.09557 , 2022.",
+          "label": "Text"
+        },
+        {
+          "id": "UqS4gTJJDN",
+          "order": null,
+          "bounding_box": {
+            "x": 0.17521040550879877,
+            "y": 0.15484633569739953,
+            "width": 0.6495791889824024,
+            "height": 0.054373522458628844
+          },
+          "block_content": "Adam Paszke, Sam Gross, Francisco Massa, Adam Lerer, James Bradbury, Gregory Chanan, Trevor Killeen, Zeming Lin, Natalia Gimelshein, Luca Antiga, et al. Pytorch: An imperative style, high- performance deep learning library. In Conference on Neural Information Processing Systems (NeurIPS) , 2019.",
+          "label": "Text"
+        },
+        {
+          "id": "4l9oSlRLN3",
+          "order": null,
+          "bounding_box": {
+            "x": 0.1782708492731446,
+            "y": 0.21926713947990545,
+            "width": 0.6472838561591431,
+            "height": 0.026004728132387706
+          },
+          "block_content": "Alec Radford, Jeffrey Wu, Rewon Child, David Luan, Dario Amodei, and Ilya Sutskever. Language models are unsupervised multitask learners. OpenAI blog , 1(8):9, 2019.",
+          "label": "Text"
+        },
+        {
+          "id": "oGrQcU1tTd",
+          "order": null,
+          "bounding_box": {
+            "x": 0.17597551644988524,
+            "y": 0.2570921985815603,
+            "width": 0.6495791889824024,
+            "height": 0.03900709219858156
+          },
+          "block_content": "Colin Raffel, Noam Shazeer, Adam Roberts, Katherine Lee, Sharan Narang, Michael Matena, Yanqi Zhou, Wei Li, and Peter Liu. Exploring the limits of transfer learning with a uniﬁed text-to-text transformer. Journal of Machine Learning Research , 21(140):1–67, 2020.",
+          "label": "Text"
+        },
+        {
+          "id": "WmuafrGfxS",
+          "order": null,
+          "bounding_box": {
+            "x": 0.17368018362662585,
+            "y": 0.30791962174940896,
+            "width": 0.6511094108645754,
+            "height": 0.03959810874704492
+          },
+          "block_content": "Pranav Rajpurkar, Jian Zhang, Konstantin Lopyrev, and Percy Liang. SQuAD: 100,000+ questions for machine comprehension of text. In Conference on Empirical Methods in Natural Language Processing (EMNLP) , 2016.",
+          "label": "Text"
+        },
+        {
+          "id": "ikglKZ0cSR",
+          "order": null,
+          "bounding_box": {
+            "x": 0.17368018362662585,
+            "y": 0.3599290780141844,
+            "width": 0.6511094108645754,
+            "height": 0.024231678486997636
+          },
+          "block_content": "Sidak Pal Singh and Dan Alistarh. WoodFisher: Efﬁcient second-order approximation for neural network compression. In Conference on Neural Information Processing Systems (NeurIPS) , 2020.",
+          "label": "Text"
+        },
+        {
+          "id": "vGkDP8iCuq",
+          "order": null,
+          "bounding_box": {
+            "x": 0.17521040550879877,
+            "y": 0.3959810874704492,
+            "width": 0.6503442999234889,
+            "height": 0.026004728132387706
+          },
+          "block_content": "Sandeep Tata and Jignesh M Patel. PiQA: An algebra for querying protein data sets. In International Conference on Scientiﬁc and Statistical Database Management , 2003.",
+          "label": "Text"
+        },
+        {
+          "id": "iiD_wPfnAk",
+          "order": null,
+          "bounding_box": {
+            "x": 0.1782708492731446,
+            "y": 0.43203309692671393,
+            "width": 0.6480489671002295,
+            "height": 0.0425531914893617
+          },
+          "block_content": "Ashish Vaswani, Noam Shazeer, Niki Parmar, Jakob Uszkoreit, Llion Jones, Aidan N Gomez, Łukasz Kaiser, and Illia Polosukhin. Attention is all you need. In Conference on Neural In- formation Processing Systems (NeurIPS) , 2017.",
+          "label": "Text"
+        },
+        {
+          "id": "xa4_ko8-WF",
+          "order": null,
+          "bounding_box": {
+            "x": 0.1729150726855394,
+            "y": 0.48226950354609927,
+            "width": 0.6526396327467483,
+            "height": 0.04018912529550828
+          },
+          "block_content": "Peisong Wang, Qiang Chen, Xiangyu He, and Jian Cheng. Towards accurate post-training network quantization via bit-split and stitching. In International Conference on Machine Learning (ICML) , 2020.",
+          "label": "Text"
+        },
+        {
+          "id": "o5Mqj-wVBQ",
+          "order": null,
+          "bounding_box": {
+            "x": 0.17750573833205815,
+            "y": 0.5348699763593381,
+            "width": 0.6480489671002295,
+            "height": 0.027777777777777776
+          },
+          "block_content": "Xiaoxia Wu, Zhewei Yao, Minjia Zhang, Conglong Li, and Yuxiong He. Extreme compression for pre-trained transformers made simple and efﬁcient. arXiv preprint arXiv:2206.01859 , 2022.",
+          "label": "Text"
+        },
+        {
+          "id": "gGM3wdLFPF",
+          "order": null,
+          "bounding_box": {
+            "x": 0.17597551644988524,
+            "y": 0.5726950354609929,
+            "width": 0.648814078041316,
+            "height": 0.04018912529550828
+          },
+          "block_content": "Zhewei Yao, Reza Yazdani Aminabadi, Minjia Zhang, Xiaoxia Wu, Conglong Li, and Yuxiong He. ZeroQuant: Efﬁcient and affordable post-training quantization for large-scale transformers. arXiv preprint arXiv:2206.01861 , 2022.",
+          "label": "Text"
+        },
+        {
+          "id": "HHgVxKrFEW",
+          "order": null,
+          "bounding_box": {
+            "x": 0.17597551644988524,
+            "y": 0.6199763593380615,
+            "width": 0.6503442999234889,
+            "height": 0.04314420803782506
+          },
+          "block_content": "Susan Zhang, Stephen Roller, Naman Goyal, Mikel Artetxe, Moya Chen, Shuohui Chen, Christo- pher Dewan, Mona Diab, Xian Li, Xi Victoria Lin, et al. OPT: Open pre-trained transformer language models. arXiv preprint arXiv:2205.01068 , 2022.",
+          "label": "Text"
+        },
+        {
+          "id": "6An5JdFcy6",
+          "order": null,
+          "bounding_box": {
+            "x": 0.17597551644988524,
+            "y": 0.6725768321513003,
+            "width": 0.6503442999234889,
+            "height": 0.040780141843971635
+          },
+          "block_content": "Lianmin Zheng, Zhuohan Li, Hao Zhang, Yonghao Zhuang, Zhifeng Chen, Yanping Huang, Yida Wang, Yuanzhong Xu, Danyang Zhuo, Joseph E Gonzalez, et al. Alpa: Automating inter-and intra-operator parallelism for distributed deep learning. arXiv preprint arXiv:2201.12023 , 2022.",
+          "label": "Text"
+        }
+      ]
+    }
+  ]
+}

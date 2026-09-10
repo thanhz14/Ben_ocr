@@ -1,0 +1,1281 @@
+{
+    "input_path": "/home/bocchi/Downloads/Paper_Data/Quantitative Biology/2607.20523v1.pdf",
+    "page_index": 8,
+    "page_count": 13,
+    "width": 1224,
+    "height": 1584,
+    "model_settings": {
+        "use_doc_preprocessor": false,
+        "use_layout_detection": true,
+        "use_chart_recognition": false,
+        "use_seal_recognition": false,
+        "use_ocr_for_image_block": true,
+        "format_block_content": true,
+        "merge_layout_blocks": true,
+        "markdown_ignore_labels": [
+            "number",
+            "footnote",
+            "header",
+            "header_image",
+            "footer",
+            "footer_image",
+            "aside_text"
+        ],
+        "return_layout_polygon_points": true
+    },
+    "parsing_res_list": [
+        {
+            "block_label": "header",
+            "block_content": "NGUYEN et al.: GRADIENT-DECOUPLED HIERARCHICAL MULTI-TASK LEARNING FOR FINE-GRAINED AQUATIC SPECIES RECOGNITION",
+            "block_bbox": [
+                93,
+                48,
+                993,
+                66
+            ],
+            "block_id": 0,
+            "block_order": null,
+            "group_id": 0,
+            "block_polygon_points": [
+                [
+                    93.0,
+                    47.99999237060547
+                ],
+                [
+                    991.9998779296875,
+                    47.99999237060547
+                ],
+                [
+                    991.9998779296875,
+                    64.99999237060547
+                ],
+                [
+                    93.0,
+                    64.99999237060547
+                ]
+            ]
+        },
+        {
+            "block_label": "number",
+            "block_content": "9",
+            "block_bbox": [
+                1116,
+                50,
+                1129,
+                65
+            ],
+            "block_id": 1,
+            "block_order": null,
+            "group_id": 1,
+            "block_polygon_points": [
+                [
+                    1116.0,
+                    50.0
+                ],
+                [
+                    1128.0,
+                    50.0
+                ],
+                [
+                    1128.0,
+                    64.0
+                ],
+                [
+                    1116.0,
+                    64.0
+                ]
+            ]
+        },
+        {
+            "block_label": "chart",
+            "block_content": "<div style=\"text-align: center;\"><img src=\"imgs/img_in_chart_box_96_115_598_436.jpg\" alt=\"Image\" width=\"41%\" />\n\n\n\n</div>\n",
+            "block_bbox": [
+                96,
+                115,
+                598,
+                436
+            ],
+            "block_id": 2,
+            "block_order": null,
+            "group_id": 2,
+            "block_polygon_points": [
+                [
+                    96.0,
+                    115.0
+                ],
+                [
+                    598.0,
+                    115.0
+                ],
+                [
+                    598.0,
+                    436.0
+                ],
+                [
+                    96.0,
+                    436.0
+                ]
+            ]
+        },
+        {
+            "block_label": "figure_title",
+            "block_content": "<div style=\"text-align: center;\">Fig. 4. Evolution of the dynamic task weights defined in Eq. (22), showing the learnable weights  $ (1/2\\sigma^{2}) $ for each task across 50 training epochs.</div>\n",
+            "block_bbox": [
+                92,
+                461,
+                603,
+                500
+            ],
+            "block_id": 3,
+            "block_order": null,
+            "group_id": 3,
+            "block_polygon_points": [
+                [
+                    92.0,
+                    461.0
+                ],
+                [
+                    603.0,
+                    461.0
+                ],
+                [
+                    603.0,
+                    500.0
+                ],
+                [
+                    92.0,
+                    500.0
+                ]
+            ]
+        },
+        {
+            "block_label": "text",
+            "block_content": "the bottom-up biological hierarchy (segmentation  $ \\rightarrow $ traits  $ \\rightarrow $ species) is essential for recognizing rare classes with limited training samples.",
+            "block_bbox": [
+                91,
+                535,
+                603,
+                605
+            ],
+            "block_id": 4,
+            "block_order": 1,
+            "group_id": 4,
+            "block_polygon_points": [
+                [
+                    91.0,
+                    535.0
+                ],
+                [
+                    603.0,
+                    535.0
+                ],
+                [
+                    603.0,
+                    605.0
+                ],
+                [
+                    91.0,
+                    605.0
+                ]
+            ]
+        },
+        {
+            "block_label": "text",
+            "block_content": "In Scenario 2, the fully connected variant allows gradients to propagate from the species head to the segmentation module. While it achieves a competitive Species F1 score (60.1%), it significantly degrades segmentation quality, with Barbel IoU dropping to 28.9% (vs. 33.4% in the detached model). This indicates that without gradient isolation, dominant high-level classification objectives suppress fine-grained morphological learning.",
+            "block_bbox": [
+                91,
+                606,
+                603,
+                796
+            ],
+            "block_id": 5,
+            "block_order": 2,
+            "group_id": 5,
+            "block_polygon_points": [
+                [
+                    91.0,
+                    606.0
+                ],
+                [
+                    603.0,
+                    606.0
+                ],
+                [
+                    603.0,
+                    796.0
+                ],
+                [
+                    91.0,
+                    796.0
+                ]
+            ]
+        },
+        {
+            "block_label": "text",
+            "block_content": "The partial detachment settings in Scenario 3 further show that allowing gradient flow between any pair of heads harms generalization, reducing OOD trait mAP to approximately 86–87%. In contrast, the fully detached design maintains OOD mAP above 95%, demonstrating that gradient isolation is critical for learning generalized, species-agnostic attribute representations.",
+            "block_bbox": [
+                90,
+                797,
+                604,
+                964
+            ],
+            "block_id": 6,
+            "block_order": 3,
+            "group_id": 6,
+            "block_polygon_points": [
+                [
+                    90.0,
+                    797.0
+                ],
+                [
+                    604.0,
+                    797.0
+                ],
+                [
+                    604.0,
+                    964.0
+                ],
+                [
+                    90.0,
+                    964.0
+                ]
+            ]
+        },
+        {
+            "block_label": "text",
+            "block_content": "Scenario 4 highlights the interaction between loss mechanisms. Applying uncertainty weighting alone to the detached architecture unexpectedly reduces performance (species F1 drops from 58.1% to 55.7%), suggesting instability or convergence to suboptimal solutions. However, when combined with orthogonality regularization, performance improves substantially, achieving the best results across all metrics (species F1: 60.8%, ultra-rare Acc: 63.8%). This indicates a strong synergy: orthogonality regularizes the feature space by enforcing separation, which stabilizes uncertainty weighting for effective task balancing. The combination of these mechanisms (FISHER) results in a robust model that effectively recognizes ultra-rare species while maintaining high segmentation quality.",
+            "block_bbox": [
+                90,
+                964,
+                604,
+                1276
+            ],
+            "block_id": 7,
+            "block_order": 4,
+            "group_id": 7,
+            "block_polygon_points": [
+                [
+                    90.0,
+                    964.0
+                ],
+                [
+                    604.0,
+                    964.0
+                ],
+                [
+                    604.0,
+                    1276.0
+                ],
+                [
+                    90.0,
+                    1276.0
+                ]
+            ]
+        },
+        {
+            "block_label": "paragraph_title",
+            "block_content": "### D. Hyperparameter Sensitivity Analysis",
+            "block_bbox": [
+                93,
+                1285,
+                428,
+                1306
+            ],
+            "block_id": 8,
+            "block_order": 5,
+            "group_id": 8,
+            "block_polygon_points": [
+                [
+                    93.0,
+                    1285.0
+                ],
+                [
+                    427.0,
+                    1285.0
+                ],
+                [
+                    427.0,
+                    1305.0
+                ],
+                [
+                    93.0,
+                    1305.0
+                ]
+            ]
+        },
+        {
+            "block_label": "text",
+            "block_content": "The orthogonality loss weight ($\\lambda$) controls the separation between prototype vectors in the attribute-aware head, preventing feature collapse where distinct anatomical traits overlap in the latent space. We analyze its effect by sweeping $\\lambda \\in [0.0, 1.0]$. Fig. 3 shows classification and segmentation metrics on a dual-axis plot. While overall accuracy (solid purple line with $\\bullet$ marker) remains stable across $\\lambda$, a clear relationship emerges between segmentation quality (brown line with $\\blacklozenge$ marker)",
+            "block_bbox": [
+                91,
+                1307,
+                602,
+                1500
+            ],
+            "block_id": 9,
+            "block_order": 6,
+            "group_id": 9,
+            "block_polygon_points": [
+                [
+                    91.0,
+                    1307.0
+                ],
+                [
+                    602.0,
+                    1307.0
+                ],
+                [
+                    602.0,
+                    1500.0
+                ],
+                [
+                    91.0,
+                    1500.0
+                ]
+            ]
+        },
+        {
+            "block_label": "chart",
+            "block_content": "<div style=\"text-align: center;\"><img src=\"imgs/img_in_chart_box_623_113_1122_393.jpg\" alt=\"Image\" width=\"40%\" />\n\n\n\n</div>\n",
+            "block_bbox": [
+                623,
+                113,
+                1122,
+                393
+            ],
+            "block_id": 10,
+            "block_order": null,
+            "group_id": 10,
+            "block_polygon_points": [
+                [
+                    623.0,
+                    113.0
+                ],
+                [
+                    1122.0,
+                    113.0
+                ],
+                [
+                    1122.0,
+                    393.0
+                ],
+                [
+                    623.0,
+                    393.0
+                ]
+            ]
+        },
+        {
+            "block_label": "figure_title",
+            "block_content": "<div style=\"text-align: center;\">Fig. 5. Gradient Alignment in Shared Backbone. Cosine similarity between classification and segmentation gradients: the baseline (black, dark red) shows frequent conflicts (negative values), while FISHER (yellow) maintains stable positive alignment.</div>\n",
+            "block_bbox": [
+                616,
+                415,
+                1129,
+                491
+            ],
+            "block_id": 11,
+            "block_order": null,
+            "group_id": 11,
+            "block_polygon_points": [
+                [
+                    616.0,
+                    415.0
+                ],
+                [
+                    1129.0,
+                    415.0
+                ],
+                [
+                    1129.0,
+                    491.0
+                ],
+                [
+                    616.0,
+                    491.0
+                ]
+            ]
+        },
+        {
+            "block_label": "text",
+            "block_content": "and ultra-rare species classification (dashed pink line with ▲ marker).",
+            "block_bbox": [
+                617,
+                532,
+                1128,
+                578
+            ],
+            "block_id": 12,
+            "block_order": 7,
+            "group_id": 12,
+            "block_polygon_points": [
+                [
+                    617.0,
+                    532.0
+                ],
+                [
+                    1128.0,
+                    532.0
+                ],
+                [
+                    1128.0,
+                    578.0
+                ],
+                [
+                    617.0,
+                    578.0
+                ]
+            ]
+        },
+        {
+            "block_label": "text",
+            "block_content": "When orthogonality is low ( $ \\lambda < 0.3 $), the model struggles to distinguish visually similar parts, yielding a mean IoU of only  $ \\sim 78\\% $ and lower accuracy for rare species. In contrast, overly large values ( $ \\lambda > 0.7 $) introduce excessive regularization, constraining the feature space and reducing the model's ability to capture intra-class variations. We observe a sharp performance transition peaking at  $ \\lambda = 0.5 $, where mIoU reaches nearly 80% and aligns with the maximum ultra-rare accuracy ( $ \\sim 64\\% $). This strong correlation supports our detached hierarchical hypothesis: enforcing well-separated morphological representations directly improves rare-species recognition. Based on this analysis, we select  $ \\lambda = 0.5 $ as the final setting, achieving an effective balance between prototype separation and representational flexibility for robust generalization.",
+            "block_bbox": [
+                615,
+                580,
+                1130,
+                940
+            ],
+            "block_id": 13,
+            "block_order": 8,
+            "group_id": 13,
+            "block_polygon_points": [
+                [
+                    615.0,
+                    580.0
+                ],
+                [
+                    1130.0,
+                    580.0
+                ],
+                [
+                    1130.0,
+                    940.0
+                ],
+                [
+                    615.0,
+                    940.0
+                ]
+            ]
+        },
+        {
+            "block_label": "paragraph_title",
+            "block_content": "### E. Analysis of Dynamic Task Weighting",
+            "block_bbox": [
+                619,
+                948,
+                956,
+                970
+            ],
+            "block_id": 14,
+            "block_order": 9,
+            "group_id": 14,
+            "block_polygon_points": [
+                [
+                    619.0,
+                    948.0
+                ],
+                [
+                    956.0,
+                    948.0
+                ],
+                [
+                    956.0,
+                    970.0
+                ],
+                [
+                    619.0,
+                    970.0
+                ]
+            ]
+        },
+        {
+            "block_label": "text",
+            "block_content": "A key component of FISHER is the homoscedastic uncertainty weighting strategy, which dynamically balances the losses of the three tasks based on their aleatoric uncertainty. Fig. 4 illustrates the evolution of the learnable weights  $ (1/2\\sigma_{m}^{2}) $ during training. Notably, FISHER assigns the lowest weight to the species loss (red line,  $ <1\\% $ relative importance), indicating that species supervision is treated as a high-variance signal. This aligns with the long-tailed nature of the FishVista dataset, where gradients from rare classes are sparse and unstable, and helps prevent noisy signals from dominating the shared backbone, particularly in early training.",
+            "block_bbox": [
+                616,
+                973,
+                1131,
+                1235
+            ],
+            "block_id": 15,
+            "block_order": 10,
+            "group_id": 15,
+            "block_polygon_points": [
+                [
+                    616.0,
+                    973.0
+                ],
+                [
+                    1131.0,
+                    973.0
+                ],
+                [
+                    1131.0,
+                    1235.0
+                ],
+                [
+                    616.0,
+                    1235.0
+                ]
+            ]
+        },
+        {
+            "block_label": "text",
+            "block_content": "In contrast, the weight for trait identification (blue line) increases rapidly and dominates the total loss ( $ \\sim $ 90% relative importance), suggesting that binary trait attributes provide a more stable learning signal with lower uncertainty. The segmentation weight (green line) remains moderate, acting as a bridge between pixel-level details and semantic attributes. This weighting pattern reinforces the proposed detached hierarchical design: with gradient detachment, the backbone learns bottom-up morphological cues from segmentation and trait supervision, while the species head performs classification without destabilizing these representations.",
+            "block_bbox": [
+                616,
+                1236,
+                1131,
+                1501
+            ],
+            "block_id": 16,
+            "block_order": 11,
+            "group_id": 16,
+            "block_polygon_points": [
+                [
+                    616.0,
+                    1236.0
+                ],
+                [
+                    1131.0,
+                    1236.0
+                ],
+                [
+                    1131.0,
+                    1501.0
+                ],
+                [
+                    616.0,
+                    1501.0
+                ]
+            ]
+        }
+    ],
+    "layout_det_res": {
+        "input_path": null,
+        "page_index": null,
+        "boxes": [
+            {
+                "cls_id": 12,
+                "label": "header",
+                "score": 0.8494203686714172,
+                "coordinate": [
+                    93,
+                    48,
+                    993,
+                    66
+                ],
+                "order": null,
+                "polygon_points": [
+                    [
+                        93.0,
+                        47.99999237060547
+                    ],
+                    [
+                        991.9998779296875,
+                        47.99999237060547
+                    ],
+                    [
+                        991.9998779296875,
+                        64.99999237060547
+                    ],
+                    [
+                        93.0,
+                        64.99999237060547
+                    ]
+                ]
+            },
+            {
+                "cls_id": 16,
+                "label": "number",
+                "score": 0.6783391237258911,
+                "coordinate": [
+                    1116,
+                    50,
+                    1129,
+                    65
+                ],
+                "order": 1,
+                "polygon_points": [
+                    [
+                        1116.0,
+                        50.0
+                    ],
+                    [
+                        1128.0,
+                        50.0
+                    ],
+                    [
+                        1128.0,
+                        64.0
+                    ],
+                    [
+                        1116.0,
+                        64.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 3,
+                "label": "chart",
+                "score": 0.9647493958473206,
+                "coordinate": [
+                    96,
+                    115,
+                    598,
+                    436
+                ],
+                "order": null,
+                "polygon_points": [
+                    [
+                        96.0,
+                        115.0
+                    ],
+                    [
+                        598.0,
+                        115.0
+                    ],
+                    [
+                        598.0,
+                        436.0
+                    ],
+                    [
+                        96.0,
+                        436.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 7,
+                "label": "figure_title",
+                "score": 0.8922142386436462,
+                "coordinate": [
+                    92,
+                    461,
+                    603,
+                    500
+                ],
+                "order": null,
+                "polygon_points": [
+                    [
+                        92.0,
+                        461.0
+                    ],
+                    [
+                        603.0,
+                        461.0
+                    ],
+                    [
+                        603.0,
+                        500.0
+                    ],
+                    [
+                        92.0,
+                        500.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 15,
+                "label": "inline_formula",
+                "score": 0.7065194845199585,
+                "coordinate": [
+                    240,
+                    479,
+                    296,
+                    499
+                ],
+                "order": 2,
+                "polygon_points": [
+                    [
+                        240.0,
+                        479.0
+                    ],
+                    [
+                        240.0,
+                        498.0
+                    ],
+                    [
+                        295.0,
+                        498.0
+                    ],
+                    [
+                        295.0,
+                        479.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.9318247437477112,
+                "coordinate": [
+                    91,
+                    535,
+                    603,
+                    605
+                ],
+                "order": 3,
+                "polygon_points": [
+                    [
+                        91.0,
+                        535.0
+                    ],
+                    [
+                        603.0,
+                        535.0
+                    ],
+                    [
+                        603.0,
+                        605.0
+                    ],
+                    [
+                        91.0,
+                        605.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.9592463970184326,
+                "coordinate": [
+                    91,
+                    606,
+                    603,
+                    796
+                ],
+                "order": 4,
+                "polygon_points": [
+                    [
+                        91.0,
+                        606.0
+                    ],
+                    [
+                        603.0,
+                        606.0
+                    ],
+                    [
+                        603.0,
+                        796.0
+                    ],
+                    [
+                        91.0,
+                        796.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.9558578133583069,
+                "coordinate": [
+                    90,
+                    797,
+                    604,
+                    964
+                ],
+                "order": 5,
+                "polygon_points": [
+                    [
+                        90.0,
+                        797.0
+                    ],
+                    [
+                        604.0,
+                        797.0
+                    ],
+                    [
+                        604.0,
+                        964.0
+                    ],
+                    [
+                        90.0,
+                        964.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.9644467234611511,
+                "coordinate": [
+                    90,
+                    964,
+                    604,
+                    1276
+                ],
+                "order": 6,
+                "polygon_points": [
+                    [
+                        90.0,
+                        964.0
+                    ],
+                    [
+                        604.0,
+                        964.0
+                    ],
+                    [
+                        604.0,
+                        1276.0
+                    ],
+                    [
+                        90.0,
+                        1276.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 17,
+                "label": "paragraph_title",
+                "score": 0.8202679753303528,
+                "coordinate": [
+                    93,
+                    1285,
+                    428,
+                    1306
+                ],
+                "order": 7,
+                "polygon_points": [
+                    [
+                        93.0,
+                        1285.0
+                    ],
+                    [
+                        427.0,
+                        1285.0
+                    ],
+                    [
+                        427.0,
+                        1305.0
+                    ],
+                    [
+                        93.0,
+                        1305.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.9580665826797485,
+                "coordinate": [
+                    91,
+                    1307,
+                    602,
+                    1500
+                ],
+                "order": 8,
+                "polygon_points": [
+                    [
+                        91.0,
+                        1307.0
+                    ],
+                    [
+                        602.0,
+                        1307.0
+                    ],
+                    [
+                        602.0,
+                        1500.0
+                    ],
+                    [
+                        91.0,
+                        1500.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 15,
+                "label": "inline_formula",
+                "score": 0.7272757291793823,
+                "coordinate": [
+                    486,
+                    1378,
+                    595,
+                    1401
+                ],
+                "order": 9,
+                "polygon_points": [
+                    [
+                        486.0,
+                        1378.0
+                    ],
+                    [
+                        486.0,
+                        1400.0
+                    ],
+                    [
+                        594.0,
+                        1400.0
+                    ],
+                    [
+                        594.0,
+                        1378.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 15,
+                "label": "inline_formula",
+                "score": 0.458625853061676,
+                "coordinate": [
+                    345,
+                    1452,
+                    365,
+                    1472
+                ],
+                "order": 10,
+                "polygon_points": [
+                    [
+                        345.0,
+                        1452.0
+                    ],
+                    [
+                        364.0,
+                        1452.0
+                    ],
+                    [
+                        364.0,
+                        1471.0
+                    ],
+                    [
+                        345.0,
+                        1471.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 3,
+                "label": "chart",
+                "score": 0.9623239636421204,
+                "coordinate": [
+                    623,
+                    113,
+                    1122,
+                    393
+                ],
+                "order": null,
+                "polygon_points": [
+                    [
+                        623.0,
+                        113.0
+                    ],
+                    [
+                        1122.0,
+                        113.0
+                    ],
+                    [
+                        1122.0,
+                        393.0
+                    ],
+                    [
+                        623.0,
+                        393.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 7,
+                "label": "figure_title",
+                "score": 0.9195862412452698,
+                "coordinate": [
+                    616,
+                    415,
+                    1129,
+                    491
+                ],
+                "order": null,
+                "polygon_points": [
+                    [
+                        616.0,
+                        415.0
+                    ],
+                    [
+                        1129.0,
+                        415.0
+                    ],
+                    [
+                        1129.0,
+                        491.0
+                    ],
+                    [
+                        616.0,
+                        491.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.9077760577201843,
+                "coordinate": [
+                    617,
+                    532,
+                    1128,
+                    578
+                ],
+                "order": 11,
+                "polygon_points": [
+                    [
+                        617.0,
+                        532.0
+                    ],
+                    [
+                        1128.0,
+                        532.0
+                    ],
+                    [
+                        1128.0,
+                        578.0
+                    ],
+                    [
+                        617.0,
+                        578.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.9649582505226135,
+                "coordinate": [
+                    615,
+                    580,
+                    1130,
+                    940
+                ],
+                "order": 12,
+                "polygon_points": [
+                    [
+                        615.0,
+                        580.0
+                    ],
+                    [
+                        1130.0,
+                        580.0
+                    ],
+                    [
+                        1130.0,
+                        940.0
+                    ],
+                    [
+                        615.0,
+                        940.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 15,
+                "label": "inline_formula",
+                "score": 0.3388522267341614,
+                "coordinate": [
+                    867,
+                    652,
+                    957,
+                    674
+                ],
+                "order": 13,
+                "polygon_points": [
+                    [
+                        867.0,
+                        652.0
+                    ],
+                    [
+                        867.0,
+                        673.0
+                    ],
+                    [
+                        956.0,
+                        673.0
+                    ],
+                    [
+                        956.0,
+                        652.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 15,
+                "label": "inline_formula",
+                "score": 0.4026336371898651,
+                "coordinate": [
+                    985,
+                    724,
+                    1064,
+                    745
+                ],
+                "order": 14,
+                "polygon_points": [
+                    [
+                        985.0,
+                        724.0
+                    ],
+                    [
+                        1063.0,
+                        724.0
+                    ],
+                    [
+                        1063.0,
+                        744.0
+                    ],
+                    [
+                        985.0,
+                        744.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 15,
+                "label": "inline_formula",
+                "score": 0.38069775700569153,
+                "coordinate": [
+                    1038,
+                    843,
+                    1126,
+                    864
+                ],
+                "order": 15,
+                "polygon_points": [
+                    [
+                        1038.0,
+                        843.0
+                    ],
+                    [
+                        1125.0,
+                        843.0
+                    ],
+                    [
+                        1125.0,
+                        863.0
+                    ],
+                    [
+                        1038.0,
+                        863.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 17,
+                "label": "paragraph_title",
+                "score": 0.8207252621650696,
+                "coordinate": [
+                    619,
+                    948,
+                    956,
+                    970
+                ],
+                "order": 16,
+                "polygon_points": [
+                    [
+                        619.0,
+                        948.0
+                    ],
+                    [
+                        956.0,
+                        948.0
+                    ],
+                    [
+                        956.0,
+                        970.0
+                    ],
+                    [
+                        619.0,
+                        970.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.9621102809906006,
+                "coordinate": [
+                    616,
+                    973,
+                    1131,
+                    1235
+                ],
+                "order": 17,
+                "polygon_points": [
+                    [
+                        616.0,
+                        973.0
+                    ],
+                    [
+                        1131.0,
+                        973.0
+                    ],
+                    [
+                        1131.0,
+                        1235.0
+                    ],
+                    [
+                        616.0,
+                        1235.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 15,
+                "label": "inline_formula",
+                "score": 0.7378233075141907,
+                "coordinate": [
+                    622,
+                    1067,
+                    692,
+                    1092
+                ],
+                "order": 18,
+                "polygon_points": [
+                    [
+                        622.0,
+                        1067.0
+                    ],
+                    [
+                        622.0,
+                        1091.0
+                    ],
+                    [
+                        691.0,
+                        1091.0
+                    ],
+                    [
+                        691.0,
+                        1067.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.9657824039459229,
+                "coordinate": [
+                    616,
+                    1236,
+                    1131,
+                    1501
+                ],
+                "order": 19,
+                "polygon_points": [
+                    [
+                        616.0,
+                        1236.0
+                    ],
+                    [
+                        1131.0,
+                        1236.0
+                    ],
+                    [
+                        1131.0,
+                        1501.0
+                    ],
+                    [
+                        616.0,
+                        1501.0
+                    ]
+                ]
+            }
+        ]
+    }
+}

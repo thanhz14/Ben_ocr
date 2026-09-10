@@ -1,0 +1,411 @@
+{
+  "file_name": "8fb41f21-2306.00978v6.pdf",
+  "pages": [
+    {
+      "page_index": 1,
+      "blocks": [
+        {
+          "id": "kGBWzF-DC_",
+          "order": "1",
+          "bounding_box": {
+            "x": 0.1812206572769953,
+            "y": 0.11240029006526468,
+            "width": 0.6262910798122066,
+            "height": 0.04278462654097172
+          },
+          "block_content": "AWQ: ACTIVATION - AWARE WEIGHT QUANTIZATION FOR ON-DEVICE LLM COMPRESSION AND ACCELERATION",
+          "label": "Text"
+        },
+        {
+          "id": "oavD1N6kgx",
+          "order": "2",
+          "bounding_box": {
+            "x": 0.14272300469483568,
+            "y": 0.19796954314720813,
+            "width": 0.6929577464788732,
+            "height": 0.032632342277012324
+          },
+          "block_content": "Ji Lin * 1 Jiaming Tang * 1 2 Haotian Tang † 1 Shang Yang † 1 Wei-Ming Chen 3 Wei-Chen Wang 1 Guangxuan Xiao 1 Xingyu Dang 1 4 Chuang Gan 5 6 Song Han 1 3",
+          "label": "Text"
+        },
+        {
+          "id": "TZqdlDWWuU",
+          "order": null,
+          "bounding_box": {
+            "x": 0.0273224043715847,
+            "y": 0.2753867781111963,
+            "width": 0.029143897996357013,
+            "height": 0.44585091420534456
+          },
+          "block_content": "arXiv:2306.00978v6 [cs.CL] 25 Apr 2026",
+          "label": "Text"
+        },
+        {
+          "id": "WcQ7sO4U_S",
+          "order": "3",
+          "bounding_box": {
+            "x": 0.29300291545189505,
+            "y": 0.23063063406729484,
+            "width": 0.3848396501457726,
+            "height": 0.015765765765765764
+          },
+          "block_content": "https://github.com/mit-han-lab/llm-awq",
+          "label": "Text"
+        },
+        {
+          "id": "MbpJ_DWcRg",
+          "order": null,
+          "bounding_box": {
+            "x": 0.4358600583090379,
+            "y": 0.268468469112843,
+            "width": 0.09912536443148688,
+            "height": 0.018018018018018018
+          },
+          "block_content": "ABSTRACT",
+          "label": "Text"
+        },
+        {
+          "id": "SR-Q9Q9TTc",
+          "order": null,
+          "bounding_box": {
+            "x": 0.5058309037900874,
+            "y": 0.5691441458624762,
+            "width": 0.3819241982507289,
+            "height": 0.10472972972972973
+          },
+          "block_content": "Quantization Algorithm: AWQ Inference System: TinyChat TinyChat Computer (Jetson Orin Nano) MacBook (Apple M1) AI PC (CPU / GPU) Raspberry Pi (ARM CPU) AWQ int4 fp16",
+          "label": "Image"
+        },
+        {
+          "id": "5q3_NT9i3G",
+          "order": null,
+          "bounding_box": {
+            "x": 0.1239067055393586,
+            "y": 0.2898648655092394,
+            "width": 0.7346938775510204,
+            "height": 0.2533783783783784
+          },
+          "block_content": "Large language models (LLMs) have transformed numerous AI applications. On-device LLM is becoming increas- ingly important: running LLMs locally on edge devices can reduce the cloud computing cost and protect users’ privacy. However, the astronomical model size and the limited hardware resource pose significant deployment challenges. We propose Activation-aware Weight Quantization (AWQ), a hardware-friendly approach for LLM low-bit weight-only quantization. AWQ finds that not all weights in an LLM are equally important. Protecting only 1% salient weights can greatly reduce quantization error. To identify salient weight channels, we should refer to the activation distribution, not weights. To avoid the hardware-inefficient mix-precision quantization, we mathematically derive that scaling up the salient channels can reduce the quantization error. AWQ employs an equivalent transformation to scale the salient weight channels to protect them. The scale is determined by collecting the activation statistics offline. AWQ does not rely on any backpropagation or reconstruction, so it generalizes to different domains and modalities without overfitting the calibration set. AWQ outperforms existing work on various language modeling and domain-specific benchmarks (coding and math). Thanks to better generalization, it achieves excellent quantization performance for instruction-tuned LMs and, for the first time, multi-modal LMs. Alongside AWQ, we implement TinyChat, an efficient and flexible inference framework tailored for 4-bit on-device LLM/VLMs. With kernel fusion and platform-aware weight packing, TinyChat offers more than 3 × speedup over the Huggingface FP16 implementation on both desktop and mobile GPUs. It also democratizes the deployment of the 70B Llama-2 model on mobile GPUs.",
+          "label": "Text"
+        },
+        {
+          "id": "3pT8iA210b",
+          "order": null,
+          "bounding_box": {
+            "x": 0.08859223300970874,
+            "y": 0.5669793563756889,
+            "width": 0.17111650485436894,
+            "height": 0.01594746716697936
+          },
+          "block_content": "1 INTRODUCTION",
+          "label": "Text"
+        },
+        {
+          "id": "wdHOyfrlGW",
+          "order": null,
+          "bounding_box": {
+            "x": 0.09101941747572816,
+            "y": 0.6138836715726871,
+            "width": 0.3859223300970874,
+            "height": 0.19136960600375236
+          },
+          "block_content": "Deploying large language models (LLMs) directly on edge devices is crucial. On-device usage eliminates delays caused by sending data to a cloud server and enables LLMs to op- erate offline, which is beneficial for real-time applications like virtual assistants, chatbots, and autonomous vehicles. The operational costs associated with maintaining and scal- ing centralized cloud infrastructure can also be reduced. On-device LLM also enhances data security by keeping sensitive information local, reducing the chance of data breaches. LLMs, grounded in transformer-based architec- tures (Vaswani et al., 2017), have gathered significant atten- tion for their impressive performance across diverse bench- marks (Brown et al., 2020; Zhang et al., 2022; Touvron",
+          "label": "Text"
+        },
+        {
+          "id": "6RYq8Q2Qv5",
+          "order": null,
+          "bounding_box": {
+            "x": 0.08859223300970874,
+            "y": 0.8123827392120075,
+            "width": 0.38470873786407767,
+            "height": 0.054409005628517824
+          },
+          "block_content": "* : Algorithm co-lead, † : system co-lead. 1 MIT 2 Shanghai Jiao Tong University 3 NVIDIA 4 Tsinghua University 5 MIT-IBM Wat- son AI Lab 6 UMass Amherst. Correspondence to: Song Han < songhan@mit.edu > .",
+          "label": "Text"
+        },
+        {
+          "id": "CfOnI3dnts",
+          "order": null,
+          "bounding_box": {
+            "x": 0.08859223300970874,
+            "y": 0.8780487804878049,
+            "width": 0.3859223300970874,
+            "height": 0.027204502814258912
+          },
+          "block_content": "Proceedings of the 7 th MLSys Conference , Santa Clara, CA, USA, 2024. Best Paper Award. Copyright 2024 by the author(s).",
+          "label": "Text"
+        },
+        {
+          "id": "zIY3i9-wwx",
+          "order": null,
+          "bounding_box": {
+            "x": 0.5012135922330098,
+            "y": 0.6866791744840526,
+            "width": 0.3859223300970874,
+            "height": 0.09849906191369606
+          },
+          "block_content": "Figure 1. We introduce AWQ , a versatile weight quantization method for LLM. To implement AWQ, we developed TinyChat to deploy 4-bit quantized LLMs into various edge platforms, achieving a 3-4 × performance boost compared to FP16. No- tably, we’ve also manufactured a TinyChat computer , powered by TinyChat, which contains an NVIDIA Jetson Orin Nano with only 8GB of memory and 15W power consumption. Demo: https://youtu.be/z91a8DrfgEw .",
+          "label": "Text"
+        },
+        {
+          "id": "pgwbPdpvra",
+          "order": null,
+          "bounding_box": {
+            "x": 0.5,
+            "y": 0.8320825515947468,
+            "width": 0.3859223300970874,
+            "height": 0.07317073170731707
+          },
+          "block_content": "et al., 2023a; Scao et al., 2022). However, the large model size leads to the high serving costs. For example, GPT-3 has 175B parameters, which is 350GB in FP16, while the latest B200 GPU only has 192GB memory, let alone edge devices.",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "page_index": 4,
+      "blocks": [
+        {
+          "id": "MOjiv6HVPN",
+          "order": null,
+          "bounding_box": {
+            "x": 0.13397129186602874,
+            "y": 0.5091581882755588,
+            "width": 0.30143540669856467,
+            "height": 0.03607770582793666
+          },
+          "block_content": "Q(\\mathbf{w}) = \\Delta \\cdot \\text{Round}(\\frac{\\mathbf{w}}{\\Delta}), \\quad \\Delta = \\frac{\\max(|\\mathbf{w}|)}{2^{N-1}}",
+          "label": "Formula"
+        },
+        {
+          "id": "Zu5lY3TF6G",
+          "order": null,
+          "bounding_box": {
+            "x": 0.16507177033492823,
+            "y": 0.09102682136585048,
+            "width": 0.6519138755980861,
+            "height": 0.08695652173913043
+          },
+          "block_content": "<table><tr><td>OPT (PPL$↓$)</td><td>1.3B</td><td>2.7B</td><td>6.7B</td><td>13B</td><td>30B</td></tr><tr><td>FP16</td><td>14.62</td><td>12.47</td><td>10.86</td><td>10.13</td><td>9.56</td></tr><tr><td>RTN</td><td>119.47</td><td>298.00</td><td>23.54</td><td>46.04</td><td>18.80</td></tr><tr><td>1% FP16</td><td>16.91</td><td>13.69</td><td>11.39</td><td>10.43</td><td>9.85</td></tr><tr><td>$s=2$</td><td>18.63</td><td>14.94</td><td>11.92</td><td>10.80</td><td>10.32</td></tr><tr><td>method</td><td>16.32</td><td>13.58</td><td>11.39</td><td>10.56</td><td>9.77</td></tr></table>",
+          "label": "Table"
+        },
+        {
+          "id": "MMobZop4gM",
+          "order": null,
+          "bounding_box": {
+            "x": 0.14473684210526316,
+            "y": 0.6368177556859245,
+            "width": 0.2727272727272727,
+            "height": 0.02960222016651249
+          },
+          "block_content": "Q(w\\cdot s)\\cdot \\frac{x}{s} = \\Delta^{'} \\cdot \\text{Round}(\\frac{ws}{\\Delta^{'}}) \\cdot x \\cdot \\frac{1}{s}",
+          "label": "Formula"
+        },
+        {
+          "id": "9xvPBz-W7C",
+          "order": null,
+          "bounding_box": {
+            "x": 0.08971291866028708,
+            "y": 0.18723404396473534,
+            "width": 0.7978468899521531,
+            "height": 0.05180388529139685
+          },
+          "block_content": "Table 1. Keeping a small fraction of weights (0.1%-1%) in FP16 significantly improves the performance of the quantized models over round-to-nearest (RTN). It is only effective when we select the important weights in FP16 by looking at activation distribution instead of weight distribution. We highlight results with a decent perplexity in green. We used INT3 quantization with a group size of 128 and measured the WikiText perplexity ( ↓ ).",
+          "label": "Text"
+        },
+        {
+          "id": "07YHtBIWPm",
+          "order": null,
+          "bounding_box": {
+            "x": 0.09210526315789473,
+            "y": 0.2649398719018306,
+            "width": 0.37559808612440193,
+            "height": 0.09620721554116558
+          },
+          "block_content": "<table><tr><td>OPT-6.7B</td><td>$s=1$</td><td>$s=1.25$</td><td>$s=1.5$</td><td>$s=2$</td><td>$s=4$</td></tr><tr><td>proportion of $\\Delta^{'} \\neq \\Delta$</td><td>0%</td><td>2.8%</td><td>4.4%</td><td>8.2%</td><td>21.2%</td></tr><tr><td>average $\\Delta^{'}/ \\Delta$</td><td>1</td><td>1.005</td><td>1.013</td><td>1.038</td><td>1.213</td></tr><tr><td>average $\\frac{\\Delta^{'}}{\\Delta} \\cdot \\frac{1}{s}$</td><td>1</td><td>0.804</td><td>0.676</td><td>0.519</td><td>0.303</td></tr><tr><td>Wiki-2 PPL</td><td>23.54</td><td>12.87</td><td>12.48</td><td>11.92</td><td>12.36</td></tr></table>",
+          "label": "Table"
+        },
+        {
+          "id": "kIl7vQUZ8a",
+          "order": null,
+          "bounding_box": {
+            "x": 0.5155502392344498,
+            "y": 0.2649398719018306,
+            "width": 0.35645933014354064,
+            "height": 0.09990749306197964
+          },
+          "block_content": "<table><tr><td>OPT (PPL$↓$)</td><td>1.3B</td><td>2.7B</td><td>6.7B</td><td>13B</td><td>30B</td></tr><tr><td>FP16</td><td>14.62</td><td>12.47</td><td>10.86</td><td>10.13</td><td>9.56</td></tr><tr><td>RTN</td><td>119.47</td><td>298.00</td><td>23.54</td><td>46.04</td><td>18.80</td></tr><tr><td>1% FP16</td><td>16.91</td><td>13.69</td><td>11.39</td><td>10.43</td><td>9.85</td></tr><tr><td>$s=2$</td><td>18.63</td><td>14.94</td><td>11.92</td><td>10.80</td><td>10.32</td></tr><tr><td>method</td><td>16.32</td><td>13.58</td><td>11.39</td><td>10.56</td><td>9.77</td></tr></table>",
+          "label": "Table"
+        },
+        {
+          "id": "b4_75nxGMR",
+          "order": null,
+          "bounding_box": {
+            "x": 0.08971291866028708,
+            "y": 0.3722479200054384,
+            "width": 0.38516746411483255,
+            "height": 0.08325624421831637
+          },
+          "block_content": "Table 2. Statistics when multiplying the 1% salient channels by s > 1 . Scaling up the salient channels significantly improves the perplexity (23.54 to 11.92). As s goes larger, the percentage of changed ∆ increases, and the error reduction rate for salient channels also increases. However, the best perplexity is achieved at s = 2 , since further increasing s will increase the quantization error for non-salient channels.",
+          "label": "Text"
+        },
+        {
+          "id": "E6YMF3w5DD",
+          "order": null,
+          "bounding_box": {
+            "x": 0.5011961722488039,
+            "y": 0.37502312814604893,
+            "width": 0.38516746411483255,
+            "height": 0.06567992599444958
+          },
+          "block_content": "Table 3. AWQ protects salient weights and reduces quantization error by using a scaling-based method. It consistently outperforms Round-to-nearest quantization (RTN) and achieves comparable performance as mixed-precision (1% FP16) while being more hardware-friendly. We use 3-bit quantization with group size 128.",
+          "label": "Text"
+        },
+        {
+          "id": "phzZS4-IWP",
+          "order": null,
+          "bounding_box": {
+            "x": 0.08732057416267942,
+            "y": 0.4869565302083936,
+            "width": 0.145933014354067,
+            "height": 0.013876040703052728
+          },
+          "block_content": "function is defined as:",
+          "label": "Text"
+        },
+        {
+          "id": "I_bJrKgQbH",
+          "order": null,
+          "bounding_box": {
+            "x": 0.08851674641148326,
+            "y": 0.5526364562028432,
+            "width": 0.388755980861244,
+            "height": 0.06938020351526364
+          },
+          "block_content": "where N is the number of quantization bits, and ∆ is the quantization scaler determined by the absolute maximum value. Now consider a weight element w ∈ w , if we mul- tiply w with s > 1 and the inversely scale x , we will have Q ( w · s )( x/s ) , which is:",
+          "label": "Text"
+        },
+        {
+          "id": "3X0skIvibH",
+          "order": null,
+          "bounding_box": {
+            "x": 0.4976076555023923,
+            "y": 0.5202590278957201,
+            "width": 0.3923444976076554,
+            "height": 0.04995374653098958
+          },
+          "block_content": "The ratio of the new error to the original error is ∆ ′ ∆ · 1 s . Given ∆ ′ ≈ ∆ and s > 1 , the relative error is smaller for the salient weight w .",
+          "label": "Text"
+        },
+        {
+          "id": "IBpG6i_EX4",
+          "order": null,
+          "bounding_box": {
+            "x": 0.4988038277511962,
+            "y": 0.5785383988485415,
+            "width": 0.38995215311004783,
+            "height": 0.2580943711922193
+          },
+          "block_content": "To verify the idea, we multiply the 1% salient channels with s > 1 for the OPT-6.7B model, and measure the change in ∆ for each group in Table 2. We find that scaling up the salient channels is quite effective: the perplexity improves from 23.54 for s = 1 (simply RTN) to 11.92 for s = 2 . As s goes larger, the percentage of changed ∆ generally gets larger, but the percentage is still quite small for s < 2 (less than 5%); the relative error for the salient channels continues to go smaller as s increases. Nonetheless, the best PPL actually appears at s = 2 . This is because if we use a very large s , it will increase the relative error for the non- salient channels when ∆ increases (the error of non-salient channels will be amplified by ∆ ′ ∆ , and the ratio is larger than 1 for 21.2% of the channels under s = 4 ), which can damage the model’s overall accuracy. Therefore, we need to also consider the error from non-salient channels when protecting salient ones.",
+          "label": "Text"
+        },
+        {
+          "id": "J3v9rR5gNP",
+          "order": null,
+          "bounding_box": {
+            "x": 0.4988038277511962,
+            "y": 0.8477336026032031,
+            "width": 0.38995215311004783,
+            "height": 0.06105457909343201
+          },
+          "block_content": "Searching to scale. To consider both salient and non- salient weights, we choose to automatically search for an optimal (per input channel) scaling factor that minimizes the output difference after quantization for a certain layer.",
+          "label": "Text"
+        },
+        {
+          "id": "Rv8AaYK6w_",
+          "order": null,
+          "bounding_box": {
+            "x": 0.08492822966507177,
+            "y": 0.6793709471752862,
+            "width": 0.3875598086124402,
+            "height": 0.1637372802960222
+          },
+          "block_content": "where ∆ ′ is the new quantization scaler after applying s . We empirically find that: (1) The expected error from Round ( · ) (denoted as RoundErr ( · ) ) does not change: since the round function maps a floating-point number to an inte- ger, the error is roughly uniformly distributed from [0,0.5], resulting in an average error of 0 . 25 ; i.e., RoundErr ( · ) ∼ 0 . 25 . (2) Scaling up a single element w usually does not change the maximum value from the group w . Therefore we have ∆ ′ ≈ ∆ ; (3) As ∆ and x are represented in FP16, they have no quantization error. Consequently, the quantization error from equation 1 and 2 can be expressed as",
+          "label": "Text"
+        },
+        {
+          "id": "d-33u3Jp0u",
+          "order": null,
+          "bounding_box": {
+            "x": 0.13038277511961727,
+            "y": 0.8532840188844242,
+            "width": 0.3223632651377659,
+            "height": 0.027752081406105245
+          },
+          "block_content": "(Q(w) x) &= \\Delta\\cdot \\texttt{RoundErr}(\\frac{w}{\\Delta})\\cdot x",
+          "label": "Formula"
+        },
+        {
+          "id": "waf7MAfNZE",
+          "order": null,
+          "bounding_box": {
+            "x": 0.09928229665071775,
+            "y": 0.8838113084311385,
+            "width": 0.3526233294835835,
+            "height": 0.031452358926919194
+          },
+          "block_content": "(Q(w \\cdot s)(\\frac{x}{s})) &= \\Delta^{'}\\cdot \\texttt{RoundErr}(\\frac{ws}{\\Delta^{'}})\\cdot x\\cdot \\frac{1}{s}",
+          "label": "Formula"
+        },
+        {
+          "id": "k80BjeSU0H",
+          "order": null,
+          "bounding_box": {
+            "x": 0.4558189655172414,
+            "y": 0.8729392376470129,
+            "width": 0.01939655172413793,
+            "height": 0.017485428809325562
+          },
+          "block_content": "(3)",
+          "label": "Text"
+        },
+        {
+          "id": "VeUxO-3eel",
+          "order": null,
+          "bounding_box": {
+            "x": 0.18065693430656934,
+            "y": 0.05723905126505792,
+            "width": 0.6104014598540146,
+            "height": 0.014094432699083862
+          },
+          "block_content": "AWQ: Activation-aware Weight Quantization for On-Device LLM Compression and Acceleration",
+          "label": "Text"
+        },
+        {
+          "id": "ZJHCgMR6LV",
+          "order": null,
+          "bounding_box": {
+            "x": 0.45454545454545453,
+            "y": 0.5161290322580645,
+            "width": 0.019656019656019656,
+            "height": 0.018975332068311195
+          },
+          "block_content": "(1)",
+          "label": "Text"
+        },
+        {
+          "id": "NBpBGVN0bF",
+          "order": null,
+          "bounding_box": {
+            "x": 0.4557739557739558,
+            "y": 0.6432637571157496,
+            "width": 0.020884520884520884,
+            "height": 0.018026565464895637
+          },
+          "block_content": "(2)",
+          "label": "Text"
+        }
+      ]
+    }
+  ]
+}

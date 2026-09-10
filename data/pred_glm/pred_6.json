@@ -1,0 +1,1890 @@
+{
+  "file_name": "paper_6",
+  "pages": [
+    {
+      "page_index": 1,
+      "blocks": [
+        {
+          "id": "0",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.122,
+            "y": 0.121,
+            "width": 0.753,
+            "height": 0.073
+          },
+          "content": "# PAI-ECON-CLAUDE: A GATED HUMAN-IN-THE-LOOP MULTI-AGENT ARCHITECTURE FOR AI-ASSISTED ECONOMIC THEORY DEVELOPMENT",
+          "label": "Text"
+        },
+        {
+          "id": "1",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.162,
+            "y": 0.256,
+            "width": 0.2,
+            "height": 0.042
+          },
+          "content": "Chen Zhu China Agricultural University zhuchen@cau.edu.cn",
+          "label": "Text"
+        },
+        {
+          "id": "2",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.414,
+            "y": 0.257,
+            "width": 0.203,
+            "height": 0.042
+          },
+          "content": "Xiaolu Wang China Agricultural University wangxiaolu77@cau.edu.cn",
+          "label": "Text"
+        },
+        {
+          "id": "3",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.669,
+            "y": 0.257,
+            "width": 0.168,
+            "height": 0.041
+          },
+          "content": "Weilong Zhang University of Cambridge wz301@cam.ac.uk",
+          "label": "Text"
+        },
+        {
+          "id": "4",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.452,
+            "y": 0.334,
+            "width": 0.094,
+            "height": 0.015
+          },
+          "content": "July 24,2026",
+          "label": "Text"
+        },
+        {
+          "id": "5",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.45,
+            "y": 0.368,
+            "width": 0.099,
+            "height": 0.014
+          },
+          "content": "## ABSTRACT",
+          "label": "Text"
+        },
+        {
+          "id": "6",
+          "order": 7,
+          "bounding_box": {
+            "x": 0.171,
+            "y": 0.396,
+            "width": 0.657,
+            "height": 0.291
+          },
+          "content": "In many social-science research tasks, such as economics, LLM-based agents must produce outputs for which no cheap, task-complete, machine-readable correctness signal exists. This creates a distinctive reliability problem for multi-agent systems: how should generation, critique, coordination, and human judgment be organized when no component can certify the final result? We address this problem through pAI-Econ-claude, a gated, human-in-the-loop multi-agent architecture for AI-assisted economic theory development. Agents coordinate through a shared workspace of inspectable intermediate records; specialized gates diagnose targeted failure modes and recommend loopbacks without certifying correctness; and human checkpoints retain authority over decisions that are costly to reverse. Three principles guide the design: failures should be intercepted while the relevant choices remain visible, a checker without an oracle may diagnose but may not certify, and human attention should be concentrated at points of highest irreversibility. We evaluate the architecture on five matched economic-theory tasks against an ungated baseline. Two evaluators blinded to configuration agreed on all five pairwise rankings, preferring the gated architecture in four tasks and the baseline in one. Mean failure severity fell from 1.58 to 1.16, while overall usefulness rose from 2.60 to 3.10. The largest observed gain occurred when a reality check rejected a false market-structure premise and a proof review prompted revision of a false welfare claim. The negative case shows that scaffolding can also compress an economically important mechanism too aggressively. The results support a bounded claim: gated oversight improves the auditability of AI-assisted economic theory without substituting for formal verification, and the allocation of irreversible human judgment is a more informative design variable than pure agent autonomy. The workflow is publicly available at https://github.com/maxwell2732/pAI-Econ-claude.",
+          "label": "Text"
+        },
+        {
+          "id": "7",
+          "order": 8,
+          "bounding_box": {
+            "x": 0.111,
+            "y": 0.701,
+            "width": 0.73,
+            "height": 0.014
+          },
+          "content": "Keywords Human-in-the-loop AI · AI for Social Science · Quality gates · AI for economics · Agent reliability",
+          "label": "Text"
+        },
+        {
+          "id": "8",
+          "order": 9,
+          "bounding_box": {
+            "x": 0.114,
+            "y": 0.736,
+            "width": 0.14,
+            "height": 0.014
+          },
+          "content": "## 1 Introduction",
+          "label": "Text"
+        },
+        {
+          "id": "9",
+          "order": 10,
+          "bounding_box": {
+            "x": 0.111,
+            "y": 0.767,
+            "width": 0.776,
+            "height": 0.098
+          },
+          "content": "LLM-based agents are increasingly used across social-science research for literature search, hypothesis generation, coding, empirical analysis, and manuscript drafting [1, 2, 3]. Yet many social-scientific outputs, especially theoretical mechanisms, causal interpretations, and welfare claims, lack a cheap, task-complete, machine-readable correctness signal. Partial checks may verify code, algebraic derivations, numerical solutions, or predictions against observed data, but they cannot jointly certify institutional fit, behavioral assumptions, equilibrium selection, and normative interpretation. This creates a distinctive design problem for multi-agent systems: how should generation, critique, coordination, and human judgment be organized when no component can certify the final result?",
+          "label": "Text"
+        },
+        {
+          "id": "10",
+          "order": 11,
+          "bounding_box": {
+            "x": 0.111,
+            "y": 0.87,
+            "width": 0.777,
+            "height": 0.043
+          },
+          "content": "We study this problem in economic theory development, a demanding social-science setting in which an empirically relevant and formally coherent model may still rest on an inappropriate canonical lineage, restrictive assumptions, hidden proof gaps, or unsupported welfare interpretations. Empirical economics has strong norms for data construction,",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "page_index": 2,
+      "blocks": [
+        {
+          "id": "0",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.111,
+            "y": 0.093,
+            "width": 0.774,
+            "height": 0.112
+          },
+          "content": "identification, econometric execution, and computational reproducibility [4, 5], and none of them settles the mechanism behind an estimated effect, the question a structural model is built to answer [6]. Algebraic re-derivation, numerical analysis, and counterexample search can test parts of a model, but they do not jointly certify institutional fit, assumption validity, equilibrium selection, or welfare interpretation. A paper may identify an effect convincingly while leaving open which canonical model family fits the institution, which assumptions generate the result, whether the comparative statics are non-trivial, and whether the welfare interpretation follows. When a language model fills that gap, fluency conceals five recurring failures, catalogued in Section 2.1, which are instances of confident unsupported generation [7] arising at the points where domain judgment matters most.",
+          "label": "Text"
+        },
+        {
+          "id": "1",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.111,
+            "y": 0.21,
+            "width": 0.776,
+            "height": 0.18
+          },
+          "content": "Existing agentic research systems demonstrate the value of decomposing scientific work into specialized roles and persistent intermediate outputs. Systems for automated science and machine-learning research coordinate agents for ideation, experimentation, coding, review, and writing [1, 2, 8], and comparable multi-agent pipelines with inprocess quality control serve biomedical research [9]. Role-specialized LLM organizations [10, 11, 12, 13], general orchestration frameworks such as AutoGen [14], and reasoning-acting paradigms such as ReAct [15] establish related patterns beyond any single domain. Self-critique loops also improve output when a model can meaningfully inspect its own intermediate steps [16]. In companion work we develop a related pipeline for empirical economic research and argue that human oversight is what makes AI-assisted social science reliable [17, 18], and related workflows organized around persistent shared files reduce the steering needed to turn a question into a structured workspace [19]. Many of these systems operate in settings with executable code, experimental feedback, or benchmarked outputs. Those signals do not cover the full economic-theory task, which additionally requires institutional reality checking, canonical-lineage selection, an explicit equilibrium concept, assumption-sensitive welfare accounting, and a record of which claims were proved, illustrated, weakened, or left open.",
+          "label": "Text"
+        },
+        {
+          "id": "2",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.111,
+            "y": 0.395,
+            "width": 0.774,
+            "height": 0.085
+          },
+          "content": "We address this gap with a human-in-the-loop multi-agent workflow for constructing the theory component of an empirical economics study. The workflow decomposes modeling into named and inspectable stages running from puzzle refinement to manuscript construction, each writing a persistent record (Table 2). Quality gates target specific failure modes and recommend loopbacks without certifying any stage as correct, and mandatory checkpoints reserve the institutional framing, the equilibrium concept, the proposition set, and the treatment of counterexamples for the researcher. Human oversight is therefore part of the system architecture [20, 21].",
+          "label": "Text"
+        },
+        {
+          "id": "3",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.111,
+            "y": 0.485,
+            "width": 0.776,
+            "height": 0.167
+          },
+          "content": "The central research question is comparative: holding the user-level task and underlying model fixed within each matched pair, does a gated oversight architecture produce more reliable and useful theory manuscripts than an ordinary ungated interaction? We evaluate the workflow using five matched task pairs spanning human capital, health economics nutrition and macro-development, consumer information, and agri-food system transformation. Two evaluators scored the ten resulting manuscripts under blinded A/B labels and agreed on all five pairwise rankings, preferring the full workflow in four tasks and the baseline in one (Section 5). The largest difference arose in the nutrition-label task, whose process trace recorded rejection of a false monopoly premise and revision of a false welfare-incidence proposition; Task 1 is the necessary counterexample, where both evaluators preferred the richer baseline because the full workflow simplified the human-capital mechanism without resolving its key formal errors. The stage-by-stage record shows why: a gate sometimes initiated a loopback that changed the model or proposition set, and elsewhere exposed a gap without closing it, so the architecture's value depends on whether the relevant check is well targeted and the human adjudication produces a valid correction.",
+          "label": "Text"
+        },
+        {
+          "id": "4",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.111,
+            "y": 0.657,
+            "width": 0.775,
+            "height": 0.112
+          },
+          "content": "This paper makes three contributions. First, it derives three architectural principles for agent systems whose outputs cannot be certified by a task-complete automated verifier and realizes them as a gated multi-agent architecture with blackboard coordination, a supervisory gate tier, and bounded agent autonomy. Second, it develops a failure taxonomy and maps each mode to a concrete interception mechanism, making reliability claims inspectable at the level of individual stage outputs. Third, it provides a matched evaluation protocol combining blinded endpoint ratings with process tracing over the workflow's own records. The broader implication is that, absent a reliable task-complete oracle, autonomy is a poor proxy for reliability, while the placement of irreversible human judgment, independent re-derivation, adversarial counterexample search, and disclosure of unresolved gaps are more informative design variables.",
+          "label": "Text"
+        },
+        {
+          "id": "5",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.113,
+            "y": 0.794,
+            "width": 0.189,
+            "height": 0.016
+          },
+          "content": "## 2 Design Motivation",
+          "label": "Text"
+        },
+        {
+          "id": "6",
+          "order": 7,
+          "bounding_box": {
+            "x": 0.111,
+            "y": 0.828,
+            "width": 0.775,
+            "height": 0.085
+          },
+          "content": "This section organizes the errors of LLM-assisted economic theory into a small taxonomy of failure modes, including citation hallucination and unreliable reference grounding, and then states three architectural principles that the taxonomy forces on any oversight system built to intercept them. The principles govern where stages, quality gates, and human checkpoints are placed in Sections 3-4, and Section 5 tests whether the resulting placement does the work claimed for it. The organizing premise is that reliability is carried by the oversight architecture, with the underlying model held fixed within each matched task pair.",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "page_index": 3,
+      "blocks": [
+        {
+          "id": "0",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.111,
+            "y": 0.09,
+            "width": 0.773,
+            "height": 0.162
+          },
+          "content": "<table border=\"1\"><tr><td>ID</td><td>Failure mode</td><td>Description</td></tr><tr><td>F1</td><td>Canonical mismatch</td><td>Idea placed in the wrong model family, or a standard model relabeled as new; the natural failure of free-form generation, which has no incentive to locate a tradition.</td></tr><tr><td>F2</td><td>Trivial propositions</td><td>A result follows directly from an assumption (e.g. a hard-wired monotonicity); the formal apparatus is real but empty.</td></tr><tr><td>F3</td><td>Hidden proof gaps</td><td>A derivation skips cases, assumes a sign, or conflates sufficient and necessary conditions; such failures can survive ordinary reading and may require explicit obligation tracking, independent re-derivation, counterexample search, or numerical checking to expose.</td></tr><tr><td>F4</td><td>Interpretive overreach</td><td>Economic reading exceeds the formal result: unsupported welfare claims, over-generalization, or asserted institutional facts.</td></tr><tr><td>F5</td><td>Unreliable citations</td><td>Fabricated, misattributed, or unverified citations; especially damaging here because canonical lineage and institutional motivation are carried by references.</td></tr></table>",
+          "label": "Table"
+        },
+        {
+          "id": "1",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.114,
+            "y": 0.255,
+            "width": 0.769,
+            "height": 0.042
+          },
+          "content": "Table 1: Failure taxonomy for LLM-assisted economic theory development. F1-F5 are concrete enough to be adjudicated against a finished manuscript and are scored in Section 5; F5 is coded by checking bibliography usability and whether cited sources support the claims assigned to them.",
+          "label": "Text"
+        },
+        {
+          "id": "2",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.113,
+            "y": 0.33,
+            "width": 0.254,
+            "height": 0.015
+          },
+          "content": "## 2.1 A Taxonomy of Failure Modes",
+          "label": "Text"
+        },
+        {
+          "id": "3",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.111,
+            "y": 0.356,
+            "width": 0.773,
+            "height": 0.029
+          },
+          "content": "When a capable model turns an empirical puzzle into theory, its mistakes cluster into recognizable categories, each attached to a specific point in the modeling process and each requiring a different check to catch. Table 1 lists five.",
+          "label": "Text"
+        },
+        {
+          "id": "4",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.111,
+            "y": 0.391,
+            "width": 0.774,
+            "height": 0.043
+          },
+          "content": "Each stage, gate, and human checkpoint is mapped to the failure mode it targets where the pipeline is introduced (Section 3, Table 2), and Section 5 tests whether the gates catch what the taxonomy predicts. Three properties of Table 1 constrain how that mapping can be organized, and they are what the architecture of Section 3 is built to satisfy.",
+          "label": "Text"
+        },
+        {
+          "id": "5",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.114,
+            "y": 0.449,
+            "width": 0.255,
+            "height": 0.015
+          },
+          "content": "## 2.2 Three Architectural Principles",
+          "label": "Text"
+        },
+        {
+          "id": "6",
+          "order": 7,
+          "bounding_box": {
+            "x": 0.111,
+            "y": 0.475,
+            "width": 0.774,
+            "height": 0.084
+          },
+          "content": "P1. Interception must happen while the failure is still visible. F1 and F3 leave no trace in the finished manuscript: a model placed in the wrong family still reads as a model, and a derivation that quietly assumes a sign still reads as a proof. Both are visible only while the choice is being made, when the rejected model families are still on the table and the discharged and undischarged proof obligations are still separable. An architecture emitting only a final manuscript therefore offers nothing to inspect. Stages that each write a persistent record are what create the inspection surface, which is why the pipeline is staged.",
+          "label": "Text"
+        },
+        {
+          "id": "7",
+          "order": 8,
+          "bounding_box": {
+            "x": 0.111,
+            "y": 0.564,
+            "width": 0.776,
+            "height": 0.112
+          },
+          "content": "P2. A checker without an oracle may diagnose and may not certify. Every gate here is itself a language model, exposed to the failure modes it is asked to detect. A gate emitting a correctness certificate would move the risk of confident error from the stage agent to the gate agent and conceal it behind an apparent verification step. The implementation uses PASS/REFRAME as operational labels, but PASS means only that the gate did not detect its targeted failure under the stated checklist; it is not a certificate of correctness. A REFRAME verdict reports a failure reason, severity, recommended loopback stage, and whether an override is permitted, with adjudication left to the researcher. Certification belongs to domains possessing a task-complete external verifier; in its absence the achievable standard is auditability.",
+          "label": "Text"
+        },
+        {
+          "id": "8",
+          "order": 9,
+          "bounding_box": {
+            "x": 0.111,
+            "y": 0.681,
+            "width": 0.775,
+            "height": 0.126
+          },
+          "content": "P3. Human judgment belongs at the points of highest irreversibility. Checkpoints consume researcher attention, the scarce resource in a human-in-the-loop system, so they cannot follow every stage. The ordering principle is the cost of a late reversal. The equilibrium concept fixes the meaning of every subsequent proposition, proof, and welfare statement, so an error there invalidates everything downstream and admits no local patch, whereas an over-stated interpretation can be corrected in place at any time. Hence HiL-4 is the one unconditional hard stop tied to a substantive modeling choice, with the remaining scheduled checkpoints placed where a decision constrains later work without wholly determining it. Negative gate verdicts create additional conditional pauses for human adjudication. The principle survives translation out of economics: in any pipeline lacking a task-complete external verifier, the placement of irreversible human judgment varies independently of how autonomous the agents are.",
+          "label": "Text"
+        },
+        {
+          "id": "9",
+          "order": 10,
+          "bounding_box": {
+            "x": 0.113,
+            "y": 0.826,
+            "width": 0.206,
+            "height": 0.015
+          },
+          "content": "## 3 System Architecture",
+          "label": "Text"
+        },
+        {
+          "id": "10",
+          "order": 11,
+          "bounding_box": {
+            "x": 0.111,
+            "y": 0.856,
+            "width": 0.774,
+            "height": 0.057
+          },
+          "content": "This section instantiates P1-P3 as a skill-based orchestration layer for human-in-the-loop theoretical modeling. P1 becomes a staged decomposition in which every stage writes an inspectable record and canonical matching precedes construction, so institutional reality and literature grounding are checked while the model family can still change. P2 becomes a gate design emitting diagnoses and loopback recommendations without certifying any stage. P3 becomes a",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "page_index": 4,
+      "blocks": [
+        {
+          "id": "0",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.111,
+            "y": 0.09,
+            "width": 0.771,
+            "height": 0.201
+          },
+          "content": "<table border=\"1\"><tr><td>Stage</td><td>Name</td><td>Gate after</td><td>HiL after</td><td>Targets</td></tr><tr><td>0</td><td>Intake</td><td>-</td><td>-</td><td>-</td></tr><tr><td>1</td><td>Puzzle Refinement</td><td>-</td><td>HiL-1</td><td>-</td></tr><tr><td>2</td><td>Literature Positioning</td><td>Novelty Risk</td><td>HiL-2</td><td>F5</td></tr><tr><td>2a</td><td>Empirical Reality Check</td><td>Reality Fit</td><td>-</td><td>F1,F4</td></tr><tr><td>3</td><td>Theory Persona Council</td><td>-</td><td>HiL-3</td><td>F1</td></tr><tr><td>3b</td><td>Canonical Model Matching</td><td>Canon. Fit, Lineage</td><td>-</td><td>F1</td></tr><tr><td>4</td><td>Model Primitives</td><td>Model Coherence</td><td>HiL-4(hard)</td><td>F1,F2</td></tr><tr><td>5</td><td>Assumption Audit</td><td>-</td><td>-</td><td>F2</td></tr><tr><td>6</td><td>Proposition Generator</td><td>Non-triviality</td><td>HiL-5</td><td>F2</td></tr><tr><td>7</td><td>Proof Sketch</td><td>Proof Integrity</td><td>-</td><td>F3</td></tr><tr><td>7b</td><td>Numerical Analysis(optional)</td><td>-</td><td>HiL-N1-N3</td><td>F3</td></tr><tr><td>8</td><td>Counterexample Finder</td><td>-</td><td>HiL-6</td><td>F3</td></tr><tr><td>9</td><td>Economic Interpretation</td><td>Economic Meaning</td><td>-</td><td>F4</td></tr><tr><td>10</td><td>Manuscript Skeleton</td><td>Math Review</td><td>-</td><td>F3,F4</td></tr></table>",
+          "label": "Table"
+        },
+        {
+          "id": "1",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.114,
+            "y": 0.293,
+            "width": 0.77,
+            "height": 0.084
+          },
+          "content": "Table 2: The Stage 0-10 pipeline with inserted sub-stages 2a, 3b, and 7b. Each stage writes a named output file; gates and scheduled human checkpoints (HiL) attach after the stages indicated. HiL-4, fixing the equilibrium concept, is the only unconditional hard stop tied to a substantive modeling choice (P3); any negative gate verdict creates a separate conditional pause for adjudication. Stage 7b is entered only if the researcher approves a numerical plan at HiL-N1, with results approved and reviewed at HiL-N2 and HiL-N3. Targets lists the failure modes from Table 1 the stage or its gate primarily intercepts; Stages 0 and 1 are preparatory.",
+          "label": "Text"
+        },
+        {
+          "id": "2",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.111,
+            "y": 0.411,
+            "width": 0.773,
+            "height": 0.029
+          },
+          "content": "checkpoint schedule concentrated on decisions that cannot be reversed cheaply, of which fixing the equilibrium concept is the extreme case.",
+          "label": "Text"
+        },
+        {
+          "id": "3",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.111,
+            "y": 0.446,
+            "width": 0.774,
+            "height": 0.18
+          },
+          "content": "The architecture is organized around the three-phase pipeline shown in Figure 1: grounding the research puzzle (phase (a)), constructing the model through canonical matching and assumption auditing (phase (b)), and stress-testing and interpreting the resulting propositions (phase (c)). An orchestration core selects the entry mode and routes execution through this pipeline; the knowledge and workflow assets described below, including the canonical model library, prompt templates, documentation, and examples, feed the pipeline directly and form no separate architectural layer. Each stage and gate box in Figure 1 is executed by one specialized agent: a stage agent (dark-blue marker) produces the corresponding output, a gate or verdict agent (teal marker) evaluates it and emits an operational PASS/REFRAME verdict, and the reality-check and counterexample-finder stages (red marker) are adversarial critique agents, charged with attacking work they did not produce; the persona council at Stage 3+3b further decomposes into four sub-agents, discussed in Section 3.4. Here PASS denotes only that no targeted failure was detected. The purple HiL labels mark scheduled human checkpoints, while a negative gate verdict creates a conditional adjudication pause. The numbered gate labels in Figure 1 are implementation identifiers; Table 2 uses functional names. Oversight sits above the agent roster as a separate layer, and it carries the reliability claim of Section 2.",
+          "label": "Text"
+        },
+        {
+          "id": "4",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.113,
+            "y": 0.642,
+            "width": 0.304,
+            "height": 0.015
+          },
+          "content": "## 3.1 Entry Modes and Orchestration Core",
+          "label": "Text"
+        },
+        {
+          "id": "5",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.111,
+            "y": 0.668,
+            "width": 0.774,
+            "height": 0.098
+          },
+          "content": "Economists arrive at theory from different starting points, so four entry modes share one core: Model Extension adds a mechanism to a known canonical model; Phenomenon-to-Model takes an empirical or institutional phenomenon and recommends model families; Model Critique returns a referee-style audit of an existing draft; Full Pipeline proceeds from intuition to manuscript skeleton. The orchestration core selects the mode and decomposes theory development into inspectable decisions: what is the puzzle, which model family applies, which institutional facts need checking, which assumptions do the work. That decomposition is what lets gates and checkpoints act on the process itself, at every intermediate step.",
+          "label": "Text"
+        },
+        {
+          "id": "6",
+          "order": 7,
+          "bounding_box": {
+            "x": 0.113,
+            "y": 0.782,
+            "width": 0.219,
+            "height": 0.015
+          },
+          "content": "## 3.2 Theory-Building Pipeline",
+          "label": "Text"
+        },
+        {
+          "id": "7",
+          "order": 8,
+          "bounding_box": {
+            "x": 0.111,
+            "y": 0.808,
+            "width": 0.775,
+            "height": 0.057
+          },
+          "content": "The pipeline is a Stage 0-10 sequence with three inserted sub-stages, 2a, 3b, and the optional numerical stage 7b, organized into the three phases of Figure 1. Each stage writes a named file that can be inspected, revised, and reused. Table 2 lists the stages together with the gate and human checkpoint that follow each, and the failure mode(s) from Table 1 each primarily targets.",
+          "label": "Text"
+        },
+        {
+          "id": "8",
+          "order": 9,
+          "bounding_box": {
+            "x": 0.111,
+            "y": 0.87,
+            "width": 0.774,
+            "height": 0.043
+          },
+          "content": "Four stages carry most of the interception load. Stage 2a's reality check and Stage 3b's canonical matching act before the primitives are fixed, while Stage 7's proof sketch and Stage 8's counterexample search act afterward, once propositions exist to test. The remaining stages prepare or consolidate the material these checks read.",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "page_index": 5,
+      "blocks": [
+        {
+          "id": "0",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.289,
+            "y": 0.093,
+            "width": 0.38,
+            "height": 0.011
+          },
+          "content": "A Human-in-the-Loop Agentic Workflow for Economic Theory Development",
+          "label": "Text"
+        },
+        {
+          "id": "1",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.121,
+            "y": 0.112,
+            "width": 0.739,
+            "height": 0.213
+          },
+          "content": "",
+          "label": "Image"
+        },
+        {
+          "id": "2",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.34,
+            "y": 0.33,
+            "width": 0.278,
+            "height": 0.011
+          },
+          "content": "GATE FAIL $\\rightarrow$ return to the responsible upstream stage",
+          "label": "Text"
+        },
+        {
+          "id": "3",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.117,
+            "y": 0.348,
+            "width": 0.757,
+            "height": 0.023
+          },
+          "content": "Agent roles: Stage agent (produces the stage's artifact) Reality/critique agent (adversarial check, Stage 2a & 8) Gate/verdict agent (evaluates and returns a verdict) Purple HiL labels mark human checkpoints.",
+          "label": "Text"
+        },
+        {
+          "id": "4",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.111,
+            "y": 0.387,
+            "width": 0.774,
+            "height": 0.072
+          },
+          "content": "Figure 1: Architecture of the pAI-Econ-claude workflow, in three phases: grounding the research puzzle, constructing the model through canonical matching and assumption auditing, and stress-testing the resulting propositions through proof review, optional numerical simulation, counterexample search, and economic interpretation. Purple HiL labels mark scheduled human checkpoints. Gate verdicts can recommend revision, but the loopback arrows are executed only after human adjudication.",
+          "label": "Text"
+        },
+        {
+          "id": "5",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.112,
+            "y": 0.486,
+            "width": 0.45,
+            "height": 0.015
+          },
+          "content": "## 3.3 Quality Gates, Human Oversight, and the Run Workspace",
+          "label": "Text"
+        },
+        {
+          "id": "6",
+          "order": 7,
+          "bounding_box": {
+            "x": 0.111,
+            "y": 0.514,
+            "width": 0.776,
+            "height": 0.167
+          },
+          "content": "The workflow includes nine gates: novelty risk, reality fit, canonical fit, theory lineage, model coherence, non-triviality proof integrity, economic meaning, and a final math review at the manuscript stage. Following P2, no gate certifies correctness or loops silently. A REFRAME verdict pauses execution and reports a failure reason, severity, recommended loopback stage, and whether an override is permitted. The researcher may confirm the loopback, override it with a recorded justification, edit the output, or terminate the run. The six named HiL checkpoints from puzzle revision (HiL-1) through counterexample treatment (HiL-6) are unconditional scheduled reviews, with three further checkpoints (HiL-N1 to HiL-N3) governing entry into and use of the optional numerical stage. HiL-4 is the only unconditional hard stop tied to a substantive modeling choice, requiring the researcher to fix the equilibrium concept (competitive, Nash, subgame-perfect, Bayesian Nash, perfect Bayesian, or planner's solution) before the pipeline continues. Each run produces a workspace of staged outputs, gate reports, adjudication records, and a stage-level log. This workspace supports auditability where substantive correctness cannot be certified mechanically, complementing rather than replacing computational reproducibility.",
+          "label": "Text"
+        },
+        {
+          "id": "7",
+          "order": 8,
+          "bounding_box": {
+            "x": 0.113,
+            "y": 0.699,
+            "width": 0.27,
+            "height": 0.015
+          },
+          "content": "## 3.4 Relation to Multi-Agent Systems",
+          "label": "Text"
+        },
+        {
+          "id": "8",
+          "order": 9,
+          "bounding_box": {
+            "x": 0.111,
+            "y": 0.726,
+            "width": 0.774,
+            "height": 0.057
+          },
+          "content": "The system is a multi-agent organization with a deliberately restricted autonomy budget, and P1-P3 constrain each of its multi-agent design choices. Operationally, an agent is a role-specific model invocation with a distinct prompt, task obligation, and read-write interface to the shared workspace. Agents may share the same underlying language model, but they remain organizationally separated by their roles, permitted actions, and positions in the control flow.",
+          "label": "Text"
+        },
+        {
+          "id": "9",
+          "order": 10,
+          "bounding_box": {
+            "x": 0.111,
+            "y": 0.788,
+            "width": 0.776,
+            "height": 0.124
+          },
+          "content": "Coordination is mediated by a shared workspace. Agents never message one another directly. Each stage agent reads the files written by its predecessors and writes its own into a persistent workspace, which gate agents also read to produce verdicts. The coordination model is a blackboard: control passes through inspectable shared state, with no point-to-point channel between agents. P1 makes this load-bearing, since the shared state is exactly the inspection surface that direct messaging would leave transient, and it gives the human one place to intervene, a checkpoint being an edit to the blackboard between two agent activations. The overlap with the Agents and Artifacts meta-model [22] is partly substantive: these workspace files are passive, persistent, agent-readable environment entities in the sense of an A&A artifact, but they expose no operations for agents to invoke, placing them closer to a structured blackboard than to a full A&A artifact.",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "page_index": 6,
+      "blocks": [
+        {
+          "id": "0",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.111,
+            "y": 0.093,
+            "width": 0.774,
+            "height": 0.097
+          },
+          "content": "Organization is supervisory. Gate agents stand in a normative relation to stage agents, evaluating a stage output against a stated obligation and emitting a verdict, a severity, and a recommended loopback, while holding no authority to enforce it. Enforcement rests with the human at either a scheduled checkpoint or a conditional gate-adjudication pause, where the researcher may accept a loopback, override it, edit the output, or terminate the run. P2 forces this separation of diagnosis from enforcement, yielding a three-tier organization in which the lower tier produces, the middle tier critiques, and the upper tier decides. The reliability claim of this paper concerns that division of authority. No claim is made about the competence of any single agent.",
+          "label": "Text"
+        },
+        {
+          "id": "1",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.111,
+            "y": 0.196,
+            "width": 0.774,
+            "height": 0.084
+          },
+          "content": "Autonomy is bounded by construction. Stage agents choose how to fill their assigned output and never whether to run; activation order is fixed by the orchestration core except at loopbacks, where a gate recommends the target stage and a human confirms it. This is far less autonomy than role-based LLM organizations that let agents negotiate task allocation [10, 11, 12, 13]. The restriction is the point: without a task-complete external verifier, autonomy in task allocation adds failure modes while adding no signal that would reliably catch them, so the design spends its autonomy budget where disagreement is informative.",
+          "label": "Text"
+        },
+        {
+          "id": "2",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.111,
+            "y": 0.285,
+            "width": 0.776,
+            "height": 0.099
+          },
+          "content": "The persona council is the one parallel-role structure. Stage 3+3b activates four sub-agents on the same puzzle: a mechanism agent proposing the economic force at work, a formalization agent proposing how to write it down, a positioning agent proposing where it sits in the literature, and a skeptic charged with attacking all three. They return independent proposals, and the synthesis reaches the researcher at HiL-3 with the skeptic's objections attached and unresolved. Disagreement is surfaced to the human and left open inside the council, which separates the design from debate procedures that aggregate toward a single answer [23]. P2 explains why: an internal aggregation rule is certification by majority, which a system without an oracle cannot justify.",
+          "label": "Text"
+        },
+        {
+          "id": "3",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.111,
+            "y": 0.411,
+            "width": 0.539,
+            "height": 0.017
+          },
+          "content": "## 4 The Canonical Model Library and Theory-Lineage Protocol",
+          "label": "Text"
+        },
+        {
+          "id": "4",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.111,
+            "y": 0.448,
+            "width": 0.773,
+            "height": 0.029
+          },
+          "content": "The canonical model library, with the protocol that uses it to enforce theory lineage, is what most distinguishes this workflow from a general research agent.",
+          "label": "Text"
+        },
+        {
+          "id": "5",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.112,
+            "y": 0.502,
+            "width": 0.378,
+            "height": 0.015
+          },
+          "content": "## 4.1 Library Structure and Theory-Lineage Protocol",
+          "label": "Text"
+        },
+        {
+          "id": "6",
+          "order": 7,
+          "bounding_box": {
+            "x": 0.111,
+            "y": 0.532,
+            "width": 0.776,
+            "height": 0.126
+          },
+          "content": "The library holds structured model templates: each entry records, for one model family, when to use it, its primitives and timing, information structure and equilibrium concept, typical comparative statics and extensions, and its common failure modes. A general layer of sixteen entries covers consumer and discrete choice, search, costly information acquisition, signaling, screening, moral hazard, adverse selection, product differentiation, mechanism design, matching dynamic optimization, overlapping generations, principal-agent, general equilibrium, and political economy; a human-capital sub-library adds Becker, Ben-Porath, Roy, Cunha-Heckman skill formation, education under credit constraints, and the Acemoglu-Restrepo task framework. One restriction is deliberate: the library admits only structural models carrying an equilibrium concept and provable propositions, which excludes econometric identification frameworks and keeps matching focused on economic structure.",
+          "label": "Text"
+        },
+        {
+          "id": "7",
+          "order": 8,
+          "bounding_box": {
+            "x": 0.111,
+            "y": 0.663,
+            "width": 0.774,
+            "height": 0.084
+          },
+          "content": "The library feeds canonical matching (Stage 3b), enforced through two gates: the canonical-fit gate asks whether the proposed model is genuinely matched to its claimed family or a renamed instance of another, and the theory-lineage gate requires an explicit statement of what the model inherits, modifies, and adds relative to its canonical ancestor, together with a demonstration that the new result does not follow from the unmodified ancestor. Both target F1 and force a contribution to be expressed as a delta against a named ancestor, which disciplines novelty claims and makes the manuscript legible to referees reading it against the same tradition.",
+          "label": "Text"
+        },
+        {
+          "id": "8",
+          "order": 9,
+          "bounding_box": {
+            "x": 0.113,
+            "y": 0.772,
+            "width": 0.351,
+            "height": 0.015
+          },
+          "content": "## 4.2 Two Demonstrations of Canonical Matching",
+          "label": "Text"
+        },
+        {
+          "id": "9",
+          "order": 10,
+          "bounding_box": {
+            "x": 0.111,
+            "y": 0.801,
+            "width": 0.775,
+            "height": 0.113
+          },
+          "content": "Two runs illustrate the protocol in different entry modes. In Model Extension Mode, an extension of Becker's human capital model to China's urban-rural divide was placed in the Becker tradition with a genuine gap flagged (no group-specific return function) and a second family surfaced (credit constraints). In Phenomenon-to-Model Mode, a carbonated-drink market converged on third-degree price discrimination with dominant-firm pricing and a cross-market capacity constraint, while a Hotelling framing was rejected (the urban-rural gap traces to demand elasticity, with spatial preference judged immaterial) and screening set aside (observable types). The rejections are the instructive part: canonical matching intercepts F1 by ruling out plausible-looking families and recording the reason, a discipline free-form generation has no incentive to impose.",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "page_index": 7,
+      "blocks": [
+        {
+          "id": "0",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.273,
+            "y": 0.09,
+            "width": 0.453,
+            "height": 0.124
+          },
+          "content": "<table border=\"1\"><tr><td></td><td></td><td></td><td colspan=\"2\">Failure</td><td colspan=\"2\">Overall</td><td rowspan=\"2\">Diff.</td></tr><tr><td>Task</td><td>Preferred</td><td>Gap</td><td>Full</td><td>Base</td><td>Full</td><td>Base</td></tr><tr><td>T1 Human capital</td><td>Base</td><td>1.50</td><td>1.80</td><td>1.40</td><td>2.50</td><td>3.00</td><td>-0.50</td></tr><tr><td>T2 Drug procurement</td><td>Full</td><td>1.00</td><td>1.20</td><td>1.80</td><td>3.00</td><td>2.50</td><td>+0.50</td></tr><tr><td>T3 Nutrition DSGE</td><td>Full</td><td>1.50</td><td>1.10</td><td>1.50</td><td>3.00</td><td>2.50</td><td>+0.50</td></tr><tr><td>T4 Nutrition label</td><td>Full</td><td>2.50</td><td>0.70</td><td>1.40</td><td>4.00</td><td>2.50</td><td>+1.50</td></tr><tr><td>T5 Agri-food DSGE</td><td>Full</td><td>1.50</td><td>1.00</td><td>1.80</td><td>3.00</td><td>2.50</td><td>+0.50</td></tr><tr><td>Mean(Full in 4/5)</td><td>-</td><td>1.60</td><td>1.16</td><td>1.58</td><td>3.10</td><td>2.60</td><td>+0.50</td></tr></table>",
+          "label": "Table"
+        },
+        {
+          "id": "1",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.112,
+            "y": 0.216,
+            "width": 0.773,
+            "height": 0.043
+          },
+          "content": "Table 3: Task-level results. Failure is the mean of F1-F5 across evaluators (lower better); Overall is the mean holisticusefulness rating (higher better); Gap is the mean pairwise preference magnitude on a 0-3 scale; Diff. is full minus baseline Overall.",
+          "label": "Text"
+        },
+        {
+          "id": "2",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.114,
+            "y": 0.29,
+            "width": 0.126,
+            "height": 0.016
+          },
+          "content": "## 5 Evaluation",
+          "label": "Text"
+        },
+        {
+          "id": "3",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.112,
+            "y": 0.322,
+            "width": 0.775,
+            "height": 0.043
+          },
+          "content": "The demonstrations show that the workflow runs end to end without establishing that the checks improve reliability. The evaluation asks whether evaluators prefer the gated workflow's final manuscripts and, when a difference appears, whether the process record identifies the stage, gate, or human decision associated with the revision path.",
+          "label": "Text"
+        },
+        {
+          "id": "4",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.113,
+            "y": 0.382,
+            "width": 0.369,
+            "height": 0.015
+          },
+          "content": "## 5.1 Matched-Task Design and External Evaluation",
+          "label": "Text"
+        },
+        {
+          "id": "5",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.111,
+            "y": 0.409,
+            "width": 0.776,
+            "height": 0.194
+          },
+          "content": "Each task ran under two configurations on the same short user prompt, in a separate workspace and session with auto-memory disabled. The no-skill baseline operated in a clean generic workspace with no access to the workflow repository, library, staged prompts, gates, or checkpoints, approximating a direct request to a general AI research assistant. The full-workflow configuration operated in a clean copy of the workflow repository with the complete pipeline, and human intervention was admitted only at scheduled checkpoints or in response to negative gate verdicts, with every intervention recorded in the stage log. The five tasks covered human capital and hukou, centralized drug procurement, nutrition-capital DSGE modeling, nutrition-label industrial organization, and agri-food system transformation. Four were stated as short ordinary research requests; Task 4 deliberately embedded a false institutional premise to test whether the reality-check stage would intercept it before model construction. The underlying model was held fixed within each matched pair but differed across pairs: Sonnet 4.6 for Task 1, Sonnet 5 for Tasks 2 and 3, and Fable 5 for Tasks 4 and 5. Metered against the plan-relative rolling five-hour usage allowance, the full workflow consumed 4.6 to 18 times the allowance used by its paired baseline. Because this measure is not a token count and model versions draw on it at different rates, it is interpretable only within pairs; the present evaluation does not establish that the workflow is cost-effective.",
+          "label": "Text"
+        },
+        {
+          "id": "6",
+          "order": 7,
+          "bounding_box": {
+            "x": 0.111,
+            "y": 0.609,
+            "width": 0.776,
+            "height": 0.138
+          },
+          "content": "The ten resulting manuscripts were relabeled A/B within task, and two evaluators, one model-based and one a human economist who took no part in designing the workflow, selecting the tasks, or running either configuration, completed the same structured scoring form without access to configuration labels or intermediate outputs, recording independent scores plus a pairwise preference, preference magnitude, and confidence. Failure severity is scored 0-3 (0 = not present, 3 = severe, lower preferred) along F1-F5; positive usefulness dimensions are scored 1-5 (higher preferred): canonical-model fit, mechanism originality, internal consistency, proof integrity, reality correspondence, testable predictions, literature reliability, writing and organization, and a holistic overall-usefulness rating. After blinded scoring, configurations were unblinded and the intermediate outputs were separately reviewed and classified as flagged, resolved, partially resolved, or missed relative to each external finding; the external scores are the primary endpoint measures, and the review of the workflow's own records supplies process evidence.",
+          "label": "Text"
+        },
+        {
+          "id": "7",
+          "order": 8,
+          "bounding_box": {
+            "x": 0.112,
+            "y": 0.753,
+            "width": 0.773,
+            "height": 0.043
+          },
+          "content": "The evaluators agreed on all five pairwise rankings, preferring the full workflow in four tasks and the baseline in one; the mean preference magnitude was 1.60 on a 0-3 scale, with the largest gap in Task 4. Table 3 reports the task-level comparison.",
+          "label": "Text"
+        },
+        {
+          "id": "8",
+          "order": 9,
+          "bounding_box": {
+            "x": 0.111,
+            "y": 0.801,
+            "width": 0.776,
+            "height": 0.112
+          },
+          "content": "Descriptively averaged over the five heterogeneous task-model pairs and two evaluators, the full workflow is associated with 0.42 lower mean failure severity and 0.50 higher overall usefulness (Table 4). The largest failure differences concern interpretive overreach, assumption-driven propositions, and proof gaps; the largest usefulness differences concern internal consistency, proof integrity, and writing. The baseline scores slightly higher on reality correspondence and testable predictions, since its broader models sometimes preserve more institutional detail, while literature reliability ties. The pattern suggests a trade: the full workflow gains 1.10 on internal consistency and 0.80 on proof integrity but loses 0.10 on reality correspondence and 0.30 on testable predictions. Task 1 displays the same tension in sharper form which is why every dimension is reported separately.",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "page_index": 8,
+      "blocks": [
+        {
+          "id": "0",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.253,
+            "y": 0.09,
+            "width": 0.489,
+            "height": 0.243
+          },
+          "content": "<table border=\"1\"><tr><td>Dimension</td><td>Full workflow</td><td>Baseline</td><td>Full minus baseline</td></tr><tr><td colspan=\"4\">Panel A: Failure severity, lower is better</td></tr><tr><td>F1 Canonical mismatch</td><td>0.80</td><td>0.90</td><td>-0.10</td></tr><tr><td>F2 Trivial/assumption-driven</td><td>1.10</td><td>1.60</td><td>-0.50</td></tr><tr><td>F3 Proof gaps</td><td>2.00</td><td>2.50</td><td>-0.50</td></tr><tr><td>F4 Interpretive overreach</td><td>1.10</td><td>1.90</td><td>-0.80</td></tr><tr><td>F5 Citation grounding</td><td>0.80</td><td>1.00</td><td>-0.20</td></tr><tr><td>Mean failure severity</td><td>1.16</td><td>1.58</td><td>-0.42</td></tr><tr><td colspan=\"4\">Panel B: Positive usefulness,higher is better</td></tr><tr><td>CMF Canonical-model fit</td><td>3.60</td><td>3.40</td><td>+0.20</td></tr><tr><td>MO Mechanism originality</td><td>3.00</td><td>2.70</td><td>+0.30</td></tr><tr><td>MIC Internal consistency</td><td>3.30</td><td>2.20</td><td>+1.10</td></tr><tr><td>PI Proof integrity</td><td>2.50</td><td>1.70</td><td>+0.80</td></tr><tr><td>RC Reality correspondence</td><td>3.10</td><td>3.20</td><td>-0.10</td></tr><tr><td>TPI Testable predictions</td><td>3.20</td><td>3.50</td><td>-0.30</td></tr><tr><td>LRP Literature reliability</td><td>3.40</td><td>3.40</td><td>0.00</td></tr><tr><td>WO Writing and organization</td><td>4.00</td><td>3.40</td><td>+0.60</td></tr><tr><td>Overall usefulness</td><td>3.10</td><td>2.60</td><td>+0.50</td></tr></table>",
+          "label": "Table"
+        },
+        {
+          "id": "1",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.114,
+            "y": 0.336,
+            "width": 0.771,
+            "height": 0.029
+          },
+          "content": "Table 4: Descriptive dimension-level means across five heterogeneous task-model pairs and two external evaluators Negative differences are favorable in Panel A; positive differences are favorable in Panel B.",
+          "label": "Text"
+        },
+        {
+          "id": "2",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.111,
+            "y": 0.406,
+            "width": 0.774,
+            "height": 0.043
+          },
+          "content": "Agreement on pairwise ranking exceeds agreement on exact scores: the evaluators differed in severity on several dimensions, and one repeatedly noted scope asymmetries between complete papers and shorter theory-section excerpts. The numerical differences are therefore descriptive, and the unanimous pairwise ordering is the more stable result.",
+          "label": "Text"
+        },
+        {
+          "id": "3",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.112,
+            "y": 0.472,
+            "width": 0.415,
+            "height": 0.015
+          },
+          "content": "## 5.2 Task 1: A Negative Case in Human-Capital Modeling",
+          "label": "Text"
+        },
+        {
+          "id": "4",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.111,
+            "y": 0.501,
+            "width": 0.776,
+            "height": 0.166
+          },
+          "content": "Both evaluators preferred the baseline (difference magnitude 1.50): the full workflow scored higher failure severity (1.80 versus 1.40) and lower overall usefulness (2.50 versus 3.00). The baseline preserved a broader institutional mechanism spanning school quality, credit constraints, migration barriers, and hukou-related labor-market access, which both judged more economically meaningful despite unresolved migration-threshold cases. The full workflow compressed the problem into a cleaner binary-threshold model without a matching formal gain, and external review found an internally inconsistent policy-switch threshold and an under-conditioned welfare-supermodularity claim. The stage record shows canonical matching, novelty screening, and reference verification all ran and flagged the relevant risk assumptions, while the decisive errors survived. More structure can therefore narrow a model prematurely, and a gate can create confidence without removing the decisive error. Task 1 also reverses the initial author-side preference for the more polished manuscript, which is why endpoint evaluation must stay separate from process self-assessment. Because model versions differed across task pairs, variation in the observed workflow advantage across Tasks 1-5 cannot be attributed to task characteristics alone; the within-Task-1 comparison itself nevertheless holds the model fixed.",
+          "label": "Text"
+        },
+        {
+          "id": "5",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.113,
+            "y": 0.69,
+            "width": 0.405,
+            "height": 0.015
+          },
+          "content": "## 5.3 Tasks 2, 3, and 5: Detection Without Full Resolution",
+          "label": "Text"
+        },
+        {
+          "id": "6",
+          "order": 7,
+          "bounding_box": {
+            "x": 0.111,
+            "y": 0.719,
+            "width": 0.776,
+            "height": 0.194
+          },
+          "content": "Both evaluators preferred the full workflow in the three remaining tasks (Table 3; overall usefulness 3.00 versus 2.50 in each), all following a detect-and-narrow pattern short of a solved theorem. In Task 2 (drug procurement), the baseline's welfare accounting risked double-counting and its deadweight-loss formula was wrong; the proof gate rejected a uniqueness step and a counterexample search falsified a universal cost-dispersion claim (CRRA with uniform costs gives a corner, linear demand an interior peak), narrowing the claim to two regimes while leaving the primitive condition separating them open. In Task 3 (nutrition-capital DSGE), the baseline's capital-return, depreciation, and fiscal-block equations were mutually inconsistent; the numerical stage traced an apparent subsidy advantage to a non-optimal solver critical point, and constrained maximization reversed the ranking to transfer-dominance, leaving steady-state uniqueness open. In Task 5 (agri-food DSGE), the baseline ranked policy instruments by the largest wedge although each instrument moves several distorted quantities; a numerical sweep found 378 steady-state solve failures traced to a learning-loop gain, and the tightened domain was back-propagated to the propositions, leaving global determinacy open. In each case, the process record identifies a gate, numerical check, or counterexample search that exposed an error left silent in the baseline and prompted a narrower final claim. Proof integrity nevertheless remains the lowest usefulness dimension because the remaining obligations are disclosed rather than discharged.",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "page_index": 9,
+      "blocks": [
+        {
+          "id": "0",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.112,
+            "y": 0.092,
+            "width": 0.432,
+            "height": 0.015
+          },
+          "content": "## 5.4 Task 4: Institutional Reframing and Proposition Repair",
+          "label": "Text"
+        },
+        {
+          "id": "1",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.111,
+            "y": 0.118,
+            "width": 0.774,
+            "height": 0.18
+          },
+          "content": "Task 4 produces the largest and most consistent observed gain: both evaluators preferred the full workflow (difference magnitude 2.50), failure severity fell from 1.40 to 0.70, and overall usefulness rose from 2.50 to 4.00. The prompt deliberately described the U.S. candy market as a monopoly, and the baseline accepted the premise and built a thin, parameter-dependent monopoly-attention model. The reality check classified the premise as false and issued a negative verdict, creating a conditional adjudication pause. The researcher confirmed the recommended reframing, rerouting the model to differentiated duopoly before primitives were fixed and producing a benchmark in which only one-third of the fixed-price healthy-share response survives strategic repricing. A second revision path was initiated by the proof gate: a proposition claiming that every informed switcher gains from label simplification was independently re-derived as false, returned upstream, and rewritten around an explicit attention-cost threshold. A subsequent numerical sweep showed that the result holds under uniform taste density and varies substantially outside it, so the manuscript reports the relative-price prediction with more confidence than the price-level prediction. Task 4 provides the clearest process evidence that targeted checks and human-confirmed loopbacks can alter final economic content rather than merely its presentation.",
+          "label": "Text"
+        },
+        {
+          "id": "2",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.112,
+            "y": 0.304,
+            "width": 0.773,
+            "height": 0.084
+          },
+          "content": "Taken together, the evaluation supports a bounded comparative claim. The largest observed gain occurs where the process trace records a targeted check followed by a valid human-confirmed revision (Task 4), while the gains are weaker where the pattern is detect-and-narrow (Tasks 2,3,and 5). Task 1 prevents a universal conclusion: gates guarantee neither a correct proposition set nor the retention of useful institutional structure. The architecture is therefore best read as a reliability scaffold whose performance depends on gate coverage, human judgment, and the fit between the task and model library, rather than as evidence for the isolated causal effect of any single component.",
+          "label": "Text"
+        },
+        {
+          "id": "3",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.114,
+            "y": 0.405,
+            "width": 0.131,
+            "height": 0.016
+          },
+          "content": "## 6 Limitations",
+          "label": "Text"
+        },
+        {
+          "id": "4",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.111,
+            "y": 0.435,
+            "width": 0.776,
+            "height": 0.181
+          },
+          "content": "This study has several limitations. First, the gates diagnose potential failures rather than certify correctness: proof sketches remain provisional, and numerical checks can reveal inconsistencies or counterexamples but cannot establish general theorems. Second, the evaluation covers only five task pairs and two evaluators, one model-based and one human economist acquainted with the authors; the reported score differences are therefore descriptive, and variation in output length and completeness may have affected the comparison. Third, the full workflow combines staged decomposition, a canonical model library, quality gates, human checkpoints, and numerical analysis, while also receiving more expert intervention than the baseline, so the contribution of any individual component cannot be isolated without ablation studies and matched human-attention budgets. Finally, the literature checks, institutional grounding, and model library have bounded coverage, and the implementation was tested with one commercial language-model family through one tooling environment, with model versions differing across task pairs. The system should therefore be treated as an auditable scaffold rather than a verification mechanism: novelty, factual accuracy, formal validity, and final interpretation remain the responsibility of the researcher, and broader expert evaluation and cross-model replication are needed.",
+          "label": "Text"
+        },
+        {
+          "id": "5",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.114,
+            "y": 0.634,
+            "width": 0.128,
+            "height": 0.016
+          },
+          "content": "## 7 Conclusion",
+          "label": "Text"
+        },
+        {
+          "id": "6",
+          "order": 7,
+          "bounding_box": {
+            "x": 0.111,
+            "y": 0.664,
+            "width": 0.775,
+            "height": 0.112
+          },
+          "content": "This paper addresses a central design problem for AI-assisted social science: how to organize agentic workflows when the quality of the final output cannot be judged against a clear, task-complete external oracle. This problem is especially acute in social science because validity depends not only on formal consistency, but also on institutional context, behavioral assumptions, causal interpretation, and the boundary between positive analysis and normative judgment Economic theory is a demanding case: a model may appear fluent and sophisticated while still containing canonical mismatches, assumption-driven propositions, proof gaps, or unsupported welfare claims. We therefore develop a gated human-in-the-loop architecture guided by three principles: intercept failures while key choices remain visible, let gates diagnose rather than certify, and place human judgment at decisions that are costly to reverse.",
+          "label": "Text"
+        },
+        {
+          "id": "7",
+          "order": 8,
+          "bounding_box": {
+            "x": 0.111,
+            "y": 0.781,
+            "width": 0.774,
+            "height": 0.098
+          },
+          "content": "The matched-task evaluation provides qualified evidence that this design can improve AI-assisted theory development. The full workflow was preferred in four of five tasks, with the largest observed gain occurring where the process trace recorded an early diagnostic check followed by institutional reframing and proposition repair. The negative human-capital case, however, shows that additional structure can also compress a socially important mechanism too aggressively. The architecture's main contribution is therefore to make the modeling process more transparent and auditable by recording assumptions, rejected alternatives, unresolved obligations, and the points at which human judgment changed the analysis.",
+          "label": "Text"
+        },
+        {
+          "id": "8",
+          "order": 9,
+          "bounding_box": {
+            "x": 0.111,
+            "y": 0.884,
+            "width": 0.774,
+            "height": 0.029
+          },
+          "content": "These features matter particularly for AI for social science. Unlike domains in which outputs can be checked against test accuracy, executable code, or formal proofs, many social-scientific claims remain contestable even after the",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "page_index": 10,
+      "blocks": [
+        {
+          "id": "0",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.111,
+            "y": 0.093,
+            "width": 0.776,
+            "height": 0.138
+          },
+          "content": "calculations are correct. Competing models may fit the same empirical pattern, institutions may not travel across settings, distributional consequences may depend on unobserved heterogeneity, and welfare conclusions may embed value judgments that cannot be delegated to an automated checker. Reliability therefore depends on how evidence, theory, institutional knowledge, and human judgment are organized together. The relevant design question is not simply how much autonomy an agent should receive, but which decisions should remain reversible, which claims require independent challenge, and where human expertise has the greatest marginal value. A well-designed social-science agent should leave behind more than a polished answer: it should expose the reasoning structure, assumptions, alternatives, failed checks, revisions, and residual uncertainties that determine how much confidence the answer deserves. These broader implications are architectural hypotheses derived from the economic-theory case rather than empirically established results across social-science domains.",
+          "label": "Text"
+        },
+        {
+          "id": "1",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.111,
+            "y": 0.237,
+            "width": 0.776,
+            "height": 0.084
+          },
+          "content": "The architecture developed here provides a foundation for that broader agenda. Future work should isolate the contribution of individual components through ablation studies, equalize human-attention and output budgets across conditions, expand evaluation to larger and more diverse expert panels, and test the design across model families language models, and social-science domains. Progress in AI for social science will depend on systems that can produce increasingly sophisticated analyses while preserving institutional sensitivity, interpretive restraint, and meaningful human accountability.",
+          "label": "Text"
+        },
+        {
+          "id": "2",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.114,
+            "y": 0.341,
+            "width": 0.23,
+            "height": 0.016
+          },
+          "content": "## Code and Data Availability",
+          "label": "Text"
+        },
+        {
+          "id": "3",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.113,
+            "y": 0.372,
+            "width": 0.772,
+            "height": 0.057
+          },
+          "content": "The implementation is released as an open-source Claude Code skill at https://github.com/maxwell12732/pAI-Econ-claude, archived at https://doi.org/10.5281/zenodo.20686026 [24]. The repository contains the staged prompts, the canonical model library, the gate specifications, and the evaluation artifacts for the five matched task pairs reported in Section 5.",
+          "label": "Text"
+        },
+        {
+          "id": "4",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.114,
+            "y": 0.448,
+            "width": 0.295,
+            "height": 0.017
+          },
+          "content": "## Use of Generative AI in This Work",
+          "label": "Text"
+        },
+        {
+          "id": "5",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.113,
+            "y": 0.48,
+            "width": 0.771,
+            "height": 0.044
+          },
+          "content": "Generative AI assisted manuscript preparation, including literature organization, drafting and editing support, and LATEX formatting. All experimental design, analysis, interpretation, and final judgments remain the responsibility of the human authors, who take full responsibility for every claim made. Generative AI is not an author.",
+          "label": "Text"
+        },
+        {
+          "id": "6",
+          "order": 7,
+          "bounding_box": {
+            "x": 0.113,
+            "y": 0.544,
+            "width": 0.177,
+            "height": 0.016
+          },
+          "content": "## Competing Interests",
+          "label": "Text"
+        },
+        {
+          "id": "7",
+          "order": 8,
+          "bounding_box": {
+            "x": 0.112,
+            "y": 0.575,
+            "width": 0.632,
+            "height": 0.015
+          },
+          "content": "The authors have no competing interests to declare that are relevant to the content of this article.",
+          "label": "Text"
+        },
+        {
+          "id": "8",
+          "order": 9,
+          "bounding_box": {
+            "x": 0.114,
+            "y": 0.61,
+            "width": 0.097,
+            "height": 0.016
+          },
+          "content": "## References",
+          "label": "Text"
+        },
+        {
+          "id": "9",
+          "order": 10,
+          "bounding_box": {
+            "x": 0.122,
+            "y": 0.644,
+            "width": 0.765,
+            "height": 0.266
+          },
+          "content": "[1] Chris Lu, Cong Lu, Robert Tjarko Lange, Jakob Foerster, Jeff Clune, and David Ha. The AI scientist: Towards fully automated open-ended scientific discovery, 2024.\n\n[2] Samuel Schmidgall, Yusheng Su, Ze Wang, Ximeng Sun, Jialian Wu, Xiaodong Yu, Jiang Liu, Michael Moor, Zicheng Liu, and Emad Barsoum. Agent Laboratory: Using LLM agents as research assistants. In Findings of the Association for Computational Linguistics: EMNLP 2025, pages 5977-6043, Suzhou, China, 2025. Association for Computational Linguistics.\n\n[3] Juraj Gottweis, Wei-Hung Weng, Alexander Daryin, Tao Tu, Anil Palepu, Petar Sirkovic, et al. Towards an AI co-scientist, 2025.\n\n[4] Matthew Gentzkow and Jesse M. Shapiro. Code and data for the social sciences: A practitioner's guide. University of Chicago mimeo, 2014.\n\n[5] Garret S. Christensen and Edward Miguel. Transparency, reproducibility, and the credibility of economics research. Journal of Economic Literature, 56(3):920-980, 2018.\n\n[6] Hamish Low and Costas Meghir. The use of structural models in econometrics. Journal of Economic Perspectives, 31(2):33-58, 2017.\n\n[7] Ziwei Ji, Nayeon Lee, Rita Frieske, Tiezheng Yu, Dan Su, Yan Xu, Etsuko Ishii, Ye Jin Bang, Andrea Madotto, and Pascale Fung. Survey of hallucination in natural language generation. ACM Computing Surveys, 55(12):1-38, 2023.",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "page_index": 11,
+      "blocks": [
+        {
+          "id": "0",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.112,
+            "y": 0.092,
+            "width": 0.774,
+            "height": 0.744
+          },
+          "content": "[8] Tal Ifargan, Lukas Hafner, Maor Kern, Ori Alcalay, and Roy Kishony. Autonomous LLM-driven research from data to human-verifiable research papers. *NEM AI*, 2(1), 2025.\n\n[9] Yi Luo, Linghang Shi, Yihao Li, Aobo Zhuang, Yeyun Gong, Ling Liu, and Chen Lin. From intention to implementation; Automating biomedical research via LLMs. *Science China Information Sciences*, 68(7):170105, 2025.\n\n[10] Sirui Hong, Mingchen Shi, Jonathan Chen, Xiauw Zheng, Yuheng Cheng, Jinlin Wang, Cyeao Zhang, Zili Wang, Steven Ka Shing Yau, Zijian Li, Liyang Chen, Zhenyu Ran, Lingfeng Xiao, Chenglin Wu, and Jürgen Schmidhuber. MetaGPT: Meta programming for a multi-agent collaborative framework. In *International Conference on Learning Representations (ICLR)*, 2024.\n\n[11] Chen Qian, Wei Liu, Hongzhang Liu, Nuo Chen, Yufan Dang, Jiahao Li, Cheng Yang, Weizen Chen, Yusheng Xu, Xin Cong, Juyuan Xiao, Zhihang Li, Laosong Wu, and Maosong Liu. ChatDev: Communicative agents for software development. In *Proceedings of the 62nd Annual Meeting of the Association for Computational Linguistics (ACL)*, 2024.\n\n[12] Guohao Li, Hasan Abed Al Kader Hammoud, Hani Itani, Dmitrii Khizbullin, and Bernard Ghanem. CAMEL: Communicative agents for \"mind\" exploration of large language model society. In *Advances in Neural Information Processing Systems (NeurIPS)*, 2023.\n\n[13] Taicheng Guo, Xiuying Chen, Yaqi Wang, Ruidi Chang, Shichao Pei, Nitesh V. Chawla, Olaf Wiest, and Xiangliang Zhang. Large language model based multi-agents: A survey of progress and challenges. In *Proceedings of the 33rd International Joint Conference on Artificial Intelligence (ICAI)*, 2024.\n\n[14] Qingyun Wu, Gagan Bansal, yiejung Yu, Yiran Wu, Beibin Li, Erkang Zhu, Li Jiang, Xiaoyun Zhang, Shaokun Zhang, Jiale Liu, et al. AutoGen: Enabling next-gen LLM applications via multi-agent conversations. In *First Conference on Language Modeling (COLM)*, 2024.\n\n[15] Shunyu Yao, Jeffrey Zhao, Dian Yu, Nan Du, Izhaik Shafran, Karthik R. Narasimhan, and Yuan Cao. ReAct: Synergizing reasoning and acting in language models. In *International Conference on Learning Representations (ICLR)*, 2023.\n\n[16] Aman Madaan, Niket Tandon, Prakhar Gupta, Skyler Hallan, Luyu Gao, Sarah Wiegreffe, Uri Alon, Nouha Dziiri, Shrimai Prabhmoye, Yiming Yang, et al. Self-Refine: Iterative refinement with self-feedback. *Advances in Neural Information Processing Systems*, 36:46534–46594, 2023.\n\n[17] Chen Zhu and Xiaolu Wang. HLER: Human-in-the-loop economic research via multi-agent pipelines for empirical discovery, 2026. arXiv:2603.07444.\n\n[18] Chen Zhu, Xiaolu Wang, and Weilong Zhang. (human) attention is (still) all you need: Human oversight makes AI-assisted social science reliable, 2026. arXiv:2606.12848.\n\n[19] Mahmoud Abdelmoneum, Pierfrancesco Beneventano, and Tomaso Poggio. pAI/MSc: ML theory research with humans on the loop, 2026. arXiv:2604.20622.\n\n[20] Eduardo Mosqueira-Rey, Elen Hernández-Pereira, David Alonso-Rios, José Bobes-Bascarán, and Ángel Fernández-Leal. Human-in-the-loop machine learning: a state of the art. *Artificial Intelligence Review*, 56(4):3005-3024, 2023.\n\n[21] Wannita Takerngsaksi, Jirat Pasuksi, Patamon Thongtanunam, Chakkrit Tantithamthavorn, Ruixiong Zhang, Fan Jiang, Jing Li, Evan Cook, Kun Chen, and Ming Wu. Human-in-the-loop software development agents. In 2025 IEEE/AJCM 47th International Conference on Software Engineering: Software Engineering in Practice (ICE-SEIP), pages 342-352, IEEE, 2025.\n\n[22] Andrea Omicini, Alessandro Ricci, and Mikro Viroli. Artifacts in the A&A meta-model for multi-agent systems. Autonomous Agents and Multi-Agent Systems, 17(3):432-456, 2008.\n\n[23] Yilun Dhu, Shuang Li, Antonio Corralba, Joshua B. Tenbaum, and Igor Mordatch. Improving factuality and reasoning in language models through multiagent debate. In *International Conference on Machine Learning (ICML)*, 2024.\n\n[24] Chen Zhu, Xiaolu Wang, and Weilong Zhang. pAI-Econ-claude: Human-in-the-loop agentic theoretical modeling for empirical economists. https://github.com/maxwel12732/pAI-Econ-claude, 2026. Software repository and Claude Code Skill.",
+          "label": "Text"
+        },
+        {
+          "id": "1",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.113,
+            "y": 0.853,
+            "width": 0.088,
+            "height": 0.018
+          },
+          "content": "## Appendix",
+          "label": "Text"
+        },
+        {
+          "id": "2",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.111,
+            "y": 0.884,
+            "width": 0.773,
+            "height": 0.029
+          },
+          "content": "The appendices below provide the full task prompts, the evaluator-level score tables, and the complete task-by-task process-tracing narratives underlying the evaluation reported in Section 5.",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "page_index": 12,
+      "blocks": [
+        {
+          "id": "0",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.113,
+            "y": 0.09,
+            "width": 0.195,
+            "height": 0.017
+          },
+          "content": "## A Full Task Prompts",
+          "label": "Text"
+        },
+        {
+          "id": "1",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.111,
+            "y": 0.122,
+            "width": 0.774,
+            "height": 0.057
+          },
+          "content": "Both configurations within a task received the identical short user-level research prompt described below; only the invocation environment differed (Section 5). The Task 4 prompt is reproduced verbatim including the false institutional premise it embeds, namely that the U.S. candy market is a monopoly; Section 5.4 reports how the reality-check stage handled it.",
+          "label": "Text"
+        },
+        {
+          "id": "2",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.114,
+            "y": 0.193,
+            "width": 0.368,
+            "height": 0.015
+          },
+          "content": "## Task 1 (Human capital and hukou) baseline prompt.",
+          "label": "Text"
+        },
+        {
+          "id": "3",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.17,
+            "y": 0.219,
+            "width": 0.658,
+            "height": 0.078
+          },
+          "content": "I am working on an empirical economics paper about China's urban-rural dual structure. I want a simple theoretical model explaining why children with similar ability may make different human-capital investment decisions depending on whether they are born into urban or rural households. The mechanism may involve schooling quality, household resources, education costs, migration barriers, and hukou-related access to urban labor markets. Please help me build a clean model, derive a few main propositions, and organize it into a manuscript-style theory section.",
+          "label": "Text"
+        },
+        {
+          "id": "4",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.112,
+            "y": 0.307,
+            "width": 0.772,
+            "height": 0.029
+          },
+          "content": "The full-workflow configuration received the same prompt, issued through the staged workflow's entry point with quotation marks preserved.",
+          "label": "Text"
+        },
+        {
+          "id": "5",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.114,
+            "y": 0.351,
+            "width": 0.316,
+            "height": 0.015
+          },
+          "content": "## Task 2 (Drug procurement) baseline prompt.",
+          "label": "Text"
+        },
+        {
+          "id": "6",
+          "order": 7,
+          "bounding_box": {
+            "x": 0.17,
+            "y": 0.377,
+            "width": 0.657,
+            "height": 0.065
+          },
+          "content": "I am working on a health economics paper about China's centralized drug procurement system. The policy lowers drug procurement prices and may reduce medical insurance spending and patient out-of-pocket costs, but very low prices may also affect firm participation and drug availability. Please help me build a simple theory model connecting centralized procurement, insurance moral hazard, patient drug demand, insurer spending, firm participation, and welfare.",
+          "label": "Text"
+        },
+        {
+          "id": "7",
+          "order": 8,
+          "bounding_box": {
+            "x": 0.114,
+            "y": 0.456,
+            "width": 0.352,
+            "height": 0.015
+          },
+          "content": "## Task 3 (Nutrition-capital DSGE) baseline prompt.",
+          "label": "Text"
+        },
+        {
+          "id": "8",
+          "order": 9,
+          "bounding_box": {
+            "x": 0.169,
+            "y": 0.482,
+            "width": 0.659,
+            "height": 0.078
+          },
+          "content": "Build a tractable DSGE model to study how a temporary food-price shock affects household nutrition, future labor productivity, and aggregate output. Households choose food intake, non-food consumption, labor supply, and savings; nutrition is a state variable that evolves with food intake and affects future effective labor. Firms produce output using capital and effective labor. The government can respond with either a food-price subsidy or a lump-sum cash transfer. Derive the equilibrium conditions, characterize the steady state, discuss the welfare trade-off between the two policies, and state what impulse-response predictions the model would generate.",
+          "label": "Text"
+        },
+        {
+          "id": "9",
+          "order": 10,
+          "bounding_box": {
+            "x": 0.114,
+            "y": 0.575,
+            "width": 0.453,
+            "height": 0.015
+          },
+          "content": "## Task 4 (Nutrition-label industrial organization) baseline prompt.",
+          "label": "Text"
+        },
+        {
+          "id": "10",
+          "order": 11,
+          "bounding_box": {
+            "x": 0.17,
+            "y": 0.6,
+            "width": 0.658,
+            "height": 0.065
+          },
+          "content": "I am working on a food and health economics paper about nutrition labels in the US Monopoly candy market. Consumers may not fully use nutrition information because reading and interpreting labels requires attention, time, and cognitive effort. Simplified front-of-package labels may reduce information costs and shift demand toward healthier products. Please help me build a simple economic model for this mechanism. Include necessary references and organize it into a manuscript-style theory section in both md and pdf.",
+          "label": "Text"
+        },
+        {
+          "id": "11",
+          "order": 12,
+          "bounding_box": {
+            "x": 0.111,
+            "y": 0.675,
+            "width": 0.774,
+            "height": 0.044
+          },
+          "content": "The full-workflow configuration received the same prompt. The phrase \"US Monopoly candy market\" is the planted false premise: the U.S. candy category is in fact a differentiated oligopoly, and the reality-check stage rejected the monopoly framing before the model primitives were fixed.",
+          "label": "Text"
+        },
+        {
+          "id": "12",
+          "order": 13,
+          "bounding_box": {
+            "x": 0.114,
+            "y": 0.733,
+            "width": 0.301,
+            "height": 0.015
+          },
+          "content": "## Task 5 (Agri-food DSGE) baseline prompt.",
+          "label": "Text"
+        },
+        {
+          "id": "13",
+          "order": 14,
+          "bounding_box": {
+            "x": 0.17,
+            "y": 0.759,
+            "width": 0.658,
+            "height": 0.129
+          },
+          "content": "Build a tractable DSGE model of agri-food system transformation. Farms allocate land, labor, capital, and intermediate inputs between staple grains and diversified crops. Staple grains provide food-security value and reserve stability, but excessive staple production may lower marginal farm returns and increase environmental pressure. Diversified crops may raise farm income and dietary diversity, but require crop-conversion costs, market access, and learning. The government can use staple-grain support, crop-conversion subsidies, or green-input subsidies, financed by lump-sum taxation. Derive the decentralized equilibrium, the social planner problem, the steady state, the key first-order conditions, and the wedges between private and social allocation. Compare when staple support, crop-conversion subsidies, or green-input subsidies improve welfare. State impulse-response predictions after shocks to staple prices, diversified-food demand, climate productivity, or policy reform. Organize the output as a manuscript-style theory section with necessary references.",
+          "label": "Text"
+        },
+        {
+          "id": "14",
+          "order": 15,
+          "bounding_box": {
+            "x": 0.112,
+            "y": 0.897,
+            "width": 0.584,
+            "height": 0.015
+          },
+          "content": "The full-workflow configuration used the same prompt without substantive modification.",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "page_index": 13,
+      "blocks": [
+        {
+          "id": "0",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.114,
+            "y": 0.09,
+            "width": 0.152,
+            "height": 0.016
+          },
+          "content": "## B Run Isolation",
+          "label": "Text"
+        },
+        {
+          "id": "1",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.111,
+            "y": 0.123,
+            "width": 0.774,
+            "height": 0.071
+          },
+          "content": "Each task-configuration pair ran in a separate workspace and Claude Code session. The no-skill baseline workspace contained none of the workflow repository's files (no orchestration configuration, no model library, no staged prompts). The full-workflow workspace was a clean copy of the workflow repository. Auto-memory was disabled or redirected to a run-specific directory, generated artifacts from other runs were not visible to the current run, and the user prompt was fixed before execution and not edited during the run.",
+          "label": "Text"
+        },
+        {
+          "id": "2",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.113,
+            "y": 0.217,
+            "width": 0.285,
+            "height": 0.016
+          },
+          "content": "## C Evaluator-Level Score Tables",
+          "label": "Text"
+        },
+        {
+          "id": "3",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.299,
+            "y": 0.26,
+            "width": 0.398,
+            "height": 0.086
+          },
+          "content": "<table border=\"1\"><tr><td>Task</td><td>Full workflow</td><td>No-skill baseline</td></tr><tr><td>T1 Human capital and hukou</td><td>T1-A</td><td>T1-B</td></tr><tr><td>T2 Drug procurement</td><td>T2-A</td><td>T2-B</td></tr><tr><td>T3 Nutrition-capital DSGE</td><td>T3-B</td><td>T3-A</td></tr><tr><td>T4 Nutrition-label IO</td><td>T4-A</td><td>T4-B</td></tr><tr><td>T5 Agri-food DSGE</td><td>T5-B</td><td>T5-A</td></tr></table>",
+          "label": "Table"
+        },
+        {
+          "id": "4",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.173,
+            "y": 0.348,
+            "width": 0.648,
+            "height": 0.015
+          },
+          "content": "Table 5: Configuration mapping revealed only after the blinded external evaluations were returned.",
+          "label": "Text"
+        },
+        {
+          "id": "5",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.198,
+            "y": 0.409,
+            "width": 0.599,
+            "height": 0.149
+          },
+          "content": "<table border=\"1\"><tr><td>Task</td><td>Configuration</td><td>R1 failure</td><td>R2 failure</td><td>R1 overall</td><td>R2 overall</td><td>R1 readiness</td><td>R2 readiness</td></tr><tr><td>T1</td><td>Full workflow</td><td>2.20</td><td>1.40</td><td>2</td><td>3</td><td>1</td><td>2</td></tr><tr><td>T1</td><td>Baseline</td><td>1.80</td><td>1.00</td><td>2</td><td>4</td><td>1</td><td>3</td></tr><tr><td>T2</td><td>Full workflow</td><td>1.60</td><td>0.80</td><td>3</td><td>3</td><td>2</td><td>3</td></tr><tr><td>T2</td><td>Baseline</td><td>2.00</td><td>1.60</td><td>2</td><td>3</td><td>1</td><td>2</td></tr><tr><td>T3</td><td>Full workflow</td><td>1.00</td><td>1.20</td><td>3</td><td>3</td><td>2</td><td>3</td></tr><tr><td>T3</td><td>Baseline</td><td>1.60</td><td>1.40</td><td>2</td><td>3</td><td>1</td><td>2</td></tr><tr><td>T4</td><td>Full workflow</td><td>0.40</td><td>1.00</td><td>4</td><td>4</td><td>4</td><td>4</td></tr><tr><td>T4</td><td>Baseline</td><td>1.60</td><td>1.20</td><td>2</td><td>3</td><td>1</td><td>2</td></tr><tr><td>T5</td><td>Full workflow</td><td>0.80</td><td>1.20</td><td>3</td><td>3</td><td>3</td><td>3</td></tr><tr><td>T5</td><td>Baseline</td><td>1.80</td><td>1.80</td><td>2</td><td>3</td><td>1</td><td>2</td></tr></table>",
+          "label": "Table"
+        },
+        {
+          "id": "6",
+          "order": 7,
+          "bounding_box": {
+            "x": 0.113,
+            "y": 0.56,
+            "width": 0.771,
+            "height": 0.043
+          },
+          "content": "Table 6: Evaluator-level summary scores. Failure is the evaluator's mean across F1-F5. Overall usefulness and standalone-theory readiness use 1-5 scales. R1 is the model-based evaluator; R2 is the independent economics evaluator.",
+          "label": "Text"
+        },
+        {
+          "id": "7",
+          "order": 8,
+          "bounding_box": {
+            "x": 0.221,
+            "y": 0.645,
+            "width": 0.552,
+            "height": 0.087
+          },
+          "content": "<table border=\"1\"><tr><td>Task</td><td>R1 preferred</td><td>R2 preferred</td><td>R1 gap</td><td>R2 gap</td><td>R1 confidence</td><td>R2 confidence</td></tr><tr><td>T1</td><td>Baseline</td><td>Baseline</td><td>1</td><td>2</td><td>4</td><td>4</td></tr><tr><td>T2</td><td>Full</td><td>Full</td><td>1</td><td>1</td><td>4</td><td>3</td></tr><tr><td>T3</td><td>Full</td><td>Full</td><td>2</td><td>1</td><td>4</td><td>3</td></tr><tr><td>T4</td><td>Full</td><td>Full</td><td>3</td><td>2</td><td>5</td><td>4</td></tr><tr><td>T5</td><td>Full</td><td>Full</td><td>2</td><td>1</td><td>4</td><td>3</td></tr></table>",
+          "label": "Table"
+        },
+        {
+          "id": "8",
+          "order": 9,
+          "bounding_box": {
+            "x": 0.13,
+            "y": 0.735,
+            "width": 0.734,
+            "height": 0.014
+          },
+          "content": "Table 7: Pairwise external preferences. Difference magnitude ranges from 0 to 3; confidence ranges from 1 to 5.",
+          "label": "Text"
+        },
+        {
+          "id": "9",
+          "order": 10,
+          "bounding_box": {
+            "x": 0.111,
+            "y": 0.785,
+            "width": 0.774,
+            "height": 0.043
+          },
+          "content": "The evaluators agreed on all pairwise choices but differed on exact dimension scores. The second evaluator also noted that several pairs differed in scope, with one artifact presented as a complete paper and the other as a shorter theory section or excerpt; this motivates the output-scope limitation discussed in Section 6.",
+          "label": "Text"
+        },
+        {
+          "id": "10",
+          "order": 11,
+          "bounding_box": {
+            "x": 0.113,
+            "y": 0.85,
+            "width": 0.29,
+            "height": 0.017
+          },
+          "content": "## D Task-by-Task Process Tracing",
+          "label": "Text"
+        },
+        {
+          "id": "11",
+          "order": 12,
+          "bounding_box": {
+            "x": 0.111,
+            "y": 0.884,
+            "width": 0.776,
+            "height": 0.029
+          },
+          "content": "Each subsection below reports the author-side blind assessment made before configuration labels were revealed, followed by the workflow-artifact review conducted after unblinding.",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "page_index": 14,
+      "blocks": [
+        {
+          "id": "0",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.112,
+            "y": 0.092,
+            "width": 0.293,
+            "height": 0.014
+          },
+          "content": "## D.1 Task 1: Human Capital and Hukou",
+          "label": "Text"
+        },
+        {
+          "id": "1",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.111,
+            "y": 0.12,
+            "width": 0.774,
+            "height": 0.125
+          },
+          "content": "Task 1 is the only pair in which both external evaluators preferred the baseline. This finding reverses the initial author-side blind impression, which favored the narrower and more polished full-workflow artifact. The author-side assessment placed substantial weight on compact exposition, reference verification, and the explicit two-wedge threshold structure; the external evaluators placed greater weight on institutional richness and on the correctness of the headline propositions. The baseline was judged stronger because it retained school quality, credit constraints, migration barriers, and endogenous labor-market access, with its formal gaps treated as omissions that could be repaired. The full-workflow model contained more direct errors in the claims it emphasized: the policy-switch threshold was internally inconsistent, the welfare-supermodularity result required an omitted density condition, and the comparison of the wage and cost wedges mixed units.",
+          "label": "Text"
+        },
+        {
+          "id": "2",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.111,
+            "y": 0.25,
+            "width": 0.776,
+            "height": 0.139
+          },
+          "content": "The unblinded artifact review shows the workflow surfaced several adjacent risks: it identified Galor-Zeira relabeling risk, the dependence of the result on the multiplicative wage-penalty specification, and the need to state support and density assumptions. The novelty-risk gate classified the closest-model risk from Galor-Zeira as material and recommended that the paper locate its contribution in the dual-wedge extension rather than the threshold mechanism itself; the canonical-fit and theory-lineage gates distinguished the inherited threshold structure from the group-specific return and cost wedges. The non-triviality gate treated threshold existence and boundary cases as supporting results and identified supermodularity as the principal formal contribution, which increased the cost of the missed regularity condition. The proof and counterexample artifacts recorded dependence on the multiplicative wage-penalty form, positive density over the relevant ability range, partial-equilibrium scope, and common ability distributions, but did not force a successful rewrite before manuscript generation.",
+          "label": "Text"
+        },
+        {
+          "id": "3",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.111,
+            "y": 0.395,
+            "width": 0.774,
+            "height": 0.084
+          },
+          "content": "Reference handling was comparatively disciplined: the workflow verified the retained sources and excluded an unverified citation. External evaluators nevertheless did not assign the full artifact a citation-grounding advantage large enough to offset its formal weaknesses; a clean literature trail cannot compensate for an incorrect core proposition. The final gate sequence did not convert its own warnings into a correct proposition set, and Task 1 is classified as an unambiguous endpoint failure for the full workflow and a partial failure of gate coverage. It also shows why author-side process enthusiasm cannot substitute for independent endpoint evaluation.",
+          "label": "Text"
+        },
+        {
+          "id": "4",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.111,
+            "y": 0.497,
+            "width": 0.774,
+            "height": 0.141
+          },
+          "content": "Recommended manual corrections. The Task 1 full-workflow output should be revised in two places before use as a theory appendix or example artifact. First, the welfare proposition should distinguish threshold-gap supermodularity from welfare-loss supermodularity: the threshold gap is strictly supermodular under the maintained multiplicative wage-penalty specification, but the welfare loss, while increasing in both wedges, is supermodular only under additional regularity conditions on the ability distribution. Second, the policy-ranking proposition should compare marginal effects using a normalized cost wedge (e.g. $\\tilde{\\Delta}=\\Delta C / \\alpha$ ) rather than comparing a dimensionless wage penalty with an unnormalized cost measure; the model identifies a local structural tradeoff between reducing the return wedge and reducing the normalized cost wedge, not a fiscal-cost or political-feasibility ranking. These corrections do not overturn the main evaluation finding: they reinforce that the workflow makes many modeling risks visible, but final theoretical validity still requires human judgment.",
+          "label": "Text"
+        },
+        {
+          "id": "5",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.114,
+            "y": 0.657,
+            "width": 0.232,
+            "height": 0.015
+          },
+          "content": "## D.2 Task 2: Drug Procurement",
+          "label": "Text"
+        },
+        {
+          "id": "6",
+          "order": 7,
+          "bounding_box": {
+            "x": 0.112,
+            "y": 0.684,
+            "width": 0.773,
+            "height": 0.071
+          },
+          "content": "Before configuration labels were revealed, the Task 2 manuscripts were evaluated under a Top-5-journal standard. The stronger document had a coherent cutoff-participation model and a useful marginal-welfare decomposition but not a complete characterization of the interior-versus-corner optimum; the weaker document had a richer institutional description and more empirical predictions but an internally unclosed welfare-accounting and supply-reliability block. After unblinding, the stronger document was the full-workflow output.",
+          "label": "Text"
+        },
+        {
+          "id": "7",
+          "order": 8,
+          "bounding_box": {
+            "x": 0.111,
+            "y": 0.76,
+            "width": 0.774,
+            "height": 0.154
+          },
+          "content": "The novelty gate assigned a conditional pass because the broader regulation-and-exit and procurement-participation literatures had not yet been searched exhaustively. The reality-fit gate passed four of five institutional assumptions and explicitly classified the low-price-to-availability claim as weakly supported. The canonical-fit and theory-lineage gates correctly located the model at the intersection of Pauly-Zeckhauser moral hazard and Melitz-style cutoff participation rather than treating it as a wholly new family. The formal gates were more consequential: the model-coherence gate warned that a unique interior optimum had not been established, the non-triviality gate flagged the cost-dispersion proposition as borderline, and the proof-integrity gate issued a major conditional pass, explicitly failing the claimed uniqueness step and requiring the general cost-dispersion claim to be narrowed. The counterexample finder then supplied the decisive stress test: with CRRA-type demand and uniform firm costs, welfare is convex in a monotone transformation of price and the optimum is necessarily a corner, while with linear demand and the same cost distribution a numerical example exhibits an interior peak. This falsified the initial universal intuition and showed that log-concavity",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "page_index": 15,
+      "blocks": [
+        {
+          "id": "0",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.111,
+            "y": 0.092,
+            "width": 0.774,
+            "height": 0.043
+          },
+          "content": "of the cost distribution alone is insufficient. The researcher accepted the finding at the counterexample checkpoint and the manuscript was reframed as a two-regime result; the economic-meaning gate subsequently downgraded the cost-dispersion comparative static to a supporting result.",
+          "label": "Text"
+        },
+        {
+          "id": "1",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.111,
+            "y": 0.141,
+            "width": 0.774,
+            "height": 0.154
+          },
+          "content": "The full workflow did not solve Task 2's central theorem; it detected the critical gap, generated a valid counterexample to the original strong claim, and prevented that claim from entering the final manuscript unchanged. Non-triviality and interpretive-overreach risks are mild rather than moderate because the workflow explicitly downgraded weak propositions and narrowed the final claims after counterexample review, but F3 severity remains high because the exact primitive condition separating the interior and corner regimes was not derived and the first-best comparison remains a sketch. Reference handling was stronger here: the completion log records nine verified citations and four excluded references, with a mild residual F5 score retained because the availability/quality channel rests on documented concern rather than a causal estimate. The stage log shows the researcher approved early checkpoints without substantive correction; the decisive reframing occurred only after the workflow's own proof and counterexample stages surfaced the problem, making Task 2 an informative example of the architecture stopping a plausible false generalization from passing silently.",
+          "label": "Text"
+        },
+        {
+          "id": "2",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.114,
+            "y": 0.31,
+            "width": 0.271,
+            "height": 0.015
+          },
+          "content": "## D.3 Task 3: Nutrition-Capital DSGE",
+          "label": "Text"
+        },
+        {
+          "id": "3",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.111,
+            "y": 0.336,
+            "width": 0.774,
+            "height": 0.07
+          },
+          "content": "Before unblinding, the no-skill baseline produced a readable DSGE-style theory section covering the requested household, firm, government, steady-state, and impulse-response components, but with model-closure problems: the budget equation and firm rental-rate definition appeared to mix net and gross returns, government tax financing was not fully integrated into the household constraint, and the food optimality condition was not written in clean recursive form. After unblinding, the stronger artifact was the full-workflow output.",
+          "label": "Text"
+        },
+        {
+          "id": "4",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.111,
+            "y": 0.413,
+            "width": 0.774,
+            "height": 0.097
+          },
+          "content": "The assumption audit identified the nutrition law of motion, the smooth nutrition-productivity mapping, the borrowing constraint, the representative-household scope, and the small-shock interior-solution domain as binding assumptions, and explicitly warned that the nutrition-depreciation parameter is stylized rather than calibrated and that steady-state uniqueness is a hidden regularity condition. The proof-integrity gate independently re-derived the main algebra, found no sign or exponent discrepancies, and issued a conditional pass; the two most important remaining gaps were the steady-state uniqueness lemma and a Blanchard-Kahn-style stability verification for the full coupled system, both marked at conjecture level rather than hidden.",
+          "label": "Text"
+        },
+        {
+          "id": "5",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.111,
+            "y": 0.515,
+            "width": 0.775,
+            "height": 0.169
+          },
+          "content": "The optional numerical stage was user-controlled, with a plan-approval checkpoint before execution and a separate figure-authorization decision before manuscript inclusion. The numerical-integrity gate returned a pass with two warnings and explicitly noted that no genuinely binding borrowing-constraint grid point was reached. The numerical report illustrates the persistence mechanism (after a 10 percent food-price shock with $\\rho_{p}=0.50$ ,the price shock is essentially gone by period 11 while output and nutrition remain below steady state) while stating this does not discharge the missing stability proof. It also documents a solver failure in the welfare comparison: an initial first-order-condition root solver falsely made the subsidy appear to dominate the transfer; the workflow diagnosed this as a non-optimal critical point, replaced the solver with direct constrained maximization, and found transfers dominating subsidies in all eight tested grid points, an example of numerical audit functioning as error detection rather than decoration. The counterexample stage then checked four items, three scope or exposition issues and the resolved solver artifact; none required dropping a proposition, but the manuscript needed explicit scope and conjecture-level language, and Propositions 2,4,and 6 were reworded to match their proof status.",
+          "label": "Text"
+        },
+        {
+          "id": "6",
+          "order": 7,
+          "bounding_box": {
+            "x": 0.111,
+            "y": 0.688,
+            "width": 0.774,
+            "height": 0.084
+          },
+          "content": "F3 severity is reduced from high to moderate relative to a final-PDF-only review: serious formal gaps remain, but the workflow flagged them, tested their numerical implications where possible, corrected the language before manuscript completion, and prevented simulated results from being described as proofs. A complete version would still need a clean separation between net assets and productive capital, a formal steady-state uniqueness result or explicit domain restriction, and a saddle-path stability proof for the coupled system; the value of the full workflow is that these needs are visible and traceable, while the baseline's comparable weaknesses remain largely implicit.",
+          "label": "Text"
+        },
+        {
+          "id": "7",
+          "order": 8,
+          "bounding_box": {
+            "x": 0.113,
+            "y": 0.789,
+            "width": 0.382,
+            "height": 0.015
+          },
+          "content": "## D.4 Task 4: Nutrition-Label Industrial Organization",
+          "label": "Text"
+        },
+        {
+          "id": "8",
+          "order": 9,
+          "bounding_box": {
+            "x": 0.112,
+            "y": 0.815,
+            "width": 0.775,
+            "height": 0.098
+          },
+          "content": "Before configuration labels were revealed, the twenty-page duopoly manuscript was judged clearly stronger than the seven-page monopoly manuscript: a sharper canonical IO structure, a closed-form equilibrium pass-through result, a richer distributional analysis, explicit scope conditions, and numerical illustrations labeled as illustrations. The monopoly artifact had useful consumer-attention comparative statics but relied heavily on a uniform parametric example and did not generate strategic rival-price responses. After unblinding, the duopoly manuscript was the full-workflow output. Section 5.4 summarizes the artifact trace for this task, including the reality-check reroute, the proof-gate repair, and the numerical boundary mapping; this subsection adds detail not covered there.",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "page_index": 16,
+      "blocks": [
+        {
+          "id": "0",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.111,
+            "y": 0.093,
+            "width": 0.775,
+            "height": 0.112
+          },
+          "content": "The canonical-model artifacts matched the problem to Hotelling product differentiation, differentiated Bertrand competition, and binary costly information acquisition, distinguishing inherited objects from the new combination: Hotelling supplies the pricing margin, the information-acquisition family supplies the value-of-information cutoff, and the policy creates asymmetric exposure because information helps the healthy firm and hurts its rival. The assumption audit identified full coverage and a small health gap as maintaining an interior shared market, and independence of tastes and processing costs together with uniform taste density as delivering the exact one-third equilibrium pass-through; it flagged no-price-signaling as the highest referee-risk assumption and predicted that non-uniform taste density would destroy the sharp pass-through result, a prediction later confirmed numerically.",
+          "label": "Text"
+        },
+        {
+          "id": "1",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.111,
+            "y": 0.21,
+            "width": 0.774,
+            "height": 0.139
+          },
+          "content": "The user-approved numerical stage provided further checks beyond the proof repair reported in Section 5.4: symbolic routines recovered the equilibrium prices, market share, pass-through ratio, distributional threshold, and boundary limits; a 40,000-cell sweep within the maintained assumptions produced no sign or bound violation; and random-start best-response iterations converged to the closed form. Outside uniform taste density, the equilibrium-to-fixed-price ratio ranged from 0.34 to 2.64 in solved cases, with amplification occurring, and both prices could fall although the unhealthy product became cheaper relative to the healthy product in every solved case. The numerical report also records an unfavorable policy result rather than suppressing it: at the illustrative baseline, reducing the attention-cost parameter from 1 to 0.5 lowers utilitarian welfare, while stronger simplification eventually raises it, with the welfare-worst regime interior on the grid; since no proposition signs the welfare derivative, the workflow labels this a computational illustration and leaves the general welfare sign as open analytical work.",
+          "label": "Text"
+        },
+        {
+          "id": "2",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.112,
+            "y": 0.355,
+            "width": 0.773,
+            "height": 0.055
+          },
+          "content": "Reference handling was unusually strong: the literature-positioning artifact reports verification for every citation used in the model's lineage, and the resumed manuscript-generation run rechecked all 13 bibliography entries with zero discrepancies, contrasting with the baseline's misnaming of a real economist and its unsupported claim that a single firm dominates the U.S. candy category. The full workflow therefore receives F5=0 for this task.",
+          "label": "Text"
+        },
+        {
+          "id": "3",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.113,
+            "y": 0.435,
+            "width": 0.341,
+            "height": 0.015
+          },
+          "content": "## D.5 Task 5: Agri-Food System Transformation",
+          "label": "Text"
+        },
+        {
+          "id": "4",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.111,
+            "y": 0.463,
+            "width": 0.774,
+            "height": 0.085
+          },
+          "content": "Before unblinding, the more compact three-wedge manuscript was judged clearly stronger than the broader four-wedge manuscript. The broader document had good institutional coverage and useful qualitative shock narratives, but its policy-ranking propositions often treated one wedge at a time despite a model in which every instrument moved several distorted quantities, and it claimed multiple steady states and detailed impulse-response shapes without closing the corresponding dynamic system. After unblinding, this document was the no-skill baseline, and the three-wedge document was the full-workflow output.",
+          "label": "Text"
+        },
+        {
+          "id": "5",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.111,
+            "y": 0.554,
+            "width": 0.776,
+            "height": 0.098
+          },
+          "content": "The empirical reality check verified the prevalence of output-linked staple support, nitrogen-related environmental damage, and agricultural learning spillovers, classified the diversification-diet relationship as conditional and the publicgood value of staple output as a stylized assumption, and required the zero-weight food-security case to remain visible. The novelty gate returned a conditional pass with average risk 1.8 out of 3 and required a priority search of agricultural field journals before submission. The assumption audit reduced the binding assumptions to the food-security value, environmental damage, external learning, convex conversion costs, lump-sum financing, and a learning contraction bound, flagging the food-security term as bespoke and high risk.",
+          "label": "Text"
+        },
+        {
+          "id": "6",
+          "order": 7,
+          "bounding_box": {
+            "x": 0.111,
+            "y": 0.657,
+            "width": 0.774,
+            "height": 0.126
+          },
+          "content": "The proposition and proof stages contain two substantive corrections. First, the initial instrument-equivalence proposition was judged non-trivial only after Stage 7 introduced a CES polluting/green input nest, added a direct polluting-input tax to the first-best benchmark, and proved at sketch level that a green-input subsidy cannot replace that tax; the proof gate independently confirmed the CES homogeneity argument and the three-wedge envelope formula, issuing a conditional pass rather than a proof certificate because the steady-state slope/root argument, the pollution response to the acreage payment, and the full-system persistence comparison remained incomplete. Second, the numerical stage, executed only after separate user approval of the simulation plan and passing all six integrity checks, documented an $\\varepsilon=1$ coding-domain bug, added the normalized Cobb-Douglas limit, verified continuity, and reran the affected sweep from scratch with no parameter changed after observing results.",
+          "label": "Text"
+        },
+        {
+          "id": "7",
+          "order": 8,
+          "bounding_box": {
+            "x": 0.111,
+            "y": 0.788,
+            "width": 0.774,
+            "height": 0.125
+          },
+          "content": "Several numerical findings materially affected the theory. The rebound decomposition was checked against direct finite differences to within $10^{-5}$ on the baseline slice, confirming that green-input subsidies increase pollution throughout the searched Cobb-Douglas and low-substitution region. A steady-state-only welfare diagnostic gave the opposite sign for staple support and the acreage payment relative to the transition-based present-value object, so the manuscript is required to use the latter. The full workflow also confirmed that subsidizing the flow conversion cost has essentially zero steady-state effect, leading the policy section to distinguish a recurrent acreage payment from a transition-only flow subsidy. The most important counterexample concerned the learning bound: the initial assumption allowed $\\phi<1-\\kappa-\\mu=\\gamma+\\alpha$ , but the numerical sweep produced 378 steady-state solve failures, all at $\\phi >\\gamma$ , traced to a general-equilibrium learning-loop gain of $\\phi /\\gamma$ ; the researcher tightened the maintained domain to $\\phi <\\gamma$ and",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "page_index": 17,
+      "blocks": [
+        {
+          "id": "0",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.111,
+            "y": 0.092,
+            "width": 0.773,
+            "height": 0.029
+          },
+          "content": "back-propagated the correction to the equilibrium propositions and proof sketches, and the final manuscript marks the interval above $\\gamma$ as uncharted rather than treating the solved grid points as evidence of robustness.",
+          "label": "Text"
+        },
+        {
+          "id": "1",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.112,
+            "y": 0.127,
+            "width": 0.774,
+            "height": 0.098
+          },
+          "content": "Serious proof obligations remain: the exact global slope inequality for the steady-state excess-return function is open, the determinacy claim is supported by numerical root counts rather than a complete general proof, and the persistence proposition retains an unresolved eigenvalue-monotonicity step. F3 is therefore moderate, not mild, lower than the baseline because the main domain error is corrected and all remaining gaps are explicit rather than implicit. Reference grounding is complete for the retained bibliography (12 citations verified, no uncertain citation in the manuscript), with the remaining literature limitation concerning coverage (a priority search for a directly overlapping agricultural field-journal model) rather than accuracy.",
+          "label": "Text"
+        }
+      ]
+    }
+  ]
+}

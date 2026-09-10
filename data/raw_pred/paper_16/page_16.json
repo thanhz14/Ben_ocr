@@ -1,0 +1,582 @@
+{
+    "input_path": "/home/bocchi/Downloads/Paper_Data/Statistics/2607.20760v1.pdf",
+    "page_index": 16,
+    "page_count": 20,
+    "width": 1224,
+    "height": 1584,
+    "model_settings": {
+        "use_doc_preprocessor": false,
+        "use_layout_detection": true,
+        "use_chart_recognition": false,
+        "use_seal_recognition": false,
+        "use_ocr_for_image_block": true,
+        "format_block_content": true,
+        "merge_layout_blocks": true,
+        "markdown_ignore_labels": [
+            "number",
+            "footnote",
+            "header",
+            "header_image",
+            "footer",
+            "footer_image",
+            "aside_text"
+        ],
+        "return_layout_polygon_points": true
+    },
+    "parsing_res_list": [
+        {
+            "block_label": "text",
+            "block_content": "both decoupled trees have the lowest error of any method; on the harder, drift-dominated NOx response they are competitive with, though not ahead of, the deepest black-box models. A fully coupled coskewness tree is markedly worse on NOx, its skewness-aligned leaves generalizing poorly across the year boundary. This is exactly the gap the covariance leaves close.",
+            "block_bbox": [
+                137,
+                147,
+                1085,
+                291
+            ],
+            "block_id": 0,
+            "block_order": 1,
+            "group_id": 0,
+            "block_polygon_points": [
+                [
+                    137.0,
+                    147.0
+                ],
+                [
+                    1085.0,
+                    147.0
+                ],
+                [
+                    1085.0,
+                    291.0
+                ],
+                [
+                    137.0,
+                    291.0
+                ]
+            ]
+        },
+        {
+            "block_label": "figure_title",
+            "block_content": "<div style=\"text-align: center;\">Table 3: Gas-turbine emissions (Kaya et al., 2019), temporal split (train 2011–2014, test 2015): per-response RMSEP and the scale-weighted mean  $ \\overline{RMSEP}_{w} $ (lower is better), with the number of local leaf models. The two decoupled tbtree configurations are shown against the black-box references. Best in each column in bold.</div>\n",
+            "block_bbox": [
+                137,
+                328,
+                1083,
+                441
+            ],
+            "block_id": 1,
+            "block_order": null,
+            "group_id": 1,
+            "block_polygon_points": [
+                [
+                    136.99993896484375,
+                    336.0
+                ],
+                [
+                    1082.0,
+                    328.0
+                ],
+                [
+                    1082.888671875,
+                    432.99249267578125
+                ],
+                [
+                    137.88873291015625,
+                    440.99249267578125
+                ]
+            ]
+        },
+        {
+            "block_label": "table",
+            "block_content": "\n<table border=1 style='margin: auto; word-wrap: break-word;'><tr><td style='text-align: center; word-wrap: break-word;'>Model</td><td style='text-align: center; word-wrap: break-word;'># regimes</td><td style='text-align: center; word-wrap: break-word;'>RMSEP CO</td><td style='text-align: center; word-wrap: break-word;'>RMSEP NOx</td><td style='text-align: center; word-wrap: break-word;'>RMSEP w</td></tr><tr><td style='text-align: center; word-wrap: break-word;'>tbtree coskew split, cov leaves</td><td style='text-align: center; word-wrap: break-word;'>16</td><td style='text-align: center; word-wrap: break-word;'>1.61</td><td style='text-align: center; word-wrap: break-word;'>10.44</td><td style='text-align: center; word-wrap: break-word;'>0.830</td></tr><tr><td style='text-align: center; word-wrap: break-word;'>tbtree cov+coskew split, cov leaves</td><td style='text-align: center; word-wrap: break-word;'>16</td><td style='text-align: center; word-wrap: break-word;'>1.62</td><td style='text-align: center; word-wrap: break-word;'>10.50</td><td style='text-align: center; word-wrap: break-word;'>0.834</td></tr><tr><td style='text-align: center; word-wrap: break-word;'>TCN (4 blocks)</td><td style='text-align: center; word-wrap: break-word;'>-</td><td style='text-align: center; word-wrap: break-word;'>1.81</td><td style='text-align: center; word-wrap: break-word;'>9.70</td><td style='text-align: center; word-wrap: break-word;'>0.840</td></tr><tr><td style='text-align: center; word-wrap: break-word;'>Cubist (10 committees)</td><td style='text-align: center; word-wrap: break-word;'>-</td><td style='text-align: center; word-wrap: break-word;'>1.70</td><td style='text-align: center; word-wrap: break-word;'>10.75</td><td style='text-align: center; word-wrap: break-word;'>0.863</td></tr><tr><td style='text-align: center; word-wrap: break-word;'>Random forest, 200 trees</td><td style='text-align: center; word-wrap: break-word;'>-</td><td style='text-align: center; word-wrap: break-word;'>1.67</td><td style='text-align: center; word-wrap: break-word;'>11.20</td><td style='text-align: center; word-wrap: break-word;'>0.876</td></tr><tr><td style='text-align: center; word-wrap: break-word;'>MLP (64, 32), ReLU</td><td style='text-align: center; word-wrap: break-word;'>-</td><td style='text-align: center; word-wrap: break-word;'>1.71</td><td style='text-align: center; word-wrap: break-word;'>11.13</td><td style='text-align: center; word-wrap: break-word;'>0.882</td></tr><tr><td style='text-align: center; word-wrap: break-word;'>flat twoblock</td><td style='text-align: center; word-wrap: break-word;'>-</td><td style='text-align: center; word-wrap: break-word;'>1.77</td><td style='text-align: center; word-wrap: break-word;'>12.68</td><td style='text-align: center; word-wrap: break-word;'>0.966</td></tr><tr><td style='text-align: center; word-wrap: break-word;'>CART regression tree</td><td style='text-align: center; word-wrap: break-word;'>-</td><td style='text-align: center; word-wrap: break-word;'>2.33</td><td style='text-align: center; word-wrap: break-word;'>12.96</td><td style='text-align: center; word-wrap: break-word;'>1.104</td></tr></table>",
+            "block_bbox": [
+                145,
+                442,
+                1086,
+                723
+            ],
+            "block_id": 2,
+            "block_order": null,
+            "group_id": 2,
+            "block_polygon_points": [
+                [
+                    145.0,
+                    442.0
+                ],
+                [
+                    1086.0,
+                    442.0
+                ],
+                [
+                    1086.0,
+                    723.0
+                ],
+                [
+                    145.0,
+                    723.0
+                ]
+            ]
+        },
+        {
+            "block_label": "text",
+            "block_content": "The predictive parity above is bought at no cost to transparency, which is the point of the example. The decoupled coskewness tree partitions the operating envelope into 16 regimes, each carrying its own covariance twoblock model – a linear map from the nine process variables to the two emissions, with fully readable coefficients (all 16 leaves non-degenerate). The regimes are genuinely heterogeneous: across them the dominant driver of CO takes four distinct values (compressor discharge pressure in most regimes, but the inlet-filter pressure drop, the turbine exhaust pressure or the turbine-after temperature in specific operating regions), and the dominant NOx driver takes two. A plant engineer can thus read off which process variable governs emissions in each operating regime, an explanation nor the random forest, the MLP, or the TCN can provide.",
+            "block_bbox": [
+                136,
+                762,
+                1084,
+                1050
+            ],
+            "block_id": 3,
+            "block_order": 2,
+            "group_id": 3,
+            "block_polygon_points": [
+                [
+                    136.0,
+                    762.0
+                ],
+                [
+                    1084.0,
+                    762.0
+                ],
+                [
+                    1084.0,
+                    1050.0
+                ],
+                [
+                    136.0,
+                    1050.0
+                ]
+            ]
+        },
+        {
+            "block_label": "text",
+            "block_content": "Summarizing, the decoupled tbtree matches or beats every black-box baseline on scale-weighted error while remaining a single tree of 16 interpretable local emission models; the covariance leaves are what let the coskewness split compete predictively, whereas a fully coupled coskewness tree would trail in terms of predictive power.",
+            "block_bbox": [
+                137,
+                1050,
+                1084,
+                1168
+            ],
+            "block_id": 4,
+            "block_order": 3,
+            "group_id": 4,
+            "block_polygon_points": [
+                [
+                    137.0,
+                    1050.0
+                ],
+                [
+                    1084.0,
+                    1050.0
+                ],
+                [
+                    1084.0,
+                    1168.0
+                ],
+                [
+                    137.0,
+                    1168.0
+                ]
+            ]
+        },
+        {
+            "block_label": "paragraph_title",
+            "block_content": "## 8 Discussion and outlook",
+            "block_bbox": [
+                139,
+                1209,
+                578,
+                1245
+            ],
+            "block_id": 5,
+            "block_order": 4,
+            "group_id": 5,
+            "block_polygon_points": [
+                [
+                    139.0,
+                    1209.0
+                ],
+                [
+                    578.0,
+                    1209.0
+                ],
+                [
+                    578.0,
+                    1245.0
+                ],
+                [
+                    139.0,
+                    1245.0
+                ]
+            ]
+        },
+        {
+            "block_label": "text",
+            "block_content": "This paper has introduced tbtree, a shallow, deterministic and interpretable, top-down clustering tree that carries a local (dense or sparse) twoblock dimension reduction model in every leaf. To the author's knowledge it is the first tree-based regression method to do so, generalizing the PLS-Trees of Eriksson et al. (2009) from partial least squares to the joint predictor–response reduction of Cook et al. (2023). Its central methodological ingredient is a novel twoblock decomposition whose latent directions maximize the coskewness of the pre-",
+            "block_bbox": [
+                136,
+                1269,
+                1084,
+                1445
+            ],
+            "block_id": 6,
+            "block_order": 5,
+            "group_id": 6,
+            "block_polygon_points": [
+                [
+                    136.0,
+                    1269.0
+                ],
+                [
+                    1084.0,
+                    1269.0
+                ],
+                [
+                    1084.0,
+                    1445.0
+                ],
+                [
+                    136.0,
+                    1445.0
+                ]
+            ]
+        },
+        {
+            "block_label": "number",
+            "block_content": "17",
+            "block_bbox": [
+                598,
+                1481,
+                626,
+                1504
+            ],
+            "block_id": 7,
+            "block_order": null,
+            "group_id": 7,
+            "block_polygon_points": [
+                [
+                    598.0,
+                    1481.0
+                ],
+                [
+                    625.0,
+                    1481.0
+                ],
+                [
+                    625.0,
+                    1503.0
+                ],
+                [
+                    598.0,
+                    1503.0
+                ]
+            ]
+        }
+    ],
+    "layout_det_res": {
+        "input_path": null,
+        "page_index": null,
+        "boxes": [
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.926546573638916,
+                "coordinate": [
+                    137,
+                    147,
+                    1085,
+                    291
+                ],
+                "order": 1,
+                "polygon_points": [
+                    [
+                        137.0,
+                        147.0
+                    ],
+                    [
+                        1085.0,
+                        147.0
+                    ],
+                    [
+                        1085.0,
+                        291.0
+                    ],
+                    [
+                        137.0,
+                        291.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 7,
+                "label": "figure_title",
+                "score": 0.9299072027206421,
+                "coordinate": [
+                    137,
+                    328,
+                    1083,
+                    441
+                ],
+                "order": null,
+                "polygon_points": [
+                    [
+                        136.99993896484375,
+                        336.0
+                    ],
+                    [
+                        1082.0,
+                        328.0
+                    ],
+                    [
+                        1082.888671875,
+                        432.99249267578125
+                    ],
+                    [
+                        137.88873291015625,
+                        440.99249267578125
+                    ]
+                ]
+            },
+            {
+                "cls_id": 15,
+                "label": "inline_formula",
+                "score": 0.45895546674728394,
+                "coordinate": [
+                    746,
+                    356,
+                    847,
+                    385
+                ],
+                "order": 2,
+                "polygon_points": [
+                    [
+                        746.0,
+                        356.0
+                    ],
+                    [
+                        847.0,
+                        356.0
+                    ],
+                    [
+                        847.0,
+                        385.0
+                    ],
+                    [
+                        746.0,
+                        385.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 21,
+                "label": "table",
+                "score": 0.9648017883300781,
+                "coordinate": [
+                    145,
+                    442,
+                    1086,
+                    723
+                ],
+                "order": null,
+                "polygon_points": [
+                    [
+                        145.0,
+                        442.0
+                    ],
+                    [
+                        1086.0,
+                        442.0
+                    ],
+                    [
+                        1086.0,
+                        723.0
+                    ],
+                    [
+                        145.0,
+                        723.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 15,
+                "label": "inline_formula",
+                "score": 0.38464316725730896,
+                "coordinate": [
+                    975,
+                    447,
+                    1076,
+                    476
+                ],
+                "order": 3,
+                "polygon_points": [
+                    [
+                        975.0,
+                        447.0
+                    ],
+                    [
+                        1076.0,
+                        447.0
+                    ],
+                    [
+                        1076.0,
+                        476.0
+                    ],
+                    [
+                        975.0,
+                        476.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.9641209244728088,
+                "coordinate": [
+                    136,
+                    762,
+                    1084,
+                    1050
+                ],
+                "order": 4,
+                "polygon_points": [
+                    [
+                        136.0,
+                        762.0
+                    ],
+                    [
+                        1084.0,
+                        762.0
+                    ],
+                    [
+                        1084.0,
+                        1050.0
+                    ],
+                    [
+                        136.0,
+                        1050.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.9520831108093262,
+                "coordinate": [
+                    137,
+                    1050,
+                    1084,
+                    1168
+                ],
+                "order": 5,
+                "polygon_points": [
+                    [
+                        137.0,
+                        1050.0
+                    ],
+                    [
+                        1084.0,
+                        1050.0
+                    ],
+                    [
+                        1084.0,
+                        1168.0
+                    ],
+                    [
+                        137.0,
+                        1168.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 17,
+                "label": "paragraph_title",
+                "score": 0.8735237717628479,
+                "coordinate": [
+                    139,
+                    1209,
+                    578,
+                    1245
+                ],
+                "order": 6,
+                "polygon_points": [
+                    [
+                        139.0,
+                        1209.0
+                    ],
+                    [
+                        578.0,
+                        1209.0
+                    ],
+                    [
+                        578.0,
+                        1245.0
+                    ],
+                    [
+                        139.0,
+                        1245.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.9594261050224304,
+                "coordinate": [
+                    136,
+                    1269,
+                    1084,
+                    1445
+                ],
+                "order": 7,
+                "polygon_points": [
+                    [
+                        136.0,
+                        1269.0
+                    ],
+                    [
+                        1084.0,
+                        1269.0
+                    ],
+                    [
+                        1084.0,
+                        1445.0
+                    ],
+                    [
+                        136.0,
+                        1445.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 16,
+                "label": "number",
+                "score": 0.7688235640525818,
+                "coordinate": [
+                    598,
+                    1481,
+                    626,
+                    1504
+                ],
+                "order": 8,
+                "polygon_points": [
+                    [
+                        598.0,
+                        1481.0
+                    ],
+                    [
+                        625.0,
+                        1481.0
+                    ],
+                    [
+                        625.0,
+                        1503.0
+                    ],
+                    [
+                        598.0,
+                        1503.0
+                    ]
+                ]
+            }
+        ]
+    }
+}

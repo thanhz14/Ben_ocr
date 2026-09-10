@@ -1,0 +1,4155 @@
+{
+  "file_name": "paper_13",
+  "pages": [
+    {
+      "page_index": 1,
+      "blocks": [
+        {
+          "id": "0",
+          "order": null,
+          "bounding_box": {
+            "x": 0.03022875816993464,
+            "y": 0.36237373737373735,
+            "width": 0.035130718954248366,
+            "height": 0.461489898989899
+          },
+          "content": "arXiv:2607.20915v1 [q-bio.PE] 23 Jul 2026",
+          "label": "Text"
+        },
+        {
+          "id": "1",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.08496732026143791,
+            "y": 0.06439393939393939,
+            "width": 0.8349673202614379,
+            "height": 0.03535353535353535
+          },
+          "content": "# Evolutionary Le Chatelier's Principle: Phenotypic Plasticity and Genetic Assimilation via Timescale Separation in the Price Equation",
+          "label": "Text"
+        },
+        {
+          "id": "2",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.4027777777777778,
+            "y": 0.1148989898989899,
+            "width": 0.20016339869281047,
+            "height": 0.013888888888888888
+          },
+          "content": "Tetsuhiro S. Hatakeyama $ ^{*} $",
+          "label": "Text"
+        },
+        {
+          "id": "3",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.2173202614379085,
+            "y": 0.1294191919191919,
+            "width": 0.5702614379084967,
+            "height": 0.039141414141414144
+          },
+          "content": "Earth-Life Science Institute, Institute of Future Science, Institute of Science Tokyo,\n\n2-12-1-IE-1 Ookayama, Meguro-ku, Tokyo 152-8550, Japan\n\n(Dated: July 2026)",
+          "label": "Text"
+        },
+        {
+          "id": "4",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.17320261437908496,
+            "y": 0.17676767676767677,
+            "width": 0.6593137254901961,
+            "height": 0.22537878787878787
+          },
+          "content": "Phenotypic plasticity and genetic assimilation play key roles in adaptive evolution, yet their underlying mechanism has lacked a unified physical description. A major theoretical difficulty lies in the fundamental difference in timescales, as phenotypic plasticity occurs rapidly within a generation whereas genetic changes accumulate slowly across generations. Here, we formalize these processes by bridging the continuous-time Price equation, a foundational equation of evolutionary dynamics, with the physical concept of timescale separation. A sudden environmental change induces a fast plastic displacement of the phenotype relative to the slow genotypic variable. Through genotype-phenotype coupling, this displacement generates an internal genetic stress. We demonstrate that genetic assimilation is a dynamical relaxation process in which the genotype evolves to resolve this self-generated stress. These evolutionary dynamics mathematically realize Le Chatelier's principle, where the slow genetic response naturally amplifies the initial plastic shift in the same direction. The theory predicts that a weaker restoring force, which can manifest as larger clonal phenotypic fluctuations, requires a longer evolutionary timescale for assimilation. In the ideal limit of cost-free, perfectly adaptive plasticity, the relaxation time diverges, so assimilation effectively stalls. This formulation provides a macroscopic physical mechanism for genetic assimilation, offering a universal response law for evolutionary systems in which rapid phenotypic responses precede slower genetic change.",
+          "label": "Text"
+        },
+        {
+          "id": "5",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.19934640522875818,
+            "y": 0.42676767676767674,
+            "width": 0.17647058823529413,
+            "height": 0.013257575757575758
+          },
+          "content": "### I. INTRODUCTION",
+          "label": "Text"
+        },
+        {
+          "id": "6",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.08169934640522876,
+            "y": 0.4595959595959596,
+            "width": 0.41013071895424835,
+            "height": 0.36047979797979796
+          },
+          "content": "Phenotypic plasticity allows organisms to rapidly alter their traits in response to sudden environmental changes, providing a buffer for survival [1]. From a biophysical perspective, plasticity can be viewed as a strategy to process environmental information and optimize population growth in fluctuating environments [2, 3]. Its evolutionary role extends beyond survival; it is increasingly recognized that plasticity can act as a driver of adaptive evolution [4, 5]. A classic manifestation of this is genetic assimilation, first proposed by Waddington [6–8] and Schmalhausen [9]. In this process, a phenotypic trait initially expressed via plasticity in response to an environmental shift often represents an incomplete adaptation to novel conditions [10]. This trait is later genetically stabilized, eventually becoming constitutive even in the absence of the original environmental trigger [6, 11] or direct selection for the phenotype itself [12]. While this phenomenon has been empirically demonstrated [7, 13], the mechanistic link between the initial plastic response and the subsequent genetic evolution remains a subject of ongoing debate. Furthermore, while maintaining and expressing phenotypic plasticity often incurs inherent fitness costs [14, 15], the dynamic role of this plasticity cost in driving genetic assimilation has not been fully formulated.",
+          "label": "Text"
+        },
+        {
+          "id": "7",
+          "order": 7,
+          "bounding_box": {
+            "x": 0.08251633986928104,
+            "y": 0.8207070707070707,
+            "width": 0.4084967320261438,
+            "height": 0.04482323232323232
+          },
+          "content": "The central difficulty in understanding genetic assimilation as a general phenomenon lies in the difference in timescales between phenotypic and genetic processes. Phenotypic plasticity is a rapid, intra-generational response, while genetic changes accumulate slowly across generations; the dynamic interplay between these separated timescales has long been recognized as a key driver of evolution  $ [16] $. Classical quantitative genetics  $ [17–19] $ and recent mechanistic models  $ [20–22] $ describe these evolutionary trajectories by assuming specific microscopic genetic architectures or developmental processes. For instance, quantitative models often treat the degree of plasticity as an evolving genetic locus, and mechanistic models rely on explicit equations for developmental networks to simulate evolutionary updates. These approaches depend on microscopic details of the system, which makes it difficult to identify the underlying physical dynamics of assimilation. While Waddington intuitively conceptualized such macroscopic dynamics through the metaphor of an “epigenetic landscape”  $ [8] $, a macroscopic formulation based on timescale separation is required. This framework should describe the response to external perturbations independently of microscopic details.",
+          "label": "Text"
+        },
+        {
+          "id": "8",
+          "order": 8,
+          "bounding_box": {
+            "x": 0.511437908496732,
+            "y": 0.4255050505050505,
+            "width": 0.41013071895424835,
+            "height": 0.2916666666666667
+          },
+          "content": "",
+          "label": "Text"
+        },
+        {
+          "id": "9",
+          "order": 9,
+          "bounding_box": {
+            "x": 0.511437908496732,
+            "y": 0.7279040404040404,
+            "width": 0.41094771241830064,
+            "height": 0.19065656565656566
+          },
+          "content": "In physics, thermodynamics provides macroscopic laws that inherently incorporate timescale separation. Specifically, the Le Chatelier-Braun principle (hereafter referred to simply as Le Chatelier's principle) dictates that a system's long-term response to an external perturbation is amplified when its internal slow variables are allowed to relax, compared to its short-term response where these variables are constrained [23]. This principle is a mathematical property of any system undergoing constrained optimization, including economic systems [24]. Given the mathematical analogies between evolutionary dynamics and statistical mechanics [25–27], applying Le Chatelier's principle to evolutionary responses has been a viable hy",
+          "label": "Text"
+        },
+        {
+          "id": "10",
+          "order": null,
+          "bounding_box": {
+            "x": 0.08741830065359477,
+            "y": 0.898989898989899,
+            "width": 0.13480392156862744,
+            "height": 0.01452020202020202
+          },
+          "content": " $ ^{*} $ hatakeyama@elsi.jp",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "page_index": 2,
+      "blocks": [
+        {
+          "id": "0",
+          "order": null,
+          "bounding_box": {
+            "x": 0.9076797385620915,
+            "y": 0.03598484848484849,
+            "width": 0.013071895424836602,
+            "height": 0.011363636363636364
+          },
+          "content": "2",
+          "label": "Text"
+        },
+        {
+          "id": "1",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.08251633986928104,
+            "y": 0.06691919191919192,
+            "width": 0.4084967320261438,
+            "height": 0.13068181818181818
+          },
+          "content": "pothesis. Previous works have argued for the necessity of macroscopic theories for evolving systems [28], and indeed a static version of the evolutionary Le Chatelier's principle has been suggested based on static potential [29–32]. However, explicitly addressing timescale separation requires a dynamical formulation. Deriving this principle as a dynamical process directly from the fundamental equations of population genetics remains an unresolved challenge.",
+          "label": "Text"
+        },
+        {
+          "id": "2",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.08251633986928104,
+            "y": 0.1976010101010101,
+            "width": 0.40931372549019607,
+            "height": 0.14457070707070707
+          },
+          "content": "In this paper, we formalize the general theory of the evolutionary Le Chatelier's principle. By utilizing the continuous-time Price equation [33–35], the foundational theorem of evolutionary dynamics, combined with the physical concept of timescale separation, we distinguish the fast relaxation of the expressed phenotype from the slow transgenerational evolution of a genotypic variable. This approach allows us to construct a formulation of genetic assimilation that is independent of microscopic details.",
+          "label": "Text"
+        },
+        {
+          "id": "3",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.08333333333333333,
+            "y": 0.3428030303030303,
+            "width": 0.4084967320261438,
+            "height": 0.24621212121212122
+          },
+          "content": "Based on this framework, we address the dynamics of genetic assimilation (Fig. 1). When a sudden environmental change occurs, the environmental perturbation changes the fitness gradient along the fast phenotypic coordinate, but does not directly create a fitness-gradient component along the slow genotypic coordinate (Fig. 1B). The phenotype therefore rapidly relaxes to a new constrained optimum, producing an immediate plastic displacement (Fig. 1C). Through genotype-phenotype coupling, this plastic displacement generates a selection gradient along the genotypic coordinate, or internal genetic stress, even though the environment does not directly generate that gradient. Genetic assimilation then proceeds as a dynamical relaxation process in which the genotype evolves to resolve this self-generated stress (Fig. 1D). In short, plasticity creates stress, and evolution relaxes it.",
+          "label": "Text"
+        },
+        {
+          "id": "4",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.08251633986928104,
+            "y": 0.5890151515151515,
+            "width": 0.4084967320261438,
+            "height": 0.08901515151515152
+          },
+          "content": "To provide a physical picture of this general theory, we further apply our framework to an analytically tractable fitness landscape. In the explicit quadratic model below, genotype-phenotype coupling is identical to the plasticity cost,  $ F_{xy} = c $, which mathematically acts as a spring constant connecting the phenotype and genotype.",
+          "label": "Text"
+        },
+        {
+          "id": "5",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.22794117647058823,
+            "y": 0.7039141414141414,
+            "width": 0.12009803921568628,
+            "height": 0.01452020202020202
+          },
+          "content": "### II. RESULTS",
+          "label": "Text"
+        },
+        {
+          "id": "6",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.09313725490196079,
+            "y": 0.7361111111111112,
+            "width": 0.3872549019607843,
+            "height": 0.015151515151515152
+          },
+          "content": "### A. The Price equation with timescale separation",
+          "label": "Text"
+        },
+        {
+          "id": "7",
+          "order": 7,
+          "bounding_box": {
+            "x": 0.08333333333333333,
+            "y": 0.7676767676767676,
+            "width": 0.4068627450980392,
+            "height": 0.030303030303030304
+          },
+          "content": "We consider the continuous-time Price equation [33–35]:",
+          "label": "Text"
+        },
+        {
+          "id": "8",
+          "order": 8,
+          "bounding_box": {
+            "x": 0.19526143790849673,
+            "y": 0.8093434343434344,
+            "width": 0.184640522875817,
+            "height": 0.03535353535353535
+          },
+          "content": " $$ \\frac{d\\overline{x}}{dt}=\\mathrm{Cov}(x,F)+\\overline{\\left(\\frac{dx}{dt}\\right)} $$ ",
+          "label": "Formula"
+        },
+        {
+          "id": "9",
+          "order": 9,
+          "bounding_box": {
+            "x": 0.4673202614379085,
+            "y": 0.8207070707070707,
+            "width": 0.021241830065359478,
+            "height": 0.015151515151515152
+          },
+          "content": "(1)",
+          "label": "Formula"
+        },
+        {
+          "id": "10",
+          "order": 10,
+          "bounding_box": {
+            "x": 0.08251633986928104,
+            "y": 0.8560606060606061,
+            "width": 0.4076797385620915,
+            "height": 0.05997474747474747
+          },
+          "content": "where  $ \\bar{a} $ denotes the population mean of a, and  $ \\text{Cov}(a, b) $ represents the covariance between a and b. x is the phenotype of an individual, and F is the fitness. The first term on the right-hand side indicates the change in the phenotype by selection, and the second term indicates the change driven by other factors (e.g., environmental changes). Here, t represents an evolutionary time scale across generations, while individual phenotypic changes (e.g., plastic responses) occur on a much shorter, intra-generational time scale.",
+          "label": "Text"
+        },
+        {
+          "id": "11",
+          "order": 11,
+          "bounding_box": {
+            "x": 0.5122549019607843,
+            "y": 0.06691919191919192,
+            "width": 0.4084967320261438,
+            "height": 0.08648989898989899
+          },
+          "content": "",
+          "label": "Text"
+        },
+        {
+          "id": "12",
+          "order": 12,
+          "bounding_box": {
+            "x": 0.5122549019607843,
+            "y": 0.15467171717171718,
+            "width": 0.4084967320261438,
+            "height": 0.05618686868686869
+          },
+          "content": "We introduce the fitness function (or adaptive landscape [36]),  $ F(x, y; \\alpha) $, given by the phenotype x, genotype y, and environment  $ \\alpha $. In addition, we apply three assumptions.",
+          "label": "Text"
+        },
+        {
+          "id": "13",
+          "order": 13,
+          "bounding_box": {
+            "x": 0.5138888888888888,
+            "y": 0.21148989898989898,
+            "width": 0.40604575163398693,
+            "height": 0.028409090909090908
+          },
+          "content": "## Assumption 1: No direct environmental selection on the genotypic variable",
+          "label": "Text"
+        },
+        {
+          "id": "14",
+          "order": 14,
+          "bounding_box": {
+            "x": 0.5122549019607843,
+            "y": 0.24053030303030304,
+            "width": 0.4084967320261438,
+            "height": 0.07323232323232323
+          },
+          "content": "We assume that y is a slow inherited genotypic variable and that an environmental shift does not directly impose selection on this variable. In other words, at fixed phenotype and genotype, the environmental perturbation does not create a selection gradient along y.",
+          "label": "Text"
+        },
+        {
+          "id": "15",
+          "order": 15,
+          "bounding_box": {
+            "x": 0.5147058823529411,
+            "y": 0.31376262626262624,
+            "width": 0.3055555555555556,
+            "height": 0.013888888888888888
+          },
+          "content": "## Assumption 2: Timescale separation",
+          "label": "Text"
+        },
+        {
+          "id": "16",
+          "order": 16,
+          "bounding_box": {
+            "x": 0.5122549019607843,
+            "y": 0.32765151515151514,
+            "width": 0.40931372549019607,
+            "height": 0.08712121212121213
+          },
+          "content": "We assume a timescale separation between phenotype and genotype: the expressed phenotype relaxes much faster than the slow genotypic variable. On the evolutionary timescale, this fast phenotypic relaxation is approximated as instantaneous, so that the phenotype is slaved to a constrained local optimum,",
+          "label": "Text"
+        },
+        {
+          "id": "17",
+          "order": 17,
+          "bounding_box": {
+            "x": 0.6560457516339869,
+            "y": 0.4255050505050505,
+            "width": 0.125,
+            "height": 0.030934343434343436
+          },
+          "content": " $$ \\frac{\\partial F(x^{*},y;\\alpha)}{\\partial x}=0 $$ ",
+          "label": "Formula"
+        },
+        {
+          "id": "18",
+          "order": 18,
+          "bounding_box": {
+            "x": 0.8970588235294118,
+            "y": 0.43434343434343436,
+            "width": 0.021241830065359478,
+            "height": 0.015151515151515152
+          },
+          "content": "(2)",
+          "label": "Formula"
+        },
+        {
+          "id": "19",
+          "order": 19,
+          "bounding_box": {
+            "x": 0.5122549019607843,
+            "y": 0.4659090909090909,
+            "width": 0.4084967320261438,
+            "height": 0.04419191919191919
+          },
+          "content": "where  $ x^* = x^*(y, \\alpha) $. Thus, the plastic responses considered below correspond to local adaptive relaxation of the expressed phenotype under timescale separation.",
+          "label": "Text"
+        },
+        {
+          "id": "20",
+          "order": 20,
+          "bounding_box": {
+            "x": 0.511437908496732,
+            "y": 0.5107323232323232,
+            "width": 0.41013071895424835,
+            "height": 0.2196969696969697
+          },
+          "content": "Assumption 3: Local Quadratic Approximation\n\nWe assume that the fitness function is locally approximated by a quadratic function. The second derivatives of the fitness function (Hessian components), such as  $ F_{xx} = \\frac{\\partial^2 F}{\\partial x^2} $,  $ F_{yy} = \\frac{\\partial^2 F}{\\partial y^2} $,  $ F_{xy} = \\frac{\\partial^2 F}{\\partial x \\partial y} $, and  $ F_{x\\alpha} = \\frac{\\partial^2 F}{\\partial x \\partial \\alpha} $, are constant and common across all individuals. From Assumption 2,  $ x^* $ is on the peak of the fitness landscape, and thus  $ F_{xx} < 0 $. Note that this assumption has been historically employed in quantitative genetics [17, 37]. In the local quadratic expansion, Assumption 1 is expressed as  $ F_{y\\alpha} = 0 $, meaning that the environmental perturbation has no direct contribution to the fitness gradient along y. By contrast,  $ F_{x\\alpha} $ may be nonzero, allowing the environmental perturbation to induce a plastic response of the fast phenotypic variable.",
+          "label": "Text"
+        },
+        {
+          "id": "21",
+          "order": 21,
+          "bounding_box": {
+            "x": 0.5122549019607843,
+            "y": 0.7316919191919192,
+            "width": 0.4084967320261438,
+            "height": 0.05808080808080808
+          },
+          "content": "By taking the total differential of Eq. (2) (see SI Appendix for detailed derivations), we obtain the local response of the optimized phenotype as a linear function of y and  $ \\alpha $:",
+          "label": "Text"
+        },
+        {
+          "id": "22",
+          "order": 22,
+          "bounding_box": {
+            "x": 0.6021241830065359,
+            "y": 0.7992424242424242,
+            "width": 0.2312091503267974,
+            "height": 0.03345959595959596
+          },
+          "content": " $$ x^{*}(y,\\alpha)=-\\frac{F_{xy}}{F_{xx}}y-\\frac{F_{x\\alpha}}{F_{xx}}\\alpha+C $$ ",
+          "label": "Formula"
+        },
+        {
+          "id": "23",
+          "order": 23,
+          "bounding_box": {
+            "x": 0.8970588235294118,
+            "y": 0.8087121212121212,
+            "width": 0.021241830065359478,
+            "height": 0.015151515151515152
+          },
+          "content": "(3)",
+          "label": "Formula"
+        },
+        {
+          "id": "24",
+          "order": 24,
+          "bounding_box": {
+            "x": 0.511437908496732,
+            "y": 0.8409090909090909,
+            "width": 0.41013071895424835,
+            "height": 0.07575757575757576
+          },
+          "content": "where C is a constant of integration. Equation (3) has the formal structure of a local linear reaction norm: the coefficient  $ -F_{x\\alpha}/F_{xx} $ represents the local plastic susceptibility, namely the environmental sensitivity of the expressed phenotype at fixed genotype. This expression",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "page_index": 11,
+      "blocks": [
+        {
+          "id": "0",
+          "order": null,
+          "bounding_box": {
+            "x": 0.8995098039215687,
+            "y": 0.03598484848484849,
+            "width": 0.0196078431372549,
+            "height": 0.011363636363636364
+          },
+          "content": "11",
+          "label": "Text"
+        },
+        {
+          "id": "1",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.08169934640522876,
+            "y": 0.06755050505050506,
+            "width": 0.8390522875816994,
+            "height": 0.02904040404040404
+          },
+          "content": "Because y is a slow inherited genotypic variable, its evolutionary dynamics follow the Price equation with the selection term:",
+          "label": "Text"
+        },
+        {
+          "id": "2",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.44362745098039214,
+            "y": 0.10037878787878787,
+            "width": 0.1184640522875817,
+            "height": 0.029671717171717172
+          },
+          "content": " $$ \\frac{d\\overline{y}}{dt}=Cov(y,F) $$ ",
+          "label": "Formula"
+        },
+        {
+          "id": "3",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.8872549019607843,
+            "y": 0.10858585858585859,
+            "width": 0.03022875816993464,
+            "height": 0.01452020202020202
+          },
+          "content": "(S9)",
+          "label": "Formula"
+        },
+        {
+          "id": "4",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.08333333333333333,
+            "y": 0.13573232323232323,
+            "width": 0.2687908496732026,
+            "height": 0.015151515151515152
+          },
+          "content": "Substituting this into Eq. (S8) gives:",
+          "label": "Text"
+        },
+        {
+          "id": "5",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.4207516339869281,
+            "y": 0.15656565656565657,
+            "width": 0.16339869281045752,
+            "height": 0.030934343434343436
+          },
+          "content": " $$ \\mathrm{Cov}(x,F)=-\\frac{F_{xy}}{F_{xx}}\\frac{d\\overline{y}}{dt} $$ ",
+          "label": "Formula"
+        },
+        {
+          "id": "6",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.8790849673202614,
+            "y": 0.16414141414141414,
+            "width": 0.0392156862745098,
+            "height": 0.015782828282828284
+          },
+          "content": "(S10)",
+          "label": "Formula"
+        },
+        {
+          "id": "7",
+          "order": 7,
+          "bounding_box": {
+            "x": 0.08333333333333333,
+            "y": 0.19318181818181818,
+            "width": 0.6968954248366013,
+            "height": 0.015782828282828284
+          },
+          "content": "By substituting Eqs. (S7) and (S10) into the Price equation, it is unified into the following form:",
+          "label": "Text"
+        },
+        {
+          "id": "8",
+          "order": 8,
+          "bounding_box": {
+            "x": 0.4084967320261438,
+            "y": 0.21401515151515152,
+            "width": 0.18790849673202614,
+            "height": 0.032196969696969696
+          },
+          "content": " $$ \\frac{d\\overline{x}}{dt}=-\\frac{F_{xy}}{F_{xx}}\\frac{d\\overline{y}}{dt}-\\frac{F_{x\\alpha}}{F_{xx}}\\frac{d\\alpha}{dt} $$ ",
+          "label": "Formula"
+        },
+        {
+          "id": "9",
+          "order": 9,
+          "bounding_box": {
+            "x": 0.8790849673202614,
+            "y": 0.22285353535353536,
+            "width": 0.0392156862745098,
+            "height": 0.015782828282828284
+          },
+          "content": "(S11)",
+          "label": "Formula"
+        },
+        {
+          "id": "10",
+          "order": 10,
+          "bounding_box": {
+            "x": 0.08415032679738563,
+            "y": 0.25063131313131315,
+            "width": 0.8366013071895425,
+            "height": 0.03345959595959596
+          },
+          "content": "We decompose the total rate of phenotypic change into two biological contributions: the slow dynamics driven by genetic evolution  $ \\left(\\frac{d\\overline{x}_{\\mathrm{evo}}}{dt}\\right) $ and the fast dynamics due to phenotypic plasticity  $ \\left(\\frac{d\\overline{x}_{\\mathrm{plas}}}{dt}\\right) $. We define them respectively as:",
+          "label": "Text"
+        },
+        {
+          "id": "11",
+          "order": 11,
+          "bounding_box": {
+            "x": 0.3570261437908497,
+            "y": 0.288510101010101,
+            "width": 0.2916666666666667,
+            "height": 0.03282828282828283
+          },
+          "content": " $$ \\frac{d\\overline{x}_{evo}}{dt}=-\\frac{F_{xy}}{F_{xx}}\\frac{d\\overline{y}}{dt},\\quad\\frac{d\\overline{x}_{plas}}{dt}=-\\frac{F_{x\\alpha}}{F_{xx}}\\frac{d\\alpha}{dt} $$ ",
+          "label": "Formula"
+        },
+        {
+          "id": "12",
+          "order": 12,
+          "bounding_box": {
+            "x": 0.8790849673202614,
+            "y": 0.29797979797979796,
+            "width": 0.0392156862745098,
+            "height": 0.015782828282828284
+          },
+          "content": "(S12)",
+          "label": "Formula"
+        },
+        {
+          "id": "13",
+          "order": 13,
+          "bounding_box": {
+            "x": 0.08415032679738563,
+            "y": 0.3263888888888889,
+            "width": 0.571078431372549,
+            "height": 0.015151515151515152
+          },
+          "content": "Thus, the Price equation is decomposed into the sum of these two components:",
+          "label": "Text"
+        },
+        {
+          "id": "14",
+          "order": 14,
+          "bounding_box": {
+            "x": 0.42401960784313725,
+            "y": 0.3465909090909091,
+            "width": 0.15522875816993464,
+            "height": 0.030934343434343436
+          },
+          "content": " $$ \\frac{d\\overline{x}}{dt}=\\frac{d\\overline{x}_{evo}}{dt}+\\frac{d\\overline{x}_{plas}}{dt} $$ ",
+          "label": "Formula"
+        },
+        {
+          "id": "15",
+          "order": 15,
+          "bounding_box": {
+            "x": 0.8799019607843137,
+            "y": 0.3547979797979798,
+            "width": 0.03839869281045752,
+            "height": 0.015782828282828284
+          },
+          "content": "(S13)",
+          "label": "Formula"
+        },
+        {
+          "id": "16",
+          "order": 16,
+          "bounding_box": {
+            "x": 0.3668300653594771,
+            "y": 0.4015151515151515,
+            "width": 0.272875816993464,
+            "height": 0.013888888888888888
+          },
+          "content": "## Derivation of the evolutionary rate",
+          "label": "Text"
+        },
+        {
+          "id": "17",
+          "order": 17,
+          "bounding_box": {
+            "x": 0.08496732026143791,
+            "y": 0.43308080808080807,
+            "width": 0.8349673202614379,
+            "height": 0.028409090909090908
+          },
+          "content": "To explicitly evaluate  $ \\operatorname{Cov}(y, F) $, we expand the fitness function up to the quadratic term around the population mean:",
+          "label": "Text"
+        },
+        {
+          "id": "18",
+          "order": 18,
+          "bounding_box": {
+            "x": 0.2696078431372549,
+            "y": 0.4640151515151515,
+            "width": 0.46568627450980393,
+            "height": 0.06376262626262626
+          },
+          "content": " $$ \\begin{aligned}F(x,y;\\alpha)&=F(\\overline{x},\\overline{y};\\alpha)+\\frac{\\partial F}{\\partial\\overline{x}}\\left(x-\\overline{x}\\right)+\\frac{\\partial F}{\\partial\\overline{y}}\\left(y-\\overline{y}\\right)\\\\&+\\frac{1}{2}F_{xx}\\left(x-\\overline{x}\\right)^{2}+F_{xy}\\left(x-\\overline{x}\\right)\\left(y-\\overline{y}\\right)+\\frac{1}{2}F_{yy}\\left(y-\\overline{y}\\right)^{2}\\end{aligned} $$ ",
+          "label": "Formula"
+        },
+        {
+          "id": "19",
+          "order": 19,
+          "bounding_box": {
+            "x": 0.8790849673202614,
+            "y": 0.5063131313131313,
+            "width": 0.03839869281045752,
+            "height": 0.015782828282828284
+          },
+          "content": "(S14)",
+          "label": "Formula"
+        },
+        {
+          "id": "20",
+          "order": 20,
+          "bounding_box": {
+            "x": 0.08251633986928104,
+            "y": 0.5334595959595959,
+            "width": 0.8382352941176471,
+            "height": 0.043560606060606064
+          },
+          "content": "In the covariance calculation, all terms involving only  $ \\alpha $ or cross-terms with  $ \\alpha $ are zero because the variance of  $ \\alpha $ within the population is zero. From the optimal condition, the term proportional to  $ \\frac{\\partial F}{\\partial x} $ is zero. Using the linear relation  $ x - \\overline{x} = -(F_{xy}/F_{xx})(y - \\overline{y}) $, we calculate  $ \\operatorname{Cov}(y, F) $:",
+          "label": "Text"
+        },
+        {
+          "id": "21",
+          "order": 21,
+          "bounding_box": {
+            "x": 0.24428104575163398,
+            "y": 0.5839646464646465,
+            "width": 0.5163398692810458,
+            "height": 0.1268939393939394
+          },
+          "content": " $$ \\begin{aligned}\\operatorname{Cov}(y,F)&=\\left[(y-\\overline{y})F(x,y;\\alpha)\\right]\\\\&=F(\\overline{x},\\overline{y};\\alpha)(\\overline{y-\\overline{y}})+\\frac{\\partial F}{\\partial\\overline{y}}(\\overline{y-\\overline{y})^{2}}+\\frac{1}{2}\\left(F_{yy}-\\frac{F_{xy}^{2}}{F_{xx}}\\right)\\overline{(y-\\overline{y})^{3}}\\\\&=\\frac{\\partial F}{\\partial\\overline{y}}(\\overline{y-\\overline{y})^{2}}\\\\&=G_{yy}\\frac{\\partial F}{\\partial\\overline{y}}=\\frac{d\\overline{y}}{dt}\\end{aligned} $$ ",
+          "label": "Formula"
+        },
+        {
+          "id": "22",
+          "order": 22,
+          "bounding_box": {
+            "x": 0.8790849673202614,
+            "y": 0.6887626262626263,
+            "width": 0.0392156862745098,
+            "height": 0.015782828282828284
+          },
+          "content": "(S15)",
+          "label": "Formula"
+        },
+        {
+          "id": "23",
+          "order": 23,
+          "bounding_box": {
+            "x": 0.08415032679738563,
+            "y": 0.7209595959595959,
+            "width": 0.8366013071895425,
+            "height": 0.032196969696969696
+          },
+          "content": "where we used the definition  $ (y - \\overline{y}) = 0 $, and under Assumption 4 (symmetric distribution), the third central moment  $ \\overline{(y - \\overline{y})^3} = 0 $. Substituting this result into the evolutionary term defined in Eq. (S12) yields the evolutionary rate:",
+          "label": "Text"
+        },
+        {
+          "id": "24",
+          "order": 24,
+          "bounding_box": {
+            "x": 0.4199346405228758,
+            "y": 0.7575757575757576,
+            "width": 0.1650326797385621,
+            "height": 0.03282828282828283
+          },
+          "content": " $$ \\frac{d\\overline{x}_{evo}}{dt}=-G_{yy}\\frac{F_{xy}}{F_{xx}}\\frac{\\partial F}{\\partial\\overline{y}} $$ ",
+          "label": "Formula"
+        },
+        {
+          "id": "25",
+          "order": 25,
+          "bounding_box": {
+            "x": 0.8790849673202614,
+            "y": 0.7664141414141414,
+            "width": 0.0392156862745098,
+            "height": 0.015782828282828284
+          },
+          "content": "(S16)",
+          "label": "Formula"
+        },
+        {
+          "id": "26",
+          "order": 26,
+          "bounding_box": {
+            "x": 0.14460784313725492,
+            "y": 0.8150252525252525,
+            "width": 0.7165032679738562,
+            "height": 0.013888888888888888
+          },
+          "content": "### S2. DERIVATION OF THE DYNAMIC RESPONSE AND LE CHATELIER'S PRINCIPLE",
+          "label": "Text"
+        },
+        {
+          "id": "27",
+          "order": 27,
+          "bounding_box": {
+            "x": 0.08333333333333333,
+            "y": 0.8478535353535354,
+            "width": 0.8366013071895425,
+            "height": 0.027777777777777776
+          },
+          "content": "This section provides the detailed derivations of the dynamic response and the evolutionary Le Chatelier relation presented in the main text.",
+          "label": "Text"
+        },
+        {
+          "id": "28",
+          "order": 28,
+          "bounding_box": {
+            "x": 0.08496732026143791,
+            "y": 0.8768939393939394,
+            "width": 0.8349673202614379,
+            "height": 0.03787878787878788
+          },
+          "content": "We consider an environmental shift  $ \\Delta\\alpha $ at t = 0, defined as  $ \\frac{d\\alpha}{dt} = \\Delta\\alpha\\delta(t) $. Prior to the shift, y is optimized, satisfying  $ \\left.\\frac{\\partial F}{\\partial y}\\right|_{t=0^{-}} = 0 $,  $ F_{yy} < 0 $, and  $ \\det H = F_{xx}F_{yy} - F_{xy}^{2} > 0 $.",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "page_index": 12,
+      "blocks": [
+        {
+          "id": "0",
+          "order": null,
+          "bounding_box": {
+            "x": 0.9003267973856209,
+            "y": 0.03535353535353535,
+            "width": 0.02042483660130719,
+            "height": 0.011994949494949494
+          },
+          "content": "12",
+          "label": "Text"
+        },
+        {
+          "id": "1",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.42320261437908496,
+            "y": 0.06881313131313131,
+            "width": 0.15931372549019607,
+            "height": 0.013257575757575758
+          },
+          "content": "## Short-time response",
+          "label": "Text"
+        },
+        {
+          "id": "2",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.08169934640522876,
+            "y": 0.09911616161616162,
+            "width": 0.8390522875816994,
+            "height": 0.04861111111111111
+          },
+          "content": "We calculate the fast response of  $ \\overline{x} $ in the short-time limit ( $ \\epsilon \\to 0 $). Because  $ \\overline{y} $ is a slow variable, its change over an infinitesimal time is zero ( $ \\int_{-\\epsilon}^{+\\epsilon} \\frac{d\\overline{x}_{\\text{evo}}}{dt} dt = 0 $). Integrating the plastic component yields the initial phenotypic response  $ \\Delta \\overline{x}_{\\text{plas}} $:",
+          "label": "Text"
+        },
+        {
+          "id": "3",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.3897058823529412,
+            "y": 0.15593434343434343,
+            "width": 0.2238562091503268,
+            "height": 0.10164141414141414
+          },
+          "content": " $$ \\begin{aligned}\\Delta\\overline{x}_{plas}&=\\int_{-\\epsilon}^{+\\epsilon}\\frac{d\\overline{x}_{plas}}{dt}dt\\\\&=-\\int_{-\\epsilon}^{+\\epsilon}\\frac{F_{x\\alpha}}{F_{xx}}\\Delta\\alpha\\delta(t)dt\\\\&=-\\frac{F_{x\\alpha}}{F_{xx}}\\Delta\\alpha\\end{aligned} $$ ",
+          "label": "Formula"
+        },
+        {
+          "id": "4",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.8790849673202614,
+            "y": 0.2361111111111111,
+            "width": 0.0392156862745098,
+            "height": 0.015782828282828284
+          },
+          "content": "(S17)",
+          "label": "Formula"
+        },
+        {
+          "id": "5",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.09967320261437909,
+            "y": 0.2676767676767677,
+            "width": 0.7066993464052288,
+            "height": 0.01452020202020202
+          },
+          "content": "To derive the slow genetic change after the shift, we expand the fitness gradient along  $ \\overline{y} $ at  $ t = 0^{+} $:",
+          "label": "Text"
+        },
+        {
+          "id": "6",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.2426470588235294,
+            "y": 0.2878787878787879,
+            "width": 0.5220588235294118,
+            "height": 0.05366161616161616
+          },
+          "content": " $$ \\begin{aligned}\\left.\\frac{\\partial F}{\\partial\\overline{y}}\\right|_{t=0^{+}}&=\\left.\\frac{\\partial F}{\\partial\\overline{y}}\\right|_{t=0^{-}}+\\left.\\frac{\\partial}{\\partial\\overline{x}}\\left(\\frac{\\partial F}{\\partial\\overline{y}}\\right)\\Delta\\overline{x}+\\frac{\\partial}{\\partial\\overline{y}}\\left(\\frac{\\partial F}{\\partial\\overline{y}}\\right)\\Delta\\overline{y}+\\frac{\\partial}{\\partial\\alpha}\\left(\\frac{\\partial F}{\\partial\\overline{y}}\\right)\\Delta\\alpha\\right.\\\\&=F_{xy}\\Delta\\overline{x}+F_{yy}\\Delta\\overline{y}+F_{y\\alpha}\\Delta\\alpha\\end{aligned} $$ ",
+          "label": "Formula"
+        },
+        {
+          "id": "7",
+          "order": 7,
+          "bounding_box": {
+            "x": 0.8790849673202614,
+            "y": 0.32575757575757575,
+            "width": 0.0392156862745098,
+            "height": 0.015782828282828284
+          },
+          "content": "(S18)",
+          "label": "Formula"
+        },
+        {
+          "id": "8",
+          "order": 8,
+          "bounding_box": {
+            "x": 0.08415032679738563,
+            "y": 0.3503787878787879,
+            "width": 0.8366013071895425,
+            "height": 0.07386363636363637
+          },
+          "content": "Under Assumption 3 (quadratic fitness function), higher-order terms are zero, making this first-order expansion exact. In the short-time response,  $ \\Delta\\overline{y} = 0 $, and the initial change of  $ \\overline{x} $ is solely  $ \\Delta\\overline{x}_{\\text{plas}} $. By Assumption 1, the environmental perturbation does not directly create a fitness-gradient component along the slow genotypic coordinate. In the local quadratic expansion, this condition is expressed as  $ F_{y\\alpha} = 0 $. Thus, immediately after the environmental shift, the genetic gradient is generated by the plastic displacement of the fast phenotypic variable:",
+          "label": "Text"
+        },
+        {
+          "id": "9",
+          "order": 9,
+          "bounding_box": {
+            "x": 0.4215686274509804,
+            "y": 0.42992424242424243,
+            "width": 0.1642156862745098,
+            "height": 0.034722222222222224
+          },
+          "content": " $$ \\left.\\frac{\\partial F}{\\partial\\overline{y}}\\right|_{t=0^{+}}=F_{xy}\\Delta\\overline{x}_{plas} $$ ",
+          "label": "Formula"
+        },
+        {
+          "id": "10",
+          "order": 10,
+          "bounding_box": {
+            "x": 0.8790849673202614,
+            "y": 0.43876262626262624,
+            "width": 0.0392156862745098,
+            "height": 0.015782828282828284
+          },
+          "content": "(S19)",
+          "label": "Formula"
+        },
+        {
+          "id": "11",
+          "order": 11,
+          "bounding_box": {
+            "x": 0.08415032679738563,
+            "y": 0.4715909090909091,
+            "width": 0.8349673202614379,
+            "height": 0.015151515151515152
+          },
+          "content": "Substituting this into the evolutionary rate defined in Eq. (S16) gives the initial velocity of the evolutionary change:",
+          "label": "Text"
+        },
+        {
+          "id": "12",
+          "order": 12,
+          "bounding_box": {
+            "x": 0.39133986928104575,
+            "y": 0.494949494949495,
+            "width": 0.2238562091503268,
+            "height": 0.03535353535353535
+          },
+          "content": " $$ \\left.\\frac{d\\overline{x}_{evo}}{dt}\\right|_{t=0^{+}}=-G_{yy}\\frac{F_{xy}^{2}}{F_{xx}}\\Delta\\overline{x}_{plas} $$ ",
+          "label": "Formula"
+        },
+        {
+          "id": "13",
+          "order": 13,
+          "bounding_box": {
+            "x": 0.8790849673202614,
+            "y": 0.5044191919191919,
+            "width": 0.0392156862745098,
+            "height": 0.015782828282828284
+          },
+          "content": "(S20)",
+          "label": "Formula"
+        },
+        {
+          "id": "14",
+          "order": 14,
+          "bounding_box": {
+            "x": 0.31862745098039214,
+            "y": 0.5555555555555556,
+            "width": 0.3684640522875817,
+            "height": 0.013888888888888888
+          },
+          "content": "## Response at an arbitrary time and steady state",
+          "label": "Text"
+        },
+        {
+          "id": "15",
+          "order": 15,
+          "bounding_box": {
+            "x": 0.08251633986928104,
+            "y": 0.5871212121212122,
+            "width": 0.8382352941176471,
+            "height": 0.030303030303030304
+          },
+          "content": "To evaluate the response at an arbitrary time  $ t $, we integrate the total rate of phenotypic change to decompose the total phenotypic change  $ \\Delta\\overline{x}(t)=\\overline{x}(t)-\\overline{x}(0^{-}) $ into genetic and plastic displacements:",
+          "label": "Text"
+        },
+        {
+          "id": "16",
+          "order": 16,
+          "bounding_box": {
+            "x": 0.369281045751634,
+            "y": 0.6256313131313131,
+            "width": 0.2647058823529412,
+            "height": 0.08522727272727272
+          },
+          "content": " $$ \\begin{aligned}\\Delta\\overline{x}(t)&=\\int_{0^{-}}^{t}\\frac{d\\overline{x}_{evo}}{dt}dt+\\int_{0^{-}}^{t}\\frac{d\\overline{x}_{plas}}{dt}dt\\\\&=\\Delta\\overline{x}_{evo}(t)+\\Delta\\overline{x}_{plas}\\\\&=-\\frac{F_{xy}}{F_{xx}}\\Delta\\overline{y}(t)+\\Delta\\overline{x}_{plas}\\end{aligned} $$ ",
+          "label": "Formula"
+        },
+        {
+          "id": "17",
+          "order": 17,
+          "bounding_box": {
+            "x": 0.8790849673202614,
+            "y": 0.6875,
+            "width": 0.0392156862745098,
+            "height": 0.015782828282828284
+          },
+          "content": "(S21)",
+          "label": "Formula"
+        },
+        {
+          "id": "18",
+          "order": 18,
+          "bounding_box": {
+            "x": 0.08251633986928104,
+            "y": 0.7184343434343434,
+            "width": 0.7066993464052288,
+            "height": 0.015782828282828284
+          },
+          "content": "where  $ \\Delta\\overline{y}(t)=\\overline{y}(t)-\\overline{y}(0^{-}) $. We expand the slope of the fitness landscape using  $ \\Delta\\overline{x}(t) $ and  $ \\Delta\\overline{y}(t) $:",
+          "label": "Text"
+        },
+        {
+          "id": "19",
+          "order": 19,
+          "bounding_box": {
+            "x": 0.3897058823529412,
+            "y": 0.740530303030303,
+            "width": 0.22549019607843138,
+            "height": 0.03282828282828283
+          },
+          "content": " $$ \\frac{\\partial F}{\\partial\\overline{y}}(t)=F_{xy}\\Delta\\overline{x}(t)+F_{yy}\\Delta\\overline{y}(t) $$ ",
+          "label": "Formula"
+        },
+        {
+          "id": "20",
+          "order": 20,
+          "bounding_box": {
+            "x": 0.8790849673202614,
+            "y": 0.7493686868686869,
+            "width": 0.0392156862745098,
+            "height": 0.015782828282828284
+          },
+          "content": "(S22)",
+          "label": "Formula"
+        },
+        {
+          "id": "21",
+          "order": 21,
+          "bounding_box": {
+            "x": 0.08333333333333333,
+            "y": 0.7803030303030303,
+            "width": 0.3194444444444444,
+            "height": 0.015782828282828284
+          },
+          "content": "Substituting Eq. (S21) into Eq. (S22) gives:",
+          "label": "Text"
+        },
+        {
+          "id": "22",
+          "order": 22,
+          "bounding_box": {
+            "x": 0.3235294117647059,
+            "y": 0.80239898989899,
+            "width": 0.35866013071895425,
+            "height": 0.10858585858585859
+          },
+          "content": " $$ \\begin{aligned}\\frac{\\partial F}{\\partial\\overline{y}}(t)&=F_{xy}\\left(-\\frac{F_{xy}}{F_{xx}}\\Delta\\overline{y}(t)+\\Delta\\overline{x}_{plas}\\right)+F_{yy}\\Delta\\overline{y}(t)\\\\&=F_{xy}\\Delta\\overline{x}_{plas}+\\left(F_{yy}-\\frac{F_{xy}^{2}}{F_{xx}}\\right)\\Delta\\overline{y}(t)\\\\&=F_{xy}\\Delta\\overline{x}_{plas}+\\frac{\\det H}{F_{xx}}\\Delta\\overline{y}(t)\\\\ \\end{aligned} $$ ",
+          "label": "Formula"
+        },
+        {
+          "id": "23",
+          "order": 23,
+          "bounding_box": {
+            "x": 0.8790849673202614,
+            "y": 0.8888888888888888,
+            "width": 0.0392156862745098,
+            "height": 0.015782828282828284
+          },
+          "content": "(S23)",
+          "label": "Formula"
+        }
+      ]
+    },
+    {
+      "page_index": 13,
+      "blocks": [
+        {
+          "id": "0",
+          "order": null,
+          "bounding_box": {
+            "x": 0.9003267973856209,
+            "y": 0.03535353535353535,
+            "width": 0.02042483660130719,
+            "height": 0.011994949494949494
+          },
+          "content": "13",
+          "label": "Text"
+        },
+        {
+          "id": "1",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.08251633986928104,
+            "y": 0.06691919191919192,
+            "width": 0.8382352941176471,
+            "height": 0.03156565656565657
+          },
+          "content": "At the final steady state ($t \\to \\infty$), genetic evolution ceases, and $\\frac{\\partial F}{\\partial y}(\\infty) = 0$. Substituting Eq. (S23) into this condition yields the total change in genotype:",
+          "label": "Text"
+        },
+        {
+          "id": "2",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.3684640522875817,
+            "y": 0.10606060606060606,
+            "width": 0.26715686274509803,
+            "height": 0.06376262626262626
+          },
+          "content": " $$ \\begin{aligned}0&=F_{xy}\\Delta\\overline{x}_{plas}+\\frac{\\det H}{F_{xx}}\\Delta\\overline{y}(\\infty)\\\\\\Delta\\overline{y}(\\infty)&=-\\frac{F_{xx}F_{xy}}{\\det H}\\Delta\\overline{x}_{plas}\\end{aligned} $$ ",
+          "label": "Formula"
+        },
+        {
+          "id": "3",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.8790849673202614,
+            "y": 0.14709595959595959,
+            "width": 0.0392156862745098,
+            "height": 0.015151515151515152
+          },
+          "content": "(S24)",
+          "label": "Formula"
+        },
+        {
+          "id": "4",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.08415032679738563,
+            "y": 0.1773989898989899,
+            "width": 0.7246732026143791,
+            "height": 0.015151515151515152
+          },
+          "content": "The total long-time change in the phenotype,  $ \\Delta\\overline{x}_{\\text{total}} $, is obtained by evaluating Eq. (S21) at  $ t \\to \\infty $:",
+          "label": "Text"
+        },
+        {
+          "id": "5",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.38235294117647056,
+            "y": 0.2013888888888889,
+            "width": 0.23937908496732027,
+            "height": 0.09027777777777778
+          },
+          "content": " $$ \\begin{aligned}\\Delta\\overline{x}_{total}&=\\Delta\\overline{x}_{evo}(\\infty)+\\Delta\\overline{x}_{plas}\\\\&=-\\frac{F_{xy}}{F_{xx}}\\Delta\\overline{y}(\\infty)+\\Delta\\overline{x}_{plas}\\\\&=\\left(1+\\frac{F_{xy}^{2}}{\\det H}\\right)\\Delta\\overline{x}_{plas}\\\\ \\end{aligned} $$ ",
+          "label": "Formula"
+        },
+        {
+          "id": "6",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.8799019607843137,
+            "y": 0.2657828282828283,
+            "width": 0.03839869281045752,
+            "height": 0.015782828282828284
+          },
+          "content": "(S25)",
+          "label": "Formula"
+        },
+        {
+          "id": "7",
+          "order": 7,
+          "bounding_box": {
+            "x": 0.08415032679738563,
+            "y": 0.3023989898989899,
+            "width": 0.4665032679738562,
+            "height": 0.015782828282828284
+          },
+          "content": "Because  $ \\det H > 0 $, we obtain the inequality  $ |\\Delta \\overline{x}_{\\text{total}}| \\geq |\\Delta \\overline{x}_{\\text{plas}}| $.",
+          "label": "Text"
+        },
+        {
+          "id": "8",
+          "order": 8,
+          "bounding_box": {
+            "x": 0.2107843137254902,
+            "y": 0.3446969696969697,
+            "width": 0.5833333333333334,
+            "height": 0.013888888888888888
+          },
+          "content": "### S3. EXPONENTIAL DECAY AND MUTATION-SELECTION BALANCE",
+          "label": "Text"
+        },
+        {
+          "id": "9",
+          "order": 9,
+          "bounding_box": {
+            "x": 0.08169934640522876,
+            "y": 0.3768939393939394,
+            "width": 0.8390522875816994,
+            "height": 0.030303030303030304
+          },
+          "content": "This section provides the detailed derivations of the exponential relaxation and mutation-selection-balance results presented in the main text.",
+          "label": "Text"
+        },
+        {
+          "id": "10",
+          "order": 10,
+          "bounding_box": {
+            "x": 0.2687908496732026,
+            "y": 0.4337121212121212,
+            "width": 0.4681372549019608,
+            "height": 0.013888888888888888
+          },
+          "content": "## Derivation of the evolutionary dynamics and relaxation time",
+          "label": "Text"
+        },
+        {
+          "id": "11",
+          "order": 11,
+          "bounding_box": {
+            "x": 0.08169934640522876,
+            "y": 0.46464646464646464,
+            "width": 0.8366013071895425,
+            "height": 0.03345959595959596
+          },
+          "content": "The evolutionary process of the genotype is driven by the Price equation derived in Eq. (S15). Because  $ \\overline{y}(0^{+}) $ is constant, we can rewrite  $ \\frac{d\\overline{y}}{dt} $ as  $ \\frac{d}{dt}\\Delta\\overline{y}(t) $. Substituting the slope at an arbitrary time (Eq. S23) yields:",
+          "label": "Text"
+        },
+        {
+          "id": "12",
+          "order": 12,
+          "bounding_box": {
+            "x": 0.33088235294117646,
+            "y": 0.5056818181818182,
+            "width": 0.3423202614379085,
+            "height": 0.12878787878787878
+          },
+          "content": " $$ \\begin{aligned}\\frac{d}{dt}\\Delta\\overline{y}(t)&=G_{yy}\\left(F_{xy}\\Delta\\overline{x}_{plas}+\\frac{\\det H}{F_{xx}}\\Delta\\overline{y}(t)\\right)\\\\&=G_{yy}\\frac{\\det H}{F_{xx}}\\Delta\\overline{y}(t)+G_{yy}F_{xy}\\Delta\\overline{x}_{plas}\\\\&=G_{yy}\\frac{\\det H}{F_{xx}}\\Delta\\overline{y}(t)-G_{yy}\\frac{\\det H}{F_{xx}}\\Delta\\overline{y}(\\infty)\\\\&=-\\frac{1}{\\tau}\\left(\\Delta\\overline{y}(t)-\\Delta\\overline{y}(\\infty)\\right)\\end{aligned} $$ ",
+          "label": "Formula"
+        },
+        {
+          "id": "13",
+          "order": 13,
+          "bounding_box": {
+            "x": 0.8790849673202614,
+            "y": 0.6142676767676768,
+            "width": 0.0392156862745098,
+            "height": 0.015782828282828284
+          },
+          "content": "(S26)",
+          "label": "Formula"
+        },
+        {
+          "id": "14",
+          "order": 14,
+          "bounding_box": {
+            "x": 0.08496732026143791,
+            "y": 0.6439393939393939,
+            "width": 0.8349673202614379,
+            "height": 0.03409090909090909
+          },
+          "content": "In the third line, we used the steady-state relationship (Eq. S24) to eliminate  $ \\Delta \\overline{x}_{\\text{plas}} $. In the final line, we defined the relaxation time as  $ \\tau = -\\frac{F_{xx}}{G_{yy} \\det H} $.",
+          "label": "Text"
+        },
+        {
+          "id": "15",
+          "order": 15,
+          "bounding_box": {
+            "x": 0.32189542483660133,
+            "y": 0.7058080808080808,
+            "width": 0.3611111111111111,
+            "height": 0.013888888888888888
+          },
+          "content": "## Derivation of the steady-state genetic variance",
+          "label": "Text"
+        },
+        {
+          "id": "16",
+          "order": 16,
+          "bounding_box": {
+            "x": 0.08251633986928104,
+            "y": 0.7367424242424242,
+            "width": 0.8382352941176471,
+            "height": 0.030934343434343436
+          },
+          "content": "We consider the effective fitness landscape experienced by y when x is optimized. By differentiating the expanded slope (Eq. S23) with respect to  $ \\overline{y} $, the effective curvature is:",
+          "label": "Text"
+        },
+        {
+          "id": "17",
+          "order": 17,
+          "bounding_box": {
+            "x": 0.42810457516339867,
+            "y": 0.7752525252525253,
+            "width": 0.1503267973856209,
+            "height": 0.03345959595959596
+          },
+          "content": " $$ \\frac{\\partial^{2}F}{\\partial\\overline{y}^{2}}=\\frac{\\det H}{F_{xx}}=-\\kappa $$ ",
+          "label": "Formula"
+        },
+        {
+          "id": "18",
+          "order": 18,
+          "bounding_box": {
+            "x": 0.8799019607843137,
+            "y": 0.7847222222222222,
+            "width": 0.03839869281045752,
+            "height": 0.015782828282828284
+          },
+          "content": "(S27)",
+          "label": "Formula"
+        },
+        {
+          "id": "19",
+          "order": 19,
+          "bounding_box": {
+            "x": 0.08415032679738563,
+            "y": 0.8175505050505051,
+            "width": 0.8357843137254902,
+            "height": 0.03535353535353535
+          },
+          "content": "where  $ \\kappa = -\\frac{\\det H}{F_{xx}} > 0 $. The effective fitness function around the optimal  $ y_{\\mathrm{opt}} = \\overline{y}(0^{-}) + \\Delta \\overline{y}(\\infty) $ is a quadratic function  $ F(y) = F(y_{\\mathrm{opt}}) - \\frac{\\kappa}{2}(y - y_{\\mathrm{opt}})^2 $.",
+          "label": "Text"
+        },
+        {
+          "id": "20",
+          "order": 20,
+          "bounding_box": {
+            "x": 0.08415032679738563,
+            "y": 0.8529040404040404,
+            "width": 0.8357843137254902,
+            "height": 0.030303030303030304
+          },
+          "content": "Mapping the continuous-time dynamics to discrete generations, the absolute fitness is  $ \\exp(F(y)) $. Selection multiplies the Gaussian distribution  $ P(y) $ (Assumption 4') by a Gaussian weighting factor:",
+          "label": "Text"
+        },
+        {
+          "id": "21",
+          "order": 21,
+          "bounding_box": {
+            "x": 0.3758169934640523,
+            "y": 0.8907828282828283,
+            "width": 0.25,
+            "height": 0.027146464646464648
+          },
+          "content": " $$ P^{\\prime}(y)\\propto P(y)\\exp\\left[-\\frac{\\kappa}{2}\\left(y-y_{opt}\\right)^{2}\\right] $$ ",
+          "label": "Formula"
+        },
+        {
+          "id": "22",
+          "order": 22,
+          "bounding_box": {
+            "x": 0.8790849673202614,
+            "y": 0.8958333333333334,
+            "width": 0.0392156862745098,
+            "height": 0.015151515151515152
+          },
+          "content": "(S28)",
+          "label": "Formula"
+        }
+      ]
+    },
+    {
+      "page_index": 14,
+      "blocks": [
+        {
+          "id": "0",
+          "order": null,
+          "bounding_box": {
+            "x": 0.8995098039215687,
+            "y": 0.03598484848484849,
+            "width": 0.021241830065359478,
+            "height": 0.011363636363636364
+          },
+          "content": "14",
+          "label": "Text"
+        },
+        {
+          "id": "1",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.08251633986928104,
+            "y": 0.06755050505050506,
+            "width": 0.8080065359477124,
+            "height": 0.015782828282828284
+          },
+          "content": "The product of two Gaussian distributions yields a new Gaussian distribution  $ P'(y) $ with updated variance  $ G_{yy}' $",
+          "label": "Text"
+        },
+        {
+          "id": "2",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.43790849673202614,
+            "y": 0.09406565656565656,
+            "width": 0.12826797385620914,
+            "height": 0.06881313131313131
+          },
+          "content": " $$ \\begin{aligned}\\frac{1}{G_{yy}^{\\prime}}&=\\frac{1}{G_{yy}}+\\kappa\\\\G_{yy}^{\\prime}&=\\frac{G_{yy}}{1+\\kappa G_{yy}}\\end{aligned} $$ ",
+          "label": "Formula"
+        },
+        {
+          "id": "3",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.8790849673202614,
+            "y": 0.13762626262626262,
+            "width": 0.0392156862745098,
+            "height": 0.015151515151515152
+          },
+          "content": "(S29)",
+          "label": "Formula"
+        },
+        {
+          "id": "4",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.10049019607843138,
+            "y": 0.1736111111111111,
+            "width": 0.7132352941176471,
+            "height": 0.015782828282828284
+          },
+          "content": "Under Assumption 5 (mutation-selection balance), Gyy − G′yy = Vm. Substituting Eq. (S29) yields:",
+          "label": "Text"
+        },
+        {
+          "id": "5",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.3937908496732026,
+            "y": 0.20202020202020202,
+            "width": 0.21405228758169934,
+            "height": 0.08964646464646464
+          },
+          "content": " $$ \\begin{aligned}G_{yy}&=\\frac{G_{yy}}{1+\\kappa G_{yy}}+V_{m}\\\\0&=\\kappa G_{yy}^{2}-\\kappa V_{m}G_{yy}-V_{m}\\\\G_{yy}&=\\frac{V_{m}}{2}+\\sqrt{\\frac{V_{m}^{2}}{4}+\\frac{V_{m}}{\\kappa}}\\end{aligned} $$ ",
+          "label": "Formula"
+        },
+        {
+          "id": "6",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.8790849673202614,
+            "y": 0.26830808080808083,
+            "width": 0.0392156862745098,
+            "height": 0.015782828282828284
+          },
+          "content": "(S30)",
+          "label": "Formula"
+        },
+        {
+          "id": "7",
+          "order": 7,
+          "bounding_box": {
+            "x": 0.0857843137254902,
+            "y": 0.30176767676767674,
+            "width": 0.7859477124183006,
+            "height": 0.015151515151515152
+          },
+          "content": "Assuming the mutational variance is very small (Vm ⇔ 1), we obtain the approximated steady-state variance:",
+          "label": "Text"
+        },
+        {
+          "id": "8",
+          "order": 8,
+          "bounding_box": {
+            "x": 0.40032679738562094,
+            "y": 0.3282828282828283,
+            "width": 0.20179738562091504,
+            "height": 0.03409090909090909
+          },
+          "content": " $$ G_{yy}\\simeq\\sqrt{\\frac{V_{m}}{\\kappa}}=\\sqrt{-\\frac{V_{m}F_{xx}}{\\det H}} $$ ",
+          "label": "Formula"
+        },
+        {
+          "id": "9",
+          "order": 9,
+          "bounding_box": {
+            "x": 0.8790849673202614,
+            "y": 0.3390151515151515,
+            "width": 0.0392156862745098,
+            "height": 0.015782828282828284
+          },
+          "content": "(S31)",
+          "label": "Formula"
+        }
+      ]
+    },
+    {
+      "page_index": 3,
+      "blocks": [
+        {
+          "id": "0",
+          "order": null,
+          "bounding_box": {
+            "x": 0.9076797385620915,
+            "y": 0.03535353535353535,
+            "width": 0.013071895424836602,
+            "height": 0.011994949494949494
+          },
+          "content": "3",
+          "label": "Text"
+        },
+        {
+          "id": "1",
+          "order": null,
+          "bounding_box": {
+            "x": 0.12990196078431374,
+            "y": 0.07196969696969698,
+            "width": 0.026143790849673203,
+            "height": 0.020833333333333332
+          },
+          "content": "<div style=\"text-align: center;\">A</div>\n",
+          "label": "Image"
+        },
+        {
+          "id": "2",
+          "order": null,
+          "bounding_box": {
+            "x": 0.32516339869281047,
+            "y": 0.07196969696969698,
+            "width": 0.022058823529411766,
+            "height": 0.020202020202020204
+          },
+          "content": "<div style=\"text-align: center;\">B</div>\n",
+          "label": "Image"
+        },
+        {
+          "id": "3",
+          "order": null,
+          "bounding_box": {
+            "x": 0.5179738562091504,
+            "y": 0.07196969696969698,
+            "width": 0.02369281045751634,
+            "height": 0.020202020202020204
+          },
+          "content": "<div style=\"text-align: center;\">C</div>\n",
+          "label": "Image"
+        },
+        {
+          "id": "4",
+          "order": null,
+          "bounding_box": {
+            "x": 0.7132352941176471,
+            "y": 0.07196969696969698,
+            "width": 0.02369281045751634,
+            "height": 0.01893939393939394
+          },
+          "content": "<div style=\"text-align: center;\">D</div>\n",
+          "label": "Image"
+        },
+        {
+          "id": "5",
+          "order": null,
+          "bounding_box": {
+            "x": 0.09558823529411764,
+            "y": 0.07133838383838384,
+            "width": 0.8161764705882353,
+            "height": 0.4880050505050505
+          },
+          "content": "<div style=\"text-align: center;\"><img src=\"imgs/img_in_image_box_117_113_1116_886.jpg\" alt=\"Image\" width=\"81%\" />\n\nA Adapted state\nB Environmental shift\nC Fast plastic relaxation\nD Slow genetic relaxation\nPhenotype x\nGenotype y\nPhenotypic slice\nPhenotype x\nGenetic slice\nGenotype y\n\n</div>\n",
+          "label": "Image"
+        },
+        {
+          "id": "6",
+          "order": null,
+          "bounding_box": {
+            "x": 0.08333333333333333,
+            "y": 0.5839646464646465,
+            "width": 0.8374183006535948,
+            "height": 0.14835858585858586
+          },
+          "content": "<div style=\"text-align: center;\">FIG. 1. Dynamical relaxation picture of genetic assimilation governed by the evolutionary Le Chatelier's principle. Columns show four successive stages: (A) the adapted state before the environmental change, (B) the environmental shift, (C) fast plastic relaxation of the phenotype, and (D) slow genetic relaxation. The top row shows the fitness landscape  $ F(x, y; \\alpha) $ as a function of phenotype x and genotypic coordinate y. The middle and bottom rows show one-dimensional fitness slices along the phenotypic and genotypic coordinates, respectively. Red circles indicate the current population state, and pale circles indicate the previous state before the movement shown by arrows. Blue vertical and orange horizontal dashed lines in the top row indicate the fixed-y and fixed-x slices shown in the middle and bottom rows, respectively. The white dashed curve in panels C and D denotes the constrained optimum  $ x^{*}(y, \\alpha) $. In panel B, the environmental shift changes the fitness landscape, but at fixed phenotype and genotype it does not directly create a fitness-gradient component along the genotypic coordinate. In panel C, fast plastic relaxation displaces the phenotype and creates internal stress through genotype-phenotype coupling. In panel D, slow genetic evolution relaxes this stress, further moving the phenotype in the same direction as the initial plastic shift.</div>\n",
+          "label": "Image"
+        },
+        {
+          "id": "7",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.08169934640522876,
+            "y": 0.7575757575757576,
+            "width": 0.41013071895424835,
+            "height": 0.08775252525252525
+          },
+          "content": "also identifies the phenotypic sensitivities to genetic and environmental perturbations. For fixed cross-couplings, a larger  $ |F_{xx}| $ makes the optimized phenotype less sensitive to changes in y or  $ \\alpha $, because the response coefficients scale with  $ 1/F_{xx} $. This corresponds to a stiffer phenotypic response and connects to canalization-like robustness.",
+          "label": "Text"
+        },
+        {
+          "id": "8",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.08333333333333333,
+            "y": 0.8705808080808081,
+            "width": 0.4084967320261438,
+            "height": 0.045454545454545456
+          },
+          "content": "By substituting this solution into the Price equation (Eq. 1) and utilizing the linear properties of covariance, the total rate of phenotypic change is unified into the following form (see SI Appendix):",
+          "label": "Text"
+        },
+        {
+          "id": "9",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.5138888888888888,
+            "y": 0.7575757575757576,
+            "width": 0.24591503267973855,
+            "height": 0.015782828282828284
+          },
+          "content": "",
+          "label": "Text"
+        },
+        {
+          "id": "10",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.6241830065359477,
+            "y": 0.7986111111111112,
+            "width": 0.1854575163398693,
+            "height": 0.03345959595959596
+          },
+          "content": " $$ \\frac{d\\overline{x}}{dt}=-\\frac{F_{xy}}{F_{xx}}\\frac{d\\overline{y}}{dt}-\\frac{F_{x\\alpha}}{F_{xx}}\\frac{d\\alpha}{dt} $$ ",
+          "label": "Formula"
+        },
+        {
+          "id": "11",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.8970588235294118,
+            "y": 0.8074494949494949,
+            "width": 0.021241830065359478,
+            "height": 0.015782828282828284
+          },
+          "content": "(4)",
+          "label": "Formula"
+        },
+        {
+          "id": "12",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.511437908496732,
+            "y": 0.8560606060606061,
+            "width": 0.41013071895424835,
+            "height": 0.06060606060606061
+          },
+          "content": "This equation demonstrates that the phenotypic change can be explicitly decoupled into two distinct biological contributions: the slow dynamics driven by genetic evolution ( $ \\frac{d\\overline{x}_{evo}}{dt} $) and the fast dynamics due to phenotypic",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "page_index": 4,
+      "blocks": [
+        {
+          "id": "0",
+          "order": null,
+          "bounding_box": {
+            "x": 0.9076797385620915,
+            "y": 0.03598484848484849,
+            "width": 0.013071895424836602,
+            "height": 0.010732323232323232
+          },
+          "content": "4",
+          "label": "Text"
+        },
+        {
+          "id": "1",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.08251633986928104,
+            "y": 0.06628787878787878,
+            "width": 0.3660130718954248,
+            "height": 0.017676767676767676
+          },
+          "content": "plasticity  $ \\left(\\frac{d\\overline{x}_{\\mathrm{plas}}}{dt}\\right) $. We define them respectively as:",
+          "label": "Text"
+        },
+        {
+          "id": "2",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.14297385620915032,
+            "y": 0.08964646464646464,
+            "width": 0.28921568627450983,
+            "height": 0.03282828282828283
+          },
+          "content": " $$ \\frac{d\\overline{x}_{evo}}{dt}=-\\frac{F_{xy}}{F_{xx}}\\frac{d\\overline{y}}{dt},\\quad\\frac{d\\overline{x}_{plas}}{dt}=-\\frac{F_{x\\alpha}}{F_{xx}}\\frac{d\\alpha}{dt} $$ ",
+          "label": "Formula"
+        },
+        {
+          "id": "3",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.4673202614379085,
+            "y": 0.09911616161616162,
+            "width": 0.02042483660130719,
+            "height": 0.015782828282828284
+          },
+          "content": "(5)",
+          "label": "Formula"
+        },
+        {
+          "id": "4",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.08251633986928104,
+            "y": 0.12878787878787878,
+            "width": 0.4076797385620915,
+            "height": 0.029671717171717172
+          },
+          "content": "Thus, the Price equation is rewritten as the sum of these two components:",
+          "label": "Text"
+        },
+        {
+          "id": "5",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.20915032679738563,
+            "y": 0.16540404040404041,
+            "width": 0.15522875816993464,
+            "height": 0.030303030303030304
+          },
+          "content": " $$ \\frac{d\\overline{x}}{dt}=\\frac{d\\overline{x}_{evo}}{dt}+\\frac{d\\overline{x}_{plas}}{dt} $$ ",
+          "label": "Formula"
+        },
+        {
+          "id": "6",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.4673202614379085,
+            "y": 0.17297979797979798,
+            "width": 0.02042483660130719,
+            "height": 0.015151515151515152
+          },
+          "content": "(6)",
+          "label": "Formula"
+        },
+        {
+          "id": "7",
+          "order": 7,
+          "bounding_box": {
+            "x": 0.08333333333333333,
+            "y": 0.20075757575757575,
+            "width": 0.4076797385620915,
+            "height": 0.05808080808080808
+          },
+          "content": "To explicitly determine the evolutionary dynamics of the slow variable y and further expand the evolutionary component, we introduce a standard assumption from quantitative genetics [38–41].",
+          "label": "Text"
+        },
+        {
+          "id": "8",
+          "order": 8,
+          "bounding_box": {
+            "x": 0.08415032679738563,
+            "y": 0.25946969696969696,
+            "width": 0.40604575163398693,
+            "height": 0.028409090909090908
+          },
+          "content": "Assumption 4: Symmetric distribution of genotype",
+          "label": "Text"
+        },
+        {
+          "id": "9",
+          "order": 9,
+          "bounding_box": {
+            "x": 0.08333333333333333,
+            "y": 0.2878787878787879,
+            "width": 0.4068627450980392,
+            "height": 0.02904040404040404
+          },
+          "content": "We assume that y has a symmetric distribution, and thus odd-ordered moments of y are zero.",
+          "label": "Text"
+        },
+        {
+          "id": "10",
+          "order": 10,
+          "bounding_box": {
+            "x": 0.08333333333333333,
+            "y": 0.317550505050505,
+            "width": 0.4068627450980392,
+            "height": 0.08712121212121213
+          },
+          "content": "Since y is a slow inherited genotypic variable, its evolutionary dynamics follow the Price equation with the selection term,  $ \\frac{dy}{dt} = \\text{Cov}(y, F) $. By evaluating this covariance term through a quadratic expansion of the fitness function under Assumptions 3 and 4 (see SI Appendix), the evolutionary rate defined in Eq. (5) is derived as:",
+          "label": "Text"
+        },
+        {
+          "id": "11",
+          "order": 11,
+          "bounding_box": {
+            "x": 0.20506535947712418,
+            "y": 0.4109848484848485,
+            "width": 0.1650326797385621,
+            "height": 0.03282828282828283
+          },
+          "content": " $$ \\frac{d\\overline{x}_{evo}}{dt}=-G_{yy}\\frac{F_{xy}}{F_{xx}}\\frac{\\partial F}{\\partial\\overline{y}} $$ ",
+          "label": "Formula"
+        },
+        {
+          "id": "12",
+          "order": 12,
+          "bounding_box": {
+            "x": 0.4673202614379085,
+            "y": 0.4198232323232323,
+            "width": 0.021241830065359478,
+            "height": 0.015782828282828284
+          },
+          "content": "(7)",
+          "label": "Formula"
+        },
+        {
+          "id": "13",
+          "order": 13,
+          "bounding_box": {
+            "x": 0.08251633986928104,
+            "y": 0.45012626262626265,
+            "width": 0.4076797385620915,
+            "height": 0.06060606060606061
+          },
+          "content": "where  $ G_{yy} $ is the variance of y. This formulation is essentially equivalent to Lande's equation [17], which generalizes Fisher's fundamental theorem of natural selection [42] to arbitrary phenotypic traits.",
+          "label": "Text"
+        },
+        {
+          "id": "14",
+          "order": 14,
+          "bounding_box": {
+            "x": 0.0988562091503268,
+            "y": 0.5353535353535354,
+            "width": 0.37663398692810457,
+            "height": 0.028409090909090908
+          },
+          "content": "### B. Correspondence between the Price equation and Le Chatelier's principle",
+          "label": "Text"
+        },
+        {
+          "id": "15",
+          "order": 15,
+          "bounding_box": {
+            "x": 0.08169934640522876,
+            "y": 0.5801767676767676,
+            "width": 0.40931372549019607,
+            "height": 0.10858585858585859
+          },
+          "content": "We consider a situation where the environment shifts by  $ \\Delta\\alpha $ at t = 0. The time evolution of  $ \\alpha $ is represented as  $ \\left.\\frac{d\\alpha}{dt} = \\Delta\\alpha\\delta(t) $. We assume y is initially optimized before the environmental shift. From the stability condition,  $ \\left.\\left.\\frac{\\partial F}{\\partial y}\\right|_{t=0^-} = 0 $,  $ F_{yy} < 0 $, and  $ \\det H = F_{xx}F_{yy} - F_{xy}^2 > 0 $ are satisfied, where H is the Hessian matrix of the fitness landscape.",
+          "label": "Text"
+        },
+        {
+          "id": "16",
+          "order": 16,
+          "bounding_box": {
+            "x": 0.08251633986928104,
+            "y": 0.6900252525252525,
+            "width": 0.4076797385620915,
+            "height": 0.058712121212121215
+          },
+          "content": "Because  $ \\overline{y} $ is a slow variable driven by genetic evolution, its change over an infinitesimal time is zero. The initial phenotypic response,  $ \\Delta\\overline{x}_{plas} $, is entirely determined by the plastic component (see SI Appendix):",
+          "label": "Text"
+        },
+        {
+          "id": "17",
+          "order": 17,
+          "bounding_box": {
+            "x": 0.21650326797385622,
+            "y": 0.7563131313131313,
+            "width": 0.14215686274509803,
+            "height": 0.030303030303030304
+          },
+          "content": " $$ \\Delta\\overline{x}_{plas}=-\\frac{F_{x\\alpha}}{F_{xx}}\\Delta\\alpha $$ ",
+          "label": "Formula"
+        },
+        {
+          "id": "18",
+          "order": 18,
+          "bounding_box": {
+            "x": 0.4681372549019608,
+            "y": 0.764520202020202,
+            "width": 0.0196078431372549,
+            "height": 0.01452020202020202
+          },
+          "content": "(8)",
+          "label": "Formula"
+        },
+        {
+          "id": "19",
+          "order": 19,
+          "bounding_box": {
+            "x": 0.08251633986928104,
+            "y": 0.7935606060606061,
+            "width": 0.4076797385620915,
+            "height": 0.08143939393939394
+          },
+          "content": "Although the environmental shift does not directly generate a genetic gradient, the plastic displacement does. Expanding the genetic gradient immediately after the shift gives  $ \\left.\\frac{\\partial F}{\\partial \\bar{y}}\\right|_{t=0^+} = F_{xy} \\Delta \\bar{x}_{\\text{plas}} $ (SI Appendix), leading to the initial evolutionary velocity",
+          "label": "Text"
+        },
+        {
+          "id": "20",
+          "order": 20,
+          "bounding_box": {
+            "x": 0.1772875816993464,
+            "y": 0.8819444444444444,
+            "width": 0.22303921568627452,
+            "height": 0.03535353535353535
+          },
+          "content": " $$ \\left.\\frac{d\\overline{x}_{evo}}{dt}\\right|_{t=0^{+}}=-G_{yy}\\frac{F_{xy}^{2}}{F_{xx}}\\Delta\\overline{x}_{plas} $$ ",
+          "label": "Formula"
+        },
+        {
+          "id": "21",
+          "order": 21,
+          "bounding_box": {
+            "x": 0.4673202614379085,
+            "y": 0.8920454545454546,
+            "width": 0.021241830065359478,
+            "height": 0.015151515151515152
+          },
+          "content": "(9)",
+          "label": "Formula"
+        },
+        {
+          "id": "22",
+          "order": 22,
+          "bounding_box": {
+            "x": 0.511437908496732,
+            "y": 0.06755050505050506,
+            "width": 0.40931372549019607,
+            "height": 0.11742424242424243
+          },
+          "content": "Since  $ G_{yy} > 0 $ and  $ F_{xx} < 0 $, the coefficient  $ -G_{yy} \\frac{F_{xy}^{xz}}{F_{yx}^{xz}} $ is positive. Thus, the initial genetic component of the phenotypic response is in the same direction as the initial plastic shift. In this way, genotype-phenotype coupling converts the plastic displacement into the internal stress  $ F_{xy} \\Delta \\overline{x}_{\\text{plas}} $ that drives assimilation. For a fixed plastic displacement, a larger  $ |F_{xx}| $ slows the initial evolutionary response.",
+          "label": "Text"
+        },
+        {
+          "id": "23",
+          "order": 23,
+          "bounding_box": {
+            "x": 0.5122549019607843,
+            "y": 0.18623737373737373,
+            "width": 0.40931372549019607,
+            "height": 0.046085858585858584
+          },
+          "content": "At the final steady state ($t \\to \\infty$), genetic evolution ceases, satisfying $\\frac{\\partial F}{\\partial \\overline{y}}(\\infty) = 0$. Solving this condition (see SI Appendix) yields the total change in genotype:",
+          "label": "Text"
+        },
+        {
+          "id": "24",
+          "order": 24,
+          "bounding_box": {
+            "x": 0.619281045751634,
+            "y": 0.23737373737373738,
+            "width": 0.19444444444444445,
+            "height": 0.030934343434343436
+          },
+          "content": " $$ \\Delta\\overline{y}(\\infty)=-\\frac{F_{xx}F_{xy}}{\\det H}\\Delta\\overline{x}_{plas} $$ ",
+          "label": "Formula"
+        },
+        {
+          "id": "25",
+          "order": 25,
+          "bounding_box": {
+            "x": 0.8888888888888888,
+            "y": 0.24621212121212122,
+            "width": 0.029411764705882353,
+            "height": 0.015782828282828284
+          },
+          "content": "(10)",
+          "label": "Formula"
+        },
+        {
+          "id": "26",
+          "order": 26,
+          "bounding_box": {
+            "x": 0.5122549019607843,
+            "y": 0.2720959595959596,
+            "width": 0.4084967320261438,
+            "height": 0.13068181818181818
+          },
+          "content": "Eq. (10) provides a dynamical interpretation of the evolutionary Le Chatelier's principle. Rewriting Eq. (10) as  $ -\\frac{\\det H}{F_{xx}} \\Delta \\overline{y}(\\infty) = F_{xy} \\Delta \\overline{x}_{\\text{plas}} $ shows the force balance. The right-hand side represents the internal stress generated by the plastic deformation, while the left-hand side represents the restoring force generated by the displacement of the slow variable y. Thus, genetic assimilation functions as a relaxation process to cancel out this internal stress.",
+          "label": "Text"
+        },
+        {
+          "id": "27",
+          "order": 27,
+          "bounding_box": {
+            "x": 0.5147058823529411,
+            "y": 0.4027777777777778,
+            "width": 0.40604575163398693,
+            "height": 0.04482323232323232
+          },
+          "content": "The total long-time change in the phenotype,  $ \\Delta\\overline{x}_{\\text{total}} = \\Delta\\overline{x}_{\\text{evo}}(\\infty) + \\Delta\\overline{x}_{\\text{plas}} $, is derived as (see SI Appendix):",
+          "label": "Text"
+        },
+        {
+          "id": "28",
+          "order": 28,
+          "bounding_box": {
+            "x": 0.6045751633986928,
+            "y": 0.45391414141414144,
+            "width": 0.22630718954248366,
+            "height": 0.039141414141414144
+          },
+          "content": " $$ \\Delta\\overline{x}_{total}=\\left(1+\\frac{F_{xy}^{2}}{\\det H}\\right)\\Delta\\overline{x}_{plas} $$ ",
+          "label": "Formula"
+        },
+        {
+          "id": "29",
+          "order": 29,
+          "bounding_box": {
+            "x": 0.8888888888888888,
+            "y": 0.4659090909090909,
+            "width": 0.029411764705882353,
+            "height": 0.015782828282828284
+          },
+          "content": "(11)",
+          "label": "Formula"
+        },
+        {
+          "id": "30",
+          "order": 30,
+          "bounding_box": {
+            "x": 0.5122549019607843,
+            "y": 0.49936868686868685,
+            "width": 0.380718954248366,
+            "height": 0.015151515151515152
+          },
+          "content": "Since  $ \\det H > 0 $, the following inequality is satisfied:",
+          "label": "Text"
+        },
+        {
+          "id": "31",
+          "order": 31,
+          "bounding_box": {
+            "x": 0.6462418300653595,
+            "y": 0.5214646464646465,
+            "width": 0.14215686274509803,
+            "height": 0.017045454545454544
+          },
+          "content": " $$ |\\Delta\\overline{x}_{total}|\\geq|\\Delta\\overline{x}_{plas}| $$ ",
+          "label": "Formula"
+        },
+        {
+          "id": "32",
+          "order": 32,
+          "bounding_box": {
+            "x": 0.8888888888888888,
+            "y": 0.5220959595959596,
+            "width": 0.029411764705882353,
+            "height": 0.01452020202020202
+          },
+          "content": "(12)",
+          "label": "Formula"
+        },
+        {
+          "id": "33",
+          "order": 33,
+          "bounding_box": {
+            "x": 0.511437908496732,
+            "y": 0.5429292929292929,
+            "width": 0.40931372549019607,
+            "height": 0.10479797979797979
+          },
+          "content": "This inequality corresponds to the phenomenological manifestation of Le Chatelier's principle. The total phenotypic change caused by both phenotypic plasticity and evolution is always in the same direction and equal to or greater than that caused by phenotypic plasticity alone. Therefore, genetic assimilation enhances the phenotypic change initially triggered by phenotypic plasticity.",
+          "label": "Text"
+        },
+        {
+          "id": "34",
+          "order": 34,
+          "bounding_box": {
+            "x": 0.5187908496732027,
+            "y": 0.6717171717171717,
+            "width": 0.39705882352941174,
+            "height": 0.027146464646464648
+          },
+          "content": "### C. Exponential decay and the timescale of genetic assimilation",
+          "label": "Text"
+        },
+        {
+          "id": "35",
+          "order": 35,
+          "bounding_box": {
+            "x": 0.511437908496732,
+            "y": 0.7178030303030303,
+            "width": 0.40931372549019607,
+            "height": 0.0928030303030303
+          },
+          "content": "We examine how genetic assimilation changes over time. The evolutionary process of the genotype is driven by the Price equation  $ \\frac{dy}{dt} = G_{yy} \\frac{\\partial F}{\\partial \\overline{y}} $. By evaluating the slope  $ \\frac{\\partial F}{\\partial \\overline{y}} $ at an arbitrary time (see SI Appendix), the evolutionary dynamics can be rewritten as a linear differential equation:",
+          "label": "Text"
+        },
+        {
+          "id": "36",
+          "order": 36,
+          "bounding_box": {
+            "x": 0.5988562091503268,
+            "y": 0.8156565656565656,
+            "width": 0.238562091503268,
+            "height": 0.030934343434343436
+          },
+          "content": " $$ \\frac{d}{dt}\\Delta\\overline{y}(t)=-\\frac{1}{\\tau}\\left(\\Delta\\overline{y}(t)-\\Delta\\overline{y}(\\infty)\\right) $$ ",
+          "label": "Formula"
+        },
+        {
+          "id": "37",
+          "order": 37,
+          "bounding_box": {
+            "x": 0.8888888888888888,
+            "y": 0.8232323232323232,
+            "width": 0.029411764705882353,
+            "height": 0.015782828282828284
+          },
+          "content": "(13)",
+          "label": "Formula"
+        },
+        {
+          "id": "38",
+          "order": 38,
+          "bounding_box": {
+            "x": 0.5122549019607843,
+            "y": 0.8497474747474747,
+            "width": 0.4076797385620915,
+            "height": 0.02904040404040404
+          },
+          "content": "where  $ \\tau $ is the characteristic relaxation time for genetic assimilation, defined as:",
+          "label": "Text"
+        },
+        {
+          "id": "39",
+          "order": 39,
+          "bounding_box": {
+            "x": 0.6535947712418301,
+            "y": 0.884469696969697,
+            "width": 0.12418300653594772,
+            "height": 0.03282828282828283
+          },
+          "content": " $$ \\tau=-\\frac{F_{xx}}{G_{yy}\\det H} $$ ",
+          "label": "Formula"
+        },
+        {
+          "id": "40",
+          "order": 40,
+          "bounding_box": {
+            "x": 0.8888888888888888,
+            "y": 0.8926767676767676,
+            "width": 0.029411764705882353,
+            "height": 0.016414141414141416
+          },
+          "content": "(14)",
+          "label": "Formula"
+        }
+      ]
+    },
+    {
+      "page_index": 5,
+      "blocks": [
+        {
+          "id": "0",
+          "order": null,
+          "bounding_box": {
+            "x": 0.9076797385620915,
+            "y": 0.03598484848484849,
+            "width": 0.012254901960784314,
+            "height": 0.011363636363636364
+          },
+          "content": "5",
+          "label": "Text"
+        },
+        {
+          "id": "1",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.08251633986928104,
+            "y": 0.06691919191919192,
+            "width": 0.4084967320261438,
+            "height": 0.07386363636363637
+          },
+          "content": "Eq. (13) indicates that the genotype  $ \\overline{y} $ relaxes toward its evolutionary destination  $ \\Delta\\overline{y}(\\infty) $ to resolve the internal stress induced by the initial plastic response. Since the initial genetic displacement is zero  $ (\\Delta\\overline{y}(0^{+})=0) $, the analytical solution is an exponential decay function:",
+          "label": "Text"
+        },
+        {
+          "id": "2",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.18790849673202614,
+            "y": 0.15214646464646464,
+            "width": 0.1977124183006536,
+            "height": 0.023989898989898988
+          },
+          "content": " $$ \\Delta\\overline{y}(t)=\\Delta\\overline{y}(\\infty)\\left(1-e^{-\\frac{t}{\\tau}}\\right) $$ ",
+          "label": "Formula"
+        },
+        {
+          "id": "3",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.4591503267973856,
+            "y": 0.15593434343434343,
+            "width": 0.028594771241830064,
+            "height": 0.015782828282828284
+          },
+          "content": "(15)",
+          "label": "Formula"
+        },
+        {
+          "id": "4",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.08333333333333333,
+            "y": 0.1875,
+            "width": 0.4076797385620915,
+            "height": 0.10164141414141414
+          },
+          "content": "This implies that the internal stress driving genetic assimilation decays exponentially over time. Eq. (14) shows that the relaxation time is controlled by the local phenotypic stiffness  $ \\left|F_{xx}\\right| $, together with the remaining Hessian structure,  $ \\det H $, and the genetic variance  $ G_{yy} $. Thus, the same stiffness also enters the timescale over which the internally generated stress is relaxed.",
+          "label": "Text"
+        },
+        {
+          "id": "5",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.08415032679738563,
+            "y": 0.28914141414141414,
+            "width": 0.40604575163398693,
+            "height": 0.028409090909090908
+          },
+          "content": "To determine the variance of y,  $ G_{yy} $, we strengthen Assumption 4 and introduce a new assumption.",
+          "label": "Text"
+        },
+        {
+          "id": "6",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.08333333333333333,
+            "y": 0.317550505050505,
+            "width": 0.4068627450980392,
+            "height": 0.058712121212121215
+          },
+          "content": "Assumption 4': Gaussian distribution of genotype\n\nWe assume that the genotypic distribution  $ P(y) $ in the population follows a Gaussian distribution with variance  $ G_{yy} $ [38–41].",
+          "label": "Text"
+        },
+        {
+          "id": "7",
+          "order": 7,
+          "bounding_box": {
+            "x": 0.08415032679738563,
+            "y": 0.37436868686868685,
+            "width": 0.3562091503267974,
+            "height": 0.015151515151515152
+          },
+          "content": "## sumption 5: Mutation-selection balance",
+          "label": "Text"
+        },
+        {
+          "id": "8",
+          "order": 8,
+          "bounding_box": {
+            "x": 0.08251633986928104,
+            "y": 0.38825757575757575,
+            "width": 0.4076797385620915,
+            "height": 0.10353535353535354
+          },
+          "content": "We assume that the genetic variance is maintained at a steady state by a dynamic equilibrium between the reduction of variance due to stabilizing selection and the continuous input of novel genetic variation via mutation ( $ V_m \\ll 1 $). The steady-state balance is  $ G_{yy} - G'_{yy} = V_m $, where  $ G'_{yy} $ is the genetic variance after selection in a single generation.",
+          "label": "Text"
+        },
+        {
+          "id": "9",
+          "order": 9,
+          "bounding_box": {
+            "x": 0.08169934640522876,
+            "y": 0.4917929292929293,
+            "width": 0.4084967320261438,
+            "height": 0.10479797979797979
+          },
+          "content": "We evaluate the effective fitness landscape experienced by the slow genotypic variable $y$ when the fast phenotype $x$ is constantly optimized. The effective curvature, representing the strength of stabilizing selection on $y$, is derived as $\\kappa = -\\frac{\\det\\vec{H}}{F_{xx}}$ (see SI Appendix). Under Assumption 4', applying this selection pressure gives the updated variance $G_{yy}^{\\prime} = \\frac{G_{yy}}{1+\\kappa G_{yy}}$ (SI Appendix).",
+          "label": "Text"
+        },
+        {
+          "id": "10",
+          "order": 10,
+          "bounding_box": {
+            "x": 0.08333333333333333,
+            "y": 0.5978535353535354,
+            "width": 0.4068627450980392,
+            "height": 0.059343434343434344
+          },
+          "content": "Applying Assumption 5 (Mutation-selection balance) [40, 41, 43, 44], we solve for the steady-state genetic variance. For  $ V_m \\ll 1 $, we obtain an approximated variance (SI Appendix):",
+          "label": "Text"
+        },
+        {
+          "id": "11",
+          "order": 11,
+          "bounding_box": {
+            "x": 0.1854575163398693,
+            "y": 0.6679292929292929,
+            "width": 0.2034313725490196,
+            "height": 0.03535353535353535
+          },
+          "content": " $$ G_{yy}\\simeq\\sqrt{\\frac{V_{m}}{\\kappa}}=\\sqrt{-\\frac{V_{m}F_{xx}}{\\det H}} $$ ",
+          "label": "Formula"
+        },
+        {
+          "id": "12",
+          "order": 12,
+          "bounding_box": {
+            "x": 0.4591503267973856,
+            "y": 0.6799242424242424,
+            "width": 0.028594771241830064,
+            "height": 0.015782828282828284
+          },
+          "content": "(16)",
+          "label": "Formula"
+        },
+        {
+          "id": "13",
+          "order": 13,
+          "bounding_box": {
+            "x": 0.08251633986928104,
+            "y": 0.7133838383838383,
+            "width": 0.4076797385620915,
+            "height": 0.04482323232323232
+          },
+          "content": "Substituting Eq. (16) into Eq. (14) gives the characteristic timescale solely characterized by the macroscopic parameters of the landscape and mutation:",
+          "label": "Text"
+        },
+        {
+          "id": "14",
+          "order": 14,
+          "bounding_box": {
+            "x": 0.21895424836601307,
+            "y": 0.7695707070707071,
+            "width": 0.136437908496732,
+            "height": 0.03409090909090909
+          },
+          "content": " $$ \\tau= {\\sqrt{\\frac{F_{xx}}{{V_{m}} \\det H}}}} $$ ",
+          "label": "Formula"
+        },
+        {
+          "id": "15",
+          "order": 15,
+          "bounding_box": {
+            "x": 0.4591503267973856,
+            "y": 0.7790404040404041,
+            "width": 0.028594771241830064,
+            "height": 0.015782828282828284
+          },
+          "content": "(17)",
+          "label": "Formula"
+        },
+        {
+          "id": "16",
+          "order": 16,
+          "bounding_box": {
+            "x": 0.08251633986928104,
+            "y": 0.8131313131313131,
+            "width": 0.4084967320261438,
+            "height": 0.10227272727272728
+          },
+          "content": "This indicates that the speed of genetic assimilation is determined by the curvature of the fitness landscape ( $ F_{xx} $ and  $ \\det H $) and the mutational rate ( $ V_{m} $). As demonstrated in the specific example below, this timescale provides biological insights into how developmental constraints and selection pressures dictate the speed of evolution.\n\nD. Example: A quadratic fitness landscape with a selection pressure and a cost of phenotypic plasticity",
+          "label": "Text"
+        },
+        {
+          "id": "17",
+          "order": 17,
+          "bounding_box": {
+            "x": 0.5147058823529411,
+            "y": 0.06755050505050506,
+            "width": 0.40522875816993464,
+            "height": 0.028409090909090908
+          },
+          "content": "",
+          "label": "Text"
+        },
+        {
+          "id": "18",
+          "order": 18,
+          "bounding_box": {
+            "x": 0.5130718954248366,
+            "y": 0.11300505050505051,
+            "width": 0.4076797385620915,
+            "height": 0.05808080808080808
+          },
+          "content": "We apply our theoretical framework to a specific quantitative genetic model: a quadratic fitness landscape with a selection pressure and a cost of phenotypic plasticity. The fitness function  $ F(x, y; \\alpha) $ is defined as:",
+          "label": "Text"
+        },
+        {
+          "id": "19",
+          "order": 19,
+          "bounding_box": {
+            "x": 0.5808823529411765,
+            "y": 0.17803030303030304,
+            "width": 0.27205882352941174,
+            "height": 0.027777777777777776
+          },
+          "content": " $$ F(x,y;\\alpha)=-\\frac{s}{2}(x-\\alpha)^{2}-\\frac{c}{2}(x-y)^{2} $$ ",
+          "label": "Formula"
+        },
+        {
+          "id": "20",
+          "order": 20,
+          "bounding_box": {
+            "x": 0.8888888888888888,
+            "y": 0.1830808080808081,
+            "width": 0.029411764705882353,
+            "height": 0.015782828282828284
+          },
+          "content": "(18)",
+          "label": "Formula"
+        },
+        {
+          "id": "21",
+          "order": 21,
+          "bounding_box": {
+            "x": 0.511437908496732,
+            "y": 0.21085858585858586,
+            "width": 0.41013071895424835,
+            "height": 0.08712121212121213
+          },
+          "content": "The first term represents stabilizing selection toward the environmental optimum  $ \\alpha $, where  $ s > 0 $ is the strength of the selection pressure. The second term represents the cost of phenotypic plasticity, penalizing the deviation of the phenotype x from the baseline genotype y, where c > 0 is the magnitude of this cost.",
+          "label": "Text"
+        },
+        {
+          "id": "22",
+          "order": 22,
+          "bounding_box": {
+            "x": 0.5122549019607843,
+            "y": 0.29797979797979796,
+            "width": 0.4084967320261438,
+            "height": 0.030303030303030304
+          },
+          "content": "The second derivatives (Hessian components) of this fitness landscape are:",
+          "label": "Text"
+        },
+        {
+          "id": "23",
+          "order": 23,
+          "bounding_box": {
+            "x": 0.5204248366013072,
+            "y": 0.3352272727272727,
+            "width": 0.36519607843137253,
+            "height": 0.017045454545454544
+          },
+          "content": " $$ F_{x x}=-(s+c),\\quad F_{y y}=-c,\\quad F_{x y}=c,\\quad F_{x\\alpha}=s $$ ",
+          "label": "Formula"
+        },
+        {
+          "id": "24",
+          "order": 24,
+          "bounding_box": {
+            "x": 0.8897058823529411,
+            "y": 0.336489898989899,
+            "width": 0.028594771241830064,
+            "height": 0.01452020202020202
+          },
+          "content": "(19)",
+          "label": "Formula"
+        },
+        {
+          "id": "25",
+          "order": 25,
+          "bounding_box": {
+            "x": 0.5122549019607843,
+            "y": 0.3592171717171717,
+            "width": 0.4076797385620915,
+            "height": 0.029671717171717172
+          },
+          "content": "The determinant of the Hessian matrix,  $ \\det H $, is calculated as:",
+          "label": "Text"
+        },
+        {
+          "id": "26",
+          "order": 26,
+          "bounding_box": {
+            "x": 0.5261437908496732,
+            "y": 0.39646464646464646,
+            "width": 0.3545751633986928,
+            "height": 0.017676767676767676
+          },
+          "content": " $$ \\det H=F_{xx}F_{yy}-F_{xy}^{2}=-(s+c)(-c)-c^{2}=sc $$ ",
+          "label": "Formula"
+        },
+        {
+          "id": "27",
+          "order": 27,
+          "bounding_box": {
+            "x": 0.8888888888888888,
+            "y": 0.39835858585858586,
+            "width": 0.029411764705882353,
+            "height": 0.015151515151515152
+          },
+          "content": "(20)",
+          "label": "Formula"
+        },
+        {
+          "id": "28",
+          "order": 28,
+          "bounding_box": {
+            "x": 0.5122549019607843,
+            "y": 0.42045454545454547,
+            "width": 0.4068627450980392,
+            "height": 0.07323232323232323
+          },
+          "content": "The stability of the fitness landscape  $ \\left(\\det H > 0\\right) $ requires both environmental selection pressure  $ (s > 0) $ and a cost of plasticity  $ (c > 0) $. If either is zero,  $ \\det H = 0 $, meaning the fitness landscape forms a flat ridge, and the uniqueness of the optimal state is lost.",
+          "label": "Text"
+        },
+        {
+          "id": "29",
+          "order": 29,
+          "bounding_box": {
+            "x": 0.5130718954248366,
+            "y": 0.4943181818181818,
+            "width": 0.4076797385620915,
+            "height": 0.04482323232323232
+          },
+          "content": "We calculate the initial fast response of the phenotype ( $ \\Delta\\overline{x}_{\\text{plas}} $) to an environmental shift  $ \\Delta\\alpha $. Substituting Eq. (19) into Eq. (8) gives:",
+          "label": "Text"
+        },
+        {
+          "id": "30",
+          "order": 30,
+          "bounding_box": {
+            "x": 0.5866013071895425,
+            "y": 0.5441919191919192,
+            "width": 0.26062091503267976,
+            "height": 0.030303030303030304
+          },
+          "content": " $$ \\Delta\\overline{x}_{plas}=-\\frac{s}{-(s+c)}\\Delta\\alpha=\\frac{s}{s+c}\\Delta\\alpha $$ ",
+          "label": "Formula"
+        },
+        {
+          "id": "31",
+          "order": 31,
+          "bounding_box": {
+            "x": 0.8888888888888888,
+            "y": 0.5498737373737373,
+            "width": 0.029411764705882353,
+            "height": 0.015782828282828284
+          },
+          "content": "(21)",
+          "label": "Formula"
+        },
+        {
+          "id": "32",
+          "order": 32,
+          "bounding_box": {
+            "x": 0.511437908496732,
+            "y": 0.5808080808080808,
+            "width": 0.4084967320261438,
+            "height": 0.04419191919191919
+          },
+          "content": "This indicates an incomplete plastic adaptation; the initial phenotypic shift falls short of the environmental change  $ \\Delta\\alpha $ due to the plasticity cost c.",
+          "label": "Text"
+        },
+        {
+          "id": "33",
+          "order": 33,
+          "bounding_box": {
+            "x": 0.511437908496732,
+            "y": 0.625,
+            "width": 0.41094771241830064,
+            "height": 0.12878787878787878
+          },
+          "content": "As discussed in the previous section regarding the force balance (see the text following Eq. 10), the internal stress initially driving genetic assimilation is represented by  $ F_{xy} \\Delta \\overline{x}_{\\text{plas}} $. In this model, since  $ F_{xy} = c $, the internal stress is explicitly expressed as  $ c \\Delta \\overline{x}_{\\text{plas}} $. The plasticity cost c mathematically acts as a spring constant connecting the genotype and phenotype. Genetic assimilation is the dynamic process of relaxing the elastic energy stored in this spring.",
+          "label": "Text"
+        },
+        {
+          "id": "34",
+          "order": 34,
+          "bounding_box": {
+            "x": 0.5130718954248366,
+            "y": 0.7544191919191919,
+            "width": 0.4084967320261438,
+            "height": 0.04419191919191919
+          },
+          "content": "Substituting Eqs. (19) and (20) into Eq. (10) yields the total evolutionary change of the genotype ( $ \\Delta\\overline{y}(\\infty) $) after sufficient time has passed:",
+          "label": "Text"
+        },
+        {
+          "id": "35",
+          "order": 35,
+          "bounding_box": {
+            "x": 0.5531045751633987,
+            "y": 0.8055555555555556,
+            "width": 0.29983660130718953,
+            "height": 0.03282828282828283
+          },
+          "content": " $$ \\Delta\\overline{y}(\\infty)=-\\frac{-(s+c)c}{sc}\\left(\\frac{s}{s+c}\\Delta\\alpha\\right)=\\Delta\\alpha $$ ",
+          "label": "Formula"
+        },
+        {
+          "id": "36",
+          "order": 36,
+          "bounding_box": {
+            "x": 0.8888888888888888,
+            "y": 0.8143939393939394,
+            "width": 0.029411764705882353,
+            "height": 0.015782828282828284
+          },
+          "content": "(22)",
+          "label": "Formula"
+        },
+        {
+          "id": "37",
+          "order": 37,
+          "bounding_box": {
+            "x": 0.5122549019607843,
+            "y": 0.8459595959595959,
+            "width": 0.4084967320261438,
+            "height": 0.030934343434343436
+          },
+          "content": "By substituting the parameters into Eq. (11), the total phenotypic change  $ \\left(\\Delta \\overline{x}_{\\text{total}}\\right) $ is:",
+          "label": "Text"
+        },
+        {
+          "id": "38",
+          "order": 38,
+          "bounding_box": {
+            "x": 0.5751633986928104,
+            "y": 0.8825757575757576,
+            "width": 0.28513071895424835,
+            "height": 0.034722222222222224
+          },
+          "content": " $$ \\Delta\\overline{x}_{total}=\\left(1+\\frac{c^{2}}{sc}\\right)\\left(\\frac{s}{s+c}\\Delta\\alpha\\right)=\\Delta\\alpha $$ ",
+          "label": "Formula"
+        },
+        {
+          "id": "39",
+          "order": 39,
+          "bounding_box": {
+            "x": 0.8880718954248366,
+            "y": 0.8926767676767676,
+            "width": 0.03022875816993464,
+            "height": 0.015782828282828284
+          },
+          "content": "(23)",
+          "label": "Formula"
+        }
+      ]
+    },
+    {
+      "page_index": 6,
+      "blocks": [
+        {
+          "id": "0",
+          "order": null,
+          "bounding_box": {
+            "x": 0.9076797385620915,
+            "y": 0.03598484848484849,
+            "width": 0.013071895424836602,
+            "height": 0.011363636363636364
+          },
+          "content": "6",
+          "label": "Text"
+        },
+        {
+          "id": "1",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.08333333333333333,
+            "y": 0.06755050505050506,
+            "width": 0.4076797385620915,
+            "height": 0.11616161616161616
+          },
+          "content": "Since $s > 0$ and $c > 0$, the inequality $|\\Delta\\overline{x}_{total}| = |\\Delta\\alpha| > |\\Delta\\overline{x}_{plas}| = \\frac{s}{s+c}|\\Delta\\alpha|$ holds. This confirms the phenomenological manifestation of the evolutionary Le Chatelier's principle. Comparing Eq. (22) and Eq. (23) reveals that the final states of the phenotype and genotype are aligned $(\\Delta\\overline{x}_{total} = \\Delta\\overline{y}(\\infty) = \\Delta\\alpha)$. This indicates that genetic assimilation proceeds to eliminate the plasticity cost.",
+          "label": "Text"
+        },
+        {
+          "id": "2",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.08251633986928104,
+            "y": 0.18813131313131312,
+            "width": 0.4076797385620915,
+            "height": 0.045454545454545456
+          },
+          "content": "We evaluate the relaxation time  $ \\tau $, which governs the speed of this genetic assimilation. Substituting Eq. (19) and Eq. (20) into Eq. (14), we obtain:",
+          "label": "Text"
+        },
+        {
+          "id": "3",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.11274509803921569,
+            "y": 0.255050505050505,
+            "width": 0.31781045751633985,
+            "height": 0.03409090909090909
+          },
+          "content": " $$ \\tau=-\\frac{F_{xx}}{G_{yy}\\det H}=\\frac{s+c}{G_{yy}sc}=\\frac{1}{G_{yy}}\\left(\\frac{1}{s}+\\frac{1}{c}\\right) $$ ",
+          "label": "Formula"
+        },
+        {
+          "id": "4",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.4591503267973856,
+            "y": 0.2638888888888889,
+            "width": 0.029411764705882353,
+            "height": 0.015782828282828284
+          },
+          "content": "(24)",
+          "label": "Formula"
+        },
+        {
+          "id": "5",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.08333333333333333,
+            "y": 0.30997474747474746,
+            "width": 0.40604575163398693,
+            "height": 0.030303030303030304
+          },
+          "content": "Under the condition where a balance between selection and mutation is satisfied (Eq. 17), this becomes:",
+          "label": "Text"
+        },
+        {
+          "id": "6",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.21160130718954248,
+            "y": 0.36363636363636365,
+            "width": 0.14950980392156862,
+            "height": 0.039141414141414144
+          },
+          "content": " $$ \\tau=\\sqrt{\\frac{1}{V_{m}}\\left(\\frac{1}{s}+\\frac{1}{c}\\right)} $$ ",
+          "label": "Formula"
+        },
+        {
+          "id": "7",
+          "order": 7,
+          "bounding_box": {
+            "x": 0.4591503267973856,
+            "y": 0.37626262626262624,
+            "width": 0.029411764705882353,
+            "height": 0.015782828282828284
+          },
+          "content": "(25)",
+          "label": "Formula"
+        },
+        {
+          "id": "8",
+          "order": 8,
+          "bounding_box": {
+            "x": 0.08251633986928104,
+            "y": 0.4255050505050505,
+            "width": 0.4084967320261438,
+            "height": 0.17613636363636365
+          },
+          "content": "For fixed genetic variance  $ G_{yy} $, Eq. (24) shows that the time required for genetic assimilation is proportional to the sum of the inverses of the selection pressure  $ (s) $ and the plasticity cost  $ (c) $. Under mutation–selection balance, Eq. (25) instead shows that the relaxation time scales with the square root of this sum. In both cases, if either the environmental selection pressure is absent  $ (s \\to 0) $ or the plasticity is cost-free  $ (c \\to 0) $, the relaxation time diverges  $ (\\tau \\to \\infty) $. While phenotypic plasticity allows organisms to survive sudden environmental changes, the cost of maintaining this plasticity drives the subsequent genetic assimilation.",
+          "label": "Text"
+        },
+        {
+          "id": "9",
+          "order": 9,
+          "bounding_box": {
+            "x": 0.08251633986928104,
+            "y": 0.6047979797979798,
+            "width": 0.4084967320261438,
+            "height": 0.14646464646464646
+          },
+          "content": "To validate the theoretical framework, we performed an individual-based simulation of a finite population evolving on this quadratic fitness landscape (Fig. 2). As shown in Fig. 2A, when the environment instantaneously shifts at t = 0, the mean phenotype exhibits an immediate plastic jump, partially adapting to the new environment. Subsequently, the mean genotype slowly evolves to close the phenotype-genotype gap. The theoretical predictions (dashed lines) capture this microscopic population dynamics.",
+          "label": "Text"
+        },
+        {
+          "id": "10",
+          "order": 10,
+          "bounding_box": {
+            "x": 0.08333333333333333,
+            "y": 0.7550505050505051,
+            "width": 0.4084967320261438,
+            "height": 0.16161616161616163
+          },
+          "content": "We evaluated the characteristic relaxation time  $ \\tau $ across a range of selection pressures (s) and plasticity costs (c). Fig. 2B demonstrates that the relaxation time becomes long when the cost of plasticity is small ( $ c \\to 0 $) or the selection pressure is weak ( $ s \\to 0 $). The theoretically predicted  $ \\tau $ shows quantitative agreement with the empirical relaxation times observed in the simulation (Fig. 2C). These numerical results are consistent with the theoretical prediction that, in the quadratic model, the plasticity cost physically acts as the internal spring constant driving genetic assimilation.",
+          "label": "Text"
+        },
+        {
+          "id": "11",
+          "order": 11,
+          "bounding_box": {
+            "x": 0.6388888888888888,
+            "y": 0.06691919191919192,
+            "width": 0.1568627450980392,
+            "height": 0.01452020202020202
+          },
+          "content": "### III. DISCUSSION",
+          "label": "Text"
+        },
+        {
+          "id": "12",
+          "order": 12,
+          "bounding_box": {
+            "x": 0.5122549019607843,
+            "y": 0.10037878787878787,
+            "width": 0.40931372549019607,
+            "height": 0.2032828282828283
+          },
+          "content": "In this paper, we formulated a macroscopic framework for genetic assimilation by bridging the Price equation with the physical concept of timescale separation. Our formulation reveals that the evolutionary trajectory following an environmental shift is governed by the evolutionary Le Chatelier's principle. Genetic assimilation is fundamentally a dynamical relaxation process: the initial plastic displacement generates an internal stress through genotype-phenotype coupling, and subsequent genetic evolution proceeds to resolve this stress. This dynamical picture demonstrates that genetic assimilation is a natural physical consequence of evolving systems undergoing timescale separation, independent of microscopic genetic details.",
+          "label": "Text"
+        },
+        {
+          "id": "13",
+          "order": 13,
+          "bounding_box": {
+            "x": 0.5122549019607843,
+            "y": 0.3036616161616162,
+            "width": 0.4084967320261438,
+            "height": 0.1597222222222222
+          },
+          "content": "While previous models describe genetic assimilation through specific genetic architectures  $ [17–19] $ or explicit biophysical and developmental constraints  $ [20–22] $, our formulation provides a phenomenological counterpart. By coarse-graining these microscopic details into a generalized potential landscape under the assumption of timescale separation, our framework complements these mechanistic approaches. Rather than detailing how specific traits are mechanistically encoded, this phenomenological perspective explains why genetic assimilation follows a universal macroscopic relaxation law.",
+          "label": "Text"
+        },
+        {
+          "id": "14",
+          "order": 14,
+          "bounding_box": {
+            "x": 0.5122549019607843,
+            "y": 0.46464646464646464,
+            "width": 0.4084967320261438,
+            "height": 0.20202020202020202
+          },
+          "content": "Equation (3) has the formal structure of a local linear reaction norm and is therefore closely related to quantitative-genetic models of plasticity, particularly Lande's model of adaptation to an extraordinary environment [18]. The distinction is that the present theory does not postulate the reaction norm as a microscopic genetic architecture. Instead, the reaction-norm-like slope emerges as a local susceptibility after eliminating the fast phenotypic variable through  $ F_x = 0 $. Thus, Lande's model can be viewed as a microscopic realization in which this susceptibility itself can evolve, whereas the present theory treats the susceptibility as locally fixed and focuses on the macroscopic relaxation law generated by timescale separation.",
+          "label": "Text"
+        },
+        {
+          "id": "15",
+          "order": 15,
+          "bounding_box": {
+            "x": 0.511437908496732,
+            "y": 0.6666666666666666,
+            "width": 0.40931372549019607,
+            "height": 0.13068181818181818
+          },
+          "content": "A biological implication of our framework lies in the role of genotype-phenotype coupling. In the general theory, the internal stress driving assimilation is  $ F_{xy}\\Delta\\overline{x}_{plas} $. In the quadratic model, this coupling is identical to the plasticity cost,  $ F_{xy}=c $, so the cost acts as a spring constant connecting phenotype and genotype. This explains why a cost that is conventionally viewed as an evolutionary constraint can also serve as the restoring force that drives genetic assimilation.",
+          "label": "Text"
+        },
+        {
+          "id": "16",
+          "order": 16,
+          "bounding_box": {
+            "x": 0.5122549019607843,
+            "y": 0.7973484848484849,
+            "width": 0.4084967320261438,
+            "height": 0.08775252525252525
+          },
+          "content": "The limit  $ c \\to 0^+ $ should be interpreted as a singular limit of the stable quadratic model. The restoring force between genotype and phenotype vanishes,  $ \\det H = sc $ approaches zero, and the relaxation time diverges. Thus, in the ideal limit of cost-free, perfectly adaptive plasticity, genetic assimilation effectively stalls.",
+          "label": "Text"
+        },
+        {
+          "id": "17",
+          "order": 17,
+          "bounding_box": {
+            "x": 0.5122549019607843,
+            "y": 0.8857323232323232,
+            "width": 0.40931372549019607,
+            "height": 0.030303030303030304
+          },
+          "content": "This relationship provides a testable prediction for experimental evolution. In the quadratic model, the plas-",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "page_index": 7,
+      "blocks": [
+        {
+          "id": "0",
+          "order": null,
+          "bounding_box": {
+            "x": 0.9076797385620915,
+            "y": 0.03535353535353535,
+            "width": 0.013071895424836602,
+            "height": 0.012626262626262626
+          },
+          "content": "7",
+          "label": "Text"
+        },
+        {
+          "id": "1",
+          "order": null,
+          "bounding_box": {
+            "x": 0.21977124183006536,
+            "y": 0.0726010101010101,
+            "width": 0.027777777777777776,
+            "height": 0.020202020202020204
+          },
+          "content": "<div style=\"text-align: center;\">A</div>\n",
+          "label": "Image"
+        },
+        {
+          "id": "2",
+          "order": null,
+          "bounding_box": {
+            "x": 0.1968954248366013,
+            "y": 0.09343434343434344,
+            "width": 0.6209150326797386,
+            "height": 0.1736111111111111
+          },
+          "content": "<div style=\"text-align: center;\"><img src=\"imgs/img_in_chart_box_241_148_1001_423.jpg\" alt=\"Image\" width=\"62%\" />\n\n\n\n</div>\n",
+          "label": "Image"
+        },
+        {
+          "id": "3",
+          "order": null,
+          "bounding_box": {
+            "x": 0.22058823529411764,
+            "y": 0.2689393939393939,
+            "width": 0.024509803921568627,
+            "height": 0.01893939393939394
+          },
+          "content": "<div style=\"text-align: center;\">B</div>\n",
+          "label": "Image"
+        },
+        {
+          "id": "4",
+          "order": null,
+          "bounding_box": {
+            "x": 0.5555555555555556,
+            "y": 0.2702020202020202,
+            "width": 0.024509803921568627,
+            "height": 0.018308080808080808
+          },
+          "content": "<div style=\"text-align: center;\">C</div>\n",
+          "label": "Image"
+        },
+        {
+          "id": "5",
+          "order": null,
+          "bounding_box": {
+            "x": 0.1854575163398693,
+            "y": 0.2758838383838384,
+            "width": 0.3382352941176471,
+            "height": 0.22474747474747475
+          },
+          "content": "<div style=\"text-align: center;\"><img src=\"imgs/img_in_chart_box_227_437_641_793.jpg\" alt=\"Image\" width=\"33%\" />\n\n\n\n</div>\n",
+          "label": "Image"
+        },
+        {
+          "id": "6",
+          "order": null,
+          "bounding_box": {
+            "x": 0.5277777777777778,
+            "y": 0.2922979797979798,
+            "width": 0.28104575163398693,
+            "height": 0.20833333333333334
+          },
+          "content": "<div style=\"text-align: center;\"><img src=\"imgs/img_in_chart_box_646_463_990_793.jpg\" alt=\"Image\" width=\"28%\" />\n\n\n\n</div>\n",
+          "label": "Image"
+        },
+        {
+          "id": "7",
+          "order": null,
+          "bounding_box": {
+            "x": 0.08333333333333333,
+            "y": 0.5246212121212122,
+            "width": 0.8382352941176471,
+            "height": 0.09406565656565656
+          },
+          "content": "<div style=\"text-align: center;\">FIG. 2. Individual-based simulation of genetic assimilation on the quadratic fitness landscape. (A) Time series of the mean phenotype  $ \\bar{x} $ and mean genotype  $ \\bar{y} $ before and after an environmental shift  $ \\Delta\\alpha = 1 $ at  $ t = 0 $. Solid lines show a representative single replicate for a population of  $ N = 10,000 $ with s = 1.0 and c = 1.0, and dashed lines show the analytical predictions with no fitted parameters. (B) Relaxation time  $ \\tau $ obtained from parameter sweeps over the selection pressure s and the cost of plasticity c, averaged over 100 independent replicates for each parameter combination. (C) Cross-section of the relaxation time at fixed selection pressure s = 1.0. Points show mean simulation results averaged over 100 independent replicates, and the solid line shows the theoretical prediction from Eq. (25).</div>\n",
+          "label": "Image"
+        },
+        {
+          "id": "8",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.08333333333333333,
+            "y": 0.6452020202020202,
+            "width": 0.4076797385620915,
+            "height": 0.20454545454545456
+          },
+          "content": "ticity cost c sets the genotype-phenotype restoring force. If developmental noise is comparable across genotypes and environments, a weaker restoring force should be reflected in larger phenotypic fluctuations among genetically identical individuals. Thus, clonal phenotypic fluctuations provide a practical way to infer the strength of the local restoring force. Our theory predicts that a population exhibiting larger clonal phenotypic fluctuations will require a longer evolutionary timescale for genetic assimilation. This counter-intuitive prediction provides an avenue to test the evolutionary Le Chatelier's principle in laboratory experiments, demonstrating that greater clonal phenotypic variation slows genetic evolution because of a weaker restoring force.",
+          "label": "Text"
+        },
+        {
+          "id": "9",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.08251633986928104,
+            "y": 0.8560606060606061,
+            "width": 0.40931372549019607,
+            "height": 0.05997474747474747
+          },
+          "content": "While our explicit example assumed a one-dimensional trait, extending this theoretical framework to multidimensional phenotypic and genotypic spaces remains an important direction for future research. Real biological systems typically involve pleiotropy and multidimensional fitness landscapes. By replacing the scalar variance with a genetic covariance matrix and the second derivative of fitness with a Hessian matrix, this formulation could be generalized to describe a multidimensional evolutionary Le Chatelier's principle.",
+          "label": "Text"
+        },
+        {
+          "id": "10",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.511437908496732,
+            "y": 0.6452020202020202,
+            "width": 0.40931372549019607,
+            "height": 0.08838383838383838
+          },
+          "content": "",
+          "label": "Text"
+        },
+        {
+          "id": "11",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.511437908496732,
+            "y": 0.7361111111111112,
+            "width": 0.41013071895424835,
+            "height": 0.14709595959595959
+          },
+          "content": "Beyond simple quadratic landscapes, exploring evolution on complex, rugged fitness landscapes represents another direction for future research. In highly rugged landscapes, the quantitative relationships derived here might be complicated by local optima and rare evolutionary events, such as valley crossing [45], required for global adaptation. However, the core qualitative picture would remain valid: the initial plastic displacement creates an internal stress through genotype-phenotype coupling, driving subsequent evolution.",
+          "label": "Text"
+        },
+        {
+          "id": "12",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.5122549019607843,
+            "y": 0.88510101010101,
+            "width": 0.41013071895424835,
+            "height": 0.030934343434343436
+          },
+          "content": "A further extension concerns the Baldwin effect. The Baldwin effect is historically associated with learning and",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "page_index": 8,
+      "blocks": [
+        {
+          "id": "0",
+          "order": null,
+          "bounding_box": {
+            "x": 0.9084967320261438,
+            "y": 0.03598484848484849,
+            "width": 0.012254901960784314,
+            "height": 0.011363636363636364
+          },
+          "content": "8",
+          "label": "Text"
+        },
+        {
+          "id": "1",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.08169934640522876,
+            "y": 0.06628787878787878,
+            "width": 0.41013071895424835,
+            "height": 0.32196969696969696
+          },
+          "content": "other forms of ontogenetic accommodation [46, 47]. It is related to genetic assimilation because both involve plastic responses that influence subsequent evolution [11], but the two concepts should not be conflated [48]. In the present framework, the natural extension would be to introduce an additional fast ontogenetic process, with learning providing the clearest example. Such a process would not transmit acquired behavior to the genome; rather, it would change how genotypes are evaluated by selection. Classic models show that learning can allow partially suitable genotypes to survive and reproduce, making otherwise hidden genetic variation visible to natural selection [49]. In physical terms, this additional fast process reshapes the effective fitness landscape experienced by the slower phenotypic and genotypic variables. A future extension could coarse-grain over this fast accommodative process before deriving the responses of the slower phenotypic and genotypic variables. Such a multiple-timescale formulation could clarify when fast ontogenetic accommodation accelerates genetic adaptation and when its costs or limits favor reduced reliance on the fast response.",
+          "label": "Text"
+        },
+        {
+          "id": "2",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.08251633986928104,
+            "y": 0.5808080808080808,
+            "width": 0.40931372549019607,
+            "height": 0.17487373737373738
+          },
+          "content": "Our results establish a formal link between evolutionary dynamics and macroscopic physics. Just as Fisher's fundamental theorem mirrors the second law of thermodynamics by dictating the monotonic increase of mean fitness  $ [42] $, the evolutionary Le Chatelier's principle mathematically dictates how an evolving system macroscopically responds to external perturbations. By unifying phenotypic plasticity and genetic evolution under this universal framework, we anticipate that this macroscopic perspective will stimulate further theoretical and empirical explorations into the physical nature of biological evolution.",
+          "label": "Text"
+        },
+        {
+          "id": "3",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.5915032679738562,
+            "y": 0.06755050505050506,
+            "width": 0.25163398692810457,
+            "height": 0.013888888888888888
+          },
+          "content": "## MATERIALS AND METHODS",
+          "label": "Text"
+        },
+        {
+          "id": "4",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.6094771241830066,
+            "y": 0.09911616161616162,
+            "width": 0.21568627450980393,
+            "height": 0.013257575757575758
+          },
+          "content": "## Individual-based simulation",
+          "label": "Text"
+        },
+        {
+          "id": "5",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.5130718954248366,
+            "y": 0.13068181818181818,
+            "width": 0.4076797385620915,
+            "height": 0.10101010101010101
+          },
+          "content": "We simulated a Wright-Fisher population of  $ N = 10,000 $ individuals with discrete, non-overlapping generations. Each individual i in the population is characterized by a continuous genotype  $ y_i $ and a phenotype  $ x_i $. The absolute fitness of an individual is given by  $ W(x_i, y_i) = \\exp[F(x_i, y_i; \\alpha)] $, where F is the quadratic fitness function defined in Eq. (18).",
+          "label": "Text"
+        },
+        {
+          "id": "6",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.511437908496732,
+            "y": 0.23295454545454544,
+            "width": 0.40931372549019607,
+            "height": 0.1433080808080808
+          },
+          "content": "Following the assumption of timescale separation, the actual phenotype  $ x_i $ expressed by an individual is assumed to be constantly kept at its optimal plastic response:  $ x_i = x^*(y_i, \\alpha) = \\frac{s\\alpha + c y_i}{s + c} $. In each generation,  $ N $ parents are selected to produce the next generation with probabilities proportional to their absolute fitness  $ W(x_i, y_i) $. The offspring inherit their parent's genotype with a mutational perturbation:  $ y_i' = y_i + \\xi_m $, where the mutational effect  $ \\xi_m $ is drawn from a normal distribution with mean zero and variance  $ V_m = 0.001 $.",
+          "label": "Text"
+        },
+        {
+          "id": "7",
+          "order": 7,
+          "bounding_box": {
+            "x": 0.5122549019607843,
+            "y": 0.3768939393939394,
+            "width": 0.40931372549019607,
+            "height": 0.2474747474747475
+          },
+          "content": "The population was initialized with  $ y_i = 0 $ for all individuals and allowed to evolve for a burn-in period of 2,000 generations under a constant environment ( $ \\alpha = 0 $) to reach a mutation-selection balance. At  $ t = 0 $, the environment was instantaneously shifted to  $ \\alpha = 1 $. For the time-series analysis (Fig. 2A), a single replicate run with  $ s = 1.0 $ and  $ c = 1.0 $ was performed to demonstrate the representative evolutionary trajectory. For the parameter sweeps (Fig. 2B and C), the parameters  $ s $ and  $ c $ were independently varied from  $ 10^{-3} $ to  $ 10^1 $, uniformly divided into 41 points on a logarithmic scale. The empirical relaxation time  $ \\tau $ was numerically defined as the number of generations required for the mean genotype  $ \\bar{y} $ to reach  $ 1 - e^{-1} \\simeq 63.2\\% $ of its theoretically predicted total displacement  $ \\Delta\\bar{y}(\\infty) $. The presented sweep data were averaged over 100 independent replicate runs for each parameter combination.",
+          "label": "Text"
+        },
+        {
+          "id": "8",
+          "order": 8,
+          "bounding_box": {
+            "x": 0.6176470588235294,
+            "y": 0.6496212121212122,
+            "width": 0.20016339869281047,
+            "height": 0.01452020202020202
+          },
+          "content": "## ACKNOWLEDGMENTS",
+          "label": "Text"
+        },
+        {
+          "id": "9",
+          "order": 9,
+          "bounding_box": {
+            "x": 0.511437908496732,
+            "y": 0.6811868686868687,
+            "width": 0.41013071895424835,
+            "height": 0.07449494949494949
+          },
+          "content": "I thank Chikara Furusawa for helpful discussions, and Kunihiko Kaneko and Archishman Raju for helpful discussions and critical reading of the manuscript. This work was supported by JSPS KAKENHI Grant Numbers 26K00057 and 26K00061.",
+          "label": "Text"
+        },
+        {
+          "id": "10",
+          "order": 10,
+          "bounding_box": {
+            "x": 0.09395424836601307,
+            "y": 0.8112373737373737,
+            "width": 0.39705882352941174,
+            "height": 0.026515151515151516
+          },
+          "content": "[1] M. Pigliucci, Phenotypic plasticity: beyond nature and nurture (JHU Press, 2001).",
+          "label": "Text"
+        },
+        {
+          "id": "11",
+          "order": 11,
+          "bounding_box": {
+            "x": 0.09477124183006536,
+            "y": 0.8396464646464646,
+            "width": 0.3946078431372549,
+            "height": 0.036616161616161616
+          },
+          "content": "[2] E. Kussell and S. Leibler, Phenotypic diversity, population growth, and information in fluctuating environments, Science 309, 2075 (2005).",
+          "label": "Text"
+        },
+        {
+          "id": "12",
+          "order": 12,
+          "bounding_box": {
+            "x": 0.09477124183006536,
+            "y": 0.8781565656565656,
+            "width": 0.3946078431372549,
+            "height": 0.026515151515151516
+          },
+          "content": "[3] O. Rivoire and S. Leibler, The value of information for populations in varying environments, Journal of Statist-",
+          "label": "Text"
+        },
+        {
+          "id": "13",
+          "order": 13,
+          "bounding_box": {
+            "x": 0.5424836601307189,
+            "y": 0.8112373737373737,
+            "width": 0.20016339869281047,
+            "height": 0.013257575757575758
+          },
+          "content": "cal Physics 142, 1124 (2011).",
+          "label": "Text"
+        },
+        {
+          "id": "14",
+          "order": 14,
+          "bounding_box": {
+            "x": 0.5220588235294118,
+            "y": 0.8251262626262627,
+            "width": 0.397875816993464,
+            "height": 0.025883838383838384
+          },
+          "content": "[4] M. J. West-Eberhard, Developmental plasticity and evolution (Oxford University Press, 2003).",
+          "label": "Text"
+        },
+        {
+          "id": "15",
+          "order": 15,
+          "bounding_box": {
+            "x": 0.5236928104575164,
+            "y": 0.8516414141414141,
+            "width": 0.39624183006535946,
+            "height": 0.03851010101010101
+          },
+          "content": "[5] N. A. Levis and D. W. Pfennig, Evaluating 'plasticity-first' evolution in nature: key criteria and empirical approaches, Trends in ecology & evolution 31, 563 (2016).",
+          "label": "Text"
+        },
+        {
+          "id": "16",
+          "order": 16,
+          "bounding_box": {
+            "x": 0.5236928104575164,
+            "y": 0.8907828282828283,
+            "width": 0.39705882352941174,
+            "height": 0.013888888888888888
+          },
+          "content": "[6] C. H. Waddington, Canalization of development and",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "page_index": 9,
+      "blocks": [
+        {
+          "id": "0",
+          "order": null,
+          "bounding_box": {
+            "x": 0.9076797385620915,
+            "y": 0.03598484848484849,
+            "width": 0.013071895424836602,
+            "height": 0.010732323232323232
+          },
+          "content": "9",
+          "label": "Text"
+        },
+        {
+          "id": "1",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.11437908496732026,
+            "y": 0.06818181818181818,
+            "width": 0.375,
+            "height": 0.025252525252525252
+          },
+          "content": "the inheritance of acquired characters, Nature 150, 563 (1942).",
+          "label": "Text"
+        },
+        {
+          "id": "2",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.09395424836601307,
+            "y": 0.09532828282828283,
+            "width": 0.39624183006535946,
+            "height": 0.025252525252525252
+          },
+          "content": "[7] C. H. Waddington, Genetic assimilation of an acquired character, Evolution 7, 118 (1953).",
+          "label": "Text"
+        },
+        {
+          "id": "3",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.09477124183006536,
+            "y": 0.12184343434343434,
+            "width": 0.3946078431372549,
+            "height": 0.03851010101010101
+          },
+          "content": "[8] C. H. Waddington, The strategy of the genes: a discussion of some aspects of theoretical biology (George Allen & Unwin, 1957).",
+          "label": "Text"
+        },
+        {
+          "id": "4",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.09395424836601307,
+            "y": 0.16098484848484848,
+            "width": 0.39705882352941174,
+            "height": 0.025252525252525252
+          },
+          "content": "[9] I. I. Schmalhausen, Factors of evolution: the theory of stabilizing selection. (Blakiston, 1949).",
+          "label": "Text"
+        },
+        {
+          "id": "5",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.08741830065359477,
+            "y": 0.18686868686868688,
+            "width": 0.4027777777777778,
+            "height": 0.052398989898989896
+          },
+          "content": "[10] C. K. Ghalambor, J. K. McKay, S. P. Carroll, and D. N. Reznick, Adaptive versus non-adaptive phenotypic plasticity and the potential for contemporary adaptation in new environments, Functional ecology 21, 394 (2007).",
+          "label": "Text"
+        },
+        {
+          "id": "6",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.08660130718954248,
+            "y": 0.24053030303030304,
+            "width": 0.4027777777777778,
+            "height": 0.03851010101010101
+          },
+          "content": "[11] E. Crispo, The Baldwin effect and genetic assimilation: revisiting two mechanisms of evolutionary change mediated by phenotypic plasticity, Evolution 61, 2469 (2007).",
+          "label": "Text"
+        },
+        {
+          "id": "7",
+          "order": 7,
+          "bounding_box": {
+            "x": 0.08741830065359477,
+            "y": 0.2803030303030303,
+            "width": 0.4027777777777778,
+            "height": 0.05113636363636364
+          },
+          "content": "[12] J. Masel, Genetic assimilation can occur in the absence of selection for the assimilating phenotype, suggesting a role for the canalization heuristic, Journal of Evolutionary Biology 17, 1106 (2004).",
+          "label": "Text"
+        },
+        {
+          "id": "8",
+          "order": 8,
+          "bounding_box": {
+            "x": 0.08660130718954248,
+            "y": 0.3333333333333333,
+            "width": 0.4027777777777778,
+            "height": 0.025252525252525252
+          },
+          "content": "[13] Y. Suzuki and H. F. Nijhout, Evolution of a polyphenism by genetic accommodation, Science 311, 650 (2006).",
+          "label": "Text"
+        },
+        {
+          "id": "9",
+          "order": 9,
+          "bounding_box": {
+            "x": 0.08741830065359477,
+            "y": 0.3592171717171717,
+            "width": 0.4027777777777778,
+            "height": 0.03851010101010101
+          },
+          "content": "[14] T. J. DeWitt, A. Sih, and D. S. Wilson, Costs and limits of phenotypic plasticity, Trends in ecology & evolution 13, 77 (1998).",
+          "label": "Text"
+        },
+        {
+          "id": "10",
+          "order": 10,
+          "bounding_box": {
+            "x": 0.08741830065359477,
+            "y": 0.39835858585858586,
+            "width": 0.4019607843137255,
+            "height": 0.09217171717171717
+          },
+          "content": "[15] C. J. Murren, J. R. Auld, H. Callahan, C. K. Ghalam-bor, C. A. Handelsman, M. A. Heskel, J. Kingsolver, H. J. Maclean, J. Masel, H. Maughan, D. Pfennig, R. Relyea, S. Seiter, E. Snell-Rood, U. Steiner, and C. Schlichting, Constraints on the evolution of phenotypic plasticity: limits and costs of phenotype and plasticity, Heredity 115, 293 (2015).",
+          "label": "Text"
+        },
+        {
+          "id": "11",
+          "order": 11,
+          "bounding_box": {
+            "x": 0.08660130718954248,
+            "y": 0.4917929292929293,
+            "width": 0.4019607843137255,
+            "height": 0.037247474747474744
+          },
+          "content": "[16] L. B. Slobodkin and A. Rapoport, An optimal strategy of evolution, The Quarterly Review of Biology 49, 181 (1974).",
+          "label": "Text"
+        },
+        {
+          "id": "12",
+          "order": 12,
+          "bounding_box": {
+            "x": 0.08660130718954248,
+            "y": 0.5309343434343434,
+            "width": 0.4027777777777778,
+            "height": 0.03851010101010101
+          },
+          "content": "[17] R. Lande, Quantitative genetic analysis of multivariate evolution, applied to brain: body size allometry, Evolution 33, 402 (1979).",
+          "label": "Text"
+        },
+        {
+          "id": "13",
+          "order": 13,
+          "bounding_box": {
+            "x": 0.08660130718954248,
+            "y": 0.5707070707070707,
+            "width": 0.4027777777777778,
+            "height": 0.03851010101010101
+          },
+          "content": "[18] R. Lande, Adaptation to an extraordinary environment by evolution of phenotypic plasticity and genetic assimilation, Journal of Evolutionary Biology 22, 1435 (2009).",
+          "label": "Text"
+        },
+        {
+          "id": "14",
+          "order": 14,
+          "bounding_box": {
+            "x": 0.08741830065359477,
+            "y": 0.610479797979798,
+            "width": 0.4019607843137255,
+            "height": 0.05113636363636364
+          },
+          "content": "[19] L.-M. Chevin, R. Lande, and G. M. Mace, Adaptation, plasticity, and extinction in a changing environment: towards a predictive theory, PLoS Biology 8, e1000357 (2010).",
+          "label": "Text"
+        },
+        {
+          "id": "15",
+          "order": 15,
+          "bounding_box": {
+            "x": 0.08660130718954248,
+            "y": 0.6628787878787878,
+            "width": 0.4027777777777778,
+            "height": 0.03851010101010101
+          },
+          "content": "[20] L. W. Ancel and W. Fontana, Plasticity, evolvability, and modularity in RNA, Journal of Experimental Zoology 288, 242 (2000).",
+          "label": "Text"
+        },
+        {
+          "id": "16",
+          "order": 16,
+          "bounding_box": {
+            "x": 0.08741830065359477,
+            "y": 0.7026515151515151,
+            "width": 0.4019607843137255,
+            "height": 0.05176767676767677
+          },
+          "content": "[21] C. Espinosa-Soto, O. C. Martin, and A. Wagner, Phenotypic plasticity can facilitate adaptive evolution in gene regulatory circuits, BMC Evolutionary Biology 11, 5 (2011).",
+          "label": "Text"
+        },
+        {
+          "id": "17",
+          "order": 17,
+          "bounding_box": {
+            "x": 0.08741830065359477,
+            "y": 0.7556818181818182,
+            "width": 0.4019607843137255,
+            "height": 0.05113636363636364
+          },
+          "content": "[22] A. Raju, B. Xue, and S. Leibler, A theoretical perspective on Waddington's genetic assimilation experiments, Proceedings of the National Academy of Sciences 120, e2309760120 (2023).",
+          "label": "Text"
+        },
+        {
+          "id": "18",
+          "order": 18,
+          "bounding_box": {
+            "x": 0.08660130718954248,
+            "y": 0.8080808080808081,
+            "width": 0.4027777777777778,
+            "height": 0.025883838383838384
+          },
+          "content": "[23] H. B. Callen, Thermodynamics and an Introduction to Thermostatistics, 2nd ed. (John Wiley & Sons, 1985).",
+          "label": "Text"
+        },
+        {
+          "id": "19",
+          "order": 19,
+          "bounding_box": {
+            "x": 0.08741830065359477,
+            "y": 0.8352272727272727,
+            "width": 0.4027777777777778,
+            "height": 0.02462121212121212
+          },
+          "content": "[24] P. A. Samuelson, Foundations of Economic Analysis (Harvard University Press, 1947).",
+          "label": "Text"
+        },
+        {
+          "id": "20",
+          "order": 20,
+          "bounding_box": {
+            "x": 0.08741830065359477,
+            "y": 0.860479797979798,
+            "width": 0.4019607843137255,
+            "height": 0.025883838383838384
+          },
+          "content": "[25] Y. Iwasa, Free fitness that always increases in evolution, Journal of Theoretical Biology 135, 265 (1988).",
+          "label": "Text"
+        },
+        {
+          "id": "21",
+          "order": 21,
+          "bounding_box": {
+            "x": 0.08741830065359477,
+            "y": 0.8876262626262627,
+            "width": 0.4019607843137255,
+            "height": 0.026515151515151516
+          },
+          "content": "[26] G. Sella and A. E. Hirsh, The application of statistical physics to evolutionary biology, Proceedings of the Na-",
+          "label": "Text"
+        },
+        {
+          "id": "22",
+          "order": 22,
+          "bounding_box": {
+            "x": 0.5449346405228758,
+            "y": 0.06881313131313131,
+            "width": 0.3047385620915033,
+            "height": 0.012626262626262626
+          },
+          "content": "tional Academy of Sciences 102, 9541 (2005).",
+          "label": "Text"
+        },
+        {
+          "id": "23",
+          "order": 23,
+          "bounding_box": {
+            "x": 0.5171568627450981,
+            "y": 0.08207070707070707,
+            "width": 0.4019607843137255,
+            "height": 0.03851010101010101
+          },
+          "content": "[27] T. J. Kobayashi and Y. Sughiyama, Fluctuation relations of fitness and information in population dynamics, Physical Review Letters 115, 238102 (2015).",
+          "label": "Text"
+        },
+        {
+          "id": "24",
+          "order": 24,
+          "bounding_box": {
+            "x": 0.5171568627450981,
+            "y": 0.12184343434343434,
+            "width": 0.4019607843137255,
+            "height": 0.03851010101010101
+          },
+          "content": "[28] N. Goldenfeld and C. Woese, Life is physics: evolution as a collective phenomenon far from equilibrium, Annual Review of Condensed Matter Physics 2, 375 (2011).",
+          "label": "Text"
+        },
+        {
+          "id": "25",
+          "order": 25,
+          "bounding_box": {
+            "x": 0.5171568627450981,
+            "y": 0.16161616161616163,
+            "width": 0.4027777777777778,
+            "height": 0.03787878787878788
+          },
+          "content": "[29] C. Furusawa and K. Kaneko, Global relationships in fluctuation and response in adaptive evolution, Journal of The Royal Society Interface 12, 20150482 (2015).",
+          "label": "Text"
+        },
+        {
+          "id": "26",
+          "order": 26,
+          "bounding_box": {
+            "x": 0.5171568627450981,
+            "y": 0.20075757575757575,
+            "width": 0.4019607843137255,
+            "height": 0.03851010101010101
+          },
+          "content": "[30] K. Kaneko and C. Furusawa, Macroscopic theory for evolving biological systems akin to thermodynamics, Annual review of biophysics 47, 273 (2018).",
+          "label": "Text"
+        },
+        {
+          "id": "27",
+          "order": 27,
+          "bounding_box": {
+            "x": 0.5179738562091504,
+            "y": 0.24053030303030304,
+            "width": 0.4019607843137255,
+            "height": 0.06439393939393939
+          },
+          "content": "[31] K. Kaneko, Constructing universal phenomenology for biological cellular systems: an idiosyncratic review on evolutionary dimensional reduction, Journal of Statistical Mechanics: Theory and Experiment 2024, 024002 (2024).",
+          "label": "Text"
+        },
+        {
+          "id": "28",
+          "order": 28,
+          "bounding_box": {
+            "x": 0.5163398692810458,
+            "y": 0.3061868686868687,
+            "width": 0.4035947712418301,
+            "height": 0.03851010101010101
+          },
+          "content": "[32] K. Kaneko, Universal Biology: The Physics of Life through the Macro-Micro Consistency Principle (Cambridge University Press, 2025).",
+          "label": "Text"
+        },
+        {
+          "id": "29",
+          "order": 29,
+          "bounding_box": {
+            "x": 0.5171568627450981,
+            "y": 0.3453282828282828,
+            "width": 0.4027777777777778,
+            "height": 0.025252525252525252
+          },
+          "content": "[33] G. R. Price, Selection and covariance, Nature 227, 520 (1970).",
+          "label": "Text"
+        },
+        {
+          "id": "30",
+          "order": 30,
+          "bounding_box": {
+            "x": 0.5171568627450981,
+            "y": 0.37247474747474746,
+            "width": 0.4019607843137255,
+            "height": 0.025252525252525252
+          },
+          "content": "[34] G. R. Price, Extension of covariance selection mathematics, Annals of Human Genetics 35, 485 (1972).",
+          "label": "Text"
+        },
+        {
+          "id": "31",
+          "order": 31,
+          "bounding_box": {
+            "x": 0.5171568627450981,
+            "y": 0.398989898989899,
+            "width": 0.4019607843137255,
+            "height": 0.03787878787878788
+          },
+          "content": "[35] S. A. Frank, The Price equation, Fisher's fundamental theorem, kin selection, and causal analysis, Evolution 51, 1712 (1997).",
+          "label": "Text"
+        },
+        {
+          "id": "32",
+          "order": 32,
+          "bounding_box": {
+            "x": 0.5171568627450981,
+            "y": 0.43876262626262624,
+            "width": 0.4019607843137255,
+            "height": 0.03851010101010101
+          },
+          "content": "[36] S. Wright, The roles of mutation, inbreeding, crossbreeding, and selection in evolution, Proceedings of the Sixth International Congress of Genetics 1, 356 (1932).",
+          "label": "Text"
+        },
+        {
+          "id": "33",
+          "order": 33,
+          "bounding_box": {
+            "x": 0.5163398692810458,
+            "y": 0.47853535353535354,
+            "width": 0.4027777777777778,
+            "height": 0.025252525252525252
+          },
+          "content": "[37] R. Lande and S. J. Arnold, The measurement of selection on correlated characters, Evolution 37, 1210 (1983).",
+          "label": "Text"
+        },
+        {
+          "id": "34",
+          "order": 34,
+          "bounding_box": {
+            "x": 0.5163398692810458,
+            "y": 0.5050505050505051,
+            "width": 0.4027777777777778,
+            "height": 0.02462121212121212
+          },
+          "content": "[38] D. S. Falconer and T. F. Mackay, Introduction to quantitative genetics, 4th ed. (Longman, 1996).",
+          "label": "Text"
+        },
+        {
+          "id": "35",
+          "order": 35,
+          "bounding_box": {
+            "x": 0.5179738562091504,
+            "y": 0.5309343434343434,
+            "width": 0.4019607843137255,
+            "height": 0.025883838383838384
+          },
+          "content": "[39] J. F. Crow and M. Kimura, An Introduction to Population Genetics Theory (Harper & Row, New York, 1970).",
+          "label": "Text"
+        },
+        {
+          "id": "36",
+          "order": 36,
+          "bounding_box": {
+            "x": 0.5171568627450981,
+            "y": 0.5568181818181818,
+            "width": 0.4027777777777778,
+            "height": 0.025883838383838384
+          },
+          "content": "[40] M. Lynch and B. Walsh, Genetics and analysis of quantitative traits (Sinauer Associates Sunderland, MA, 1998).",
+          "label": "Text"
+        },
+        {
+          "id": "37",
+          "order": 37,
+          "bounding_box": {
+            "x": 0.5171568627450981,
+            "y": 0.5839646464646465,
+            "width": 0.4019607843137255,
+            "height": 0.025252525252525252
+          },
+          "content": "[41] R. Bürger, The mathematical theory of selection, recom-bination, and mutation (John Wiley & Sons, 2000).",
+          "label": "Text"
+        },
+        {
+          "id": "38",
+          "order": 38,
+          "bounding_box": {
+            "x": 0.5171568627450981,
+            "y": 0.610479797979798,
+            "width": 0.4019607843137255,
+            "height": 0.025252525252525252
+          },
+          "content": "[42] R. A. Fisher, The genetical theory of natural selection (Clarendon Press, 1930).",
+          "label": "Text"
+        },
+        {
+          "id": "39",
+          "order": 39,
+          "bounding_box": {
+            "x": 0.5171568627450981,
+            "y": 0.6369949494949495,
+            "width": 0.4011437908496732,
+            "height": 0.050505050505050504
+          },
+          "content": "[43] M. Kimura, A stochastic model concerning the maintenance of genetic variability in quantitative characters, Proceedings of the National Academy of Sciences 54, 731 (1965).",
+          "label": "Text"
+        },
+        {
+          "id": "40",
+          "order": 40,
+          "bounding_box": {
+            "x": 0.5163398692810458,
+            "y": 0.6893939393939394,
+            "width": 0.4027777777777778,
+            "height": 0.03851010101010101
+          },
+          "content": "[44] R. Lande, The maintenance of genetic variability by mutation in a polygenic character with linked loci, Genetical Research 26, 221 (1975).",
+          "label": "Text"
+        },
+        {
+          "id": "41",
+          "order": 41,
+          "bounding_box": {
+            "x": 0.5163398692810458,
+            "y": 0.7291666666666666,
+            "width": 0.4019607843137255,
+            "height": 0.025252525252525252
+          },
+          "content": "[45] T. S. Hatakeyama and R. Ohbayashi, Evolutionary innovation by polyploidy, PRX Life 2, 043021 (2024).",
+          "label": "Text"
+        },
+        {
+          "id": "42",
+          "order": 42,
+          "bounding_box": {
+            "x": 0.5171568627450981,
+            "y": 0.7556818181818182,
+            "width": 0.4019607843137255,
+            "height": 0.025252525252525252
+          },
+          "content": "[46] J. M. Baldwin, A new factor in evolution, The American Naturalist 30, 441 (1896).",
+          "label": "Text"
+        },
+        {
+          "id": "43",
+          "order": 43,
+          "bounding_box": {
+            "x": 0.5171568627450981,
+            "y": 0.7815656565656566,
+            "width": 0.4027777777777778,
+            "height": 0.025252525252525252
+          },
+          "content": "[47] G. G. Simpson, The Baldwin effect, Evolution 7, 110 (1953).",
+          "label": "Text"
+        },
+        {
+          "id": "44",
+          "order": 44,
+          "bounding_box": {
+            "x": 0.5171568627450981,
+            "y": 0.8087121212121212,
+            "width": 0.4019607843137255,
+            "height": 0.03851010101010101
+          },
+          "content": "[48] L. Loison, Disentangling genetic assimilation from the baldwin effect: A philosophical perspective, Paradigmi. Rivista di critica filosofica 38, 441 (2020).",
+          "label": "Text"
+        },
+        {
+          "id": "45",
+          "order": 45,
+          "bounding_box": {
+            "x": 0.5171568627450981,
+            "y": 0.8478535353535354,
+            "width": 0.4027777777777778,
+            "height": 0.025883838383838384
+          },
+          "content": "[49] G. E. Hinton and S. J. Nowlan, How learning can guide evolution, Complex Systems 1, 495 (1987).",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "page_index": 10,
+      "blocks": [
+        {
+          "id": "0",
+          "order": null,
+          "bounding_box": {
+            "x": 0.9003267973856209,
+            "y": 0.03535353535353535,
+            "width": 0.02042483660130719,
+            "height": 0.011994949494949494
+          },
+          "content": "10",
+          "label": "Text"
+        },
+        {
+          "id": "1",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.37745098039215685,
+            "y": 0.06755050505050506,
+            "width": 0.25,
+            "height": 0.013257575757575758
+          },
+          "content": "## SUPPLEMENTAL MATERIAL",
+          "label": "Text"
+        },
+        {
+          "id": "2",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.16013071895424835,
+            "y": 0.09848484848484848,
+            "width": 0.6838235294117647,
+            "height": 0.013888888888888888
+          },
+          "content": "### S1. DERIVATION OF THE PRICE EQUATION UNDER TIMESCALE SEPARATION",
+          "label": "Text"
+        },
+        {
+          "id": "3",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.08333333333333333,
+            "y": 0.13131313131313133,
+            "width": 0.8374183006535948,
+            "height": 0.029671717171717172
+          },
+          "content": "This section provides the detailed derivations of the Price-equation formulation and the local phenotypic response presented in the main text.",
+          "label": "Text"
+        },
+        {
+          "id": "4",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.2704248366013072,
+            "y": 0.18686868686868688,
+            "width": 0.46486928104575165,
+            "height": 0.013888888888888888
+          },
+          "content": "## Derivation of the local response of the optimized phenotype",
+          "label": "Text"
+        },
+        {
+          "id": "5",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.08333333333333333,
+            "y": 0.21906565656565657,
+            "width": 0.8374183006535948,
+            "height": 0.029671717171717172
+          },
+          "content": "From Assumption 2, the phenotype is kept at the optimal state  $ x^{*} $, satisfying  $ \\partial F/\\partial x = 0 $. By taking the total differential of this condition, we obtain:",
+          "label": "Text"
+        },
+        {
+          "id": "6",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.3480392156862745,
+            "y": 0.25252525252525254,
+            "width": 0.30718954248366015,
+            "height": 0.06944444444444445
+          },
+          "content": " $$ \\begin{aligned}d\\left(\\frac{\\partial F}{\\partial x}\\right)&=\\frac{\\partial^{2}F}{\\partial x^{2}}d x^{*}+\\frac{\\partial^{2}F}{\\partial x\\partial y}d y+\\frac{\\partial^{2}F}{\\partial x\\partial\\alpha}d\\alpha\\\\&=F_{x x}d x^{*}+F_{x y}d y+F_{x\\alpha}d\\alpha\\\\&=0\\end{aligned} $$ ",
+          "label": "Formula"
+        },
+        {
+          "id": "7",
+          "order": 7,
+          "bounding_box": {
+            "x": 0.8872549019607843,
+            "y": 0.30808080808080807,
+            "width": 0.03104575163398693,
+            "height": 0.015151515151515152
+          },
+          "content": "(S1)",
+          "label": "Formula"
+        },
+        {
+          "id": "8",
+          "order": 8,
+          "bounding_box": {
+            "x": 0.08415032679738563,
+            "y": 0.3301767676767677,
+            "width": 0.5620915032679739,
+            "height": 0.015151515151515152
+          },
+          "content": "By rearranging this, we obtain the local response of the optimized phenotype:",
+          "label": "Text"
+        },
+        {
+          "id": "9",
+          "order": 9,
+          "bounding_box": {
+            "x": 0.41013071895424835,
+            "y": 0.34974747474747475,
+            "width": 0.18382352941176472,
+            "height": 0.032196969696969696
+          },
+          "content": " $$ d x^{*}=-\\frac{F_{x y}}{F_{x x}}d y-\\frac{F_{x\\alpha}}{F_{x x}}d\\alpha $$ ",
+          "label": "Formula"
+        },
+        {
+          "id": "10",
+          "order": 10,
+          "bounding_box": {
+            "x": 0.8880718954248366,
+            "y": 0.35858585858585856,
+            "width": 0.03022875816993464,
+            "height": 0.015151515151515152
+          },
+          "content": "(S2)",
+          "label": "Formula"
+        },
+        {
+          "id": "11",
+          "order": 11,
+          "bounding_box": {
+            "x": 0.08251633986928104,
+            "y": 0.38636363636363635,
+            "width": 0.8382352941176471,
+            "height": 0.029671717171717172
+          },
+          "content": "Because the Hessian components are constant under Assumption 3, this differential equation can be directly integrated by treating y and  $ \\alpha $ as independent coordinates:",
+          "label": "Text"
+        },
+        {
+          "id": "12",
+          "order": 12,
+          "bounding_box": {
+            "x": 0.38643790849673204,
+            "y": 0.42045454545454547,
+            "width": 0.23202614379084968,
+            "height": 0.03156565656565657
+          },
+          "content": " $$ x^{*}(y,\\alpha)=-\\frac{F_{xy}}{F_{xx}}y-\\frac{F_{x\\alpha}}{F_{xx}}\\alpha+C $$ ",
+          "label": "Formula"
+        },
+        {
+          "id": "13",
+          "order": 13,
+          "bounding_box": {
+            "x": 0.08496732026143791,
+            "y": 0.45707070707070707,
+            "width": 0.6446078431372549,
+            "height": 0.01452020202020202
+          },
+          "content": "where C is a constant of integration. The partial derivatives are determined as constants:",
+          "label": "Text"
+        },
+        {
+          "id": "14",
+          "order": 14,
+          "bounding_box": {
+            "x": 0.8880718954248366,
+            "y": 0.4292929292929293,
+            "width": 0.03022875816993464,
+            "height": 0.015151515151515152
+          },
+          "content": "(S3)",
+          "label": "Formula"
+        },
+        {
+          "id": "15",
+          "order": 15,
+          "bounding_box": {
+            "x": 0.39215686274509803,
+            "y": 0.476010101010101,
+            "width": 0.21977124183006536,
+            "height": 0.03345959595959596
+          },
+          "content": " $$ \\frac{\\partial x^{*}}{\\partial y}=-\\frac{F_{xy}}{F_{xx}},\\quad\\frac{\\partial x^{*}}{\\partial\\alpha}=-\\frac{F_{x\\alpha}}{F_{xx}} $$ ",
+          "label": "Formula"
+        },
+        {
+          "id": "16",
+          "order": 16,
+          "bounding_box": {
+            "x": 0.8880718954248366,
+            "y": 0.48484848484848486,
+            "width": 0.03022875816993464,
+            "height": 0.015782828282828284
+          },
+          "content": "(S4)",
+          "label": "Formula"
+        },
+        {
+          "id": "17",
+          "order": 17,
+          "bounding_box": {
+            "x": 0.3602941176470588,
+            "y": 0.5340909090909091,
+            "width": 0.28431372549019607,
+            "height": 0.013888888888888888
+          },
+          "content": "## Decomposition of the Price equation",
+          "label": "Text"
+        },
+        {
+          "id": "18",
+          "order": 18,
+          "bounding_box": {
+            "x": 0.09967320261437909,
+            "y": 0.5656565656565656,
+            "width": 0.6552287581699346,
+            "height": 0.01452020202020202
+          },
+          "content": "We evaluate the second term on the right-hand side of the continuous-time Price equation;",
+          "label": "Text"
+        },
+        {
+          "id": "19",
+          "order": 19,
+          "bounding_box": {
+            "x": 0.41013071895424835,
+            "y": 0.586489898989899,
+            "width": 0.184640522875817,
+            "height": 0.03409090909090909
+          },
+          "content": " $$ \\frac{d\\overline{x}}{dt}=\\mathrm{Cov}(x,F)+\\overline{\\left(\\frac{dx}{dt}\\right)} $$ ",
+          "label": "Formula"
+        },
+        {
+          "id": "20",
+          "order": 20,
+          "bounding_box": {
+            "x": 0.8880718954248366,
+            "y": 0.5972222222222222,
+            "width": 0.03022875816993464,
+            "height": 0.015151515151515152
+          },
+          "content": "(S5)",
+          "label": "Formula"
+        },
+        {
+          "id": "21",
+          "order": 21,
+          "bounding_box": {
+            "x": 0.08415032679738563,
+            "y": 0.6268939393939394,
+            "width": 0.7279411764705882,
+            "height": 0.01452020202020202
+          },
+          "content": "Since the environment  $ \\alpha $ changes over time, the rate of phenotypic change due to the environment is:",
+          "label": "Text"
+        },
+        {
+          "id": "22",
+          "order": 22,
+          "bounding_box": {
+            "x": 0.440359477124183,
+            "y": 0.6458333333333334,
+            "width": 0.12418300653594772,
+            "height": 0.06313131313131314
+          },
+          "content": " $$ \\begin{aligned}\\frac{dx^{*}}{dt}&=\\frac{\\partial x^{*}}{\\partial\\alpha}\\frac{d\\alpha}{dt}\\\\&=-\\frac{F_{x\\alpha}}{F_{xx}}\\frac{d\\alpha}{dt}\\end{aligned} $$ ",
+          "label": "Formula"
+        },
+        {
+          "id": "23",
+          "order": 23,
+          "bounding_box": {
+            "x": 0.8880718954248366,
+            "y": 0.6862373737373737,
+            "width": 0.03022875816993464,
+            "height": 0.01452020202020202
+          },
+          "content": "(S6)",
+          "label": "Formula"
+        },
+        {
+          "id": "24",
+          "order": 24,
+          "bounding_box": {
+            "x": 0.08333333333333333,
+            "y": 0.7140151515151515,
+            "width": 0.6862745098039216,
+            "height": 0.015782828282828284
+          },
+          "content": "Because  $ F_{xx} $,  $ F_{x\\alpha} $, and  $ d\\alpha/dt $ are common to every individual, its population average is simply:",
+          "label": "Text"
+        },
+        {
+          "id": "25",
+          "order": 25,
+          "bounding_box": {
+            "x": 0.4338235294117647,
+            "y": 0.7367424242424242,
+            "width": 0.1380718954248366,
+            "height": 0.03409090909090909
+          },
+          "content": " $$ \\overline{\\left(\\frac{dx}{dt}\\right)}=-\\frac{F_{x\\alpha}}{F_{xx}}\\frac{d\\alpha}{dt} $$ ",
+          "label": "Formula"
+        },
+        {
+          "id": "26",
+          "order": 26,
+          "bounding_box": {
+            "x": 0.8880718954248366,
+            "y": 0.7468434343434344,
+            "width": 0.03022875816993464,
+            "height": 0.015782828282828284
+          },
+          "content": "(S7)",
+          "label": "Formula"
+        },
+        {
+          "id": "27",
+          "order": 27,
+          "bounding_box": {
+            "x": 0.08333333333333333,
+            "y": 0.7771464646464646,
+            "width": 0.8366013071895425,
+            "height": 0.043560606060606064
+          },
+          "content": "Next, we examine the first term of the Price equation,  $ \\text{Cov}(x, F) $. When calculating the covariance at a specific time  $ t $, the macroscopic environmental parameter  $ \\alpha $ is a global state common to all individuals  $ (\\text{Cov}(\\alpha, F) = 0) $. By applying the linear property of covariance to the solution of  $ x^* $, we obtain:",
+          "label": "Text"
+        },
+        {
+          "id": "28",
+          "order": 28,
+          "bounding_box": {
+            "x": 0.3423202614379085,
+            "y": 0.827020202020202,
+            "width": 0.31699346405228757,
+            "height": 0.08396464646464646
+          },
+          "content": " $$ \\begin{aligned}\\operatorname{Cov}(x,F)&=\\operatorname{Cov}(x^{*},F)\\\\&=\\operatorname{Cov}\\left(-\\frac{F_{xy}}{F_{xx}}y-\\frac{F_{x\\alpha}}{F_{xx}}\\alpha+C,F\\right)\\\\&=-\\frac{F_{xy}}{F_{xx}}\\operatorname{Cov}(y,F)\\end{aligned} $$ ",
+          "label": "Formula"
+        },
+        {
+          "id": "29",
+          "order": 29,
+          "bounding_box": {
+            "x": 0.8880718954248366,
+            "y": 0.889520202020202,
+            "width": 0.03022875816993464,
+            "height": 0.015151515151515152
+          },
+          "content": "(S8)",
+          "label": "Formula"
+        }
+      ]
+    }
+  ]
+}

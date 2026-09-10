@@ -1,0 +1,795 @@
+{
+    "input_path": "/home/bocchi/Downloads/Paper_Data/Physics/2601.00169v2.pdf",
+    "page_index": 1,
+    "page_count": 13,
+    "width": 1224,
+    "height": 1584,
+    "model_settings": {
+        "use_doc_preprocessor": false,
+        "use_layout_detection": true,
+        "use_chart_recognition": false,
+        "use_seal_recognition": false,
+        "use_ocr_for_image_block": true,
+        "format_block_content": true,
+        "merge_layout_blocks": true,
+        "markdown_ignore_labels": [
+            "number",
+            "footnote",
+            "header",
+            "header_image",
+            "footer",
+            "footer_image",
+            "aside_text"
+        ],
+        "return_layout_polygon_points": true
+    },
+    "parsing_res_list": [
+        {
+            "block_label": "number",
+            "block_content": "2",
+            "block_bbox": [
+                1111,
+                57,
+                1127,
+                75
+            ],
+            "block_id": 0,
+            "block_order": null,
+            "group_id": 0,
+            "block_polygon_points": [
+                [
+                    1111.0,
+                    57.0
+                ],
+                [
+                    1126.0,
+                    57.0
+                ],
+                [
+                    1126.0,
+                    74.0
+                ],
+                [
+                    1111.0,
+                    74.0
+                ]
+            ]
+        },
+        {
+            "block_label": "text",
+            "block_content": "a candidate of dark matter, the primordial black holes (PBHs) may be originated by comoving curvature perturbations generated when inflation reenters the horizon [30]. By inspecting the accompanying GW radiation, Taiji has the potential to probe PBHs in the mass range of  $ 10^{-16} \\sim 10^{-10} M_{\\odot} $ [31, 32], offering a unique window to test PBH hypothesis.",
+            "block_bbox": [
+                100,
+                107,
+                1127,
+                198
+            ],
+            "block_id": 1,
+            "block_order": 1,
+            "group_id": 1,
+            "block_polygon_points": [
+                [
+                    100.0,
+                    107.0
+                ],
+                [
+                    1127.0,
+                    107.0
+                ],
+                [
+                    1127.0,
+                    198.0
+                ],
+                [
+                    100.0,
+                    198.0
+                ]
+            ]
+        },
+        {
+            "block_label": "text",
+            "block_content": "The SGWB manifests a stochastic signal in the output of detector, akin to instrumental noise. Distinguishing GW from noise and extracting its physical implications are the duties of data analysis technique. This task is particularly complex for space-based interferometers. The standard cross-correlation method, used for SGWB searches in ground detectors [33], relies on the assumption that environmental noise is uncorrelated between different detectors, which does not hold for a single space interferometer like Taiji. In general, detecting the SGWB in such a mission necessitates prior knowledge of the characteristics about noise. Instrument noise originates from diverse sources [11, 34–36]. For demonstration purposes, current data processing strategies typically model several dominant noise components. Earlier studies and simulations [37, 38] have demonstrated the feasibility of SGWB identification. In light of recent advancements in the LISA design, studies [39–41] have employed an automated adaptive frequency-binning procedure for reconstructing SGWB with arbitrary spectral shapes. On the other hand, the data stream of a space mission will be signal-rich, containing a large number of concurrent GW sources. Therefore, any searching program designed for particular GW signal should be integrated into a global fitting pipeline [42, 43]. To address these multifaceted challenges, the Taiji Data Challenge II (TDC II) was recently released [44]. The datasets incorporate the GW sources expected within Taiji's sensitivity band, and are divided into blind and training sets to foster the development of robust data analysis techniques.",
+            "block_bbox": [
+                101,
+                199,
+                1128,
+                542
+            ],
+            "block_id": 2,
+            "block_order": 2,
+            "group_id": 2,
+            "block_polygon_points": [
+                [
+                    101.0,
+                    199.0
+                ],
+                [
+                    1128.0,
+                    199.0
+                ],
+                [
+                    1128.0,
+                    542.0
+                ],
+                [
+                    101.0,
+                    542.0
+                ]
+            ]
+        },
+        {
+            "block_label": "text",
+            "block_content": "In this work, we will concentrate on the training sets designed for SGWB science. Going beyond the commonly adopted equal-arm approximation, our analysis incorporates the more realistic, simulated orbits provided in TDC II, which result in unequal and time-varying interferometric armlengths. Furthermore, unlike the assumptions in [45], the single-link interferometric noise levels are different across the links. We begin by conducting a template-based parameter estimations for the background, assuming a known spectral shape. In general, the energy spectrum of the SGWB is not a known prior. Therefore, we choose to employ a trans-dimensional Markov chain Monte Carlo (MCMC) [46] approach to reconstruct the frequency profile of SGWB. This model-agnostic approach enables the detection of SGWB without the precise knowledge about the spectrum. We compare its performance directly with that of the template-based method.",
+            "block_bbox": [
+                103,
+                542,
+                1127,
+                748
+            ],
+            "block_id": 3,
+            "block_order": 3,
+            "group_id": 3,
+            "block_polygon_points": [
+                [
+                    103.0,
+                    542.0
+                ],
+                [
+                    1127.0,
+                    542.0
+                ],
+                [
+                    1127.0,
+                    748.0
+                ],
+                [
+                    103.0,
+                    748.0
+                ]
+            ]
+        },
+        {
+            "block_label": "text",
+            "block_content": "The TDC II datasets contain both isotropic SGWB and confusion galactic binaries (CGBs). The latter constitutes an anisotropic background due to the inhomogeneous distribution of binaries in the Milky Way, exhibiting a year-round modulation pattern. We postpone the issue of CGB to future work. At this stage, we pre-process the dataset by subtracting the provided CGB component and focus our analysis on the residual noise and isotropic background.",
+            "block_bbox": [
+                100,
+                749,
+                1127,
+                842
+            ],
+            "block_id": 4,
+            "block_order": 4,
+            "group_id": 4,
+            "block_polygon_points": [
+                [
+                    100.0,
+                    749.0
+                ],
+                [
+                    1127.0,
+                    749.0
+                ],
+                [
+                    1127.0,
+                    842.0
+                ],
+                [
+                    100.0,
+                    842.0
+                ]
+            ]
+        },
+        {
+            "block_label": "paragraph_title",
+            "block_content": "### II. TDC II DATASETS",
+            "block_bbox": [
+                495,
+                884,
+                736,
+                905
+            ],
+            "block_id": 5,
+            "block_order": 5,
+            "group_id": 5,
+            "block_polygon_points": [
+                [
+                    495.0,
+                    884.0
+                ],
+                [
+                    735.0,
+                    884.0
+                ],
+                [
+                    735.0,
+                    904.0
+                ],
+                [
+                    495.0,
+                    904.0
+                ]
+            ]
+        },
+        {
+            "block_label": "text",
+            "block_content": "As we have mentioned before, Taiji consists of three SCs around the Sun. Each SC carries two movable optical sub-assemblies (MOSAs) which functions as transceiver and measurement unit of interferometry. Depicted in Fig. 1, we adopt the conventional indexing scheme [44, 47] for facilities and observables: three SCs are labeled from 1 to 3 in a direction opposite to the cartwheel rotation. MOSAs and laser paths are labeled with two indices ij, where i, j denote receiving and emitting SCs, respectively. Raw measurements are labeled according to the MOSA or SC on which they are performed.",
+            "block_bbox": [
+                101,
+                935,
+                1127,
+                1071
+            ],
+            "block_id": 6,
+            "block_order": 6,
+            "group_id": 6,
+            "block_polygon_points": [
+                [
+                    101.0,
+                    935.0
+                ],
+                [
+                    1127.0,
+                    935.0
+                ],
+                [
+                    1127.0,
+                    1071.0
+                ],
+                [
+                    101.0,
+                    1071.0
+                ]
+            ]
+        },
+        {
+            "block_label": "text",
+            "block_content": "At present, our primitive objective is to establish a basic pipeline for the detection of SGWB. Consequently, we will only focus on TDC II training sets [48]. The data generation processes for these training sets are simplified, aside from the provided parameters of injected GW signals, fewer physical effects are modeled. In terms of noise, two main sources of noise are considered: test-mass acceleration (ACC) noise arises from deviations of the test-mass from ideal geodesic motion. Optical metrology noise (OMS) encompasses all the contributions from optical readout system. The PSDs are given by",
+            "block_bbox": [
+                102,
+                1072,
+                1128,
+                1212
+            ],
+            "block_id": 7,
+            "block_order": 7,
+            "group_id": 7,
+            "block_polygon_points": [
+                [
+                    102.0,
+                    1072.0
+                ],
+                [
+                    1128.0,
+                    1072.0
+                ],
+                [
+                    1128.0,
+                    1212.0
+                ],
+                [
+                    102.0,
+                    1212.0
+                ]
+            ]
+        },
+        {
+            "block_label": "display_formula",
+            "block_content": " $$ \\begin{aligned}&S_{\\mathrm{acc}}(f)=A_{\\mathrm{acc}}^{2}\\left[1+\\left(\\frac{0.4\\mathrm{mHz}}{f}\\right)^{2}\\right]\\left[1+\\left(\\frac{f}{8\\mathrm{mHz}}\\right)^{4}\\right]\\left(\\frac{1}{2\\pi f c}\\right)^{2},\\\\&S_{\\mathrm{oms}}(f)=A_{\\mathrm{oms}}^{2}\\left[1+\\left(\\frac{2\\mathrm{mHz}}{f}\\right)^{4}\\right]\\left(\\frac{2\\pi f}{c}\\right)^{2}.\\\\ \\end{aligned} $$ ",
+            "block_bbox": [
+                330,
+                1224,
+                900,
+                1357
+            ],
+            "block_id": 8,
+            "block_order": 8,
+            "group_id": 8,
+            "block_polygon_points": [
+                [
+                    330.0,
+                    1224.0
+                ],
+                [
+                    900.0,
+                    1224.0
+                ],
+                [
+                    900.0,
+                    1357.0
+                ],
+                [
+                    330.0,
+                    1357.0
+                ]
+            ]
+        },
+        {
+            "block_label": "formula_number",
+            "block_content": "(1)",
+            "block_bbox": [
+                1098,
+                1281,
+                1123,
+                1305
+            ],
+            "block_id": 9,
+            "block_order": 9,
+            "group_id": 9,
+            "block_polygon_points": [
+                [
+                    1098.0,
+                    1281.0
+                ],
+                [
+                    1122.0,
+                    1281.0
+                ],
+                [
+                    1122.0,
+                    1304.0
+                ],
+                [
+                    1098.0,
+                    1304.0
+                ]
+            ]
+        },
+        {
+            "block_label": "text",
+            "block_content": "The nominal amplitudes are  $ A_{\\text{acc}} = 3 \\, \\text{fm/s}^2 / \\sqrt{\\text{Hz}} $ and  $ A_{\\text{oms}} = 8 \\, \\text{pm/√Hz} $. While the process of simulation, the noises are uncorrelated, but not identically distributed in each MOSA. The actual noise amplitudes of facilities in individual MOSAs are determined by applying  $ \\pm 20\\% $ fluctuations around the nominal value.",
+            "block_bbox": [
+                103,
+                1378,
+                1127,
+                1450
+            ],
+            "block_id": 10,
+            "block_order": 10,
+            "group_id": 10,
+            "block_polygon_points": [
+                [
+                    103.0,
+                    1378.0
+                ],
+                [
+                    1127.0,
+                    1378.0
+                ],
+                [
+                    1127.0,
+                    1450.0
+                ],
+                [
+                    103.0,
+                    1450.0
+                ]
+            ]
+        }
+    ],
+    "layout_det_res": {
+        "input_path": null,
+        "page_index": null,
+        "boxes": [
+            {
+                "cls_id": 16,
+                "label": "number",
+                "score": 0.6732641458511353,
+                "coordinate": [
+                    1111,
+                    57,
+                    1127,
+                    75
+                ],
+                "order": 1,
+                "polygon_points": [
+                    [
+                        1111.0,
+                        57.0
+                    ],
+                    [
+                        1126.0,
+                        57.0
+                    ],
+                    [
+                        1126.0,
+                        74.0
+                    ],
+                    [
+                        1111.0,
+                        74.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.945529043674469,
+                "coordinate": [
+                    100,
+                    107,
+                    1127,
+                    198
+                ],
+                "order": 2,
+                "polygon_points": [
+                    [
+                        100.0,
+                        107.0
+                    ],
+                    [
+                        1127.0,
+                        107.0
+                    ],
+                    [
+                        1127.0,
+                        198.0
+                    ],
+                    [
+                        100.0,
+                        198.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 15,
+                "label": "inline_formula",
+                "score": 0.8080419898033142,
+                "coordinate": [
+                    527,
+                    152,
+                    694,
+                    175
+                ],
+                "order": 3,
+                "polygon_points": [
+                    [
+                        527.0,
+                        152.0
+                    ],
+                    [
+                        694.0,
+                        152.0
+                    ],
+                    [
+                        694.0,
+                        175.0
+                    ],
+                    [
+                        527.0,
+                        175.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.9696170687675476,
+                "coordinate": [
+                    101,
+                    199,
+                    1128,
+                    542
+                ],
+                "order": 4,
+                "polygon_points": [
+                    [
+                        101.0,
+                        199.0
+                    ],
+                    [
+                        1128.0,
+                        199.0
+                    ],
+                    [
+                        1128.0,
+                        542.0
+                    ],
+                    [
+                        101.0,
+                        542.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.9592864513397217,
+                "coordinate": [
+                    103,
+                    542,
+                    1127,
+                    748
+                ],
+                "order": 5,
+                "polygon_points": [
+                    [
+                        103.0,
+                        542.0
+                    ],
+                    [
+                        1127.0,
+                        542.0
+                    ],
+                    [
+                        1127.0,
+                        748.0
+                    ],
+                    [
+                        103.0,
+                        748.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.9411810040473938,
+                "coordinate": [
+                    100,
+                    749,
+                    1127,
+                    842
+                ],
+                "order": 6,
+                "polygon_points": [
+                    [
+                        100.0,
+                        749.0
+                    ],
+                    [
+                        1127.0,
+                        749.0
+                    ],
+                    [
+                        1127.0,
+                        842.0
+                    ],
+                    [
+                        100.0,
+                        842.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 17,
+                "label": "paragraph_title",
+                "score": 0.8331615328788757,
+                "coordinate": [
+                    495,
+                    884,
+                    736,
+                    905
+                ],
+                "order": 7,
+                "polygon_points": [
+                    [
+                        495.0,
+                        884.0
+                    ],
+                    [
+                        735.0,
+                        884.0
+                    ],
+                    [
+                        735.0,
+                        904.0
+                    ],
+                    [
+                        495.0,
+                        904.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.9549638628959656,
+                "coordinate": [
+                    101,
+                    935,
+                    1127,
+                    1071
+                ],
+                "order": 8,
+                "polygon_points": [
+                    [
+                        101.0,
+                        935.0
+                    ],
+                    [
+                        1127.0,
+                        935.0
+                    ],
+                    [
+                        1127.0,
+                        1071.0
+                    ],
+                    [
+                        101.0,
+                        1071.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.9553924202919006,
+                "coordinate": [
+                    102,
+                    1072,
+                    1128,
+                    1212
+                ],
+                "order": 9,
+                "polygon_points": [
+                    [
+                        102.0,
+                        1072.0
+                    ],
+                    [
+                        1128.0,
+                        1072.0
+                    ],
+                    [
+                        1128.0,
+                        1212.0
+                    ],
+                    [
+                        102.0,
+                        1212.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 5,
+                "label": "display_formula",
+                "score": 0.933368980884552,
+                "coordinate": [
+                    330,
+                    1224,
+                    900,
+                    1357
+                ],
+                "order": 10,
+                "polygon_points": [
+                    [
+                        330.0,
+                        1224.0
+                    ],
+                    [
+                        900.0,
+                        1224.0
+                    ],
+                    [
+                        900.0,
+                        1357.0
+                    ],
+                    [
+                        330.0,
+                        1357.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 11,
+                "label": "formula_number",
+                "score": 0.8015162348747253,
+                "coordinate": [
+                    1098,
+                    1281,
+                    1123,
+                    1305
+                ],
+                "order": 11,
+                "polygon_points": [
+                    [
+                        1098.0,
+                        1281.0
+                    ],
+                    [
+                        1122.0,
+                        1281.0
+                    ],
+                    [
+                        1122.0,
+                        1304.0
+                    ],
+                    [
+                        1098.0,
+                        1304.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.9278979897499084,
+                "coordinate": [
+                    103,
+                    1378,
+                    1127,
+                    1450
+                ],
+                "order": 12,
+                "polygon_points": [
+                    [
+                        103.0,
+                        1378.0
+                    ],
+                    [
+                        1127.0,
+                        1378.0
+                    ],
+                    [
+                        1127.0,
+                        1450.0
+                    ],
+                    [
+                        103.0,
+                        1450.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 15,
+                "label": "inline_formula",
+                "score": 0.8399902582168579,
+                "coordinate": [
+                    363,
+                    1379,
+                    549,
+                    1402
+                ],
+                "order": 13,
+                "polygon_points": [
+                    [
+                        363.0,
+                        1379.0
+                    ],
+                    [
+                        549.0,
+                        1379.0
+                    ],
+                    [
+                        549.0,
+                        1402.0
+                    ],
+                    [
+                        363.0,
+                        1402.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 15,
+                "label": "inline_formula",
+                "score": 0.8290116190910339,
+                "coordinate": [
+                    594,
+                    1378,
+                    763,
+                    1402
+                ],
+                "order": 14,
+                "polygon_points": [
+                    [
+                        594.0,
+                        1378.0
+                    ],
+                    [
+                        763.0,
+                        1378.0
+                    ],
+                    [
+                        763.0,
+                        1402.0
+                    ],
+                    [
+                        594.0,
+                        1402.0
+                    ]
+                ]
+            }
+        ]
+    }
+}

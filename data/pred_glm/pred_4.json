@@ -1,0 +1,1324 @@
+{
+  "file_name": "paper_4",
+  "pages": [
+    {
+      "page_index": 1,
+      "blocks": [
+        {
+          "id": "0",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.169,
+            "y": 0.14,
+            "width": 0.661,
+            "height": 0.024
+          },
+          "content": "# Using Pre-Trends for Inference in Difference-in-Differences",
+          "label": "Text"
+        },
+        {
+          "id": "1",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.389,
+            "y": 0.184,
+            "width": 0.228,
+            "height": 0.017
+          },
+          "content": "Clément de Chaisemartin $^{*}$",
+          "label": "Text"
+        },
+        {
+          "id": "2",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.114,
+            "y": 0.262,
+            "width": 0.19,
+            "height": 0.018
+          },
+          "content": "## 1 Introduction",
+          "label": "Text"
+        },
+        {
+          "id": "3",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.112,
+            "y": 0.296,
+            "width": 0.773,
+            "height": 0.067
+          },
+          "content": "Difference-in-differences (DID) are sometimes estimated with many pre-treatment periods. In such settings, the observed pre-treatment outcome evolutions provide direct information about the magnitude of shocks that could also occur after treatment. This paper proposes a simple inference procedure that uses those pre-trends as the reference distribution for the post-treatment DID.",
+          "label": "Text"
+        },
+        {
+          "id": "4",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.111,
+            "y": 0.365,
+            "width": 0.774,
+            "height": 0.117
+          },
+          "content": "The idea is to test a candidate treatment effect by subtracting it from the post-treatment outcome of the treated group and comparing the resulting absolute DID with the empirical distribution of the absolute pre-treatment DIDs. Under the null, the adjusted post-treatment DID is an untreated differential trend and should therefore be distributed like its pre-treatment counterparts. If the empirical distribution of those differential trends is uniformly consistent for a continuous limiting distribution, the resulting rank-based test is asymptotically exact. Confidence sets follow by test inversion.",
+          "label": "Text"
+        },
+        {
+          "id": "5",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.111,
+            "y": 0.484,
+            "width": 0.776,
+            "height": 0.155
+          },
+          "content": "The procedure is closely related to conformal inference, but its DID-specific predictor leads to a distinct identifying restriction. Existing conformal DID procedures are based on outcome levels and imply parallel trends. Here, the prediction error is instead the change in the treated group's untreated outcome minus the contemporaneous change in the control group's untreated outcome. The method therefore does not require parallel trends. It requires only that the distribution of the absolute untreated differential trend be stable over time. This permits the mean differential trend to be nonzero, to vary over time, and even to change sign, while imposing stability on its magnitude. The procedure is nonparametric, easy to implement, and especially natural in applications with a long pre-treatment time series.",
+          "label": "Text"
+        },
+        {
+          "id": "6",
+          "order": 7,
+          "bounding_box": {
+            "x": 0.112,
+            "y": 0.66,
+            "width": 0.258,
+            "height": 0.02
+          },
+          "content": "## 2 Preliminary result",
+          "label": "Text"
+        },
+        {
+          "id": "7",
+          "order": 8,
+          "bounding_box": {
+            "x": 0.112,
+            "y": 0.695,
+            "width": 0.178,
+            "height": 0.016
+          },
+          "content": "Let $U_{1},\\dots,U_{T}$ satisfy",
+          "label": "Text"
+        },
+        {
+          "id": "8",
+          "order": 9,
+          "bounding_box": {
+            "x": 0.368,
+            "y": 0.725,
+            "width": 0.263,
+            "height": 0.037
+          },
+          "content": "$$\n\\begin{array}{l} U _ {t} = U _ {t} (0), \\quad t = 1, \\dots , T - 1, \\\\ U _ {T} = U _ {T} (0) + \\tau , \\\\ \\end{array}\n$$",
+          "label": "Formula"
+        },
+        {
+          "id": "9",
+          "order": 10,
+          "bounding_box": {
+            "x": 0.861,
+            "y": 0.746,
+            "width": 0.023,
+            "height": 0.018
+          },
+          "content": "(1) ",
+          "label": "Formula"
+        },
+        {
+          "id": "10",
+          "order": 11,
+          "bounding_box": {
+            "x": 0.11,
+            "y": 0.778,
+            "width": 0.774,
+            "height": 0.033
+          },
+          "content": "where $\\tau\\in\\mathbb{R}$ is an unknown, non-stochastic treatment-effect parameter we seek to estimate. Fix $\\alpha\\in(0,1)$ , and assume that, for every t and every u $\\geq0,$",
+          "label": "Text"
+        },
+        {
+          "id": "11",
+          "order": 12,
+          "bounding_box": {
+            "x": 0.407,
+            "y": 0.825,
+            "width": 0.183,
+            "height": 0.018
+          },
+          "content": "$$\n\\mathbb {P} \\left(\\left| U _ {t} (0) \\right| \\leq u\\right) = F (u),\n$$",
+          "label": "Formula"
+        },
+        {
+          "id": "12",
+          "order": 13,
+          "bounding_box": {
+            "x": 0.861,
+            "y": 0.825,
+            "width": 0.023,
+            "height": 0.017
+          },
+          "content": "(2) ",
+          "label": "Formula"
+        }
+      ]
+    },
+    {
+      "page_index": 2,
+      "blocks": [
+        {
+          "id": "0",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.112,
+            "y": 0.092,
+            "width": 0.457,
+            "height": 0.016
+          },
+          "content": "where F is a continuous cumulative distribution function.",
+          "label": "Text"
+        },
+        {
+          "id": "1",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.139,
+            "y": 0.115,
+            "width": 0.622,
+            "height": 0.016
+          },
+          "content": "For any candidate value $x\\in\\mathbb{R}$ for $\\tau$ , define the empirical distribution function",
+          "label": "Text"
+        },
+        {
+          "id": "2",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.329,
+            "y": 0.137,
+            "width": 0.336,
+            "height": 0.042
+          },
+          "content": "$$\n\\widehat {F} (u; x) = \\frac {1}{T} \\sum_ {t = 1} ^ {T} \\mathbf {1} \\left\\{\\left| U _ {t} - \\mathbf {1} \\{t = T \\} x \\right| \\leq u \\right\\}.\n$$",
+          "label": "Formula"
+        },
+        {
+          "id": "3",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.112,
+            "y": 0.186,
+            "width": 0.317,
+            "height": 0.016
+          },
+          "content": "Assume that, under the null hypothesis",
+          "label": "Text"
+        },
+        {
+          "id": "4",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.453,
+            "y": 0.21,
+            "width": 0.092,
+            "height": 0.016
+          },
+          "content": "$$\nH _ {0}: \\tau = x,\n$$",
+          "label": "Formula"
+        },
+        {
+          "id": "5",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.392,
+            "y": 0.237,
+            "width": 0.212,
+            "height": 0.033
+          },
+          "content": "$$\n\\sup _ {u \\geq 0} \\left| \\widehat {F} (u; x) - F (u) \\right| \\xrightarrow {P} 0.\n$$",
+          "label": "Formula"
+        },
+        {
+          "id": "6",
+          "order": 7,
+          "bounding_box": {
+            "x": 0.86,
+            "y": 0.243,
+            "width": 0.024,
+            "height": 0.018
+          },
+          "content": "(3) ",
+          "label": "Formula"
+        },
+        {
+          "id": "7",
+          "order": 8,
+          "bounding_box": {
+            "x": 0.112,
+            "y": 0.276,
+            "width": 0.345,
+            "height": 0.016
+          },
+          "content": "Consider the test that rejects $H_{0}$ whenever",
+          "label": "Text"
+        },
+        {
+          "id": "8",
+          "order": 9,
+          "bounding_box": {
+            "x": 0.405,
+            "y": 0.298,
+            "width": 0.189,
+            "height": 0.019
+          },
+          "content": "$$\n\\widehat {F} \\left(\\left| U _ {T} - x \\right|; x\\right) \\geq 1 - \\alpha .\n$$",
+          "label": "Formula"
+        },
+        {
+          "id": "9",
+          "order": 10,
+          "bounding_box": {
+            "x": 0.112,
+            "y": 0.323,
+            "width": 0.456,
+            "height": 0.017
+          },
+          "content": "Proposition 1. Suppose (1)-(3) hold. Under $H_{0}:\\tau=x,$",
+          "label": "Text"
+        },
+        {
+          "id": "10",
+          "order": 11,
+          "bounding_box": {
+            "x": 0.361,
+            "y": 0.347,
+            "width": 0.273,
+            "height": 0.025
+          },
+          "content": "$$\n\\mathbb {P} \\left(\\widehat {F} \\left(| U _ {T} - x |; x\\right) \\geq 1 - \\alpha\\right) \\longrightarrow \\alpha .\n$$",
+          "label": "Formula"
+        },
+        {
+          "id": "11",
+          "order": 12,
+          "bounding_box": {
+            "x": 0.111,
+            "y": 0.378,
+            "width": 0.301,
+            "height": 0.016
+          },
+          "content": "Thus, the test is asymptotically exact.",
+          "label": "Text"
+        },
+        {
+          "id": "12",
+          "order": 13,
+          "bounding_box": {
+            "x": 0.114,
+            "y": 0.4,
+            "width": 0.14,
+            "height": 0.017
+          },
+          "content": "Proof. Under $H_{0}$",
+          "label": "Text"
+        },
+        {
+          "id": "13",
+          "order": 14,
+          "bounding_box": {
+            "x": 0.42,
+            "y": 0.417,
+            "width": 0.157,
+            "height": 0.018
+          },
+          "content": "$$\n\\left| U _ {T} - x \\right| = \\left| U _ {T} (0) \\right|.\n$$",
+          "label": "Formula"
+        },
+        {
+          "id": "14",
+          "order": 15,
+          "bounding_box": {
+            "x": 0.445,
+            "y": 0.455,
+            "width": 0.107,
+            "height": 0.018
+          },
+          "content": "$$\nV = \\left| U _ {T} (0) \\right|.\n$$",
+          "label": "Formula"
+        },
+        {
+          "id": "15",
+          "order": 16,
+          "bounding_box": {
+            "x": 0.112,
+            "y": 0.44,
+            "width": 0.034,
+            "height": 0.014
+          },
+          "content": "Let",
+          "label": "Text"
+        },
+        {
+          "id": "16",
+          "order": 17,
+          "bounding_box": {
+            "x": 0.11,
+            "y": 0.478,
+            "width": 0.612,
+            "height": 0.017
+          },
+          "content": "Then V has cumulative distribution function F. Uniform consistency implies",
+          "label": "Text"
+        },
+        {
+          "id": "17",
+          "order": 18,
+          "bounding_box": {
+            "x": 0.248,
+            "y": 0.499,
+            "width": 0.499,
+            "height": 0.031
+          },
+          "content": "$$\n\\left| \\widehat {F} \\left(\\left| U _ {T} - x \\right|; x\\right) - F \\left(\\left| U _ {T} - x \\right|\\right) \\right| \\leq \\sup _ {u > 0} \\left| \\widehat {F} (u; x) - F (u) \\right| = o _ {P} (1).\n$$",
+          "label": "Formula"
+        },
+        {
+          "id": "18",
+          "order": 19,
+          "bounding_box": {
+            "x": 0.112,
+            "y": 0.538,
+            "width": 0.06,
+            "height": 0.015
+          },
+          "content": "Hence,",
+          "label": "Text"
+        },
+        {
+          "id": "19",
+          "order": 20,
+          "bounding_box": {
+            "x": 0.371,
+            "y": 0.552,
+            "width": 0.255,
+            "height": 0.019
+          },
+          "content": "$$\n\\widehat {F} \\left(\\left| U _ {T} - x \\right|; x\\right) = F (V) + o _ {P} (1).\n$$",
+          "label": "Formula"
+        },
+        {
+          "id": "20",
+          "order": 21,
+          "bounding_box": {
+            "x": 0.138,
+            "y": 0.576,
+            "width": 0.513,
+            "height": 0.016
+          },
+          "content": "Since F is continuous, the probability integral transform implies",
+          "label": "Text"
+        },
+        {
+          "id": "21",
+          "order": 22,
+          "bounding_box": {
+            "x": 0.422,
+            "y": 0.6,
+            "width": 0.153,
+            "height": 0.017
+          },
+          "content": "$$\nF (V) \\sim \\operatorname {U n i f} (0, 1).\n$$",
+          "label": "Formula"
+        },
+        {
+          "id": "22",
+          "order": 23,
+          "bounding_box": {
+            "x": 0.112,
+            "y": 0.624,
+            "width": 0.087,
+            "height": 0.016
+          },
+          "content": "Therefore,",
+          "label": "Text"
+        },
+        {
+          "id": "23",
+          "order": 24,
+          "bounding_box": {
+            "x": 0.384,
+            "y": 0.64,
+            "width": 0.228,
+            "height": 0.022
+          },
+          "content": "$$\n\\widehat {F} \\left(\\left| U _ {T} - x \\right|; x\\right) \\xrightarrow {d} \\operatorname {U n i f} (0, 1),\n$$",
+          "label": "Formula"
+        },
+        {
+          "id": "24",
+          "order": 25,
+          "bounding_box": {
+            "x": 0.361,
+            "y": 0.678,
+            "width": 0.273,
+            "height": 0.027
+          },
+          "content": "$$\n\\mathbb {P} \\left(\\widehat {F} \\left(| U _ {T} - x |; x\\right) \\geq 1 - \\alpha\\right) \\longrightarrow \\alpha .\n$$",
+          "label": "Formula"
+        },
+        {
+          "id": "25",
+          "order": 26,
+          "bounding_box": {
+            "x": 0.112,
+            "y": 0.667,
+            "width": 0.039,
+            "height": 0.015
+          },
+          "content": "and",
+          "label": "Text"
+        },
+        {
+          "id": "26",
+          "order": 27,
+          "bounding_box": {
+            "x": 0.111,
+            "y": 0.735,
+            "width": 0.777,
+            "height": 0.119
+          },
+          "content": "The test in Proposition 1 follows the same basic principle as conformal inference (Vovk, Gammerman, and Shafer, 2005; Chernozhukov, Wüthrich, and Zhu, 2018): under the null, the treated observation, after adjustment by the hypothesized treatment effect, should be indistinguishable from the untreated observations. Accordingly, inference is based on the empirical rank of the treated observation among the adjusted sample. Unlike existing conformal methods, however, our procedure requires only uniform consistency of the empirical distribution function. A confidence set for $\\tau$ can be obtained by inverting the test. In particular, an asymptotic $1-\\alpha$ confidence set is",
+          "label": "Text"
+        },
+        {
+          "id": "27",
+          "order": 28,
+          "bounding_box": {
+            "x": 0.329,
+            "y": 0.865,
+            "width": 0.336,
+            "height": 0.028
+          },
+          "content": "$$\n\\mathcal {C} _ {1 - \\alpha} = \\left\\{x \\in \\mathbb {R}: \\widehat {F} \\left(\\left| U _ {T} - x \\right|; x\\right) < 1 - \\alpha \\right\\}.\n$$",
+          "label": "Formula"
+        },
+        {
+          "id": "28",
+          "order": 29,
+          "bounding_box": {
+            "x": 0.113,
+            "y": 0.896,
+            "width": 0.317,
+            "height": 0.017
+          },
+          "content": "By Proposition 1, $\\mathbb{P}(\\tau\\in\\mathcal{C}_{1-\\alpha})\\to 1-\\alpha.$",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "page_index": 3,
+      "blocks": [
+        {
+          "id": "0",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.112,
+            "y": 0.089,
+            "width": 0.493,
+            "height": 0.02
+          },
+          "content": "## 3 Application to difference-in-differences",
+          "label": "Text"
+        },
+        {
+          "id": "1",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.113,
+            "y": 0.122,
+            "width": 0.12,
+            "height": 0.018
+          },
+          "content": "## 3.1 Set-up",
+          "label": "Text"
+        },
+        {
+          "id": "2",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.11,
+            "y": 0.149,
+            "width": 0.777,
+            "height": 0.069
+          },
+          "content": "There are two groups, indexed by $g\\in\\{1,2\\}$ , and dates $t\\in\\{0,\\dots,T\\}$ . Group 1 is never treated. Group 2 is untreated at dates 0,...,T-1 and treated at date T. Let $Y_{g,t}$ denote group g's observed outcome at date t, and let $Y_{g,t}(0)$ denote its untreated potential outcome. The treatment effect of group 2 at date T is",
+          "label": "Text"
+        },
+        {
+          "id": "3",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.409,
+            "y": 0.218,
+            "width": 0.178,
+            "height": 0.017
+          },
+          "content": "$$\n\\tau = Y _ {2, T} (1) - Y _ {2, T} (0),\n$$",
+          "label": "Formula"
+        },
+        {
+          "id": "4",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.111,
+            "y": 0.243,
+            "width": 0.31,
+            "height": 0.015
+          },
+          "content": "which is assumed to be non-stochastic.",
+          "label": "Text"
+        },
+        {
+          "id": "5",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.139,
+            "y": 0.267,
+            "width": 0.501,
+            "height": 0.017
+          },
+          "content": "For every $t\\in\\{1,\\dots,T\\}$ , define the untreated differential trend",
+          "label": "Text"
+        },
+        {
+          "id": "6",
+          "order": 7,
+          "bounding_box": {
+            "x": 0.301,
+            "y": 0.296,
+            "width": 0.393,
+            "height": 0.018
+          },
+          "content": "$$\nU _ {t} (0) = Y _ {2, t} (0) - Y _ {2, t - 1} (0) - \\left(Y _ {1, t} (0) - Y _ {1, t - 1} (0)\\right).\n$$",
+          "label": "Formula"
+        },
+        {
+          "id": "7",
+          "order": 8,
+          "bounding_box": {
+            "x": 0.112,
+            "y": 0.327,
+            "width": 0.268,
+            "height": 0.016
+          },
+          "content": "The observed differential trend is",
+          "label": "Text"
+        },
+        {
+          "id": "8",
+          "order": 9,
+          "bounding_box": {
+            "x": 0.358,
+            "y": 0.355,
+            "width": 0.279,
+            "height": 0.019
+          },
+          "content": "$$\nU _ {t} = Y _ {2, t} - Y _ {2, t - 1} - \\left(Y _ {1, t} - Y _ {1, t - 1}\\right).\n$$",
+          "label": "Formula"
+        },
+        {
+          "id": "9",
+          "order": 10,
+          "bounding_box": {
+            "x": 0.111,
+            "y": 0.392,
+            "width": 0.427,
+            "height": 0.018
+          },
+          "content": "## 3.2 Sufficient conditions for (1)-(3) to hold",
+          "label": "Text"
+        },
+        {
+          "id": "10",
+          "order": 11,
+          "bounding_box": {
+            "x": 0.112,
+            "y": 0.419,
+            "width": 0.337,
+            "height": 0.017
+          },
+          "content": "Because neither group is treated before $T$",
+          "label": "Text"
+        },
+        {
+          "id": "11",
+          "order": 12,
+          "bounding_box": {
+            "x": 0.408,
+            "y": 0.448,
+            "width": 0.182,
+            "height": 0.018
+          },
+          "content": "$$\nU _ {t} = U _ {t} (0), \\quad t < T,\n$$",
+          "label": "Formula"
+        },
+        {
+          "id": "12",
+          "order": 13,
+          "bounding_box": {
+            "x": 0.112,
+            "y": 0.48,
+            "width": 0.069,
+            "height": 0.015
+          },
+          "content": "whereas",
+          "label": "Text"
+        },
+        {
+          "id": "13",
+          "order": 14,
+          "bounding_box": {
+            "x": 0.43,
+            "y": 0.496,
+            "width": 0.137,
+            "height": 0.017
+          },
+          "content": "$$\nU _ {T} = U _ {T} (0) + \\tau .\n$$",
+          "label": "Formula"
+        },
+        {
+          "id": "14",
+          "order": 15,
+          "bounding_box": {
+            "x": 0.112,
+            "y": 0.52,
+            "width": 0.13,
+            "height": 0.017
+          },
+          "content": "Thus, (1) holds.",
+          "label": "Text"
+        },
+        {
+          "id": "15",
+          "order": 16,
+          "bounding_box": {
+            "x": 0.111,
+            "y": 0.546,
+            "width": 0.777,
+            "height": 0.137
+          },
+          "content": "For (2) to hold, it is sufficient that $| U_{t}(0)|$ have the same continuous distribution at every date t. Continuity may be plausible when groups are aggregate entities (e.g., states or regions) and $Y_{g,t}(0)$ averages outcomes across many units. Importantly, (2) does not imply the usual parallel-trends condition. Provided $U_{t}(0)$ is integrable, parallel trends requires $\\mathbb{E}[U_{t}(0)]=0$ at every date t. In contrast, (2) restricts only the distribution of $| U_{t}(0)|$ and places no restriction on the time evolution of the sign of $U_{t}(0).$ Consequently, $\\mathbb{E}[U_{t}(0)]$ may be nonzero, may vary over time, and may change sign. The restriction is nevertheless substantive: it requires the entire distribution of the magnitude $| U_{t}(0)|$ , including its tail behavior and all its quantiles, to remain stable over time.",
+          "label": "Text"
+        },
+        {
+          "id": "16",
+          "order": 17,
+          "bounding_box": {
+            "x": 0.14,
+            "y": 0.69,
+            "width": 0.565,
+            "height": 0.016
+          },
+          "content": "Finally, a sufficient condition for (3) is that the joint increment process",
+          "label": "Text"
+        },
+        {
+          "id": "17",
+          "order": 18,
+          "bounding_box": {
+            "x": 0.279,
+            "y": 0.719,
+            "width": 0.438,
+            "height": 0.018
+          },
+          "content": "$$\n\\left(\\Delta Y _ {1, t} (0), \\Delta Y _ {2, t} (0)\\right), \\quad \\Delta Y _ {g, t} (0) = Y _ {g, t} (0) - Y _ {g, t - 1} (0),\n$$",
+          "label": "Formula"
+        },
+        {
+          "id": "18",
+          "order": 19,
+          "bounding_box": {
+            "x": 0.112,
+            "y": 0.75,
+            "width": 0.323,
+            "height": 0.015
+          },
+          "content": "be strictly stationary and ergodic. Then",
+          "label": "Text"
+        },
+        {
+          "id": "19",
+          "order": 20,
+          "bounding_box": {
+            "x": 0.387,
+            "y": 0.779,
+            "width": 0.223,
+            "height": 0.017
+          },
+          "content": "$$\nU _ {t} (0) = \\Delta Y _ {2, t} (0) - \\Delta Y _ {1, t} (0)\n$$",
+          "label": "Formula"
+        },
+        {
+          "id": "20",
+          "order": 21,
+          "bounding_box": {
+            "x": 0.112,
+            "y": 0.809,
+            "width": 0.77,
+            "height": 0.051
+          },
+          "content": "is also stationary and ergodic. The ergodic theorem, applied to $\\mathbf{1}\\left\\{\\left| U_{t}(0)\\right|\\leq u\\right\\}$ , gives pointwise almost-sure convergence of the empirical distribution function to F at every u . Because F is continuous, pointwise convergence of distribution functions implies uniform convergence, so",
+          "label": "Text"
+        },
+        {
+          "id": "21",
+          "order": 22,
+          "bounding_box": {
+            "x": 0.339,
+            "y": 0.871,
+            "width": 0.316,
+            "height": 0.045
+          },
+          "content": "$$\n\\sup _ {u \\geq 0} \\left| \\frac {1}{T} \\sum_ {t = 1} ^ {T} \\mathbf {1} \\{| U _ {t} (0) | \\leq u \\} - F (u) \\right| \\xrightarrow {P} 0.\n$$",
+          "label": "Formula"
+        }
+      ]
+    },
+    {
+      "page_index": 4,
+      "blocks": [
+        {
+          "id": "0",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.11,
+            "y": 0.091,
+            "width": 0.774,
+            "height": 0.034
+          },
+          "content": "Under $H_{0}$ , the empirical distribution function in the preceding display is exactly $\\widehat{F}(u;x)$ , establishing (3).",
+          "label": "Text"
+        },
+        {
+          "id": "1",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.111,
+            "y": 0.127,
+            "width": 0.774,
+            "height": 0.068
+          },
+          "content": "A more primitive sufficient condition is that the joint increment process be strictly stationary and strongly mixing, with mixing coefficients satisfying $\\alpha (k)\\rightarrow 0$ . For example, this follows if the two increment processes are independent of each other as stochastic processes and each is strictly stationary and strongly mixing with mixing coefficients converging to zero.",
+          "label": "Text"
+        },
+        {
+          "id": "2",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.112,
+            "y": 0.214,
+            "width": 0.523,
+            "height": 0.017
+          },
+          "content": "## 3.3 The test in the difference-in-differences example",
+          "label": "Text"
+        },
+        {
+          "id": "3",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.111,
+            "y": 0.24,
+            "width": 0.776,
+            "height": 0.103
+          },
+          "content": "When testing the null of no treatment effect, the null is rejected whenever the T-1-to-T difference in-differences is larger in absolute value than the $( 1-\\alpha)$ -quantile of the absolute pre-treatment difference-in-differences. Intuitively, the test treats the post-treatment differential trend as an end-of-sample observation and asks whether it is unusually large relative to the historical distribution of differential trends. More generally, to test $H_{0}:\\tau=x$ , the outcome of group 2 at T is adjusted by x, and one rejects whenever",
+          "label": "Text"
+        },
+        {
+          "id": "4",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.29,
+            "y": 0.355,
+            "width": 0.415,
+            "height": 0.019
+          },
+          "content": "$$\n\\widehat {F} \\left(\\left| Y _ {2, T} - Y _ {2, T - 1} - \\left(Y _ {1, T} - Y _ {1, T - 1}\\right) - x \\right|; x\\right) \\geq 1 - \\alpha .\n$$",
+          "label": "Formula"
+        },
+        {
+          "id": "5",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.112,
+            "y": 0.397,
+            "width": 0.407,
+            "height": 0.019
+          },
+          "content": "## 4 Relationship to prior literature",
+          "label": "Text"
+        },
+        {
+          "id": "6",
+          "order": 7,
+          "bounding_box": {
+            "x": 0.111,
+            "y": 0.429,
+            "width": 0.634,
+            "height": 0.018
+          },
+          "content": "## 4.1 Comparison with Chernozhukov, Wüthrich, and Zhu (2021)",
+          "label": "Text"
+        },
+        {
+          "id": "7",
+          "order": 8,
+          "bounding_box": {
+            "x": 0.111,
+            "y": 0.457,
+            "width": 0.776,
+            "height": 0.119
+          },
+          "content": "The method proposed in this paper can be viewed as a simple and novel difference-in-differences specific choice of counterfactual predictor within the general conformal inference framework of Chernozhukov, Wüthrich, and Zhu (2021). Their framework starts from a counterfactual prediction rule for the untreated potential outcome of the treated unit and conducts inference by comparing the post-treatment prediction error with the empirical distribution of analogous pre-treatment prediction errors. Our procedure follows this logic using a particularly simple predictor tailored to the DID setting.",
+          "label": "Text"
+        },
+        {
+          "id": "8",
+          "order": 9,
+          "bounding_box": {
+            "x": 0.14,
+            "y": 0.584,
+            "width": 0.735,
+            "height": 0.016
+          },
+          "content": "Consider testing the sharp null that the treatment effect at date $T$ equals x. Under this null,",
+          "label": "Text"
+        },
+        {
+          "id": "9",
+          "order": 10,
+          "bounding_box": {
+            "x": 0.421,
+            "y": 0.614,
+            "width": 0.155,
+            "height": 0.017
+          },
+          "content": "$$\nY _ {2, T} (0) = Y _ {2, T} - x.\n$$",
+          "label": "Formula"
+        },
+        {
+          "id": "10",
+          "order": 11,
+          "bounding_box": {
+            "x": 0.141,
+            "y": 0.645,
+            "width": 0.545,
+            "height": 0.016
+          },
+          "content": "For each date t, we predict group 2's untreated potential outcome by",
+          "label": "Text"
+        },
+        {
+          "id": "11",
+          "order": 12,
+          "bounding_box": {
+            "x": 0.366,
+            "y": 0.672,
+            "width": 0.264,
+            "height": 0.02
+          },
+          "content": "$$\n\\widehat {Y} _ {2, t} (0) = Y _ {2, t - 1} + \\left(Y _ {1, t} - Y _ {1, t - 1}\\right),\n$$",
+          "label": "Formula"
+        },
+        {
+          "id": "12",
+          "order": 13,
+          "bounding_box": {
+            "x": 0.112,
+            "y": 0.705,
+            "width": 0.775,
+            "height": 0.05
+          },
+          "content": "namely, its previous outcome plus the contemporaneous outcome change of the control group. Under $H_{0}$ , the observed outcome adjusted by the hypothesized effect is $Y_{2,t}-\\mathbf{1}\\{t=T\\}x$ . The associated conformity score is therefore",
+          "label": "Text"
+        },
+        {
+          "id": "13",
+          "order": 14,
+          "bounding_box": {
+            "x": 0.208,
+            "y": 0.767,
+            "width": 0.58,
+            "height": 0.048
+          },
+          "content": "$$\n\\begin{array}{l} \\left| Y _ {2, t} - \\mathbf {1} \\{t = T \\} x - \\widehat {Y} _ {2, t} (0) \\right| = \\left| Y _ {2, t} - Y _ {2, t - 1} - \\left(Y _ {1, t} - Y _ {1, t - 1}\\right) - \\mathbf {1} \\{t = T \\} x \\right| \\\\ = \\left| U _ {t} - \\mathbf {1} \\{t = T \\} x \\right|, \\\\ \\end{array}\n$$",
+          "label": "Formula"
+        },
+        {
+          "id": "14",
+          "order": 15,
+          "bounding_box": {
+            "x": 0.111,
+            "y": 0.828,
+            "width": 0.776,
+            "height": 0.086
+          },
+          "content": "which is precisely the statistic used in our test. Because the prediction rule contains no unknown parameter, the estimator-stability condition in Chernozhukov, Wuthrich, and Zhu (2021) is automatically satisfied. The relevant substantive requirement is therefore the distributional stability of the untreated prediction errors, together with the weak-dependence conditions needed for the empirical distribution of the conformity scores to be consistently estimated.",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "page_index": 5,
+      "blocks": [
+        {
+          "id": "0",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.111,
+            "y": 0.092,
+            "width": 0.775,
+            "height": 0.051
+          },
+          "content": "Relative to the DID predictor considered by Chernozhukov, Wüthrich, and Zhu (2021), our predictor has a key advantage: it does not imply parallel trends. Their DID specification predicts the untreated potential outcome of the treated group using",
+          "label": "Text"
+        },
+        {
+          "id": "1",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.426,
+            "y": 0.154,
+            "width": 0.146,
+            "height": 0.021
+          },
+          "content": "$$\n\\widehat {Y} _ {2, t} (0) = \\widehat {\\mu} + Y _ {1, t},\n$$",
+          "label": "Formula"
+        },
+        {
+          "id": "2",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.11,
+            "y": 0.188,
+            "width": 0.775,
+            "height": 0.052
+          },
+          "content": "where $\\widehat{\\mu}$ estimates a time-invariant difference between the two groups. Thus, asymptotically, the prediction error is simply the untreated outcome gap after removing a constant. If this prediction error has a stable distribution over time and is integrable, then",
+          "label": "Text"
+        },
+        {
+          "id": "3",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.422,
+            "y": 0.252,
+            "width": 0.152,
+            "height": 0.019
+          },
+          "content": "$$\n\\mathbb {E} \\left[ Y _ {2, t} (0) - Y _ {1, t} (0) \\right]\n$$",
+          "label": "Formula"
+        },
+        {
+          "id": "4",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.112,
+            "y": 0.285,
+            "width": 0.52,
+            "height": 0.016
+          },
+          "content": "must be constant over time. First-differencing this equality yields",
+          "label": "Text"
+        },
+        {
+          "id": "5",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.307,
+            "y": 0.314,
+            "width": 0.383,
+            "height": 0.019
+          },
+          "content": "$$\n\\mathbb {E} \\left[ Y _ {2, t} (0) - Y _ {2, t - 1} (0) - \\left(Y _ {1, t} (0) - Y _ {1, t - 1} (0)\\right) \\right] = 0,\n$$",
+          "label": "Formula"
+        },
+        {
+          "id": "6",
+          "order": 7,
+          "bounding_box": {
+            "x": 0.112,
+            "y": 0.346,
+            "width": 0.391,
+            "height": 0.016
+          },
+          "content": "which is precisely the parallel-trends assumption.",
+          "label": "Text"
+        },
+        {
+          "id": "7",
+          "order": 8,
+          "bounding_box": {
+            "x": 0.14,
+            "y": 0.371,
+            "width": 0.386,
+            "height": 0.017
+          },
+          "content": "Our predictor instead yields the prediction error",
+          "label": "Text"
+        },
+        {
+          "id": "8",
+          "order": 9,
+          "bounding_box": {
+            "x": 0.26,
+            "y": 0.4,
+            "width": 0.475,
+            "height": 0.02
+          },
+          "content": "$$\nY _ {2, t} (0) - \\widehat {Y} _ {2, t} (0) = Y _ {2, t} (0) - Y _ {2, t - 1} (0) - \\left(Y _ {1, t} (0) - Y _ {1, t - 1} (0)\\right),\n$$",
+          "label": "Formula"
+        },
+        {
+          "id": "9",
+          "order": 10,
+          "bounding_box": {
+            "x": 0.111,
+            "y": 0.433,
+            "width": 0.774,
+            "height": 0.034
+          },
+          "content": "namely the untreated differential trend between the two groups. Stability of the distribution of this prediction error only requires, in particular, that",
+          "label": "Text"
+        },
+        {
+          "id": "10",
+          "order": 11,
+          "bounding_box": {
+            "x": 0.325,
+            "y": 0.48,
+            "width": 0.345,
+            "height": 0.019
+          },
+          "content": "$$\n\\mathbb {E} \\left[ Y _ {2, t} (0) - Y _ {2, t - 1} (0) - \\left(Y _ {1, t} (0) - Y _ {1, t - 1} (0)\\right) \\right]\n$$",
+          "label": "Formula"
+        },
+        {
+          "id": "11",
+          "order": 12,
+          "bounding_box": {
+            "x": 0.111,
+            "y": 0.512,
+            "width": 0.776,
+            "height": 0.085
+          },
+          "content": "be constant over time. This constant may be nonzero, so group 2 may systematically exhibit faster or slower untreated growth than group 1. Thus, our procedure allows stable violations of parallel trends. As discussed earlier, even stability of the full distribution of this prediction error is stronger than necessary for the test considered in this paper. Because the test uses only the absolute conformity scores, it is sufficient that",
+          "label": "Text"
+        },
+        {
+          "id": "12",
+          "order": 13,
+          "bounding_box": {
+            "x": 0.255,
+            "y": 0.61,
+            "width": 0.486,
+            "height": 0.025
+          },
+          "content": "$$\n\\left| Y _ {2, t} (0) - \\widehat {Y} _ {2, t} (0) \\right| = \\left| Y _ {2, t} (0) - Y _ {2, t - 1} (0) - \\left(Y _ {1, t} (0) - Y _ {1, t - 1} (0)\\right) \\right|\n$$",
+          "label": "Formula"
+        },
+        {
+          "id": "13",
+          "order": 14,
+          "bounding_box": {
+            "x": 0.112,
+            "y": 0.647,
+            "width": 0.29,
+            "height": 0.017
+          },
+          "content": "have a stable distribution over time.",
+          "label": "Text"
+        },
+        {
+          "id": "14",
+          "order": 15,
+          "bounding_box": {
+            "x": 0.111,
+            "y": 0.672,
+            "width": 0.776,
+            "height": 0.069
+          },
+          "content": "Overall, the distinction is between two counterfactual predictors within the same framework. Chernozhukov, Wüthrich, and Zhu's DID predictor is based on outcome levels and implies parallel trends, whereas ours is based on outcome changes and requires only distributional stability of the absolute prediction errors, or, equivalently, of the absolute untreated differential trends.",
+          "label": "Text"
+        },
+        {
+          "id": "15",
+          "order": 16,
+          "bounding_box": {
+            "x": 0.113,
+            "y": 0.76,
+            "width": 0.463,
+            "height": 0.016
+          },
+          "content": "## 4.2 Related difference-in-differences literature",
+          "label": "Text"
+        },
+        {
+          "id": "16",
+          "order": 17,
+          "bounding_box": {
+            "x": 0.111,
+            "y": 0.786,
+            "width": 0.777,
+            "height": 0.034
+          },
+          "content": "The proposal in this paper is related to, but distinct from, several strands of the difference-indifferences literature.",
+          "label": "Text"
+        },
+        {
+          "id": "17",
+          "order": 18,
+          "bounding_box": {
+            "x": 0.111,
+            "y": 0.828,
+            "width": 0.777,
+            "height": 0.086
+          },
+          "content": "Conley and Taber (2011) and Ferman and Pinto (2019) study inference with few treated groups. Their procedures use the cross-sectional distribution of estimated shocks among many control groups to approximate the distribution of the treated groups' shocks. The present approach instead uses the time-series distribution of pre-treatment differential trends for the same treated and control groups.",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "page_index": 6,
+      "blocks": [
+        {
+          "id": "0",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.111,
+            "y": 0.092,
+            "width": 0.776,
+            "height": 0.171
+          },
+          "content": "A large literature uses pre-treatment trends to assess or relax parallel trends. Roth (2022) studies inference conditional on passing a pre-trends test. Bilinski and Hatfield (2018) and Dette and Schumann (2024) advocate non-inferiority or equivalence tests, which ask whether pre-treatment differences in trends are small enough to be substantively negligible. Rambachan and Roth (2023) use restrictions on how violations of parallel trends may evolve from pre- to post-treatment periods to construct robust confidence sets. These papers use pre-trends primarily to diagnose, bound, or extrapolate violations of parallel trends. In contrast, the proposed test uses the empirical distribution of the differential pre-trends themselves as the reference distribution for the final differential trend. While it allows for differential trends, it does so in a more restricted way than Rambachan and Roth (2023).",
+          "label": "Text"
+        },
+        {
+          "id": "1",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.112,
+            "y": 0.27,
+            "width": 0.773,
+            "height": 0.068
+          },
+          "content": "The procedure is also connected to end-of-sample stability and structural-break tests, particularly Andrews (2003). From this perspective, the null of no treatment effect says that the final differential trend is not a distributional break relative to the pre-treatment differential-trend process. The causal interpretation comes from the timing of treatment and the additive decomposition $U_{T}=U_{T}(0)+\\tau .$",
+          "label": "Text"
+        },
+        {
+          "id": "2",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.111,
+            "y": 0.345,
+            "width": 0.774,
+            "height": 0.102
+          },
+          "content": "I am not aware of an earlier difference-in-differences paper that proposes exactly the test considered here: ranking the absolute post-treatment difference-in-differences within the time-series distribution of absolute pre-treatment difference-in-differences while explicitly allowing a stable, nonzero differential trend. The closest antecedent appears to be the general counterfactual conformal framework of Chernozhukov, Wüthrich, and Zhu (2021), together with the end-of-sample stability literature. This novelty claim should nonetheless be treated as provisional rather than exhaustive.",
+          "label": "Text"
+        },
+        {
+          "id": "3",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.113,
+            "y": 0.465,
+            "width": 0.424,
+            "height": 0.016
+          },
+          "content": "## 4.3 Related conformal-inference literature",
+          "label": "Text"
+        },
+        {
+          "id": "4",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.111,
+            "y": 0.493,
+            "width": 0.775,
+            "height": 0.119
+          },
+          "content": "The procedure belongs to the broad family of conformal methods that calibrate a new prediction error using historical errors. Classical conformal prediction obtains finite-sample validity from exchangeability; see Vovk, Gammerman, and Shafer (2005) and Lei et al. (2018). Time-series settings require weaker approximate-exchangeability arguments or explicit adjustments for dependence. Chernozhukov, Wüthrich, and Zhu (2018) develop conformal methods for dependent data using permutation schemes, while Xu and Xie (2021) construct prediction intervals for dynamic time series using ensembles of leave-one-out residuals.",
+          "label": "Text"
+        },
+        {
+          "id": "5",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.111,
+            "y": 0.619,
+            "width": 0.774,
+            "height": 0.085
+          },
+          "content": "For causal inference, Lei and Candès (2021) construct conformal intervals for counterfactual outcomes and individual treatment effects under potential- outcome assumptions. Their goal differs from the present aggregate time-series test, but the common principle is to turn uncertainty about an unobserved counterfactual into a prediction problem and calibrate prediction errors without imposing a fully parametric distribution.",
+          "label": "Text"
+        },
+        {
+          "id": "6",
+          "order": 7,
+          "bounding_box": {
+            "x": 0.112,
+            "y": 0.71,
+            "width": 0.773,
+            "height": 0.085
+          },
+          "content": "The closest reference remains Chernozhukov, Wüthrich, and Zhu (2021): their method explicitly covers counterfactual and synthetic-control estimators, including difference-in-differences, and permits weakly dependent time-series errors. The contribution of the present specialization is to use differential trends as the primitive conformity scores. Doing so makes it transparent that the required stability restriction need not be parallel trends.",
+          "label": "Text"
+        },
+        {
+          "id": "7",
+          "order": 8,
+          "bounding_box": {
+            "x": 0.114,
+            "y": 0.819,
+            "width": 0.13,
+            "height": 0.018
+          },
+          "content": "## References",
+          "label": "Text"
+        },
+        {
+          "id": "8",
+          "order": 9,
+          "bounding_box": {
+            "x": 0.115,
+            "y": 0.854,
+            "width": 0.768,
+            "height": 0.058
+          },
+          "content": "Andrews, D. W. K. (2003). End-of-sample instability tests. Econometrica, 71(6), 1661-1694. Bilinski, A., and Hatfield, L. A. (2018). Nothing to see here? Non-inferiority approaches to parallel trends and other model assumptions. arXiv preprint arXiv:1805.03273.",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "page_index": 7,
+      "blocks": [
+        {
+          "id": "0",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.112,
+            "y": 0.088,
+            "width": 0.775,
+            "height": 0.544
+          },
+          "content": "Chernozhukov, V., Wüthrich, K., and Zhu, Y. (2018). Exact and robust conformal inference methods for predictive machine learning with dependent data. In Proceedings of the 31st Conference on Learning Theory, 732-749.\n\nChernozhukov, V., Wüthrich, K., and Zhu, Y. (2021). An exact and robust conformal inference method for counterfactual and synthetic controls. Journal of the American Statistical Association, 116(536), 1849-1864.\n\nConley, T. G., and Taber, C. R. (2011). Inference with \"difference in differences\" with a small number of policy changes. Review of Economics and Statistics, 93(1), 113-125.\n\nDette, H., and Schumann, M. (2024). Testing for equivalence of pre-trends in difference-in-differences estimation. Journal of Business & Economic Statistics, forthcoming.\n\nFerman, B., and Pinto, C. (2019). Inference in differences-in-differences with few treated groups and heteroskedasticity. Review of Economics and Statistics, 101(3), 452-467.\n\nLei, L., and Candès, E. J. (2021). Conformal inference of counterfactuals and individual treatment effects. Journal of the Royal Statistical Society: Series B, 83(5), 911-938.\n\nLei, J., G'Sell, M., Rinaldo, A., Tibshirani, R. J., and Wasserman, L. (2018). Distribution-free predictive inference for regression. Journal of the American Statistical Association, 113(523), 1094-1111.\n\nRambachan, A., and Roth, J. (2023). A more credible approach to parallel trends. Review of Economic Studies, 90(5), 2555-2591.\n\nRoth, J. (2022). Pretest with caution: Event-study estimates after testing for parallel trends. American Economic Review: Insights, 4(3), 305-322.\n\nVovk, V., Gammerman, A., and Shafer, G. (2005). Algorithmic Learning in a Random World. Springer.\n\nXu, C., and Xie, Y. (2021). Conformal prediction interval for dynamic time-series. In Proceedings of the 38th International Conference on Machine Learning, 11559-11569.",
+          "label": "Text"
+        }
+      ]
+    }
+  ]
+}

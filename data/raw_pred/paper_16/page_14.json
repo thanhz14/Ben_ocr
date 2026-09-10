@@ -1,0 +1,672 @@
+{
+    "input_path": "/home/bocchi/Downloads/Paper_Data/Statistics/2607.20760v1.pdf",
+    "page_index": 14,
+    "page_count": 20,
+    "width": 1224,
+    "height": 1584,
+    "model_settings": {
+        "use_doc_preprocessor": false,
+        "use_layout_detection": true,
+        "use_chart_recognition": false,
+        "use_seal_recognition": false,
+        "use_ocr_for_image_block": true,
+        "format_block_content": true,
+        "merge_layout_blocks": true,
+        "markdown_ignore_labels": [
+            "number",
+            "footnote",
+            "header",
+            "header_image",
+            "footer",
+            "footer_image",
+            "aside_text"
+        ],
+        "return_layout_polygon_points": true
+    },
+    "parsing_res_list": [
+        {
+            "block_label": "paragraph_title",
+            "block_content": "## 7 Real-world benchmarks",
+            "block_bbox": [
+                139,
+                140,
+                586,
+                175
+            ],
+            "block_id": 0,
+            "block_order": 1,
+            "group_id": 0,
+            "block_polygon_points": [
+                [
+                    139.0,
+                    140.0
+                ],
+                [
+                    586.0,
+                    140.0
+                ],
+                [
+                    586.0,
+                    175.0
+                ],
+                [
+                    139.0,
+                    175.0
+                ]
+            ]
+        },
+        {
+            "block_label": "paragraph_title",
+            "block_content": "### 7.1 UCI energy-efficiency benchmark",
+            "block_bbox": [
+                139,
+                203,
+                680,
+                235
+            ],
+            "block_id": 1,
+            "block_order": 2,
+            "group_id": 1,
+            "block_polygon_points": [
+                [
+                    139.0,
+                    203.0
+                ],
+                [
+                    680.0,
+                    203.0
+                ],
+                [
+                    680.0,
+                    235.0
+                ],
+                [
+                    139.0,
+                    235.0
+                ]
+            ]
+        },
+        {
+            "block_label": "text",
+            "block_content": "The energy-efficiency dataset of Tsanas and Xifara (2012) comprises 768 simulated residential buildings parametrized by eight building attributes and predicts two continuous energy responses (heating and cooling load). Four of the eight inputs are discrete, which is the source of the dataset's regime structure, but the response surface is otherwise smooth and non-linear rather than sharply piecewise – the opposite end of the spectrum from the piecewise mixtures of the simulation, and the setting in which the paper's second claim is tested, that tbtree can also deliver state-of-the-art predictive accuracy.",
+            "block_bbox": [
+                136,
+                251,
+                1083,
+                452
+            ],
+            "block_id": 2,
+            "block_order": 3,
+            "group_id": 2,
+            "block_polygon_points": [
+                [
+                    136.0,
+                    251.0
+                ],
+                [
+                    1083.0,
+                    251.0
+                ],
+                [
+                    1083.0,
+                    452.0
+                ],
+                [
+                    136.0,
+                    452.0
+                ]
+            ]
+        },
+        {
+            "block_label": "text",
+            "block_content": "Table 2 reports mean test  $ R^{2} $ on a fixed 80/20 split (seed 0) with approximate parameter counts, for the two decoupled tbtree configurations (a coskewness split and a combined split, each with covariance leaves) against the usual black-box references. The combined split with covariance leaves is the best tbtree configuration obtained, at mean  $ R^{2} = 0.975 $ – above a deep CART regression tree (0.970, at 613 leaves), and within noise of a 200-tree random forest (0.980) and a two-hidden-layer multilayer perceptron (0.978). It reaches this as a single tree of eleven leaves with a few hundred stored coefficients: one to three orders of magnitude fewer parameters than the black-box regressors, and fitted in seconds. The pure-coskewness split with covariance leaves is more parsimonious ( $ R^{2} = 0.937 $, six leaves) but, on data this smooth, does not need the extra regime sensitivity. On this benchmark decoupling barely moves the predictions relative to a fully coupled tree: the leaves are small and cross-validated to two or three components, so the covariance and coskewness leaf regressions almost coincide, and the small predictive edge of the combined objective lives in the split rather than the leaf. The combined split is thus the sweet spot on smooth non-linear data, just as a pure-coskewness split is on sharply piecewise data. Figure 4 shows the resulting tree, whose deepest low-cost split separates the two overall-height levels that dominate the predictor block.",
+            "block_bbox": [
+                136,
+                452,
+                1085,
+                946
+            ],
+            "block_id": 3,
+            "block_order": 4,
+            "group_id": 3,
+            "block_polygon_points": [
+                [
+                    136.0,
+                    452.0
+                ],
+                [
+                    1085.0,
+                    452.0
+                ],
+                [
+                    1085.0,
+                    946.0
+                ],
+                [
+                    136.0,
+                    946.0
+                ]
+            ]
+        },
+        {
+            "block_label": "figure_title",
+            "block_content": "<div style=\"text-align: center;\">Table 2: UCI energy-efficiency benchmark (Tsanas & Xifara, 2012): mean test  $ R^{2} $ on the 80/20 hold-out and approximate parameter count, for the two decoupled tbtree configurations (coskewness / combined split, covariance leaves) and the black-box references. The combined-split tbtree is the best single-tree model and matches the black-box regressors to within noise at a fraction of their size. Best single tree in bold.</div>\n",
+            "block_bbox": [
+                136,
+                987,
+                1084,
+                1130
+            ],
+            "block_id": 4,
+            "block_order": null,
+            "group_id": 4,
+            "block_polygon_points": [
+                [
+                    136.0,
+                    987.0
+                ],
+                [
+                    1084.0,
+                    987.0
+                ],
+                [
+                    1084.0,
+                    1130.0
+                ],
+                [
+                    136.0,
+                    1130.0
+                ]
+            ]
+        },
+        {
+            "block_label": "table",
+            "block_content": "\n<table border=1 style='margin: auto; word-wrap: break-word;'><tr><td style='text-align: center; word-wrap: break-word;'>Model</td><td style='text-align: center; word-wrap: break-word;'>mean  $ R^{2} $</td><td style='text-align: center; word-wrap: break-word;'>#params</td></tr><tr><td style='text-align: center; word-wrap: break-word;'>flat twoblock</td><td style='text-align: center; word-wrap: break-word;'>0.876</td><td style='text-align: center; word-wrap: break-word;'>18</td></tr><tr><td style='text-align: center; word-wrap: break-word;'>tbtree coskew split, cov leaves</td><td style='text-align: center; word-wrap: break-word;'>0.937</td><td style='text-align: center; word-wrap: break-word;'>$ \\sim $110</td></tr><tr><td style='text-align: center; word-wrap: break-word;'>tbtree cov+coskew split, cov leaves</td><td style='text-align: center; word-wrap: break-word;'>0.975</td><td style='text-align: center; word-wrap: break-word;'>$ \\sim $200</td></tr><tr><td style='text-align: center; word-wrap: break-word;'>CART regression tree</td><td style='text-align: center; word-wrap: break-word;'>0.970</td><td style='text-align: center; word-wrap: break-word;'>1226</td></tr><tr><td style='text-align: center; word-wrap: break-word;'>Random forest, 200 trees</td><td style='text-align: center; word-wrap: break-word;'>0.980</td><td style='text-align: center; word-wrap: break-word;'>155394</td></tr><tr><td style='text-align: center; word-wrap: break-word;'>MLP (64, 32), ReLU</td><td style='text-align: center; word-wrap: break-word;'>0.978</td><td style='text-align: center; word-wrap: break-word;'>2722</td></tr></table>",
+            "block_bbox": [
+                304,
+                1133,
+                920,
+                1356
+            ],
+            "block_id": 5,
+            "block_order": null,
+            "group_id": 5,
+            "block_polygon_points": [
+                [
+                    304.0,
+                    1133.0
+                ],
+                [
+                    920.0,
+                    1133.0
+                ],
+                [
+                    920.0,
+                    1356.0
+                ],
+                [
+                    304.0,
+                    1356.0
+                ]
+            ]
+        },
+        {
+            "block_label": "text",
+            "block_content": "This example illustrates that, for piecewise multivariate linear data, a combined-split tbtree with covariance leaves allows a shallow, interpretable model to achieve predictions",
+            "block_bbox": [
+                138,
+                1390,
+                1084,
+                1448
+            ],
+            "block_id": 6,
+            "block_order": 5,
+            "group_id": 6,
+            "block_polygon_points": [
+                [
+                    138.0,
+                    1390.0
+                ],
+                [
+                    1084.0,
+                    1390.0
+                ],
+                [
+                    1084.0,
+                    1448.0
+                ],
+                [
+                    138.0,
+                    1448.0
+                ]
+            ]
+        },
+        {
+            "block_label": "number",
+            "block_content": "15",
+            "block_bbox": [
+                598,
+                1481,
+                626,
+                1504
+            ],
+            "block_id": 7,
+            "block_order": null,
+            "group_id": 7,
+            "block_polygon_points": [
+                [
+                    598.0,
+                    1481.0
+                ],
+                [
+                    625.0,
+                    1481.0
+                ],
+                [
+                    625.0,
+                    1503.0
+                ],
+                [
+                    598.0,
+                    1503.0
+                ]
+            ]
+        }
+    ],
+    "layout_det_res": {
+        "input_path": null,
+        "page_index": null,
+        "boxes": [
+            {
+                "cls_id": 17,
+                "label": "paragraph_title",
+                "score": 0.8595016598701477,
+                "coordinate": [
+                    139,
+                    140,
+                    586,
+                    175
+                ],
+                "order": 1,
+                "polygon_points": [
+                    [
+                        139.0,
+                        140.0
+                    ],
+                    [
+                        586.0,
+                        140.0
+                    ],
+                    [
+                        586.0,
+                        175.0
+                    ],
+                    [
+                        139.0,
+                        175.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 17,
+                "label": "paragraph_title",
+                "score": 0.8766593933105469,
+                "coordinate": [
+                    139,
+                    203,
+                    680,
+                    235
+                ],
+                "order": 2,
+                "polygon_points": [
+                    [
+                        139.0,
+                        203.0
+                    ],
+                    [
+                        680.0,
+                        203.0
+                    ],
+                    [
+                        680.0,
+                        235.0
+                    ],
+                    [
+                        139.0,
+                        235.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.9629665613174438,
+                "coordinate": [
+                    136,
+                    251,
+                    1083,
+                    452
+                ],
+                "order": 3,
+                "polygon_points": [
+                    [
+                        136.0,
+                        251.0
+                    ],
+                    [
+                        1083.0,
+                        251.0
+                    ],
+                    [
+                        1083.0,
+                        452.0
+                    ],
+                    [
+                        136.0,
+                        452.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.9661170840263367,
+                "coordinate": [
+                    136,
+                    452,
+                    1085,
+                    946
+                ],
+                "order": 4,
+                "polygon_points": [
+                    [
+                        136.0,
+                        452.0
+                    ],
+                    [
+                        1085.0,
+                        452.0
+                    ],
+                    [
+                        1085.0,
+                        946.0
+                    ],
+                    [
+                        136.0,
+                        946.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 15,
+                "label": "inline_formula",
+                "score": 0.7141241431236267,
+                "coordinate": [
+                    445,
+                    452,
+                    474,
+                    477
+                ],
+                "order": 5,
+                "polygon_points": [
+                    [
+                        445.0,
+                        452.0
+                    ],
+                    [
+                        445.0,
+                        476.0
+                    ],
+                    [
+                        473.0,
+                        476.0
+                    ],
+                    [
+                        473.0,
+                        452.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 15,
+                "label": "inline_formula",
+                "score": 0.7705919146537781,
+                "coordinate": [
+                    852,
+                    539,
+                    992,
+                    565
+                ],
+                "order": 6,
+                "polygon_points": [
+                    [
+                        852.0,
+                        539.0
+                    ],
+                    [
+                        992.0,
+                        539.0
+                    ],
+                    [
+                        992.0,
+                        565.0
+                    ],
+                    [
+                        852.0,
+                        565.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 15,
+                "label": "inline_formula",
+                "score": 0.7829560041427612,
+                "coordinate": [
+                    764,
+                    683,
+                    885,
+                    709
+                ],
+                "order": 7,
+                "polygon_points": [
+                    [
+                        764.0,
+                        683.0
+                    ],
+                    [
+                        885.0,
+                        683.0
+                    ],
+                    [
+                        885.0,
+                        709.0
+                    ],
+                    [
+                        764.0,
+                        709.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 7,
+                "label": "figure_title",
+                "score": 0.9305432438850403,
+                "coordinate": [
+                    136,
+                    987,
+                    1084,
+                    1130
+                ],
+                "order": null,
+                "polygon_points": [
+                    [
+                        136.0,
+                        987.0
+                    ],
+                    [
+                        1084.0,
+                        987.0
+                    ],
+                    [
+                        1084.0,
+                        1130.0
+                    ],
+                    [
+                        136.0,
+                        1130.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 15,
+                "label": "inline_formula",
+                "score": 0.760924756526947,
+                "coordinate": [
+                    975,
+                    987,
+                    1005,
+                    1011
+                ],
+                "order": 8,
+                "polygon_points": [
+                    [
+                        975.0,
+                        987.0
+                    ],
+                    [
+                        975.0,
+                        1010.0
+                    ],
+                    [
+                        1004.0,
+                        1010.0
+                    ],
+                    [
+                        1004.0,
+                        987.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 21,
+                "label": "table",
+                "score": 0.9549618363380432,
+                "coordinate": [
+                    304,
+                    1133,
+                    920,
+                    1356
+                ],
+                "order": null,
+                "polygon_points": [
+                    [
+                        304.0,
+                        1133.0
+                    ],
+                    [
+                        920.0,
+                        1133.0
+                    ],
+                    [
+                        920.0,
+                        1356.0
+                    ],
+                    [
+                        304.0,
+                        1356.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 15,
+                "label": "inline_formula",
+                "score": 0.6248270869255066,
+                "coordinate": [
+                    759,
+                    1136,
+                    790,
+                    1164
+                ],
+                "order": 9,
+                "polygon_points": [
+                    [
+                        759.0,
+                        1136.0
+                    ],
+                    [
+                        759.0,
+                        1163.0
+                    ],
+                    [
+                        789.0,
+                        1163.0
+                    ],
+                    [
+                        789.0,
+                        1136.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.9160908460617065,
+                "coordinate": [
+                    138,
+                    1390,
+                    1084,
+                    1448
+                ],
+                "order": 10,
+                "polygon_points": [
+                    [
+                        138.0,
+                        1390.0
+                    ],
+                    [
+                        1084.0,
+                        1390.0
+                    ],
+                    [
+                        1084.0,
+                        1448.0
+                    ],
+                    [
+                        138.0,
+                        1448.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 16,
+                "label": "number",
+                "score": 0.7688655257225037,
+                "coordinate": [
+                    598,
+                    1481,
+                    626,
+                    1504
+                ],
+                "order": 11,
+                "polygon_points": [
+                    [
+                        598.0,
+                        1481.0
+                    ],
+                    [
+                        625.0,
+                        1481.0
+                    ],
+                    [
+                        625.0,
+                        1503.0
+                    ],
+                    [
+                        598.0,
+                        1503.0
+                    ]
+                ]
+            }
+        ]
+    }
+}

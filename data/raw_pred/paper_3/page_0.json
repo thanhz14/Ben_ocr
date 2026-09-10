@@ -1,0 +1,918 @@
+{
+    "input_path": "/home/bocchi/Work/Paper-Translate-Personal-Project/input/2606.13668v1.pdf",
+    "page_index": 0,
+    "page_count": 8,
+    "width": 1191,
+    "height": 1684,
+    "model_settings": {
+        "use_doc_preprocessor": false,
+        "use_layout_detection": true,
+        "use_chart_recognition": false,
+        "use_seal_recognition": false,
+        "use_ocr_for_image_block": true,
+        "format_block_content": true,
+        "merge_layout_blocks": true,
+        "markdown_ignore_labels": [
+            "number",
+            "footnote",
+            "header",
+            "header_image",
+            "footer",
+            "footer_image",
+            "aside_text"
+        ],
+        "return_layout_polygon_points": true
+    },
+    "parsing_res_list": [
+        {
+            "block_label": "aside_text",
+            "block_content": "arXiv:2606.13668v1 [cs.CL] 11 Jun 2026",
+            "block_bbox": [
+                29,
+                492,
+                71,
+                1185
+            ],
+            "block_id": 0,
+            "block_order": null,
+            "group_id": 0,
+            "block_polygon_points": [
+                [
+                    29.0,
+                    492.0
+                ],
+                [
+                    71.0,
+                    492.0
+                ],
+                [
+                    71.0,
+                    1185.0
+                ],
+                [
+                    29.0,
+                    1185.0
+                ]
+            ]
+        },
+        {
+            "block_label": "doc_title",
+            "block_content": "# Influcoder: Distilling Decoders’ Gradient Influence Rankings into an Encoder for Data Attribution",
+            "block_bbox": [
+                216,
+                154,
+                974,
+                219
+            ],
+            "block_id": 1,
+            "block_order": 1,
+            "group_id": 1,
+            "block_polygon_points": [
+                [
+                    216.0,
+                    154.0
+                ],
+                [
+                    974.0,
+                    154.0
+                ],
+                [
+                    974.0,
+                    219.0
+                ],
+                [
+                    216.0,
+                    219.0
+                ]
+            ]
+        },
+        {
+            "block_label": "text",
+            "block_content": "Dimitri Kachler, Damien Sileo, Pascal Denis\n\nCentre Inria de l'Université de Lille, CRISTAL, Université de Lille\n\n{dimitri.kachler, damien.sileo, pascal.denis}@inria.fr",
+            "block_bbox": [
+                268,
+                268,
+                922,
+                355
+            ],
+            "block_id": 2,
+            "block_order": 2,
+            "group_id": 2,
+            "block_polygon_points": [
+                [
+                    268.0,
+                    268.0
+                ],
+                [
+                    922.0,
+                    268.0
+                ],
+                [
+                    922.0,
+                    355.0
+                ],
+                [
+                    268.0,
+                    355.0
+                ]
+            ]
+        },
+        {
+            "block_label": "paragraph_title",
+            "block_content": "## Abstract",
+            "block_bbox": [
+                312,
+                441,
+                408,
+                468
+            ],
+            "block_id": 3,
+            "block_order": 3,
+            "group_id": 3,
+            "block_polygon_points": [
+                [
+                    312.0,
+                    441.0
+                ],
+                [
+                    408.0,
+                    441.0
+                ],
+                [
+                    408.0,
+                    468.0
+                ],
+                [
+                    312.0,
+                    468.0
+                ]
+            ]
+        },
+        {
+            "block_label": "abstract",
+            "block_content": "With the growth of LLMs' (Large Language Models) capabilities, there has been an increasing push to curate high quality datasets by filtering samples in the training data. In general, Data Attribution (DA) methods aim to estimate how individual samples in a training dataset can precondition a model to generate certain outputs. As an example, one might be interested in which samples in the data could be the source of toxic behavior after training the LLM. Many methods quantify this conditioning through the paradigm of influence functions. While methods of this family are effective in its function, they lack the necessary processing speed and storage compactness to be practically implemented on large datasets. We propose a method, Influcoder, as a quick and cost-effective approach to influence-based Data Attribution at scale.",
+            "block_bbox": [
+                170,
+                492,
+                552,
+                946
+            ],
+            "block_id": 4,
+            "block_order": 4,
+            "group_id": 4,
+            "block_polygon_points": [
+                [
+                    170.0,
+                    492.0
+                ],
+                [
+                    552.0,
+                    492.0
+                ],
+                [
+                    552.0,
+                    946.0
+                ],
+                [
+                    170.0,
+                    946.0
+                ]
+            ]
+        },
+        {
+            "block_label": "paragraph_title",
+            "block_content": "## 1 Introduction",
+            "block_bbox": [
+                138,
+                974,
+                310,
+                999
+            ],
+            "block_id": 5,
+            "block_order": 5,
+            "group_id": 5,
+            "block_polygon_points": [
+                [
+                    138.0,
+                    974.0
+                ],
+                [
+                    310.0,
+                    974.0
+                ],
+                [
+                    310.0,
+                    999.0
+                ],
+                [
+                    138.0,
+                    999.0
+                ]
+            ]
+        },
+        {
+            "block_label": "text",
+            "block_content": "The paradigm of Data Attribution within the scope of LLMs (Deng et al., 2025) has become an active field of research driven by the question of how individual training examples shape model behavior. One branch, referred to as Data Selection, uses curation as a means to optimize performance on a certain benchmark. Another growing branch has tasked itself with detection or filtering (Jiao et al., 2025) as a curation means where one aims to find samples that might cause unwanted behavior that could pose risks and dangers. Thus there is a motivation for methods that are able to attribute the responsibility of training data for certain outputs, while still scaling up to large datasets.",
+            "block_bbox": [
+                133,
+                1020,
+                585,
+                1401
+            ],
+            "block_id": 6,
+            "block_order": 6,
+            "group_id": 6,
+            "block_polygon_points": [
+                [
+                    133.0,
+                    1020.0
+                ],
+                [
+                    585.0,
+                    1020.0
+                ],
+                [
+                    585.0,
+                    1401.0
+                ],
+                [
+                    133.0,
+                    1401.0
+                ]
+            ]
+        },
+        {
+            "block_label": "text",
+            "block_content": "Influence Functions Influence functions (Koh and Liang, 2017), (Garima et al., 2020) have been used for dataset selection (Xia et al., 2024), albeit not without criticism. In (Li et al., 2025) they state consistent performance issues partly due to the inverse Hessian approximation errors and (Ivison et al., 2025) demonstrates that many influence methods fail to beat the random baseline when selecting at scale. For filtering, however, (Jiao et al., 2025) shows they consistently outperform baselines. Their main limitation stems from the computational costs, often requiring per-example gradients. This motivates the need for an approach that efficiently computes influence at scale.",
+            "block_bbox": [
+                134,
+                1417,
+                585,
+                1555
+            ],
+            "block_id": 7,
+            "block_order": 7,
+            "group_id": 7,
+            "block_polygon_points": [
+                [
+                    134.0,
+                    1417.0
+                ],
+                [
+                    585.0,
+                    1417.0
+                ],
+                [
+                    585.0,
+                    1555.0
+                ],
+                [
+                    134.0,
+                    1555.0
+                ]
+            ]
+        },
+        {
+            "block_label": "text",
+            "block_content": "",
+            "block_bbox": [
+                604,
+                441,
+                1055,
+                688
+            ],
+            "block_id": 8,
+            "block_order": 8,
+            "group_id": 7,
+            "block_polygon_points": [
+                [
+                    604.0,
+                    441.0
+                ],
+                [
+                    1055.0,
+                    441.0
+                ],
+                [
+                    1055.0,
+                    688.0
+                ],
+                [
+                    604.0,
+                    688.0
+                ]
+            ]
+        },
+        {
+            "block_label": "text",
+            "block_content": "Contribution In this paper we put forth a novel method for influence estimation through distilling gradient influence rankings into an encoder model. Due to the high processing speeds of encoders, our method demonstrates a path forwards towards effective data attribution at large data scales.",
+            "block_bbox": [
+                606,
+                702,
+                1055,
+                864
+            ],
+            "block_id": 9,
+            "block_order": 9,
+            "group_id": 9,
+            "block_polygon_points": [
+                [
+                    606.0,
+                    702.0
+                ],
+                [
+                    1055.0,
+                    702.0
+                ],
+                [
+                    1055.0,
+                    864.0
+                ],
+                [
+                    606.0,
+                    864.0
+                ]
+            ]
+        },
+        {
+            "block_label": "paragraph_title",
+            "block_content": "## 2 Related Work",
+            "block_bbox": [
+                608,
+                884,
+                795,
+                910
+            ],
+            "block_id": 10,
+            "block_order": 10,
+            "group_id": 10,
+            "block_polygon_points": [
+                [
+                    608.0,
+                    884.0
+                ],
+                [
+                    795.0,
+                    884.0
+                ],
+                [
+                    795.0,
+                    910.0
+                ],
+                [
+                    608.0,
+                    910.0
+                ]
+            ]
+        },
+        {
+            "block_label": "text",
+            "block_content": "Data Attribution methods for LLMs fall into one of three families, distinguished by the space in which they perform attribution.",
+            "block_bbox": [
+                606,
+                926,
+                1054,
+                1010
+            ],
+            "block_id": 11,
+            "block_order": 11,
+            "group_id": 11,
+            "block_polygon_points": [
+                [
+                    606.0,
+                    926.0
+                ],
+                [
+                    1054.0,
+                    926.0
+                ],
+                [
+                    1054.0,
+                    1010.0
+                ],
+                [
+                    606.0,
+                    1010.0
+                ]
+            ]
+        },
+        {
+            "block_label": "text",
+            "block_content": "Representation-based Representation-based methods function in training-agnostic feature spaces, meaning they tend to work out-of-the-box and are generally cheap to compute. Examples include TF-IDF, (Ni et al., 2022) for semantic similarity, and RDS+ (Ivison et al., 2025), which uses the model's activation space.",
+            "block_bbox": [
+                604,
+                1023,
+                1054,
+                1214
+            ],
+            "block_id": 12,
+            "block_order": 12,
+            "group_id": 12,
+            "block_polygon_points": [
+                [
+                    604.0,
+                    1023.0
+                ],
+                [
+                    1054.0,
+                    1023.0
+                ],
+                [
+                    1054.0,
+                    1214.0
+                ],
+                [
+                    604.0,
+                    1214.0
+                ]
+            ]
+        },
+        {
+            "block_label": "text",
+            "block_content": "Projection-based influence methods Early approaches at scaling influence functions for LLMs (Grosse et al., 2023) operated on fully dense gradients, but storage constraints pushed subsequent methods towards projection based approaches. TRAK (Park et al., 2023) randomly projects the gradients, which conserves the expected dot product value (Johnson and Lindenstrauss, 1984). On the other hand, TrackSTAR (Chang et al., 2025) and LoGRA (Choe et al., 2026) use two-sided auxiliary projections which are added on top of linear layers to calculate influence with a low memory",
+            "block_bbox": [
+                604,
+                1229,
+                1058,
+                1556
+            ],
+            "block_id": 13,
+            "block_order": 13,
+            "group_id": 13,
+            "block_polygon_points": [
+                [
+                    604.0,
+                    1229.0
+                ],
+                [
+                    1058.0,
+                    1229.0
+                ],
+                [
+                    1058.0,
+                    1556.0
+                ],
+                [
+                    604.0,
+                    1556.0
+                ]
+            ]
+        }
+    ],
+    "layout_det_res": {
+        "input_path": null,
+        "page_index": null,
+        "boxes": [
+            {
+                "cls_id": 2,
+                "label": "aside_text",
+                "score": 0.8910901546478271,
+                "coordinate": [
+                    29,
+                    492,
+                    71,
+                    1185
+                ],
+                "order": null,
+                "polygon_points": [
+                    [
+                        29.0,
+                        492.0
+                    ],
+                    [
+                        71.0,
+                        492.0
+                    ],
+                    [
+                        71.0,
+                        1185.0
+                    ],
+                    [
+                        29.0,
+                        1185.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 6,
+                "label": "doc_title",
+                "score": 0.9180147051811218,
+                "coordinate": [
+                    216,
+                    154,
+                    974,
+                    219
+                ],
+                "order": 1,
+                "polygon_points": [
+                    [
+                        216.0,
+                        154.0
+                    ],
+                    [
+                        974.0,
+                        154.0
+                    ],
+                    [
+                        974.0,
+                        219.0
+                    ],
+                    [
+                        216.0,
+                        219.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.33963543176651,
+                "coordinate": [
+                    369,
+                    268,
+                    828,
+                    295
+                ],
+                "order": 2,
+                "polygon_points": [
+                    [
+                        369.0,
+                        268.0
+                    ],
+                    [
+                        828.0,
+                        268.0
+                    ],
+                    [
+                        828.0,
+                        295.0
+                    ],
+                    [
+                        369.0,
+                        295.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.7364508509635925,
+                "coordinate": [
+                    268,
+                    268,
+                    922,
+                    355
+                ],
+                "order": 3,
+                "polygon_points": [
+                    [
+                        268.0,
+                        268.0
+                    ],
+                    [
+                        922.0,
+                        268.0
+                    ],
+                    [
+                        922.0,
+                        355.0
+                    ],
+                    [
+                        268.0,
+                        355.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 17,
+                "label": "paragraph_title",
+                "score": 0.7921004295349121,
+                "coordinate": [
+                    312,
+                    441,
+                    408,
+                    468
+                ],
+                "order": 4,
+                "polygon_points": [
+                    [
+                        312.0,
+                        441.0
+                    ],
+                    [
+                        408.0,
+                        441.0
+                    ],
+                    [
+                        408.0,
+                        468.0
+                    ],
+                    [
+                        312.0,
+                        468.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 0,
+                "label": "abstract",
+                "score": 0.9837522506713867,
+                "coordinate": [
+                    170,
+                    492,
+                    552,
+                    946
+                ],
+                "order": 5,
+                "polygon_points": [
+                    [
+                        170.0,
+                        492.0
+                    ],
+                    [
+                        552.0,
+                        492.0
+                    ],
+                    [
+                        552.0,
+                        946.0
+                    ],
+                    [
+                        170.0,
+                        946.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 17,
+                "label": "paragraph_title",
+                "score": 0.8368691205978394,
+                "coordinate": [
+                    138,
+                    974,
+                    310,
+                    999
+                ],
+                "order": 6,
+                "polygon_points": [
+                    [
+                        138.0,
+                        974.0
+                    ],
+                    [
+                        310.0,
+                        974.0
+                    ],
+                    [
+                        310.0,
+                        999.0
+                    ],
+                    [
+                        138.0,
+                        999.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.9653996825218201,
+                "coordinate": [
+                    133,
+                    1020,
+                    585,
+                    1401
+                ],
+                "order": 7,
+                "polygon_points": [
+                    [
+                        133.0,
+                        1020.0
+                    ],
+                    [
+                        585.0,
+                        1020.0
+                    ],
+                    [
+                        585.0,
+                        1401.0
+                    ],
+                    [
+                        133.0,
+                        1401.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.9562829732894897,
+                "coordinate": [
+                    134,
+                    1417,
+                    585,
+                    1555
+                ],
+                "order": 8,
+                "polygon_points": [
+                    [
+                        134.0,
+                        1417.0
+                    ],
+                    [
+                        585.0,
+                        1417.0
+                    ],
+                    [
+                        585.0,
+                        1555.0
+                    ],
+                    [
+                        134.0,
+                        1555.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.9635459780693054,
+                "coordinate": [
+                    604,
+                    441,
+                    1055,
+                    688
+                ],
+                "order": 9,
+                "polygon_points": [
+                    [
+                        604.0,
+                        441.0
+                    ],
+                    [
+                        1055.0,
+                        441.0
+                    ],
+                    [
+                        1055.0,
+                        688.0
+                    ],
+                    [
+                        604.0,
+                        688.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.9536012411117554,
+                "coordinate": [
+                    606,
+                    702,
+                    1055,
+                    864
+                ],
+                "order": 10,
+                "polygon_points": [
+                    [
+                        606.0,
+                        702.0
+                    ],
+                    [
+                        1055.0,
+                        702.0
+                    ],
+                    [
+                        1055.0,
+                        864.0
+                    ],
+                    [
+                        606.0,
+                        864.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 17,
+                "label": "paragraph_title",
+                "score": 0.8299656510353088,
+                "coordinate": [
+                    608,
+                    884,
+                    795,
+                    910
+                ],
+                "order": 11,
+                "polygon_points": [
+                    [
+                        608.0,
+                        884.0
+                    ],
+                    [
+                        795.0,
+                        884.0
+                    ],
+                    [
+                        795.0,
+                        910.0
+                    ],
+                    [
+                        608.0,
+                        910.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.9293307662010193,
+                "coordinate": [
+                    606,
+                    926,
+                    1054,
+                    1010
+                ],
+                "order": 12,
+                "polygon_points": [
+                    [
+                        606.0,
+                        926.0
+                    ],
+                    [
+                        1054.0,
+                        926.0
+                    ],
+                    [
+                        1054.0,
+                        1010.0
+                    ],
+                    [
+                        606.0,
+                        1010.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.9545748233795166,
+                "coordinate": [
+                    604,
+                    1023,
+                    1054,
+                    1214
+                ],
+                "order": 13,
+                "polygon_points": [
+                    [
+                        604.0,
+                        1023.0
+                    ],
+                    [
+                        1054.0,
+                        1023.0
+                    ],
+                    [
+                        1054.0,
+                        1214.0
+                    ],
+                    [
+                        604.0,
+                        1214.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.9674953818321228,
+                "coordinate": [
+                    604,
+                    1229,
+                    1058,
+                    1556
+                ],
+                "order": 14,
+                "polygon_points": [
+                    [
+                        604.0,
+                        1229.0
+                    ],
+                    [
+                        1058.0,
+                        1229.0
+                    ],
+                    [
+                        1058.0,
+                        1556.0
+                    ],
+                    [
+                        604.0,
+                        1556.0
+                    ]
+                ]
+            }
+        ]
+    }
+}

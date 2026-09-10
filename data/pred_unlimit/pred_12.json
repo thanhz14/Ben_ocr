@@ -1,0 +1,2326 @@
+{
+  "file_name": "paper_12",
+  "pages": [
+    {
+      "page_index": 1,
+      "blocks": [
+        {
+          "id": "1_0",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.023,
+            "y": 0.247,
+            "width": 0.038,
+            "height": 0.504
+          },
+          "content": "arXiv:2601.00169v2 [astro-ph.CO] 20 Apr 2026",
+          "label": "Text"
+        },
+        {
+          "id": "1_1",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.142,
+            "y": 0.063,
+            "width": 0.723,
+            "height": 0.036
+          },
+          "content": "Isotropic stochastic gravitational wave background reconstruction for Taiji constellation",
+          "label": "Text"
+        },
+        {
+          "id": "1_2",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.334,
+            "y": 0.112,
+            "width": 0.337,
+            "height": 0.017
+          },
+          "content": "Yang Jiang \\( ^{1,2,*} \\)  and Qing-Guo Huang \\( ^{1,2,3,\\dagger} \\)",
+          "label": "Text"
+        },
+        {
+          "id": "1_3",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.295,
+            "y": 0.132,
+            "width": 0.415,
+            "height": 0.014
+          },
+          "content": "\\( ^{1} \\) School of Fundamental Physics and Mathematical Sciences,",
+          "label": "Text"
+        },
+        {
+          "id": "1_4",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.253,
+            "y": 0.147,
+            "width": 0.5,
+            "height": 0.012
+          },
+          "content": "Hangzhou Institute for Advanced Study, UCAS, Hangzhou 310024, China",
+          "label": "Text"
+        },
+        {
+          "id": "1_5",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.101,
+            "y": 0.159,
+            "width": 0.804,
+            "height": 0.014
+          },
+          "content": "\\(^{2}\\)School of Physical Sciences, University of Chinese Academy of Sciences, No. 19A Yuquan Road, Beijing 100049, China",
+          "label": "Text"
+        },
+        {
+          "id": "1_6",
+          "order": 7,
+          "bounding_box": {
+            "x": 0.212,
+            "y": 0.173,
+            "width": 0.582,
+            "height": 0.013
+          },
+          "content": "\\( ^{3} \\) Institute of Theoretical Physics, Chinese Academy of Sciences, Beijing 100190, China",
+          "label": "Text"
+        },
+        {
+          "id": "1_7",
+          "order": 8,
+          "bounding_box": {
+            "x": 0.424,
+            "y": 0.186,
+            "width": 0.158,
+            "height": 0.014
+          },
+          "content": "(Dated: April 21, 2026)",
+          "label": "Text"
+        },
+        {
+          "id": "1_8",
+          "order": 9,
+          "bounding_box": {
+            "x": 0.171,
+            "y": 0.207,
+            "width": 0.661,
+            "height": 0.147
+          },
+          "content": "The stochastic gravitational wave background is a broadband target from diverse astrophysical and cosmological sources. The background falls within the mHz frequency band could become a potential observable for future space-based interferometers. Taiji, a proposed space mission slated for launch in the 2030s, will enable the study of such a background. However, the unique characteristics of space missions pose distinctive challenges for separating the stochastic background from instrumental noise. To address the data analysis requirements, we develop a preliminary pipeline to search for the SGWB and evaluate its performance with Taiji simulation datasets. At present, we demonstrate that the algorithm can successfully recover the parameters of injected background with a known spectral density after setting aside the complication of galactic binaries foreground. Furthermore, by employing the trans-dimensional Markov Chain Monte Carlo method, we extend the analysis to reconstruct the background with unknown spectral morphology.",
+          "label": "Text"
+        },
+        {
+          "id": "1_9",
+          "order": 10,
+          "bounding_box": {
+            "x": 0.413,
+            "y": 0.401,
+            "width": 0.176,
+            "height": 0.014
+          },
+          "content": "I. INTRODUCTION",
+          "label": "Text"
+        },
+        {
+          "id": "1_10",
+          "order": 11,
+          "bounding_box": {
+            "x": 0.082,
+            "y": 0.433,
+            "width": 0.839,
+            "height": 0.131
+          },
+          "content": "Over the past decade, ground-based detectors such as LIGO  \\( [1] \\) , Virgo  \\( [2] \\)  and KAGRA  \\( [3] \\)  have achieved remarkable success, pioneering the field of gravitational wave (GW) astronomy. By the recent O4a observing run  \\( [4] \\) , more than two hundred compact binary coalescences (CBCs) have been recorded. These GW signals are concentrated in the frequency band of several tens of hertz, corresponding to the systems of astronomical binary black holes, black hole-neutron star, and binary neutron stars. Unfortunately, environmental noise, particularly seismic noise, limits the sensitivity of ground detectors in the low-frequency regime  \\( [5] \\) . To overcome this limitation, it is essential to increase the arm length and deploy the detector in space. After long-term preparation, Laser Interferometer Space Antenna (LISA)  \\( [6, 7] \\) , a space-borne GW detecting project led by the European Space Agency has now come into the engineering phase, marking a significant step toward addressing this challenge.",
+          "label": "Text"
+        },
+        {
+          "id": "1_11",
+          "order": 12,
+          "bounding_box": {
+            "x": 0.082,
+            "y": 0.564,
+            "width": 0.838,
+            "height": 0.145
+          },
+          "content": "Cocurrently, China is also advancing space-based GW detection, scheduled for launch in the 2030s. Two major projects have been proposed. TianQin [8, 9] consists of three Earth orbiting satellites, forming a constellation centered around Earth. In contrast, Taiji is a space-borne GW observatory sponsored by Chinese Academy of Sciences, similar in design to LISA. It comprises three spacecrafts (SCs) configured in an equilateral triangle constellation with a nominal arm length of \\(3 \\times 10^{9} \\mathrm{~m}\\). The barycenter follows a heliocentric orbit, trailing or leading the Earth by \\(20^{\\circ}\\) approximately [10, 11]. The Taiji-1 pilot satellite, launched in 2019, has successfully completed its mission, validating a number of key technologies [12–15] and demonstrating the feasibility of the Taiji roadmap. These forthcoming observatories will emerge the millihertz GW sky, providing unprecedented opportunities for studying the GW signals from massive black hole binaries [16], extreme mass-ratio inspirals [17], Galactic binaries [18] and inspiral stellar-mass black hole binaries [19].",
+          "label": "Text"
+        },
+        {
+          "id": "1_12",
+          "order": 13,
+          "bounding_box": {
+            "x": 0.082,
+            "y": 0.709,
+            "width": 0.838,
+            "height": 0.145
+          },
+          "content": "In addition to individual GW events previously discussed, the stochastic GW background (SGWB) represents another type of signal within great scientific interest. It typically arises from the superposition of numerous weak and unresolved sources. Such a guaranteed source in the millihertz band is the confusion foreground from the vast population of stellar compact binaries in the Galaxies  \\( [20] \\) . It is estimated that our galaxy contains  \\( \\mathcal{O}(10^{7}) \\)  such systems, of which only about  \\( \\mathcal{O}(10^{4}) \\)  are expected to be resolved individually  \\( [21, 22] \\) . The unresolved remainder forms a persistent GW background  \\( [23] \\) . Detection of this background will serve as a supplement to individual binaries, providing valuable insights to the structure of our Milky Way. Furthermore, cosmological SGWB is also predicted to be within Taiji's observational band. Several well-motivated physics beyond the Standard Model  \\( [24–26] \\)  predict a first-order phase transition (PT)  \\( [27] \\)  in early Universe. Taiji is particularly sensitive to the phase transition at electroweak scale  \\( [28, 29] \\) . A detection of such GW background would constitute a major scientific breakthrough. As",
+          "label": "Text"
+        },
+        {
+          "id": "1_13",
+          "order": 14,
+          "bounding_box": {
+            "x": 0.086,
+            "y": 0.886,
+            "width": 0.127,
+            "height": 0.013
+          },
+          "content": "* jiangy@ucas.ac.cn",
+          "label": "Text"
+        },
+        {
+          "id": "1_14",
+          "order": 15,
+          "bounding_box": {
+            "x": 0.086,
+            "y": 0.899,
+            "width": 0.269,
+            "height": 0.013
+          },
+          "content": "\\( ^{\\dagger} \\)  corresponding author: huangqg@itp.ac.cn",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "page_index": 2,
+      "blocks": [
+        {
+          "id": "2_0",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.908,
+            "y": 0.035,
+            "width": 0.012,
+            "height": 0.011
+          },
+          "content": "2",
+          "label": "Text"
+        },
+        {
+          "id": "2_1",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.082,
+            "y": 0.066,
+            "width": 0.839,
+            "height": 0.059
+          },
+          "content": "a candidate of dark matter, the primordial black holes (PBHs) may be originated by comoving curvature perturbations generated when inflation reenters the horizon [30]. By inspecting the accompanying GW radiation, Taiji has the potential to probe PBHs in the mass range of \\(10^{-16} \\sim 10^{-10} M_{\\odot}\\) [31, 32], offering a unique window to test PBH hypothesis.",
+          "label": "Text"
+        },
+        {
+          "id": "2_2",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.086,
+            "y": 0.125,
+            "width": 0.835,
+            "height": 0.216
+          },
+          "content": "The SGWB manifests a stochastic signal in the output of detector, akin to instrumental noise. Distinguishing GW from noise and extracting its physical implications are the duties of data analysis technique. This task is particularly complex for space-based interferometers. The standard cross-correlation method, used for SGWB searches in ground detectors [33], relies on the assumption that environmental noise is uncorrelated between different detectors, which does not hold for a single space interferometer like Taiji. In general, detecting the SGWB in such a mission necessitates prior knowledge of the characteristics about noise. Instrument noise originates from diverse sources [11, 34–36]. For demonstration purposes, current data processing strategies typically model several dominant noise components. Earlier studies and simulations [37, 38] have demonstrated the feasibility of SGWB identification. In light of recent advancements in the LISA design, studies [39–41] have employed an automated adaptive frequency-binning procedure for reconstructing SGWB with arbitrary spectral shapes. On the other hand, the data stream of a space mission will be signal-rich, containing a large number of concurrent GW sources. Therefore, any searching program designed for particular GW signal should be integrated into a global fitting pipeline [42, 43]. To address these multifaceted challenges, the Taiji Data Challenge II (TDC II) was recently released [44]. The datasets incorporate the GW sources expected within Taiji's sensitivity band, and are divided into blind and training sets to foster the development of robust data analysis techniques.",
+          "label": "Text"
+        },
+        {
+          "id": "2_3",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.082,
+            "y": 0.342,
+            "width": 0.838,
+            "height": 0.13
+          },
+          "content": "In this work, we will concentrate on the training sets designed for SGWB science. Going beyond the commonly adopted equal-arm approximation, our analysis incorporates the more realistic, simulated orbits provided in TDC II, which result in unequal and time-varying interferometric armlengths. Furthermore, unlike the assumptions in  \\( [45] \\) , the single-link interferometric noise levels are different across the links. We begin by conducting a template-based parameter estimations for the background, assuming a known spectral shape. In general, the energy spectrum of the SGWB is not a known prior. Therefore, we choose to employ a trans-dimensional Markov chain Monte Carlo (MCMC)  \\( [46] \\)  approach to reconstruct the frequency profile of SGWB. This model-agnostic approach enables the detection of SGWB without the precise knowledge about the spectrum. We compare its performance directly with that of the template-based method.",
+          "label": "Text"
+        },
+        {
+          "id": "2_4",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.082,
+            "y": 0.472,
+            "width": 0.838,
+            "height": 0.06
+          },
+          "content": "The TDC II datasets contain both isotropic SGWB and confusion galactic binaries (CGBs). The latter constitutes an anisotropic background due to the inhomogeneous distribution of binaries in the Milky Way, exhibiting a year-round modulation pattern. We postpone the issue of CGB to future work. At this stage, we pre-process the dataset by subtracting the provided CGB component and focus our analysis on the residual noise and isotropic background.",
+          "label": "Text"
+        },
+        {
+          "id": "2_5",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.404,
+            "y": 0.558,
+            "width": 0.196,
+            "height": 0.013
+          },
+          "content": "II. TDC II DATASETS",
+          "label": "Text"
+        },
+        {
+          "id": "2_6",
+          "order": 7,
+          "bounding_box": {
+            "x": 0.082,
+            "y": 0.589,
+            "width": 0.838,
+            "height": 0.087
+          },
+          "content": "As we have mentioned before, Taiji consists of three SCs around the Sun. Each SC carries two movable optical sub-assemblies (MOSAs) which functions as transceiver and measurement unit of interferometry. Depicted in Fig. 1, we adopt the conventional indexing scheme [44, 47] for facilities and observables: three SCs are labeled from 1 to 3 in a direction opposite to the cartwheel rotation. MOSAs and laser paths are labeled with two indices \\( ij \\), where \\( i, j \\) denote receiving and emitting SCs, respectively. Raw measurements are labeled according to the MOSA or SC on which they are performed.",
+          "label": "Text"
+        },
+        {
+          "id": "2_7",
+          "order": 8,
+          "bounding_box": {
+            "x": 0.082,
+            "y": 0.677,
+            "width": 0.838,
+            "height": 0.087
+          },
+          "content": "At present, our primitive objective is to establish a basic pipeline for the detection of SGWB. Consequently, we will only focus on TDC II training sets  \\( [48] \\) . The data generation processes for these training sets are simplified, aside from the provided parameters of injected GW signals, fewer physical effects are modeled. In terms of noise, two main sources of noise are considered: test-mass acceleration (ACC) noise arises from deviations of the test-mass from ideal geodesic motion. Optical metrology noise (OMS) encompasses all the contributions from optical readout system. The PSDs are given by",
+          "label": "Text"
+        },
+        {
+          "id": "2_8",
+          "order": 9,
+          "bounding_box": {
+            "x": 0.273,
+            "y": 0.772,
+            "width": 0.647,
+            "height": 0.06
+          },
+          "content": "\\[\n\\begin{array}{l} S _ {\\mathrm{acc}} (f) = A _ {\\mathrm{acc}} ^ {2} \\left[ 1 + \\left(\\frac {0 . 4 \\mathrm{mHz}}{f}\\right) ^ {2} \\right] \\left[ 1 + \\left(\\frac {f}{8 \\mathrm{mHz}}\\right) ^ {4} \\right] \\left(\\frac {1}{2 \\pi f c}\\right) ^ {2}, \\\\ S _ {\\mathrm{oms}} (f) = A _ {\\mathrm{oms}} ^ {2} \\left[ 1 + \\left(\\frac {2 \\mathrm{mHz}}{f}\\right) ^ {4} \\right] \\left(\\frac {2 \\pi f}{c}\\right) ^ {2}. \\end{array} \\tag {1}\n\\]",
+          "label": "Formula"
+        },
+        {
+          "id": "2_9",
+          "order": 10,
+          "bounding_box": {
+            "x": 0.082,
+            "y": 0.87,
+            "width": 0.838,
+            "height": 0.045
+          },
+          "content": "The nominal amplitudes are  \\( A_{acc} = 3 \\, fm/s^{2}/\\sqrt{Hz} \\)  and  \\( A_{oms} = 8 \\, pm/\\sqrt{Hz} \\) . While in the process of simulation, the noises are uncorrelated, but not identically distributed in each MOSA. The actual noise amplitudes of facilities in individual MOSAs are determined by applying  \\( \\pm20\\% \\)  fluctuations around the nominal value.",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "page_index": 3,
+      "blocks": [
+        {
+          "id": "3_0",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.908,
+            "y": 0.035,
+            "width": 0.012,
+            "height": 0.012
+          },
+          "content": "3",
+          "label": "Text"
+        },
+        {
+          "id": "3_1",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.248,
+            "y": 0.062,
+            "width": 0.513,
+            "height": 0.34
+          },
+          "content": "",
+          "label": "Image"
+        },
+        {
+          "id": "3_2",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.336,
+            "y": 0.41,
+            "width": 0.33,
+            "height": 0.014
+          },
+          "content": "",
+          "label": "Image"
+        },
+        {
+          "id": "3_3",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.082,
+            "y": 0.451,
+            "width": 0.84,
+            "height": 0.102
+          },
+          "content": "Space-borne detectors measure the change of distance between free falling test-masses located on seperated SCs through laser interferometry. But in practice, this is achieved indirectly by combining multiple interferometric signals and constructing six intermediate  \\( \\eta \\)  observables in the preprocessing stage [49]. At this level, noise from motion of optical bench and three degree of freedom of laser are canceled. However, under the current limitation of laser stability,  \\( \\eta \\)  observables remain dominant by laser phase noise. This kind of noise is further suppressed by the time delay interferometry (TDI) [50–52]. TDI observable is formed by the linear combinations of the time delayed  \\( \\eta \\)  observables:",
+          "label": "Text"
+        },
+        {
+          "id": "3_4",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.444,
+            "y": 0.56,
+            "width": 0.476,
+            "height": 0.035
+          },
+          "content": "\\[\n\\Delta = \\sum_ {i j} \\mathcal {P} _ {i j} \\eta_ {i j}, \\tag {2}\n\\]",
+          "label": "Formula"
+        },
+        {
+          "id": "3_5",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.082,
+            "y": 0.604,
+            "width": 0.838,
+            "height": 0.044
+          },
+          "content": "where  \\( P_{ij} \\)  is a polynomial of delay operator  \\( D_{ij} \\) . Details about the delay operator and the specific TDI combinations of this work are provided in Appendix A. For the Taiji mission, the second generation of TDI is adopted. The training sets comprise Michelson type TDI observables X, Y, Z lasting for one year.",
+          "label": "Text"
+        },
+        {
+          "id": "3_6",
+          "order": 7,
+          "bounding_box": {
+            "x": 0.082,
+            "y": 0.648,
+            "width": 0.838,
+            "height": 0.031
+          },
+          "content": "TDC II 2.8, 2.8_EQ, 2.9 and 2.9_EQ are dedicated to serving the science of SGWB. The EQ suffix denotes an analytical equal-arm orbit. For a stationary, isotropic and unpolarized SGWB, the cross correlation spectrum is",
+          "label": "Text"
+        },
+        {
+          "id": "3_7",
+          "order": 8,
+          "bounding_box": {
+            "x": 0.297,
+            "y": 0.687,
+            "width": 0.623,
+            "height": 0.032
+          },
+          "content": "\\[\n\\langle h _ {A} (f, \\boldsymbol {n}) h _ {A ^ {\\prime}} (f ^ {\\prime}, \\boldsymbol {n} ^ {\\prime}) \\rangle = \\frac {1}{1 6 \\pi} S _ {h} (f) \\delta_ {A A ^ {\\prime}} \\delta (f - f ^ {\\prime}) \\delta^ {2} (\\boldsymbol {n}, \\boldsymbol {n} ^ {\\prime}). \\tag {3}\n\\]",
+          "label": "Formula"
+        },
+        {
+          "id": "3_8",
+          "order": 9,
+          "bounding_box": {
+            "x": 0.084,
+            "y": 0.726,
+            "width": 0.828,
+            "height": 0.016
+          },
+          "content": "\\(S_{h}(f)\\) can be regarded as the strain PSD of background. It is related to the fractional energy density spectrum via",
+          "label": "Text"
+        },
+        {
+          "id": "3_9",
+          "order": 10,
+          "bounding_box": {
+            "x": 0.42,
+            "y": 0.75,
+            "width": 0.5,
+            "height": 0.036
+          },
+          "content": "\\[\nS _ {h} (f) = \\frac {3 H _ {0} ^ {2}}{2 \\pi^ {2}} \\frac {\\Omega_ {\\mathrm{gw}} (f)}{f ^ {3}}, \\tag {4}\n\\]",
+          "label": "Formula"
+        },
+        {
+          "id": "3_10",
+          "order": 11,
+          "bounding_box": {
+            "x": 0.084,
+            "y": 0.794,
+            "width": 0.033,
+            "height": 0.013
+          },
+          "content": "and",
+          "label": "Text"
+        },
+        {
+          "id": "3_11",
+          "order": 12,
+          "bounding_box": {
+            "x": 0.415,
+            "y": 0.816,
+            "width": 0.505,
+            "height": 0.033
+          },
+          "content": "\\[\n\\Omega_ {\\mathrm{gw}} (f) = \\frac {8 \\pi G}{3 c ^ {2} H _ {0} ^ {2}} \\frac {\\mathrm{d} \\rho_ {\\mathrm{gw}}}{\\mathrm{d} \\ln f}. \\tag {5}\n\\]",
+          "label": "Formula"
+        },
+        {
+          "id": "3_12",
+          "order": 13,
+          "bounding_box": {
+            "x": 0.099,
+            "y": 0.858,
+            "width": 0.469,
+            "height": 0.015
+          },
+          "content": "2.8 dataset models the astrophysical background by a power law",
+          "label": "Text"
+        },
+        {
+          "id": "3_13",
+          "order": 14,
+          "bounding_box": {
+            "x": 0.397,
+            "y": 0.882,
+            "width": 0.523,
+            "height": 0.035
+          },
+          "content": "\\[\n\\Omega_ {\\mathrm{gw}} (f) = A _ {\\mathrm{ap}} \\left(\\frac {f}{1 \\mathrm{mHz}}\\right) ^ {\\gamma_ {\\mathrm{ap}}}. \\tag {6}\n\\]",
+          "label": "Formula"
+        }
+      ]
+    },
+    {
+      "page_index": 4,
+      "blocks": [
+        {
+          "id": "4_0",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.908,
+            "y": 0.035,
+            "width": 0.012,
+            "height": 0.011
+          },
+          "content": "4",
+          "label": "Text"
+        },
+        {
+          "id": "4_1",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.084,
+            "y": 0.066,
+            "width": 0.66,
+            "height": 0.016
+          },
+          "content": "While 2.9 models the cosmological background from PT by double broken power law model",
+          "label": "Text"
+        },
+        {
+          "id": "4_2",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.303,
+            "y": 0.095,
+            "width": 0.617,
+            "height": 0.038
+          },
+          "content": "\\[\n\\Omega_ {\\mathrm{gw}} (f) = A _ {\\mathrm{pt}} s ^ {9} \\left(\\frac {1 + r _ {b} ^ {4}}{r _ {b} ^ {4} + s ^ {4}}\\right) ^ {\\frac {9 - b}{4}} \\left(\\frac {b + 4}{b + 4 - m + m s ^ {2}}\\right) ^ {\\frac {b + 4}{2}}, \\tag {7}\n\\]",
+          "label": "Formula"
+        },
+        {
+          "id": "4_3",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.084,
+            "y": 0.146,
+            "width": 0.048,
+            "height": 0.013
+          },
+          "content": "where",
+          "label": "Text"
+        },
+        {
+          "id": "4_4",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.416,
+            "y": 0.172,
+            "width": 0.504,
+            "height": 0.035
+          },
+          "content": "\\[\nm = \\frac {9 r _ {b} ^ {4} + b}{r _ {b} ^ {4} + 1}, \\quad s = \\frac {f}{f _ {\\mathrm{pt}}}. \\tag {8}\n\\]",
+          "label": "Formula"
+        },
+        {
+          "id": "4_5",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.084,
+            "y": 0.217,
+            "width": 0.498,
+            "height": 0.015
+          },
+          "content": "We list the parameters of spectra and selected true values in Table I.",
+          "label": "Text"
+        },
+        {
+          "id": "4_6",
+          "order": 7,
+          "bounding_box": {
+            "x": 0.373,
+            "y": 0.265,
+            "width": 0.258,
+            "height": 0.013
+          },
+          "content": "III. SGWB IDENTIFICATION",
+          "label": "Text"
+        },
+        {
+          "id": "4_7",
+          "order": 8,
+          "bounding_box": {
+            "x": 0.082,
+            "y": 0.298,
+            "width": 0.839,
+            "height": 0.029
+          },
+          "content": "We assume that both SGWB and noise can be depicted by stationary Gaussian process. Consequently, for a pair of TDI observations, the cross correlation satisfies",
+          "label": "Text"
+        },
+        {
+          "id": "4_8",
+          "order": 9,
+          "bounding_box": {
+            "x": 0.312,
+            "y": 0.34,
+            "width": 0.608,
+            "height": 0.028
+          },
+          "content": "\\[\n\\langle \\Delta_ {I} (f) \\Delta_ {J} ^ {*} (f ^ {\\prime}) \\rangle = \\frac {1}{2} \\delta (f - f ^ {\\prime}) \\left[ N _ {I J} (f) + \\Gamma_ {I J} (f) S _ {h} (f) \\right]. \\tag {9}\n\\]",
+          "label": "Formula"
+        },
+        {
+          "id": "4_9",
+          "order": 10,
+          "bounding_box": {
+            "x": 0.082,
+            "y": 0.38,
+            "width": 0.839,
+            "height": 0.046
+          },
+          "content": "Here,  \\( \\Gamma_{IJ}(f) \\)  denotes the overlap reduction function (or average response) [53] for the IJ pair.  \\( N_{IJ} \\)  counts for the cross spectral density (CSD) of noise, which includes contributions from ACC and OMS noise in this work. Based on the simplified data preprocessing procedure, the relationship between TDI noise and raw noise is given by",
+          "label": "Text"
+        },
+        {
+          "id": "4_10",
+          "order": 11,
+          "bounding_box": {
+            "x": 0.333,
+            "y": 0.439,
+            "width": 0.34,
+            "height": 0.032
+          },
+          "content": "\\[\nN _ {I J} ^ {\\mathrm{(acc)}} = \\sum_ {i j} (\\mathcal {P} _ {i j} ^ {I} + \\mathcal {P} _ {j i} ^ {I} \\mathcal {D} _ {j i}) (\\mathcal {P} _ {i j} ^ {J} + \\mathcal {P} _ {j i} ^ {J} \\mathcal {D} _ {j i}) ^ {*} S _ {i j} ^ {\\mathrm{(acc)}},\n\\]",
+          "label": "Formula"
+        },
+        {
+          "id": "4_11",
+          "order": 12,
+          "bounding_box": {
+            "x": 0.329,
+            "y": 0.47,
+            "width": 0.591,
+            "height": 0.037
+          },
+          "content": "\\[\nN _ {I J} ^ {\\mathrm{(oms)}} = \\sum_ {i j} (\\mathcal {P} _ {i j} ^ {I} \\mathcal {P} _ {i j} ^ {J *}) S _ {i j} ^ {\\mathrm{(oms)}}. \\tag {10}\n\\]",
+          "label": "Formula"
+        },
+        {
+          "id": "4_12",
+          "order": 13,
+          "bounding_box": {
+            "x": 0.082,
+            "y": 0.52,
+            "width": 0.838,
+            "height": 0.044
+          },
+          "content": "Although in order to achieve the accuracy of eliminating laser phase noise, the rate of change in armlength should be taken into consideration in time delay operator. Such high accuracy is not required for analysing TDI response to GW and other kinds of noise. When expressing Eq. (10) in frequency domain,  \\( D_{ij} \\)  is just a multiplier  \\( e^{-i2\\pi d_{ij}} \\) .",
+          "label": "Text"
+        },
+        {
+          "id": "4_13",
+          "order": 14,
+          "bounding_box": {
+            "x": 0.082,
+            "y": 0.564,
+            "width": 0.838,
+            "height": 0.031
+          },
+          "content": "The actual TDI combinations we adopted in the analysis are AET observations, which derived from XYZ channels with the following linear transformation:",
+          "label": "Text"
+        },
+        {
+          "id": "4_14",
+          "order": 15,
+          "bounding_box": {
+            "x": 0.325,
+            "y": 0.606,
+            "width": 0.595,
+            "height": 0.034
+          },
+          "content": "\\[\nA = \\frac {Z - X}{\\sqrt {2}}, E = \\frac {X - 2 Y + Z}{\\sqrt {6}}, T = \\frac {X + Y + Z}{\\sqrt {3}}. \\tag {11}\n\\]",
+          "label": "Formula"
+        },
+        {
+          "id": "4_15",
+          "order": 16,
+          "bounding_box": {
+            "x": 0.083,
+            "y": 0.65,
+            "width": 0.775,
+            "height": 0.017
+          },
+          "content": "In equal-arm and equal-noise constellation, AET channels are orthonogonal. That is, the covariance matrix",
+          "label": "Text"
+        },
+        {
+          "id": "4_16",
+          "order": 17,
+          "bounding_box": {
+            "x": 0.393,
+            "y": 0.679,
+            "width": 0.527,
+            "height": 0.064
+          },
+          "content": "\\[\nC = \\left[ \\begin{array}{l l l} \\langle A A ^ {*} \\rangle & \\langle A E ^ {*} \\rangle & \\langle A T ^ {*} \\rangle \\\\ \\langle E A ^ {*} \\rangle & \\langle E E ^ {*} \\rangle & \\langle E T ^ {*} \\rangle \\\\ \\langle T A ^ {*} \\rangle & \\langle T E ^ {*} \\rangle & \\langle T T ^ {*} \\rangle \\end{array} \\right], \\tag {12}\n\\]",
+          "label": "Formula"
+        },
+        {
+          "id": "4_17",
+          "order": 18,
+          "bounding_box": {
+            "x": 0.082,
+            "y": 0.754,
+            "width": 0.839,
+            "height": 0.059
+          },
+          "content": "is diagonal. This character greatly simplifies the subsequent inverse process. While neither conditions is satisfied, we retain this accustomed TDI combinations because numerical inversion is slightly more stable. In Fig. 2, the PSDs of two noise components in A channel are shown as dashed lines. The ACC noise dominates at low frequencies, whereas the OMS noise is the dominant component at high frequencies.",
+          "label": "Text"
+        },
+        {
+          "id": "4_18",
+          "order": 19,
+          "bounding_box": {
+            "x": 0.082,
+            "y": 0.813,
+            "width": 0.84,
+            "height": 0.073
+          },
+          "content": "We divide the one-year TDI observations  \\( s(t) \\)  into weekly segments denoted by  \\( s_{i}(t) \\) . Each segment is multiplied by a Kaiser window with  \\( \\beta = 14 \\)  and then Fourier transformed into the frequency domain. We further assume that the response pattern of detector does not vary abruptly in a segment. Therefore, we take the configuration at intermediate moments to calculate the TDI response. The inference of SGWB is performed with Bayesian framework. According to Bayes' theorem, the posterior probability satisfies",
+          "label": "Text"
+        },
+        {
+          "id": "4_19",
+          "order": 20,
+          "bounding_box": {
+            "x": 0.381,
+            "y": 0.899,
+            "width": 0.539,
+            "height": 0.017
+          },
+          "content": "\\[\np (k, \\boldsymbol {\\theta} _ {k} | s) \\propto p (s | k, \\boldsymbol {\\theta} _ {k}) p (\\boldsymbol {\\theta} _ {k} | k) p (k), \\tag {13}\n\\]",
+          "label": "Formula"
+        }
+      ]
+    },
+    {
+      "page_index": 5,
+      "blocks": [
+        {
+          "id": "5_0",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.908,
+            "y": 0.035,
+            "width": 0.011,
+            "height": 0.011
+          },
+          "content": "5",
+          "label": "Text"
+        },
+        {
+          "id": "5_1",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.257,
+            "y": 0.067,
+            "width": 0.492,
+            "height": 0.292
+          },
+          "content": "",
+          "label": "Image"
+        },
+        {
+          "id": "5_2",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.082,
+            "y": 0.375,
+            "width": 0.839,
+            "height": 0.055
+          },
+          "content": "",
+          "label": "Image"
+        },
+        {
+          "id": "5_3",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.082,
+            "y": 0.453,
+            "width": 0.838,
+            "height": 0.031
+          },
+          "content": "where  \\( p(k) \\)  is the prior of the model k, and  \\( p(\\boldsymbol{\\theta}_{k}|k) \\)  is the prior of parameters  \\( \\theta_{k} \\)  in this model. In our case, the parameters to be estimated are encoded in the covariance matrix  \\( C(f) \\) . The likelihood  \\( p(s|k,\\boldsymbol{\\theta}_{k}) \\)  takes the form",
+          "label": "Text"
+        },
+        {
+          "id": "5_4",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.314,
+            "y": 0.49,
+            "width": 0.606,
+            "height": 0.043
+          },
+          "content": "\\[\n\\ln p (s | C) = - \\sum_ {i, f} \\left[ \\det (C _ {i} (f)) + s _ {i} ^ {\\dagger} (f) C _ {i} ^ {- 1} (f) s _ {i} (f) \\right], \\tag {14}\n\\]",
+          "label": "Formula"
+        },
+        {
+          "id": "5_5",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.385,
+            "y": 0.528,
+            "width": 0.233,
+            "height": 0.031
+          },
+          "content": "\\[\ns _ {i} (f) = \\left[ A _ {i} (f) E _ {i} (f) T _ {i} (f) \\right] ^ {T},\n\\]",
+          "label": "Formula"
+        },
+        {
+          "id": "5_6",
+          "order": 7,
+          "bounding_box": {
+            "x": 0.082,
+            "y": 0.563,
+            "width": 0.84,
+            "height": 0.134
+          },
+          "content": "where the index i runs over segments and f over frequency bins. For the EQ datasets, the dependence of  \\( C_{i} \\)  on noise and background is identical across all segments. As a result, we can reduce the computational cost by first averaging  \\( s_{i}^{\\dagger}(f)s_{i}(f) \\)  over segments. The resulting averaged PSDs of noise and SGWB are also shown in Fig. 2. Our analysis covers the frequency band from  \\( 10^{-4} \\)  Hz to 0.05 Hz. Note that a characteristic feature of the TDI algorithm is that its complete cancellation of signals in certain frequency bins, which manifests as sharp dips of the PSDs in Fig. 2. We exclude frequency bins near these null frequencies. For datasets with time-varying armlengths, pre-averaging across segments is not applicable. In order to speed up the computation, we compress the data by combining multiple adjacent frequency bins of  \\( s_{i}(f) \\)  and averaging the estimated CSD within each combined band. The final frequency resolution after this binning is  \\( 1 \\times 10^{-5} \\)  Hz.",
+          "label": "Text"
+        },
+        {
+          "id": "5_7",
+          "order": 8,
+          "bounding_box": {
+            "x": 0.266,
+            "y": 0.707,
+            "width": 0.474,
+            "height": 0.139
+          },
+          "content": "<table><tr><td>Datasets</td><td>Parameters</td><td>Injected values</td><td>Priors</td></tr><tr><td rowspan=\"2\">2.8</td><td>\\( A_{\\text{ap}} \\)</td><td>\\( 1 \\times 10^{-12} \\)</td><td>\\( \\mathcal{U}[10^{-14}, 5 \\times 10^{-11}] \\)</td></tr><tr><td>\\( \\gamma_{\\text{ap}} \\)</td><td>2/3</td><td>\\( \\mathcal{U}[-1, 2] \\)</td></tr><tr><td rowspan=\"4\">2.9</td><td>\\( A_{\\text{pt}} \\)</td><td>\\( 1 \\times 10^{-10} \\)</td><td>\\( \\mathcal{U}[10^{-14}, 5 \\times 10^{-9}] \\)</td></tr><tr><td>\\( f_{\\text{pt}} \\) (mHz)</td><td>0.2</td><td>\\( \\mathcal{U}[0.1, 0.5] \\)</td></tr><tr><td>\\( r_b \\)</td><td>0.15</td><td>\\( \\mathcal{U}[0.02, 0.5] \\)</td></tr><tr><td>\\( b \\)</td><td>0.65</td><td>\\( \\mathcal{U}[0.2, 1.5] \\)</td></tr></table>",
+          "label": "Table"
+        },
+        {
+          "id": "5_8",
+          "order": 9,
+          "bounding_box": {
+            "x": 0.082,
+            "y": 0.856,
+            "width": 0.838,
+            "height": 0.028
+          },
+          "content": "TABLE I. Parameters of SGWB spectra and priors used for Bayesian analysis in TDC II training datasets. EQ datasets share identical injected values with the realistic orbit datasets.",
+          "label": "Text"
+        },
+        {
+          "id": "5_9",
+          "order": 10,
+          "bounding_box": {
+            "x": 0.099,
+            "y": 0.899,
+            "width": 0.822,
+            "height": 0.016
+          },
+          "content": "We adopt uniform priors to all free parameters in the template-based analysis. For the amplitude of noise, we use a",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "page_index": 6,
+      "blocks": [
+        {
+          "id": "6_0",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.908,
+            "y": 0.035,
+            "width": 0.012,
+            "height": 0.012
+          },
+          "content": "6",
+          "label": "Text"
+        },
+        {
+          "id": "6_1",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.082,
+            "y": 0.066,
+            "width": 0.839,
+            "height": 0.044
+          },
+          "content": "uniform prior spanning  \\( \\pm25\\% \\)  fluctuations around the nominal values. Priors of physical parameters that determine the spectrum of SGWB are listed in Table I. MCMC sampling is performed using the Eryn [54, 55] package. The default affine invariant stretch-move proposal [56] is well-suited for our application.",
+          "label": "Text"
+        },
+        {
+          "id": "6_2",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.086,
+            "y": 0.11,
+            "width": 0.835,
+            "height": 0.174
+          },
+          "content": "For the TDC II data challenge, the power spectra of both noise and injected SGWB are known for users. In a realistic observational scenario, however, this information is unavailable. While the noise properties can be partly informed by ground-based experiments, the spectral density of SGWB remains largely unknown. Although the astrophysical background from CBCs is widely assumed to follow a power law with spectral index \\(\\gamma_{\\mathrm{ap}} = 2/3\\), the cosmological component is difficult to predict across the entire Taiji frequency band. Moreover, the superposition of all potential contributions result in a composite spectrum of greater complexity and uncertainty. Therefore, we prefer to retain flexibility in modeling the SGWB without relying on a precise theoretical template. A generic approach to implement this idea is interpolation. We fit the spectrum curve in the \\(\\log \\Omega_{\\mathrm{gw}} - \\log f\\) plane using a piecewise quadratic spline function. By adjusting the knot positions, such an interpolation can adapt to any continuous and smooth spectral shape. A key question, however, is how to choose the number of knots. Trans-dimensional methods are particularly suited for this purpose, as they simultaneously infer the optimal model and the corresponding parameters. We therefore employ the reversible jump MCMC (RJMCMC) [57] to estimate the spectrum.",
+          "label": "Text"
+        },
+        {
+          "id": "6_3",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.082,
+            "y": 0.284,
+            "width": 0.84,
+            "height": 0.058
+          },
+          "content": "In a trans-dimensional problem, the parameter space  \\( \\theta_{k} \\)  has different dimensions for different model k. To transit to a new model from k, a candidate model  \\( k' \\)  is proposed with probability  \\( j(k'|k) \\) , and random variables u are drawn from a designed proposal  \\( q(\\boldsymbol{u}|\\boldsymbol{\\theta}_{k}, k) \\) . The parameters of new state are obtained via  \\( (\\boldsymbol{\\theta}_{k'}', \\boldsymbol{u}') = g(\\boldsymbol{\\theta}_{k}, \\boldsymbol{u}) \\) , where g is a specified diffeomorphism. Like Metropolis-Hasting algorithm, this new state is accepted with probability",
+          "label": "Text"
+        },
+        {
+          "id": "6_4",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.318,
+            "y": 0.352,
+            "width": 0.602,
+            "height": 0.035
+          },
+          "content": "\\[\n\\min \\left(1, \\frac {p (k ^ {\\prime} , \\boldsymbol {\\theta} _ {k ^ {\\prime}} ^ {\\prime} | s) j (k | k ^ {\\prime}) q (\\boldsymbol {u} ^ {\\prime} | \\boldsymbol {\\theta} _ {k ^ {\\prime}} ^ {\\prime} , k ^ {\\prime})}{p (k , \\boldsymbol {\\theta} _ {k} | s) j (k ^ {\\prime} | k) q (\\boldsymbol {u} | \\boldsymbol {\\theta} _ {k} , k)} \\left| \\frac {\\partial (\\boldsymbol {\\theta} _ {k ^ {\\prime}} ^ {\\prime} , \\boldsymbol {u} ^ {\\prime})}{\\partial (\\boldsymbol {\\theta} _ {k} , \\boldsymbol {u})} \\right|\\right) \\tag {15}\n\\]",
+          "label": "Formula"
+        },
+        {
+          "id": "6_5",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.082,
+            "y": 0.392,
+            "width": 0.838,
+            "height": 0.072
+          },
+          "content": "In our implementation, the model index k corresponds to the number of knots, and their positions form the parameter space  \\( \\theta_{k} \\) . Trans-dimensional sampling is typically regarded as challenging and often requires careful tuning of the proposal mechanisms to achieve satisfactory performance. Fortunately, our model belongs to the nested category. When jumping to higher-dimensional space, we can add a new knot while keeping the existed knots unchanged. Consequently, g reduces to the identity transformation and the Jacobian in Eq. (15) become unity.",
+          "label": "Text"
+        },
+        {
+          "id": "6_6",
+          "order": 7,
+          "bounding_box": {
+            "x": 0.082,
+            "y": 0.464,
+            "width": 0.84,
+            "height": 0.103
+          },
+          "content": "We fix the two edge knots to the boundaries of our analysis frequency band. The prior for the positions of the interior knots is uniform distribution within a rectangle region in  \\( \\log\\Omega_{gw}-\\log f \\)  plane, with  \\( \\log\\Omega_{gw} \\)  constrained to  \\( [-14,-9] \\) . The maximum numbers of interior knots is set to 16. The default RJMCMC sampler also proposes new knots with this prior. Although the results in the next section show that the setup is workable now, we note that this may lead to inefficient sampling for a more complex problem. Additionally, the stretch proposal can not be directly applied to trans-dimensional steps. We therefore enable the gibbs sampling, preserving the stretch move to noise parameters and use a Gaussian proposal to in-model update of the knots positions.",
+          "label": "Text"
+        },
+        {
+          "id": "6_7",
+          "order": 8,
+          "bounding_box": {
+            "x": 0.439,
+            "y": 0.593,
+            "width": 0.127,
+            "height": 0.014
+          },
+          "content": "IV. RESULTS",
+          "label": "Text"
+        },
+        {
+          "id": "6_8",
+          "order": 9,
+          "bounding_box": {
+            "x": 0.082,
+            "y": 0.625,
+            "width": 0.838,
+            "height": 0.116
+          },
+          "content": "As an initial validation, we first demonstrate the recovery of astrophysical SGWB in 2.8_EQ dataset using the template-based method. In Fig. 3, the posterior distribution is shown in blue shaded region. Both the amplitude and the power index of the injected astrophysical SGWB are successfully recovered within the \\(1\\sigma\\) credible interval (CI). This result provides evidence for the applicability of our pipeline. As note in [37], the amplitudes of individual noise components exhibit a strong degeneracy in the equal-arm orbital configuration. We define an averaged amplitude for each SC over its associated MOSAs as \\(A_{i} = (A_{ij} + A_{ik}) / 2\\). We find that it can mitigate the redundant degrees of freedom. Hence, we present the posterior distribution of noise by this averaged amplitudes in Fig. 4. The error in estimating the amplitude of low-frequency ACC noise is slightly larger, but still within the \\(2\\sigma\\) CI.",
+          "label": "Text"
+        },
+        {
+          "id": "6_9",
+          "order": 10,
+          "bounding_box": {
+            "x": 0.082,
+            "y": 0.741,
+            "width": 0.84,
+            "height": 0.174
+          },
+          "content": "Afterwards, we will focus on resolving the SGWB in the flexing-arm scenario, putting results of noise parameters to Appendix B. In the equal-arm case, the T channel constitutes a null channel insensitive to the GW signals, making it useful for monitoring instrumental noise. However, its responses to noise and GW are significantly affected by variations of armlength [58]. We have done an attempt, that is, recovering astrophysical SGWB using an equal-arm model on flexing-arm dataset. The results show a strongly biased estimate: 95% CI for  \\( A_{ap} \\)  is  \\( [1.66, 1.72] \\times 10^{-12} \\)  and the posterior for  \\( \\gamma_{ap} \\)  concentrated at -1, which is the lower bound of our chosen prior. This confirms that the equal-arm model is unsuitable for realistic orbit configuration. In contrast, Fig. 3 also shows the posterior distributions for astrophysical SGWB parameters after flexing-arm effect considered. The injected values are successfully recovered and the variance of armlength does not bring significant changes to the confidence contours. A similar analysis to cosmological PT SGWB is presented in Fig. 5. We have obtained meaningful constraints on the background intensity and its peak frequency, while the constraint on the parameter  \\( r_{b} \\)  remains relatively weak. Our analysis pipeline takes about  \\( \\mathcal{O}(10) \\)  hours using 64 cores of an AMD EPYC chip.",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "page_index": 7,
+      "blocks": [
+        {
+          "id": "7_0",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.908,
+            "y": 0.035,
+            "width": 0.013,
+            "height": 0.012
+          },
+          "content": "7",
+          "label": "Text"
+        },
+        {
+          "id": "7_1",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.262,
+            "y": 0.069,
+            "width": 0.487,
+            "height": 0.377
+          },
+          "content": "",
+          "label": "Image"
+        },
+        {
+          "id": "7_2",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.262,
+            "y": 0.07,
+            "width": 0.279,
+            "height": 0.158
+          },
+          "content": "",
+          "label": "Image"
+        },
+        {
+          "id": "7_3",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.542,
+            "y": 0.229,
+            "width": 0.204,
+            "height": 0.215
+          },
+          "content": "",
+          "label": "Image"
+        },
+        {
+          "id": "7_4",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.262,
+            "y": 0.228,
+            "width": 0.279,
+            "height": 0.216
+          },
+          "content": "",
+          "label": "Image"
+        },
+        {
+          "id": "7_5",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.082,
+            "y": 0.466,
+            "width": 0.842,
+            "height": 0.042
+          },
+          "content": "",
+          "label": "Image"
+        },
+        {
+          "id": "7_6",
+          "order": 7,
+          "bounding_box": {
+            "x": 0.082,
+            "y": 0.534,
+            "width": 0.843,
+            "height": 0.219
+          },
+          "content": "Next, we present the recovery of the energy-density spectrum based on the RJMCMC interpolation method. Compared to the template-based evaluation, we find that the proposal and mixing between MCMC chains become more challenging. Consequently, we double the number of burn-in samples and increase the thinning interval of the MCMC chain. Gibbs sampling also introduces additional computational cost. It takes about 50 hours with the same number of cores. Each sample from this sampler consists of a set of knots, which corresponds to one possible spectrum. To translate these samples into constraints on the SGWB, we compute the corresponding \\(\\Omega_{\\mathrm{gw}}(f)\\) for all samples and then derive the CI at selected frequencies. The results are shown in Fig. 6 and Fig. 7. For comparison, the recovered spectrum from the template-based method is also shown. Noticing that the \\(1\\mathrm{mHz}\\) pivot frequency in Eq. (6) is below the sensitive frequency band of the detector. This naturally leads to the correlation of the posterior between \\(A_{\\mathrm{ap}}\\) and \\(\\gamma_{\\mathrm{ap}}\\) in Fig. 3. Both methods successfully reconstruct the injected spectra. Within the detector's sensitivity band, the two results show a high degree of consistency, with nearly identical uncertainty range. For known template and interpolation methods, in the most sensitive frequency band, a \\(95\\%\\) CI corresponds to approximately \\(8\\%\\) and \\(10\\%\\) errors, respectively. While the parameterized template can extrapolate the spectrum beyond the sensitive band, such extrapolation is not informed by the data themselves. In contrast, the interpolation spectrum reflects this lack of information by showing rapidly growing uncertainties in those regions.",
+          "label": "Text"
+        },
+        {
+          "id": "7_7",
+          "order": 8,
+          "bounding_box": {
+            "x": 0.337,
+            "y": 0.78,
+            "width": 0.332,
+            "height": 0.014
+          },
+          "content": "V. CONCLUSIONS & FUTURE WORK",
+          "label": "Text"
+        },
+        {
+          "id": "7_8",
+          "order": 9,
+          "bounding_box": {
+            "x": 0.082,
+            "y": 0.812,
+            "width": 0.841,
+            "height": 0.087
+          },
+          "content": "We have presented a preliminary framework for detecting SGWB for Taiji mission. The code used in this work is publicly available at https://github.com/DrizzleatDusk/TaijiSGWB. The present work focuses on the official Taiji training datasets, which incorporate realistic features such as unequal noise levels and time-varying armlengths. We show that applying an equal-arm model to the flexing-arm datasets introduces significant bias. To address this, we segment time-domain strain data and compute the detector response individually for each segment, subsequently evaluating the likelihood via inversion of the full, non-diagonal covariance matrix.",
+          "label": "Text"
+        },
+        {
+          "id": "7_9",
+          "order": 10,
+          "bounding_box": {
+            "x": 0.099,
+            "y": 0.899,
+            "width": 0.822,
+            "height": 0.016
+          },
+          "content": "Our analysis covers the frequency band from  \\( 10^{-4} \\sim 0.05 \\)  Hz. By using template-based method, we confirm that",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "page_index": 8,
+      "blocks": [
+        {
+          "id": "8_0",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.908,
+            "y": 0.035,
+            "width": 0.011,
+            "height": 0.011
+          },
+          "content": "8",
+          "label": "Text"
+        },
+        {
+          "id": "8_1",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.257,
+            "y": 0.069,
+            "width": 0.253,
+            "height": 0.302
+          },
+          "content": "",
+          "label": "Image"
+        },
+        {
+          "id": "8_2",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.513,
+            "y": 0.069,
+            "width": 0.231,
+            "height": 0.302
+          },
+          "content": "",
+          "label": "Image"
+        },
+        {
+          "id": "8_3",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.082,
+            "y": 0.392,
+            "width": 0.839,
+            "height": 0.027
+          },
+          "content": "",
+          "label": "Image"
+        },
+        {
+          "id": "8_4",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.082,
+            "y": 0.448,
+            "width": 0.838,
+            "height": 0.087
+          },
+          "content": "Taiji's projected sensitivity to detect both an astrophysical SGWB with \\(\\Omega \\sim 1 \\times 10^{-12}\\) at \\(1\\mathrm{mHz}\\) and a PT SGWB with \\(\\Omega \\sim 1 \\times 10^{-10}\\) at \\(0.2\\mathrm{mHz}\\). In practice, however, the precise spectral shape of the SGWB may be unknown. To overcome the limitation of template-based method, we employ a flexible, model-independent approach in which the SGWB spectrum is reconstructed with a quadratic interpolation. Since the optimal number and locations of spline knots are not known in advance, we sample them simultaneously using a trans-dimensional MCMC algorithm. This method is shown to successfully reconstruct the injected background spectrum without bias.",
+          "label": "Text"
+        },
+        {
+          "id": "8_5",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.082,
+            "y": 0.536,
+            "width": 0.84,
+            "height": 0.088
+          },
+          "content": "A key limitation of the current work is the complete omission of GB foreground. Therefore, we cannot yet say that the analysis is fully satisfied the objectives of the training datasets. The immediate next step is to incorporate the GB foreground. As mentioned earlier, the CGB is anisotropic and exhibits cyclostationary modulation in time domain. While phenomenological treatments are possible  \\( [59] \\) , a more principled approach would be to model the response of Taiji to an anisotropic background, since the modulation pattern is intrinsically linked to the spatial distribution of GBs in the Milky Way  \\( [60] \\) . Work in this direction is currently underway.",
+          "label": "Text"
+        },
+        {
+          "id": "8_6",
+          "order": 7,
+          "bounding_box": {
+            "x": 0.402,
+            "y": 0.654,
+            "width": 0.2,
+            "height": 0.014
+          },
+          "content": "ACKNOWLEDGMENTS",
+          "label": "Text"
+        },
+        {
+          "id": "8_7",
+          "order": 8,
+          "bounding_box": {
+            "x": 0.082,
+            "y": 0.686,
+            "width": 0.838,
+            "height": 0.059
+          },
+          "content": "The authors thank Minghui Du for the guidance on the Triangle toolkit and support of data simulation. Yang would also like to thank Jingyi Wu for the discussions during the course. YJ is supported by the China Postdoctoral Science Foundation under Grant Number 2025M783376. QGH is supported by the grants from NSFC (Grant No. 12547110, 12475065, 12447101) and the China Manned Space Program with grant no. CMS-CSST-2025-A01.",
+          "label": "Text"
+        },
+        {
+          "id": "8_8",
+          "order": 9,
+          "bounding_box": {
+            "x": 0.432,
+            "y": 0.777,
+            "width": 0.141,
+            "height": 0.013
+          },
+          "content": "Appendix A: TDI",
+          "label": "Text"
+        },
+        {
+          "id": "8_9",
+          "order": 10,
+          "bounding_box": {
+            "x": 0.082,
+            "y": 0.809,
+            "width": 0.838,
+            "height": 0.031
+          },
+          "content": "TDI is a process that cancel the significant laser phase noise and forming a virtual laser interference signal. Delay operator  \\( D_{ij} \\)  is defined as",
+          "label": "Text"
+        },
+        {
+          "id": "8_10",
+          "order": 11,
+          "bounding_box": {
+            "x": 0.38,
+            "y": 0.853,
+            "width": 0.54,
+            "height": 0.019
+          },
+          "content": "\\[\n\\mathcal {D} _ {i j} f (t) = [ 1 - \\dot {d} _ {i j} (t) ] f [ t - d _ {i j} (t) ], \\tag {A1}\n\\]",
+          "label": "Formula"
+        },
+        {
+          "id": "8_11",
+          "order": 12,
+          "bounding_box": {
+            "x": 0.082,
+            "y": 0.883,
+            "width": 0.838,
+            "height": 0.033
+          },
+          "content": "where  \\( f(t) \\)  is an arbitrary function defined in time domain and  \\( d_{ij} \\)  is light travel time along  \\( L_{ij} \\) . If the rate of change in armlength  \\( \\dot{d}_{ij} \\)  is negligible, the delay operator, as its name suggests, acts as a time delay transformation.",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "page_index": 9,
+      "blocks": [
+        {
+          "id": "9_0",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.908,
+            "y": 0.035,
+            "width": 0.012,
+            "height": 0.012
+          },
+          "content": "9",
+          "label": "Text"
+        },
+        {
+          "id": "9_1",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.256,
+            "y": 0.066,
+            "width": 0.496,
+            "height": 0.383
+          },
+          "content": "",
+          "label": "Image"
+        },
+        {
+          "id": "9_2",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.082,
+            "y": 0.464,
+            "width": 0.842,
+            "height": 0.043
+          },
+          "content": "",
+          "label": "Image"
+        },
+        {
+          "id": "9_3",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.082,
+            "y": 0.532,
+            "width": 0.842,
+            "height": 0.033
+          },
+          "content": "The second generation of TDI is necessary for Taiji mission, Michelson X TDI is constructed by the following polynomial operators:",
+          "label": "Text"
+        },
+        {
+          "id": "9_4",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.344,
+            "y": 0.575,
+            "width": 0.266,
+            "height": 0.016
+          },
+          "content": "\\[\n\\mathcal {P} _ {1 2} = 1 - \\mathcal {D} _ {1 3 1} - \\mathcal {D} _ {1 3 1 2 1} + \\mathcal {D} _ {1 2 1 3 1 3 1},\n\\]",
+          "label": "Formula"
+        },
+        {
+          "id": "9_5",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.346,
+            "y": 0.593,
+            "width": 0.065,
+            "height": 0.015
+          },
+          "content": "\\[\n\\mathcal {P} _ {2 3} = 0,\n\\]",
+          "label": "Formula"
+        },
+        {
+          "id": "9_6",
+          "order": 7,
+          "bounding_box": {
+            "x": 0.346,
+            "y": 0.61,
+            "width": 0.576,
+            "height": 0.026
+          },
+          "content": "\\[\n\\begin{array}{l} \\mathcal {P} _ {3 1} = - \\mathcal {D} _ {1 3} + \\mathcal {D} _ {1 2 1 3} + \\mathcal {D} _ {1 2 1 3 1 3 3} - \\mathcal {D} _ {1 3 1 2 1 2 1 3}, \\\\ \\mathcal {P} _ {2 1} = \\mathcal {D} _ {1 2} - \\mathcal {D} _ {1 3 1 2} - \\mathcal {D} _ {1 3 1 2 1 2} + \\mathcal {D} _ {1 2 1 3 1 3 1 2}. \\end{array} \\tag {A2}\n\\]",
+          "label": "Formula"
+        },
+        {
+          "id": "9_7",
+          "order": 8,
+          "bounding_box": {
+            "x": 0.346,
+            "y": 0.634,
+            "width": 0.299,
+            "height": 0.016
+          },
+          "content": "\\[\n\\mathcal {P} _ {2 1} = \\mathcal {D} _ {1 2} - \\mathcal {D} _ {1 3 1 2} - \\mathcal {D} _ {1 3 1 2 1 2} + \\mathcal {D} _ {1 2 1 3 1 3 1 2},\n\\]",
+          "label": "Formula"
+        },
+        {
+          "id": "9_8",
+          "order": 9,
+          "bounding_box": {
+            "x": 0.346,
+            "y": 0.651,
+            "width": 0.065,
+            "height": 0.014
+          },
+          "content": "\\[\n\\mathcal {P} _ {3 2} = 0,\n\\]",
+          "label": "Formula"
+        },
+        {
+          "id": "9_9",
+          "order": 10,
+          "bounding_box": {
+            "x": 0.346,
+            "y": 0.668,
+            "width": 0.274,
+            "height": 0.016
+          },
+          "content": "\\[\n\\mathcal {P} _ {1 3} = - 1 + \\mathcal {D} _ {1 2 1} + \\mathcal {D} _ {1 2 1 3 1} - \\mathcal {D} _ {1 3 1 2 1 2 1}.\n\\]",
+          "label": "Formula"
+        },
+        {
+          "id": "9_10",
+          "order": 11,
+          "bounding_box": {
+            "x": 0.082,
+            "y": 0.695,
+            "width": 0.838,
+            "height": 0.03
+          },
+          "content": "Where  \\( D_{ijk} \\)  is an abbreviation for the continuous action of the delay operator  \\( D_{ij}D_{jk}\\cdots \\) . Y and Z channels can be constructed by cyclic the index in Eq. (A2).",
+          "label": "Text"
+        },
+        {
+          "id": "9_11",
+          "order": 12,
+          "bounding_box": {
+            "x": 0.383,
+            "y": 0.756,
+            "width": 0.239,
+            "height": 0.015
+          },
+          "content": "Appendix B: Noise amplitudes",
+          "label": "Text"
+        },
+        {
+          "id": "9_12",
+          "order": 13,
+          "bounding_box": {
+            "x": 0.082,
+            "y": 0.788,
+            "width": 0.838,
+            "height": 0.03
+          },
+          "content": "We supplement the posteriors of noise amplitude here. Fig. 8 and Fig. 9 denote the distribution of noise amplitudes for 2.8 and 2.9 datasets, respectively.",
+          "label": "Text"
+        },
+        {
+          "id": "9_13",
+          "order": 14,
+          "bounding_box": {
+            "x": 0.091,
+            "y": 0.873,
+            "width": 0.793,
+            "height": 0.015
+          },
+          "content": "[1] J. Aasi et al. (LIGO Scientific), “Advanced LIGO,” Class. Quant. Grav. 32, 074001 (2015), arXiv:1411.4547 [gr-qc].",
+          "label": "Text"
+        },
+        {
+          "id": "9_14",
+          "order": 15,
+          "bounding_box": {
+            "x": 0.091,
+            "y": 0.888,
+            "width": 0.827,
+            "height": 0.027
+          },
+          "content": "[2] F. Acernese et al. (VIRGO), “Advanced Virgo: a second-generation interferometric gravitational wave detector,” Class. Quant. Grav. 32, 024001 (2015), arXiv:1408.3978 [gr-qc].",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "page_index": 10,
+      "blocks": [
+        {
+          "id": "10_0",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.9,
+            "y": 0.035,
+            "width": 0.02,
+            "height": 0.012
+          },
+          "content": "10",
+          "label": "Text"
+        },
+        {
+          "id": "10_1",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.259,
+            "y": 0.071,
+            "width": 0.49,
+            "height": 0.306
+          },
+          "content": "",
+          "label": "Image"
+        },
+        {
+          "id": "10_2",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.082,
+            "y": 0.395,
+            "width": 0.839,
+            "height": 0.029
+          },
+          "content": "",
+          "label": "Image"
+        },
+        {
+          "id": "10_3",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.258,
+            "y": 0.454,
+            "width": 0.491,
+            "height": 0.307
+          },
+          "content": "",
+          "label": "Image"
+        },
+        {
+          "id": "10_4",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.082,
+            "y": 0.78,
+            "width": 0.838,
+            "height": 0.029
+          },
+          "content": "",
+          "label": "Image"
+        },
+        {
+          "id": "10_5",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.091,
+            "y": 0.846,
+            "width": 0.829,
+            "height": 0.028
+          },
+          "content": "[3] T. Akutsu et al. (KAGRA), “Overview of KAGRA: Detector design and construction history,” PTEP 2021, 05A101 (2021), arXiv:2005.05574 [physics.ins-det].",
+          "label": "Text"
+        },
+        {
+          "id": "10_6",
+          "order": 7,
+          "bounding_box": {
+            "x": 0.091,
+            "y": 0.874,
+            "width": 0.83,
+            "height": 0.042
+          },
+          "content": "[4] A. G. Abac et al. (LIGO Scientific, VIRGO, KAGRA), “GWTC-4.0: Updating the Gravitational-Wave Transient Catalog with Observations from the First Part of the Fourth LIGO-Virgo-KAGRA Observing Run,” (2025), arXiv:2508.18082 [gr-qc].",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "page_index": 11,
+      "blocks": [
+        {
+          "id": "11_0",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.9,
+            "y": 0.035,
+            "width": 0.019,
+            "height": 0.012
+          },
+          "content": "11",
+          "label": "Text"
+        },
+        {
+          "id": "11_1",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.257,
+            "y": 0.068,
+            "width": 0.253,
+            "height": 0.306
+          },
+          "content": "",
+          "label": "Image"
+        },
+        {
+          "id": "11_2",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.517,
+            "y": 0.067,
+            "width": 0.228,
+            "height": 0.306
+          },
+          "content": "",
+          "label": "Image"
+        },
+        {
+          "id": "11_3",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.082,
+            "y": 0.392,
+            "width": 0.839,
+            "height": 0.029
+          },
+          "content": "",
+          "label": "Image"
+        },
+        {
+          "id": "11_4",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.257,
+            "y": 0.443,
+            "width": 0.253,
+            "height": 0.312
+          },
+          "content": "",
+          "label": "Image"
+        },
+        {
+          "id": "11_5",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.52,
+            "y": 0.443,
+            "width": 0.227,
+            "height": 0.312
+          },
+          "content": "",
+          "label": "Image"
+        },
+        {
+          "id": "11_6",
+          "order": 7,
+          "bounding_box": {
+            "x": 0.082,
+            "y": 0.773,
+            "width": 0.838,
+            "height": 0.03
+          },
+          "content": "",
+          "label": "Image"
+        },
+        {
+          "id": "11_7",
+          "order": 8,
+          "bounding_box": {
+            "x": 0.091,
+            "y": 0.833,
+            "width": 0.829,
+            "height": 0.028
+          },
+          "content": "[5] S. Soni et al. (LIGO), “LIGO Detector Characterization in the first half of the fourth Observing run,” Class. Quant. Grav. 42, 085016 (2025), arXiv:2409.02831 [astro-ph.IM].",
+          "label": "Text"
+        },
+        {
+          "id": "11_8",
+          "order": 9,
+          "bounding_box": {
+            "x": 0.091,
+            "y": 0.861,
+            "width": 0.829,
+            "height": 0.026
+          },
+          "content": "[6] John Baker et al., “The Laser Interferometer Space Antenna: Unveiling the Millihertz Gravitational Wave Sky,” (2019), arXiv:1907.06482 [astro-ph.IM].",
+          "label": "Text"
+        },
+        {
+          "id": "11_9",
+          "order": 10,
+          "bounding_box": {
+            "x": 0.091,
+            "y": 0.887,
+            "width": 0.709,
+            "height": 0.014
+          },
+          "content": "[7] Monica Colpi et al. (LISA), “LISA Definition Study Report,” (2024), arXiv:2402.07571 [astro-ph.CO].",
+          "label": "Text"
+        },
+        {
+          "id": "11_10",
+          "order": 11,
+          "bounding_box": {
+            "x": 0.091,
+            "y": 0.901,
+            "width": 0.794,
+            "height": 0.015
+          },
+          "content": "[8] Jun Luo et al., “Progress of the TianQin project,” Class. Quant. Grav. 42, 173001 (2025), arXiv:2502.11328 [gr-qc].",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "page_index": 12,
+      "blocks": [
+        {
+          "id": "12_0",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.9,
+            "y": 0.035,
+            "width": 0.02,
+            "height": 0.012
+          },
+          "content": "12",
+          "label": "Text"
+        },
+        {
+          "id": "12_1",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.093,
+            "y": 0.067,
+            "width": 0.713,
+            "height": 0.014
+          },
+          "content": "[9] Jun Luo et al., “Fundamental Physics and Cosmology with TianQin,” (2025), arXiv:2502.20138 [gr-qc].",
+          "label": "Text"
+        },
+        {
+          "id": "12_2",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.088,
+            "y": 0.082,
+            "width": 0.83,
+            "height": 0.026
+          },
+          "content": "[10] Wen-Rui Hu and Yue-Liang Wu, “The taiji program in space for gravitational wave physics and the nature of gravity,” National Science Review 4, 685–686 (2017), https://academic.oup.com/nsr/article-pdf/4/5/685/31566708/nwx116.pdf.",
+          "label": "Text"
+        },
+        {
+          "id": "12_3",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.088,
+            "y": 0.108,
+            "width": 0.83,
+            "height": 0.039
+          },
+          "content": "[11] Ziren Luo, Yan Wang, Yueliang Wu, Wenrui Hu, and Gang Jin, “The taiji program: A concise overview,” Progress of Theoretical and Experimental Physics 2021, 05A108 (2020), https://academic.oup.com/ptep/article-pdf/2021/5/05A108/37953044/pataa083.pdf.",
+          "label": "Text"
+        },
+        {
+          "id": "12_4",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.088,
+            "y": 0.147,
+            "width": 0.83,
+            "height": 0.027
+          },
+          "content": "[12] He-Shan Liu, Zi-Ren Luo, and Wei and Sha, “In-orbit performance of the laser interferometer of taiji-1 experimental satellite,” International Journal of Modern Physics A 36, 2140004 (2021), https://doi.org/10.1142/S0217751X21400042.",
+          "label": "Text"
+        },
+        {
+          "id": "12_5",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.088,
+            "y": 0.174,
+            "width": 0.83,
+            "height": 0.026
+          },
+          "content": "[13] Zhi Wang and Jun-Gang Lei, “Development and on orbit test of taiji-1 inertial reference,” International Journal of Modern Physics A 36, 2140008 (2021), https://doi.org/10.1142/S0217751X2140008X.",
+          "label": "Text"
+        },
+        {
+          "id": "12_6",
+          "order": 7,
+          "bounding_box": {
+            "x": 0.088,
+            "y": 0.2,
+            "width": 0.83,
+            "height": 0.04
+          },
+          "content": "[14] Shu-Yan Xu, Lu-Xiang Xu, Lin-Xiao Cong, Yong-Gui Li, and Cong-Feng and Qiao, “First result of orbit verification of taiji-1 hall micro thruster,” International Journal of Modern Physics A 36, 2140013 (2021), https://doi.org/10.1142/S0217751X21400133.",
+          "label": "Text"
+        },
+        {
+          "id": "12_7",
+          "order": 8,
+          "bounding_box": {
+            "x": 0.088,
+            "y": 0.24,
+            "width": 0.83,
+            "height": 0.039
+          },
+          "content": "[15] Zhiqiang Hu, Pengcheng Wang, Jianfeng Deng, Zhiming Cai, Zhi Wang, Zuolei Wang, Jinpei Yu, Yueliang Wu, Qi Kang, Huawang Li, and Yonghe Zhang, “The drag-free control design and in-orbit experimental results of “taiji-1”,” International Journal of Modern Physics A 36, 2140019 (2021), https://doi.org/10.1142/S0217751X21400194.",
+          "label": "Text"
+        },
+        {
+          "id": "12_8",
+          "order": 9,
+          "bounding_box": {
+            "x": 0.088,
+            "y": 0.279,
+            "width": 0.83,
+            "height": 0.027
+          },
+          "content": "[16] Kunyang Li, Tamara Bogdanović, David R. Ballantyne, and Matteo Bonetti, “Massive black hole binaries from the tng50-3 simulation. i. coalescence and lisa detection rates,” The Astrophysical Journal 933, 104 (2022).",
+          "label": "Text"
+        },
+        {
+          "id": "12_9",
+          "order": 10,
+          "bounding_box": {
+            "x": 0.088,
+            "y": 0.306,
+            "width": 0.83,
+            "height": 0.027
+          },
+          "content": "[17] Jonathan R Gair, Leor Barack, Teviet Creighton, Curt Cutler, Shane L Larson, E Sterl Phinney, and Michele Vallisneri, \"Event rate estimates for lisa extreme mass ratio capture sources,\" Classical and Quantum Gravity 21, S1595 (2004).",
+          "label": "Text"
+        },
+        {
+          "id": "12_10",
+          "order": 11,
+          "bounding_box": {
+            "x": 0.088,
+            "y": 0.333,
+            "width": 0.83,
+            "height": 0.039
+          },
+          "content": "[18] Valeriya Korol, Vasily Belokurov, Christopher J Moore, and Silvia Toonen, “Weighing milky way satellites with lisa,” Monthly Notices of the Royal Astronomical Society: Letters 502, L55–L60 (2021), https://academic.oup.com/mnrasl/article-pdf/502/1/L55/54638295/slab003.pdf.",
+          "label": "Text"
+        },
+        {
+          "id": "12_11",
+          "order": 12,
+          "bounding_box": {
+            "x": 0.088,
+            "y": 0.372,
+            "width": 0.83,
+            "height": 0.039
+          },
+          "content": "[19] R. Buscicchio, J. Torrado, C. Caprini, G. Nardini, N. Karnesis, M. Pieroni, and A. Sesana, “Stellar-mass black-hole binaries in LISA: characteristics and complementarity with current-generation interferometers,” JCAP 01, 084 (2025), arXiv:2410.18171 [astro-ph.HE].",
+          "label": "Text"
+        },
+        {
+          "id": "12_12",
+          "order": 13,
+          "bounding_box": {
+            "x": 0.088,
+            "y": 0.411,
+            "width": 0.83,
+            "height": 0.053
+          },
+          "content": "[20] A Lamberts, S Garrison-Kimmel, P F Hopkins, E Quataert, J S Bullock, C-A Faucher-Giguère, A Wetzel, D Keres, K Drango, and R E Sanderson, “Predicting the binary black hole population of the milky way with cosmological simulations,” Monthly Notices of the Royal Astronomical Society 480, 2704–2718 (2018), https://academic.oup.com/mnras/article-pdf/480/2/2704/25495274/sty2035.pdf.",
+          "label": "Text"
+        },
+        {
+          "id": "12_13",
+          "order": 14,
+          "bounding_box": {
+            "x": 0.088,
+            "y": 0.464,
+            "width": 0.83,
+            "height": 0.04
+          },
+          "content": "[21] Katelyn Breivik, Kyle Kremer, Michael Bueno, Shane L. Larson, Scott Coughlin, and Vassiliki Kalogera, “Characterizing Accreting Double White Dwarf Binaries with the Laser Interferometer Space Antenna and Gaia,” Astrophys. J. Lett. 854, L1 (2018), arXiv:1710.08370 [astro-ph.SR].",
+          "label": "Text"
+        },
+        {
+          "id": "12_14",
+          "order": 15,
+          "bounding_box": {
+            "x": 0.088,
+            "y": 0.504,
+            "width": 0.83,
+            "height": 0.04
+          },
+          "content": "[22] Ashley J. Ruiter, Krzysztof Belczynski, Matthew Benacquista, Shane L. Larson, and Gabriel Williams, “The LISA Gravitational Wave Foreground: A Study of Double White Dwarfs,” Astrophys. J. 717, 1006–1021 (2010), arXiv:0705.3272 [astro-ph].",
+          "label": "Text"
+        },
+        {
+          "id": "12_15",
+          "order": 16,
+          "bounding_box": {
+            "x": 0.088,
+            "y": 0.544,
+            "width": 0.83,
+            "height": 0.027
+          },
+          "content": "[23] Chang Liu, Wen-Hong Ruan, and Zong-Kuan Guo, “Confusion noise from Galactic binaries for Taiji,” Phys. Rev. D 107, 064021 (2023), arXiv:2301.02821 [astro-ph.IM].",
+          "label": "Text"
+        },
+        {
+          "id": "12_16",
+          "order": 17,
+          "bounding_box": {
+            "x": 0.088,
+            "y": 0.571,
+            "width": 0.83,
+            "height": 0.027
+          },
+          "content": "[24] Djuna Croon, Tomás E. Gonzalez, Lukas Graf, Nejc Košnik, and Graham White, “GUT Physics in the era of the LHC,” Front. in Phys. 7, 76 (2019), arXiv:1903.04977 [hep-ph].",
+          "label": "Text"
+        },
+        {
+          "id": "12_17",
+          "order": 18,
+          "bounding_box": {
+            "x": 0.088,
+            "y": 0.598,
+            "width": 0.83,
+            "height": 0.026
+          },
+          "content": "[25] Stephan J. Huber, Thomas Konstandin, Germano Nardini, and Ingo Rues, “Detectable Gravitational Waves from Very Strong Phase Transitions in the General NMSSM,” JCAP 03, 036 (2016), arXiv:1512.06357 [hep-ph].",
+          "label": "Text"
+        },
+        {
+          "id": "12_18",
+          "order": 19,
+          "bounding_box": {
+            "x": 0.088,
+            "y": 0.624,
+            "width": 0.83,
+            "height": 0.026
+          },
+          "content": "[26] Tillmann Boeckel and Jürgen Schaffner-Bielich, “A little inflation in the early universe at the qcd phase transition,” Phys. Rev. Lett. 105, 041301 (2010).",
+          "label": "Text"
+        },
+        {
+          "id": "12_19",
+          "order": 20,
+          "bounding_box": {
+            "x": 0.088,
+            "y": 0.65,
+            "width": 0.804,
+            "height": 0.014
+          },
+          "content": "[27] A D Linde, “Phase transitions in gauge theories and cosmology,” Reports on Progress in Physics 42, 389–437 (1979).",
+          "label": "Text"
+        },
+        {
+          "id": "12_20",
+          "order": 21,
+          "bounding_box": {
+            "x": 0.088,
+            "y": 0.664,
+            "width": 0.83,
+            "height": 0.026
+          },
+          "content": "[28] Renhui Qin and Ligong Bian, “First-order electroweak phase transition with a gauge-invariant approach,” Phys. Rev. D 111, L051702 (2025).",
+          "label": "Text"
+        },
+        {
+          "id": "12_21",
+          "order": 22,
+          "bounding_box": {
+            "x": 0.088,
+            "y": 0.69,
+            "width": 0.83,
+            "height": 0.027
+          },
+          "content": "[29] Fan Huang, Zu-Cheng Chen, and Qing-Guo Huang, “Detecting cosmological phase transitions with taiji: sensitivity analysis and parameter estimation*,” Chinese Physics C 49, 105103 (2025).",
+          "label": "Text"
+        },
+        {
+          "id": "12_22",
+          "order": 23,
+          "bounding_box": {
+            "x": 0.088,
+            "y": 0.717,
+            "width": 0.83,
+            "height": 0.026
+          },
+          "content": "[30] P. Ivanov, “Nonlinear metric perturbations and production of primordial black holes,” Phys. Rev. D 57, 7145–7154 (1998), arXiv:astro-ph/9708224.",
+          "label": "Text"
+        },
+        {
+          "id": "12_23",
+          "order": 24,
+          "bounding_box": {
+            "x": 0.088,
+            "y": 0.743,
+            "width": 0.83,
+            "height": 0.027
+          },
+          "content": "[31] N. Bartolo, V. De Luca, G. Franciolini, M. Peloso, D. Racco, and A. Riotto, “Testing primordial black holes as dark matter with lisa,” Phys. Rev. D 99, 103521 (2019).",
+          "label": "Text"
+        },
+        {
+          "id": "12_24",
+          "order": 25,
+          "bounding_box": {
+            "x": 0.088,
+            "y": 0.77,
+            "width": 0.83,
+            "height": 0.026
+          },
+          "content": "[32] Chen Yuan, Zu-Cheng Chen, and Qing-Guo Huang, “Log-dependent slope of scalar induced gravitational waves in the infrared regions,” Phys. Rev. D 101, 4 (2020), arXiv:1910.09099 [astro-ph.CO].",
+          "label": "Text"
+        },
+        {
+          "id": "12_25",
+          "order": 26,
+          "bounding_box": {
+            "x": 0.088,
+            "y": 0.796,
+            "width": 0.83,
+            "height": 0.039
+          },
+          "content": "[33] Peter F. Michelson, “On detecting stochastic background gravitational radiation with terrestrial detectors,” Monthly Notices of the Royal Astronomical Society 227, 933–941 (1987), https://academic.oup.com/mnras/article-pdf/227/4/933/3926536/mnras227-0933.pdf.",
+          "label": "Text"
+        },
+        {
+          "id": "12_26",
+          "order": 27,
+          "bounding_box": {
+            "x": 0.088,
+            "y": 0.835,
+            "width": 0.83,
+            "height": 0.026
+          },
+          "content": "[34] Simon Barke, Inter-spacecraft frequency distribution for future gravitational wave observatories, Ph.D. thesis, Leibniz U., Hannover (2015).",
+          "label": "Text"
+        },
+        {
+          "id": "12_27",
+          "order": 28,
+          "bounding_box": {
+            "x": 0.088,
+            "y": 0.861,
+            "width": 0.83,
+            "height": 0.026
+          },
+          "content": "[35] M.-S. Hartig, S. Paczkowski, M. Hewitson, G. Heinzel, and G. Wanner, “Postprocessing subtraction of tilt-to-length noise in lisa in the presence of gravitational wave signals,” Phys. Rev. D 111, 043048 (2025).",
+          "label": "Text"
+        },
+        {
+          "id": "12_28",
+          "order": 29,
+          "bounding_box": {
+            "x": 0.088,
+            "y": 0.887,
+            "width": 0.83,
+            "height": 0.027
+          },
+          "content": "[36] FANG Ziruo, SHI Xingjian, CHEN Kun, CHEN Wen, and CAI Zhiming, “Gravitational wave detection spacecraft noise decomposition and electromagnetic force noise simulation,” Journal of Deep Space Exploration 10, 334–342 (2023).",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "page_index": 13,
+      "blocks": [
+        {
+          "id": "13_0",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.9,
+            "y": 0.035,
+            "width": 0.02,
+            "height": 0.012
+          },
+          "content": "13",
+          "label": "Text"
+        },
+        {
+          "id": "13_1",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.086,
+            "y": 0.067,
+            "width": 0.834,
+            "height": 0.027
+          },
+          "content": "[37] Matthew R. Adams and Neil J. Cornish, “Discriminating between a stochastic gravitational wave background and instrument noise,” Phys. Rev. D 82, 022002 (2010).",
+          "label": "Text"
+        },
+        {
+          "id": "13_2",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.086,
+            "y": 0.095,
+            "width": 0.835,
+            "height": 0.026
+          },
+          "content": "[38] Matthew R. Adams and Neil J. Cornish, “Detecting a stochastic gravitational wave background in the presence of a galactic foreground and instrument noise,” Phys. Rev. D 89, 022001 (2014).",
+          "label": "Text"
+        },
+        {
+          "id": "13_3",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.086,
+            "y": 0.121,
+            "width": 0.834,
+            "height": 0.039
+          },
+          "content": "[39] Chiara Caprini, Daniel G. Figueroa, Raphael Flauger, Germano Nardini, Marco Peloso, Mauro Pieroni, Angelo Ricciardone, and Gianmassimo Tasinato, “Reconstructing the spectral shape of a stochastic gravitational wave background with LISA,” JCAP 11, 017 (2019), arXiv:1906.09244 [astro-ph.CO].",
+          "label": "Text"
+        },
+        {
+          "id": "13_4",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.086,
+            "y": 0.16,
+            "width": 0.835,
+            "height": 0.04
+          },
+          "content": "[40] Raphael Flauger, Nikolaos Karnesis, Germano Nardini, Mauro Pieroni, Angelo Ricciardone, and Jesús Torrado, “Improved reconstruction of a stochastic gravitational wave background with LISA,” JCAP 01, 059 (2021), arXiv:2009.11845 [astro-ph.CO].",
+          "label": "Text"
+        },
+        {
+          "id": "13_5",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.086,
+            "y": 0.2,
+            "width": 0.835,
+            "height": 0.026
+          },
+          "content": "[41] Jun'ya Kume, Marco Peloso, Mauro Pieroni, and Angelo Ricciardone, “Assessing the impact of unequal noises and foreground modeling on SGWB reconstruction with LISA,” JCAP 06, 030 (2025), arXiv:2410.10342 [gr-qc].",
+          "label": "Text"
+        },
+        {
+          "id": "13_6",
+          "order": 7,
+          "bounding_box": {
+            "x": 0.086,
+            "y": 0.226,
+            "width": 0.835,
+            "height": 0.027
+          },
+          "content": "[42] Tyson B. Littenberg and Neil J. Cornish, “Prototype global analysis of LISA data with multiple source types,” Phys. Rev. D 107, 063004 (2023), arXiv:2301.03673 [gr-qc].",
+          "label": "Text"
+        },
+        {
+          "id": "13_7",
+          "order": 8,
+          "bounding_box": {
+            "x": 0.086,
+            "y": 0.253,
+            "width": 0.835,
+            "height": 0.026
+          },
+          "content": "[43] Robert Rosati and Tyson B. Littenberg, “Prototype stochastic gravitational wave background recovery in the LISA global fit residual,” Phys. Rev. D 112, 084060 (2025), arXiv:2410.17180 [gr-qc].",
+          "label": "Text"
+        },
+        {
+          "id": "13_8",
+          "order": 9,
+          "bounding_box": {
+            "x": 0.086,
+            "y": 0.279,
+            "width": 0.835,
+            "height": 0.04
+          },
+          "content": "[44] Minghui Du et al., “Towards realistic detection pipelines of Taiji: New challenges in data analysis and high-fidelity simulations of space-based gravitational wave antenna,” Sci. China Phys. Mech. Astron. 69, 249501 (2026), arXiv:2505.16500 [gr-qc].",
+          "label": "Text"
+        },
+        {
+          "id": "13_9",
+          "order": 10,
+          "bounding_box": {
+            "x": 0.086,
+            "y": 0.319,
+            "width": 0.835,
+            "height": 0.027
+          },
+          "content": "[45] Quentin Baghi, Nikolaos Karnesis, Jean-Baptiste Bayle, Marc Besançon, and Henri Inchauspé, “Uncovering gravitational-wave backgrounds from noises of unknown shape with LISA,” JCAP 04, 066 (2023), arXiv:2302.12573 [gr-qc].",
+          "label": "Text"
+        },
+        {
+          "id": "13_10",
+          "order": 11,
+          "bounding_box": {
+            "x": 0.086,
+            "y": 0.346,
+            "width": 0.835,
+            "height": 0.026
+          },
+          "content": "[46] PETER J. GREEN, “Reversible jump markov chain monte carlo computation and bayesian model determination,” Biometrika 82, 711–732 (1995), https://academic.oup.com/biomet/article-pdf/82/4/711/699533/82-4-711.pdf.",
+          "label": "Text"
+        },
+        {
+          "id": "13_11",
+          "order": 12,
+          "bounding_box": {
+            "x": 0.086,
+            "y": 0.372,
+            "width": 0.835,
+            "height": 0.026
+          },
+          "content": "[47] Olaf Hartwig and Jean-Baptiste Bayle, “Clock-jitter reduction in lisa time-delay interferometry combinations,” Phys. Rev. D 103, 123027 (2021).",
+          "label": "Text"
+        },
+        {
+          "id": "13_12",
+          "order": 13,
+          "bounding_box": {
+            "x": 0.086,
+            "y": 0.398,
+            "width": 0.282,
+            "height": 0.014
+          },
+          "content": "[48] Minghui Du, “TDC II training sets,”.",
+          "label": "Text"
+        },
+        {
+          "id": "13_13",
+          "order": 14,
+          "bounding_box": {
+            "x": 0.086,
+            "y": 0.412,
+            "width": 0.835,
+            "height": 0.013
+          },
+          "content": "[49] Massimo Tinto and Olaf Hartwig, “Time-delay interferometry and clock-noise calibration,” Phys. Rev. D 98, 042003 (2018).",
+          "label": "Text"
+        },
+        {
+          "id": "13_14",
+          "order": 15,
+          "bounding_box": {
+            "x": 0.086,
+            "y": 0.425,
+            "width": 0.835,
+            "height": 0.026
+          },
+          "content": "[50] Massimo Tinto and J. W. Armstrong, “Cancellation of laser noise in an unequal-arm interferometer detector of gravitational radiation,” Phys. Rev. D 59, 102003 (1999).",
+          "label": "Text"
+        },
+        {
+          "id": "13_15",
+          "order": 16,
+          "bounding_box": {
+            "x": 0.086,
+            "y": 0.451,
+            "width": 0.835,
+            "height": 0.027
+          },
+          "content": "[51] Daniel A. Shaddock, Massimo Tinto, Frank B. Estabrook, and J. W. Armstrong, “Data combinations accounting for lisa spacecraft motion,” Phys. Rev. D 68, 061303 (2003).",
+          "label": "Text"
+        },
+        {
+          "id": "13_16",
+          "order": 17,
+          "bounding_box": {
+            "x": 0.086,
+            "y": 0.478,
+            "width": 0.835,
+            "height": 0.026
+          },
+          "content": "[52] Massimo Tinto and Sanjeev V. Dhurandhar, “Time-delay Interferometry,” Living Rev. Rel. 8, 4 (2005), arXiv:gr-qc/0409034.",
+          "label": "Text"
+        },
+        {
+          "id": "13_17",
+          "order": 18,
+          "bounding_box": {
+            "x": 0.086,
+            "y": 0.504,
+            "width": 0.835,
+            "height": 0.027
+          },
+          "content": "[53] Stanislav Babak, Antoine Petiteau, and Martin Hewitson, “LISA Sensitivity and SNR Calculations,” (2021), arXiv:2108.01167 [astro-ph.IM].",
+          "label": "Text"
+        },
+        {
+          "id": "13_18",
+          "order": 19,
+          "bounding_box": {
+            "x": 0.086,
+            "y": 0.531,
+            "width": 0.835,
+            "height": 0.026
+          },
+          "content": "[54] Nikolaos Karnesis, Michael L. Katz, Natalia Korsakova, Jonathan R. Gair, and Nikolaos Stergioulas, “Eryn: a multipurpose sampler for Bayesian inference,” Mon. Not. Roy. Astron. Soc. 526, 4814–4830 (2023), arXiv:2303.02164 [astro-ph.IM].",
+          "label": "Text"
+        },
+        {
+          "id": "13_19",
+          "order": 20,
+          "bounding_box": {
+            "x": 0.086,
+            "y": 0.557,
+            "width": 0.718,
+            "height": 0.014
+          },
+          "content": "[55] Michael Katz, Nikolaos Karnesis, and Natalia Korsakova, “mikekatz04/eryn: first full release,” (2023).",
+          "label": "Text"
+        },
+        {
+          "id": "13_20",
+          "order": 21,
+          "bounding_box": {
+            "x": 0.086,
+            "y": 0.571,
+            "width": 0.835,
+            "height": 0.026
+          },
+          "content": "[56] Daniel Foreman-Mackey, David W. Hogg, Dustin Lang, and Jonathan B. Goodman, “emcee: The mcmc hammer,” Publications of the Astronomical Society of the Pacific 125, 306 – 312 (2012).",
+          "label": "Text"
+        },
+        {
+          "id": "13_21",
+          "order": 22,
+          "bounding_box": {
+            "x": 0.086,
+            "y": 0.597,
+            "width": 0.835,
+            "height": 0.027
+          },
+          "content": "[57] PETER J. GREEN, “Reversible jump markov chain monte carlo computation and bayesian model determination,” Biometrika 82, 711–732 (1995), https://academic.oup.com/biomet/article-pdf/82/4/711/699533/82-4-711.pdf.",
+          "label": "Text"
+        },
+        {
+          "id": "13_22",
+          "order": 23,
+          "bounding_box": {
+            "x": 0.086,
+            "y": 0.624,
+            "width": 0.835,
+            "height": 0.039
+          },
+          "content": "[58] Olaf Hartwig, Marc Lilley, Martina Muratore, and Mauro Pieroni, “Stochastic gravitational wave background reconstruction for a nonequilateral and unequal-noise LISA constellation,” Phys. Rev. D 107, 123531 (2023), arXiv:2303.15929 [gr-qc].",
+          "label": "Text"
+        },
+        {
+          "id": "13_23",
+          "order": 24,
+          "bounding_box": {
+            "x": 0.086,
+            "y": 0.663,
+            "width": 0.835,
+            "height": 0.04
+          },
+          "content": "[59] Guillaume Boileau, Astrid Lamberts, Neil J. Cornish, and Renate Meyer, “Spectral separation of the stochastic gravitational-wave background for LISA in the context of a modulated Galactic foreground,” Mon. Not. Roy. Astron. Soc. 508, 803–826 (2021), [Erratum: Mon.Not.Roy.Astron.Soc. 508, 5554–5555 (2021)], arXiv:2105.04283 [gr-qc].",
+          "label": "Text"
+        },
+        {
+          "id": "13_24",
+          "order": 25,
+          "bounding_box": {
+            "x": 0.086,
+            "y": 0.703,
+            "width": 0.835,
+            "height": 0.027
+          },
+          "content": "[60] Alexander W. Criswell, Steven Rieck, and Vuk Mandic, “Templated anisotropic analyses of the LISA Galactic foreground,” Phys. Rev. D 111, 023025 (2025), arXiv:2410.23260 [astro-ph.IM].",
+          "label": "Text"
+        }
+      ]
+    }
+  ]
+}

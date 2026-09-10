@@ -1,0 +1,1911 @@
+{
+    "input_path": "/home/bocchi/Downloads/Paper_Data/Electrical Engineering and Systems Science/2607.20842v1.pdf",
+    "page_index": 0,
+    "page_count": 7,
+    "width": 1224,
+    "height": 1584,
+    "model_settings": {
+        "use_doc_preprocessor": false,
+        "use_layout_detection": true,
+        "use_chart_recognition": false,
+        "use_seal_recognition": false,
+        "use_ocr_for_image_block": true,
+        "format_block_content": true,
+        "merge_layout_blocks": true,
+        "markdown_ignore_labels": [
+            "number",
+            "footnote",
+            "header",
+            "header_image",
+            "footer",
+            "footer_image",
+            "aside_text"
+        ],
+        "return_layout_polygon_points": true
+    },
+    "parsing_res_list": [
+        {
+            "block_label": "aside_text",
+            "block_content": "arXiv:2607.20842v1 [eess.SY] 23 Jul 2026",
+            "block_bbox": [
+                37,
+                572,
+                78,
+                1294
+            ],
+            "block_id": 0,
+            "block_order": null,
+            "group_id": 0,
+            "block_polygon_points": [
+                [
+                    37.0,
+                    572.0
+                ],
+                [
+                    78.0,
+                    572.0
+                ],
+                [
+                    78.0,
+                    1294.0
+                ],
+                [
+                    37.0,
+                    1294.0
+                ]
+            ]
+        },
+        {
+            "block_label": "doc_title",
+            "block_content": "# Robust Adaptive Backup Control Barrier Functions",
+            "block_bbox": [
+                237,
+                144,
+                972,
+                177
+            ],
+            "block_id": 1,
+            "block_order": 1,
+            "group_id": 1,
+            "block_polygon_points": [
+                [
+                    237.0,
+                    144.0
+                ],
+                [
+                    972.0,
+                    144.0
+                ],
+                [
+                    972.0,
+                    177.0
+                ],
+                [
+                    237.0,
+                    177.0
+                ]
+            ]
+        },
+        {
+            "block_label": "text",
+            "block_content": "Ersin Daş¹, David E. J. van Wijk², Tamas G. Molnar³, Aaron D. Ames², and Joel W. Burdick²",
+            "block_bbox": [
+                159,
+                184,
+                1032,
+                211
+            ],
+            "block_id": 2,
+            "block_order": 2,
+            "group_id": 2,
+            "block_polygon_points": [
+                [
+                    159.0,
+                    184.0
+                ],
+                [
+                    1032.0,
+                    184.0
+                ],
+                [
+                    1032.0,
+                    211.0
+                ],
+                [
+                    159.0,
+                    211.0
+                ]
+            ]
+        },
+        {
+            "block_label": "abstract",
+            "block_content": "Abstract—We propose a notion of robust adaptive backup control barrier functions for nonlinear control affine systems with parametric uncertainty in both the drift dynamics and actuation matrix. Backup control barrier functions guarantee safety by predicting the system's trajectory under a pre-certified safe controller. However, these predictions rely on the model and can be inaccurate when the system contains unknown parameters. To address this issue, we estimate the unknown parameters using element-wise certified adaptive estimators that provide a parameter adaptation law and component-wise estimation error bounds. We compute the backup flow using the estimated model and tighten the safety conditions using these certified bounds. The resulting safety conditions account for the sensitivity of the predicted flow to parameter estimation errors. Moreover, to handle uncertainty in the actuation matrix, we use a duality-based reformulation that enables the use of a computationally efficient quadratic-program-based safety filter. We prove that controllers satisfying the proposed robust adaptive backup control barrier function constraints guarantee safety under parametric uncertainty and input constraints.",
+            "block_bbox": [
+                102,
+                254,
+                601,
+                611
+            ],
+            "block_id": 3,
+            "block_order": 3,
+            "group_id": 3,
+            "block_polygon_points": [
+                [
+                    102.0,
+                    254.0
+                ],
+                [
+                    601.0,
+                    254.0
+                ],
+                [
+                    601.0,
+                    611.0
+                ],
+                [
+                    102.0,
+                    611.0
+                ]
+            ]
+        },
+        {
+            "block_label": "paragraph_title",
+            "block_content": "### I. INTRODUCTION",
+            "block_bbox": [
+                271,
+                622,
+                434,
+                641
+            ],
+            "block_id": 4,
+            "block_order": 4,
+            "group_id": 4,
+            "block_polygon_points": [
+                [
+                    271.0,
+                    622.0
+                ],
+                [
+                    433.0,
+                    622.0
+                ],
+                [
+                    433.0,
+                    640.0
+                ],
+                [
+                    271.0,
+                    640.0
+                ]
+            ]
+        },
+        {
+            "block_label": "text",
+            "block_content": "Safety-critical control is essential for autonomous systems that operate in complex real-world environments. Control barrier functions (CBFs) provide a constructive framework for synthesizing controllers that render a prescribed safe set forward invariant, ensuring safety w.r.t. state constraints [1]. This can be realized by safety filters, often formulated as quadratic programs (QPs), that modify a nominal controller when safety necessitates intervention. However, CBF design requires a safe set in which feasible safe control inputs are available. Constructing such a set is difficult for input-constrained nonlinear systems, especially when the system must be steered close to the safe set boundary [2], [3].",
+            "block_bbox": [
+                99,
+                648,
+                601,
+                905
+            ],
+            "block_id": 5,
+            "block_order": 5,
+            "group_id": 5,
+            "block_polygon_points": [
+                [
+                    99.0,
+                    648.0
+                ],
+                [
+                    601.0,
+                    648.0
+                ],
+                [
+                    601.0,
+                    905.0
+                ],
+                [
+                    99.0,
+                    905.0
+                ]
+            ]
+        },
+        {
+            "block_label": "text",
+            "block_content": "Model predictive control (MPC) provides another way to handle state and input constraints. It predicts the system evolution over a finite horizon while enforcing constraints along the predicted trajectory. This makes MPC effective for constrained nonlinear systems, but recursive feasibility and safety guarantees require additional terminal conditions, invariant sets, or robustness margins. Adaptive MPC and robust sensitivity-based MPC reduce conservatism by updating model information online [4]–[6] or by propagating the effect of parametric uncertainty along the prediction horizon [7].",
+            "block_bbox": [
+                100,
+                905,
+                601,
+                1118
+            ],
+            "block_id": 6,
+            "block_order": 6,
+            "group_id": 6,
+            "block_polygon_points": [
+                [
+                    100.0,
+                    905.0
+                ],
+                [
+                    601.0,
+                    905.0
+                ],
+                [
+                    601.0,
+                    1118.0
+                ],
+                [
+                    100.0,
+                    1118.0
+                ]
+            ]
+        },
+        {
+            "block_label": "text",
+            "block_content": "Backup control barrier functions (bCBFs) use a similar finite horizon prediction idea for safety-critical control to construct an implicit safe set online [8]. Instead of requiring an explicit controlled invariant set, bCBFs predict the evolution of the system under a pre-certified safe controller, called a backup controller, over a finite time horizon. A system is considered safe if the predicted backup trajectory satisfies the state constraints and reaches a known backup set [8]. This approach guarantees feasibility for input-constrained systems by providing a constructive certificate that the state remains safe. However, bCBFs rely on forward integration to compute the flow of the system model. Thus, model uncertainty can cause the computed backup trajectory to differ from the true trajectory, invalidating safety [9].",
+            "block_bbox": [
+                100,
+                1118,
+                602,
+                1312
+            ],
+            "block_id": 7,
+            "block_order": 7,
+            "group_id": 7,
+            "block_polygon_points": [
+                [
+                    100.0,
+                    1118.0
+                ],
+                [
+                    602.0,
+                    1118.0
+                ],
+                [
+                    602.0,
+                    1312.0
+                ],
+                [
+                    100.0,
+                    1312.0
+                ]
+            ]
+        },
+        {
+            "block_label": "text",
+            "block_content": "",
+            "block_bbox": [
+                620,
+                251,
+                1120,
+                358
+            ],
+            "block_id": 8,
+            "block_order": 8,
+            "group_id": 7,
+            "block_polygon_points": [
+                [
+                    620.0,
+                    251.0
+                ],
+                [
+                    1120.0,
+                    251.0
+                ],
+                [
+                    1120.0,
+                    358.0
+                ],
+                [
+                    620.0,
+                    358.0
+                ]
+            ]
+        },
+        {
+            "block_label": "text",
+            "block_content": "This limitation becomes more severe when the uncertainty appears in both the drift dynamics and the actuation matrix. Actuation uncertainty complicates robust safety filter design because the worst-case uncertainty involves the control input that is the decision variable of the underlying optimization problem. Recent robust CBF methods address related issues by using worst-case bounds, set-membership identification, or duality-based reformulations  $ [10] $,  $ [11] $. Adaptive CBF methods reduce conservatism by estimating uncertain parameters online  $ [12] $,  $ [13] $. However, robust bCBFs require more than a pointwise estimate of uncertain parameters. Since the safety condition depends on the predicted backup flow, it must account for the sensitivity of the flow to the parameter estimation errors. Moreover, if the estimator returns only a set-valued update, it may not provide the parameter estimate required for computing the backup flow sensitivity.",
+            "block_bbox": [
+                619,
+                359,
+                1120,
+                700
+            ],
+            "block_id": 9,
+            "block_order": 9,
+            "group_id": 9,
+            "block_polygon_points": [
+                [
+                    619.0,
+                    359.0
+                ],
+                [
+                    1120.0,
+                    359.0
+                ],
+                [
+                    1120.0,
+                    700.0
+                ],
+                [
+                    619.0,
+                    700.0
+                ]
+            ]
+        },
+        {
+            "block_label": "text",
+            "block_content": "In this letter, we propose a robust adaptive bCBF framework for nonlinear systems with structured parametric uncertainty in the drift dynamics and actuation matrix. We consider a parameter affine uncertainty model and use element-wise certified adaptive estimators. These estimators provide a parameter adaptation law and certified component-wise bounds on the parameter estimation error. The proposed method computes the backup flow using the estimated model and tightens the safety conditions using the certified error bounds. These tightened conditions define an inner approximation of the implicit safe set. To handle uncertainty in the actuation matrix, we use a duality-based robustification that preserves a QP-based safety filter. We demonstrate the effectiveness of the proposed approach through a planar quadrotor example.",
+            "block_bbox": [
+                619,
+                700,
+                1121,
+                1002
+            ],
+            "block_id": 10,
+            "block_order": 10,
+            "group_id": 10,
+            "block_polygon_points": [
+                [
+                    619.0,
+                    700.0
+                ],
+                [
+                    1121.0,
+                    700.0
+                ],
+                [
+                    1121.0,
+                    1002.0
+                ],
+                [
+                    619.0,
+                    1002.0
+                ]
+            ]
+        },
+        {
+            "block_label": "paragraph_title",
+            "block_content": "### II. PRELIMINARIES",
+            "block_bbox": [
+                784,
+                1018,
+                958,
+                1039
+            ],
+            "block_id": 11,
+            "block_order": 11,
+            "group_id": 11,
+            "block_polygon_points": [
+                [
+                    784.0,
+                    1018.0
+                ],
+                [
+                    957.0,
+                    1018.0
+                ],
+                [
+                    957.0,
+                    1038.0
+                ],
+                [
+                    784.0,
+                    1038.0
+                ]
+            ]
+        },
+        {
+            "block_label": "text",
+            "block_content": "We consider a nonlinear control affine system of the form",
+            "block_bbox": [
+                639,
+                1050,
+                1118,
+                1073
+            ],
+            "block_id": 12,
+            "block_order": 12,
+            "group_id": 12,
+            "block_polygon_points": [
+                [
+                    646.0,
+                    1050.0
+                ],
+                [
+                    1117.0,
+                    1050.0
+                ],
+                [
+                    1117.0,
+                    1072.0
+                ],
+                [
+                    646.0,
+                    1072.0
+                ]
+            ]
+        },
+        {
+            "block_label": "display_formula",
+            "block_content": " $$ \\dot{x}=f(x)+g(x)u,\\quad x\\in\\mathcal{X}\\subset\\mathbb{R}^{n},\\quad u\\in\\mathcal{U}\\subset\\mathbb{R}^{m}, $$ ",
+            "block_bbox": [
+                642,
+                1082,
+                1074,
+                1107
+            ],
+            "block_id": 13,
+            "block_order": 13,
+            "group_id": 13,
+            "block_polygon_points": [
+                [
+                    642.0,
+                    1082.0
+                ],
+                [
+                    1074.0,
+                    1082.0
+                ],
+                [
+                    1074.0,
+                    1107.0
+                ],
+                [
+                    642.0,
+                    1107.0
+                ]
+            ]
+        },
+        {
+            "block_label": "formula_number",
+            "block_content": "(1)",
+            "block_bbox": [
+                1091,
+                1085,
+                1116,
+                1105
+            ],
+            "block_id": 14,
+            "block_order": 14,
+            "group_id": 14,
+            "block_polygon_points": [
+                [
+                    1091.0,
+                    1085.0
+                ],
+                [
+                    1115.0,
+                    1085.0
+                ],
+                [
+                    1115.0,
+                    1104.0
+                ],
+                [
+                    1091.0,
+                    1104.0
+                ]
+            ]
+        },
+        {
+            "block_label": "text",
+            "block_content": "where  $ f: \\mathcal{X} \\to \\mathbb{R}^n $ and  $ g: \\mathcal{X} \\to \\mathbb{R}^{n \\times m} $ are continuously differentiable, and  $ \\mathcal{U} $ is a convex polytope. To capture state constraints that characterize safety, we define the safe set",
+            "block_bbox": [
+                619,
+                1115,
+                1119,
+                1181
+            ],
+            "block_id": 15,
+            "block_order": 15,
+            "group_id": 15,
+            "block_polygon_points": [
+                [
+                    619.0,
+                    1115.0
+                ],
+                [
+                    1119.0,
+                    1115.0
+                ],
+                [
+                    1119.0,
+                    1181.0
+                ],
+                [
+                    619.0,
+                    1181.0
+                ]
+            ]
+        },
+        {
+            "block_label": "display_formula",
+            "block_content": " $$ \\mathcal{C}_{\\mathrm{S}}\\triangleq\\{\\boldsymbol{x}\\in\\mathcal{X}:h(\\boldsymbol{x})\\geq0\\}, $$ ",
+            "block_bbox": [
+                755,
+                1191,
+                982,
+                1217
+            ],
+            "block_id": 16,
+            "block_order": 16,
+            "group_id": 16,
+            "block_polygon_points": [
+                [
+                    755.0,
+                    1191.0
+                ],
+                [
+                    982.0,
+                    1191.0
+                ],
+                [
+                    982.0,
+                    1217.0
+                ],
+                [
+                    755.0,
+                    1217.0
+                ]
+            ]
+        },
+        {
+            "block_label": "formula_number",
+            "block_content": "(2)",
+            "block_bbox": [
+                1091,
+                1194,
+                1117,
+                1215
+            ],
+            "block_id": 17,
+            "block_order": 17,
+            "group_id": 17,
+            "block_polygon_points": [
+                [
+                    1091.0,
+                    1194.0
+                ],
+                [
+                    1116.0,
+                    1194.0
+                ],
+                [
+                    1116.0,
+                    1214.0
+                ],
+                [
+                    1091.0,
+                    1214.0
+                ]
+            ]
+        },
+        {
+            "block_label": "text",
+            "block_content": "where  $ h: \\mathcal{X} \\to \\mathbb{R} $ is continuously differentiable. Safety requires that (1) evolves inside the safe set, i.e.,  $ C_S $ must be forward invariant. Control barrier functions (CBFs) enable the synthesis of safe controllers. The function  $ h $ is a CBF if there exists an extended class- $ \\mathcal{K}_\\infty $ function  $ \\alpha $ such that",
+            "block_bbox": [
+                619,
+                1227,
+                1120,
+                1335
+            ],
+            "block_id": 18,
+            "block_order": 18,
+            "group_id": 18,
+            "block_polygon_points": [
+                [
+                    619.0,
+                    1227.0
+                ],
+                [
+                    1120.0,
+                    1227.0
+                ],
+                [
+                    1120.0,
+                    1335.0
+                ],
+                [
+                    619.0,
+                    1335.0
+                ]
+            ]
+        },
+        {
+            "block_label": "display_formula",
+            "block_content": " $$ \\operatorname*{s u p}_{u\\in\\mathcal{U}}\\big[\\nabla h(\\boldsymbol{x})\\big(\\boldsymbol{f}(\\boldsymbol{x})+\\boldsymbol{g}(\\boldsymbol{x})\\boldsymbol{u}\\big)\\big}>-\\alpha\\big(h(\\boldsymbol{x})\\big), $$ ",
+            "block_bbox": [
+                682,
+                1341,
+                1055,
+                1382
+            ],
+            "block_id": 19,
+            "block_order": 19,
+            "group_id": 19,
+            "block_polygon_points": [
+                [
+                    682.0,
+                    1341.0
+                ],
+                [
+                    1055.0,
+                    1341.0
+                ],
+                [
+                    1055.0,
+                    1382.0
+                ],
+                [
+                    682.0,
+                    1382.0
+                ]
+            ]
+        },
+        {
+            "block_label": "footnote",
+            "block_content": " $ ^{1} $ E. Daş is with the Department of Mechanical, Materials, and Aerospace Engineering, Illinois Institute of Technology, Chicago, IL 60616, USA, edas2@illinoistech.edu.",
+            "block_bbox": [
+                102,
+                1321,
+                600,
+                1376
+            ],
+            "block_id": 20,
+            "block_order": null,
+            "group_id": 20,
+            "block_polygon_points": [
+                [
+                    102.0,
+                    1321.0
+                ],
+                [
+                    600.0,
+                    1321.0
+                ],
+                [
+                    600.0,
+                    1376.0
+                ],
+                [
+                    102.0,
+                    1376.0
+                ]
+            ]
+        },
+        {
+            "block_label": "formula_number",
+            "block_content": "(3)",
+            "block_bbox": [
+                1092,
+                1346,
+                1117,
+                1367
+            ],
+            "block_id": 21,
+            "block_order": 20,
+            "group_id": 21,
+            "block_polygon_points": [
+                [
+                    1092.0,
+                    1346.0
+                ],
+                [
+                    1116.0,
+                    1346.0
+                ],
+                [
+                    1116.0,
+                    1366.0
+                ],
+                [
+                    1092.0,
+                    1366.0
+                ]
+            ]
+        },
+        {
+            "block_label": "footnote",
+            "block_content": " $ ^{2} $ D. E. J. van Wijk, A. D. Ames, and J. W. Burdick are with the Mechanical and Civil Engineering, California Institute of Technology, Pasadena, CA 91125, USA, {vanwijk, ames, jburdick}@caltech.edu.",
+            "block_bbox": [
+                102,
+                1376,
+                601,
+                1431
+            ],
+            "block_id": 22,
+            "block_order": null,
+            "group_id": 22,
+            "block_polygon_points": [
+                [
+                    102.0,
+                    1376.0
+                ],
+                [
+                    601.0,
+                    1376.0
+                ],
+                [
+                    601.0,
+                    1431.0
+                ],
+                [
+                    102.0,
+                    1431.0
+                ]
+            ]
+        },
+        {
+            "block_label": "text",
+            "block_content": "holds for all  $ x \\in \\mathcal{C}_S $. Then, any locally Lipschitz controller  $ u = k(x) $,  $ k : \\mathcal{X} \\to \\mathcal{U} $, satisfying",
+            "block_bbox": [
+                619,
+                1391,
+                1119,
+                1435
+            ],
+            "block_id": 23,
+            "block_order": 21,
+            "group_id": 23,
+            "block_polygon_points": [
+                [
+                    619.0,
+                    1391.0
+                ],
+                [
+                    1119.0,
+                    1391.0
+                ],
+                [
+                    1119.0,
+                    1435.0
+                ],
+                [
+                    619.0,
+                    1435.0
+                ]
+            ]
+        },
+        {
+            "block_label": "footnote",
+            "block_content": " $ ^{3} $ T. G. Molnar is with Mechanical Engineering, Wichita State University, Wichita, KS 67260, USA, tamas.molnar@wichita.edu.",
+            "block_bbox": [
+                101,
+                1431,
+                601,
+                1469
+            ],
+            "block_id": 24,
+            "block_order": null,
+            "group_id": 24,
+            "block_polygon_points": [
+                [
+                    101.0,
+                    1431.0
+                ],
+                [
+                    601.0,
+                    1431.0
+                ],
+                [
+                    601.0,
+                    1469.0
+                ],
+                [
+                    101.0,
+                    1469.0
+                ]
+            ]
+        },
+        {
+            "block_label": "display_formula",
+            "block_content": " $$ \\nabla h(\\boldsymbol{x})\\big(\\boldsymbol{f}(\\boldsymbol{x})+\\boldsymbol{g}(\\boldsymbol{x})\\boldsymbol{u}\\big)\\geq-\\alpha\\big(h(\\boldsymbol{x})\\big),\\quad\\forall\\boldsymbol{x}\\in\\mathcal{C}_{\\mathrm{S}}, $$ ",
+            "block_bbox": [
+                652,
+                1444,
+                1065,
+                1471
+            ],
+            "block_id": 25,
+            "block_order": 22,
+            "group_id": 25,
+            "block_polygon_points": [
+                [
+                    652.0,
+                    1444.0
+                ],
+                [
+                    1065.0,
+                    1444.0
+                ],
+                [
+                    1065.0,
+                    1471.0
+                ],
+                [
+                    652.0,
+                    1471.0
+                ]
+            ]
+        },
+        {
+            "block_label": "formula_number",
+            "block_content": "(4)",
+            "block_bbox": [
+                1092,
+                1447,
+                1117,
+                1468
+            ],
+            "block_id": 26,
+            "block_order": 23,
+            "group_id": 26,
+            "block_polygon_points": [
+                [
+                    1092.0,
+                    1447.0
+                ],
+                [
+                    1116.0,
+                    1447.0
+                ],
+                [
+                    1116.0,
+                    1467.0
+                ],
+                [
+                    1092.0,
+                    1467.0
+                ]
+            ]
+        }
+    ],
+    "layout_det_res": {
+        "input_path": null,
+        "page_index": null,
+        "boxes": [
+            {
+                "cls_id": 2,
+                "label": "aside_text",
+                "score": 0.8996113538742065,
+                "coordinate": [
+                    37,
+                    572,
+                    78,
+                    1294
+                ],
+                "order": null,
+                "polygon_points": [
+                    [
+                        37.0,
+                        572.0
+                    ],
+                    [
+                        78.0,
+                        572.0
+                    ],
+                    [
+                        78.0,
+                        1294.0
+                    ],
+                    [
+                        37.0,
+                        1294.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 6,
+                "label": "doc_title",
+                "score": 0.8949688076972961,
+                "coordinate": [
+                    237,
+                    144,
+                    972,
+                    177
+                ],
+                "order": 1,
+                "polygon_points": [
+                    [
+                        237.0,
+                        144.0
+                    ],
+                    [
+                        972.0,
+                        144.0
+                    ],
+                    [
+                        972.0,
+                        177.0
+                    ],
+                    [
+                        237.0,
+                        177.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.8528885841369629,
+                "coordinate": [
+                    159,
+                    184,
+                    1032,
+                    211
+                ],
+                "order": 2,
+                "polygon_points": [
+                    [
+                        159.0,
+                        184.0
+                    ],
+                    [
+                        1032.0,
+                        184.0
+                    ],
+                    [
+                        1032.0,
+                        211.0
+                    ],
+                    [
+                        159.0,
+                        211.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 17,
+                "label": "paragraph_title",
+                "score": 0.7496776580810547,
+                "coordinate": [
+                    125,
+                    254,
+                    194,
+                    271
+                ],
+                "order": 3,
+                "polygon_points": [
+                    [
+                        125.0,
+                        254.0
+                    ],
+                    [
+                        193.0,
+                        254.0
+                    ],
+                    [
+                        193.0,
+                        270.0
+                    ],
+                    [
+                        125.0,
+                        270.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 0,
+                "label": "abstract",
+                "score": 0.9811303019523621,
+                "coordinate": [
+                    102,
+                    254,
+                    601,
+                    611
+                ],
+                "order": 4,
+                "polygon_points": [
+                    [
+                        102.0,
+                        254.0
+                    ],
+                    [
+                        601.0,
+                        254.0
+                    ],
+                    [
+                        601.0,
+                        611.0
+                    ],
+                    [
+                        102.0,
+                        611.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 17,
+                "label": "paragraph_title",
+                "score": 0.8272930979728699,
+                "coordinate": [
+                    271,
+                    622,
+                    434,
+                    641
+                ],
+                "order": 5,
+                "polygon_points": [
+                    [
+                        271.0,
+                        622.0
+                    ],
+                    [
+                        433.0,
+                        622.0
+                    ],
+                    [
+                        433.0,
+                        640.0
+                    ],
+                    [
+                        271.0,
+                        640.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.9636348485946655,
+                "coordinate": [
+                    99,
+                    648,
+                    601,
+                    905
+                ],
+                "order": 6,
+                "polygon_points": [
+                    [
+                        99.0,
+                        648.0
+                    ],
+                    [
+                        601.0,
+                        648.0
+                    ],
+                    [
+                        601.0,
+                        905.0
+                    ],
+                    [
+                        99.0,
+                        905.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.9634461402893066,
+                "coordinate": [
+                    100,
+                    905,
+                    601,
+                    1118
+                ],
+                "order": 7,
+                "polygon_points": [
+                    [
+                        100.0,
+                        905.0
+                    ],
+                    [
+                        601.0,
+                        905.0
+                    ],
+                    [
+                        601.0,
+                        1118.0
+                    ],
+                    [
+                        100.0,
+                        1118.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.9616317749023438,
+                "coordinate": [
+                    100,
+                    1118,
+                    602,
+                    1312
+                ],
+                "order": 8,
+                "polygon_points": [
+                    [
+                        100.0,
+                        1118.0
+                    ],
+                    [
+                        602.0,
+                        1118.0
+                    ],
+                    [
+                        602.0,
+                        1312.0
+                    ],
+                    [
+                        100.0,
+                        1312.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.9578380584716797,
+                "coordinate": [
+                    620,
+                    251,
+                    1120,
+                    358
+                ],
+                "order": 9,
+                "polygon_points": [
+                    [
+                        620.0,
+                        251.0
+                    ],
+                    [
+                        1120.0,
+                        251.0
+                    ],
+                    [
+                        1120.0,
+                        358.0
+                    ],
+                    [
+                        620.0,
+                        358.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.9716280102729797,
+                "coordinate": [
+                    619,
+                    359,
+                    1120,
+                    700
+                ],
+                "order": 10,
+                "polygon_points": [
+                    [
+                        619.0,
+                        359.0
+                    ],
+                    [
+                        1120.0,
+                        359.0
+                    ],
+                    [
+                        1120.0,
+                        700.0
+                    ],
+                    [
+                        619.0,
+                        700.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.9672240018844604,
+                "coordinate": [
+                    619,
+                    700,
+                    1121,
+                    1002
+                ],
+                "order": 11,
+                "polygon_points": [
+                    [
+                        619.0,
+                        700.0
+                    ],
+                    [
+                        1121.0,
+                        700.0
+                    ],
+                    [
+                        1121.0,
+                        1002.0
+                    ],
+                    [
+                        619.0,
+                        1002.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 17,
+                "label": "paragraph_title",
+                "score": 0.8398000597953796,
+                "coordinate": [
+                    784,
+                    1018,
+                    958,
+                    1039
+                ],
+                "order": 12,
+                "polygon_points": [
+                    [
+                        784.0,
+                        1018.0
+                    ],
+                    [
+                        957.0,
+                        1018.0
+                    ],
+                    [
+                        957.0,
+                        1038.0
+                    ],
+                    [
+                        784.0,
+                        1038.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.8089754581451416,
+                "coordinate": [
+                    639,
+                    1050,
+                    1118,
+                    1073
+                ],
+                "order": 13,
+                "polygon_points": [
+                    [
+                        646.0,
+                        1050.0
+                    ],
+                    [
+                        1117.0,
+                        1050.0
+                    ],
+                    [
+                        1117.0,
+                        1072.0
+                    ],
+                    [
+                        646.0,
+                        1072.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 5,
+                "label": "display_formula",
+                "score": 0.7952200770378113,
+                "coordinate": [
+                    642,
+                    1082,
+                    1074,
+                    1107
+                ],
+                "order": 14,
+                "polygon_points": [
+                    [
+                        642.0,
+                        1082.0
+                    ],
+                    [
+                        1074.0,
+                        1082.0
+                    ],
+                    [
+                        1074.0,
+                        1107.0
+                    ],
+                    [
+                        642.0,
+                        1107.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 11,
+                "label": "formula_number",
+                "score": 0.6914812326431274,
+                "coordinate": [
+                    1091,
+                    1085,
+                    1116,
+                    1105
+                ],
+                "order": 15,
+                "polygon_points": [
+                    [
+                        1091.0,
+                        1085.0
+                    ],
+                    [
+                        1115.0,
+                        1085.0
+                    ],
+                    [
+                        1115.0,
+                        1104.0
+                    ],
+                    [
+                        1091.0,
+                        1104.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.9106250405311584,
+                "coordinate": [
+                    619,
+                    1115,
+                    1119,
+                    1181
+                ],
+                "order": 16,
+                "polygon_points": [
+                    [
+                        619.0,
+                        1115.0
+                    ],
+                    [
+                        1119.0,
+                        1115.0
+                    ],
+                    [
+                        1119.0,
+                        1181.0
+                    ],
+                    [
+                        619.0,
+                        1181.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 15,
+                "label": "inline_formula",
+                "score": 0.6471702456474304,
+                "coordinate": [
+                    683,
+                    1116,
+                    790,
+                    1137
+                ],
+                "order": 17,
+                "polygon_points": [
+                    [
+                        683.0,
+                        1116.0
+                    ],
+                    [
+                        683.0,
+                        1136.0
+                    ],
+                    [
+                        783.0,
+                        1136.0
+                    ],
+                    [
+                        789.0,
+                        1129.0
+                    ],
+                    [
+                        789.0,
+                        1116.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 15,
+                "label": "inline_formula",
+                "score": 0.4634597599506378,
+                "coordinate": [
+                    835,
+                    1116,
+                    967,
+                    1137
+                ],
+                "order": 18,
+                "polygon_points": [
+                    [
+                        835.0,
+                        1116.0
+                    ],
+                    [
+                        966.0,
+                        1116.0
+                    ],
+                    [
+                        966.0,
+                        1136.0
+                    ],
+                    [
+                        835.0,
+                        1136.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 5,
+                "label": "display_formula",
+                "score": 0.852798581123352,
+                "coordinate": [
+                    755,
+                    1191,
+                    982,
+                    1217
+                ],
+                "order": 19,
+                "polygon_points": [
+                    [
+                        755.0,
+                        1191.0
+                    ],
+                    [
+                        982.0,
+                        1191.0
+                    ],
+                    [
+                        982.0,
+                        1217.0
+                    ],
+                    [
+                        755.0,
+                        1217.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 11,
+                "label": "formula_number",
+                "score": 0.7641013264656067,
+                "coordinate": [
+                    1091,
+                    1194,
+                    1117,
+                    1215
+                ],
+                "order": 20,
+                "polygon_points": [
+                    [
+                        1091.0,
+                        1194.0
+                    ],
+                    [
+                        1116.0,
+                        1194.0
+                    ],
+                    [
+                        1116.0,
+                        1214.0
+                    ],
+                    [
+                        1091.0,
+                        1214.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.9352651238441467,
+                "coordinate": [
+                    619,
+                    1227,
+                    1120,
+                    1335
+                ],
+                "order": 21,
+                "polygon_points": [
+                    [
+                        619.0,
+                        1227.0
+                    ],
+                    [
+                        1120.0,
+                        1227.0
+                    ],
+                    [
+                        1120.0,
+                        1335.0
+                    ],
+                    [
+                        619.0,
+                        1335.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 15,
+                "label": "inline_formula",
+                "score": 0.5227059125900269,
+                "coordinate": [
+                    681,
+                    1227,
+                    774,
+                    1248
+                ],
+                "order": 22,
+                "polygon_points": [
+                    [
+                        681.0,
+                        1227.0
+                    ],
+                    [
+                        681.0,
+                        1247.0
+                    ],
+                    [
+                        718.0,
+                        1247.0
+                    ],
+                    [
+                        725.0,
+                        1247.0
+                    ],
+                    [
+                        730.0,
+                        1247.0
+                    ],
+                    [
+                        737.0,
+                        1247.0
+                    ],
+                    [
+                        773.0,
+                        1247.0
+                    ],
+                    [
+                        773.0,
+                        1227.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 15,
+                "label": "inline_formula",
+                "score": 0.7195796966552734,
+                "coordinate": [
+                    873,
+                    1314,
+                    906,
+                    1333
+                ],
+                "order": 23,
+                "polygon_points": [
+                    [
+                        873.0,
+                        1314.0
+                    ],
+                    [
+                        905.0,
+                        1314.0
+                    ],
+                    [
+                        905.0,
+                        1332.0
+                    ],
+                    [
+                        873.0,
+                        1332.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 5,
+                "label": "display_formula",
+                "score": 0.9001126289367676,
+                "coordinate": [
+                    682,
+                    1341,
+                    1055,
+                    1382
+                ],
+                "order": 24,
+                "polygon_points": [
+                    [
+                        682.0,
+                        1341.0
+                    ],
+                    [
+                        1055.0,
+                        1341.0
+                    ],
+                    [
+                        1055.0,
+                        1382.0
+                    ],
+                    [
+                        682.0,
+                        1382.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 10,
+                "label": "footnote",
+                "score": 0.9371199011802673,
+                "coordinate": [
+                    102,
+                    1321,
+                    600,
+                    1376
+                ],
+                "order": null,
+                "polygon_points": [
+                    [
+                        102.0,
+                        1321.0
+                    ],
+                    [
+                        600.0,
+                        1321.0
+                    ],
+                    [
+                        600.0,
+                        1376.0
+                    ],
+                    [
+                        102.0,
+                        1376.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 11,
+                "label": "formula_number",
+                "score": 0.7493576407432556,
+                "coordinate": [
+                    1092,
+                    1346,
+                    1117,
+                    1367
+                ],
+                "order": 25,
+                "polygon_points": [
+                    [
+                        1092.0,
+                        1346.0
+                    ],
+                    [
+                        1116.0,
+                        1346.0
+                    ],
+                    [
+                        1116.0,
+                        1366.0
+                    ],
+                    [
+                        1092.0,
+                        1366.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 10,
+                "label": "footnote",
+                "score": 0.9410043954849243,
+                "coordinate": [
+                    102,
+                    1376,
+                    601,
+                    1431
+                ],
+                "order": null,
+                "polygon_points": [
+                    [
+                        102.0,
+                        1376.0
+                    ],
+                    [
+                        601.0,
+                        1376.0
+                    ],
+                    [
+                        601.0,
+                        1431.0
+                    ],
+                    [
+                        102.0,
+                        1431.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.8975327610969543,
+                "coordinate": [
+                    619,
+                    1391,
+                    1119,
+                    1435
+                ],
+                "order": 26,
+                "polygon_points": [
+                    [
+                        619.0,
+                        1391.0
+                    ],
+                    [
+                        1119.0,
+                        1391.0
+                    ],
+                    [
+                        1119.0,
+                        1435.0
+                    ],
+                    [
+                        619.0,
+                        1435.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 15,
+                "label": "inline_formula",
+                "score": 0.7122252583503723,
+                "coordinate": [
+                    732,
+                    1393,
+                    792,
+                    1411
+                ],
+                "order": 27,
+                "polygon_points": [
+                    [
+                        732.0,
+                        1393.0
+                    ],
+                    [
+                        732.0,
+                        1410.0
+                    ],
+                    [
+                        791.0,
+                        1410.0
+                    ],
+                    [
+                        791.0,
+                        1393.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 10,
+                "label": "footnote",
+                "score": 0.938226044178009,
+                "coordinate": [
+                    101,
+                    1431,
+                    601,
+                    1469
+                ],
+                "order": null,
+                "polygon_points": [
+                    [
+                        101.0,
+                        1431.0
+                    ],
+                    [
+                        601.0,
+                        1431.0
+                    ],
+                    [
+                        601.0,
+                        1469.0
+                    ],
+                    [
+                        101.0,
+                        1469.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 15,
+                "label": "inline_formula",
+                "score": 0.5313650369644165,
+                "coordinate": [
+                    623,
+                    1411,
+                    812,
+                    1434
+                ],
+                "order": 28,
+                "polygon_points": [
+                    [
+                        623.0,
+                        1411.0
+                    ],
+                    [
+                        812.0,
+                        1411.0
+                    ],
+                    [
+                        812.0,
+                        1434.0
+                    ],
+                    [
+                        623.0,
+                        1434.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 5,
+                "label": "display_formula",
+                "score": 0.8697366118431091,
+                "coordinate": [
+                    652,
+                    1444,
+                    1065,
+                    1471
+                ],
+                "order": 29,
+                "polygon_points": [
+                    [
+                        652.0,
+                        1444.0
+                    ],
+                    [
+                        1065.0,
+                        1444.0
+                    ],
+                    [
+                        1065.0,
+                        1471.0
+                    ],
+                    [
+                        652.0,
+                        1471.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 11,
+                "label": "formula_number",
+                "score": 0.7404436469078064,
+                "coordinate": [
+                    1092,
+                    1447,
+                    1117,
+                    1468
+                ],
+                "order": 30,
+                "polygon_points": [
+                    [
+                        1092.0,
+                        1447.0
+                    ],
+                    [
+                        1116.0,
+                        1447.0
+                    ],
+                    [
+                        1116.0,
+                        1467.0
+                    ],
+                    [
+                        1092.0,
+                        1467.0
+                    ]
+                ]
+            }
+        ]
+    }
+}

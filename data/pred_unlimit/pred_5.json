@@ -1,0 +1,3801 @@
+{
+  "file_name": "paper_5",
+  "pages": [
+    {
+      "page_index": 1,
+      "blocks": [
+        {
+          "id": "1_0",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.023,
+            "y": 0.273,
+            "width": 0.035,
+            "height": 0.453
+          },
+          "content": "arXiv:2607.01377v1 [econ.EM] 1 Jul 2026",
+          "label": "Text"
+        },
+        {
+          "id": "1_1",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.245,
+            "y": 0.137,
+            "width": 0.511,
+            "height": 0.025
+          },
+          "content": "Liquidity Premium and Investment Horizons",
+          "label": "Text"
+        },
+        {
+          "id": "1_2",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.436,
+            "y": 0.179,
+            "width": 0.132,
+            "height": 0.018
+          },
+          "content": "Irene Aldridge*",
+          "label": "Text"
+        },
+        {
+          "id": "1_3",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.464,
+            "y": 0.252,
+            "width": 0.07,
+            "height": 0.013
+          },
+          "content": "Abstract",
+          "label": "Text"
+        },
+        {
+          "id": "1_4",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.152,
+            "y": 0.271,
+            "width": 0.694,
+            "height": 0.141
+          },
+          "content": "We estimate Kyle's (1985) price-impact coefficient \\(\\lambda\\) directly from daily equity order flow and test its ability to forecast the cross-section of subsequent stock returns. Using CRSP data from 2020 to 2025, we construct firm-month measures of signed order flow and two estimators of \\(\\hat{\\lambda}_{it}\\): a within-month price-impact regression and an Amihud-style ratio. Signed order flow strongly predicts contemporaneous and one-month-ahead returns, while volume volatility predicts lower subsequent returns, consistent with widening price impact degrading price discovery. Fama-MacBeth regressions confirm that our order-flow signal carries significant cross-sectional return information after Newey-West adjustment. Theoretically, we resolve the liquidity premium puzzle of Constantinides (1986) through an adverse-selection mechanism: low order flow widens \\(\\lambda\\) and depresses prices today; subsequent normalization restores prices, generating the illiquidity premium without risk-based compensation.",
+          "label": "Text"
+        },
+        {
+          "id": "1_5",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.114,
+            "y": 0.433,
+            "width": 0.19,
+            "height": 0.018
+          },
+          "content": "1 Introduction",
+          "label": "Text"
+        },
+        {
+          "id": "1_6",
+          "order": 7,
+          "bounding_box": {
+            "x": 0.111,
+            "y": 0.464,
+            "width": 0.773,
+            "height": 0.105
+          },
+          "content": "Equity returns exhibit return predictability tied to trading activity that classical asset-pricing models struggle to explain. A long empirical literature documents that trading volume, order flow, and measures of illiquidity carry information about subsequent stock returns. However, this evidence has developed largely independently of the equilibrium models that explain why trading activity should move prices in the first place. We bring these two strands together: we estimate the price-impact coefficient from Kyle (1985) model of strategic informed trading directly from observable equity order flow and test its ability to forecast the cross-section of subsequent stock returns.",
+          "label": "Text"
+        },
+        {
+          "id": "1_7",
+          "order": 8,
+          "bounding_box": {
+            "x": 0.111,
+            "y": 0.57,
+            "width": 0.773,
+            "height": 0.105
+          },
+          "content": "In Kyle's model, a single informed trader submits orders against a competitive, risk-neutral market maker who observes only aggregate order flow and prices the asset as a linear function of that flow. The resulting equilibrium price-impact coefficient, \\(\\lambda\\), governs how strongly a given unit of net order flow moves prices, and is determined by the ratio of noise-trader variance to fundamental uncertainty about the asset's value. We argue that this equilibrium object, estimated from daily equity trading data, predicts subsequent returns. A stock with a high \\(\\lambda\\) is one whose order flow is, in equilibrium, more informative, more costly to trade against, and more sensitive to shifts in investor demand.",
+          "label": "Text"
+        },
+        {
+          "id": "1_8",
+          "order": 9,
+          "bounding_box": {
+            "x": 0.111,
+            "y": 0.676,
+            "width": 0.774,
+            "height": 0.151
+          },
+          "content": "We propose a resolution to a long-standing puzzle in this literature: why does trading volume predict returns, and through what mechanism does illiquidity command a premium? Existing empirical work documents a robust association between volume, order flow, and subsequent returns (e.g., Lo and Wang (2015), Bajzik (2021)), but does not, on its own, provide a structural account of why this association should hold or how to translate it into a tractable equilibrium pricing model. Separately, a large literature on equity liquidity premia (Amihud and Mendelson (1986a); Pástor and Stambaugh (2003); Acharya and Pedersen (2005)) establishes that illiquidity is priced, but typically treats the illiquidity premium as compensation for risk borne by long-horizon investors, leaving open the puzzle first posed by Constantinides (1986): if infinite-horizon investors should be indifferent to transaction costs, why is the observed illiquidity premium so large in practice?",
+          "label": "Text"
+        },
+        {
+          "id": "1_9",
+          "order": 10,
+          "bounding_box": {
+            "x": 0.112,
+            "y": 0.827,
+            "width": 0.772,
+            "height": 0.061
+          },
+          "content": "We propose that both questions have a common answer rooted in market microstructure theory. Kyle (1985)'s equilibrium implies that \\(\\lambda\\) widens precisely when the ratio of informed to noise trading is high relative to fundamental uncertainty, discouraging participation and depressing prices. As order flow normalizes, \\(\\lambda\\) narrows and prices recover. This generates a return differential between low- and high-order-flow states that",
+          "label": "Text"
+        },
+        {
+          "id": "1_10",
+          "order": 11,
+          "bounding_box": {
+            "x": 0.132,
+            "y": 0.896,
+            "width": 0.211,
+            "height": 0.014
+          },
+          "content": "*Email: irene.aldridge@gmail.com",
+          "label": "Text"
+        },
+        {
+          "id": "1_11",
+          "order": 12,
+          "bounding_box": {
+            "x": 0.494,
+            "y": 0.936,
+            "width": 0.01,
+            "height": 0.012
+          },
+          "content": "1",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "page_index": 2,
+      "blocks": [
+        {
+          "id": "2_0",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.112,
+            "y": 0.092,
+            "width": 0.772,
+            "height": 0.029
+          },
+          "content": "requires no counterparty to knowingly bear a liquidity cost on investors' behalf. The \\(\\lambda\\) dynamics further offer a resolution to the liquidity premium puzzle grounded in adverse selection rather than risk compensation.",
+          "label": "Text"
+        },
+        {
+          "id": "2_1",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.112,
+            "y": 0.122,
+            "width": 0.773,
+            "height": 0.165
+          },
+          "content": "We test four predictions of this framework, each tied to a formal proposition developed in Section 3. We develop signed (directional) order flow as the empirical analog of Kyle's latent order flow variable \\( y \\). First, we posit that signed order flow should positively and significantly predict stock returns since price moves linearly in net order flow in Kyle's equilibrium (Proposition 3). Second, signed order flow should dominate unsigned, aggregate trading volume as a return predictor since \\( \\lambda \\) operates on signed flow rather than raw volume. Third, volume volatility, which we use to proxy the noise-trading variance that determines \\( \\lambda \\) in equilibrium (Proposition 1), should predict lower subsequent returns since higher noise-trading variance narrows \\( \\lambda \\) and degrades the precision of price discovery. Fourth, the predictive content of order flow and \\( \\lambda \\) should be strongest at short horizons and high trading frequencies, since the continuous-time extension of Kyle's model implies that price impact rises as the date of full information revelation approaches (Proposition 4).",
+          "label": "Text"
+        },
+        {
+          "id": "2_2",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.112,
+            "y": 0.288,
+            "width": 0.772,
+            "height": 0.061
+          },
+          "content": "Using CRSP daily and monthly equity data for the entire CRSP universe from 2020 to 2025, we construct firm-month measures of total trading volume, volume volatility, and signed order flow, along with two estimators of \\(\\hat{\\lambda}_{it}\\): a direct within-month regression of price changes on signed order flow and an Amihud (2002a)-style illiquidity ratio. We document four main findings.",
+          "label": "Text"
+        },
+        {
+          "id": "2_3",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.112,
+            "y": 0.349,
+            "width": 0.772,
+            "height": 0.075
+          },
+          "content": "First, in panel regressions of monthly stock returns on our volume-based predictors, signed order flow is a strongly significant predictor of both contemporaneous and one-month-ahead returns, robust to the inclusion of standard equity controls (size, book-to-market, momentum, and Amihud illiquidity), while volume volatility predicts returns with a negative sign, consistent with our model's prediction that elevated noise-trading variance narrows \\(\\lambda\\) and weakens price discovery.",
+          "label": "Text"
+        },
+        {
+          "id": "2_4",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.112,
+            "y": 0.424,
+            "width": 0.771,
+            "height": 0.061
+          },
+          "content": "Second, return-prediction regressions based directly on  \\( \\hat{\\lambda}_{it} \\)  yield informative but specification-sensitive results: the within-month price-impact regression estimator enters significantly and with a large coefficient in our baseline specification with an intercept. However, the sign and magnitude of this relationship vary with specification choices that we investigate as a robustness question in Section 6.",
+          "label": "Text"
+        },
+        {
+          "id": "2_5",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.112,
+            "y": 0.485,
+            "width": 0.772,
+            "height": 0.06
+          },
+          "content": "Third, Fama–MacBeth cross-sectional regressions of next-month returns on our predicted-return signal yield a statistically significant average slope, after a Newey–West adjustment, for both our Amihud-style and regression-based  \\( \\hat{\\lambda}_{it} \\)  estimators, indicating that order-flow-based illiquidity measures carry reliable cross-sectional information about future returns over our sample period.",
+          "label": "Text"
+        },
+        {
+          "id": "2_6",
+          "order": 7,
+          "bounding_box": {
+            "x": 0.112,
+            "y": 0.545,
+            "width": 0.771,
+            "height": 0.075
+          },
+          "content": "Fourth, we provide a microstructure-based resolution to the liquidity premium puzzle: rather than positing a counterparty who knowingly bears the cost of holding illiquid assets, we show that low signed order flow widens  \\( \\lambda \\)  and depresses prices in equilibrium, while subsequent normalization of order flow narrows  \\( \\lambda \\)  and restores prices, generating the historically observed illiquidity premium as a consequence of equilibrium price impact rather than risk-based compensation.",
+          "label": "Text"
+        },
+        {
+          "id": "2_7",
+          "order": 8,
+          "bounding_box": {
+            "x": 0.112,
+            "y": 0.62,
+            "width": 0.772,
+            "height": 0.196
+          },
+          "content": "Our work makes three contributions to asset pricing theory and practice. Methodologically, we provide a direct empirical implementation of Kyle (1985)'s price-impact coefficient using observable daily equity trading data, estimated separately via a regression-based approach and an Amihud-style approach, and show that both carry information for the cross-section of subsequent returns. This bridges the equilibrium market microstructure literature (Kyle (1985); Glosten and Milgrom (1985); Easley et al. (1996a)) with the empirical literature on volume and illiquidity in asset pricing (Amihud (2002a); Pástor and Stambaugh (2003)). Theoretically, we resolve the liquidity premium puzzle through a demand-based adverse-selection mechanism rather than a risk-compensation mechanism. In doing so, we provide microfoundations for why illiquid assets earn higher returns without requiring implausible assumptions about investor preferences or market segmentation. Empirically, we demonstrate that an equilibrium, microstructure-founded measure of price impact, estimated entirely from CRSP daily price and volume data, has predictive content for monthly stock returns distinct from standard equity characteristics, with direct implications for portfolio construction and market-making.",
+          "label": "Text"
+        },
+        {
+          "id": "2_8",
+          "order": 9,
+          "bounding_box": {
+            "x": 0.112,
+            "y": 0.817,
+            "width": 0.772,
+            "height": 0.092
+          },
+          "content": "The paper proceeds as follows. Section 2 reviews the related literature in market microstructure theory, order-flow informativeness, and equity liquidity premia. Section 3 develops our theoretical framework, presenting Kyle (1985)'s equilibrium and four formal propositions on order flow, price impact, and return predictability. Section 4 describes our CRSP-based data construction and summary statistics. Section 5 presents our baseline order-flow and stock-return regressions. Section 6 develops firm-month estimates of Kyle's \\(\\lambda\\) and tests their ability to forecast returns. Section 7 compares alternative constructions of \\(\\hat{\\lambda}_{it}\\).",
+          "label": "Text"
+        },
+        {
+          "id": "2_9",
+          "order": 10,
+          "bounding_box": {
+            "x": 0.494,
+            "y": 0.937,
+            "width": 0.012,
+            "height": 0.011
+          },
+          "content": "2",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "page_index": 3,
+      "blocks": [
+        {
+          "id": "3_0",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.111,
+            "y": 0.092,
+            "width": 0.777,
+            "height": 0.046
+          },
+          "content": "Section 8 presents an expanding-window out-of-sample forecasting exercise, together with Fama–MacBeth and portfolio-sort robustness checks. Section 9 discusses economic mechanisms and practical implications for portfolio managers and market makers. Section 10 concludes.",
+          "label": "Text"
+        },
+        {
+          "id": "3_1",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.113,
+            "y": 0.16,
+            "width": 0.263,
+            "height": 0.021
+          },
+          "content": "2 Related Literature",
+          "label": "Text"
+        },
+        {
+          "id": "3_2",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.111,
+            "y": 0.191,
+            "width": 0.777,
+            "height": 0.092
+          },
+          "content": "Our study touches upon four research streams: (1) market microstructure models of price formation under information asymmetry, (2) empirical measures of order flow and informed trading, (3) the role of trading volume in asset pricing, and (4) liquidity premia in equity markets. We contribute by showing that the equilibrium price-impact coefficient from Kyle (1985)-style microstructure models, estimated from observable equity order flow, predicts the cross-section of subsequent stock returns and by offering a microstructure-based resolution to the liquidity premium puzzle grounded in adverse selection rather than risk compensation.",
+          "label": "Text"
+        },
+        {
+          "id": "3_3",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.112,
+            "y": 0.3,
+            "width": 0.546,
+            "height": 0.018
+          },
+          "content": "2.1 Market Microstructure Models of Price Formation",
+          "label": "Text"
+        },
+        {
+          "id": "3_4",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.111,
+            "y": 0.325,
+            "width": 0.778,
+            "height": 0.167
+          },
+          "content": "Two complementary modeling traditions establish how private information becomes impounded into asset prices through trading. Kyle (1985) models a single informed trader submitting market orders against a competitive, risk-neutral market maker who observes only aggregate order flow; in the resulting linear equilibrium, price moves linearly in net order flow with a slope of  \\( \\lambda \\) , the now-canonical measure of price impact. Glosten and Milgrom (1985) instead models a sequence of individual trades, in which a risk-neutral, zero-expected-profit dealer quotes bid and ask prices that widen purely to compensate for adverse selection from privately informed counterparties. Back and Baruch (2004) unify the two traditions, showing that Kyle's continuous-time linear equilibrium is the limit of the Glosten–Milgrom sequential-trade equilibrium as trade sizes shrink and arrival rates increase, while Back (1992) extends Kyle's framework to continuous time directly, yielding the time-varying price-impact process central to our horizon-dependent predictions (Section 3.5).",
+          "label": "Text"
+        },
+        {
+          "id": "3_5",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.112,
+            "y": 0.509,
+            "width": 0.772,
+            "height": 0.037
+          },
+          "content": "2.2 Order Flow, Trade Informativeness, and the Probability of Informed Trading",
+          "label": "Text"
+        },
+        {
+          "id": "3_6",
+          "order": 7,
+          "bounding_box": {
+            "x": 0.111,
+            "y": 0.552,
+            "width": 0.775,
+            "height": 0.121
+          },
+          "content": "A parallel empirical literature develops measures of how much information is embedded in observed trading, independent of the particular equilibrium pricing model. Easley and O'Hara (1987) show that trade size, not just trade direction, carries information: because informed traders prefer to trade larger quantities when their signal is more valuable, market makers rationally widen the price impact of large trades, generating a nonlinear relationship between trade size and price response. Easley and O'Hara (1992) extend the informational content of trading to the time dimension, showing that the absence of trading itself is informative. Intervals without trades signal the absence of new information, so the timing of trade arrivals, not only their size and direction, affects the speed and magnitude of price adjustment.",
+          "label": "Text"
+        },
+        {
+          "id": "3_7",
+          "order": 8,
+          "bounding_box": {
+            "x": 0.111,
+            "y": 0.673,
+            "width": 0.775,
+            "height": 0.121
+          },
+          "content": "Building on this framework, Easley et al. (1996b) develop the probability of informed trading (PIN) measure, a structural estimate of the fraction of order flow attributable to informed traders for a given stock. The estimate is obtained from the sequence of buy and sell trade arrivals. The central empirical finding of Easley et al. (1996a) is that the probability of information-based trading is systematically lower for high-volume stocks, is the direct empirical counterpart of our Proposition 1: higher trading volume is associated with a less favorable informed-to-noise trading ratio  \\( \\sigma_{u}/\\sqrt{\\Sigma_{0}} \\) , and hence a smaller equilibrium  \\( \\lambda \\) . Our use of signed order flow as a proxy for Kyle's latent  \\( y_{t}=x_{t}+u_{t} \\)  is conceptually continuous with this literature's effort to recover the unobservable informed-trading component from observable trade data.",
+          "label": "Text"
+        },
+        {
+          "id": "3_8",
+          "order": 9,
+          "bounding_box": {
+            "x": 0.112,
+            "y": 0.812,
+            "width": 0.443,
+            "height": 0.018
+          },
+          "content": "2.3 Price Discovery and Information Shares",
+          "label": "Text"
+        },
+        {
+          "id": "3_9",
+          "order": 10,
+          "bounding_box": {
+            "x": 0.111,
+            "y": 0.837,
+            "width": 0.775,
+            "height": 0.076
+          },
+          "content": "A separate strand of the microstructure literature asks not how much information trading contains, but where that information is impounded into price when a security trades across multiple venues or related instruments. Hasbrouck (1995) develops the information-share methodology, decomposing the innovation in a security's common efficient price into the proportional contributions of each market in which it trades. While our setting is single-market rather than multi-market, the underlying logic is directly relevant: just",
+          "label": "Text"
+        },
+        {
+          "id": "3_10",
+          "order": 11,
+          "bounding_box": {
+            "x": 0.494,
+            "y": 0.936,
+            "width": 0.012,
+            "height": 0.012
+          },
+          "content": "3",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "page_index": 4,
+      "blocks": [
+        {
+          "id": "4_0",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.111,
+            "y": 0.092,
+            "width": 0.777,
+            "height": 0.092
+          },
+          "content": "as Hasbrouck's information share isolates the fraction of price discovery attributable to a given venue's order flow, our \\(\\dot{\\lambda}_{it}\\) estimates isolate the fraction of a stock's monthly price variation attributable to signed order flow as opposed to noise-driven trading. This connection motivates a natural robustness check in our empirical design (Section 9): decomposing realized return variance into a signed-order-flow component and a residual component, in the spirit of an information-share calculation applied to a single market over time rather than across markets at a point in time.",
+          "label": "Text"
+        },
+        {
+          "id": "4_1",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.113,
+            "y": 0.201,
+            "width": 0.373,
+            "height": 0.018
+          },
+          "content": "2.4 Trading Volume in Asset Pricing",
+          "label": "Text"
+        },
+        {
+          "id": "4_2",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.111,
+            "y": 0.225,
+            "width": 0.775,
+            "height": 0.152
+          },
+          "content": "The dynamics of trading volume are well documented empirically but remain incompletely understood theoretically. Lo and Wang (2015) study volume measures in a portfolio-theoretic context and find that volume does not reduce to a simple measure of institutional flows. Lo et al. (2000) examine the informational content of volume from a technical-analysis perspective, finding that price trends accompanied by rising volume are more persistent than price trends unaccompanied by volume. Relevant to our setting, Easley et al. (1998a) and Pan and Poteshman (2006) show that option trading volume contains information about subsequent prices of the underlying asset, which Pan and Poteshman (2006) attribute to informed traders exploiting implicit leverage in option markets. We document a related but distinct channel: rather than volume in a derivative market predicting the underlying, we show that signed volume in the underlying equity itself, filtered through a Kyle-style price-impact estimate, predicts the equity's own subsequent returns.",
+          "label": "Text"
+        },
+        {
+          "id": "4_3",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.111,
+            "y": 0.377,
+            "width": 0.774,
+            "height": 0.12
+          },
+          "content": "Bajzik (2021) synthesizes 44 studies on the volume–return relationship and reports that the impact of volume weakens as stocks mature and their liquidity stabilizes. This finding is consistent with our Proposition 1, in which  \\( \\lambda \\)  depends on the time-varying ratio of informed to noise trading rather than on volume in isolation. Bai et al. (2024) show that volume normalized by amount outstanding helps investors navigate liquidity conditions across related instruments. More broadly, Koijen and Yogo (2019) and Cong et al. (2020) motivate pricing financial instruments as a function of their usage rather than purely their fundamentals. We adopt a related premise, treating observed trading activity as informative about price formation in its own right rather than as a secondary characteristic.",
+          "label": "Text"
+        },
+        {
+          "id": "4_4",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.111,
+            "y": 0.498,
+            "width": 0.773,
+            "height": 0.06
+          },
+          "content": "The existing literature documents volume–return correlations but does not, on its own, provide a structural account of why volume should predict returns or how to translate that correlation into a tractable pricing model. By grounding our volume measures in Kyle's equilibrium, we supply both the missing theoretical foundation and a direct empirical implementation.",
+          "label": "Text"
+        },
+        {
+          "id": "4_5",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.113,
+            "y": 0.576,
+            "width": 0.358,
+            "height": 0.018
+          },
+          "content": "2.5 Liquidity and Liquidity Premia",
+          "label": "Text"
+        },
+        {
+          "id": "4_6",
+          "order": 7,
+          "bounding_box": {
+            "x": 0.111,
+            "y": 0.601,
+            "width": 0.773,
+            "height": 0.06
+          },
+          "content": "A substantial literature establishes that liquidity is a priced state variable in equity markets. Amihud and Mendelson (1986a) show that stocks with wider bid–ask spreads earn higher average returns, a result extended using alternative liquidity proxies including turnover-based measures and the Amihud illiquidity ratio (Amihud, 2002a).",
+          "label": "Text"
+        },
+        {
+          "id": "4_7",
+          "order": 8,
+          "bounding_box": {
+            "x": 0.111,
+            "y": 0.662,
+            "width": 0.774,
+            "height": 0.106
+          },
+          "content": "Acharya and Pedersen (2005) propose a liquidity-adjusted capital asset pricing model in which expected returns depend on both an asset's baseline illiquidity and its covariance with aggregate liquidity shocks, while Pástor and Stambaugh (2003) show that stocks with high sensitivity to market-wide liquidity deterioration command higher average returns, consistent with a systematic liquidity-risk premium. Johnson (2008) distinguishes liquidity (a market's average risk-bearing capacity) from volume (the investor-driven change in that capacity), showing that volume is positively related to the variance of liquidity. This distinction is directly relevant to our use of volume volatility as a proxy for the noise-trading variance \\(\\sigma_u^2\\) in Proposition 1.",
+          "label": "Text"
+        },
+        {
+          "id": "4_8",
+          "order": 9,
+          "bounding_box": {
+            "x": 0.111,
+            "y": 0.768,
+            "width": 0.773,
+            "height": 0.09
+          },
+          "content": "Reichenbacher and Schuster (2022) propose size-adapted liquidity measures and show that standard metrics can underestimate illiquidity costs unless trade size is properly normalized, while Cabrol et al. (2024) apply machine-learning methods to illiquidity prediction. Brunnermeier and Pedersen (2009) connect funding liquidity (the ability of intermediaries to borrow) to market liquidity, showing how small funding shocks can generate liquidity spirals through forced deleveraging. Such a mechanism is consistent with the regime-dependent strength of our predicted relationships during stress periods (Section 10).",
+          "label": "Text"
+        },
+        {
+          "id": "4_9",
+          "order": 10,
+          "bounding_box": {
+            "x": 0.111,
+            "y": 0.858,
+            "width": 0.773,
+            "height": 0.031
+          },
+          "content": "The collective evidence indicates that investors require both a level premium for holding illiquid assets and a separate premium for exposure to systematic liquidity risk. Our contribution is to show that a",
+          "label": "Text"
+        },
+        {
+          "id": "4_10",
+          "order": 11,
+          "bounding_box": {
+            "x": 0.494,
+            "y": 0.936,
+            "width": 0.012,
+            "height": 0.012
+          },
+          "content": "4",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "page_index": 5,
+      "blocks": [
+        {
+          "id": "5_0",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.112,
+            "y": 0.092,
+            "width": 0.776,
+            "height": 0.031
+          },
+          "content": "structural, equilibrium-based measure of illiquidity carries the same pricing information while also nesting a theoretical account of why that information should be priced in the first place.",
+          "label": "Text"
+        },
+        {
+          "id": "5_1",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.113,
+            "y": 0.14,
+            "width": 0.357,
+            "height": 0.018
+          },
+          "content": "2.6 The Liquidity Premium Puzzle",
+          "label": "Text"
+        },
+        {
+          "id": "5_2",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.111,
+            "y": 0.165,
+            "width": 0.775,
+            "height": 0.135
+          },
+          "content": "Our paper also contributes to the literature on the liquidity premium puzzle. Merton (1973) hypothesized that investors should demand higher returns to hold illiquid assets to compensate for transaction costs, but he left open which market participants actually bear that cost. Constantinides (1986) formalized this as a puzzle: in an equilibrium model, the liquidity premium should be small for investors with an infinite trading horizon, yet large liquidity premia are observed in practice. Chen (2022) attributes the discrepancy to heterogeneity in investor information, arguing that better-informed investors are unfazed by transaction costs, while less-informed investors require compensation for illiquidity. Fama and French (1988) separately establish the empirical practice of decomposing security returns into permanent and transitory components, a decomposition we adapt in interpreting the temporary mispricing mechanism below.",
+          "label": "Text"
+        },
+        {
+          "id": "5_3",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.111,
+            "y": 0.301,
+            "width": 0.773,
+            "height": 0.121
+          },
+          "content": "Our proposed resolution synthesizes the information-asymmetry mechanism of Kyle (1985) and Glosten and Milgrom (1985) with this puzzle: rather than positing a counterparty who knowingly pays a risk premium to illiquid-asset holders, we show that low signed order flow depresses prices today because Kyle's \\(\\lambda\\) widens when noise-trading variance is low relative to informational uncertainty, discouraging participation. Subsequent normalization of order flow and the associated narrowing of \\(\\lambda\\) then drives a price recovery, generating a return differential that requires no counterparty to \"pay\" the premium in equilibrium. This relocates the liquidity premium puzzle's resolution from a risk-compensation story to an adverse-selection and price-impact story, consistent with the market microstructure tradition reviewed above.",
+          "label": "Text"
+        },
+        {
+          "id": "5_4",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.111,
+            "y": 0.422,
+            "width": 0.773,
+            "height": 0.076
+          },
+          "content": "In sum, while the existing literature establishes (1) equilibrium models of price formation under information asymmetry, (2) empirical techniques for measuring informed trading and price discovery, and (3) the presence of equity liquidity premia, no prior work directly estimates Kyle's  \\( \\lambda \\)  from observable order flow and tests its ability to forecast the cross-section of equity returns within a unified, microstructure-founded framework. Our contribution fills this gap.",
+          "label": "Text"
+        },
+        {
+          "id": "5_5",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.113,
+            "y": 0.52,
+            "width": 0.172,
+            "height": 0.018
+          },
+          "content": "3 The Model",
+          "label": "Text"
+        },
+        {
+          "id": "5_6",
+          "order": 7,
+          "bounding_box": {
+            "x": 0.144,
+            "y": 0.551,
+            "width": 0.636,
+            "height": 0.016
+          },
+          "content": "In this section, we propose an agent-driven pricing model. Specifically, we establish that",
+          "label": "Text"
+        },
+        {
+          "id": "5_7",
+          "order": 8,
+          "bounding_box": {
+            "x": 0.133,
+            "y": 0.576,
+            "width": 0.75,
+            "height": 0.031
+          },
+          "content": "1. For assets with a finite outstanding amount, short-term informed trading necessarily induces higher trading volume in the long run.",
+          "label": "Text"
+        },
+        {
+          "id": "5_8",
+          "order": 9,
+          "bounding_box": {
+            "x": 0.132,
+            "y": 0.617,
+            "width": 0.752,
+            "height": 0.03
+          },
+          "content": "2. In addition, in the long run, higher volume translates into higher demand for the asset and results in higher prices.",
+          "label": "Text"
+        },
+        {
+          "id": "5_9",
+          "order": 10,
+          "bounding_box": {
+            "x": 0.145,
+            "y": 0.657,
+            "width": 0.443,
+            "height": 0.015
+          },
+          "content": "Our model comprises the following market structure settings:",
+          "label": "Text"
+        },
+        {
+          "id": "5_10",
+          "order": 11,
+          "bounding_box": {
+            "x": 0.138,
+            "y": 0.682,
+            "width": 0.232,
+            "height": 0.016
+          },
+          "content": "- Discrete time \\( t \\in \\{0, 1, 2, \\ldots\\} \\)",
+          "label": "Text"
+        },
+        {
+          "id": "5_11",
+          "order": 12,
+          "bounding_box": {
+            "x": 0.138,
+            "y": 0.707,
+            "width": 0.237,
+            "height": 0.015
+          },
+          "content": "• A single firm with risky assets",
+          "label": "Text"
+        },
+        {
+          "id": "5_12",
+          "order": 13,
+          "bounding_box": {
+            "x": 0.138,
+            "y": 0.732,
+            "width": 0.42,
+            "height": 0.015
+          },
+          "content": "- A continuum of risk-averse investors with CARA utility",
+          "label": "Text"
+        },
+        {
+          "id": "5_13",
+          "order": 14,
+          "bounding_box": {
+            "x": 0.138,
+            "y": 0.757,
+            "width": 0.525,
+            "height": 0.016
+          },
+          "content": "- Fixed supply of equities: \\( s_t \\) (no issuance/buybacks during the periods)",
+          "label": "Text"
+        },
+        {
+          "id": "5_14",
+          "order": 15,
+          "bounding_box": {
+            "x": 0.138,
+            "y": 0.783,
+            "width": 0.499,
+            "height": 0.015
+          },
+          "content": "- Associated equity trades in a competitive market with a volume \\( V_{t} \\)",
+          "label": "Text"
+        },
+        {
+          "id": "5_15",
+          "order": 16,
+          "bounding_box": {
+            "x": 0.112,
+            "y": 0.808,
+            "width": 0.772,
+            "height": 0.03
+          },
+          "content": "We assume three types of market participants: Short-horizon traders who rebalance monthly and long-horizon buy-and-hold investors. Among both long- and short-term investors, a fixed proportion  \\( \\alpha \\)  is informed.",
+          "label": "Text"
+        },
+        {
+          "id": "5_16",
+          "order": 17,
+          "bounding_box": {
+            "x": 0.111,
+            "y": 0.839,
+            "width": 0.773,
+            "height": 0.06
+          },
+          "content": "We also assume the existence of public and private information. Public information includes disclosed firm fundamentals and debt structure. In addition, some traders are able to observe private firms' signals about near-term liquidity needs. In either case, following Easley et al. (1996a), we assume that the trading volume aggregates all public and private information.",
+          "label": "Text"
+        },
+        {
+          "id": "5_17",
+          "order": 18,
+          "bounding_box": {
+            "x": 0.494,
+            "y": 0.937,
+            "width": 0.011,
+            "height": 0.011
+          },
+          "content": "5",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "page_index": 6,
+      "blocks": [
+        {
+          "id": "6_0",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.113,
+            "y": 0.09,
+            "width": 0.305,
+            "height": 0.018
+          },
+          "content": "3.1 Single-Period Kyle Model",
+          "label": "Text"
+        },
+        {
+          "id": "6_1",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.112,
+            "y": 0.115,
+            "width": 0.774,
+            "height": 0.076
+          },
+          "content": "Market structure. A single risky asset has a liquidation value  \\( v \\sim N(p_{0}, \\Sigma_{0}) \\) . One risk-neutral informed trader observes v perfectly and submits a market order x. Noise (liquidity) traders submit an aggregate order  \\( u \\sim N(0, \\sigma_{u}^{2}) \\) , independent of v. A competitive, risk-neutral market maker observes only the total order flow  \\( y = x + u \\)  (and cannot separate informed from noise flow) and sets the transaction price  \\( p(y) \\)  to satisfy a zero-expected-profit (semi-strong efficiency) condition.",
+          "label": "Text"
+        },
+        {
+          "id": "6_2",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.145,
+            "y": 0.192,
+            "width": 0.378,
+            "height": 0.013
+          },
+          "content": "We restrict attention to linear equilibria of the form",
+          "label": "Text"
+        },
+        {
+          "id": "6_3",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.405,
+            "y": 0.219,
+            "width": 0.479,
+            "height": 0.016
+          },
+          "content": "\\[\nx = \\beta (v - p _ {0}), \\quad \\beta > 0, \\tag {1}\n\\]",
+          "label": "Formula"
+        },
+        {
+          "id": "6_4",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.406,
+            "y": 0.238,
+            "width": 0.476,
+            "height": 0.016
+          },
+          "content": "\\[\np = p _ {0} + \\lambda y, \\quad \\lambda > 0. \\tag {2}\n\\]",
+          "label": "Formula"
+        },
+        {
+          "id": "6_5",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.112,
+            "y": 0.265,
+            "width": 0.772,
+            "height": 0.032
+          },
+          "content": "The informed trader chooses x to maximize expected trading profit  \\( \\mathbb{E}[(v-p)x \\mid v] \\) . The market maker chooses  \\( \\lambda \\)  so that the price equals the conditional expectation of value given observed order flow,  \\( p = E[v \\mid y] \\) .",
+          "label": "Text"
+        },
+        {
+          "id": "6_6",
+          "order": 7,
+          "bounding_box": {
+            "x": 0.112,
+            "y": 0.305,
+            "width": 0.608,
+            "height": 0.016
+          },
+          "content": "Proposition 1 (Kyle's Lambda). The unique linear equilibrium of (1)-(2) satisfies",
+          "label": "Text"
+        },
+        {
+          "id": "6_7",
+          "order": 8,
+          "bounding_box": {
+            "x": 0.4,
+            "y": 0.332,
+            "width": 0.482,
+            "height": 0.033
+          },
+          "content": "\\[\n\\beta = \\frac {\\sigma_ {u}}{\\sqrt {\\Sigma_ {0}}}, \\quad \\lambda = \\frac {1}{2} \\frac {\\sqrt {\\Sigma_ {0}}}{\\sigma_ {u}}, \\tag {3}\n\\]",
+          "label": "Formula"
+        },
+        {
+          "id": "6_8",
+          "order": 9,
+          "bounding_box": {
+            "x": 0.113,
+            "y": 0.376,
+            "width": 0.771,
+            "height": 0.031
+          },
+          "content": "and the informed trader's expected profit is \\(\\pi(v) = (v - p_0)^2 / (4\\lambda)\\). Residual price uncertainty after trading is \\(\\Sigma_1 = \\Sigma_0 / 2\\).",
+          "label": "Text"
+        },
+        {
+          "id": "6_9",
+          "order": 10,
+          "bounding_box": {
+            "x": 0.113,
+            "y": 0.417,
+            "width": 0.771,
+            "height": 0.046
+          },
+          "content": "Proof. Substituting the market maker's pricing rule (2) into the informed trader's objective, \\( x \\) maximizes \\( (v - p_0 - \\lambda x)x \\), giving the first-order condition \\( x^{*} = (v - p_{0}) / (2\\lambda) \\), i.e., \\( \\beta = 1 / (2\\lambda) \\). Imposing the market maker's rational-expectations pricing condition",
+          "label": "Text"
+        },
+        {
+          "id": "6_10",
+          "order": 11,
+          "bounding_box": {
+            "x": 0.399,
+            "y": 0.474,
+            "width": 0.203,
+            "height": 0.034
+          },
+          "content": "\\[\n\\lambda = \\frac {\\mathrm{Cov} (v , y)}{\\mathrm{Var} (y)} = \\frac {\\beta \\Sigma_ {0}}{\\beta^ {2} \\Sigma_ {0} + \\sigma_ {u} ^ {2}}\n\\]",
+          "label": "Formula"
+        },
+        {
+          "id": "6_11",
+          "order": 12,
+          "bounding_box": {
+            "x": 0.112,
+            "y": 0.517,
+            "width": 0.406,
+            "height": 0.015
+          },
+          "content": "and solving jointly with \\(\\beta = 1 / (2\\lambda)\\) for \\((\\beta, \\lambda)\\) yields (3).",
+          "label": "Text"
+        },
+        {
+          "id": "6_12",
+          "order": 13,
+          "bounding_box": {
+            "x": 0.112,
+            "y": 0.542,
+            "width": 0.772,
+            "height": 0.03
+          },
+          "content": "We refer to  \\( \\lambda \\)  in (3) as Kyle's lambda, the standard measure of price impact per unit of (latent) net order flow. In this paper, Kyle's Lambda is an equilibrium object derived from strategic informed trading.",
+          "label": "Text"
+        },
+        {
+          "id": "6_13",
+          "order": 14,
+          "bounding_box": {
+            "x": 0.112,
+            "y": 0.572,
+            "width": 0.772,
+            "height": 0.046
+          },
+          "content": "Our direct theoretical implication is that signed/directional volume (Methods 2–3) outperforms simple aggregate volume (Method 1) in predicting short-horizon returns, as predicted by Kyle's model, since  \\( \\lambda \\)  operates on signed order flow y, not on unsigned trading volume.",
+          "label": "Text"
+        },
+        {
+          "id": "6_14",
+          "order": 15,
+          "bounding_box": {
+            "x": 0.113,
+            "y": 0.635,
+            "width": 0.556,
+            "height": 0.018
+          },
+          "content": "3.2 Informed Trading Propagates to Future Order Flow",
+          "label": "Text"
+        },
+        {
+          "id": "6_15",
+          "order": 16,
+          "bounding_box": {
+            "x": 0.145,
+            "y": 0.66,
+            "width": 0.53,
+            "height": 0.015
+          },
+          "content": "This section provides a dynamic extension of Kyle's model (Kyle (1985)).",
+          "label": "Text"
+        },
+        {
+          "id": "6_16",
+          "order": 17,
+          "bounding_box": {
+            "x": 0.112,
+            "y": 0.675,
+            "width": 0.772,
+            "height": 0.046
+          },
+          "content": "Setup. Trading occurs over N discrete rounds  \\( n = 1, \\ldots, N \\)  before v is publicly revealed at T. At each round, the informed trader submits  \\( \\Delta x_{n} \\) , noise traders submit  \\( \\Delta u_{n} \\sim N(0, \\sigma_{u}^{2}\\Delta t) \\) , and the market maker sets  \\( \\Delta p_{n} = \\lambda_{n} \\Delta y_{n} \\)  based on the cumulative order flow to date.",
+          "label": "Text"
+        },
+        {
+          "id": "6_17",
+          "order": 18,
+          "bounding_box": {
+            "x": 0.112,
+            "y": 0.73,
+            "width": 0.774,
+            "height": 0.047
+          },
+          "content": "Proposition 2 (Propagation of Informed Trading into Order Flow). If informed-trading intensity rises at round n (i.e., the informed trader's optimal  \\( \\beta_{n} \\)  increases, for instance, because residual uncertainty  \\( \\Sigma_{n-1} \\)  is still large relative to  \\( \\sigma_{u} \\) ), then expected order flow in subsequent rounds is higher:",
+          "label": "Text"
+        },
+        {
+          "id": "6_18",
+          "order": 19,
+          "bounding_box": {
+            "x": 0.268,
+            "y": 0.788,
+            "width": 0.616,
+            "height": 0.018
+          },
+          "content": "\\[\n\\mathbb {E} \\big [ \\left| \\Delta y _ {n + \\tau} \\right| \\big | \\beta_ {n} \\big ] > \\mathbb {E} \\big [ \\left| \\Delta y _ {n + \\tau} \\right| \\big | \\beta_ {n - 1} \\big ] \\qquad f o r \\tau = 1, \\ldots , N - n. \\tag {4}\n\\]",
+          "label": "Formula"
+        },
+        {
+          "id": "6_19",
+          "order": 20,
+          "bounding_box": {
+            "x": 0.112,
+            "y": 0.816,
+            "width": 0.772,
+            "height": 0.061
+          },
+          "content": "Intuition. A higher  \\( \\beta_{n} \\)  both (i) directly raises the informed component of flow and (ii) accelerates the market maker's repricing, which, in a sequential-auction equilibrium, raises the rate at which residual uncertainty  \\( \\Sigma_{n} \\)  is resolved. Faster resolution sustains higher expected order flow in nearby rounds because price still has more \"catching up\" left relative to v.",
+          "label": "Text"
+        },
+        {
+          "id": "6_20",
+          "order": 21,
+          "bounding_box": {
+            "x": 0.494,
+            "y": 0.936,
+            "width": 0.011,
+            "height": 0.012
+          },
+          "content": "6",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "page_index": 7,
+      "blocks": [
+        {
+          "id": "7_0",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.113,
+            "y": 0.09,
+            "width": 0.399,
+            "height": 0.018
+          },
+          "content": "3.3 Order Flow and Price Appreciation",
+          "label": "Text"
+        },
+        {
+          "id": "7_1",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.113,
+            "y": 0.115,
+            "width": 0.547,
+            "height": 0.016
+          },
+          "content": "Proposition 3 (Price Impact of Order Flow Innovations). In any round n,",
+          "label": "Text"
+        },
+        {
+          "id": "7_2",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.443,
+            "y": 0.143,
+            "width": 0.441,
+            "height": 0.017
+          },
+          "content": "\\[\n\\Delta p _ {n} = \\lambda_ {n} \\Delta y _ {n}, \\tag {5}\n\\]",
+          "label": "Formula"
+        },
+        {
+          "id": "7_3",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.112,
+            "y": 0.17,
+            "width": 0.774,
+            "height": 0.032
+          },
+          "content": "so that  \\( E[\\Delta p_{n} \\mid \\Delta y_{n} > 0] > 0 \\)  whenever  \\( \\lambda_{n} > 0 \\) . Since  \\( \\lambda_{n} = \\frac{1}{2}\\sqrt{\\Sigma_{n-1}}/\\sigma_{u} \\)  is strictly positive in every round prior to full revelation, any positive innovation in signed order flow raises the price.",
+          "label": "Text"
+        },
+        {
+          "id": "7_4",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.113,
+            "y": 0.219,
+            "width": 0.376,
+            "height": 0.019
+          },
+          "content": "3.4 Horizon-Dependent Price Impact",
+          "label": "Text"
+        },
+        {
+          "id": "7_5",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.112,
+            "y": 0.244,
+            "width": 0.774,
+            "height": 0.044
+          },
+          "content": "Proposition 4 (Price Impact Rises as Revelation Approaches). In the continuous-time limit of the sequential auction (Kyle (1985), Back (1992)), the price-impact coefficient \\(\\lambda(t)\\) is time-varying. Under the standard parameterization",
+          "label": "Text"
+        },
+        {
+          "id": "7_6",
+          "order": 7,
+          "bounding_box": {
+            "x": 0.408,
+            "y": 0.288,
+            "width": 0.476,
+            "height": 0.03
+          },
+          "content": "\\[\n\\frac {d \\lambda (t)}{d t} > 0, \\quad t \\in [ 0, T), \\tag {6}\n\\]",
+          "label": "Formula"
+        },
+        {
+          "id": "7_7",
+          "order": 8,
+          "bounding_box": {
+            "x": 0.112,
+            "y": 0.322,
+            "width": 0.772,
+            "height": 0.03
+          },
+          "content": "i.e., a given unit of signed order flow has a larger price impact the closer trading occurs to the information-revelation date T.",
+          "label": "Text"
+        },
+        {
+          "id": "7_8",
+          "order": 9,
+          "bounding_box": {
+            "x": 0.113,
+            "y": 0.37,
+            "width": 0.253,
+            "height": 0.017
+          },
+          "content": "3.5 Testable Predictions",
+          "label": "Text"
+        },
+        {
+          "id": "7_9",
+          "order": 10,
+          "bounding_box": {
+            "x": 0.145,
+            "y": 0.395,
+            "width": 0.176,
+            "height": 0.015
+          },
+          "content": "Propositions 1–4 imply:",
+          "label": "Text"
+        },
+        {
+          "id": "7_10",
+          "order": 11,
+          "bounding_box": {
+            "x": 0.133,
+            "y": 0.422,
+            "width": 0.75,
+            "height": 0.032
+          },
+          "content": "1. Price-impact regression.  \\( \\Delta p_{t} = \\alpha + \\hat{\\lambda} \\cdot \\hat{y}_{t} + \\varepsilon_{t} \\) , where  \\( \\hat{y}_{t} \\)  is the paper's signed-volume proxy (Method 2/3), should yield  \\( \\hat{\\lambda} > 0 \\)  and be statistically significant.",
+          "label": "Text"
+        },
+        {
+          "id": "7_11",
+          "order": 12,
+          "bounding_box": {
+            "x": 0.132,
+            "y": 0.463,
+            "width": 0.752,
+            "height": 0.032
+          },
+          "content": "2. Signed flow should dominate unsigned/aggregate volume in short-horizon return prediction, consistent with the paper's Method 1 vs. Method 2/3 comparison.",
+          "label": "Text"
+        },
+        {
+          "id": "7_12",
+          "order": 13,
+          "bounding_box": {
+            "x": 0.132,
+            "y": 0.503,
+            "width": 0.752,
+            "height": 0.032
+          },
+          "content": "3. Price impact and order-flow-based predictability should be stronger at higher trading frequencies / shorter rebalancing horizons (Proposition 4).",
+          "label": "Text"
+        },
+        {
+          "id": "7_13",
+          "order": 14,
+          "bounding_box": {
+            "x": 0.132,
+            "y": 0.543,
+            "width": 0.753,
+            "height": 0.047
+          },
+          "content": "4. Volume volatility's negative coefficient higher \\(\\mathrm{std}(V_t)\\) proxies for a higher noise-trading variance \\(\\sigma_u^2\\) relative to a roughly stable \\(\\Sigma_0\\), which, by Proposition 1, lowers \\(\\lambda\\) and degrades the precision of price discovery. This is consistent with the documented negative effect on subsequent returns.",
+          "label": "Text"
+        },
+        {
+          "id": "7_14",
+          "order": 15,
+          "bounding_box": {
+            "x": 0.113,
+            "y": 0.612,
+            "width": 0.103,
+            "height": 0.018
+          },
+          "content": "4 Data",
+          "label": "Text"
+        },
+        {
+          "id": "7_15",
+          "order": 16,
+          "bounding_box": {
+            "x": 0.112,
+            "y": 0.643,
+            "width": 0.774,
+            "height": 0.048
+          },
+          "content": "This study uses only the Center for Research in Security Prices (CRSP) daily stock files. Both the dependent variable (stock returns) and the key explanatory variables (order flow,  \\( \\hat{\\lambda} \\) ) are constructed entirely from observed equity trading.",
+          "label": "Text"
+        },
+        {
+          "id": "7_16",
+          "order": 17,
+          "bounding_box": {
+            "x": 0.113,
+            "y": 0.708,
+            "width": 0.183,
+            "height": 0.015
+          },
+          "content": "4.1 Data Sources",
+          "label": "Text"
+        },
+        {
+          "id": "7_17",
+          "order": 18,
+          "bounding_box": {
+            "x": 0.112,
+            "y": 0.733,
+            "width": 0.774,
+            "height": 0.075
+          },
+          "content": "For each PERMNO and trading day in the CRSP Daily Stock File (DSF), we obtain the closing price (DlyPrc), share volume (DlyVol), daily return (DlyRet), shares outstanding (ShrOut), and the price and volume adjustment factors (DisFacPr, DisFacShr) needed to construct split-adjusted series. Where available, we also extract daily bid (DlyBid) and ask (DlyAsk) quotes for robustness checks against quoted-spread-based illiquidity measures.",
+          "label": "Text"
+        },
+        {
+          "id": "7_18",
+          "order": 19,
+          "bounding_box": {
+            "x": 0.112,
+            "y": 0.808,
+            "width": 0.772,
+            "height": 0.032
+          },
+          "content": "We use the monthly 13-week Treasury bill yield from the Federal Reserve's H.15 Statistical Release as the risk-free rate \\( r_t \\) for the Kyle-lambda regressions and for any excess-return calculations.",
+          "label": "Text"
+        },
+        {
+          "id": "7_19",
+          "order": 20,
+          "bounding_box": {
+            "x": 0.494,
+            "y": 0.936,
+            "width": 0.011,
+            "height": 0.012
+          },
+          "content": "7",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "page_index": 8,
+      "blocks": [
+        {
+          "id": "8_0",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.113,
+            "y": 0.09,
+            "width": 0.372,
+            "height": 0.018
+          },
+          "content": "4.2 Sample Construction and Filters",
+          "label": "Text"
+        },
+        {
+          "id": "8_1",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.146,
+            "y": 0.115,
+            "width": 0.26,
+            "height": 0.015
+          },
+          "content": "We construct the sample as follows:",
+          "label": "Text"
+        },
+        {
+          "id": "8_2",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.133,
+            "y": 0.14,
+            "width": 0.751,
+            "height": 0.031
+          },
+          "content": "1. Exchange. We retain primary listings on NYSE, AMEX, and NASDAQ (CRSP exchange codes 1, 2, 3), excluding over-the-counter and other non-primary listings.",
+          "label": "Text"
+        },
+        {
+          "id": "8_3",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.133,
+            "y": 0.18,
+            "width": 0.752,
+            "height": 0.075
+          },
+          "content": "2. Price filter. Following standard practice in the trading-volume and liquidity literature, we exclude firm-months with a month-end price below $1 to limit the influence of microstructure noise in penny stocks, while retaining low-priced but liquid securities that may carry genuine information content. We report results both with and without this filter, since the equity microstructure literature finds this filter can materially affect illiquidity-based results.",
+          "label": "Text"
+        },
+        {
+          "id": "8_4",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.133,
+            "y": 0.264,
+            "width": 0.751,
+            "height": 0.046
+          },
+          "content": "3. Trading-day filter. We require at least 15 trading days with nonzero volume within a given month for that firm-month to be included, ensuring that monthly aggregates (sum volume, volume standard deviation, signed flow) are not driven by a small number of days.",
+          "label": "Text"
+        },
+        {
+          "id": "8_5",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.113,
+            "y": 0.328,
+            "width": 0.269,
+            "height": 0.016
+          },
+          "content": "4.3 Variable Construction",
+          "label": "Text"
+        },
+        {
+          "id": "8_6",
+          "order": 7,
+          "bounding_box": {
+            "x": 0.145,
+            "y": 0.353,
+            "width": 0.327,
+            "height": 0.015
+          },
+          "content": "For each firm i and trading day  \\( \\tau \\) , we define:",
+          "label": "Text"
+        },
+        {
+          "id": "8_7",
+          "order": 8,
+          "bounding_box": {
+            "x": 0.138,
+            "y": 0.378,
+            "width": 0.395,
+            "height": 0.016
+          },
+          "content": "- Daily dollar volume: \\(\\mathrm{DVOL}_{i\\tau} = \\mathrm{PRC}_{i\\tau} \\times \\mathrm{VOL}_{i\\tau}\\).",
+          "label": "Text"
+        },
+        {
+          "id": "8_8",
+          "order": 9,
+          "bounding_box": {
+            "x": 0.137,
+            "y": 0.402,
+            "width": 0.747,
+            "height": 0.032
+          },
+          "content": "- Daily signed order flow (Kyle proxy): \\(\\mathrm{OF}_{i\\tau} = \\mathrm{VOL}_{i\\tau} \\times \\mathrm{sign}(\\Delta \\mathrm{PRC}_{i\\tau})\\), where \\(\\Delta \\mathrm{PRC}_{i\\tau}\\) is the split-adjusted daily price change.",
+          "label": "Text"
+        },
+        {
+          "id": "8_9",
+          "order": 10,
+          "bounding_box": {
+            "x": 0.137,
+            "y": 0.442,
+            "width": 0.536,
+            "height": 0.017
+          },
+          "content": "- Daily price impact (Amihud-style): \\(\\mathrm{Amihud}_{i\\tau} = |\\mathrm{RET}_{i\\tau}| / \\mathrm{DVOL}_{i\\tau}\\).",
+          "label": "Text"
+        },
+        {
+          "id": "8_10",
+          "order": 11,
+          "bounding_box": {
+            "x": 0.145,
+            "y": 0.468,
+            "width": 0.352,
+            "height": 0.014
+          },
+          "content": "These are aggregated to the firm-month level as:",
+          "label": "Text"
+        },
+        {
+          "id": "8_11",
+          "order": 12,
+          "bounding_box": {
+            "x": 0.138,
+            "y": 0.493,
+            "width": 0.347,
+            "height": 0.017
+          },
+          "content": "- Total volume: \\(\\mathrm{sumvolume}_{it} = \\sum_{\\tau \\in t}\\mathrm{VOL}_{i\\tau}\\).",
+          "label": "Text"
+        },
+        {
+          "id": "8_12",
+          "order": 13,
+          "bounding_box": {
+            "x": 0.137,
+            "y": 0.518,
+            "width": 0.747,
+            "height": 0.032
+          },
+          "content": "- Volume volatility: \\(\\mathrm{stdvolume}_{it} = \\mathrm{std}_{\\tau}(\\mathrm{VOL}_{i\\tau})\\) within month \\(t\\), our proxy for the noise-trading variance \\(\\sigma_u^2\\).",
+          "label": "Text"
+        },
+        {
+          "id": "8_13",
+          "order": 14,
+          "bounding_box": {
+            "x": 0.138,
+            "y": 0.557,
+            "width": 0.313,
+            "height": 0.017
+          },
+          "content": "- Signed flow: \\(\\mathrm{signedflow}_{it} = \\sum_{\\tau \\in t} \\mathrm{OF}_{i\\tau}\\).",
+          "label": "Text"
+        },
+        {
+          "id": "8_14",
+          "order": 15,
+          "bounding_box": {
+            "x": 0.137,
+            "y": 0.584,
+            "width": 0.747,
+            "height": 0.03
+          },
+          "content": "- Kyle-lambda (regression estimator): \\(\\hat{\\lambda}_{it}\\) is the OLS slope from regressing \\(\\Delta\\mathrm{PRC}_{i\\tau}\\) on \\(\\mathrm{OF}_{i\\tau}\\) across days \\(\\tau \\in t\\), re-estimated each month per firm, as described in Section 7.",
+          "label": "Text"
+        },
+        {
+          "id": "8_15",
+          "order": 16,
+          "bounding_box": {
+            "x": 0.137,
+            "y": 0.622,
+            "width": 0.747,
+            "height": 0.032
+          },
+          "content": "- Kyle-lambda (Amihud-style estimator): \\(\\hat{\\lambda}_{it}^{Amihud} = \\frac{1}{n}\\sum_{\\tau \\in t}\\mathrm{Amihud}_{i\\tau}\\), the within-month average of the daily Amihud ratio.",
+          "label": "Text"
+        },
+        {
+          "id": "8_16",
+          "order": 17,
+          "bounding_box": {
+            "x": 0.112,
+            "y": 0.664,
+            "width": 0.772,
+            "height": 0.031
+          },
+          "content": "We winsorize all firm-month variables at the 1% and 99% levels to limit the influence of data errors and extreme outliers, consistent with standard practice in the equity microstructure literature.",
+          "label": "Text"
+        },
+        {
+          "id": "8_17",
+          "order": 18,
+          "bounding_box": {
+            "x": 0.113,
+            "y": 0.712,
+            "width": 0.296,
+            "height": 0.018
+          },
+          "content": "4.4 Equity Control Variables",
+          "label": "Text"
+        },
+        {
+          "id": "8_18",
+          "order": 19,
+          "bounding_box": {
+            "x": 0.112,
+            "y": 0.737,
+            "width": 0.772,
+            "height": 0.031
+          },
+          "content": "For the regressions in Sections 6–9 that include standard controls, we additionally construct, using CRSP (and, where indicated, external factor data):",
+          "label": "Text"
+        },
+        {
+          "id": "8_19",
+          "order": 20,
+          "bounding_box": {
+            "x": 0.137,
+            "y": 0.777,
+            "width": 0.559,
+            "height": 0.016
+          },
+          "content": "- Size: log of month-end market capitalization (price × shares outstanding).",
+          "label": "Text"
+        },
+        {
+          "id": "8_20",
+          "order": 21,
+          "bounding_box": {
+            "x": 0.137,
+            "y": 0.802,
+            "width": 0.743,
+            "height": 0.016
+          },
+          "content": "- Momentum: cumulative return from month \\( t - 12 \\) through \\( t - 2 \\) (skipping the most recent month).",
+          "label": "Text"
+        },
+        {
+          "id": "8_21",
+          "order": 22,
+          "bounding_box": {
+            "x": 0.137,
+            "y": 0.826,
+            "width": 0.747,
+            "height": 0.032
+          },
+          "content": "- Amihud illiquidity: the monthly average of the daily Amihud (2002b) ratio, as defined above, used as a benchmark illiquidity proxy distinct from our signed-flow-based \\(\\hat{\\lambda}_{it}\\).",
+          "label": "Text"
+        },
+        {
+          "id": "8_22",
+          "order": 23,
+          "bounding_box": {
+            "x": 0.137,
+            "y": 0.866,
+            "width": 0.747,
+            "height": 0.046
+          },
+          "content": "- Book-to-market and factor returns (MKT, SMB, HML, and MOM): sourced externally from Wharton Research Data Service for the factor-spanning test in Section 9, since these cannot be constructed from CRSP price and volume data alone.",
+          "label": "Text"
+        },
+        {
+          "id": "8_23",
+          "order": 24,
+          "bounding_box": {
+            "x": 0.494,
+            "y": 0.937,
+            "width": 0.011,
+            "height": 0.011
+          },
+          "content": "8",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "page_index": 9,
+      "blocks": [
+        {
+          "id": "9_0",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.113,
+            "y": 0.09,
+            "width": 0.336,
+            "height": 0.019
+          },
+          "content": "4.5 Data Construction Summary",
+          "label": "Text"
+        },
+        {
+          "id": "9_1",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.145,
+            "y": 0.115,
+            "width": 0.739,
+            "height": 0.016
+          },
+          "content": "Table 1 reports the high-level coverage of the filtered universe used in the empirical sections that follow.",
+          "label": "Text"
+        },
+        {
+          "id": "9_2",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.284,
+            "y": 0.143,
+            "width": 0.43,
+            "height": 0.016
+          },
+          "content": "Table 1: Data Construction Summary for Filtered Universe",
+          "label": "Text"
+        },
+        {
+          "id": "9_3",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.302,
+            "y": 0.17,
+            "width": 0.397,
+            "height": 0.091
+          },
+          "content": "<table><tr><td>Metric</td><td>Value</td></tr><tr><td>Unique firms (point-in-time)</td><td>9,893</td></tr><tr><td>Time coverage (min date)</td><td>2020-01-01</td></tr><tr><td>Time coverage (max date)</td><td>2025-12-01</td></tr><tr><td>Firm-month observations (after filters)</td><td>448,393</td></tr></table>",
+          "label": "Table"
+        },
+        {
+          "id": "9_4",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.113,
+            "y": 0.296,
+            "width": 0.244,
+            "height": 0.018
+          },
+          "content": "4.6 Summary Statistics",
+          "label": "Text"
+        },
+        {
+          "id": "9_5",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.112,
+            "y": 0.321,
+            "width": 0.772,
+            "height": 0.031
+          },
+          "content": "Table 2 reports summary statistics for monthly stock returns, and Table 3 reports summary statistics for the volume-based variables described above, for the filtered universe.",
+          "label": "Text"
+        },
+        {
+          "id": "9_6",
+          "order": 7,
+          "bounding_box": {
+            "x": 0.298,
+            "y": 0.364,
+            "width": 0.402,
+            "height": 0.016
+          },
+          "content": "Table 2: Summary Statistics of Monthly Stock Returns",
+          "label": "Text"
+        },
+        {
+          "id": "9_7",
+          "order": 8,
+          "bounding_box": {
+            "x": 0.375,
+            "y": 0.392,
+            "width": 0.25,
+            "height": 0.211
+          },
+          "content": "<table><tr><td>Statistic</td><td>Monthly Return</td></tr><tr><td>Mean</td><td>0.0204</td></tr><tr><td>Std Dev</td><td>0.3945</td></tr><tr><td>Kurtosis</td><td>4337.5002</td></tr><tr><td>Min</td><td>-0.9806</td></tr><tr><td>1%</td><td>-0.4077</td></tr><tr><td>5%</td><td>-0.2274</td></tr><tr><td>25% (Q1)</td><td>-0.0648</td></tr><tr><td>Median (Q2)</td><td>0.0009</td></tr><tr><td>75% (Q3)</td><td>0.0610</td></tr><tr><td>95%</td><td>0.2623</td></tr><tr><td>99%</td><td>0.7032</td></tr><tr><td>Max</td><td>74.1961</td></tr></table>",
+          "label": "Table"
+        },
+        {
+          "id": "9_8",
+          "order": 9,
+          "bounding_box": {
+            "x": 0.112,
+            "y": 0.619,
+            "width": 0.772,
+            "height": 0.032
+          },
+          "content": "Table 4 shows summary statistics for illiquidity measures obtained via 1) Kyle's lambda regression and 2) Amihud (2002b) illiquidity metric.",
+          "label": "Text"
+        },
+        {
+          "id": "9_9",
+          "order": 10,
+          "bounding_box": {
+            "x": 0.113,
+            "y": 0.667,
+            "width": 0.19,
+            "height": 0.019
+          },
+          "content": "4.7 Data Pipeline",
+          "label": "Text"
+        },
+        {
+          "id": "9_10",
+          "order": 11,
+          "bounding_box": {
+            "x": 0.111,
+            "y": 0.692,
+            "width": 0.775,
+            "height": 0.063
+          },
+          "content": "Figure 1 summarizes the end-to-end construction process: starting from raw CRSP daily and monthly files, we apply the cleaning and filtering steps in Section 4.2, construct daily order-flow and price-impact variables (Section 4.3), aggregate to the firm-month level, merge in delisting returns and point-in-time index membership, and assemble the final panel used throughout Sections 6–9.",
+          "label": "Text"
+        },
+        {
+          "id": "9_11",
+          "order": 12,
+          "bounding_box": {
+            "x": 0.162,
+            "y": 0.766,
+            "width": 0.673,
+            "height": 0.017
+          },
+          "content": "Figure 1: Data pipeline from raw CRSP files to firm-month features and final analysis panel.",
+          "label": "Text"
+        },
+        {
+          "id": "9_12",
+          "order": 13,
+          "bounding_box": {
+            "x": 0.113,
+            "y": 0.83,
+            "width": 0.181,
+            "height": 0.018
+          },
+          "content": "4.8 Assumptions",
+          "label": "Text"
+        },
+        {
+          "id": "9_13",
+          "order": 14,
+          "bounding_box": {
+            "x": 0.111,
+            "y": 0.854,
+            "width": 0.775,
+            "height": 0.047
+          },
+          "content": "In developing and testing our extended Kyle (1985)-based equity pricing framework, we rely on several conceptual, methodological, and empirical assumptions. These assumptions guide our theoretical model derivations and inform the design of our empirical tests. Below is a concise summary:",
+          "label": "Text"
+        },
+        {
+          "id": "9_14",
+          "order": 15,
+          "bounding_box": {
+            "x": 0.494,
+            "y": 0.937,
+            "width": 0.012,
+            "height": 0.011
+          },
+          "content": "9",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "page_index": 10,
+      "blocks": [
+        {
+          "id": "10_0",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.296,
+            "y": 0.09,
+            "width": 0.404,
+            "height": 0.015
+          },
+          "content": "Table 3: Summary Statistics of Volume-Based Variables",
+          "label": "Text"
+        },
+        {
+          "id": "10_1",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.252,
+            "y": 0.117,
+            "width": 0.495,
+            "height": 0.212
+          },
+          "content": "<table><tr><td>Statistic</td><td>Sum Volume</td><td>Std Dev Volume</td><td>Signed Flow</td></tr><tr><td>Mean</td><td>25,104,816.66</td><td>698,023.91</td><td>927,410.24</td></tr><tr><td>Std Dev</td><td>58,617,786.50</td><td>1,784,336.29</td><td>11,956,241.76</td></tr><tr><td>Kurtosis</td><td>22.98</td><td>26.31</td><td>16.55</td></tr><tr><td>Min</td><td>10,905.84</td><td>762.56</td><td>-44,919,327.44</td></tr><tr><td>1%</td><td>10,905.99</td><td>762.57</td><td>-44,918,538.60</td></tr><tr><td>5%</td><td>91,528.40</td><td>4,490.21</td><td>-10,329,741.40</td></tr><tr><td>25% (Q1)</td><td>1,079,302.00</td><td>34,423.39</td><td>-639,833.00</td></tr><tr><td>Median (Q2)</td><td>5,399,945.00</td><td>140,154.56</td><td>10,606.00</td></tr><tr><td>75% (Q3)</td><td>20,817,668.00</td><td>504,497.97</td><td>974,975.00</td></tr><tr><td>95%</td><td>115,601,216.20</td><td>3,165,381.84</td><td>14,387,101.20</td></tr><tr><td>99%</td><td>407,255,007.95</td><td>12,736,511.69</td><td>71,182,435.22</td></tr><tr><td>Max</td><td>407,267,898.92</td><td>12,736,546.16</td><td>71,182,966.76</td></tr></table>",
+          "label": "Table"
+        },
+        {
+          "id": "10_2",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.293,
+            "y": 0.343,
+            "width": 0.413,
+            "height": 0.015
+          },
+          "content": "Table 4: Summary Statistics of Kyle-Lambda Estimators",
+          "label": "Text"
+        },
+        {
+          "id": "10_3",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.334,
+            "y": 0.37,
+            "width": 0.333,
+            "height": 0.211
+          },
+          "content": "<table><tr><td>Statistic</td><td>Kyle’s Lambda</td><td>Amihud</td></tr><tr><td>Mean</td><td>9.631e-06</td><td>6.775e-07</td></tr><tr><td>Std Dev</td><td>3.516e-05</td><td>3.287e-06</td></tr><tr><td>Kurtosis</td><td>41.53</td><td>45.51</td></tr><tr><td>Min</td><td>8.099e-09</td><td>1.147e-11</td></tr><tr><td>1%</td><td>8.1e-09</td><td>1.147e-11</td></tr><tr><td>5%</td><td>3.042e-08</td><td>5.075e-11</td></tr><tr><td>25% (Q1)</td><td>2.385e-07</td><td>6.787e-10</td></tr><tr><td>Median (Q2)</td><td>9.738e-07</td><td>5.436e-09</td></tr><tr><td>75% (Q3)</td><td>3.933e-06</td><td>5.756e-08</td></tr><tr><td>95%</td><td>3.783e-05</td><td>2.143e-06</td></tr><tr><td>99%</td><td>0.0002816</td><td>2.66e-05</td></tr><tr><td>Max</td><td>0.0002816</td><td>2.66e-05</td></tr></table>",
+          "label": "Table"
+        },
+        {
+          "id": "10_4",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.134,
+            "y": 0.608,
+            "width": 0.3,
+            "height": 0.015
+          },
+          "content": "1. Market Microstructure Structure",
+          "label": "Text"
+        },
+        {
+          "id": "10_5",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.173,
+            "y": 0.633,
+            "width": 0.711,
+            "height": 0.045
+          },
+          "content": "- We follow the standard Kyle (1985) approach, assuming a single risky asset with liquidation value v, traded by one informed trader, a continuum (or aggregate) of noise traders, and a competitive market maker who sets price as a function of observed order flow.",
+          "label": "Text"
+        },
+        {
+          "id": "10_6",
+          "order": 7,
+          "bounding_box": {
+            "x": 0.173,
+            "y": 0.683,
+            "width": 0.712,
+            "height": 0.06
+          },
+          "content": "- In contrast to classical structural models that decompose firm value into an \"asset component\" and a \"debt component,\" our framework decomposes observed trading activity into an informed component \\( x \\) and a noise component \\( u \\), with only their sum \\( y = x + u \\) observable to the market maker.",
+          "label": "Text"
+        },
+        {
+          "id": "10_7",
+          "order": 8,
+          "bounding_box": {
+            "x": 0.133,
+            "y": 0.754,
+            "width": 0.462,
+            "height": 0.016
+          },
+          "content": "2. Risk-Neutral Market Maker and Linear Pricing Rule",
+          "label": "Text"
+        },
+        {
+          "id": "10_8",
+          "order": 9,
+          "bounding_box": {
+            "x": 0.173,
+            "y": 0.779,
+            "width": 0.711,
+            "height": 0.046
+          },
+          "content": "- Consistent with Kyle (1985), we assume a risk-neutral, competitive market maker who sets the price equal to the conditional expectation of liquidation value given observed order flow, \\( p = \\mathbb{E}[v \\mid y] \\), earning zero expected profit in equilibrium.",
+          "label": "Text"
+        },
+        {
+          "id": "10_9",
+          "order": 10,
+          "bounding_box": {
+            "x": 0.173,
+            "y": 0.829,
+            "width": 0.712,
+            "height": 0.076
+          },
+          "content": "- We restrict attention to linear equilibria, in which the informed trader's order is linear in her signal (\\(x = \\beta(v - p_0)\\)) and the market maker's pricing rule is linear in order flow (\\(p = p_0 + \\lambda y\\)). This is the standard equilibrium refinement in the microstructure literature, applied across single- and multi-period settings with one or many informed traders (Kyle, 1985; Admati and Pfleiderer, 1988; Holden and Subrahmanyam, 1992; Foster and Viswanathan, 1996; Back, 1992), and whose",
+          "label": "Text"
+        },
+        {
+          "id": "10_10",
+          "order": 11,
+          "bounding_box": {
+            "x": 0.49,
+            "y": 0.936,
+            "width": 0.02,
+            "height": 0.013
+          },
+          "content": "10",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "page_index": 11,
+      "blocks": [
+        {
+          "id": "11_0",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.187,
+            "y": 0.092,
+            "width": 0.698,
+            "height": 0.046
+          },
+          "content": "existence has been studied directly by Bagnoli et al. (2001); Back and Baruch (2004) further show that this linear, continuous-time equilibrium arises as the limit of a sequential trade-by-trade equilibrium in the spirit of Glosten and Milgrom (1985).",
+          "label": "Text"
+        },
+        {
+          "id": "11_1",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.172,
+            "y": 0.142,
+            "width": 0.715,
+            "height": 0.092
+          },
+          "content": "- In our model, risk neutrality is assigned to the market maker's pricing problem, not to the agents bearing fundamental risk. This is the standard locus of risk-neutrality in the microstructure literature (Kyle, 1985; Glosten and Milgrom, 1985): subsequent work relaxes risk-neutrality for the informed trader while continuing to model the market maker as risk-neutral and competitive (Holden and Subrahmanyam, 1994; Baruch, 2002), isolating risk-bearing to the party with fundamental exposure to \\( v \\) rather than to the price-setting mechanism itself.",
+          "label": "Text"
+        },
+        {
+          "id": "11_2",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.133,
+            "y": 0.243,
+            "width": 0.49,
+            "height": 0.016
+          },
+          "content": "3. Distributional Assumptions on Value and Noise Trading",
+          "label": "Text"
+        },
+        {
+          "id": "11_3",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.172,
+            "y": 0.268,
+            "width": 0.712,
+            "height": 0.061
+          },
+          "content": "- We assume the liquidation value is normally distributed, \\( v \\sim N(p_0, \\Sigma_0) \\), and that aggregate noise-trader demand is normally distributed, \\( u \\sim N(0, \\sigma_u^2) \\), independent of \\( v \\). Normality is imposed directly on the asset's terminal value and on noise-trader order flow, which is what permits the linear-equilibrium closed-form solution for \\( \\lambda \\) in Proposition 1.",
+          "label": "Text"
+        },
+        {
+          "id": "11_4",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.172,
+            "y": 0.333,
+            "width": 0.711,
+            "height": 0.031
+          },
+          "content": "- We treat the informativeness ratio \\(\\sigma_u / \\sqrt{\\Sigma_0}\\) as the key state variable governing price impact, in place of the asset volatility \\(\\sigma\\) and the asset-to-debt ratio \\(A / F\\) in the Merton framework.",
+          "label": "Text"
+        },
+        {
+          "id": "11_5",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.133,
+            "y": 0.373,
+            "width": 0.426,
+            "height": 0.016
+          },
+          "content": "4. Equity Trading Volume as Observed Order Flow",
+          "label": "Text"
+        },
+        {
+          "id": "11_6",
+          "order": 7,
+          "bounding_box": {
+            "x": 0.172,
+            "y": 0.398,
+            "width": 0.712,
+            "height": 0.046
+          },
+          "content": "- We assume that observed equity trading volume (and, in particular, our signed-volume construction, Method 2) is a noisy but informative empirical proxy for the latent order flow \\( y = x + u \\) that the market maker actually conditions on.",
+          "label": "Text"
+        },
+        {
+          "id": "11_7",
+          "order": 8,
+          "bounding_box": {
+            "x": 0.172,
+            "y": 0.449,
+            "width": 0.711,
+            "height": 0.046
+          },
+          "content": "- By treating signed volume as a proxy for \\( y \\), we assume that the direction of daily price changes carries information about whether volume reflects informed or noise trading. This is consistent with Kyle (1985)'s model, in which only the informed component of flow is correlated with \\( v \\).",
+          "label": "Text"
+        },
+        {
+          "id": "11_8",
+          "order": 9,
+          "bounding_box": {
+            "x": 0.172,
+            "y": 0.499,
+            "width": 0.711,
+            "height": 0.046
+          },
+          "content": "- Consistent with informed-trading models more broadly ((Easley et al., 1996a, 1998b)), we posit that if the informed trader anticipates favorable news about \\( v \\), she will submit larger buy orders, raising both signed order flow and price.",
+          "label": "Text"
+        },
+        {
+          "id": "11_9",
+          "order": 10,
+          "bounding_box": {
+            "x": 0.133,
+            "y": 0.554,
+            "width": 0.558,
+            "height": 0.016
+          },
+          "content": "5. Fixed Supply and Single-Period (or Sequential-Auction) Trading",
+          "label": "Text"
+        },
+        {
+          "id": "11_10",
+          "order": 11,
+          "bounding_box": {
+            "x": 0.172,
+            "y": 0.58,
+            "width": 0.711,
+            "height": 0.03
+          },
+          "content": "- As in Kyle (1985), we assume a fixed quantity of the risky asset available for trading within each round, with no new issuance or share buybacks occurring within a trading period.",
+          "label": "Text"
+        },
+        {
+          "id": "11_11",
+          "order": 12,
+          "bounding_box": {
+            "x": 0.172,
+            "y": 0.615,
+            "width": 0.712,
+            "height": 0.06
+          },
+          "content": "- In the dynamic extension (Section 3.3), trading occurs over a finite or continuous sequence of rounds before v is publicly revealed at T; we assume no additional informed traders enter or exit during this window, so that a single informed agent's strategy fully characterizes the informed component of order flow.",
+          "label": "Text"
+        },
+        {
+          "id": "11_12",
+          "order": 13,
+          "bounding_box": {
+            "x": 0.133,
+            "y": 0.686,
+            "width": 0.531,
+            "height": 0.015
+          },
+          "content": "6. Information Revelation in Place of Bankruptcy and Recovery",
+          "label": "Text"
+        },
+        {
+          "id": "11_13",
+          "order": 14,
+          "bounding_box": {
+            "x": 0.172,
+            "y": 0.71,
+            "width": 0.711,
+            "height": 0.061
+          },
+          "content": "- We lean on Kyle's information-revelation assumption: the liquidation value \\( v \\) becomes publicly known at a terminal date \\( T \\), at which point the price converges to value and all private information is impounded. The economic friction is the gradual, imperfect revelation of \\( v \\) through the order-flow process, formalized by the time-varying price-impact coefficient \\( \\lambda(t) \\) (Proposition 4).",
+          "label": "Text"
+        },
+        {
+          "id": "11_14",
+          "order": 15,
+          "bounding_box": {
+            "x": 0.172,
+            "y": 0.776,
+            "width": 0.711,
+            "height": 0.031
+          },
+          "content": "- We assume that the rate of information revelation and the time path of \\(\\lambda(t)\\) differentiate short-horizon from long-horizon predictability.",
+          "label": "Text"
+        },
+        {
+          "id": "11_15",
+          "order": 16,
+          "bounding_box": {
+            "x": 0.133,
+            "y": 0.816,
+            "width": 0.299,
+            "height": 0.016
+          },
+          "content": "7. Data and Frequency Conventions",
+          "label": "Text"
+        },
+        {
+          "id": "11_16",
+          "order": 17,
+          "bounding_box": {
+            "x": 0.172,
+            "y": 0.841,
+            "width": 0.522,
+            "height": 0.016
+          },
+          "content": "- We construct all variables from CRSP daily and monthly equity data.",
+          "label": "Text"
+        },
+        {
+          "id": "11_17",
+          "order": 18,
+          "bounding_box": {
+            "x": 0.172,
+            "y": 0.861,
+            "width": 0.712,
+            "height": 0.046
+          },
+          "content": "- We assume that daily CRSP volume and returns are a sufficient statistic for estimating firm-month-level \\(\\hat{\\lambda}_{it}\\), while acknowledging that higher-frequency (intraday/TAQ) data would provide a more precise estimate of the continuous-time \\(\\lambda(t)\\) path described in Proposition 4.",
+          "label": "Text"
+        },
+        {
+          "id": "11_18",
+          "order": 19,
+          "bounding_box": {
+            "x": 0.49,
+            "y": 0.936,
+            "width": 0.018,
+            "height": 0.012
+          },
+          "content": "11",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "page_index": 12,
+      "blocks": [
+        {
+          "id": "12_0",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.173,
+            "y": 0.092,
+            "width": 0.714,
+            "height": 0.06
+          },
+          "content": "- We assume that monthly aggregation of daily order-flow estimates is adequate for capturing the economically relevant variation in price impact for the purposes of one-month-ahead return forecasting, while treating intra-month variation as the object of interest for the higher-frequency robustness checks.",
+          "label": "Text"
+        },
+        {
+          "id": "12_1",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.132,
+            "y": 0.162,
+            "width": 0.411,
+            "height": 0.016
+          },
+          "content": "8. Rolling Estimation and Predictive Regressions",
+          "label": "Text"
+        },
+        {
+          "id": "12_2",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.173,
+            "y": 0.187,
+            "width": 0.711,
+            "height": 0.047
+          },
+          "content": "- When evaluating out-of-sample forecasts, we assume that the equilibrium parameters of interest \\((\\hat{\\lambda}_{it}\\), and the regression coefficients linking \\(\\hat{\\lambda}_{it}\\) to future returns) can be re-estimated as new data arrive. This reflects time-varying informativeness ratios \\(\\sigma_u / \\sqrt{\\Sigma_0}\\) across firms and over time.",
+          "label": "Text"
+        },
+        {
+          "id": "12_3",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.173,
+            "y": 0.239,
+            "width": 0.712,
+            "height": 0.046
+          },
+          "content": "- Monthly realized stock returns are regressed on one-month-lagged \\(\\hat{\\lambda}_{it}\\) estimates. We assume that the forecasting window of interest is one month, which is consistent with many hedge funds and pension funds' investing horizons.",
+          "label": "Text"
+        },
+        {
+          "id": "12_4",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.173,
+            "y": 0.289,
+            "width": 0.714,
+            "height": 0.047
+          },
+          "content": "- We treat individual firms separately when constructing \\(\\hat{\\lambda}_{it}\\) and pool them only after computing firm-level estimates. We assume that cross-sectional dependence in order flow across firms does not materially bias the final pooled regression estimates.",
+          "label": "Text"
+        },
+        {
+          "id": "12_5",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.111,
+            "y": 0.348,
+            "width": 0.773,
+            "height": 0.12
+          },
+          "content": "These assumptions underpin our main findings that (1) signed order flow, estimated via Kyle's \\(\\lambda\\), captures short-term information asymmetry and price-impact dynamics; (2) daily order flow-driven measures of \\(\\lambda\\) significantly improve short-horizon return forecasting relative to aggregate unsigned volume; and (3) the time-varying nature of \\(\\lambda(t)\\) implied by the continuous-time extension of Kyle's model retains relevance for explaining longer-horizon predictability through slower-moving aggregate trading-activity measures. Any departure from these assumptions, such as multiple informed traders with heterogeneous signals, time-varying noise-trading variance unrelated to \\(\\sigma_u\\), or strategic behavior by the market maker, may alter the empirical outcomes and should be explored in future research.",
+          "label": "Text"
+        },
+        {
+          "id": "12_6",
+          "order": 7,
+          "bounding_box": {
+            "x": 0.112,
+            "y": 0.491,
+            "width": 0.77,
+            "height": 0.02
+          },
+          "content": "5 Empirical Model 1: Order Flow and Stock Return Regressions",
+          "label": "Text"
+        },
+        {
+          "id": "12_7",
+          "order": 8,
+          "bounding_box": {
+            "x": 0.111,
+            "y": 0.522,
+            "width": 0.773,
+            "height": 0.046
+          },
+          "content": "We estimate two types of regression (contemporaneous and one-month-ahead) for the CRSP equity universe. Let  \\( StockRet_{it} \\)  denote the monthly return of stock i in month t. We define three order-flow-based explanatory variables, constructed entirely from CRSP daily data:",
+          "label": "Text"
+        },
+        {
+          "id": "12_8",
+          "order": 9,
+          "bounding_box": {
+            "x": 0.138,
+            "y": 0.58,
+            "width": 0.207,
+            "height": 0.014
+          },
+          "content": "• Total Trading Volume:",
+          "label": "Text"
+        },
+        {
+          "id": "12_9",
+          "order": 10,
+          "bounding_box": {
+            "x": 0.411,
+            "y": 0.593,
+            "width": 0.473,
+            "height": 0.032
+          },
+          "content": "\\[\n\\operatorname{sumvolume} _ {i t} = \\sum_ {\\tau \\in t} \\operatorname{Volume} _ {i \\tau}. \\tag {7}\n\\]",
+          "label": "Formula"
+        },
+        {
+          "id": "12_10",
+          "order": 11,
+          "bounding_box": {
+            "x": 0.153,
+            "y": 0.631,
+            "width": 0.48,
+            "height": 0.015
+          },
+          "content": "This represents the unsigned total trading volume within month t.",
+          "label": "Text"
+        },
+        {
+          "id": "12_11",
+          "order": 12,
+          "bounding_box": {
+            "x": 0.138,
+            "y": 0.656,
+            "width": 0.347,
+            "height": 0.015
+          },
+          "content": "• Standard Deviation of Trading Volume:",
+          "label": "Text"
+        },
+        {
+          "id": "12_12",
+          "order": 13,
+          "bounding_box": {
+            "x": 0.333,
+            "y": 0.682,
+            "width": 0.552,
+            "height": 0.04
+          },
+          "content": "\\[\n\\operatorname{stdvolume} _ {i t} = \\sqrt {\\frac {1}{n - 1} \\sum_ {\\tau} \\left(\\operatorname{Volume} _ {i \\tau} - \\overline {{\\operatorname{Volume}}} _ {i}\\right) ^ {2}}. \\tag {8}\n\\]",
+          "label": "Formula"
+        },
+        {
+          "id": "12_13",
+          "order": 14,
+          "bounding_box": {
+            "x": 0.152,
+            "y": 0.734,
+            "width": 0.731,
+            "height": 0.031
+          },
+          "content": "This proxies for the noise-trading variance  \\( \\sigma_{u}^{2} \\)  in Proposition 1: higher volume volatility signals a higher noise-to-information ratio, which lowers  \\( \\lambda \\)  and should predict weaker subsequent returns.",
+          "label": "Text"
+        },
+        {
+          "id": "12_14",
+          "order": 15,
+          "bounding_box": {
+            "x": 0.138,
+            "y": 0.774,
+            "width": 0.182,
+            "height": 0.015
+          },
+          "content": "- Signed Order Flow:",
+          "label": "Text"
+        },
+        {
+          "id": "12_15",
+          "order": 16,
+          "bounding_box": {
+            "x": 0.355,
+            "y": 0.787,
+            "width": 0.529,
+            "height": 0.034
+          },
+          "content": "\\[\n\\operatorname{signedflow} _ {i t} = \\sum_ {\\tau \\in t} \\left(\\operatorname{Volume} _ {i \\tau} \\times \\operatorname{sign} (\\Delta P _ {i \\tau})\\right). \\tag {9}\n\\]",
+          "label": "Formula"
+        },
+        {
+          "id": "12_16",
+          "order": 17,
+          "bounding_box": {
+            "x": 0.153,
+            "y": 0.827,
+            "width": 0.571,
+            "height": 0.016
+          },
+          "content": "This is the direct empirical estimate of Kyle's latent order flow \\( y_{i\\tau} = x_{i\\tau} + u_{i\\tau} \\).",
+          "label": "Text"
+        },
+        {
+          "id": "12_17",
+          "order": 18,
+          "bounding_box": {
+            "x": 0.146,
+            "y": 0.855,
+            "width": 0.099,
+            "height": 0.013
+          },
+          "content": "We estimate:",
+          "label": "Text"
+        },
+        {
+          "id": "12_18",
+          "order": 19,
+          "bounding_box": {
+            "x": 0.146,
+            "y": 0.87,
+            "width": 0.288,
+            "height": 0.015
+          },
+          "content": "(A) Contemporaneous Regression:",
+          "label": "Text"
+        },
+        {
+          "id": "12_19",
+          "order": 20,
+          "bounding_box": {
+            "x": 0.233,
+            "y": 0.897,
+            "width": 0.651,
+            "height": 0.017
+          },
+          "content": "\\[\n\\operatorname{StockRet} _ {i t} = \\alpha + \\beta_ {1} \\text {sumvolume} _ {i t} + \\beta_ {2} \\text {stdvolume} _ {i t} + \\beta_ {3} \\text {signedflow} _ {i t} + \\varepsilon_ {i t}. \\tag {10}\n\\]",
+          "label": "Formula"
+        },
+        {
+          "id": "12_20",
+          "order": 21,
+          "bounding_box": {
+            "x": 0.49,
+            "y": 0.936,
+            "width": 0.02,
+            "height": 0.013
+          },
+          "content": "12",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "page_index": 13,
+      "blocks": [
+        {
+          "id": "13_0",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.147,
+            "y": 0.092,
+            "width": 0.291,
+            "height": 0.016
+          },
+          "content": "(B) One-Month-Ahead Regression:",
+          "label": "Text"
+        },
+        {
+          "id": "13_1",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.212,
+            "y": 0.119,
+            "width": 0.672,
+            "height": 0.017
+          },
+          "content": "\\[\n\\operatorname{StockRet} _ {i, t + 1} = \\alpha + \\beta_ {1} \\text {   sumvolume } _ {i t} + \\beta_ {2} \\text {   stdvolume } _ {i t} + \\beta_ {3} \\text {   signedflow } _ {i t} + \\varepsilon_ {i, t + 1}. \\tag {11}\n\\]",
+          "label": "Formula"
+        },
+        {
+          "id": "13_2",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.112,
+            "y": 0.147,
+            "width": 0.774,
+            "height": 0.06
+          },
+          "content": "Both regressions are estimated on the full CRSP panel (point-in-time constituents, 2020–2025 or extended where data permit), with and without standard equity controls (log market capitalization, book-to-market, 12-1 month momentum, and the Amihud (2002b) illiquidity ratio), to verify that  \\( \\beta_{3} \\)  is not subsumed by known characteristics.",
+          "label": "Text"
+        },
+        {
+          "id": "13_3",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.272,
+            "y": 0.22,
+            "width": 0.453,
+            "height": 0.015
+          },
+          "content": "Table 5: Coefficient Estimates: Order Flow and Stock Returns",
+          "label": "Text"
+        },
+        {
+          "id": "13_4",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.115,
+            "y": 0.248,
+            "width": 0.868,
+            "height": 0.143
+          },
+          "content": "<table><tr><td rowspan=\"2\"></td><td colspan=\"2\">Without Controls</td><td colspan=\"2\">With Controls</td></tr><tr><td>Contemp.</td><td>1-mo Ahead</td><td>Contemp.</td><td>1-mo Ahead</td></tr><tr><td>Intercept</td><td>0.01229***(19.40)</td><td>0.01723***(26.56)</td><td>0.01197***(17.04)</td><td>0.0153***(20.99)</td></tr><tr><td>Sum Volume (\\( \\beta_1 \\))</td><td>-6.319e-10***(33.92)</td><td>-9.461e-11***(4.94)</td><td>-6.529e-10***(31.50)</td><td>-1.364e-10***(6.31)</td></tr><tr><td>Std Dev Volume (\\( \\beta_2 \\))</td><td>2.594e-08***(40.70)</td><td>8.688e-09***(13.24)</td><td>2.589e-08***(35.83)</td><td>8.334e-09***(11.00)</td></tr><tr><td>Signed Flow (\\( \\beta_3 \\))</td><td>6.33e-09***(121.70)</td><td>-5.537e-10***(10.34)</td><td>5.88e-09***(104.39)</td><td>-6.24e-10***(10.65)</td></tr><tr><td>Observations</td><td>438500</td><td>438500</td><td>337722</td><td>329252</td></tr><tr><td>\\( R^2 \\)</td><td>0.0484</td><td>0.0007</td><td>0.0468</td><td>0.0031</td></tr></table>",
+          "label": "Table"
+        },
+        {
+          "id": "13_5",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.112,
+            "y": 0.406,
+            "width": 0.772,
+            "height": 0.048
+          },
+          "content": "Predicted pattern (Proposition 1 and 3): \\(\\beta_{1} > 0\\) but small/insignificant once controls are added; \\(\\beta_{2} < 0\\) (noise-trading variance lowers \\(\\lambda\\), degrading price discovery); \\(\\beta_{3} > 0\\) and robust to controls since signed flow is the direct empirical analog of Kyle's \\(y\\).",
+          "label": "Text"
+        },
+        {
+          "id": "13_6",
+          "order": 7,
+          "bounding_box": {
+            "x": 0.112,
+            "y": 0.474,
+            "width": 0.744,
+            "height": 0.022
+          },
+          "content": "6 Empirical Model 2: Kyle-Lambda Asset-Pricing Regressions",
+          "label": "Text"
+        },
+        {
+          "id": "13_7",
+          "order": 8,
+          "bounding_box": {
+            "x": 0.145,
+            "y": 0.506,
+            "width": 0.438,
+            "height": 0.016
+          },
+          "content": "We now construct firm-month estimates of Kyle's \\(\\lambda\\) directly.",
+          "label": "Text"
+        },
+        {
+          "id": "13_8",
+          "order": 9,
+          "bounding_box": {
+            "x": 0.113,
+            "y": 0.538,
+            "width": 0.191,
+            "height": 0.02
+          },
+          "content": "6.1 Estimating \\(\\hat{\\lambda}_{it}\\)",
+          "label": "Text"
+        },
+        {
+          "id": "13_9",
+          "order": 10,
+          "bounding_box": {
+            "x": 0.144,
+            "y": 0.564,
+            "width": 0.635,
+            "height": 0.016
+          },
+          "content": "For each firm i and month t, we estimate  \\( \\hat{\\lambda}_{it} \\)  via an intramonth price-impact regression:",
+          "label": "Text"
+        },
+        {
+          "id": "13_10",
+          "order": 11,
+          "bounding_box": {
+            "x": 0.373,
+            "y": 0.59,
+            "width": 0.511,
+            "height": 0.019
+          },
+          "content": "\\[\n\\Delta P _ {i \\tau} = \\hat {\\lambda} _ {i t} \\cdot \\mathrm{OF} _ {i \\tau} + \\eta_ {i \\tau}, \\quad \\tau \\in t, \\tag {12}\n\\]",
+          "label": "Formula"
+        },
+        {
+          "id": "13_11",
+          "order": 12,
+          "bounding_box": {
+            "x": 0.112,
+            "y": 0.62,
+            "width": 0.772,
+            "height": 0.043
+          },
+          "content": "where  \\( OF_{i\\tau} = Volume_{i\\tau} \\times \\text{sign}(\\Delta P_{i\\tau}) \\)  is the daily signed order-flow proxy and  \\( \\hat{\\lambda}_{it} \\)  is the estimated slope, taken as the firm-month Kyle-lambda estimate. As a robustness check, we also compute the Amihud-style ratio",
+          "label": "Text"
+        },
+        {
+          "id": "13_12",
+          "order": 13,
+          "bounding_box": {
+            "x": 0.375,
+            "y": 0.662,
+            "width": 0.51,
+            "height": 0.037
+          },
+          "content": "\\[\n\\hat {\\lambda} _ {i t} ^ {A m i h u d} = \\frac {1}{n} \\sum_ {\\tau \\in t} \\frac {| r _ {i \\tau} |}{\\text {DollarVolume} _ {i \\tau}}, \\tag {13}\n\\]",
+          "label": "Formula"
+        },
+        {
+          "id": "13_13",
+          "order": 14,
+          "bounding_box": {
+            "x": 0.112,
+            "y": 0.704,
+            "width": 0.772,
+            "height": 0.032
+          },
+          "content": "which proxies price impact without requiring within-month regression and is directly comparable to the existing illiquidity literature (Amihud (2002b)).",
+          "label": "Text"
+        },
+        {
+          "id": "13_14",
+          "order": 15,
+          "bounding_box": {
+            "x": 0.113,
+            "y": 0.753,
+            "width": 0.343,
+            "height": 0.017
+          },
+          "content": "6.2 Return-Prediction Regression",
+          "label": "Text"
+        },
+        {
+          "id": "13_15",
+          "order": 16,
+          "bounding_box": {
+            "x": 0.145,
+            "y": 0.778,
+            "width": 0.324,
+            "height": 0.015
+          },
+          "content": "We estimate, with and without an intercept:",
+          "label": "Text"
+        },
+        {
+          "id": "13_16",
+          "order": 17,
+          "bounding_box": {
+            "x": 0.368,
+            "y": 0.805,
+            "width": 0.516,
+            "height": 0.017
+          },
+          "content": "\\[\n\\text { StockRet } _ {i, t + 1} = \\alpha_ {i} + \\beta_ {i} \\hat {\\lambda} _ {i t} + \\varepsilon_ {i, t + 1}. \\tag {14}\n\\]",
+          "label": "Formula"
+        },
+        {
+          "id": "13_17",
+          "order": 18,
+          "bounding_box": {
+            "x": 0.49,
+            "y": 0.936,
+            "width": 0.02,
+            "height": 0.013
+          },
+          "content": "13",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "page_index": 14,
+      "blocks": [
+        {
+          "id": "14_0",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.254,
+            "y": 0.089,
+            "width": 0.49,
+            "height": 0.016
+          },
+          "content": "Table 6: Coefficient Estimates for Kyle-Lambda Return Regressions",
+          "label": "Text"
+        },
+        {
+          "id": "14_1",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.184,
+            "y": 0.117,
+            "width": 0.632,
+            "height": 0.117
+          },
+          "content": "<table><tr><td rowspan=\"2\"></td><td colspan=\"2\">With Intercept</td><td colspan=\"2\">Uncentered</td></tr><tr><td>\\( \\hat{\\lambda}^{regression} \\)</td><td>\\( \\hat{\\lambda}^{Amihud} \\)</td><td>\\( \\hat{\\lambda}^{regression} \\)</td><td>\\( \\hat{\\lambda}^{Amihud} \\)</td></tr><tr><td>Intercept</td><td>0.02134*** (3.20)</td><td>0.02027*** (3.03)</td><td>—</td><td>—</td></tr><tr><td>\\( \\hat{\\lambda}_{it} \\)</td><td>-101.2*** (-6.46)</td><td>136.1 (0.48)</td><td>53.69 (1.30)</td><td>1355*** (4.08)</td></tr><tr><td>Observations</td><td>438465</td><td>438471</td><td>438465</td><td>438471</td></tr><tr><td>\\( R^2 \\)</td><td>0.0001</td><td>0.0000</td><td>0.0000</td><td>0.0001</td></tr></table>",
+          "label": "Table"
+        },
+        {
+          "id": "14_2",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.113,
+            "y": 0.253,
+            "width": 0.699,
+            "height": 0.021
+          },
+          "content": "7 Empirical Model 3: Comparing  \\( \\lambda \\) -Construction Methods",
+          "label": "Text"
+        },
+        {
+          "id": "14_3",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.145,
+            "y": 0.286,
+            "width": 0.547,
+            "height": 0.016
+          },
+          "content": "Having established that  \\( \\hat{\\lambda}_{it} \\)  predicts returns, we compare two constructions.",
+          "label": "Text"
+        },
+        {
+          "id": "14_4",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.146,
+            "y": 0.302,
+            "width": 0.275,
+            "height": 0.015
+          },
+          "content": "Method A (Amihud-style, level):",
+          "label": "Text"
+        },
+        {
+          "id": "14_5",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.393,
+            "y": 0.327,
+            "width": 0.491,
+            "height": 0.036
+          },
+          "content": "\\[\n\\hat {\\lambda} _ {i t} ^ {A} = \\frac {1}{n} \\sum_ {\\tau \\in t} \\frac {| r _ {i \\tau} |}{\\text { DollarVolume } _ {i \\tau}}. \\tag {15}\n\\]",
+          "label": "Formula"
+        },
+        {
+          "id": "14_6",
+          "order": 7,
+          "bounding_box": {
+            "x": 0.145,
+            "y": 0.373,
+            "width": 0.415,
+            "height": 0.016
+          },
+          "content": "Method B (Kyle price-impact regression, signed):",
+          "label": "Text"
+        },
+        {
+          "id": "14_7",
+          "order": 8,
+          "bounding_box": {
+            "x": 0.33,
+            "y": 0.398,
+            "width": 0.554,
+            "height": 0.027
+          },
+          "content": "\\[\n\\hat {\\lambda} _ {i t} ^ {B} = \\widehat {\\text { slope }} \\left(\\Delta P _ {i \\tau} \\text {   on   Volume } _ {i \\tau} \\times \\operatorname{sign} \\left(\\Delta P _ {i \\tau}\\right)\\right). \\tag {16}\n\\]",
+          "label": "Formula"
+        },
+        {
+          "id": "14_8",
+          "order": 9,
+          "bounding_box": {
+            "x": 0.145,
+            "y": 0.433,
+            "width": 0.73,
+            "height": 0.019
+          },
+          "content": "Each \\(\\hat{\\lambda}_{it}^{Method}\\) is used as the sole regressor in Equation (14), estimated with and without an intercept.",
+          "label": "Text"
+        },
+        {
+          "id": "14_9",
+          "order": 10,
+          "bounding_box": {
+            "x": 0.3,
+            "y": 0.463,
+            "width": 0.398,
+            "height": 0.016
+          },
+          "content": "Table 7: Summary Statistics: Simple Strategy Returns",
+          "label": "Text"
+        },
+        {
+          "id": "14_10",
+          "order": 11,
+          "bounding_box": {
+            "x": 0.368,
+            "y": 0.49,
+            "width": 0.265,
+            "height": 0.215
+          },
+          "content": "<table><tr><td>Statistic</td><td>Method A</td><td>Method B</td></tr><tr><td>Mean</td><td>0.0209</td><td>0.0209</td></tr><tr><td>Std Dev</td><td>0.3888</td><td>0.3888</td></tr><tr><td>Kurtosis</td><td>4554.6048</td><td>4554.6054</td></tr><tr><td>Min</td><td>-0.9806</td><td>-0.9806</td></tr><tr><td>1%</td><td>-0.4032</td><td>-0.4032</td></tr><tr><td>5%</td><td>-0.2234</td><td>-0.2234</td></tr><tr><td>Q1</td><td>-0.0609</td><td>-0.0609</td></tr><tr><td>Median</td><td>0.0000</td><td>0.0000</td></tr><tr><td>Q3</td><td>0.0598</td><td>0.0598</td></tr><tr><td>95%</td><td>0.2588</td><td>0.2588</td></tr><tr><td>99%</td><td>0.6887</td><td>0.6887</td></tr><tr><td>Max</td><td>74.1961</td><td>74.1961</td></tr></table>",
+          "label": "Table"
+        },
+        {
+          "id": "14_11",
+          "order": 12,
+          "bounding_box": {
+            "x": 0.112,
+            "y": 0.717,
+            "width": 0.772,
+            "height": 0.032
+          },
+          "content": "Predicted pattern: We expect Method B, which incorporates signed price-volume information, to significantly outperform Method A.",
+          "label": "Text"
+        },
+        {
+          "id": "14_12",
+          "order": 13,
+          "bounding_box": {
+            "x": 0.112,
+            "y": 0.77,
+            "width": 0.772,
+            "height": 0.043
+          },
+          "content": "8 Empirical Method 4: Expanding-Window Out-of-Sample Procedure",
+          "label": "Text"
+        },
+        {
+          "id": "14_13",
+          "order": 14,
+          "bounding_box": {
+            "x": 0.145,
+            "y": 0.824,
+            "width": 0.663,
+            "height": 0.016
+          },
+          "content": "We adopt the same expanding (rolling) window design, with the predictor variable replaced.",
+          "label": "Text"
+        },
+        {
+          "id": "14_14",
+          "order": 15,
+          "bounding_box": {
+            "x": 0.113,
+            "y": 0.857,
+            "width": 0.155,
+            "height": 0.016
+          },
+          "content": "8.1 Procedure",
+          "label": "Text"
+        },
+        {
+          "id": "14_15",
+          "order": 16,
+          "bounding_box": {
+            "x": 0.112,
+            "y": 0.882,
+            "width": 0.772,
+            "height": 0.032
+          },
+          "content": "For each firm, we initialize a training window covering the first 30% of chronological observations. At each step:",
+          "label": "Text"
+        },
+        {
+          "id": "14_16",
+          "order": 17,
+          "bounding_box": {
+            "x": 0.49,
+            "y": 0.936,
+            "width": 0.02,
+            "height": 0.013
+          },
+          "content": "14",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "page_index": 15,
+      "blocks": [
+        {
+          "id": "15_0",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.133,
+            "y": 0.092,
+            "width": 0.4,
+            "height": 0.016
+          },
+          "content": "1. The current observation is added to the training set.",
+          "label": "Text"
+        },
+        {
+          "id": "15_1",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.133,
+            "y": 0.116,
+            "width": 0.283,
+            "height": 0.016
+          },
+          "content": "2. \\(\\hat{\\lambda}_{it}\\) and the regression coefficients in",
+          "label": "Text"
+        },
+        {
+          "id": "15_2",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.374,
+            "y": 0.144,
+            "width": 0.51,
+            "height": 0.018
+          },
+          "content": "\\[\n\\text { ActualReturn } _ {t} = a + b _ {1} r _ {f, t} + b _ {2} \\hat {\\lambda} _ {i t} + \\epsilon_ {t} \\tag {17}\n\\]",
+          "label": "Formula"
+        },
+        {
+          "id": "15_3",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.152,
+            "y": 0.173,
+            "width": 0.305,
+            "height": 0.015
+          },
+          "content": "are re-estimated on the expanded sample.",
+          "label": "Text"
+        },
+        {
+          "id": "15_4",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.132,
+            "y": 0.198,
+            "width": 0.657,
+            "height": 0.015
+          },
+          "content": "3. A one-month-ahead forecast is generated for month  \\( t + 1 \\)  using the updated parameters.",
+          "label": "Text"
+        },
+        {
+          "id": "15_5",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.113,
+            "y": 0.223,
+            "width": 0.723,
+            "height": 0.016
+          },
+          "content": "We pool all out-of-sample predicted and actual returns across firms and estimate the final regression",
+          "label": "Text"
+        },
+        {
+          "id": "15_6",
+          "order": 7,
+          "bounding_box": {
+            "x": 0.33,
+            "y": 0.25,
+            "width": 0.554,
+            "height": 0.017
+          },
+          "content": "\\[\n\\text { ActualReturn } = \\alpha + \\beta \\times \\text { PredictedReturn } + \\varepsilon , \\tag {18}\n\\]",
+          "label": "Formula"
+        },
+        {
+          "id": "15_7",
+          "order": 8,
+          "bounding_box": {
+            "x": 0.112,
+            "y": 0.278,
+            "width": 0.773,
+            "height": 0.076
+          },
+          "content": "using only out-of-sample observations, separately for each  \\( \\lambda \\) -construction method (A and B) defined in Section 8, and separately for a High-Frequency estimation window (daily intramonth regression, Method B) versus a Low-Frequency estimation window (monthly aggregate, Method A). This test is motivated by Proposition 4's prediction that price impact and its predictive content are strongest at short horizons/high frequency.",
+          "label": "Text"
+        },
+        {
+          "id": "15_8",
+          "order": 9,
+          "bounding_box": {
+            "x": 0.272,
+            "y": 0.366,
+            "width": 0.454,
+            "height": 0.015
+          },
+          "content": "Table 8: Coefficient Estimates Across  \\( \\lambda \\) -Construction Methods",
+          "label": "Text"
+        },
+        {
+          "id": "15_9",
+          "order": 10,
+          "bounding_box": {
+            "x": 0.197,
+            "y": 0.392,
+            "width": 0.606,
+            "height": 0.118
+          },
+          "content": "<table><tr><td rowspan=\"2\"></td><td colspan=\"2\">Method A (level)</td><td colspan=\"2\">Method B (signed regression)</td></tr><tr><td>With Int.</td><td>Uncentered</td><td>With Int.</td><td>Uncentered</td></tr><tr><td>Intercept</td><td>0.02027***(3.03)</td><td>—</td><td>0.02134***(3.20)</td><td>—</td></tr><tr><td>\\( \\hat{\\lambda}_{it} \\)</td><td>136.1 (0.48)</td><td>1355***(4.08)</td><td>-101.2***( -6.46)</td><td>53.69 (1.30)</td></tr><tr><td>N</td><td>438471</td><td>438471</td><td>438465</td><td>438465</td></tr><tr><td>\\( R^2 \\)</td><td>0.0000</td><td>0.0001</td><td>0.0001</td><td>0.0000</td></tr></table>",
+          "label": "Table"
+        },
+        {
+          "id": "15_10",
+          "order": 11,
+          "bounding_box": {
+            "x": 0.112,
+            "y": 0.542,
+            "width": 0.523,
+            "height": 0.017
+          },
+          "content": "8.2 Robustness: Fama–MacBeth and Portfolio Sorts",
+          "label": "Text"
+        },
+        {
+          "id": "15_11",
+          "order": 12,
+          "bounding_box": {
+            "x": 0.112,
+            "y": 0.567,
+            "width": 0.772,
+            "height": 0.045
+          },
+          "content": "Pooled OLS  \\( R^{2} \\)  for monthly equity returns is expected to be small (consistent with (Fama and French, 1988; Chen et al., 2007), and the broader asset-pricing literature on monthly return predictability). We therefore complement the pooled regression with:",
+          "label": "Text"
+        },
+        {
+          "id": "15_12",
+          "order": 13,
+          "bounding_box": {
+            "x": 0.145,
+            "y": 0.613,
+            "width": 0.493,
+            "height": 0.015
+          },
+          "content": "Fama–MacBeth cross-sectional regressions. For each month t:",
+          "label": "Text"
+        },
+        {
+          "id": "15_13",
+          "order": 14,
+          "bounding_box": {
+            "x": 0.387,
+            "y": 0.638,
+            "width": 0.497,
+            "height": 0.019
+          },
+          "content": "\\[\nr _ {i, t + 1} = \\alpha_ {t} + \\beta_ {t} \\hat {r} _ {i, t + 1} ^ {p r e d} + \\varepsilon_ {i, t + 1}, \\tag {19}\n\\]",
+          "label": "Formula"
+        },
+        {
+          "id": "15_14",
+          "order": 15,
+          "bounding_box": {
+            "x": 0.112,
+            "y": 0.668,
+            "width": 0.599,
+            "height": 0.015
+          },
+          "content": "summarized by the time-series mean of  \\( \\beta_{t} \\)  and its Newey–West-adjusted t-statistic.",
+          "label": "Text"
+        },
+        {
+          "id": "15_15",
+          "order": 16,
+          "bounding_box": {
+            "x": 0.111,
+            "y": 0.683,
+            "width": 0.773,
+            "height": 0.046
+          },
+          "content": "Decile portfolio sorts. Each month, sort stocks into deciles on the model-implied  \\( \\hat{\\lambda}_{it} \\)  signal from the expanding-window procedure; report long-only (D10) and long-short (D10–D1) monthly Sharpe ratios, separately for the High-Frequency and Low-Frequency legs.",
+          "label": "Text"
+        },
+        {
+          "id": "15_16",
+          "order": 17,
+          "bounding_box": {
+            "x": 0.282,
+            "y": 0.741,
+            "width": 0.434,
+            "height": 0.015
+          },
+          "content": "Table 9: Fama–MacBeth Cross-Sectional Regression Results",
+          "label": "Text"
+        },
+        {
+          "id": "15_17",
+          "order": 18,
+          "bounding_box": {
+            "x": 0.279,
+            "y": 0.768,
+            "width": 0.441,
+            "height": 0.108
+          },
+          "content": "<table><tr><td></td><td>lambda Amihud</td><td>lambda regression</td></tr><tr><td>\\( \\bar{\\alpha} \\) (mean intercept)</td><td>0.0130</td><td>0.0132</td></tr><tr><td>\\( t(\\bar{\\alpha}) \\) [NW]</td><td>1.65*</td><td>1.68*</td></tr><tr><td>\\( \\bar{\\beta} \\) (mean slope)</td><td>-0.0122</td><td>-0.0050</td></tr><tr><td>\\( t(\\bar{\\beta}) \\) [NW]</td><td>-2.27**</td><td>-2.25**</td></tr><tr><td>T (months)</td><td>58</td><td>58</td></tr></table>",
+          "label": "Table"
+        },
+        {
+          "id": "15_18",
+          "order": 19,
+          "bounding_box": {
+            "x": 0.49,
+            "y": 0.936,
+            "width": 0.019,
+            "height": 0.012
+          },
+          "content": "15",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "page_index": 16,
+      "blocks": [
+        {
+          "id": "16_0",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.113,
+            "y": 0.088,
+            "width": 0.369,
+            "height": 0.021
+          },
+          "content": "9 Discussion and Implications",
+          "label": "Text"
+        },
+        {
+          "id": "16_1",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.113,
+            "y": 0.12,
+            "width": 0.46,
+            "height": 0.018
+          },
+          "content": "9.1 Economic Mechanisms and Interpretation",
+          "label": "Text"
+        },
+        {
+          "id": "16_2",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.113,
+            "y": 0.145,
+            "width": 0.365,
+            "height": 0.015
+          },
+          "content": "9.1.1 Why Does Volume Predict Returns?",
+          "label": "Text"
+        },
+        {
+          "id": "16_3",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.145,
+            "y": 0.168,
+            "width": 0.54,
+            "height": 0.016
+          },
+          "content": "Based on our analysis, volume affects returns along 4 distinct mechanisms:",
+          "label": "Text"
+        },
+        {
+          "id": "16_4",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.133,
+            "y": 0.193,
+            "width": 0.751,
+            "height": 0.031
+          },
+          "content": "1. The information aggregation hypothesis due to Easley et al. (1996a) implies that high volume drives more informed trading. Informed trading, in turn, impounds information into the markets.",
+          "label": "Text"
+        },
+        {
+          "id": "16_5",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.132,
+            "y": 0.233,
+            "width": 0.753,
+            "height": 0.046
+          },
+          "content": "2. The liquidity provision in our model forecasts that high volume leads to a deep secondary market where investors are willing to pay a premium to ensure an easy exit from their positions. This premium drives up the prices.",
+          "label": "Text"
+        },
+        {
+          "id": "16_6",
+          "order": 7,
+          "bounding_box": {
+            "x": 0.132,
+            "y": 0.289,
+            "width": 0.712,
+            "height": 0.016
+          },
+          "content": "3. A spike in volume reveals demand and, given a fixed supply, forces an upward price adjustment.",
+          "label": "Text"
+        },
+        {
+          "id": "16_7",
+          "order": 8,
+          "bounding_box": {
+            "x": 0.113,
+            "y": 0.322,
+            "width": 0.456,
+            "height": 0.015
+          },
+          "content": "9.1.2 Reconciling with the Liquidity Premium Puzzle",
+          "label": "Text"
+        },
+        {
+          "id": "16_8",
+          "order": 9,
+          "bounding_box": {
+            "x": 0.112,
+            "y": 0.345,
+            "width": 0.772,
+            "height": 0.045
+          },
+          "content": "Our analysis provides a microstructure-based resolution to the liquidity premium puzzle that requires neither risk-based compensation nor market segmentation. We review the puzzle and then show how our framework resolves it.",
+          "label": "Text"
+        },
+        {
+          "id": "16_9",
+          "order": 10,
+          "bounding_box": {
+            "x": 0.112,
+            "y": 0.408,
+            "width": 0.773,
+            "height": 0.182
+          },
+          "content": "The puzzle and its classical formulations. Amihud and Mendelson (1986) show empirically that stocks with wider bid-ask spreads earn higher average returns and argue that the premium compensates investors for the transaction costs they incur. Merton (1973) provides a theoretical foundation: investors require higher expected returns on illiquid assets precisely because they bear the cost of trading those assets. The puzzle, formalized by Constantinides (1986), is that this argument breaks down in general equilibrium: an investor with an infinite trading horizon should be nearly indifferent to transaction costs, yet large illiquidity premia persist in the data. As Constantinides (1986) shows, the liquidity premium that investors actually require in equilibrium should be negligibly small, far below what empirical estimates suggest. Recent work by Chen (2022) attributes the gap to heterogeneity in investor information: better-informed investors are indifferent to transaction costs while less-informed investors require compensation. However, this leaves open the question of why uninformed investors should illiquid assets in the first place if those assets expose them to greater adverse-selection losses.",
+          "label": "Text"
+        },
+        {
+          "id": "16_10",
+          "order": 11,
+          "bounding_box": {
+            "x": 0.112,
+            "y": 0.607,
+            "width": 0.772,
+            "height": 0.045
+          },
+          "content": "Our resolution: adverse selection and temporary mispricing. We propose that the illiquidity premium does not need to be required by any investor in equilibrium; instead, it is realized as a consequence of temporary mispricing driven by the equilibrium widening and subsequent narrowing of Kyle's \\(\\lambda\\).",
+          "label": "Text"
+        },
+        {
+          "id": "16_11",
+          "order": 12,
+          "bounding_box": {
+            "x": 0.145,
+            "y": 0.653,
+            "width": 0.501,
+            "height": 0.015
+          },
+          "content": "The mechanism has two stages, tied directly to Propositions 1 and 3:",
+          "label": "Text"
+        },
+        {
+          "id": "16_12",
+          "order": 13,
+          "bounding_box": {
+            "x": 0.138,
+            "y": 0.68,
+            "width": 0.746,
+            "height": 0.12
+          },
+          "content": "- Stage 1 (\\(t = 0\\), low order flow): When signed order flow falls, the ratio of informed to noise trading deteriorates; Proposition 1 implies that \\(\\lambda\\) widens. A wider \\(\\lambda\\) means that any given order moves price more, discouraging participation by both informed and noise traders. Market makers, earning zero expected profit in equilibrium, do not absorb the additional risk by lowering prices voluntarily; rather, prices fall because the reduced participation and elevated adverse-selection risk imply a lower willingness to pay for the asset among market participants. The stock thus trades at a discount relative to its fundamental value, not because anyone demands a higher expected return to hold it, but because the equilibrium mechanism through which information is impounded into price is degraded.",
+          "label": "Text"
+        },
+        {
+          "id": "16_13",
+          "order": 14,
+          "bounding_box": {
+            "x": 0.138,
+            "y": 0.81,
+            "width": 0.747,
+            "height": 0.091
+          },
+          "content": "- Stage 2 (\\(t = 1\\), order flow normalization): As the information environment improves—more noise traders return, or new information reduces \\(\\Sigma_0\\) relative to \\(\\sigma_u^2\\)—\\(\\lambda\\) narrows. Proposition 3 implies that positive signed order flow again moves prices upward, restoring prices toward fundamental value. Investors who purchased the asset in Stage 1 at a discount realize a positive excess return equal to (Fair price – Depressed price) / Depressed price without any counterparty having deliberately borne a liquidity cost on their behalf.",
+          "label": "Text"
+        },
+        {
+          "id": "16_14",
+          "order": 15,
+          "bounding_box": {
+            "x": 0.49,
+            "y": 0.936,
+            "width": 0.019,
+            "height": 0.012
+          },
+          "content": "16",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "page_index": 17,
+      "blocks": [
+        {
+          "id": "17_0",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.111,
+            "y": 0.092,
+            "width": 0.777,
+            "height": 0.136
+          },
+          "content": "This mechanism resolves the Constantinides (1986) paradox directly: the illiquidity premium is realized, not required. No investor needs to demand a risk premium for holding an illiquid asset; they simply purchase it when adverse selection drives prices below fundamental value and hold it until the order-flow process restores prices. No counterparty knowingly pays the premium. Instead, the premium arises from the equilibrium dynamics of  \\( \\lambda \\)  itself, which depresses and then restores prices mechanically as order flow evolves. This also answers Chen (2022) open question about why uninformed investors hold illiquid assets: they do not need to hold them during the low-order-flow stage; the return accrues to those who are willing to provide liquidity precisely when  \\( \\lambda \\)  is widest, in the manner of a contrarian market maker rather than a passive buy-and-hold investor.",
+          "label": "Text"
+        },
+        {
+          "id": "17_1",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.111,
+            "y": 0.245,
+            "width": 0.774,
+            "height": 0.197
+          },
+          "content": "Empirical consistency. This mechanism is consistent with four features of our empirical results. First, the negative and significant coefficient on signed order flow in our one-month-ahead regressions (Table 5) reflects the Stage 1 mechanism: lower signed flow today predicts lower returns tomorrow, as \\(\\lambda\\) widens and prices continue to adjust downward before recovering. Second, the negative coefficient on volume volatility, our proxy for \\(\\sigma_u^2\\) in Proposition 1, is consistent with the prediction that elevated noise-trading variance narrows \\(\\lambda\\), attenuating the adverse-selection-driven discount and, therefore, reducing the magnitude of the subsequent price recovery. Third, the Fama-MacBeth slopes documented in Table 10 are negative on average across both \\(\\hat{\\lambda}\\) estimators after Newey-West adjustment. This reflects the cross-sectional manifestation of this mechanism: stocks with high \\(\\hat{\\lambda}_{it}\\) today (widened price impact, depressed prices) earn lower subsequent returns over our sample period, consistent with the transition from Stage 1 to Stage 2 having already occurred in the month following the wide-\\(\\lambda\\) episode. Fourth, our resolution does not require market segmentation, implausible preferences, or clientele effects: it follows directly from the equilibrium structure of Kyle (1985)'s model applied to a single, unified equity market.",
+          "label": "Text"
+        },
+        {
+          "id": "17_2",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.111,
+            "y": 0.458,
+            "width": 0.773,
+            "height": 0.168
+          },
+          "content": "Distinction from risk-based explanations. Our resolution differs from the risk-based approach in a subtle but important respect. Standard theories attribute the illiquidity premium to required compensation: investors know ex ante that illiquid assets carry higher transaction costs or greater exposure to systematic liquidity risk (Acharya and Pedersen, 2005; Pástor and Stambaugh, 2003), and they demand a higher expected return before holding those assets. Our theory attributes the premium to realized returns from temporary mispricing: investors do not need to anticipate a premium; they simply find that assets which experienced low signed order flow subsequently recover in price as \\(\\lambda\\) normalizes. The premium is a consequence of equilibrium price-impact dynamics, not of risk aversion or market frictions per se. This distinction has a testable implication: if the risk-based story is correct, the illiquidity premium should be predictable ex ante and should persist unconditionally. If our adverse-selection story is correct, the premium should be concentrated in periods following low signed order flow and should attenuate once \\(\\lambda\\) has normalized.",
+          "label": "Text"
+        },
+        {
+          "id": "17_3",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.114,
+            "y": 0.648,
+            "width": 0.186,
+            "height": 0.019
+          },
+          "content": "10 Conclusion",
+          "label": "Text"
+        },
+        {
+          "id": "17_4",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.111,
+            "y": 0.679,
+            "width": 0.773,
+            "height": 0.091
+          },
+          "content": "We develop an equity asset-pricing framework grounded in Kyle's (1985) model of strategic informed trading, in which the equilibrium price-impact coefficient \\(\\lambda\\) governs how trading activity is impounded into prices. Using CRSP daily and monthly data for all equities in the CRSP universe from 2020 to 2025, we construct firm-month estimates of signed order flow and of \\(\\lambda\\) itself, via both a direct within-month price-impact regression and an Amihud-style illiquidity ratio. We then test their ability to forecast the cross-section of subsequent stock returns.",
+          "label": "Text"
+        },
+        {
+          "id": "17_5",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.145,
+            "y": 0.771,
+            "width": 0.169,
+            "height": 0.014
+          },
+          "content": "Three findings emerge.",
+          "label": "Text"
+        },
+        {
+          "id": "17_6",
+          "order": 7,
+          "bounding_box": {
+            "x": 0.111,
+            "y": 0.785,
+            "width": 0.772,
+            "height": 0.06
+          },
+          "content": "First, signed order flow is a strong and highly significant predictor of both contemporaneous and one-month-ahead stock returns, robust to the inclusion of standard equity controls (size, book-to-market, momentum, and Amihud illiquidity), consistent with Proposition 3's prediction that order-flow innovations move prices in equilibrium.",
+          "label": "Text"
+        },
+        {
+          "id": "17_7",
+          "order": 8,
+          "bounding_box": {
+            "x": 0.111,
+            "y": 0.845,
+            "width": 0.773,
+            "height": 0.046
+          },
+          "content": "Second, volume volatility, our proxy for the noise-trading variance  \\( \\sigma_{u}^{2} \\)  in Proposition 1, predicts lower subsequent returns, consistent with the model's prediction that a higher noise-to-information trading ratio widens  \\( \\lambda \\)  and degrades price discovery.",
+          "label": "Text"
+        },
+        {
+          "id": "17_8",
+          "order": 9,
+          "bounding_box": {
+            "x": 0.49,
+            "y": 0.936,
+            "width": 0.019,
+            "height": 0.012
+          },
+          "content": "17",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "page_index": 18,
+      "blocks": [
+        {
+          "id": "18_0",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.111,
+            "y": 0.091,
+            "width": 0.773,
+            "height": 0.107
+          },
+          "content": "Third, our return-prediction regressions based on  \\( \\hat{\\lambda}_{it} \\)  itself are informative but specification-sensitive. results vary with the inclusion of an intercept and across our two  \\( \\lambda \\)  estimators, a pattern we investigate but do not yet fully resolve, and which we flag explicitly as a target for the robustness work in the sections that follow. Fama–MacBeth cross-sectional regressions of next-month returns on the predicted-return signal yield a statistically significant average slope (Newey–West t-statistics of -2.27 and -2.25 for the Amihud-style and regression-based estimators, respectively, over 58 months), indicating that order-flow-based illiquidity measures carry reliable, if modest, cross-sectional information about future returns over our sample.",
+          "label": "Text"
+        },
+        {
+          "id": "18_1",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.111,
+            "y": 0.198,
+            "width": 0.774,
+            "height": 0.121
+          },
+          "content": "Theoretically, our framework offers a resolution to the liquidity premium puzzle of Constantinides (1986) that relocates the source of the illiquidity premium from risk-based compensation to an adverse-selection and price-impact mechanism. Low signed order flow widens  \\( \\lambda \\)  and depresses prices today, as Kyle's market maker rationally demands greater compensation for the elevated risk of trading against informed counterparties; subsequent normalization of order flow narrows  \\( \\lambda \\)  and restores prices, generating the return differential historically attributed to a liquidity premium without requiring any counterparty to knowingly bear that cost in equilibrium. This relocates the puzzle's resolution from the risk-compensation story of Amihud and Mendelson (1986b) to the market microstructure tradition of Kyle (1985) and Glosten and Milgrom (1985).",
+          "label": "Text"
+        },
+        {
+          "id": "18_2",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.111,
+            "y": 0.32,
+            "width": 0.773,
+            "height": 0.104
+          },
+          "content": "For practitioners, our results suggest that equity portfolio managers running short-horizon or high-turnover strategies should favor stocks with low  \\( \\hat{\\lambda}_{it} \\)  to minimize expected trading costs, while market makers can use real-time estimates of signed order flow to recalibrate quoted spreads in response to changes in the informed-to-noise trading ratio that determines  \\( \\lambda \\)  in equilibrium. More broadly, our findings indicate that high-frequency, order-flow-based measures of price impact, estimated entirely from publicly available equity trading data, provide a theoretically motivated and empirically tractable complement to existing illiquidity proxies such as the Amihud ratio and the bid-ask spread.",
+          "label": "Text"
+        },
+        {
+          "id": "18_3",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.114,
+            "y": 0.447,
+            "width": 0.127,
+            "height": 0.018
+          },
+          "content": "References",
+          "label": "Text"
+        },
+        {
+          "id": "18_4",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.115,
+            "y": 0.477,
+            "width": 0.77,
+            "height": 0.031
+          },
+          "content": "Acharya, Viral V. and Lasse H. Pedersen, “Asset Pricing with Liquidity Risk,” Journal of Financial Economics, 2005, 77 (2), 375–410.",
+          "label": "Text"
+        },
+        {
+          "id": "18_5",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.115,
+            "y": 0.517,
+            "width": 0.768,
+            "height": 0.032
+          },
+          "content": "Admati, Anat R. and Paul Pfleiderer, “A Theory of Intraday Patterns: Volume and Price Variability,” The Review of Financial Studies, 1988, 1 (1), 3–40.",
+          "label": "Text"
+        },
+        {
+          "id": "18_6",
+          "order": 7,
+          "bounding_box": {
+            "x": 0.115,
+            "y": 0.557,
+            "width": 0.769,
+            "height": 0.032
+          },
+          "content": "Amihud, Yakov, “Illiquidity and Stock Returns: Cross-Section and Time-Series Effects,” Journal of Financial Markets, 2002, 5 (1), 31–56.",
+          "label": "Text"
+        },
+        {
+          "id": "18_7",
+          "order": 8,
+          "bounding_box": {
+            "x": 0.115,
+            "y": 0.598,
+            "width": 0.77,
+            "height": 0.031
+          },
+          "content": "_, “Illiquidity and stock returns: cross-section and time-series effects,” Journal of Financial Markets, 2002, 5 (1), 31–56.",
+          "label": "Text"
+        },
+        {
+          "id": "18_8",
+          "order": 9,
+          "bounding_box": {
+            "x": 0.115,
+            "y": 0.638,
+            "width": 0.77,
+            "height": 0.032
+          },
+          "content": "_ and Haim Mendelson, “Asset Pricing and the Bid-Ask Spread,” Journal of Financial Economics, 1986, 17 (2), 223–249.",
+          "label": "Text"
+        },
+        {
+          "id": "18_9",
+          "order": 10,
+          "bounding_box": {
+            "x": 0.114,
+            "y": 0.678,
+            "width": 0.771,
+            "height": 0.017
+          },
+          "content": "_ and _, “Asset Pricing and the Bid-Ask Spread,” Journal of Financial Economics, 1986, 17 (2), 223–249.",
+          "label": "Text"
+        },
+        {
+          "id": "18_10",
+          "order": 11,
+          "bounding_box": {
+            "x": 0.114,
+            "y": 0.703,
+            "width": 0.771,
+            "height": 0.017
+          },
+          "content": "Back, Kerry, “Insider Trading in Continuous Time,” The Review of Financial Studies, 1992, 5 (3), 387–409.",
+          "label": "Text"
+        },
+        {
+          "id": "18_11",
+          "order": 12,
+          "bounding_box": {
+            "x": 0.114,
+            "y": 0.729,
+            "width": 0.771,
+            "height": 0.032
+          },
+          "content": "_ and Shmuel Baruch, “Information in Securities Markets: Kyle Meets Glosten and Milgrom,” Econometrica, 2004, 72 (2), 433–465.",
+          "label": "Text"
+        },
+        {
+          "id": "18_12",
+          "order": 13,
+          "bounding_box": {
+            "x": 0.114,
+            "y": 0.77,
+            "width": 0.771,
+            "height": 0.031
+          },
+          "content": "Bagnoli, Mark, S. Viswanathan, and Craig W. Holden, “On the Existence of Linear Equilibria in Models of Market Making,” Mathematical Finance, 2001, 11 (1), 1–31.",
+          "label": "Text"
+        },
+        {
+          "id": "18_13",
+          "order": 14,
+          "bounding_box": {
+            "x": 0.114,
+            "y": 0.81,
+            "width": 0.771,
+            "height": 0.032
+          },
+          "content": "Bai, Jennie, Jian Li, and Asaf Manela, “The Value of Data to Fixed Income Investors,” 2024. Working paper, Georgetown University.",
+          "label": "Text"
+        },
+        {
+          "id": "18_14",
+          "order": 15,
+          "bounding_box": {
+            "x": 0.114,
+            "y": 0.85,
+            "width": 0.771,
+            "height": 0.031
+          },
+          "content": "Bajzik, Josef, “Trading Volume and Stock Returns: A Meta-Analysis,” International Review of Financial Analysis, 2021, 78, 101923.",
+          "label": "Text"
+        },
+        {
+          "id": "18_15",
+          "order": 16,
+          "bounding_box": {
+            "x": 0.114,
+            "y": 0.89,
+            "width": 0.771,
+            "height": 0.016
+          },
+          "content": "Baruch, Shmuel, “Insider Trading and Risk Aversion,” Journal of Financial Markets, 2002, 5 (4), 451–464.",
+          "label": "Text"
+        },
+        {
+          "id": "18_16",
+          "order": 17,
+          "bounding_box": {
+            "x": 0.49,
+            "y": 0.936,
+            "width": 0.021,
+            "height": 0.013
+          },
+          "content": "18",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "page_index": 19,
+      "blocks": [
+        {
+          "id": "19_0",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.115,
+            "y": 0.09,
+            "width": 0.77,
+            "height": 0.033
+          },
+          "content": "Brunnermeier, Markus K. and Lasse H. Pedersen, “Market Liquidity and Funding Liquidity,” Review of Financial Studies, 2009, 22 (6), 2201–2238.",
+          "label": "Text"
+        },
+        {
+          "id": "19_1",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.115,
+            "y": 0.13,
+            "width": 0.77,
+            "height": 0.048
+          },
+          "content": "Cabrol, Axel, Wolfgang Drobetz, Tizian Otto, and Tatjana Puhan, “Predicting Corporate Bond Illiquidity via Machine Learning: Implications for Bond Pricing,” Financial Analysts Journal, 2024, 80(3), 103–127.",
+          "label": "Text"
+        },
+        {
+          "id": "19_2",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.115,
+            "y": 0.186,
+            "width": 0.77,
+            "height": 0.034
+          },
+          "content": "Chen, Jieyi, “An Overview of Bond Pricing Models and Duration of Bonds,” in “Proceedings of the 7th International Conference on Economics, Finance and Management” 2022, pp. 2232–2239.",
+          "label": "Text"
+        },
+        {
+          "id": "19_3",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.115,
+            "y": 0.226,
+            "width": 0.77,
+            "height": 0.033
+          },
+          "content": "Chen, Long, David A. Lesmond, and Jason Wei, “Corporate Yield Spreads and Bond Liquidity,” Journal of Finance, 2007, 62 (1), 119–149.",
+          "label": "Text"
+        },
+        {
+          "id": "19_4",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.115,
+            "y": 0.267,
+            "width": 0.77,
+            "height": 0.032
+          },
+          "content": "Cong, Lin William, Ye Li, and Neng Wang, “Tokenomics: Dynamic Adoption and Valuation,” The Review of Financial Studies, 08 2020, 34 (3), 1105–1155.",
+          "label": "Text"
+        },
+        {
+          "id": "19_5",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.115,
+            "y": 0.307,
+            "width": 0.77,
+            "height": 0.032
+          },
+          "content": "Constantinides, George M., “Capital Market Equilibrium with Transaction Costs,” Journal of Political Economy, 1986, 94 (4), 842–862.",
+          "label": "Text"
+        },
+        {
+          "id": "19_6",
+          "order": 7,
+          "bounding_box": {
+            "x": 0.115,
+            "y": 0.347,
+            "width": 0.77,
+            "height": 0.033
+          },
+          "content": "Easley, David and Maureen O'Hara, “Price, Trade Size, and Information in Securities Markets,” Journal of Financial Economics, 1987, 19 (1), 69–90.",
+          "label": "Text"
+        },
+        {
+          "id": "19_7",
+          "order": 8,
+          "bounding_box": {
+            "x": 0.115,
+            "y": 0.388,
+            "width": 0.77,
+            "height": 0.031
+          },
+          "content": "_ and _, “Time and the Process of Security Price Adjustment,” The Journal of Finance, 1992, 47 (2), 576–605.",
+          "label": "Text"
+        },
+        {
+          "id": "19_8",
+          "order": 9,
+          "bounding_box": {
+            "x": 0.115,
+            "y": 0.428,
+            "width": 0.77,
+            "height": 0.032
+          },
+          "content": "_,_, and P. S. Srinivas, “Option Volume and Stock Prices: Evidence on Where Informed Traders Trade,” The Journal of Finance, 1998, 53 (2), 431–465.",
+          "label": "Text"
+        },
+        {
+          "id": "19_9",
+          "order": 10,
+          "bounding_box": {
+            "x": 0.115,
+            "y": 0.468,
+            "width": 0.77,
+            "height": 0.032
+          },
+          "content": "_,_, and_, “Option Volume and Stock Prices: Evidence on Where Informed Traders Trade,” The Journal of Finance, 1998, 53 (2), 431–465.\n_.",
+          "label": "Text"
+        },
+        {
+          "id": "19_10",
+          "order": 11,
+          "bounding_box": {
+            "x": 0.115,
+            "y": 0.508,
+            "width": 0.77,
+            "height": 0.032
+          },
+          "content": "_, Nicholas M. Kiefer, Maureen O'Hara, and Joseph B. Paperman, “Liquidity, Information, and Infrequently Traded Stocks,” The Journal of Finance, 1996, 51 (4), 1405–1436.",
+          "label": "Text"
+        },
+        {
+          "id": "19_11",
+          "order": 12,
+          "bounding_box": {
+            "x": 0.115,
+            "y": 0.548,
+            "width": 0.77,
+            "height": 0.032
+          },
+          "content": "_, _, _, and _, “Liquidity, Information, and Infrequently Traded Stocks,” The Journal of Finance, 1996, 51 (4), 1405–1436.",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "page_index": 20,
+      "blocks": [
+        {
+          "id": "20_0",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.113,
+            "y": 0.09,
+            "width": 0.743,
+            "height": 0.018
+          },
+          "content": "Kyle, Albert S., “Continuous Auctions and Insider Trading,” Econometrica, 1985, 53 (6), 1315–1335.",
+          "label": "Text"
+        },
+        {
+          "id": "20_1",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.114,
+            "y": 0.116,
+            "width": 0.771,
+            "height": 0.032
+          },
+          "content": "Lo, Andrew W. and Jiang Wang, “Trading Volume: Definitions, Data Analysis, and Implications of Portfolio Theory,” The Review of Financial Studies, 2015, 13 (2), 257–300.",
+          "label": "Text"
+        },
+        {
+          "id": "20_2",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.114,
+            "y": 0.157,
+            "width": 0.769,
+            "height": 0.032
+          },
+          "content": "_, Harry Mamaysky, and Jiang Wang, “Foundations of Technical Analysis: Computational Algorithms, Statistical Inference, and Empirical Implementation,” The Journal of Finance, 2000, 55 (4), 1705–1765.",
+          "label": "Text"
+        },
+        {
+          "id": "20_3",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.114,
+            "y": 0.197,
+            "width": 0.765,
+            "height": 0.017
+          },
+          "content": "Merton, Robert, “An Inter-Temporal Capital Asset Pricing Model,” Econometrica, 02 1973, 41, 867–87.",
+          "label": "Text"
+        },
+        {
+          "id": "20_4",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.114,
+            "y": 0.222,
+            "width": 0.771,
+            "height": 0.032
+          },
+          "content": "Pan, Jun and Allen M. Poteshman, “The Information in Option Volume for Future Stock Prices,” The Review of Financial Studies, 02 2006, 19 (3), 871–908.",
+          "label": "Text"
+        },
+        {
+          "id": "20_5",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.114,
+            "y": 0.262,
+            "width": 0.771,
+            "height": 0.032
+          },
+          "content": "Pástor, Ľuboš and Robert F. Stambaugh, “Liquidity Risk and Expected Stock Returns,” Journal of Political Economy, 2003, 111 (3), 642–685.",
+          "label": "Text"
+        },
+        {
+          "id": "20_6",
+          "order": 7,
+          "bounding_box": {
+            "x": 0.114,
+            "y": 0.302,
+            "width": 0.771,
+            "height": 0.032
+          },
+          "content": "Reichenbacher, Michael and Philipp Schuster, “Size-Adapted Bond Liquidity Measures and Their Asset Pricing Implications,” Journal of Financial Economics, 2022, 146 (2), 425–443.",
+          "label": "Text"
+        },
+        {
+          "id": "20_7",
+          "order": 8,
+          "bounding_box": {
+            "x": 0.49,
+            "y": 0.936,
+            "width": 0.019,
+            "height": 0.012
+          },
+          "content": "20",
+          "label": "Text"
+        }
+      ]
+    }
+  ]
+}

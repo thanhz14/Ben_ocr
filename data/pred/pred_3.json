@@ -1,0 +1,1545 @@
+{
+  "file_name": "paper_3",
+  "pages": [
+    {
+      "page_index": 1,
+      "blocks": [
+        {
+          "id": "0",
+          "order": null,
+          "bounding_box": {
+            "x": 0.02434928631402183,
+            "y": 0.2921615201900237,
+            "width": 0.03526448362720403,
+            "height": 0.41152019002375295
+          },
+          "content": "arXiv:2606.13668v1 [cs.CL] 11 Jun 2026",
+          "label": "Text"
+        },
+        {
+          "id": "1",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.181360201511335,
+            "y": 0.09144893111638955,
+            "width": 0.6364399664147775,
+            "height": 0.03859857482185273
+          },
+          "content": "# Influcoder: Distilling Decoders’ Gradient Influence Rankings into an Encoder for Data Attribution",
+          "label": "Text"
+        },
+        {
+          "id": "2",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.22502099076406382,
+            "y": 0.15914489311163896,
+            "width": 0.5491183879093199,
+            "height": 0.05166270783847981
+          },
+          "content": "Dimitri Kachler, Damien Sileo, Pascal Denis\n\nCentre Inria de l'Université de Lille, CRISTAL, Université de Lille\n\n{dimitri.kachler, damien.sileo, pascal.denis}@inria.fr",
+          "label": "Text"
+        },
+        {
+          "id": "3",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.2619647355163728,
+            "y": 0.26187648456057006,
+            "width": 0.08060453400503778,
+            "height": 0.016033254156769598
+          },
+          "content": "## Abstract",
+          "label": "Text"
+        },
+        {
+          "id": "4",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.14273719563392107,
+            "y": 0.2921615201900237,
+            "width": 0.32073887489504616,
+            "height": 0.2695961995249406
+          },
+          "content": "With the growth of LLMs' (Large Language Models) capabilities, there has been an increasing push to curate high quality datasets by filtering samples in the training data. In general, Data Attribution (DA) methods aim to estimate how individual samples in a training dataset can precondition a model to generate certain outputs. As an example, one might be interested in which samples in the data could be the source of toxic behavior after training the LLM. Many methods quantify this conditioning through the paradigm of influence functions. While methods of this family are effective in its function, they lack the necessary processing speed and storage compactness to be practically implemented on large datasets. We propose a method, Influcoder, as a quick and cost-effective approach to influence-based Data Attribution at scale.",
+          "label": "Text"
+        },
+        {
+          "id": "5",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.11586901763224182,
+            "y": 0.5783847980997625,
+            "width": 0.14441645675902604,
+            "height": 0.014845605700712588
+          },
+          "content": "## 1 Introduction",
+          "label": "Text"
+        },
+        {
+          "id": "6",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.11167086481947942,
+            "y": 0.6057007125890737,
+            "width": 0.3795130142737196,
+            "height": 0.22624703087885986
+          },
+          "content": "The paradigm of Data Attribution within the scope of LLMs (Deng et al., 2025) has become an active field of research driven by the question of how individual training examples shape model behavior. One branch, referred to as Data Selection, uses curation as a means to optimize performance on a certain benchmark. Another growing branch has tasked itself with detection or filtering (Jiao et al., 2025) as a curation means where one aims to find samples that might cause unwanted behavior that could pose risks and dangers. Thus there is a motivation for methods that are able to attribute the responsibility of training data for certain outputs, while still scaling up to large datasets.",
+          "label": "Text"
+        },
+        {
+          "id": "7",
+          "order": 7,
+          "bounding_box": {
+            "x": 0.11251049538203191,
+            "y": 0.8414489311163895,
+            "width": 0.3786733837111671,
+            "height": 0.08194774346793349
+          },
+          "content": "Influence Functions Influence functions (Koh and Liang, 2017), (Garima et al., 2020) have been used for dataset selection (Xia et al., 2024), albeit not without criticism. In (Li et al., 2025) they state consistent performance issues partly due to the inverse Hessian approximation errors and (Ivison et al., 2025) demonstrates that many influence methods fail to beat the random baseline when selecting at scale. For filtering, however, (Jiao et al., 2025) shows they consistently outperform baselines. Their main limitation stems from the computational costs, often requiring per-example gradients. This motivates the need for an approach that efficiently computes influence at scale.",
+          "label": "Text"
+        },
+        {
+          "id": "8",
+          "order": 8,
+          "bounding_box": {
+            "x": 0.5071368597816961,
+            "y": 0.26187648456057006,
+            "width": 0.3786733837111671,
+            "height": 0.14667458432304037
+          },
+          "content": "",
+          "label": "Text"
+        },
+        {
+          "id": "9",
+          "order": 9,
+          "bounding_box": {
+            "x": 0.5088161209068011,
+            "y": 0.4168646080760095,
+            "width": 0.37699412258606213,
+            "height": 0.09619952494061758
+          },
+          "content": "Contribution In this paper we put forth a novel method for influence estimation through distilling gradient influence rankings into an encoder model. Due to the high processing speeds of encoders, our method demonstrates a path forwards towards effective data attribution at large data scales.",
+          "label": "Text"
+        },
+        {
+          "id": "10",
+          "order": 10,
+          "bounding_box": {
+            "x": 0.5104953820319059,
+            "y": 0.5249406175771971,
+            "width": 0.1570109151973132,
+            "height": 0.015439429928741092
+          },
+          "content": "## 2 Related Work",
+          "label": "Text"
+        },
+        {
+          "id": "11",
+          "order": 11,
+          "bounding_box": {
+            "x": 0.5088161209068011,
+            "y": 0.5498812351543944,
+            "width": 0.37615449202350965,
+            "height": 0.0498812351543943
+          },
+          "content": "Data Attribution methods for LLMs fall into one of three families, distinguished by the space in which they perform attribution.",
+          "label": "Text"
+        },
+        {
+          "id": "12",
+          "order": 12,
+          "bounding_box": {
+            "x": 0.5071368597816961,
+            "y": 0.6074821852731591,
+            "width": 0.3778337531486146,
+            "height": 0.11342042755344418
+          },
+          "content": "Representation-based Representation-based methods function in training-agnostic feature spaces, meaning they tend to work out-of-the-box and are generally cheap to compute. Examples include TF-IDF, (Ni et al., 2022) for semantic similarity, and RDS+ (Ivison et al., 2025), which uses the model's activation space.",
+          "label": "Text"
+        },
+        {
+          "id": "13",
+          "order": 13,
+          "bounding_box": {
+            "x": 0.5071368597816961,
+            "y": 0.7298099762470309,
+            "width": 0.3811922753988245,
+            "height": 0.19418052256532067
+          },
+          "content": "Projection-based influence methods Early approaches at scaling influence functions for LLMs (Grosse et al., 2023) operated on fully dense gradients, but storage constraints pushed subsequent methods towards projection based approaches. TRAK (Park et al., 2023) randomly projects the gradients, which conserves the expected dot product value (Johnson and Lindenstrauss, 1984). On the other hand, TrackSTAR (Chang et al., 2025) and LoGRA (Choe et al., 2026) use two-sided auxiliary projections which are added on top of linear layers to calculate influence with a low memory",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "page_index": 2,
+      "blocks": [
+        {
+          "id": "0",
+          "order": null,
+          "bounding_box": {
+            "x": 0.20486985726280438,
+            "y": 0.07897862232779097,
+            "width": 0.5902602854743912,
+            "height": 0.24346793349168647
+          },
+          "content": "<div style=\"text-align: center;\"><img src=\"imgs/img_in_image_box_244_133_947_543.jpg\" alt=\"Image\" width=\"59%\" />\n\nStage 1: Gradient Stocking\n\nPool Prompt + Answer\nQuery Prompt + Answer\nStage 2: Distilling Influence Rankings\nPool Prompt + Answer\nQuery Prompt + Answer\nStage 3: Influence Labels\n\nDecoder Model\n\nCountSketch Projections\n\nGround Truth Influence labels\n\n $ q_{1..n} \\in Q $\n\n $ p_{1..m} \\in P $\n\nAnswer\n\nLoRA\n\nBackprop Prompt Masked\n\nPrompt Masked\n\n $ q_{1..n} \\in Q $\n\n $ p_{1..m} \\in P $\n\nAnswer\n\nDecoder Model\n\nPrompt Masked\n\n $ q_{1..n} \\in Q $\n\nAnswer\n\nInfluence Embeddings\n\n $ p_{1..m} \\in P $\n\nAnswer\n\nEncoder Model\n\nEncoding\n\nModel\n\n(Influcoder)\n\nQuery Prompt + Answer\n\n $ q_{1..n} \\in Q $\n\nAnswer\n\n $ p_{1..m} \\in P $\n\nAnswer\n\nInfluence Embeddings\n\n $ p_{1..m} \\in Q $\n\nAnswer\n\nInfluence Labels\n\n</div>\n",
+          "label": "Image"
+        },
+        {
+          "id": "1",
+          "order": null,
+          "bounding_box": {
+            "x": 0.11418975650713686,
+            "y": 0.3331353919239905,
+            "width": 0.7707808564231738,
+            "height": 0.05938242280285035
+          },
+          "content": "<div style=\"text-align: center;\">Figure 1: Schema for the training pipeline of the Influcoder. Stage 1: full pool and query samples are passed to the target decoder model, then we compute LoRA gradients on the responses only. Finally we project the gradients with CountSketch and compute ground truth cosine similarity influences. Stage 2: full pool and query samples are passed through the encoder to produce influence embeddings, cosine similarity is taken to generate influence predictions.</div>\n",
+          "label": "Image"
+        },
+        {
+          "id": "2",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.11251049538203191,
+            "y": 0.416270783847981,
+            "width": 0.3778337531486146,
+            "height": 0.14548693586698339
+          },
+          "content": "footprint. LoRIF (Li et al., 2026) further improves on storage and query time by leveraging the rank-c factors of projected gradients. Methods such as LESS (Xia et al., 2024) leverage LoRA (Hu et al., 2022) to calculate influence from gradients on the much smaller adapters. DataInf (Kwon et al., 2024) and RRInf (Tu et al., 2025) provide efficient estimations for the inverse hessian for LoRA based influence.",
+          "label": "Text"
+        },
+        {
+          "id": "3",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.11251049538203191,
+            "y": 0.5730403800475059,
+            "width": 0.37699412258606213,
+            "height": 0.11282660332541568
+          },
+          "content": "Distillation Based methods Distillation based methods leverage smaller models as a means to achieve efficiency, such as IProX (Chen et al., 2026) which constructs gradient-aligned proxies for influence estimation on the full gradients, which prevents a direct comparison since we operate on the LoRA subspace, see A.6 for more details.",
+          "label": "Text"
+        },
+        {
+          "id": "4",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.11251049538203191,
+            "y": 0.6870546318289786,
+            "width": 0.37699412258606213,
+            "height": 0.11282660332541568
+          },
+          "content": "AirRep (Sun et al., 2025), which shares a similar approach to us, distills true training losses into an encoder. We remain fundamentally different since we distill gradient influences. And additionally it has a different architecture that treats samples interdependently to optimize for SFT. Conversely, we treat samples independently.",
+          "label": "Text"
+        },
+        {
+          "id": "5",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.11418975650713686,
+            "y": 0.8141330166270784,
+            "width": 0.15365239294710328,
+            "height": 0.016033254156769598
+          },
+          "content": "## 3 Preliminaries",
+          "label": "Text"
+        },
+        {
+          "id": "6",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.11335012594458438,
+            "y": 0.8420427553444181,
+            "width": 0.37699412258606213,
+            "height": 0.08194774346793349
+          },
+          "content": "Classic influence formulations (Koh and Liang, 2017) employ the inverse Hessian vector product to account for loss curvature. Given a pool sample p and query sample q, the influence is given by  $ Inf_{H}(p,q) = \\nabla \\ell(\\theta,p)H^{-1} \\ell(\\theta,q) $. We require our method to be robust, and estimating the inverse Hessian can introduce unwanted instabilities which may be further exacerbated in distillation, thus we discard it and base ourselves on first-order influence formulation, as in (Garima et al., 2020),  $ Inf_{SGD}(p,q) = \\eta \\nabla \\ell(\\theta,p), \\nabla \\ell(\\theta,q) $.",
+          "label": "Text"
+        },
+        {
+          "id": "7",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.5079764903442485,
+            "y": 0.4168646080760095,
+            "width": 0.3778337531486146,
+            "height": 0.09679334916864608
+          },
+          "content": "",
+          "label": "Text"
+        },
+        {
+          "id": "8",
+          "order": 7,
+          "bounding_box": {
+            "x": 0.5096557514693535,
+            "y": 0.5261282660332541,
+            "width": 0.30730478589420657,
+            "height": 0.016033254156769598
+          },
+          "content": "### 3.1 Cosine LoRA Gradient Influence",
+          "label": "Text"
+        },
+        {
+          "id": "9",
+          "order": 8,
+          "bounding_box": {
+            "x": 0.5079764903442485,
+            "y": 0.5492874109263658,
+            "width": 0.3786733837111671,
+            "height": 0.12945368171021376
+          },
+          "content": "Following LESS (Xia et al., 2024) we restrict the gradients to the parameters in the LoRA (Hu et al., 2022) adapters and replace the dot product with cosine similarity. Cosine similarity measures gradient directions which are more stable, and avoids over weighting high gradient-norm samples. With  $ \\theta_{L} $ representing the LoRA adapter parameters, we formulate our influence as,",
+          "label": "Text"
+        },
+        {
+          "id": "10",
+          "order": 9,
+          "bounding_box": {
+            "x": 0.5348446683459278,
+            "y": 0.6923990498812351,
+            "width": 0.30142737195633923,
+            "height": 0.017814726840855107
+          },
+          "content": " $$ I n f^{\\prime}(p,q)=c o s(\\nabla\\ell(\\theta_{L},p),\\nabla\\ell(\\theta_{L},q)) $$ ",
+          "label": "Formula"
+        },
+        {
+          "id": "11",
+          "order": 10,
+          "bounding_box": {
+            "x": 0.8589420654911839,
+            "y": 0.6941805225653207,
+            "width": 0.023509655751469353,
+            "height": 0.014251781472684086
+          },
+          "content": "(1)",
+          "label": "Formula"
+        },
+        {
+          "id": "12",
+          "order": 11,
+          "bounding_box": {
+            "x": 0.5096557514693535,
+            "y": 0.7256532066508313,
+            "width": 0.15029387069689337,
+            "height": 0.0172209026128266
+          },
+          "content": "## 4 Methodology",
+          "label": "Text"
+        },
+        {
+          "id": "13",
+          "order": 12,
+          "bounding_box": {
+            "x": 0.5088161209068011,
+            "y": 0.753562945368171,
+            "width": 0.33837111670864817,
+            "height": 0.014845605700712588
+          },
+          "content": "### 4.1 Collecting Gradient Influence Labels",
+          "label": "Text"
+        },
+        {
+          "id": "14",
+          "order": 13,
+          "bounding_box": {
+            "x": 0.5071368597816961,
+            "y": 0.7749406175771971,
+            "width": 0.3795130142737196,
+            "height": 0.14845605700712589
+          },
+          "content": "Let  $ \\mathcal{P} = \\{p_i\\}_{i=1}^{N_P} $ and  $ \\mathcal{Q} = \\{q_j\\}_{j=1}^{N_Q} $ denote the pool and query sets, respectively. We collect the ground truth gradients from the pool and query set only through the LoRA parameters and also by masking the prompt as the response-only gradients are more informative. To save on storage, we randomly project the gradients to a smaller dimension using CountSketch (Charikar et al., 2004) projection. We exclude the LM head and the vo",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "page_index": 3,
+      "blocks": [
+        {
+          "id": "0",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.11251049538203191,
+            "y": 0.08610451306413301,
+            "width": 0.37699412258606213,
+            "height": 0.032660332541567694
+          },
+          "content": "cabulary embeddings, as they are noisy and hinder the training.",
+          "label": "Text"
+        },
+        {
+          "id": "1",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.11418975650713686,
+            "y": 0.12767220902612827,
+            "width": 0.33753148614609574,
+            "height": 0.016033254156769598
+          },
+          "content": "### 4.2 Ranking-Based Influence Distillation",
+          "label": "Text"
+        },
+        {
+          "id": "2",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.11335012594458438,
+            "y": 0.14845605700712589,
+            "width": 0.3778337531486146,
+            "height": 0.0498812351543943
+          },
+          "content": "At the start of the training, we pre-compute all of the cosine-similarity influences between the training pool samples  $ p_{i} $ and query samples  $ q_{j} $,",
+          "label": "Text"
+        },
+        {
+          "id": "3",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.13182199832073888,
+            "y": 0.2209026128266033,
+            "width": 0.3157010915197313,
+            "height": 0.01840855106888361
+          },
+          "content": " $$ I_{G T}\\in\\mathbb{R}^{N_{P}\\times N_{Q}},\\quad[I_{G T}]_{i j}=\\operatorname{I n f}^{\\prime}(p_{i},q_{j}), $$ ",
+          "label": "Formula"
+        },
+        {
+          "id": "4",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.4643157010915197,
+            "y": 0.22327790973871733,
+            "width": 0.022670025188916875,
+            "height": 0.014845605700712588
+          },
+          "content": "(2)",
+          "label": "Formula"
+        },
+        {
+          "id": "5",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.11251049538203191,
+            "y": 0.248812351543943,
+            "width": 0.37615449202350965,
+            "height": 0.14726840855106887
+          },
+          "content": "This allows us to directly fetch the ground truth influences from  $ I_{GT} $ during the training. On each batch we sample m pool and n query samples and pass them through the encoder to get the batch of influence embeddings  $ E^p \\in \\mathbb{R}^{m \\times d} $ and  $ E^q \\in \\mathbb{R}^{n \\times d} $, on which we take the cosine similarities to get the predicted influence,  $ [I_P]_{ij} = \\cos(E_i^p, E_j^q) $. We then fetch the submatrix  $ I_{GT}^{batch} \\in \\mathbb{R}^{m \\times n} $ from  $ I_{GT} $ using the sampled indices.",
+          "label": "Text"
+        },
+        {
+          "id": "6",
+          "order": 7,
+          "bounding_box": {
+            "x": 0.11251049538203191,
+            "y": 0.40320665083135393,
+            "width": 0.3786733837111671,
+            "height": 0.09679334916864608
+          },
+          "content": "Ranking Losses While we would like to optimize on the Spearman metric directly, it is a non-differentiable function. However, we can use a surrogate ranking metric through the Pearson correlation, which is differentiable, we simply flatten the influence matrices and,",
+          "label": "Text"
+        },
+        {
+          "id": "7",
+          "order": 8,
+          "bounding_box": {
+            "x": 0.12342569269521411,
+            "y": 0.5201900237529691,
+            "width": 0.3316540722082284,
+            "height": 0.03978622327790974
+          },
+          "content": " $$ \\mathcal{L}_{\\mathrm{P e a r s o n}}=1-\\frac{\\mathrm{c o v}\\big(\\mathrm{f l a t}(I_{P}),\\mathrm{f l a t}(I_{G T}^{\\mathrm{b a t c h}})\\big)}{\\sigma_{I_{P}}\\sigma_{I_{G T}^{\\mathrm{b a t c h}}}}. $$ ",
+          "label": "Formula"
+        },
+        {
+          "id": "8",
+          "order": 9,
+          "bounding_box": {
+            "x": 0.4634760705289673,
+            "y": 0.5326603325415677,
+            "width": 0.023509655751469353,
+            "height": 0.014251781472684086
+          },
+          "content": "(3)",
+          "label": "Formula"
+        },
+        {
+          "id": "9",
+          "order": 10,
+          "bounding_box": {
+            "x": 0.11251049538203191,
+            "y": 0.5676959619952494,
+            "width": 0.37699412258606213,
+            "height": 0.16092636579572447
+          },
+          "content": "The advantage to the Pearson correlation is that it aligns the entire batch at once. As a consequence it also means that it does not particularly optimize for the top-k most influential samples. Thus, we add a softmax KL divergence loss (Hinton et al., 2015). For each query j we calculate the column  $ [IP]_{:,j} \\in \\mathbb{R}^m $ giving influence scores over pool candidates and define the tempered softmax  $ \\sigma_\\tau(z)_i $. The per-query KL loss is then averaged over the  $ n $ queries in the batch:",
+          "label": "Text"
+        },
+        {
+          "id": "10",
+          "order": 11,
+          "bounding_box": {
+            "x": 0.12426532325776658,
+            "y": 0.7369358669833729,
+            "width": 0.3308144416456759,
+            "height": 0.040380047505938245
+          },
+          "content": " $$ \\mathcal{L}_{\\mathrm{K L}}=\\frac{1}{n}\\sum_{j=1}^{n}D_{\\mathrm{K L}}\\Big(\\sigma([I_{G T}^{\\mathrm{b}}]_{:,j})\\Big\\|\\sigma([I_{P}]_{:,j})\\Big) $$ ",
+          "label": "Formula"
+        },
+        {
+          "id": "11",
+          "order": 12,
+          "bounding_box": {
+            "x": 0.4651553316540722,
+            "y": 0.7482185273159145,
+            "width": 0.0218303946263644,
+            "height": 0.014251781472684086
+          },
+          "content": "(4)",
+          "label": "Formula"
+        },
+        {
+          "id": "12",
+          "order": 13,
+          "bounding_box": {
+            "x": 0.11502938706968933,
+            "y": 0.7856294536817102,
+            "width": 0.37363560033585225,
+            "height": 0.032660332541567694
+          },
+          "content": "Finally we combine both losses linearly,  $ \\mathcal{L}_{\\text{Total}} = \\alpha \\mathcal{L}_{\\text{Pearson}} + (1 - \\alpha) \\mathcal{L}_{\\text{KL}}, \\alpha \\in [0, 1]. $",
+          "label": "Text"
+        },
+        {
+          "id": "13",
+          "order": 14,
+          "bounding_box": {
+            "x": 0.11418975650713686,
+            "y": 0.8283847980997625,
+            "width": 0.20990764063811923,
+            "height": 0.0172209026128266
+          },
+          "content": "## 5 Experimental Setup",
+          "label": "Text"
+        },
+        {
+          "id": "14",
+          "order": 15,
+          "bounding_box": {
+            "x": 0.11418975650713686,
+            "y": 0.8533254156769596,
+            "width": 0.2837951301427372,
+            "height": 0.015439429928741092
+          },
+          "content": "### 5.1 Influence Ranking Estimation",
+          "label": "Text"
+        },
+        {
+          "id": "15",
+          "order": 16,
+          "bounding_box": {
+            "x": 0.11251049538203191,
+            "y": 0.8747030878859857,
+            "width": 0.3786733837111671,
+            "height": 0.048693586698337295
+          },
+          "content": "We run an experiment to evaluate how well different influence estimation methods are able to reproduce the ground truth rankings produced by a target model, in our case we chose SmolLM2-1.7B (Allal, 2025) with no instruction tuning. For our encoders we use the ettin-encoder (Weller et al., 2025) suite, specifically the 150m and 68m model sizes.",
+          "label": "Text"
+        },
+        {
+          "id": "16",
+          "order": 17,
+          "bounding_box": {
+            "x": 0.5079764903442485,
+            "y": 0.0855106888361045,
+            "width": 0.37699412258606213,
+            "height": 0.06413301662707839
+          },
+          "content": "",
+          "label": "Text"
+        },
+        {
+          "id": "17",
+          "order": 18,
+          "bounding_box": {
+            "x": 0.5071368597816961,
+            "y": 0.1496437054631829,
+            "width": 0.380352644836272,
+            "height": 0.22743467933491687
+          },
+          "content": "This experiment re-uses the pipeline in (Nayak et al., 2026) with dolly (Conover et al., 2023) as the pool set, and specifically the version in, (Chen et al., 2026). For the query dataset, we used the BBH (Suzgun et al., 2023), (Srivastava et al., 2023). For the baselines, we test, RDS+ (Ivison et al., 2025), TF-IDF. We also test the untrained encoder, Semantic, which captures the semantic similarity between examples. For the contemporary influence methods we use LESS (Xia et al., 2024), as well as two variants of LoGra, with and without the FIM. Where possible we have used the default parameters with some deviations where necessary, which we detail in Appendix A.3.",
+          "label": "Text"
+        },
+        {
+          "id": "18",
+          "order": 19,
+          "bounding_box": {
+            "x": 0.5071368597816961,
+            "y": 0.3847980997624703,
+            "width": 0.380352644836272,
+            "height": 0.19418052256532067
+          },
+          "content": "Metrics We report the Mean-Aggregated Spearman correlations as well as the Per-Anchor Spearman coefficients between the ground truth ranking and each of the methods' rankings generated by their influence scores. For the evaluation size we use 200 pool samples and 200 query samples. On the efficiency side we report the raw FLOPs (Floating Point Operations) necessary to run each method, as well as the actual GPU wall-clock time spent on inference. We perform 3 runs with different seeds for the data splitting and average all of the metrics.",
+          "label": "Text"
+        },
+        {
+          "id": "19",
+          "order": 20,
+          "bounding_box": {
+            "x": 0.5096557514693535,
+            "y": 0.5896674584323041,
+            "width": 0.3744752308984047,
+            "height": 0.015439429928741092
+          },
+          "content": "### 5.2 Influence Estimation for Toxicity Filtering",
+          "label": "Text"
+        },
+        {
+          "id": "20",
+          "order": 21,
+          "bounding_box": {
+            "x": 0.5071368597816961,
+            "y": 0.6110451306413301,
+            "width": 0.3795130142737196,
+            "height": 0.20961995249406176
+          },
+          "content": "We evaluate the utility of single-checkpoint influence estimation by applying it to toxicity filtration through the XSTest-response task in (Jiao et al., 2025), both the Heterogeneous, and Homogeneous variants of the task, using the Pythia-1B model as the target (Biderman et al., 2023). We reserve a small section of the evaluation data purely to train our encoder, and we additionally had to source unseen query samples from (Han et al., 2024), please see Appendix A.4 for training parameters. We make sure there are no overlaps or data leakage between the training and evaluation. We report the AUPRC (Area Under Precision-Recall Curve).",
+          "label": "Text"
+        },
+        {
+          "id": "21",
+          "order": 22,
+          "bounding_box": {
+            "x": 0.5096557514693535,
+            "y": 0.8319477434679335,
+            "width": 0.1015952980688497,
+            "height": 0.016033254156769598
+          },
+          "content": "## 6 Results",
+          "label": "Text"
+        },
+        {
+          "id": "22",
+          "order": 23,
+          "bounding_box": {
+            "x": 0.5071368597816961,
+            "y": 0.8580760095011877,
+            "width": 0.3795130142737196,
+            "height": 0.06472684085510688
+          },
+          "content": "From Fig. 2, we observe that Influcoder is able to save significant inference time and FLOPs compared to LESS and LoGRA. If we take Influcoder at size 68m, we process samples faster by a factor",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "page_index": 4,
+      "blocks": [
+        {
+          "id": "0",
+          "order": null,
+          "bounding_box": {
+            "x": 0.16120906801007556,
+            "y": 0.08432304038004751,
+            "width": 0.6926952141057935,
+            "height": 0.013064133016627079
+          },
+          "content": "Influence Ranking Estimation on SmolLM2-1.7B vs. Inference Speed and Computation Cost",
+          "label": "Text"
+        },
+        {
+          "id": "1",
+          "order": null,
+          "bounding_box": {
+            "x": 0.1200671704450042,
+            "y": 0.10332541567695962,
+            "width": 0.2518891687657431,
+            "height": 0.16508313539192399
+          },
+          "content": "<div style=\"text-align: center;\"><img src=\"imgs/img_in_chart_box_143_174_443_452.jpg\" alt=\"Image\" width=\"25%\" />\n\n\n\n</div>\n",
+          "label": "Image"
+        },
+        {
+          "id": "2",
+          "order": null,
+          "bounding_box": {
+            "x": 0.38287153652392947,
+            "y": 0.10095011876484561,
+            "width": 0.22837951301427373,
+            "height": 0.19358669833729217
+          },
+          "content": "<div style=\"text-align: center;\"><img src=\"imgs/img_in_chart_box_456_170_728_496.jpg\" alt=\"Image\" width=\"22%\" />\n\n\n\n</div>\n",
+          "label": "Image"
+        },
+        {
+          "id": "3",
+          "order": null,
+          "bounding_box": {
+            "x": 0.6162888329135181,
+            "y": 0.10391923990498812,
+            "width": 0.2409739714525609,
+            "height": 0.19121140142517815
+          },
+          "content": "<div style=\"text-align: center;\"><img src=\"imgs/img_in_chart_box_734_175_1021_497.jpg\" alt=\"Image\" width=\"24%\" />\n\n\n\n</div>\n",
+          "label": "Image"
+        },
+        {
+          "id": "4",
+          "order": null,
+          "bounding_box": {
+            "x": 0.11335012594458438,
+            "y": 0.32125890736342044,
+            "width": 0.7724601175482787,
+            "height": 0.029097387173396674
+          },
+          "content": "<div style=\"text-align: center;\">Figure 2: We evaluate influence estimation from Dolly to BBH samples using SmolLM2-1.7B as the target model. We report mean-aggregated and mean per-anchor spearman coefficients as averages across 3 runs.</div>\n",
+          "label": "Image"
+        },
+        {
+          "id": "5",
+          "order": null,
+          "bounding_box": {
+            "x": 0.11418975650713686,
+            "y": 0.37292161520190026,
+            "width": 0.37531486146095716,
+            "height": 0.04334916864608076
+          },
+          "content": "<div style=\"text-align: center;\">Table 1: Splits for the time and storage required to process 10K Dolly samples. Experiment performed with SmolLM2-360m on an NVIDIA H100.</div>\n",
+          "label": "Image"
+        },
+        {
+          "id": "6",
+          "order": null,
+          "bounding_box": {
+            "x": 0.12426532325776658,
+            "y": 0.42695961995249404,
+            "width": 0.3534844668345928,
+            "height": 0.08135391923990498
+          },
+          "content": "<table><tr><td rowspan=\"2\">Method</td><td rowspan=\"2\">Stocking (h)</td><td rowspan=\"2\">Train (h)</td><td colspan=\"2\">10K Samples</td></tr><tr><td>Time (h)</td><td>Storage</td></tr><tr><td>LESS (dim=8192)</td><td>-</td><td>-</td><td>$ \\sim $3.5</td><td>320 Mb</td></tr><tr><td>LoGRA (rank=16)</td><td>-</td><td>-</td><td>$ \\sim $0.85</td><td>2.24 Gb</td></tr><tr><td>Influcoder (dim=768)</td><td>0.63</td><td>0.1</td><td>$ \\sim $0.02</td><td>30 Mb</td></tr></table>",
+          "label": "Table"
+        },
+        {
+          "id": "7",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.11251049538203191,
+            "y": 0.5356294536817102,
+            "width": 0.3786733837111671,
+            "height": 0.22446555819477435
+          },
+          "content": "of x15 against the closest proxy model, by a factor of x45 against full LoGRA and by a factor of x100 against LESS. Furthermore, again on Influcoder at size 68m, the nearest proxy uses x5 more FLOPs, and full LESS uses x44 as much. We also report that we outperform every method except for regular LESS on the per-anchor spearmans. We also explore the practicality of our initial setup in Table 1, where we see that the full training for our method only takes 0.73 hours on SmolLM2-360m, which is still quicker than processing LoGRA on 10K samples. Interestingly, it does appear to be the case that with proxy models, the inclusion of the FIM performs significantly better than without.",
+          "label": "Text"
+        },
+        {
+          "id": "8",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.11251049538203191,
+            "y": 0.7618764845605701,
+            "width": 0.3786733837111671,
+            "height": 0.16211401425178149
+          },
+          "content": "In Table 2 we demonstrate that Influcoder has quick inference, while only being slightly behind LESS on both variants. We specify that for DataInf the scores are surprisingly quite low compared to the reported numbers in (Jiao et al., 2025), despite our best efforts. We discuss this in Appendix A.5. The performance for Semantic is unsurprisingly quite low since the semantic similarity might focus on the wrong parts and miss the dangerous aspects. Rep-Sim performs decently well but underperforms",
+          "label": "Text"
+        },
+        {
+          "id": "9",
+          "order": null,
+          "bounding_box": {
+            "x": 0.5088161209068011,
+            "y": 0.3752969121140142,
+            "width": 0.37615449202350965,
+            "height": 0.03147268408551069
+          },
+          "content": "<div style=\"text-align: center;\">compared to the gradient methods, illustrating the utility of influence as a data attribution mechanism.</div>\n",
+          "label": "Image"
+        },
+        {
+          "id": "10",
+          "order": null,
+          "bounding_box": {
+            "x": 0.5113350125944585,
+            "y": 0.41983372921615203,
+            "width": 0.36859781696053734,
+            "height": 0.10570071258907364
+          },
+          "content": "<table><tr><td></td><td colspan=\"2\">XSTest-response-Het</td><td colspan=\"2\">XSTest-response-Hom</td></tr><tr><td>Method</td><td>AUPRC</td><td>Time (s)</td><td>AUPRC</td><td>Time (s)</td></tr><tr><td>Influcoder</td><td>0.6981</td><td>32.1</td><td>0.6919</td><td>33.4</td></tr><tr><td>LESS</td><td>0.7075</td><td>2248.5</td><td>0.7562</td><td>2285.6</td></tr><tr><td>DataInf</td><td>0.2157</td><td>3400.5</td><td>0.2260</td><td>3395.7</td></tr><tr><td>Rep Sim</td><td>0.4226</td><td>593.4</td><td>0.4460</td><td>620.6</td></tr><tr><td>Semantic</td><td>0.3543</td><td>23.8</td><td>0.3585</td><td>24.1</td></tr></table>",
+          "label": "Table"
+        },
+        {
+          "id": "11",
+          "order": null,
+          "bounding_box": {
+            "x": 0.5088161209068011,
+            "y": 0.5380047505938242,
+            "width": 0.37615449202350965,
+            "height": 0.05760095011876484
+          },
+          "content": "<div style=\"text-align: center;\">Table 2: Each method is given an 8K size dataset from UltraChat (Ding et al., 2023), of which 66 are toxic. Each method is tasked to retrieve the toxic examples through its attribution scores against a reference set.</div>\n",
+          "label": "Image"
+        },
+        {
+          "id": "12",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.5104953820319059,
+            "y": 0.6229216152019003,
+            "width": 0.13266162888329136,
+            "height": 0.016033254156769598
+          },
+          "content": "## 7 Conclusion",
+          "label": "Text"
+        },
+        {
+          "id": "13",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.5071368597816961,
+            "y": 0.6484560570071259,
+            "width": 0.380352644836272,
+            "height": 0.2749406175771972
+          },
+          "content": "We have presented our method, Influcoder, as a method for distilling gradient influence rankings into a smaller encoder model and saving on inference time by x15-x100. We also demonstrate that the influence predictions it generates are of sufficient quality to perform data filtration at scale. Beyond our findings, there are some unexplored directions that may give paths for future research. Namely, the embeddings we produce are compact at only 768 dimensions. This means that it would be practically possible to do fast vector search with frameworks such as FAISS (Douze et al., 2024). Additionally, we would be interested to explore the possibilities of generalizable influence distillation where an encoder might be able to learn influence characteristics outside of the data distribution and which are inherent to the target model.",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "page_index": 5,
+      "blocks": [
+        {
+          "id": "0",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.11586901763224182,
+            "y": 0.0855106888361045,
+            "width": 0.1351805205709488,
+            "height": 0.014845605700712588
+          },
+          "content": "## 8 Limitations",
+          "label": "Text"
+        },
+        {
+          "id": "1",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.11335012594458438,
+            "y": 0.11163895486935867,
+            "width": 0.37699412258606213,
+            "height": 0.32244655581947745
+          },
+          "content": "We note that the primary drawback to our methodology is that we only capture influence specific to certain pool and query set. That is, the performance drops dramatically once samples fall outside of that distribution. This is in contrast with methods such as LoGRA or LESS that function independent of the distribution. This also brings in an additional limitation that we need sufficient training data in order to distill the influence in the first place, as was the case with the toxicity filtration experiment where we had to source additional unseen data. This also means that on tasks where there is simply insufficient training data, our method would perform poorly. Additionally, we do note that our method does require an initial setup and training, which is not present with plug-in methods. This has an impact on the usability as it requires adapting and setting up the gradient stocking, as well as some tuning to make sure the encoder trains properly.",
+          "label": "Text"
+        },
+        {
+          "id": "2",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.11586901763224182,
+            "y": 0.46080760095011875,
+            "width": 0.09907640638119228,
+            "height": 0.014845605700712588
+          },
+          "content": "## References",
+          "label": "Text"
+        },
+        {
+          "id": "3",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.11586901763224182,
+            "y": 0.4845605700712589,
+            "width": 0.37279596977329976,
+            "height": 0.039192399049881234
+          },
+          "content": "Loubna Ben Allal. 2025. Smollm2: When smol goes big – data-centric training of a small language model. Preprint, arXiv:2502.02737.",
+          "label": "Text"
+        },
+        {
+          "id": "4",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.11670864819479429,
+            "y": 0.5350356294536817,
+            "width": 0.3719563392107473,
+            "height": 0.10391923990498812
+          },
+          "content": "Stella Biderman, Hailey Schoelkopf, Quentin Gregory Anthony, Herbie Bradley, Kyle O'Brien, Eric Hallahan, Mohammad Aflah Khan, Shivanshu Purohit, USVSN Sai Prashanth, Edward Raff, and 1 others. 2023. Pythia: A suite for analyzing large language models across training and scaling. In International Conference on Machine Learning, pages 2397–2430. PMLR.",
+          "label": "Text"
+        },
+        {
+          "id": "5",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.11754827875734676,
+            "y": 0.6520190023752969,
+            "width": 0.3719563392107473,
+            "height": 0.06472684085510688
+          },
+          "content": "Tyler A. Chang, Dheeraj Rajagopal, Tolga Bolukbasi, Lucas Dixon, and Ian Tenney. 2025. Scalable influence and fact tracing for large language model pretraining. In The Thirteenth International Conference on Learning Representations.",
+          "label": "Text"
+        },
+        {
+          "id": "6",
+          "order": 7,
+          "bounding_box": {
+            "x": 0.11670864819479429,
+            "y": 0.7280285035629454,
+            "width": 0.37279596977329976,
+            "height": 0.039192399049881234
+          },
+          "content": "Moses Charikar, Kevin Chen, and Martin Farach-Colton. 2004. Finding frequent items in data streams. 312(1):3–15.",
+          "label": "Text"
+        },
+        {
+          "id": "7",
+          "order": 8,
+          "bounding_box": {
+            "x": 0.11754827875734676,
+            "y": 0.7790973871733967,
+            "width": 0.3711167086481948,
+            "height": 0.06532066508313539
+          },
+          "content": "Sirui Chen, Yunzhe Qi, Mengting Ai, Yifan Sun, Ruizhong Qiu, Jiaru Zou, and Jingrui He. 2026. Influence-preserving proxies for gradient-based data selection in LLM finetuning. In The Fourteenth International Conference on Learning Representations.",
+          "label": "Text"
+        },
+        {
+          "id": "8",
+          "order": 9,
+          "bounding_box": {
+            "x": 0.11670864819479429,
+            "y": 0.8557007125890737,
+            "width": 0.3719563392107473,
+            "height": 0.06532066508313539
+          },
+          "content": "Sang Keun Choe, Hwijeen Ahn, Juhan Bae, Kewen Zhao, Youngseog Chung, Adithya Pratapa, Willie Neiswanger, Emma Strubell, Teruko Mitamura, Jeff Schneider, Eduard Hovy, Roger Baker Grosse, and Eric P. Xing. 2026. What is your data worth to GPT?",
+          "label": "Text"
+        },
+        {
+          "id": "9",
+          "order": 10,
+          "bounding_box": {
+            "x": 0.5289672544080605,
+            "y": 0.08788598574821853,
+            "width": 0.35516372795969775,
+            "height": 0.039192399049881234
+          },
+          "content": "LLM-scale data valuation with influence functions. In The Thirty-ninth Annual Conference on Neural Information Processing Systems.",
+          "label": "Text"
+        },
+        {
+          "id": "10",
+          "order": 11,
+          "bounding_box": {
+            "x": 0.5130142737195634,
+            "y": 0.13657957244655583,
+            "width": 0.3711167086481948,
+            "height": 0.06413301662707839
+          },
+          "content": "Mike Conover, Matt Hayes, Ankit Mathur, Jianwei Xie, Jun Wan, Sam Shah, Ali Ghodsi, Patrick Wendell, Matei Zaharia, and Reynold Xin. 2023. Free dolly: Introducing the world's first truly open instruction-tuned llm.",
+          "label": "Text"
+        },
+        {
+          "id": "11",
+          "order": 12,
+          "bounding_box": {
+            "x": 0.5121746431570109,
+            "y": 0.21140142517814728,
+            "width": 0.3719563392107473,
+            "height": 0.10451306413301663
+          },
+          "content": "Junwei Deng, Yuzheng Hu, Pingbang Hu, Ting-wei Li, Shixuan Liu, Jiachen T. Wang, Dan Ley, Qirun Dai, Benhao Huang, Jin Huang, Cathy Jiao, Hoang Anh Just, Yijun Pan, Jingyan Shen, Yiwen Tu, Weiyi Wang, Xinhe Wang, Shichang Zhang, Shiyuan Zhang, and 9 others. 2025. A survey of data attribution: Methods, applications, and evaluation in the era of generative ai.",
+          "label": "Text"
+        },
+        {
+          "id": "12",
+          "order": 13,
+          "bounding_box": {
+            "x": 0.5121746431570109,
+            "y": 0.32600950118764843,
+            "width": 0.3719563392107473,
+            "height": 0.10451306413301663
+          },
+          "content": "Ning Ding, Yulin Chen, Bokai Xu, Yujia Qin, Shengding Hu, Zhiyuan Liu, Maosong Sun, and Bowen Zhou. 2023. Enhancing chat language models by scaling high-quality instructional conversations. In Proceedings of the 2023 Conference on Empirical Methods in Natural Language Processing, pages 3029–3051, Singapore. Association for Computational Linguistics.",
+          "label": "Text"
+        },
+        {
+          "id": "13",
+          "order": 14,
+          "bounding_box": {
+            "x": 0.5121746431570109,
+            "y": 0.44061757719714967,
+            "width": 0.3711167086481948,
+            "height": 0.05166270783847981
+          },
+          "content": "Matthijs Douze, Alexandr Guzhva, Chengqi Deng, Jeff Johnson, Gergely Szilvasy, Pierre-Emmanuel Mazaré, Maria Lomeli, Lucas Hosseini, and Hervé Jégou. 2024. The faiss library.",
+          "label": "Text"
+        },
+        {
+          "id": "14",
+          "order": 15,
+          "bounding_box": {
+            "x": 0.5121746431570109,
+            "y": 0.5029691211401425,
+            "width": 0.3719563392107473,
+            "height": 0.07779097387173396
+          },
+          "content": "Garima, Frederick Liu, Satyen Kale, and Mukund Sundararajan. 2020. Estimating training data influence by tracing gradient descent. In Proceedings of the 34th International Conference on Neural Information Processing Systems, NIPS '20, Red Hook, NY, USA. Curran Associates Inc.",
+          "label": "Text"
+        },
+        {
+          "id": "15",
+          "order": 16,
+          "bounding_box": {
+            "x": 0.5121746431570109,
+            "y": 0.5908551068883611,
+            "width": 0.3719563392107473,
+            "height": 0.10451306413301663
+          },
+          "content": "Roger Baker Grosse, Juhan Bae, Cem Anil, Nelson Elhage, Alex Tamkin, Amirhossein Tajdini, Benoit Steiner, Dustin Li, Esin Durmus, Ethan Perez, Evan Hubinger, Kamil.e Lukovsiut.e, Karina Nguyen, Nicholas Joseph, Sam McCandlish, Jared Kaplan, and Sam Bowman. 2023. Studying large language model generalization with influence functions. ArXiv, abs/2308.03296.",
+          "label": "Text"
+        },
+        {
+          "id": "16",
+          "order": 17,
+          "bounding_box": {
+            "x": 0.5121746431570109,
+            "y": 0.7054631828978623,
+            "width": 0.3719563392107473,
+            "height": 0.09026128266033254
+          },
+          "content": "Seungju Han, Kavel Rao, Allyson Ettinger, Liwei Jiang, Bill Yuchen Lin, Nathan Lambert, Yejin Choi, and Nouha Dziri. 2024. Wildguard: Open one-stop moderation tools for safety risks, jailbreaks, and refusals of llms. In Advances in Neural Information Processing Systems, volume 37, pages 8093–8131. Curran Associates, Inc.",
+          "label": "Text"
+        },
+        {
+          "id": "17",
+          "order": 18,
+          "bounding_box": {
+            "x": 0.5121746431570109,
+            "y": 0.8064133016627079,
+            "width": 0.3719563392107473,
+            "height": 0.039192399049881234
+          },
+          "content": "Geoffrey E. Hinton, Oriol Vinyals, and Jeffrey Dean. 2015. Distilling the knowledge in a neural network. ArXiv, abs/1503.02531.",
+          "label": "Text"
+        },
+        {
+          "id": "18",
+          "order": 19,
+          "bounding_box": {
+            "x": 0.5121746431570109,
+            "y": 0.8557007125890737,
+            "width": 0.3711167086481948,
+            "height": 0.06472684085510688
+          },
+          "content": "Edward J Hu, Yelong Shen, Phillip Wallis, Zeyuan Allen-Zhu, Yuanzhi Li, Shean Wang, Lu Wang, and Weizhu Chen. 2022. LoRA: Low-rank adaptation of large language models. In International Conference on Learning Representations.",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "page_index": 6,
+      "blocks": [
+        {
+          "id": "0",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.11670864819479429,
+            "y": 0.08729216152019002,
+            "width": 0.3711167086481948,
+            "height": 0.052256532066508314
+          },
+          "content": "Hamish Ivison, Muru Zhang, Faeze Brahman, Pang Wei Koh, and Pradeep Dasigi. 2025. Large-Scale Data Selection for Instruction Tuning. Preprint, arXiv:2503.01807.",
+          "label": "Text"
+        },
+        {
+          "id": "1",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.11670864819479429,
+            "y": 0.1490498812351544,
+            "width": 0.3719563392107473,
+            "height": 0.06591448931116389
+          },
+          "content": "Cathy Jiao, Yijun Pan, Emily Xiao, Daisy Sheng, Niket Jain, Hanzhang Zhao, Ishita Dasgupta, Jiaqi W. Ma, and Chenyan Xiong. 2025. Date-lm: Benchmarking data attribution evaluation for large language models. In NeurIPS.",
+          "label": "Text"
+        },
+        {
+          "id": "2",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.11754827875734676,
+            "y": 0.22505938242280285,
+            "width": 0.3719563392107473,
+            "height": 0.03978622327790974
+          },
+          "content": "William B. Johnson and Joram Lindenstrauss. 1984. Extensions of lipschitz mappings into hilbert space. Contemporary mathematics, 26:189–206.",
+          "label": "Text"
+        },
+        {
+          "id": "3",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.11670864819479429,
+            "y": 0.2749406175771972,
+            "width": 0.3702770780856423,
+            "height": 0.06532066508313539
+          },
+          "content": "Pang Wei Koh and Percy Liang. 2017. Understanding black-box predictions via influence functions. In Proceedings of the 34th International Conference on Machine Learning - Volume 70, ICML'17, page 1885–1894. JMLR.org.",
+          "label": "Text"
+        },
+        {
+          "id": "4",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.11670864819479429,
+            "y": 0.42577197149643703,
+            "width": 0.37279596977329976,
+            "height": 0.05285035629453682
+          },
+          "content": "Shuangqi Li, Hieu Le, Jingyi Xu, and Mathieu Salzmann. 2026. Lorif: Low-rank influence functions for scalable training data attribution. Preprint, arXiv:2601.21929.",
+          "label": "Text"
+        },
+        {
+          "id": "5",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.11754827875734676,
+            "y": 0.3503562945368171,
+            "width": 0.3719563392107473,
+            "height": 0.06591448931116389
+          },
+          "content": "Yongchan Kwon, Eric Wu, Kevin Wu, and James Zou. 2024. Datainf: Efficiently estimating data influence in loRA-tuned LLMs and diffusion models. In The Twelfth International Conference on Learning Representations.",
+          "label": "Text"
+        },
+        {
+          "id": "6",
+          "order": 7,
+          "bounding_box": {
+            "x": 0.11670864819479429,
+            "y": 0.48871733966745845,
+            "width": 0.37279596977329976,
+            "height": 0.06532066508313539
+          },
+          "content": "Zhe Li, Wei Zhao, Yige Li, and Jun Sun. 2025. Do influence functions work on large language models? In Findings of the Association for Computational Linguistics: EMNLP 2025, pages 14367–14382, Suzhou, China. Association for Computational Linguistics.",
+          "label": "Text"
+        },
+        {
+          "id": "7",
+          "order": 8,
+          "bounding_box": {
+            "x": 0.11670864819479429,
+            "y": 0.5641330166270784,
+            "width": 0.37363560033585225,
+            "height": 0.06532066508313539
+          },
+          "content": "Nihal V Nayak, Paula Rodriguez-Diaz, Neha Hulkund, Sara Beery, and David Alvarez-Melis. 2026. A critical look at targeted instruction selection: Disentangling what matters (and what doesn't). arXiv preprint arXiv:2602.14696.",
+          "label": "Text"
+        },
+        {
+          "id": "8",
+          "order": 9,
+          "bounding_box": {
+            "x": 0.11670864819479429,
+            "y": 0.6395486935866983,
+            "width": 0.37279596977329976,
+            "height": 0.10510688836104513
+          },
+          "content": "Jianmo Ni, Chen Qu, Jing Lu, Zhuyun Dai, Gustavo Hernandez Abrego, Ji Ma, Vincent Zhao, Yi Luan, Keith Hall, Ming-Wei Chang, and Yinfei Yang. 2022. Large dual encoders are generalizable retrievers. In Proceedings of the 2022 Conference on Empirical Methods in Natural Language Processing, pages 9844–9855, Abu Dhabi, United Arab Emirates. Association for Computational Linguistics.",
+          "label": "Text"
+        },
+        {
+          "id": "9",
+          "order": 10,
+          "bounding_box": {
+            "x": 0.11670864819479429,
+            "y": 0.7541567695961995,
+            "width": 0.37279596977329976,
+            "height": 0.05344418052256532
+          },
+          "content": "Sung Min Park, Kristian Georgiev, Andrew Ilyas, Guillaume Leclerc, and Aleksander Madry. 2023. Trak: Attributing model behavior at scale. In International Conference on Machine Learning (ICML).",
+          "label": "Text"
+        },
+        {
+          "id": "10",
+          "order": 11,
+          "bounding_box": {
+            "x": 0.11670864819479429,
+            "y": 0.8171021377672208,
+            "width": 0.37279596977329976,
+            "height": 0.10510688836104513
+          },
+          "content": "Aarohi Srivastava, Abhinav Rastogi, Abhishek Rao, Abu Awal Md Shoeb, Abubakar Abid, Adam Fisch, Adam R. Brown, Adam Santoro, Aditya Gupta, Adrià Garriga-Alonso, Agnieszka Kluska, Aitor Lewkowycz, Akshat Agarwal, Alethea Power, Alex Ray, Alex Warstadt, Alexander W. Kocurek, Ali Safaya, Ali Tazarv, and 431 others. 2023. Beyond the imitation game: Quantifying and extrapolating",
+          "label": "Text"
+        },
+        {
+          "id": "11",
+          "order": 12,
+          "bounding_box": {
+            "x": 0.5289672544080605,
+            "y": 0.08788598574821853,
+            "width": 0.35432409739714527,
+            "height": 0.026128266033254157
+          },
+          "content": "the capabilities of language models. Transactions on Machine Learning Research. Featured Certification.",
+          "label": "Text"
+        },
+        {
+          "id": "12",
+          "order": 13,
+          "bounding_box": {
+            "x": 0.5138539042821159,
+            "y": 0.12351543942992874,
+            "width": 0.3694374475230898,
+            "height": 0.05166270783847981
+          },
+          "content": "Weiwei Sun, Haokun Liu, Nikhil Kandpal, Colin Raffel, and Yiming Yang. 2025. Enhancing training data attribution with representational optimization. In NeurIPS.",
+          "label": "Text"
+        },
+        {
+          "id": "13",
+          "order": 14,
+          "bounding_box": {
+            "x": 0.5121746431570109,
+            "y": 0.18646080760095013,
+            "width": 0.37279596977329976,
+            "height": 0.10510688836104513
+          },
+          "content": "Mirac Suzgun, Nathan Scales, Nathanael Schärli, Sebastian Gehrmann, Yi Tay, Hyung Won Chung, Aakanksha Chowdhery, Quoc Le, Ed Chi, Denny Zhou, and Jason Wei. 2023. Challenging BIG-bench tasks and whether chain-of-thought can solve them. In Findings of the Association for Computational Linguistics: ACL 2023, pages 13003–13051, Toronto, Canada. Association for Computational Linguistics.",
+          "label": "Text"
+        },
+        {
+          "id": "14",
+          "order": 15,
+          "bounding_box": {
+            "x": 0.5113350125944585,
+            "y": 0.3010688836104513,
+            "width": 0.37279596977329976,
+            "height": 0.09204275534441805
+          },
+          "content": "Zhuozhuo Tu, Cheng Chen, and Yuxuan Du. 2025. RRInf: Efficient influence function estimation via ridge regression for large language models and text-to-image diffusion models. In Proceedings of the 2025 Conference on Empirical Methods in Natural Language Processing, pages 18494–18507, Suzhou, China. Association for Computational Linguistics.",
+          "label": "Text"
+        },
+        {
+          "id": "15",
+          "order": 16,
+          "bounding_box": {
+            "x": 0.5130142737195634,
+            "y": 0.40320665083135393,
+            "width": 0.3711167086481948,
+            "height": 0.05285035629453682
+          },
+          "content": "Orion Weller, Kathryn Ricci, Marc Marone, Antoine Chaffin, Dawn Lawrie, and Benjamin Van Durme. 2025. Seq vs seq: An open suite of paired encoders and decoders. Preprint, arXiv:2507.11412.",
+          "label": "Text"
+        },
+        {
+          "id": "16",
+          "order": 17,
+          "bounding_box": {
+            "x": 0.5121746431570109,
+            "y": 0.4661520190023753,
+            "width": 0.37279596977329976,
+            "height": 0.06413301662707839
+          },
+          "content": "Mengzhou Xia, Sadhika Malladi, Suchin Gururangan, Sanjeev Arora, and Danqi Chen. 2024. LESS: Selecting influential data for targeted instruction tuning. In International Conference on Machine Learning (ICML).",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "page_index": 7,
+      "blocks": [
+        {
+          "id": "0",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.11418975650713686,
+            "y": 0.08491686460807601,
+            "width": 0.12678421494542402,
+            "height": 0.0172209026128266
+          },
+          "content": "## A Appendix",
+          "label": "Text"
+        },
+        {
+          "id": "1",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.11418975650713686,
+            "y": 0.11104513064133016,
+            "width": 0.33669185558354325,
+            "height": 0.015439429928741092
+          },
+          "content": "### A.1 Ground Truth Projection Validation",
+          "label": "Text"
+        },
+        {
+          "id": "2",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.11418975650713686,
+            "y": 0.13182897862232779,
+            "width": 0.37531486146095716,
+            "height": 0.06472684085510688
+          },
+          "content": "In order to validate the use of random projections as ground truth we calculated the Mean Aggregated Spearman correlations against dense ground truth gradients and projections of different sizes.",
+          "label": "Text"
+        },
+        {
+          "id": "3",
+          "order": null,
+          "bounding_box": {
+            "x": 0.12510495382031905,
+            "y": 0.20961995249406176,
+            "width": 0.3593618807724601,
+            "height": 0.09263657957244656
+          },
+          "content": "<table><tr><td>Proj. Dim</td><td>Per-Anchor ( $ \\rho $)</td><td>Aggregated ( $ \\rho $)</td></tr><tr><td>8,192</td><td>0.9549</td><td>0.9803</td></tr><tr><td>16,384</td><td>0.9649</td><td>0.9886</td></tr><tr><td>32,768</td><td>0.9700</td><td>0.9918</td></tr><tr><td>65,536</td><td>0.9737</td><td>0.9914</td></tr></table>",
+          "label": "Table"
+        },
+        {
+          "id": "4",
+          "order": null,
+          "bounding_box": {
+            "x": 0.11335012594458438,
+            "y": 0.3153206650831354,
+            "width": 0.3778337531486146,
+            "height": 0.07185273159144893
+          },
+          "content": "<div style=\"text-align: center;\">Table 3: Spearman Correlation Conservation between Random Projection Dimensions (Qwen3-1.7B). This level of conservations is consistent across different model families. Naturally, larger models need larger projection dimensions to retain the same estimation quality.</div>\n",
+          "label": "Image"
+        },
+        {
+          "id": "5",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.11502938706968933,
+            "y": 0.41330166270783847,
+            "width": 0.2787573467674223,
+            "height": 0.014845605700712588
+          },
+          "content": "### A.2 FLOPs Measurement Details",
+          "label": "Text"
+        },
+        {
+          "id": "6",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.11502938706968933,
+            "y": 0.4346793349168646,
+            "width": 0.0873215785054576,
+            "height": 0.014251781472684086
+          },
+          "content": "## We use the",
+          "label": "Text"
+        },
+        {
+          "id": "7",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.11418975650713686,
+            "y": 0.4507125890736342,
+            "width": 0.37699412258606213,
+            "height": 0.06294536817102138
+          },
+          "content": "torch.utils.flop-counter.FlopCounterMode\n\nto calculate our FLOPs. We also set attn-\n\nimplementation=\"eager\" for all of the methods to\n\nensure fairness.",
+          "label": "Text"
+        },
+        {
+          "id": "8",
+          "order": 7,
+          "bounding_box": {
+            "x": 0.11418975650713686,
+            "y": 0.5261282660332541,
+            "width": 0.3341729638958858,
+            "height": 0.030878859857482184
+          },
+          "content": "### A.3 Implementation Details of Influence Ranking Estimation",
+          "label": "Text"
+        },
+        {
+          "id": "9",
+          "order": 8,
+          "bounding_box": {
+            "x": 0.12090680100755667,
+            "y": 0.5629453681710214,
+            "width": 0.3635600335852225,
+            "height": 0.12707838479809977
+          },
+          "content": "All Experiments were carried out in an isolated environment on an NVIDIA H100.\n\nMax Sequence Length: 2048\n\nGround Truth Projection Dimension: 65536\n\nEval: 200 Pool samples, 200 Query samples\n\nLESS (main): rank = 16, Dim = 8192\n\nLESS (small): rank = 8, Dim = 8192\n\nLoGRa : rank = 8",
+          "label": "Text"
+        },
+        {
+          "id": "10",
+          "order": null,
+          "bounding_box": {
+            "x": 0.1528127623845508,
+            "y": 0.7024940617577197,
+            "width": 0.30058774139378674,
+            "height": 0.17220902612826602
+          },
+          "content": "<table><tr><td>Hyperparameter</td><td>Value</td></tr><tr><td>CountSketch projection dim.</td><td>32,768</td></tr><tr><td>Train pool size</td><td>2,000</td></tr><tr><td>Train query size</td><td>1,000</td></tr><tr><td>Batch size</td><td>12</td></tr><tr><td>Candidates per batch</td><td>15</td></tr><tr><td>Learning rate</td><td>5e-5</td></tr><tr><td>Epochs</td><td>10</td></tr><tr><td>Alpha ( $ \\alpha $)</td><td>0.5</td></tr><tr><td>Weight decay</td><td>0.01</td></tr></table>",
+          "label": "Table"
+        },
+        {
+          "id": "11",
+          "order": null,
+          "bounding_box": {
+            "x": 0.1494542401343409,
+            "y": 0.8883610451306413,
+            "width": 0.30310663308144414,
+            "height": 0.016033254156769598
+          },
+          "content": "<div style=\"text-align: center;\">Table 4: Training settings for INFLUCODER.</div>\n",
+          "label": "Image"
+        },
+        {
+          "id": "12",
+          "order": 9,
+          "bounding_box": {
+            "x": 0.5096557514693535,
+            "y": 0.0855106888361045,
+            "width": 0.3224181360201511,
+            "height": 0.032066508313539195
+          },
+          "content": "### A.4 Implementation Details of Toxicity Filtering Experiment",
+          "label": "Text"
+        },
+        {
+          "id": "13",
+          "order": 10,
+          "bounding_box": {
+            "x": 0.5172124265323258,
+            "y": 0.12529691211401425,
+            "width": 0.35852225020990763,
+            "height": 0.1163895486935867
+          },
+          "content": "All experiments were carried out in an isolated environment on an NVIDIA A100.\n\nEncoder model: ettin-encoder-400m\n\nMax Sequence Length: 2048\n\nGround Truth Projection Dimension: 65536\n\nEval: 8000 Pool samples, 10 Query samples\n\nLESS: Dim=8192",
+          "label": "Text"
+        },
+        {
+          "id": "14",
+          "order": null,
+          "bounding_box": {
+            "x": 0.5465994962216625,
+            "y": 0.25593824228028506,
+            "width": 0.30310663308144414,
+            "height": 0.17339667458432304
+          },
+          "content": "<table><tr><td>Hyperparameter</td><td>Value</td></tr><tr><td>CountSketch projection dim.</td><td>32,768</td></tr><tr><td>Train pool size</td><td>2,000</td></tr><tr><td>Train query size</td><td>266</td></tr><tr><td>Batch size</td><td>4</td></tr><tr><td>Candidates per batch</td><td>63</td></tr><tr><td>Learning rate</td><td>1e-5</td></tr><tr><td>Epochs</td><td>20</td></tr><tr><td>Alpha ( $ \\alpha $)</td><td>0.5</td></tr><tr><td>Weight decay</td><td>0.01</td></tr></table>",
+          "label": "Table"
+        },
+        {
+          "id": "15",
+          "order": null,
+          "bounding_box": {
+            "x": 0.5449202350965575,
+            "y": 0.44239904988123513,
+            "width": 0.30310663308144414,
+            "height": 0.014845605700712588
+          },
+          "content": "<div style=\"text-align: center;\">Table 5: Training settings for INFLUCODER.</div>\n",
+          "label": "Image"
+        },
+        {
+          "id": "16",
+          "order": 11,
+          "bounding_box": {
+            "x": 0.5096557514693535,
+            "y": 0.4910926365795725,
+            "width": 0.37363560033585225,
+            "height": 0.0166270783847981
+          },
+          "content": "### A.5 DataInf performance on XSTest-response",
+          "label": "Text"
+        },
+        {
+          "id": "17",
+          "order": 12,
+          "bounding_box": {
+            "x": 0.5071368597816961,
+            "y": 0.5154394299287411,
+            "width": 0.380352644836272,
+            "height": 0.19239904988123516
+          },
+          "content": "Despite our best efforts and rigorous searches for any bugs, it does appear to be the case that the DataInf results are correct, which is inconsistent with the scores reported in the Data Attribution Eval Leaderboard (Jiao et al., 2025). We tried tuning the parameters, yet the scores remained low to no avail. We even ran the original code without any modifications and still the scores were very low, e.g. 0.1780. In lieu of a potential bug in their pipeline we have not used these scores in our analysis, however we keep them in for transparency reasons.",
+          "label": "Text"
+        },
+        {
+          "id": "18",
+          "order": 13,
+          "bounding_box": {
+            "x": 0.5096557514693535,
+            "y": 0.7226840855106889,
+            "width": 0.2577665827036104,
+            "height": 0.014845605700712588
+          },
+          "content": "### A.6 Non-Comparison to IProx",
+          "label": "Text"
+        },
+        {
+          "id": "19",
+          "order": 14,
+          "bounding_box": {
+            "x": 0.5079764903442485,
+            "y": 0.7458432304038005,
+            "width": 0.3778337531486146,
+            "height": 0.17814726840855108
+          },
+          "content": "Since IProX aligns gradients for its proxies on the full original gradient space of the model, whereas we use LoRA gradients, our methods are incompatible for comparison. We did indeed try some preliminary tests to see how well the two correlate, but unfortunately the influence spearman was very inconsistent depending on the run. Sometimes the LoRA gradients and IProX gradients tracked quite well, however any small change could cause the scores to plummet, and thus actionable results were difficult to reproduce.",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "page_index": 8,
+      "blocks": [
+        {
+          "id": "0",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.11502938706968933,
+            "y": 0.08610451306413301,
+            "width": 0.20486985726280438,
+            "height": 0.014845605700712588
+          },
+          "content": "### A.7 Acknowledgements",
+          "label": "Text"
+        },
+        {
+          "id": "1",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.11418975650713686,
+            "y": 0.10748218527315914,
+            "width": 0.37615449202350965,
+            "height": 0.09441805225653206
+          },
+          "content": "Experiments presented in this paper were carried out using the Grid'5000 testbed, supported by a scientific interest group hosted by Inria and including CNRS, RENATER and several Universities as well as other organizations (see https://www.grid5000.fr).",
+          "label": "Text"
+        },
+        {
+          "id": "2",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.11502938706968933,
+            "y": 0.20308788598574823,
+            "width": 0.37531486146095716,
+            "height": 0.04809976247030879
+          },
+          "content": "This work was supported by the French National Research Agency (ANR) through the ANR-24-CE23-4637 grant (Adada project).",
+          "label": "Text"
+        }
+      ]
+    }
+  ]
+}

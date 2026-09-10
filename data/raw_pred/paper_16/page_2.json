@@ -1,0 +1,460 @@
+{
+    "input_path": "/home/bocchi/Downloads/Paper_Data/Statistics/2607.20760v1.pdf",
+    "page_index": 2,
+    "page_count": 20,
+    "width": 1224,
+    "height": 1584,
+    "model_settings": {
+        "use_doc_preprocessor": false,
+        "use_layout_detection": true,
+        "use_chart_recognition": false,
+        "use_seal_recognition": false,
+        "use_ocr_for_image_block": true,
+        "format_block_content": true,
+        "merge_layout_blocks": true,
+        "markdown_ignore_labels": [
+            "number",
+            "footnote",
+            "header",
+            "header_image",
+            "footer",
+            "footer_image",
+            "aside_text"
+        ],
+        "return_layout_polygon_points": true
+    },
+    "parsing_res_list": [
+        {
+            "block_label": "text",
+            "block_content": "test trees deeper than four levels, and target a single response rather than the multivariate case.",
+            "block_bbox": [
+                137,
+                148,
+                1083,
+                203
+            ],
+            "block_id": 0,
+            "block_order": 1,
+            "group_id": 0,
+            "block_polygon_points": [
+                [
+                    137.0,
+                    148.0
+                ],
+                [
+                    1083.0,
+                    148.0
+                ],
+                [
+                    1083.0,
+                    203.0
+                ],
+                [
+                    137.0,
+                    203.0
+                ]
+            ]
+        },
+        {
+            "block_label": "text",
+            "block_content": "Novel in this paper is to initiate tree construction from the recently proposed twoblock method (Cook et al., 2023), which returns, for a predictor block  $ \\mathbf{X} \\in \\mathbb{R}^{n \\times p} $ and a response block  $ \\mathbf{Y} \\in \\mathbb{R}^{n \\times q} $, a reduced central subspace of each block with respect to the other. It is a genuinely multivariate joint reduction with optional embedded per-block variable selection if the sparse variant of Serneels (2025) is selected. When the data contain several operating regimes a single global twoblock model fits poorly; but, owing to its construction, the reduced score spaces it produces are an excellent device for identifying those regimes as distinct subspaces. This is the observation exploited here: rather than fight the global misfit, the twoblock scores are used to partition the data and place a fresh, locally faithful twoblock model in each part.",
+            "block_bbox": [
+                136,
+                207,
+                1085,
+                493
+            ],
+            "block_id": 1,
+            "block_order": 2,
+            "group_id": 1,
+            "block_polygon_points": [
+                [
+                    136.0,
+                    207.0
+                ],
+                [
+                    1085.0,
+                    207.0
+                ],
+                [
+                    1085.0,
+                    493.0
+                ],
+                [
+                    136.0,
+                    493.0
+                ]
+            ]
+        },
+        {
+            "block_label": "text",
+            "block_content": "The published twoblock methods choose their latent directions to maximize the covariance of the predictor and response scores. This is the natural objective when the two blocks are jointly Gaussian, but it may be the wrong lens for the regime-identification task. A node that straddles two regimes contains a mixture of two local linear laws, and a mixture of Gaussians is non-Gaussian: its skewness and higher moments carry the signature of the components. Concretely, the direction that best separates two regimes is often one along which the joint predictor–response distribution is strongly skewed while its covariance with the response is weak or even zero. The covariance objective is blind to such a direction by construction; a third-moment objective is not. This paper therefore introduces, nested into its central methodological contribution, a novel twoblock decomposition whose latent directions maximize the coskeewness of the scores rather than their covariance, or a convex combination of the two criteria that trades regime sensitivity against predictive sharpness. Both are computed by a matrix-free, block-symmetric higher-order power method (De Lathauwer et al., 2000b) that never materializes a third-moment tensor, so the cost per latent direction stays linear in the data size.",
+            "block_bbox": [
+                136,
+                495,
+                1084,
+                927
+            ],
+            "block_id": 2,
+            "block_order": 3,
+            "group_id": 2,
+            "block_polygon_points": [
+                [
+                    136.0,
+                    495.0
+                ],
+                [
+                    1084.0,
+                    495.0
+                ],
+                [
+                    1084.0,
+                    927.0
+                ],
+                [
+                    136.0,
+                    927.0
+                ]
+            ]
+        },
+        {
+            "block_label": "text",
+            "block_content": "Putting these pieces together, the twoblock clustering tree (tbtree) is proposed: a potentially shallow, interpretable, deterministic top-down clustering scheme that fits a twoblock model at each node, splits along the first predictor score, and is multivariate by construction. Its specific contributions are the following. At first, twoblock trees prtoposed here (tbtree) are the first tree-based regression method to place a local, genuinely multivariate twoblock (dense or sparse) dimension reduction model in every leaf. They generalize the PLS-Trees of Eriksson et al. (2009) from partial least squares to the joint predictor-response reduction of Cook et al. (2023), so both the split direction and the leaf prediction are informed by the multivariate response block. Secondly, to obtain a split impurity more efficient at detecting regimes, a novel twoblock decomposition is introduced based on coskewness: its latent directions maximize a third-order comoment of the predictor and response scores, or a convex combination with the classical covariance objective. This dimension reduction based on thrid order comoments is novel by itself and has not been published elsewhere.",
+            "block_bbox": [
+                137,
+                929,
+                1084,
+                1303
+            ],
+            "block_id": 3,
+            "block_order": 4,
+            "group_id": 3,
+            "block_polygon_points": [
+                [
+                    137.0,
+                    929.0
+                ],
+                [
+                    1084.0,
+                    929.0
+                ],
+                [
+                    1084.0,
+                    1303.0
+                ],
+                [
+                    137.0,
+                    1303.0
+                ]
+            ]
+        },
+        {
+            "block_label": "text",
+            "block_content": "The remainder of the paper is organized as follows. Section 2 recaps the twoblock estimator. Section 3 develops the coskewness decomposition and its higher-order power method. Section 4 reports a controlled simulation for the coskewness objective in isolation. Section 5 states the tbtree algorithm, its impurity criterion and its cross-validation pruning gate. Section 6 reports the four-regime simulation study. Section 7 applies the method to",
+            "block_bbox": [
+                137,
+                1305,
+                1086,
+                1448
+            ],
+            "block_id": 4,
+            "block_order": 5,
+            "group_id": 4,
+            "block_polygon_points": [
+                [
+                    137.0,
+                    1305.0
+                ],
+                [
+                    1086.0,
+                    1305.0
+                ],
+                [
+                    1086.0,
+                    1448.0
+                ],
+                [
+                    137.0,
+                    1448.0
+                ]
+            ]
+        },
+        {
+            "block_label": "number",
+            "block_content": "3",
+            "block_bbox": [
+                603,
+                1482,
+                620,
+                1503
+            ],
+            "block_id": 5,
+            "block_order": null,
+            "group_id": 5,
+            "block_polygon_points": [
+                [
+                    603.0,
+                    1482.0
+                ],
+                [
+                    619.0,
+                    1482.0
+                ],
+                [
+                    619.0,
+                    1502.0
+                ],
+                [
+                    603.0,
+                    1502.0
+                ]
+            ]
+        }
+    ],
+    "layout_det_res": {
+        "input_path": null,
+        "page_index": null,
+        "boxes": [
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.9162313342094421,
+                "coordinate": [
+                    137,
+                    148,
+                    1083,
+                    203
+                ],
+                "order": 1,
+                "polygon_points": [
+                    [
+                        137.0,
+                        148.0
+                    ],
+                    [
+                        1083.0,
+                        148.0
+                    ],
+                    [
+                        1083.0,
+                        203.0
+                    ],
+                    [
+                        137.0,
+                        203.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.9660906791687012,
+                "coordinate": [
+                    136,
+                    207,
+                    1085,
+                    493
+                ],
+                "order": 2,
+                "polygon_points": [
+                    [
+                        136.0,
+                        207.0
+                    ],
+                    [
+                        1085.0,
+                        207.0
+                    ],
+                    [
+                        1085.0,
+                        493.0
+                    ],
+                    [
+                        136.0,
+                        493.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 15,
+                "label": "inline_formula",
+                "score": 0.7634544968605042,
+                "coordinate": [
+                    811,
+                    234,
+                    920,
+                    259
+                ],
+                "order": 3,
+                "polygon_points": [
+                    [
+                        811.0,
+                        234.0
+                    ],
+                    [
+                        920.0,
+                        234.0
+                    ],
+                    [
+                        920.0,
+                        259.0
+                    ],
+                    [
+                        811.0,
+                        259.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 15,
+                "label": "inline_formula",
+                "score": 0.7741659879684448,
+                "coordinate": [
+                    203,
+                    263,
+                    307,
+                    288
+                ],
+                "order": 4,
+                "polygon_points": [
+                    [
+                        203.0,
+                        263.0
+                    ],
+                    [
+                        307.0,
+                        263.0
+                    ],
+                    [
+                        307.0,
+                        288.0
+                    ],
+                    [
+                        203.0,
+                        288.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.9680386781692505,
+                "coordinate": [
+                    136,
+                    495,
+                    1084,
+                    927
+                ],
+                "order": 5,
+                "polygon_points": [
+                    [
+                        136.0,
+                        495.0
+                    ],
+                    [
+                        1084.0,
+                        495.0
+                    ],
+                    [
+                        1084.0,
+                        927.0
+                    ],
+                    [
+                        136.0,
+                        927.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.9696000218391418,
+                "coordinate": [
+                    137,
+                    929,
+                    1084,
+                    1303
+                ],
+                "order": 6,
+                "polygon_points": [
+                    [
+                        137.0,
+                        929.0
+                    ],
+                    [
+                        1084.0,
+                        929.0
+                    ],
+                    [
+                        1084.0,
+                        1303.0
+                    ],
+                    [
+                        137.0,
+                        1303.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.9584813714027405,
+                "coordinate": [
+                    137,
+                    1305,
+                    1086,
+                    1448
+                ],
+                "order": 7,
+                "polygon_points": [
+                    [
+                        137.0,
+                        1305.0
+                    ],
+                    [
+                        1086.0,
+                        1305.0
+                    ],
+                    [
+                        1086.0,
+                        1448.0
+                    ],
+                    [
+                        137.0,
+                        1448.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 16,
+                "label": "number",
+                "score": 0.7233162522315979,
+                "coordinate": [
+                    603,
+                    1482,
+                    620,
+                    1503
+                ],
+                "order": 8,
+                "polygon_points": [
+                    [
+                        603.0,
+                        1482.0
+                    ],
+                    [
+                        619.0,
+                        1482.0
+                    ],
+                    [
+                        619.0,
+                        1502.0
+                    ],
+                    [
+                        603.0,
+                        1502.0
+                    ]
+                ]
+            }
+        ]
+    }
+}

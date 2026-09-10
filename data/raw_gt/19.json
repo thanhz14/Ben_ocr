@@ -1,0 +1,4048 @@
+{
+  "id": 279712734,
+  "annotations": [
+    {
+      "id": 100530853,
+      "completed_by": {
+        "id": 202728,
+        "email": "nghuuthanh1412004@gmail.com",
+        "first_name": "Hữu Thành",
+        "last_name": ""
+      },
+      "result": [
+        {
+          "id": "9quxCFRUVG",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.07880642693190512,
+            "y": 0.028959810874704492,
+            "width": 0.057383320581484314,
+            "height": 0.014184397163120567,
+            "ocrtext": "PREPRINT",
+            "rotation": 0,
+            "ocrlabels": [
+              "Text"
+            ],
+            "pageIndex": 1
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "W7YdNwTXiL",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.12777352716143842,
+            "y": 0.06914893617021277,
+            "width": 0.7452180566182094,
+            "height": 0.10047281323877066,
+            "ocrtext": "Interaction Dynamics Modeling and Predictive Control for Safe Steerable Catheter–Tissue",
+            "rotation": 0,
+            "ocrlabels": [
+              "Text"
+            ],
+            "pageIndex": 1
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "1FAK0YJwNB",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.449885233358837,
+            "y": 0.18735224586288415,
+            "width": 0.1009946442234124,
+            "height": 0.013593380614657211,
+            "ocrtext": "Yongyan Cao",
+            "rotation": 0,
+            "ocrlabels": [
+              "Text"
+            ],
+            "pageIndex": 1
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "PFo8SwTQhp",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.07804131599081866,
+            "y": 0.25059101654846333,
+            "width": 0.41545524100994646,
+            "height": 0.37884160756501184,
+            "ocrtext": "Abstract —Safe steerable catheter control is fundamentally a problem of interaction dynamics: the tip must follow a planned motion, remain compliant against moving tissue, reject friction and hysteresis, and respect a clinically meaningful never-exceed contact-force bound. We formulate catheter–tissue interaction dynamics in the scalar tip-normal coordinate of a single-segment single-tendon catheter. A partial-physics feedforward cancels only the reliable nominal bending dynamics, exposing a configuration- invariant linear interaction-dynamics model whose input gain varies through the scalar catheter inertia. A predictive optimizer then regulates this interaction state subject to hard contact- force, tendon-force, and curvature constraints. An augmented Kalman filter compresses contact, friction, and modeling error into one sensor-free disturbance state, giving nominal offset- free regulation in free space while leaving force safety to the explicit constraint. The unconstrained and disturbance-free limit recovers classical catheter impedance as a special realization of the same interaction dynamics, rather than as the main design object. In a MuJoCo distributed-compliance simulation of an eight-link tendon-driven catheter, disturbance augmentation cuts free-space approach error by 90%, and only the force-constrained predictive interaction-dynamics controller reconciles tracking with the 0.5 N bound: the unconstrained controller drives contact force to 0.60 N against a penetrating target, while the constrained one holds 0.47 N at identical tracking. These results show that offset-free motion regulation and contact-force safety are coupled interaction-dynamics objectives, and that the explicit predictive constraint resolves their tension under stiff tissue contact. The bound also holds under 0 . 5 mm, 1 . 2 Hz cardiac motion. Hardware validation is future work.",
+            "rotation": 0,
+            "ocrlabels": [
+              "Text"
+            ],
+            "pageIndex": 1
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "hgR-CP8FJp",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.5087987758224942,
+            "y": 0.25,
+            "width": 0.41469013006885996,
+            "height": 0.1660756501182033,
+            "ocrtext": "Existing methods regulate these interaction dynamics through different mechanisms. Classical impedance control [1] shapes the tip port as a virtual mechanical impedance Z ( s ) = M d s 2 + D d s + K d , providing passive compliance without an explicit contact model. It is an important interaction- dynamics realization, but three limitations matter clinically: (i) the contact-force safety bound ∥ F tip ∥ ≤ F safe is not en- forced as a prediction-horizon constraint; (ii) persistent contact force produces a steady-state tip error e ∞ = K − 1 d F contact ; and (iii) the controller cannot anticipate trajectory curvature, impending contact, or force saturation.",
+            "rotation": 0,
+            "ocrlabels": [
+              "Text"
+            ],
+            "pageIndex": 1
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "t8LJtdItAl",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.5080336648814078,
+            "y": 0.4355791962174941,
+            "width": 0.2410099464422341,
+            "height": 0.014184397163120567,
+            "ocrtext": "B. Challenges Specific to Catheters",
+            "rotation": 0,
+            "ocrlabels": [
+              "Text"
+            ],
+            "pageIndex": 1
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "ZPuF8-3ggi",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.504973221117062,
+            "y": 0.4574468085106383,
+            "width": 0.4162203519510329,
+            "height": 0.2375886524822695,
+            "ocrtext": "Catheters present challenges absent in rigid-body robots. Model uncertainty: the mechanics follow a variant of the Cosserat rod equations [3], [4], with distributed elasticity, sheath friction, tendon backlash, and hysteresis that vary widely across specimens, making full-model inversion im- practical. Cardiac motion: the heart moves ∼ 10 –15 mm per cycle at ∼ 1 Hz; after gross target tracking, the local residual wall-normal motion still produces quasi-periodic contact-force disturbances with known frequency but unknown phase and amplitude. Limited sensing: most clinical catheters carry no force sensor; tip position is available via electromagnetic (EM) tracking, fluoroscopy, or intracardiac echocardiography at moderate latency (10–50 ms). Safety criticality: a perforation force threshold of ∼ 0 . 3 –0.5 N is clinically relevant [12], mak- ing hard force-constraint enforcement—not soft penalization— essential.",
+            "rotation": 0,
+            "ocrlabels": [
+              "Text"
+            ],
+            "pageIndex": 1
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "gfVB6OCYH_",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.07957153787299158,
+            "y": 0.6353427895981087,
+            "width": 0.4131599081866871,
+            "height": 0.04018912529550828,
+            "ocrtext": "Index Terms —Steerable catheter, continuum robot, interaction dynamics, predictive control, Kalman filter, contact-force safety, offset-free regulation, cardiac ablation.",
+            "rotation": 0,
+            "ocrlabels": [
+              "Text"
+            ],
+            "pageIndex": 1
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "AHT77mxRbM",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.22111706197398623,
+            "y": 0.6950354609929078,
+            "width": 0.12853863810252486,
+            "height": 0.016548463356973995,
+            "ocrtext": "I. I NTRODUCTION",
+            "rotation": 0,
+            "ocrlabels": [
+              "Text"
+            ],
+            "pageIndex": 1
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "8TxZeJZmhB",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.0772762050497322,
+            "y": 0.7163120567375887,
+            "width": 0.15531752104055088,
+            "height": 0.013593380614657211,
+            "ocrtext": "A. Clinical Motivation",
+            "rotation": 0,
+            "ocrlabels": [
+              "Text"
+            ],
+            "pageIndex": 1
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "EoxVIKCYpZ",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.07957153787299158,
+            "y": 0.7358156028368794,
+            "width": 0.41239479724560063,
+            "height": 0.15011820330969267,
+            "ocrtext": "S TEERABLE catheters are the primary tool for cardiac electrophysiology (EP) procedures including radiofre- quency ablation, where the tip must be positioned precisely at target tissue while maintaining controlled, stable contact. The central control problem is therefore not merely tip tracking and not merely force regulation; it is the regulation of catheter– tissue interaction dynamics . The interaction state must encode how the tip moves relative to tissue, how persistent friction and contact forces bias that motion, and how safety limits reshape what motion is physically allowable.",
+            "rotation": 0,
+            "ocrlabels": [
+              "Text"
+            ],
+            "pageIndex": 1
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "TEXZeWvYXF",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.0757459831675593,
+            "y": 0.8983451536643026,
+            "width": 0.41698546289211935,
+            "height": 0.02186761229314421,
+            "ocrtext": "Preprint, June 2026. This work has been submitted for possible publication; copyright may be transferred without notice.",
+            "rotation": 0,
+            "ocrlabels": [
+              "Text"
+            ],
+            "pageIndex": 1
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "yg_2wOvdt9",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.0811017597551645,
+            "y": 0.9208037825059102,
+            "width": 0.41009946442234124,
+            "height": 0.022458628841607566,
+            "ocrtext": "Y. Cao is with Voryx Robotic LLC, San Jose, CA 95136, USA. Corre- sponding author: Yongyan Cao (e-mail: yongyancao@gmail.com).",
+            "rotation": 0,
+            "ocrlabels": [
+              "Text"
+            ],
+            "pageIndex": 1
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "qBmfA0yc07",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.5110941086457537,
+            "y": 0.7151300236406619,
+            "width": 0.11476664116296863,
+            "height": 0.013593380614657211,
+            "ocrtext": "C. Related Work",
+            "rotation": 0,
+            "ocrlabels": [
+              "Text"
+            ],
+            "pageIndex": 1
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "n7TVu5RUVB",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.5072685539403213,
+            "y": 0.7358156028368794,
+            "width": 0.41239479724560063,
+            "height": 0.14716312056737588,
+            "ocrtext": "Catheter and continuum-robot control has progressed from PID and Jacobian-based kinematic regulation [5], [6] to model- less feedback [6] and predictive interaction-dynamics opti- mization. Cosserat-based predictive control can model rich catheter dynamics but requires online nonlinear-program solu- tion, limiting update rates to ∼ 10 –20 Hz. Constant-curvature kinematics [2] underlie most reduced-order interaction mod- els. Learning-based approaches improve robustness to model uncertainty but usually do not provide formal stability or hard interaction-constraint guarantees.",
+            "rotation": 0,
+            "ocrlabels": [
+              "Text"
+            ],
+            "pageIndex": 1
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "9DkE7eRTDH",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.5095638867635807,
+            "y": 0.8882978723404256,
+            "width": 0.41162968630451413,
+            "height": 0.05673758865248227,
+            "ocrtext": "Sensor-free contact-force control is a directly relevant line. Jolaei et al. [14] regulate the contact force of a tendon- driven ablation catheter without a force sensor via position control plus a displacement-based viscoelastic contact model",
+            "rotation": 0,
+            "ocrlabels": [
+              "Text"
+            ],
+            "pageIndex": 1
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "MY7tpD7I7e",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.032899770466717666,
+            "y": 0.36229314420803777,
+            "width": 0.0344299923488906,
+            "height": 0.45744680851063846,
+            "ocrtext": "iv:2607.20939v1 [eess.SY] 23 Jul 2026",
+            "rotation": 0,
+            "ocrlabels": [
+              "Text"
+            ],
+            "pageIndex": 1
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "tTZZZugebY",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.07761529808773904,
+            "y": 0.029887049432219266,
+            "width": 0.05849268841394826,
+            "height": 0.011294526498696786,
+            "ocrtext": "PREPRINT",
+            "rotation": 0,
+            "ocrlabels": [
+              "Text"
+            ],
+            "pageIndex": 2
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "31V2KdbHYk",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.08098987626546682,
+            "y": 0.07072110677366149,
+            "width": 0.41169853768278963,
+            "height": 0.10251954821894005,
+            "ocrtext": "(0.03–0.05 N RMS), and Kesner and Howe [15] combine ultrasound guidance with force control on a moving car- diac target ( ∼ 0 . 08 N RMS). These works regulate one com- ponent of the interaction dynamics—force—to a setpoint. The present framework instead treats force as a hard never- exceed interaction-dynamics constraint while regulating the tip-motion state, a complementary objective (Section VI-B).",
+            "rotation": 0,
+            "ocrlabels": [
+              "Text"
+            ],
+            "pageIndex": 2
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "TNoIjRvuIa",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.08098987626546682,
+            "y": 0.17584708418460848,
+            "width": 0.41169853768278963,
+            "height": 0.08688097306689835,
+            "ocrtext": "Virtual-impedance interaction shaping has been demon- strated for catheter tip-force regulation with empirically tuned parameters. In the terminology of this paper, impedance is one way to realize interaction dynamics, but the configuration- dependent effective inertia and compliance are typically not addressed, giving inconsistent behavior across the workspace.",
+            "rotation": 0,
+            "ocrlabels": [
+              "Text"
+            ],
+            "pageIndex": 2
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "6JkQS5eMId",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.0798650168728909,
+            "y": 0.2679409222640128,
+            "width": 0.4116985376827896,
+            "height": 0.10251954821894,
+            "ocrtext": "Disturbance rejection in flexible robots can also be inter- preted as interaction-dynamics regulation. Active disturbance rejection control (ADRC) and its extended state observer [8] lump unknown dynamics into an estimated disturbance state. The connection to offset-free predictive control [9], [10] provides a formal framework for combining disturbance es- timation with constraint-aware interaction optimization [7].",
+            "rotation": 0,
+            "ocrlabels": [
+              "Text"
+            ],
+            "pageIndex": 2
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "Q86XPDqyjw",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.07874015748031496,
+            "y": 0.3756733288669669,
+            "width": 0.4128233970753656,
+            "height": 0.16159860990443092,
+            "ocrtext": "Base framework. This work builds on the interaction- dynamics framework introduced for redundant-manipulator physical human–robot interaction [13]: nonlinear robot dy- namics are transformed into a configuration-invariant linear in- teraction model, then regulated by predictive optimization with disturbance augmentation and safety constraints. We carry that hierarchy—Interaction Dynamics → Configuration-Invariant Dynamics → Predictive Optimization—to the steerable- catheter setting, addressing the catheter-specific challenges of single-DOF actuation, severe model uncertainty, and hard contact-force safety.",
+            "rotation": 0,
+            "ocrlabels": [
+              "Text"
+            ],
+            "pageIndex": 2
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "0lHrx4zIDA",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.0922384701912261,
+            "y": 0.5398783613349126,
+            "width": 0.2440944881889764,
+            "height": 0.011294526498696786,
+            "ocrtext": "The contributions of this paper are:",
+            "rotation": 0,
+            "ocrlabels": [
+              "Text"
+            ],
+            "pageIndex": 2
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "bYep8SEVOe",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.0764904386951631,
+            "y": 0.5546481267562853,
+            "width": 0.41394825646794153,
+            "height": 0.07211120764552563,
+            "ocrtext": "Correct single-DOF formulation. A single-tendon catheter has one controllable DOF (the curvature); we control the scalar tip-normal coordinate, avoiding the common over- parameterization that treats the 2-D tip as independently actuable.",
+            "rotation": 0,
+            "ocrlabels": [
+              "Text"
+            ],
+            "pageIndex": 2
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "qTki90JbXL",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.07761529808773904,
+            "y": 0.6293657635938179,
+            "width": 0.4150731158605174,
+            "height": 0.1789748045178106,
+            "ocrtext": "Configuration-invariant interaction dynamics. The partial-physics feedforward cancels only the known nominal stiffness and damping, reformulating the uncertain catheter mechanics into a configuration-invariant linear interaction- dynamics model. The double integrator is the resulting model, not the contribution itself; the residual is absorbed by the disturbance state. Under the Disturbance Compression Principle (Remark 1) the estimator tracks only the observer- accessible low-frequency projection P D (∆) of the residual, so ˙ d = 0 is an equivalent-disturbance model, not a physical claim—making one integrator state legitimate across friction, contact, and cardiac effects.",
+            "rotation": 0,
+            "ocrlabels": [
+              "Text"
+            ],
+            "pageIndex": 2
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "tNmPlc9OtR",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.07874015748031496,
+            "y": 0.8112945158931093,
+            "width": 0.4128233970753656,
+            "height": 0.07211120764552563,
+            "ocrtext": "Predictive interaction-dynamics optimization. We estab- lish (Theorem 1) that the unconstrained, disturbance-free re- alization recovers the classical catheter impedance law while the constrained predictive realization adds offset-free rejection and explicit interaction-constraint enforcement.",
+            "rotation": 0,
+            "ocrlabels": [
+              "Text"
+            ],
+            "pageIndex": 2
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "04gDURRMVE",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.0798650168728909,
+            "y": 0.8842745332693038,
+            "width": 0.41169853768278963,
+            "height": 0.059079061685490875,
+            "ocrtext": "Hard interaction-dynamics constraints. The QP enforces the predicted tip-normal force bound over the horizon through the tendon-to-tip transmission, together with tendon and cur- vature limits.",
+            "rotation": 0,
+            "ocrlabels": [
+              "Text"
+            ],
+            "pageIndex": 2
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "7FQq6FEd26",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.5095613048368954,
+            "y": 0.2453518692666194,
+            "width": 0.4128233970753656,
+            "height": 0.11294526498696786,
+            "ocrtext": "Fig. 1. Single-segment tendon-actuated catheter plant, mapping the variables of this section onto the physical parts: tendon displacement u (control input) drives the curvature κ of a length- L bending segment with effective bending inertia M , damping C , and hysteretic stiffness K (1); the constant-curvature arc has radius R = 1 /κ and subtends κL . The tip position p and its controlled normal coordinate y = n ⊤ p press on a Kelvin–Voigt tissue wall ( k t , b t ), producing the normal contact force F n held under the hard safety bound F safe . Sheath friction, tendon backlash, hysteresis, and contact are lumped into the disturbance d cat , compressed by the augmented Kalman estimator into the observed state d (Remark 1).",
+            "rotation": 0,
+            "ocrlabels": [
+              "Text"
+            ],
+            "pageIndex": 2
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "MzUF-2BPgf",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.5106861642294712,
+            "y": 0.07158991650433044,
+            "width": 0.4049493813273337,
+            "height": 0.15464813205907899,
+            "ocrtext": "tendon ctuator disp. u proximal sheath tendon (force, u ) bending segment L, κ ; M, C, K + R = 1 /κ κL tip p , y = n ⊤ p n tissue wall ( k t , b t ) F n ≤ F safe friction, backlash, hysteresis, contact ⇒ d cat",
+            "rotation": 0,
+            "ocrlabels": [
+              "Image"
+            ],
+            "pageIndex": 2
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "bh4fxf8A0l",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.5073115860517435,
+            "y": 0.38436142493081443,
+            "width": 0.4150731158605174,
+            "height": 0.10425716768027801,
+            "ocrtext": "Honest characterization. Simulation on a distributed- compliance physics plant shows prediction’s dominant benefit is interaction-constraint enforcement , that offset-free rejection helps mainly in free space, and that offset-free motion regula- tion without a force constraint still breaches the safety bound (far milder on the compliant catheter than a stiff lumped model predicts, but breached).",
+            "rotation": 0,
+            "ocrlabels": [
+              "Text"
+            ],
+            "pageIndex": 2
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "Yk5DYmOrJ0",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.5579302587176603,
+            "y": 0.5042571756344687,
+            "width": 0.312710911136108,
+            "height": 0.016507384882710686,
+            "ocrtext": "II. I NTERACTION D YNAMICS F ORMULATION",
+            "rotation": 0,
+            "ocrlabels": [
+              "Text"
+            ],
+            "pageIndex": 2
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "JjNQx4Gt1W",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.5129358830146231,
+            "y": 0.5259774189011932,
+            "width": 0.32395950506186727,
+            "height": 0.011294526498696786,
+            "ocrtext": "A. Catheter Mechanics and Degrees of Freedom",
+            "rotation": 0,
+            "ocrlabels": [
+              "Text"
+            ],
+            "pageIndex": 2
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "LQes-DhVT3",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.5106861642294713,
+            "y": 0.5450912329759109,
+            "width": 0.41169853768278963,
+            "height": 0.05821025195482189,
+            "ocrtext": "Consider a planar single-segment tendon-actuated catheter; tip position p ∈ R 2 is set by tendon displacement u ∈ R (positive pull gives curvature κ > 0 ). The dominant bending dynamics take the rigid-body-analogous form",
+            "rotation": 0,
+            "ocrlabels": [
+              "Text"
+            ],
+            "pageIndex": 2
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "Uv_bmZaSL-",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.5073115860517435,
+            "y": 0.6345786219778318,
+            "width": 0.41394825646794153,
+            "height": 0.14943527367506515,
+            "ocrtext": "with effective bending inertia M , damping C , nonlinear (hysteretic) stiffness K , and a lumped term d cat collecting tissue contact, friction, backlash, and hysteresis. This equa- tion is not used as a full Cosserat model; it is the starting point for constructing a low-dimensional interaction-dynamics state. The correspondence κ ↔ q , K ↔ G bridges to the configuration-invariant interaction-dynamics framework estab- lished for redundant manipulators in physical human–robot interaction [13]; the present paper specializes that hierarchy to the single-DOF catheter setting.",
+            "rotation": 0,
+            "ocrlabels": [
+              "Text"
+            ],
+            "pageIndex": 2
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "XFAmzCFxP3",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.5073115860517435,
+            "y": 0.7892267540369109,
+            "width": 0.4150731158605174,
+            "height": 0.11728931364031277,
+            "ocrtext": "Degrees of freedom. With a single tendon, the only con- trollable coordinate is κ ; the tip pose p ( κ ) traces a one- parameter curve, so the two tip coordinates are not indepen- dently actuable—only motion along the Jacobian direction J κ is. We therefore control a scalar coordinate (the curvature, or equivalently the tip displacement y along the contact normal) and recover the 2-D pose through the kinematics of Section II-B.",
+            "rotation": 0,
+            "ocrlabels": [
+              "Text"
+            ],
+            "pageIndex": 2
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "uwsGhta1XB",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.5095613048368954,
+            "y": 0.9146828738427183,
+            "width": 0.41057367829021374,
+            "height": 0.03127715030408341,
+            "ocrtext": "Remark 1 (Disturbance Compression Principle) . The true residual after partial-physics cancellation, ∆( t ) = f real −",
+            "rotation": 0,
+            "ocrlabels": [
+              "Text"
+            ],
+            "pageIndex": 2
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "EkEt-eL9Bl",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.8976377952755905,
+            "y": 0.6123371140838809,
+            "width": 0.02249718785151856,
+            "height": 0.014769765421372719,
+            "ocrtext": "(1)",
+            "rotation": 0,
+            "ocrlabels": [
+              "Text"
+            ],
+            "pageIndex": 2
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "-xNTgghnaM",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.07874015748031496,
+            "y": 0.02901823970155028,
+            "width": 0.0562429696287964,
+            "height": 0.01216333622936577,
+            "ocrtext": "PREPRINT",
+            "rotation": 0,
+            "ocrlabels": [
+              "Text"
+            ],
+            "pageIndex": 3
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "woIP2Ej6Jk",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.0764904386951631,
+            "y": 0.06898348731232352,
+            "width": 0.41394825646794153,
+            "height": 0.07645525629887055,
+            "ocrtext": "f nominal , superposes effects on disparate timescales—quasi- static sheath friction and hysteresis, fast tissue contact, and ∼ 1 Hz quasi-periodic cardiac loading. We do not claim a single integrator physically represents all of these. Rather, the augmented estimator realizes the projection",
+            "rotation": 0,
+            "ocrlabels": [
+              "Text"
+            ],
+            "pageIndex": 3
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "27MTZkMpGy",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.47244094488188976,
+            "y": 0.1549956506485529,
+            "width": 0.01799775028121485,
+            "height": 0.015638575152041704,
+            "ocrtext": "(2)",
+            "rotation": 0,
+            "ocrlabels": [
+              "Text"
+            ],
+            "pageIndex": 3
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "wSqlhDlps6",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.07761529808773904,
+            "y": 0.17758470364594647,
+            "width": 0.41394825646794153,
+            "height": 0.22502172562891665,
+            "ocrtext": "onto the observer-accessible subspace D —the low-frequency band set by the Kalman bandwidth and the integrating internal model. The model ˙ d = 0 is thus a statement about P D (∆) , the equivalent disturbance the observer can track and the MPC reject offset-free, not about the physics of ∆ . Components outside D —the fast contact-onset transient, an unpredicted cardiac harmonic—are handled instead by the hard force constraint (§VI-F(4)) or an enlarged internal model (§V-A, Option B). This makes “model only what is observed and slowly varying” a precise design rule: partial cancellation need only move the dominant part of ∆ into D , and the offset- free guarantee then applies to P D (∆) exactly. We call this the Disturbance Compression Principle ; it lets a deliberately reduced model (1) of an infinite-dimensional Cosserat system carry a formal offset-free guarantee.",
+            "rotation": 0,
+            "ocrlabels": [
+              "Text"
+            ],
+            "pageIndex": 3
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "wlrq4ocPY4",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.0764904386951631,
+            "y": 0.42606429987426014,
+            "width": 0.12373453318335208,
+            "height": 0.013032145960034752,
+            "ocrtext": "B. Tip Kinematics",
+            "rotation": 0,
+            "ocrlabels": [
+              "Text"
+            ],
+            "pageIndex": 3
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "L6Z47Lg1jb",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.09336332958380203,
+            "y": 0.44344049448763984,
+            "width": 0.28008998875140606,
+            "height": 0.013900955690703735,
+            "ocrtext": "For a constant-curvature arc of length L ,",
+            "rotation": 0,
+            "ocrlabels": [
+              "Text"
+            ],
+            "pageIndex": 3
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "lTlLDuROgd",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.07761529808773904,
+            "y": 0.5016507464424618,
+            "width": 0.41394825646794153,
+            "height": 0.05734144222415291,
+            "ocrtext": "with continuous limits p x → L , p z → 0 as κ → 0 . Let J κ ( κ ) = dp/dκ ∈ R 2 × 1 be the translational Jacobian and let n be the controlled tip-normal direction. The scalar normal coordinate is y = n ⊤ p , with",
+            "rotation": 0,
+            "ocrlabels": [
+              "Text"
+            ],
+            "pageIndex": 3
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "Tkr81evnno",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.4701912260967379,
+            "y": 0.5728931311003339,
+            "width": 0.020247469066366704,
+            "height": 0.016507384882710686,
+            "ocrtext": "(4)",
+            "rotation": 0,
+            "ocrlabels": [
+              "Text"
+            ],
+            "pageIndex": 3
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "XzSi6dQNw4",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.4701912260967379,
+            "y": 0.6006950424817414,
+            "width": 0.02249718785151856,
+            "height": 0.013900955690703735,
+            "ocrtext": "(5)",
+            "rotation": 0,
+            "ocrlabels": [
+              "Text"
+            ],
+            "pageIndex": 3
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "EPaa48XinU",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.07874015748031496,
+            "y": 0.6258905246711419,
+            "width": 0.41394825646794153,
+            "height": 0.04170286707211121,
+            "ocrtext": "away from configurations where J n = 0 . This scalar operational-space inertia normalizes the effective tip impedance in the controllable direction.",
+            "rotation": 0,
+            "ocrlabels": [
+              "Text"
+            ],
+            "pageIndex": 3
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "eVpNDVULA7",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.08098987626546682,
+            "y": 0.6875760155486398,
+            "width": 0.41169853768278963,
+            "height": 0.013900955690703735,
+            "ocrtext": "C. Contact Model and the Force-Safety Interaction Constraint",
+            "rotation": 0,
+            "ocrlabels": [
+              "Text"
+            ],
+            "pageIndex": 3
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "3jAE_f0qNm",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.0764904386951631,
+            "y": 0.7110338782767023,
+            "width": 0.4161979752530934,
+            "height": 0.1476976542137272,
+            "ocrtext": "During contact, a tip force F tip acts at the tip; in simulation the tissue is Kelvin–Voigt, F tissue = k t δ + b t ˙ δ , with penetration δ = max(0 , p surf − p ) , tissue stiffness k t ≈ 2 –20 kN/m, and damping b t . The contact maps to curvature through virtual work, τ ext = J ⊤ κ F tip ; along the controlled normal this reduces to τ ext = J n F n , where F n = n ⊤ F tip . The clinically relevant perforation threshold F safe ≈ 0 . 5 N [12] motivates a hard predicted normal-force bound, | F n ( t ) | ≤ F safe , with additional approach-velocity limits needed for environment- induced impact transients (Section VI-F).",
+            "rotation": 0,
+            "ocrlabels": [
+              "Text"
+            ],
+            "pageIndex": 3
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "GIuVnWaY14",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.0798650168728909,
+            "y": 0.8799304846159589,
+            "width": 0.23847019122609675,
+            "height": 0.013900955690703735,
+            "ocrtext": "D. Interaction-Dynamics Objective",
+            "rotation": 0,
+            "ocrlabels": [
+              "Text"
+            ],
+            "pageIndex": 3
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "GxnP3maEJn",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.0764904386951631,
+            "y": 0.8999131084213455,
+            "width": 0.4150731158605174,
+            "height": 0.044309296264118156,
+            "ocrtext": "Given a reference ( p d , ˙ p d , ¨ p d ) , define the scalar interaction state x = [ e, ˙ e ] ⊤ , where e = y d − y is the error in the controllable normal coordinate. This state characterizes the",
+            "rotation": 0,
+            "ocrlabels": [
+              "Text"
+            ],
+            "pageIndex": 3
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "5TXdmTD6ZC",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.5084364454443194,
+            "y": 0.07332753596566845,
+            "width": 0.4128233970753656,
+            "height": 0.09904430929626412,
+            "ocrtext": "regulated catheter–tissue interaction dynamics: motion error, velocity error, persistent unknown loading, and the constraints that limit allowable contact. The objective is to choose u ( t ) so e ( t ) → 0 in the nominal free-space limit while respecting tendon limits u lo ≤ u ≤ u hi , predicted normal-force safety | F n | ≤ F safe , and curvature limits κ lo ≤ κ ≤ κ max under bounded unknown contact, friction, and hysteresis.",
+            "rotation": 0,
+            "ocrlabels": [
+              "Text"
+            ],
+            "pageIndex": 3
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "AkeoD1tXsx",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.5298087739032621,
+            "y": 0.19322328542648037,
+            "width": 0.3700787401574803,
+            "height": 0.013900955690703735,
+            "ocrtext": "III. P REDICTIVE I NTERACTION D YNAMICS C ONTROL",
+            "rotation": 0,
+            "ocrlabels": [
+              "Text"
+            ],
+            "pageIndex": 3
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "xo__RsjHK_",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.5264341957255343,
+            "y": 0.212337099501198,
+            "width": 0.2677165354330709,
+            "height": 0.013900955690703735,
+            "ocrtext": "The control architecture has two layers:",
+            "rotation": 0,
+            "ocrlabels": [
+              "Text"
+            ],
+            "pageIndex": 3
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "cZAc7F2qmx",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.5106861642294713,
+            "y": 0.2861859253652193,
+            "width": 0.41169853768278963,
+            "height": 0.14682884448305822,
+            "ocrtext": "with feedforward u ff = ˆ C ( κ, ˙ κ ) ˙ κ + ˆ K ( κ )+ J n Λ n ( κ )¨ y d cancel- ing the nominal dynamics. In the single-DOF setting F mpc ∈ R is the scalar corrective force along the controlled tip-normal; the transmitted generalized input is J n F mpc , dimensionally consistent with u . In the remainder we write J n for the scalar normal Jacobian and reserve J κ for the full translational Jacobian. For a rigid robot Layer 1 is exact; for a catheter ˆ C, ˆ K are uncertain, so the cancellation is partial and the residual is absorbed by the disturbance estimate—more robust than inverting an unreliable model.",
+            "rotation": 0,
+            "ocrlabels": [
+              "Text"
+            ],
+            "pageIndex": 3
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "GfA0lJsFTv",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.5084364454443194,
+            "y": 0.436490016642288,
+            "width": 0.41169853768278963,
+            "height": 0.044309296264118156,
+            "ocrtext": "Since the system is single-DOF (Section II), the error e = y d − y and the corrective input F mpc ∈ R are scalar. With x e = [ e, ˙ e ] ⊤ ∈ R 2 , \u0014 \u0015 \u0014 \u0015 \u0014 \u0015",
+            "rotation": 0,
+            "ocrlabels": [
+              "Text"
+            ],
+            "pageIndex": 3
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "vT1oheZRYh",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.5073115860517435,
+            "y": 0.5476976489109334,
+            "width": 0.4150731158605174,
+            "height": 0.14943527367506515,
+            "ocrtext": "where d lumps modeling error, contact, and the kinematic coupling ˙ J n ˙ κ , normalized to acceleration units. This is the key configuration-invariant interaction-dynamics model: A c is con- stant , while only the scalar gain B c ( κ ) varies through Λ n ( κ ) . The double integrator is the resulting normalized interaction model, not the main claim. The same constant- A d , parameter- varying- B d structure exploited in the base framework [13] and, earlier, in min–max MPC under input saturation [11], enables offline precomputation of the prediction matrices. Because A c is nilpotent, the exact ZOH discretization is closed-form: \u0014 \u0015 \u0014 \u0015",
+            "rotation": 0,
+            "ocrlabels": [
+              "Text"
+            ],
+            "pageIndex": 3
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "yW0RnlOUDw",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.5241844769403825,
+            "y": 0.7443961666315976,
+            "width": 0.3610798650168729,
+            "height": 0.014769765421372719,
+            "ocrtext": "Augment with a scalar integrating disturbance ˆ d ∈ R :",
+            "rotation": 0,
+            "ocrlabels": [
+              "Text"
+            ],
+            "pageIndex": 3
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "sxvOwD1CWg",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.9021372328458943,
+            "y": 0.7131190163275141,
+            "width": 0.01799775028121485,
+            "height": 0.013900955690703735,
+            "ocrtext": "(8)",
+            "rotation": 0,
+            "ocrlabels": [
+              "Text"
+            ],
+            "pageIndex": 3
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "ylfB34c35L",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.8987626546681665,
+            "y": 0.7765421266663499,
+            "width": 0.020247469066366704,
+            "height": 0.013900955690703735,
+            "ocrtext": "(9)",
+            "rotation": 0,
+            "ocrlabels": [
+              "Text"
+            ],
+            "pageIndex": 3
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "0FiR3rlb6x",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.5095613048368954,
+            "y": 0.8104257061624403,
+            "width": 0.4094488188976378,
+            "height": 0.07298001737619461,
+            "ocrtext": "with G d = [ 1 2 ∆ t 2 , ∆ t ] ⊤ the ZOH of E c — distinct from B d , which carries the − Λ − 1 n input gain ( d is in acceleration units, so G d is not Λ − 1 n -scaled). A steady-state Kalman filter estimates ˆ d from tip-error measurements; the pair is observable with C aug = [ I 2 , 0] since G d ̸ = 0 . No force sensor is required.",
+            "rotation": 0,
+            "ocrlabels": [
+              "Text"
+            ],
+            "pageIndex": 3
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "vp6RMhlUp6",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.5084364454443194,
+            "y": 0.8860121527306418,
+            "width": 0.41394825646794153,
+            "height": 0.05734144222415291,
+            "ocrtext": "A predictive interaction-dynamics QP can be constructed from the augmented dynamics (9) and an input-centered cost. For a frozen or predicted inertia sequence, let U d ( ˆ d ) = [Λ n, 0 ˆ d, . . . , Λ n,N − 1 ˆ d ] ⊤ be the steady force sequence that",
+            "rotation": 0,
+            "ocrlabels": [
+              "Text"
+            ],
+            "pageIndex": 3
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "Tpp8JxgyOa",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.8998875140607424,
+            "y": 0.2696785404825086,
+            "width": 0.020247469066366704,
+            "height": 0.013032145960034752,
+            "ocrtext": "ion (6)",
+            "rotation": 0,
+            "ocrlabels": [
+              "Text"
+            ],
+            "pageIndex": 3
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "4RHC7ru5IP",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.9032620922384702,
+            "y": 0.4964378801871133,
+            "width": 0.014623172103487065,
+            "height": 0.013900955690703735,
+            "ocrtext": "(7)",
+            "rotation": 0,
+            "ocrlabels": [
+              "Text"
+            ],
+            "pageIndex": 3
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "WimJXqfVu3",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.46906636670416196,
+            "y": 0.4733275439198591,
+            "width": 0.024746906636670417,
+            "height": 0.015638575152041704,
+            "ocrtext": "(3)",
+            "rotation": 0,
+            "ocrlabels": [
+              "Text"
+            ],
+            "pageIndex": 3
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "LvtAL-rdGJ",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.0798650168728909,
+            "y": 0.030755859162888248,
+            "width": 0.05736782902137233,
+            "height": 0.011294526498696786,
+            "ocrtext": "PREPRINT",
+            "rotation": 0,
+            "ocrlabels": [
+              "Text"
+            ],
+            "pageIndex": 4
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "qljxCPnc7K",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.9122609673790776,
+            "y": 0.029887049432219266,
+            "width": 0.012373453318335208,
+            "height": 0.010425716768027803,
+            "ocrtext": "4",
+            "rotation": 0,
+            "ocrlabels": [
+              "Text"
+            ],
+            "pageIndex": 4
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "eFzy-iEYqq",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.0798650168728909,
+            "y": 0.07245872623499945,
+            "width": 0.41169853768278963,
+            "height": 0.02693310165073849,
+            "ocrtext": "cancels the estimated acceleration disturbance in (7). The condensed QP is",
+            "rotation": 0,
+            "ocrlabels": [
+              "Text"
+            ],
+            "pageIndex": 4
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "kP1HjNM4YQ",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.07874015748031496,
+            "y": 0.13761945603517323,
+            "width": 0.41169853768278963,
+            "height": 0.06429192006950478,
+            "ocrtext": "with U = [ F mpc , 0 ; . . . ; F mpc ,N − 1 ] ∈ R N , H = Γ ⊤ ¯ Q Γ + ¯ R , Q = diag ( K d , D d ) , and Φ ∈ R 2 N × 2 , Γ precomputed once (constant A d ). When no interaction constraint is active the solution is the closed form h i",
+            "rotation": 0,
+            "ocrlabels": [
+              "Text"
+            ],
+            "pageIndex": 4
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "a57qLR7ahW",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.46231721034870643,
+            "y": 0.21233709825835573,
+            "width": 0.030371203599550055,
+            "height": 0.015638575152041704,
+            "ocrtext": "(11)",
+            "rotation": 0,
+            "ocrlabels": [
+              "Text"
+            ],
+            "pageIndex": 4
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "oNJQByNFUg",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.0764904386951631,
+            "y": 0.2392701999090942,
+            "width": 0.4150731158605174,
+            "height": 0.10338835794960903,
+            "ocrtext": "a matrix–vector multiply. With constant Λ n over the horizon, ∆( ˆ d ) + Γ U d ( ˆ d ) = 0 , so the change of variables V = U − U d reduces the optimizer to the nominal interaction-dynamics regulator in V . When a constraint binds, OSQP [16] solves the condensed QP reusing the cached factorization. The min- imization is subject to tendon limits, curvature limits, and the contact-force interaction bound.",
+            "rotation": 0,
+            "ocrlabels": [
+              "Text"
+            ],
+            "pageIndex": 4
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "cWhBLTFSzH",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.07761529808773904,
+            "y": 0.3452649870507102,
+            "width": 0.41394825646794153,
+            "height": 0.10338835794960903,
+            "ocrtext": "Force-safety interaction constraint. The corrective input F mpc is the tip-normal force, and the two-layer command is realized as the tendon tension T k = − ( u ff ,k + F mpc ,k ) /J n ( κ k ) with the tip-space elastic feedforward u ff = k eff y d ( J n bounded away from zero; Section VI-B). The predicted normal contact force—the applied tip force beyond the catheter’s own elastic restoring—is then",
+            "rotation": 0,
+            "ocrlabels": [
+              "Text"
+            ],
+            "pageIndex": 4
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "pCa3ijClpY",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.0764904386951631,
+            "y": 0.484274551829082,
+            "width": 0.41394825646794153,
+            "height": 0.08688097306689835,
+            "ocrtext": "with any calibrated free-space friction bias absorbed into the disturbance estimate ˆ d (Remark 1). Because the compliant elastic term k eff e k is small over the workspace ( | k eff e k | ≪ F safe ), the hard predicted-force bound | ˆ F n,k | ≤ F safe is en- forced to leading order by the box constraint on the corrective force,",
+            "rotation": 0,
+            "ocrlabels": [
+              "Text"
+            ],
+            "pageIndex": 4
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "oX3RSxQXZ2",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.0798650168728909,
+            "y": 0.6006950424817414,
+            "width": 0.4128233970753656,
+            "height": 0.05473501303214596,
+            "ocrtext": "applied directly in the QP. This bounds the controller- induced/predicted quasi-static normal force; fast environment- induced damping spikes are handled by approach-velocity limits (Section VI-F).",
+            "rotation": 0,
+            "ocrlabels": [
+              "Text"
+            ],
+            "pageIndex": 4
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "eVYljE6Abe",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.08211473565804274,
+            "y": 0.6658557722819152,
+            "width": 0.4094488188976378,
+            "height": 0.19461337966985232,
+            "ocrtext": "Theorem 1 (LQR–impedance equivalence) . In the uncon- strained, disturbance-free limit ( d ≡ 0 , no active constraints) the receding-horizon law is the static linear state feedback F mpc = K eff e + D eff ˙ e —the LQR-realized instance of the classi- cal catheter impedance law u imp = ˆ C ˙ κ + ˆ K + J n ( K eff e + D eff ˙ e ) , realizing the effective tip-normal impedance Z eff ( s, κ ) ≈ Λ n ( κ ) s 2 + D eff s + K eff —where the realized gains ( K eff , D eff ) are the unconstrained LQR feedback for the weights ( Q, R ) . The unconstrained predictive interaction controller is therefore an LQR-tuned classical impedance, with the realized gains the Riccati image of the cost weights (Remark 2); it is not a free rendering of a prescribed ( K d , D d ) (following [13], Theorem 1).",
+            "rotation": 0,
+            "ocrlabels": [
+              "Text"
+            ],
+            "pageIndex": 4
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "3lu5zs1iyD",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.0764904386951631,
+            "y": 0.8695047678479312,
+            "width": 0.41732283464566927,
+            "height": 0.07645525629887055,
+            "ocrtext": "Proof sketch: Without constraints and with d ≡ 0 the QP minimizer is the unconstrained stationary point U ⋆ = − H − 1 Γ ⊤ ¯ Q Φ x e , whose first block is a static gain F mpc = K eff e + D eff ˙ e ; with the DARE terminal cost this is the infinite- horizon LQR feedback for ( Q, R ) , independent of N . After",
+            "rotation": 0,
+            "ocrlabels": [
+              "Text"
+            ],
+            "pageIndex": 4
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "LvWvX0MZU3",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.5084364454443194,
+            "y": 0.07158991650433047,
+            "width": 0.41394825646794153,
+            "height": 0.08688097306689835,
+            "ocrtext": "Layer-1 cancellation the residual plant is ¨ e = − Λ − 1 n ( κ ) F mpc + d ; multiplying by Λ n ( κ ) gives Λ n ¨ e + D eff ˙ e + K eff e = Λ n d , the stated impedance, and adding the feedforward u ff = ˆ C ˙ κ + ˆ K + J n Λ n ¨ y d recovers u imp . When constraints are active or d ̸ = 0 , the MPC departs from this static law—precisely its advantage.",
+            "rotation": 0,
+            "ocrlabels": [
+              "Text"
+            ],
+            "pageIndex": 4
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "hOnRoXzIcC",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.5095613048368954,
+            "y": 0.16802780323707986,
+            "width": 0.4128233970753656,
+            "height": 0.13466550825369245,
+            "ocrtext": "Remark 2 (Prescribed vs. realized gains) . The cost weights Q = diag ( K d , D d ) , R are design penalties ; the realized impedance ( K eff , D eff ) is their LQR (Riccati) image, so in general ( K eff , D eff ) ̸ = ( K d , D d ) —in particular the cheap- control limit R → 0 yields a plant-determined gain, not ( K d , D d ) . To render a specific ( K d , D d ) exactly, prescribe the impedance gain directly ( F mpc = K d e + D d ˙ e ), making the equivalence exact at the cost of the predictive look-ahead (cf. [13], Remark 2).",
+            "rotation": 0,
+            "ocrlabels": [
+              "Text"
+            ],
+            "pageIndex": 4
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "eJrPpsx5Yw",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.6231721034870641,
+            "y": 0.3244135547574969,
+            "width": 0.1856017997750281,
+            "height": 0.014769765421372719,
+            "ocrtext": "IV. S TABILITY A NALYSIS",
+            "rotation": 0,
+            "ocrlabels": [
+              "Text"
+            ],
+            "pageIndex": 4
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "u6v17g9ekD",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.5084364454443194,
+            "y": 0.34613379802422145,
+            "width": 0.41394825646794153,
+            "height": 0.13379669852302345,
+            "ocrtext": "Theorem 2 (Nominal stability) . With terminal cost Q f the DARE solution at a nominal configuration κ 0 , if the QP is feasible at k = 0 and the LPV variation ∥ B d ( κ k ) − B d ( κ 0 ) ∥ is sufficiently small—quantified for this scalar plant in closed form as ρ = Λ n, ref / Λ n, true < ρ ⋆ ≈ 3 . 4 (Proposition 1, derived in Appendix B), comfortably satisfied by the 1 . 4 × workspace variation—the closed loop is asymptotically stable and x e ( k ) → 0 (no disturbance), provided recursive feasibility holds.",
+            "rotation": 0,
+            "ocrlabels": [
+              "Text"
+            ],
+            "pageIndex": 4
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "--ULcOzTsK",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.5095613048368954,
+            "y": 0.48861858722544255,
+            "width": 0.41169853768278963,
+            "height": 0.18071242397914858,
+            "ocrtext": "Theorem 3 (ISS / offset-free) . If ∥ d ( t ) ∥ ≤ ¯ d , the augmented system is observable, and the input-centered QP (10) is fea- sible, ( x e , ˆ d ) is input-to-state stable with an error bound that scales with the unmodeled time variation of d . For constant matched disturbances in the nominal, free-space limit, ˆ d → d ∞ implies U d = 1 N Λ n d ∞ and ∆( d ∞ ) + Γ U d = 0 , hence the unconstrained law becomes F mpc = Λ n d ∞ + K eff e + D eff ˙ e and the steady error is exactly zero. For slowly varying distur- bances the residual error scales with ∥ ˙ d ∥ . Under stiff contact the achievable steady-state error is additionally bounded by the force constraint and is therefore nonzero (Section VI-B confirms a contact-limited residual).",
+            "rotation": 0,
+            "ocrlabels": [
+              "Text"
+            ],
+            "pageIndex": 4
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "n818Rtw1So",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.5061867266591676,
+            "y": 0.6788879182419499,
+            "width": 0.4161979752530934,
+            "height": 0.09035621198957429,
+            "ocrtext": "Proof status. Theorem 1 is supported by the sketch above. Theorems 2–3 follow standard arguments—terminal- cost/recursive-feasibility stability for constrained MPC [7] and the augmented-observer offset-free result [9]—specialized to the constant- A d scalar plant with the input-centering identity ∆( ˆ d ) + Γ U d ( ˆ d ) = 0 .",
+            "rotation": 0,
+            "ocrlabels": [
+              "Text"
+            ],
+            "pageIndex": 4
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "dR0FxQRRBC",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.5106861642294713,
+            "y": 0.7774109363970189,
+            "width": 0.4094488188976378,
+            "height": 0.0894874022589053,
+            "ocrtext": "Proposition 1 (LPV stability margin) . For the scalar plant (8) , let K = [ k 1 , k 2 ] be a gain designed at Λ n, ref (normalized to Λ n, ref = 1 ) and applied where the true inertia is Λ n, true , giving the closed loop A cl ( ρ ) = A d − ρ B d (Λ n, ref ) K with ρ = Λ n, ref / Λ n, true (since B d ∝ Λ − 1 n ). Then A cl ( ρ ) is Schur for all ρ ∈ (0 , ρ ⋆ ) with",
+            "rotation": 0,
+            "ocrlabels": [
+              "Text"
+            ],
+            "pageIndex": 4
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "BzqNLmVzJ_",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.8886389201349831,
+            "y": 0.9155516835733872,
+            "width": 0.03824521934758155,
+            "height": 0.01998262380538662,
+            "ocrtext": "(14)",
+            "rotation": 0,
+            "ocrlabels": [
+              "Text"
+            ],
+            "pageIndex": 4
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "ylacy6FtUZ",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.08098987626546682,
+            "y": 0.029887049432219266,
+            "width": 0.06299212598425197,
+            "height": 0.01216333622936577,
+            "ocrtext": "PREPRINT",
+            "rotation": 0,
+            "ocrlabels": [
+              "Text"
+            ],
+            "pageIndex": 5
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "_SIJQ6iCHU",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.07761529808773904,
+            "y": 0.07072110677366149,
+            "width": 0.4128233970753656,
+            "height": 0.0738488271068636,
+            "ocrtext": "the first bound binding as a real pole exits through z = − 1 ; the second corresponds to det = − 1 . For the benchmark gain ( k 2 = − 294 . 9 , ∆ t = 2 ms) this gives ρ ⋆ ≈ 3 . 39 , agree- ing with the simulated spectral-radius sweep (Appendix B; simulation/catheter_verify.py ).",
+            "rotation": 0,
+            "ocrlabels": [
+              "Text"
+            ],
+            "pageIndex": 5
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "YVFMrAJ_di",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.08098987626546682,
+            "y": 0.15238922145654593,
+            "width": 0.41057367829021374,
+            "height": 0.14943527367506515,
+            "ocrtext": "Remark 3 (Workspace margin) . Over the workspace Λ n ( κ ) varies only 1 . 4 × , i.e. ρ ∈ [0 . 70 , 1 . 0] , a margin of more than 3 × to ρ ⋆ ≈ 3 . 4 ( Λ n, true > 0 . 29 Λ n, ref ); under-estimates ( Λ n, true > Λ n, ref , ρ < 1 ) are always stable since ρ ⋆ > 1 . A single fixed gain is therefore robustly stable, and the Λ n ( κ ) -normalized gain holds the closed-loop poles nearly configuration-invariant (spread ∼ 2 × 10 − 6 , Section VI-F). The nominal-limit caveat on Theorem 3 is essential: as the simu- lation shows (Section VI-B; Appendix A), offset-free tracking does not hold under stiff contact or fast cardiac motion.",
+            "rotation": 0,
+            "ocrlabels": [
+              "Text"
+            ],
+            "pageIndex": 5
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "JNRMHs1COs",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.23284589426321708,
+            "y": 0.3192006951306407,
+            "width": 0.11136107986501688,
+            "height": 0.015638575152041704,
+            "ocrtext": "V. D ISCUSSION",
+            "rotation": 0,
+            "ocrlabels": [
+              "Text"
+            ],
+            "pageIndex": 5
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "1qpGiw2ZMZ",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.07536557930258718,
+            "y": 0.33744569947468933,
+            "width": 0.41057367829021374,
+            "height": 0.013900955690703735,
+            "ocrtext": "A. Predictive Interaction Optimization and the ˙ d = 0 Model",
+            "rotation": 0,
+            "ocrlabels": [
+              "Text"
+            ],
+            "pageIndex": 5
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "4zHwFO3Zgr",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.0798650168728909,
+            "y": 0.35655951354940696,
+            "width": 0.4094488188976378,
+            "height": 0.22589053784527022,
+            "ocrtext": "The primary value of prediction here is interaction- constraint enforcement and trajectory feedforward , not contact-force forecasting: the feedforward ¨ p d and the known constraint bounds are exact, the Kalman disturbance estimate moderate, and force prediction near-useless (the tissue is unknown). A zero-order-hold ˆ d ( k + i ) = ˆ d ( k ) is therefore adopted, and the offset-free guarantee holds at steady state regardless of prediction quality. This integrating model is a worst-case approximation for any slowly-varying distur- bance; the ∼ 1 Hz cardiac force could instead be predicted by (A) raising the process-noise covariance for faster adaptation, or (B) an ECG-gated periodic model ˆ d ( k +1) = ˆ d DC ( k ) + A card sin( ω heart ( k +1)∆ t + ϕ ) —left to future work. During first contact the estimate lags a few samples; the hard force constraint is the safety backstop in that transient.",
+            "rotation": 0,
+            "ocrlabels": [
+              "Text"
+            ],
+            "pageIndex": 5
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "rMLWV96iy9",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.07761529808773904,
+            "y": 0.6006950424817414,
+            "width": 0.17435320584926883,
+            "height": 0.016507384882710686,
+            "ocrtext": "B. Modeling and Sensing",
+            "rotation": 0,
+            "ocrlabels": [
+              "Text"
+            ],
+            "pageIndex": 5
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "OX2JcqZuWH",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.0764904386951631,
+            "y": 0.619808856556459,
+            "width": 0.41394825646794153,
+            "height": 0.15030408340573415,
+            "ocrtext": "Partial cancellation. Catheter stiffness K ( κ ) suffers hys- teresis and specimen variability, so inverting an inaccurate ˆ K can increase the disturbance; we cancel only reliably-estimated components and let the residual add to d ( t ) , including a feed- forward term only if its omission would exceed the Kalman bandwidth. Sensing. Tip position for the Kalman updates is available from EM tracking, fluoroscopy, intracardiac echocar- diography, or FBG shape sensing ( ∼ 0 . 5 mm); no force sensor is required, though an available FBG force estimate can be injected to reduce contact-transient lag.",
+            "rotation": 0,
+            "ocrlabels": [
+              "Text"
+            ],
+            "pageIndex": 5
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "MKUdMeMtdP",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.08098987626546682,
+            "y": 0.7895742726263847,
+            "width": 0.32395950506186727,
+            "height": 0.013900955690703735,
+            "ocrtext": "C. Robustness to Contact-Normal Misalignment",
+            "rotation": 0,
+            "ocrlabels": [
+              "Text"
+            ],
+            "pageIndex": 5
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "9HsYKwpY9d",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.07761529808773905,
+            "y": 0.8104257061624399,
+            "width": 0.4139482564679416,
+            "height": 0.13292788879235448,
+            "ocrtext": "The scalar y is taken along an assumed contact normal; proximal deflections can rotate the true normal by θ . The effective contact stiffness along the assumed axis scales as k t cos 2 θ (a 7% change at 15 ◦ ), a slowly-varying mismatch ˆ d absorbs, while the off-axis ∼ F sin θ does not enter the regulated coordinate, leaving offset-free and ISS intact. For the safety bound the projection underestimates the true normal force by 1 / cos θ , so a misalignment-aware design tightens F safe by cos θ max . Tested on the MuJoCo benchmark: the",
+            "rotation": 0,
+            "ocrlabels": [
+              "Text"
+            ],
+            "pageIndex": 5
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "TiMxe4G5zV",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.5253093363329584,
+            "y": 0.06846220942811278,
+            "width": 0.3813273340832396,
+            "height": 0.036490008688097306,
+            "ocrtext": "TABLE I I NTERACTION -D YNAMICS C OMPARISON U NDER F REE M OTION AND C ONTACT",
+            "rotation": 0,
+            "ocrlabels": [
+              "Text"
+            ],
+            "pageIndex": 5
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "SD73Zh37g5",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.5084364454443194,
+            "y": 0.23006081933254371,
+            "width": 0.4128233970753656,
+            "height": 0.07124239791485665,
+            "ocrtext": "worst-case admissible true force F safe / cos θ grows to 0 . 577 N at θ = 30 ◦ (realized 0 . 54 N)—a 15% breach—whereas the cos θ max -tightened bound ( θ max = 30 ◦ ) holds it ≤ 0 . 50 N for all θ ≤ 30 ◦ (realized ≤ 0 . 46 N). Tracking under large, time- varying θ remains future work.",
+            "rotation": 0,
+            "ocrlabels": [
+              "Text"
+            ],
+            "pageIndex": 5
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "9IQNN2H9TY",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.530933633295838,
+            "y": 0.320417031322118,
+            "width": 0.3734533183352081,
+            "height": 0.014769765421372719,
+            "ocrtext": "VI. I NTERACTION -D YNAMICS S IMULATION R ESULTS",
+            "rotation": 0,
+            "ocrlabels": [
+              "Text"
+            ],
+            "pageIndex": 5
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "OWcTVIhE6K",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.5084364454443194,
+            "y": 0.33779322593549765,
+            "width": 0.06186726659167604,
+            "height": 0.013900955690703735,
+            "ocrtext": "A. Setup",
+            "rotation": 0,
+            "ocrlabels": [
+              "Text"
+            ],
+            "pageIndex": 5
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "_t2f_GaL_m",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.5095613048368953,
+            "y": 0.35690704001021545,
+            "width": 0.4116985376827897,
+            "height": 0.4847958429702773,
+            "ocrtext": "We evaluate the controller on a distributed-compliance plant in the MuJoCo physics engine: an eight-link pseudo-rigid- body (PRB) tendon-driven catheter (each joint a torsional spring approximating the segment flexural rigidity, total length 5 cm), actuated through a routed spatial tendon (tension- only), pressing on a Kelvin–Voigt tissue wall ( k t = 5 kN/m, b t = 40 N · s/m, applied analytically on the tip so the stiff contact is faithful—MuJoCo’s regularized soft contact cannot represent it). This plant genuinely violates the reduced-order assumptions: eight elastic DOFs, a configuration-dependent tendon transmission, and distributed bending the scalar model lumps away. The scalar operational-space inertia Λ n ( κ ) and tendon-to-tip-normal transmission J n ( κ ) are read from the model (mass matrix and tip Jacobian on the contact nor- mal): Λ n ≈ 3 . 5 × 10 − 3 , J n ≈ 0 . 087 , catheter tip stiffness k eff ≈ 8 . 4 N/m. Two specializations carry the scalar design onto this plant: the impedance gains are Λ n -scaled to the measured inertia (preserving ω ≈ 30 rad/s), and the corrective force F mpc is realized in tendon space , T = − ( u ff + F mpc ) /J n with Layer-1 feedforward u ff = k eff y d , so the hard bound (13) is the box | F mpc | ≤ F safe on the corrective force (the elastic k eff e contribution to ˆ F n is negligible on the compliant catheter). By Theorem 1 the unconstrained controller is the static impedance feedback and the scalar force-magnitude QP reduces to the predicted-force clip used here; the offset- free disturbance is an integrating estimator on the tip error. Control rate 500 Hz; tendon limit ± 8 N; F safe = 0 . 5 N. The reference approaches the surface (1 s), presses to a target 1.5 mm past it ( ≈ 7 . 5 N if tracked rigidly—far beyond what an 8 N tendon delivers through J n ), holds 1 s, and retracts, deliberately stressing the safety mechanism. Reproducible: simulation/catheter_benchmark_mujoco.py .",
+            "rotation": 0,
+            "ocrlabels": [
+              "Text"
+            ],
+            "pageIndex": 5
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "OzA5bQ27-K",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.5073115860517435,
+            "y": 0.8608166705412413,
+            "width": 0.18110236220472442,
+            "height": 0.015638575152041704,
+            "ocrtext": "B. Controller Comparison",
+            "rotation": 0,
+            "ocrlabels": [
+              "Text"
+            ],
+            "pageIndex": 5
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "kVAghGegQJ",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.5219347581552306,
+            "y": 0.882536913807966,
+            "width": 0.19797525309336333,
+            "height": 0.01216333622936577,
+            "ocrtext": "Key results (Table I, Fig. 2):",
+            "rotation": 0,
+            "ocrlabels": [
+              "Text"
+            ],
+            "pageIndex": 5
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "aOya3MSPjv",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.5253093363329584,
+            "y": 0.8999131084213455,
+            "width": 0.39595050618672667,
+            "height": 0.045178105994787145,
+            "ocrtext": "• Offset-free rejection of the model-reduction residual (free space). The uncancelled higher-order bending dynamics and configuration-dependent J n act as a slowly-varying",
+            "rotation": 0,
+            "ocrlabels": [
+              "Text"
+            ],
+            "pageIndex": 5
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "NV2FRuIu-3",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.08098987626546682,
+            "y": 0.02901823970155028,
+            "width": 0.05399325084364454,
+            "height": 0.01216333622936577,
+            "ocrtext": "PREPRINT",
+            "rotation": 0,
+            "ocrlabels": [
+              "Text"
+            ],
+            "pageIndex": 6
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "yNBpQFPLjn",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.5095613048368954,
+            "y": 0.06811467758165457,
+            "width": 0.4105736782902137,
+            "height": 0.038227628149435214,
+            "ocrtext": "TABLE II C APABILITY C OMPARISON WITH R EPRESENTATIVE C ATHETER -C ONTROL M ETHODS",
+            "rotation": 0,
+            "ocrlabels": [
+              "Text"
+            ],
+            "pageIndex": 6
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "wyTFElFrSg",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.07761529808773904,
+            "y": 0.2861859253652193,
+            "width": 0.4128233970753656,
+            "height": 0.11294526498696786,
+            "ocrtext": "Fig. 2. Catheter tip tracking (top) and contact force (bottom) for the four controllers of Table I over the approach–press–hold–retract task, on the MuJoCo distributed-compliance plant. The shaded band marks the contact- hold window. The force-constrained predictive interaction-dynamics controller (green) tracks the reference and holds the contact force below the 0.5 N safety bound (dashed); the unconstrained offset-free controller (blue) tracks identically but drives to 0.60 N—over the bound—to eliminate position error against the penetrating target. Classical impedance (red) stays gentle (0.17 N) but mistracks, and joint-space PD (gray), lacking the Layer-1 feedforward, cannot overcome the distributed elasticity to reach the tissue.",
+            "rotation": 0,
+            "ocrlabels": [
+              "Text"
+            ],
+            "pageIndex": 6
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "6YPxONmXPs",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.1124859392575928,
+            "y": 0.4503909723329917,
+            "width": 0.38020247469066365,
+            "height": 0.05647263249348393,
+            "ocrtext": "residual; classical impedance leaves a 0.28 mm approach error against it, which the offset-free integrator drives to 0.03 mm ( 90% reduction )—rejecting genuine model- reduction error, not a synthetic bias.",
+            "rotation": 0,
+            "ocrlabels": [
+              "Text"
+            ],
+            "pageIndex": 6
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "pcq3l0CtT1",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.09448818897637795,
+            "y": 0.5086012242878136,
+            "width": 0.3982002249718785,
+            "height": 0.11902693310165074,
+            "ocrtext": "• Force safety is the decisive interaction constraint. Only the force-constrained predictive interaction-dynamics controller achieves both accurate tracking (0.03 mm) and the 0.5 N bound (peak 0.47 N). Classical impedance (0.17 N) and joint-space PD (no contact) stay under the bound only by being too soft to track the penetrating target—safety bought with accuracy, the trade the con- straint removes.",
+            "rotation": 0,
+            "ocrlabels": [
+              "Text"
+            ],
+            "pageIndex": 6
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "FOajLwIfto",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.09786276715410573,
+            "y": 0.6311033830551559,
+            "width": 0.3937007874015748,
+            "height": 0.16246741963509992,
+            "ocrtext": "• Offset-free motion regulation without a force limit over- shoots the bound. The unconstrained predictive controller, driving hard to eliminate position error against the pene- trating target, pushes the contact force to 0.60 N ( 0 . 595 N precisely)—19% over F safe . This is far milder than the multi-newton overshoot a stiff lumped plant predicts (the compliant catheter and 8 N tendon cap the realizable force below 1 N), but the bound is still breached : offset- free motion regulation and force safety remain in ten- sion, resolved only by the hard interaction constraint (0.60 → 0.47 N at identical tracking).",
+            "rotation": 0,
+            "ocrlabels": [
+              "Text"
+            ],
+            "pageIndex": 6
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "Tor8RVHEjW",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.09673790776152989,
+            "y": 0.7961772318822629,
+            "width": 0.4004499437570302,
+            "height": 0.14543874361119385,
+            "ocrtext": "• Hold error is contact-limited. The tracking control retain ∼ 1 . 41 mm hold error because the comman depth needs > 7 N the tendon cannot deliver. Joint-s PD, lacking the Layer-1 feedforward, cannot even r the tissue at a stably-rescaled gain (1.82 mm appro no contact)—evidence that the feedforward, not raw g overcomes the distributed elasticity. The simulation does not support a blanket “zero steady-state error” c",
+            "rotation": 0,
+            "ocrlabels": [
+              "Text"
+            ],
+            "pageIndex": 6
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "d5xJ1uoTGm",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.5081374321880651,
+            "y": 0.40977653578007023,
+            "width": 0.41229656419529837,
+            "height": 0.009776536312849162,
+            "ocrtext": "C. Comparison with Published Catheter-Control Approaches",
+            "rotation": 0,
+            "ocrlabels": [
+              "Text"
+            ],
+            "pageIndex": 6
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "Fs_RiKgXY1",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.5092806218952005,
+            "y": 0.4279329603610757,
+            "width": 0.4147700110161918,
+            "height": 0.15223463687150834,
+            "ocrtext": "Table II positions the proposed predictive interaction- dynamics framework against representative classes of catheter/continuum-robot control from the literature. Direct numerical comparison is limited—reported conditions (plat- form, sensing, contact, metric) differ substantially—so the table compares capabilities and order-of-magnitude character- istics rather than asserting head-to-head accuracy. The row for this work is from the MuJoCo simulation in Section VI-B; the literature rows summarize the cited methods at a capability level rather than reproducing their experiments.",
+            "rotation": 0,
+            "ocrlabels": [
+              "Text"
+            ],
+            "pageIndex": 6
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "VA-dBQVzT9",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.5073891625615764,
+            "y": 0.5855329968602524,
+            "width": 0.4121510673234811,
+            "height": 0.28197970124065574,
+            "ocrtext": "Observations. (1) Among the surveyed classes, only the proposed framework provides a hard contact-force interaction constraint with formal feasibility, the clinically essential capa- bility (Section VI-B). Here “hard” means a horizon-wise force bound enforced inside the optimization; input saturation on a non-predictive law (e.g. ADRC with a clamped command) limits the command , not the predicted contact force, and cannot guarantee feasibility against a penetrating reference, so the “No” entries are in this stronger, predictive sense. (2) It retains a high update rate (500 Hz) because the configuration- invariant A d structure makes the unconstrained step a matrix– vector multiply, unlike Cosserat predictive control whose on- line NLP limits rates to ∼ 10 –20 Hz. (3) It requires no force sensor, unlike ADRC formulations that key off a measured force channel. (4) Its formal guarantees (ISS, DARE-based stability) exceed those of learning-based and purely kinematic controllers. The trade-off is reduced model fidelity relative to full Cosserat predictive control—mitigated by the disturbance- compression principle (Remark 1).",
+            "rotation": 0,
+            "ocrlabels": [
+              "Text"
+            ],
+            "pageIndex": 6
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "2feqfZf-sg",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.5057471264367817,
+            "y": 0.8649746270349183,
+            "width": 0.41379310344827586,
+            "height": 0.06472081218274112,
+            "ocrtext": "compression principle (Remark 1). Quantitative reading. Table III places the present work against the closest published baselines—the sensor-free tendon-driven ablation-catheter force controllers of Jolaei et al. [14] and Kesner and Howe [15].",
+            "rotation": 0,
+            "ocrlabels": [
+              "Text"
+            ],
+            "pageIndex": 6
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "jhB_h_umDY",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.5254515599343186,
+            "y": 0.9309644747506544,
+            "width": 0.39408866995073893,
+            "height": 0.011421319796954314,
+            "ocrtext": "A direct head-to-head is not meaningful: [14], [15] regulate",
+            "rotation": 0,
+            "ocrlabels": [
+              "Text"
+            ],
+            "pageIndex": 6
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "z7fgFPdfx-",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.07717569786535304,
+            "y": 0.02842638819350809,
+            "width": 0.060755336617405585,
+            "height": 0.013959390862944163,
+            "ocrtext": "PREPRINT",
+            "rotation": 0,
+            "ocrlabels": [
+              "Text"
+            ],
+            "pageIndex": 7
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "OTnwlOP1o_",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.0783132530120482,
+            "y": 0.06915016751627984,
+            "width": 0.4126506024096386,
+            "height": 0.19674039580908032,
+            "ocrtext": "contact force to a setpoint (30–80 mN, hardware results), whereas this work tracks a position trajectory while bounding the contact force as a hard constraint—so the comparison is by capability, not by the force-error column. The same formulation can also regulate force, but we make no claim of regulation parity: with the offset-free position drive propagated through the horizon the two objectives compete, and 1 Hz car- diac motion degrades regulation further (characterized in Ap- pendix A, motivating the cardiac-phase-aware periodic model of Section V-A). The distinct contribution is the unification of offset-free position tracking with a hard predicted-force bound and feasibility guarantees in one constrained optimization— which setpoint force regulation does not provide.",
+            "rotation": 0,
+            "ocrlabels": [
+              "Text"
+            ],
+            "pageIndex": 7
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "8hqILqwXdl",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.0783132530120482,
+            "y": 0.28684516169555807,
+            "width": 0.1822289156626506,
+            "height": 0.015133876600698487,
+            "ocrtext": "D. Disturbance Estimation",
+            "rotation": 0,
+            "ocrlabels": [
+              "Text"
+            ],
+            "pageIndex": 7
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "hUjkhSn36d",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.0783132530120482,
+            "y": 0.3066356157118561,
+            "width": 0.4126506024096386,
+            "height": 0.08847497089639116,
+            "ocrtext": "The Kalman filter converges within a few sample pe- riods; during the contact-onset transient the estimate lags, but the tendon-force cap prevents bound violation before convergence—the constraint, not the estimate, provides the safety guarantee. The disturbance estimate improves tracking ; the hard constraint provides safety .",
+            "rotation": 0,
+            "ocrlabels": [
+              "Text"
+            ],
+            "pageIndex": 7
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "x1MtLSS3Qt",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.07680722891566265,
+            "y": 0.4160651938601617,
+            "width": 0.2605421686746988,
+            "height": 0.01629802095459837,
+            "ocrtext": "E. Safety Under Cardiac Wall Motion",
+            "rotation": 0,
+            "ocrlabels": [
+              "Text"
+            ],
+            "pageIndex": 7
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "EmABky5fz0",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.0783132530120482,
+            "y": 0.43701979223035964,
+            "width": 0.411144578313253,
+            "height": 0.3597206142367806,
+            "ocrtext": "The headline result (Table I) is a position-tracking task with a hard force bound; its dependence on cardiac motion is fundamentally different from the force-regulation mode of Appendix A, and far more benign. We test it directly by re- running the force-constrained predictive interaction-dynamics controller with a beating wall (Table IV, Fig. 3). The bound is respected across all tested conditions—static, 0 . 3 mm at 1 Hz, and 0 . 5 mm at 1 . 2 Hz with measurement noise (peak ≈ 0 . 47 N throughout, no violation)—for an instructive physical reason: the catheter tip compliance ( k eff ≈ 8 N/m) is ∼ 600 × softer than the tissue ( k t = 5 kN/m), so the distributed catheter rides with the moving wall and the contact-force variation from even a 0 . 5 mm wall excursion is small (peak essentially unchanged from static). The hard constraint continues to cap the controller-induced force regardless of the ˙ d = 0 model, and the contact-onset impact transients b t ( ˙ y − ˙ y wall ) remain under the bound because the compliant tip closes on the wall gently. The compliant continuum is thus inherently more for- giving of cardiac motion than a stiff lumped model suggests: the safety guarantee on controller-induced force is robust to cardiac motion, and the residual environment-induced force is buffered by catheter compliance rather than entering the impact-transient regime. Tight force regulation (Appendix A) is the part that additionally requires predicting the motion.",
+            "rotation": 0,
+            "ocrlabels": [
+              "Text"
+            ],
+            "pageIndex": 7
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "6VXw9m4YsU",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.07981927710843373,
+            "y": 0.8200232935451379,
+            "width": 0.23795180722891565,
+            "height": 0.011641443538998836,
+            "ocrtext": "F. Verification of Structural Claims",
+            "rotation": 0,
+            "ocrlabels": [
+              "Text"
+            ],
+            "pageIndex": 7
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "C0GBqY3Xwt",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.07680722891566265,
+            "y": 0.8414435603149556,
+            "width": 0.41566265060240964,
+            "height": 0.10360884749708964,
+            "ocrtext": "Four further checks—structural properties of the discrete- time controller and contact law, plus an approach-velocity qualification on the current MuJoCo plant—complete the picture ( simulation/catheter_verify.py ): (1) Configuration-adaptive compliance. Computing Λ n ( κ ) from the scalar normal Jacobian (5) over κ ∈ [2 , 25] m − 1 (a 1 . 4 × inertia variation), the Λ n ( κ ) -normalized controller",
+            "rotation": 0,
+            "ocrlabels": [
+              "Text"
+            ],
+            "pageIndex": 7
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "8w_7Cr8Auk",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.516566265060241,
+            "y": 0.20419091256866634,
+            "width": 0.3990963855421687,
+            "height": 0.14318975552968569,
+            "ocrtext": "",
+            "rotation": 0,
+            "ocrlabels": [
+              "Image"
+            ],
+            "pageIndex": 7
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "ynikturEC_",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.5090361445783133,
+            "y": 0.3718277084119661,
+            "width": 0.411144578313253,
+            "height": 0.09545983701979045,
+            "ocrtext": "Fig. 3. Contact force for the force-constrained predictive interaction- dynamics controller (position-tracking safety mode) under a beating tissue wall (Table IV), on the MuJoCo plant. All three conditions—static (green), 0 . 3 mm/ 1 Hz (blue), and 0 . 5 mm/ 1 . 2 Hz with noise (red)—stay below the 0 . 5 N bound (dashed) with peak ≈ 0 . 47 N, because the compliant catheter ( k eff ≈ 8 N/m) rides with the moving wall and the contact-onset impact spikes b t ( ˙ y − ˙ y wall ) remain bounded. The hard constraint caps the controller-induced force throughout.",
+            "rotation": 0,
+            "ocrlabels": [
+              "Text"
+            ],
+            "pageIndex": 7
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "flD80s19V3",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.5090361445783133,
+            "y": 0.6093131566075424,
+            "width": 0.411144578313253,
+            "height": 0.08265424912689173,
+            "ocrtext": "Fig. 4. Dominant closed-loop pole magnitude versus curvature κ (left) and pole drift relative to κ = 2 m − 1 (right). The Λ n ( κ ) -normalized gain (green) holds the pole spread to ∼ 2 × 10 − 6 across the 1 . 4 × inertia variation, ∼ 80 × tighter than the fixed- Λ n gain (red)—confirming that the scalar operational- space inertia normalization (a closed-form gain scaling, equivalent here to per-configuration redesign) is what makes the tip compliance configuration- invariant.",
+            "rotation": 0,
+            "ocrlabels": [
+              "Text"
+            ],
+            "pageIndex": 7
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "0YuBGD-n6S",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.5105421686746988,
+            "y": 0.4800931333246553,
+            "width": 0.4066265060240964,
+            "height": 0.11525029103608847,
+            "ocrtext": "",
+            "rotation": 0,
+            "ocrlabels": [
+              "Image"
+            ],
+            "pageIndex": 7
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "utqzk2PpEj",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.5060240963855421,
+            "y": 0.7152503016941484,
+            "width": 0.411144578313253,
+            "height": 0.1669383110073032,
+            "ocrtext": "holds the closed-loop pole spread to ∼ 2 × 10 − 6 —roughly 80 × tighter than a fixed- Λ n gain’s ∼ 1 . 5 × 10 − 4 drift (which grows with control authority); Fig. 4 plots both pole loci. The normalization is a closed-form gain scaling by Λ n ( κ ) — equivalent for this plant to a per-configuration LQR redesign, since the optimal gain scales with Λ n —and it is this Λ n - awareness, absent from a single fixed gain, that renders the tip compliance configuration-independent. The magnitude of the fixed-gain drift is modest for a single segment’s 1 . 4 × range but grows for the larger inertia variation of multi-segment catheters (Section VII).",
+            "rotation": 0,
+            "ocrlabels": [
+              "Text"
+            ],
+            "pageIndex": 7
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "N_XEuMYtuz",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.5105421686746988,
+            "y": 0.8845169014092513,
+            "width": 0.411144578313253,
+            "height": 0.06053550640279395,
+            "ocrtext": "(2) Hard constraint via the QP. For a 3 mm error the uncon- strained step demands | F mpc | = 1 . 99 N; solving the condensed QP with OSQP under a 0.5 N limit returns | F mpc | = 0 . 50 N (constraint respected), and reproduces the closed-form solution",
+            "rotation": 0,
+            "ocrlabels": [
+              "Text"
+            ],
+            "pageIndex": 7
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "JcE2sSoXVO",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.5346385542168673,
+            "y": 0.07147845622407961,
+            "width": 0.35692771084337344,
+            "height": 0.03143189755529686,
+            "ocrtext": "TABLE IV S AFETY M ODE (P REDICTIVE ID + F ORCE C ONSTRAINT ) U NDER C ARDIAC W ALL M OTION",
+            "rotation": 0,
+            "ocrlabels": [
+              "Text"
+            ],
+            "pageIndex": 7
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "mul_ju_djw",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.07981927710843373,
+            "y": 0.029569259483683788,
+            "width": 0.0572289156626506,
+            "height": 0.010477299185098952,
+            "ocrtext": "PREPRINT",
+            "rotation": 0,
+            "ocrlabels": [
+              "Text"
+            ],
+            "pageIndex": 8
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "dncRTQoyjr",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.9096385542168675,
+            "y": 0.03306169254538344,
+            "width": 0.015060240963855422,
+            "height": 0.006984866123399301,
+            "ocrtext": "8",
+            "rotation": 0,
+            "ocrlabels": [
+              "Text"
+            ],
+            "pageIndex": 8
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "EM6K5tLowY",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.0783132530120482,
+            "y": 0.0714784562240796,
+            "width": 0.4126506024096386,
+            "height": 0.0570430733410943,
+            "ocrtext": "to 10 − 3 when the constraint is inactive. This verifies that the actuator/safety limits are genuinely enforced by the QP, with the closed-form step of (10) recovered when no constraint binds.",
+            "rotation": 0,
+            "ocrlabels": [
+              "Text"
+            ],
+            "pageIndex": 8
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "Csvr-WPZw7",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.08132530120481928,
+            "y": 0.13084981827297365,
+            "width": 0.40813253012048195,
+            "height": 0.08847497089639116,
+            "ocrtext": "(3) Real-time feasibility. The unconstrained closed-form step runs in ≈ 0 . 9 µ s and the warm-started OSQP solve in ≈ 28 µ s per step on a desktop CPU—both far inside the 2 ms (500 Hz) budget, supporting the real-time claim with margin for embedded hardware. (Embedded-target timing remains future work.)",
+            "rotation": 0,
+            "ocrlabels": [
+              "Text"
+            ],
+            "pageIndex": 8
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "eCbW-mIYOw",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.08132530120481928,
+            "y": 0.22165308675888115,
+            "width": 0.40963855421686746,
+            "height": 0.22351571594877764,
+            "ocrtext": "(4) Approach-velocity safety qualification. A constant- velocity approach sweep with the force-constrained controller on the current MuJoCo compliant plant remains below F safe across the tested approach speeds; the compliant catheter rides with the wall and the QP caps the controller-induced component. The qualification is nevertheless important for the safety claim: the hard constraint bounds controller-induced force, but a fast impact can inject an environment-induced b t ˙ y transient that no input limit can prevent within one sample. The damping-only bound v < F safe /b t = 12 . 5 mm/s is therefore a planning-scale guide, not a controller certifi- cate. Safe operation still requires velocity-limited approach or contact-onset detection with reference ramping; the cardiac tests in Section VI-E show that the present compliant MuJoCo plant stays below the bound under the tested wall motions.",
+            "rotation": 0,
+            "ocrlabels": [
+              "Text"
+            ],
+            "pageIndex": 8
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "2Y0d-RcI3D",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.0783132530120482,
+            "y": 0.46379511014962777,
+            "width": 0.3253012048192771,
+            "height": 0.018626309662398137,
+            "ocrtext": "G. Robustness to Unmodeled Tendon Hysteresis",
+            "rotation": 0,
+            "ocrlabels": [
+              "Text"
+            ],
+            "pageIndex": 8
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "QJAhSR9Oam",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.0783132530120482,
+            "y": 0.48707799722762546,
+            "width": 0.4141566265060241,
+            "height": 0.2852153778076172,
+            "ocrtext": "The offset-free integrator above rejects the slowly-varying model-reduction residual; we separately stress it with an un- modeled Coulomb tendon-sheath friction added to the MuJoCo plant (sign-dependent hysteresis, 0 . 3 N), with the controller still tuned on the nominal frictionless model. On a free-space sinusoidal tracking task, the offset-free state cuts the tracking RMS from 0 . 27 mm to 0 . 011 mm with no friction (a 96% reduction, consistent with the headline benchmark), but with the 0 . 3 N Coulomb friction it cuts it only from 0 . 81 mm to 0 . 47 mm: the constant-bias internal model trivially absorbs the DC offset, but the integrating estimate lags each motion reversal, leaving a residual hysteresis error the ˙ d = 0 model cannot cancel. This is the genuine cost the scalar constant- F fric assumption hid, and—together with the configuration dependence of J n ( κ ) —it motivates a hysteresis-aware distur- bance model (Section VII, future work (vi)) that augments the integrating state to capture the sign-dependent component. The qualitative safety conclusion is unaffected: the hard constraint, not the estimate, bounds the contact force.",
+            "rotation": 0,
+            "ocrlabels": [
+              "Text"
+            ],
+            "pageIndex": 8
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "aevtncPCjF",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.2183734939759036,
+            "y": 0.787892920035561,
+            "width": 0.1355421686746988,
+            "height": 0.018626309662398137,
+            "ocrtext": "VII. C ONCLUSION",
+            "rotation": 0,
+            "ocrlabels": [
+              "Text"
+            ],
+            "pageIndex": 8
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "vNLj8A-EEt",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.07680722891566265,
+            "y": 0.807683374051859,
+            "width": 0.41566265060240964,
+            "height": 0.1350407450523865,
+            "ocrtext": "Rather than viewing steerable catheter control as an impedance-control problem, this work formulates it as an interaction-dynamics regulation problem. The catheter–tissue interaction is first reduced to the correct scalar tip-normal state, then normalized into configuration-invariant linear dynamics, and finally regulated by predictive optimization with distur- bance augmentation and hard interaction constraints. Classi- cal impedance appears as the unconstrained, disturbance-free special case; the clinically relevant controller departs from it",
+            "rotation": 0,
+            "ocrlabels": [
+              "Text"
+            ],
+            "pageIndex": 8
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "7PVeqS0QYN",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.5105421686746988,
+            "y": 0.06682187880848006,
+            "width": 0.411144578313253,
+            "height": 0.033760186263096625,
+            "ocrtext": "when offset-free motion regulation, tendon limits, curvature limits, and contact-force safety compete.",
+            "rotation": 0,
+            "ocrlabels": [
+              "Text"
+            ],
+            "pageIndex": 8
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "zksDtfoh4Z",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.5060240963855421,
+            "y": 0.10058206507157669,
+            "width": 0.41566265060240964,
+            "height": 0.4190919740652455,
+            "ocrtext": "A MuJoCo distributed-compliance simulation of an eight- link tendon-driven catheter shows that disturbance augmenta- tion cuts free-space approach error by 90%, but the decisive re- sult is interaction safety: only the force-constrained predictive interaction-dynamics controller delivers both accurate tracking and the 0.5 N contact-force bound (peak 0.47 N), whereas the unconstrained offset-free controller drives to 0.60 N. We characterized this honestly: on the realistic compliant plant the unconstrained overshoot is milder than a stiff lumped model predicts, but offset-free motion regulation and contact-force safety remain in tension under stiff contact, and the hard inter- action constraint is what resolves it. The resulting framework provides a unified foundation for compliant catheter motion, constraint handling, and safety-critical tissue interaction, and is extensible to multi-segment catheters, surgical robotics, re- habilitation, whole-body control, and dexterous manipulation. Our future work includes: (i) hardware validation on a tendon-actuated catheter with EM tracking; (ii) FBG-based force estimation as a direct disturbance channel; (iii) cardiac- phase-aware periodic disturbance models; (iv) extension to multi-segment catheters with m independent tendons (an m - DOF version with configuration-varying operational-space in- ertia); (v) energy-budget augmentation toward certified passiv- ity during aggressive contact; and (vi) a hysteresis-aware dis- turbance model that augments the integrating state to capture the sign-dependent (Coulomb) component of tendon-sheath friction, which the constant-bias model rejects only partially (Section VI-G).",
+            "rotation": 0,
+            "ocrlabels": [
+              "Text"
+            ],
+            "pageIndex": 8
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "Az-kFQI_Af",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.5180722891566265,
+            "y": 0.5317811444141535,
+            "width": 0.39457831325301207,
+            "height": 0.04423748544819558,
+            "ocrtext": "A PPENDIX A F ORCE -R EGULATION M ODE AND I TS C ARDIAC -M OTION L IMIT",
+            "rotation": 0,
+            "ocrlabels": [
+              "Text"
+            ],
+            "pageIndex": 8
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "2jlv7Jv7AO",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.5060240963855421,
+            "y": 0.5818393516318484,
+            "width": 0.41566265060240964,
+            "height": 0.20954598370197905,
+            "ocrtext": "The safety contribution of this paper bounds the pre- dicted controller-induced contact force; the setpoint controllers of [14], [15] regulate contact force. To compare like-for-like we add a force-regulation mode to the same controller on the MuJoCo plant: during free-space approach it tracks position as before, and during contact it regulates a sensor-free contact- force estimate (the commanded tip force beyond the modeled elasticity, ˆ F c = J n | T | − k eff | y | ) to a clinical target of 0 . 2 N via an integral law on the tendon command, while the hard predicted-force bound (13) remains active. This mode is not a claimed contribution—the hardware results of [14], [15] (30– 80 mN) are better—but it characterizes what the framework does and does not provide. Two conditions are run over the contact-hold window:",
+            "rotation": 0,
+            "ocrlabels": [
+              "Text"
+            ],
+            "pageIndex": 8
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "sWuynz8jti",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.5180722891566265,
+            "y": 0.7937136418050604,
+            "width": 0.40512048192771083,
+            "height": 0.1490104772991851,
+            "ocrtext": "• Idealized (slowly varying disturbance): force RMSE ∼ 140 mN about the 0.2 N target. With the offset-free po- sition drive propagated through the horizon, the position- tracking and force-regulation objectives compete (the controller simultaneously tries to reach the penetrating position target and hold 0.2 N), so the simple integral law no longer regulates tightly; recovering low force RMSE requires re-tuning the force-regulation gain or an explicit position/force task hierarchy (future work). The hard predicted-force bound is unaffected.",
+            "rotation": 0,
+            "ocrlabels": [
+              "Text"
+            ],
+            "pageIndex": 8
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "E8F6R_rejT",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.07530120481927711,
+            "y": 0.029569259483683788,
+            "width": 0.0572289156626506,
+            "height": 0.012805587892898719,
+            "ocrtext": "PREPRINT",
+            "rotation": 0,
+            "ocrlabels": [
+              "Text"
+            ],
+            "pageIndex": 9
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "mSu3oWHWWK",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.09487951807228916,
+            "y": 0.06798602316237995,
+            "width": 0.39759036144578314,
+            "height": 0.1210710128055879,
+            "ocrtext": "• Realistic (1 Hz cardiac wall motion, 0.3 mm amplitude, plus 0.2 mm position noise): force RMSE is ∼ 170 mN . The zero-order-hold ˙ d = 0 model cannot anticipate the periodic motion (Section V-A), so the estimate lags. This is worse than the reported hardware controllers and identifies the cardiac-phase-aware periodic disturbance model (Section V-A, Option B) as essential future work for force-regulation use—not merely an enhancement.",
+            "rotation": 0,
+            "ocrlabels": [
+              "Text"
+            ],
+            "pageIndex": 9
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "zwMQu0LzzF",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.07680722891566265,
+            "y": 0.19254946902966752,
+            "width": 0.41265060240963863,
+            "height": 0.1653084982537835,
+            "ocrtext": "In both force-regulation conditions the peak measured force stays under F safe ( ∼ 0 . 35 N idealized, ∼ 0 . 43 N with cardiac motion): unlike the stiff reduced model—where the inte- gral force law drove the command toward the cap and an environment-induced b t ˙ y impact transient pushed the peak past F safe —the compliant catheter closes on the wall gently, so the regulation error shows up as a poorly- regulated (not unsafe) force. The hard predicted-force bound caps the controller- induced command throughout, and the position-tracking safety mode holds the bound even more comfortably under the same cardiac motion (Section VI-E, Table IV).",
+            "rotation": 0,
+            "ocrlabels": [
+              "Text"
+            ],
+            "pageIndex": 9
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "kiY_cdS1A4",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.11144578313253004,
+            "y": 0.3823050059317432,
+            "width": 0.3433734939759035,
+            "height": 0.026775320139697384,
+            "ocrtext": "A PPENDIX B D ERIVATION OF THE LPV S TABILITY M ARGIN ρ ⋆",
+            "rotation": 0,
+            "ocrlabels": [
+              "Text"
+            ],
+            "pageIndex": 9
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "KRgMqRphIy",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.07680722891566265,
+            "y": 0.41373690348704006,
+            "width": 0.4126506024096386,
+            "height": 0.059371362048894066,
+            "ocrtext": "This appendix proves Proposition 1 in closed form, re- placing the “computing the spectral radius” assertion with an explicit Jury analysis. After the exact ZOH discretization (8) the scalar error plant has the constant \u0014 \u0015 \u0014 \u0015",
+            "rotation": 0,
+            "ocrlabels": [
+              "Text"
+            ],
+            "pageIndex": 9
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "eeTdYDZzt-",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.0783132530120482,
+            "y": 0.5208381840458294,
+            "width": 0.4141566265060241,
+            "height": 0.059371362048894066,
+            "ocrtext": "A gain K = [ k 1 , k 2 ] synthesized at Λ n, ref = 1 but acting where the true inertia is Λ n, true gives, using B d (Λ n, true ) = (Λ n, ref / Λ n, true ) B d (Λ n, ref ) = ρ B d (Λ n, ref ) with ρ = Λ n, ref / Λ n, true ,",
+            "rotation": 0,
+            "ocrlabels": [
+              "Text"
+            ],
+            "pageIndex": 9
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "5Fj-rq2MXq",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.07981927710843373,
+            "y": 0.6500582178757549,
+            "width": 0.4126506024096386,
+            "height": 0.03143189755529686,
+            "ocrtext": "Its characteristic polynomial is χ ( z ) = z 2 − tr( ρ ) z + det( ρ ) with",
+            "rotation": 0,
+            "ocrlabels": [
+              "Text"
+            ],
+            "pageIndex": 9
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "BSfFCGm5sn",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.0783132530120482,
+            "y": 0.7338766113565465,
+            "width": 0.4141566265060241,
+            "height": 0.06053550640279395,
+            "ocrtext": "(The ρ 2 terms in det cancel because A d is unipotent and bK is rank one—the same constant- A d structure exploited throughout.) By Jury’s criterion a monic second-order χ is Schur iff",
+            "rotation": 0,
+            "ocrlabels": [
+              "Text"
+            ],
+            "pageIndex": 9
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "IbbUyswxbl",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.0783132530120482,
+            "y": 0.8647264473929532,
+            "width": 0.3147590361445783,
+            "height": 0.01629802095459837,
+            "ocrtext": "Substituting (16)–(17) into the three crossings:",
+            "rotation": 0,
+            "ocrlabels": [
+              "Text"
+            ],
+            "pageIndex": 9
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "pUsUM-rkjc",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.09487951807228916,
+            "y": 0.8856810457631512,
+            "width": 0.39759036144578314,
+            "height": 0.02677532013969732,
+            "ocrtext": "• z = +1 : χ (1) = − ρ ∆ t 2 k 1 > 0 for all ρ > 0 (since k 1 < 0 )—never binds.",
+            "rotation": 0,
+            "ocrlabels": [
+              "Text"
+            ],
+            "pageIndex": 9
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "Qv0mgo5uli",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.0963855421686747,
+            "y": 0.9159487989645482,
+            "width": 0.3930722891566265,
+            "height": 0.027939464493597205,
+            "ocrtext": "• z = − 1 : χ ( − 1) = 4 + 2 ρ ∆ t k 2 , which vanishes at ρ = − 2 / (∆ t k 2 ) = 2 / (∆ t | k 2 | ) (a real pole reaching − 1 ).",
+            "rotation": 0,
+            "ocrlabels": [
+              "Text"
+            ],
+            "pageIndex": 9
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "8mkTs0E0OB",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.463855421686747,
+            "y": 0.8414435603149556,
+            "width": 0.030120481927710843,
+            "height": 0.013969732246798603,
+            "ocrtext": "(18)",
+            "rotation": 0,
+            "ocrlabels": [
+              "Text"
+            ],
+            "pageIndex": 9
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "avQa3Vseq8",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.5225903614457831,
+            "y": 0.0644935901006803,
+            "width": 0.3990963855421687,
+            "height": 0.051222351571594875,
+            "ocrtext": "• | det | = 1 : det( ρ ) < 1 holds for all ρ > 0 (as k 2 − 1 2 ∆ t k 1 < 0 ), and det( ρ ) = − 1 at ρ = 2 /  ∆ t | k 2 − 1 2 ∆ t k 1 | \u0001 .",
+            "rotation": 0,
+            "ocrlabels": [
+              "Text"
+            ],
+            "pageIndex": 9
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "s_cm2zqe6E",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.5045180722891566,
+            "y": 0.11571594167227517,
+            "width": 0.4171686746987952,
+            "height": 0.050058207217694994,
+            "ocrtext": "2 The stability boundary is the smallest positive crossing, giving (14). For the benchmark gains k 1 = − 2 . 04 × 10 3 , k 2 = − 294 . 9 and ∆ t = 2 ms,",
+            "rotation": 0,
+            "ocrlabels": [
+              "Text"
+            ],
+            "pageIndex": 9
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "fmVKiiMwml",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.5075301204819277,
+            "y": 0.20768334563036597,
+            "width": 0.4141566265060241,
+            "height": 0.08847497089639116,
+            "ocrtext": "so ρ ⋆ = 3 . 39 (the z = − 1 flip binds), exactly the value returned by the brute-force spectral-radius sweep over ρ ∈ [1 , 40] in catheter_verify.py ( ρ max = 3 . 39 ). The margin is governed by the velocity gain k 2 and the step ∆ t alone; with the workspace ρ ∈ [0 . 70 , 1 . 0] the loop is robustly stable with > 3 × margin (Remark 3).",
+            "rotation": 0,
+            "ocrlabels": [
+              "Text"
+            ],
+            "pageIndex": 9
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "JPQKPnB28L",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.6641566265060241,
+            "y": 0.3124563446977502,
+            "width": 0.09939759036144578,
+            "height": 0.01629802095459837,
+            "ocrtext": "R EFERENCES",
+            "rotation": 0,
+            "ocrlabels": [
+              "Text"
+            ],
+            "pageIndex": 9
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "ghiEiDJgLq",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.5120481927710844,
+            "y": 0.3334109430679481,
+            "width": 0.40963855421686746,
+            "height": 0.034924330616996506,
+            "ocrtext": "[1] N. Hogan, “Impedance control: An approach to manipulation, Parts I– III,” ASME J. Dyn. Syst. Meas. Control , vol. 107, no. 1, pp. 1–24, Mar. 1985.",
+            "rotation": 0,
+            "ocrlabels": [
+              "Text"
+            ],
+            "pageIndex": 9
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "shn8kqOQSQ",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.5180722891566265,
+            "y": 0.3694994180388445,
+            "width": 0.4036144578313253,
+            "height": 0.03143189755529686,
+            "ocrtext": "[2] R. J. Webster III and B. A. Jones, “Design and kinematic modeling of constant curvature continuum robots: A review,” Int. J. Robot. Res. , vol. 29, no. 13, pp. 1661–1683, 2010.",
+            "rotation": 0,
+            "ocrlabels": [
+              "Text"
+            ],
+            "pageIndex": 9
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "k4-4MBSyaI",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.5135542168674698,
+            "y": 0.40209545994804125,
+            "width": 0.40813253012048195,
+            "height": 0.02211874272409779,
+            "ocrtext": "[3] S. S. Antman, Nonlinear Problems of Elasticity , 2nd ed. New York: Springer, 1995.",
+            "rotation": 0,
+            "ocrlabels": [
+              "Text"
+            ],
+            "pageIndex": 9
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "qYSlIpG7A2",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.5150602409638554,
+            "y": 0.4265424913799388,
+            "width": 0.40813253012048195,
+            "height": 0.03143189755529686,
+            "ocrtext": "[4] D. C. Rucker and R. J. Webster III, “Statics and dynamics of continuum robots with general tendon routing and external loading,” IEEE Trans. Robot. , vol. 27, no. 6, pp. 1033–1044, 2011.",
+            "rotation": 0,
+            "ocrlabels": [
+              "Text"
+            ],
+            "pageIndex": 9
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "ZIrthQcFo1",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.5135542168674698,
+            "y": 0.4591385349544574,
+            "width": 0.40512048192771083,
+            "height": 0.03259604190919674,
+            "ocrtext": "[5] D. B. Camarillo, C. F. Milne, C. R. Carlson, M. R. Zinn, and J. K. Salis- bury, “Mechanics modeling of tendon-driven continuum manipulators,” IEEE Trans. Robot. , vol. 24, no. 6, pp. 1262–1273, 2008.",
+            "rotation": 0,
+            "ocrlabels": [
+              "Text"
+            ],
+            "pageIndex": 9
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "fnWrfmBeQ7",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.516566265060241,
+            "y": 0.4928987212175539,
+            "width": 0.40662650602409645,
+            "height": 0.03143189755529685,
+            "ocrtext": "[6] M. C. Yip and D. B. Camarillo, “Model-less feedback control of continuum manipulators in constrained environments,” IEEE Trans. Robot. , vol. 30, no. 4, pp. 880–889, 2014.",
+            "rotation": 0,
+            "ocrlabels": [
+              "Text"
+            ],
+            "pageIndex": 9
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "oDCvSpOXiJ",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.5120481927710844,
+            "y": 0.5243306276545674,
+            "width": 0.411144578313253,
+            "height": 0.02211874272409779,
+            "ocrtext": "Robot. , vol. 30, no. 4, pp. 880–889, 2014. [7] J. B. Rawlings, D. Q. Mayne, and M. Diehl, Model Predictive Control: Theory, Computation, and Design , 2nd ed. Madison, WI: Nob Hill, 2017.",
+            "rotation": 0,
+            "ocrlabels": [
+              "Text"
+            ],
+            "pageIndex": 9
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "qS-CEXnOOz",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.516566265060241,
+            "y": 0.5511059477942648,
+            "width": 0.4036144578313253,
+            "height": 0.01979045401629802,
+            "ocrtext": "[8] J. Han, “From PID to active disturbance rejection control,” IEEE Trans. Ind. Electron. , vol. 56, no. 3, pp. 900–906, 2009.",
+            "rotation": 0,
+            "ocrlabels": [
+              "Text"
+            ],
+            "pageIndex": 9
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "P5lqeJmfoC",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.5150602409638554,
+            "y": 0.5708964018105628,
+            "width": 0.40512048192771083,
+            "height": 0.03259604190919674,
+            "ocrtext": "[9] G. Pannocchia and J. B. Rawlings, “Disturbance models for offset-free model-predictive control,” AIChE J. , vol. 49, no. 2, pp. 426–437, Feb. 2003.",
+            "rotation": 0,
+            "ocrlabels": [
+              "Text"
+            ],
+            "pageIndex": 9
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "W8KzK6__GA",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.5105421686746988,
+            "y": 0.6034924437197595,
+            "width": 0.40963855421686746,
+            "height": 0.023282887077997673,
+            "ocrtext": "2003. [10] U. Maeder, F. Borrelli, and M. Morari, “Linear offset-free model predictive control,” Automatica , vol. 45, no. 10, pp. 2214–2222, 2009.",
+            "rotation": 0,
+            "ocrlabels": [
+              "Text"
+            ],
+            "pageIndex": 9
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "rfmtlXFh6i",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.5060240963855421,
+            "y": 0.6267753307977572,
+            "width": 0.4126506024096386,
+            "height": 0.03259604190919674,
+            "ocrtext": "predictive control,” Automatica , vol. 45, no. 10, pp. 2214–2222, 2009. [11] Y.-Y. Cao and Z. Lin, “Min–max MPC algorithm for LPV systems subject to input saturation,” IEE Proc. Control Theory Appl. , vol. 152, no. 3, pp. 266–272, 2005.",
+            "rotation": 0,
+            "ocrlabels": [
+              "Text"
+            ],
+            "pageIndex": 9
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "4bFrJlBhTP",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.5075301204819277,
+            "y": 0.6605355170608538,
+            "width": 0.4141566265060241,
+            "height": 0.04540162980209546,
+            "ocrtext": "no. 3, pp. 266–272, 2005. [12] H. Yokoyama, H. Nakagawa, J. Kautzner et al. , “Novel contact force sensor incorporated in irrigated radiofrequency ablation catheter predicts lesion size and incidence of steam pop and thrombus,” Circ. Arrhythm. Electrophysiol. , vol. 1, no. 5, pp. 354–362, 2008.",
+            "rotation": 0,
+            "ocrlabels": [
+              "Text"
+            ],
+            "pageIndex": 9
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "5jcXcJRX16",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.5090361445783133,
+            "y": 0.7071012912168492,
+            "width": 0.4126506024096386,
+            "height": 0.03259604190919674,
+            "ocrtext": "[13] Y. Cao and J. Tang, “Impedance MPC for physical human–robot interaction: Predictive disturbance rejection with joint-limit safety,” arXiv:2606.08281, Jun. 2026.",
+            "rotation": 0,
+            "ocrlabels": [
+              "Text"
+            ],
+            "pageIndex": 9
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "gieK8qLyKj",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.5090361445783133,
+            "y": 0.7420256218338457,
+            "width": 0.411144578313253,
+            "height": 0.04307334109429569,
+            "ocrtext": "[14] M. Jolaei, A. Hooshiar, A. Sayadi, J. Dargahi, and M. Packirisamy, “Sensor-free force control of tendon-driven ablation catheters through position control and contact modeling,” in Proc. 42nd Annu. Int. Conf. IEEE Eng. Med. Biol. Soc. (EMBC) , 2020, pp. 5248–5251.",
+            "rotation": 0,
+            "ocrlabels": [
+              "Text"
+            ],
+            "pageIndex": 9
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "4sisyFkkQM",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.5120481927710844,
+            "y": 0.7862631072820413,
+            "width": 0.40813253012048195,
+            "height": 0.03259604190919674,
+            "ocrtext": "[15] S. B. Kesner and R. D. Howe, “Robotic catheter cardiac ablation combining ultrasound guidance and force control,” Int. J. Robot. Res. , vol. 33, no. 4, pp. 631–644, 2014.",
+            "rotation": 0,
+            "ocrlabels": [
+              "Text"
+            ],
+            "pageIndex": 9
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "GVouO55UkT",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.5105421686746989,
+            "y": 0.8200232935451375,
+            "width": 0.4066265060240963,
+            "height": 0.03376018626309687,
+            "ocrtext": "[16] B. Stellato, G. Banjac, P. Goulart, A. Bemporad, and S. Boyd, “OSQP: An operator splitting solver for quadratic programs,” Math. Program. Comput. , vol. 12, no. 4, pp. 637–672, 2020.",
+            "rotation": 0,
+            "ocrlabels": [
+              "Text"
+            ],
+            "pageIndex": 9
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "PIRQ2lZkXE",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.5832258064516129,
+            "y": 0.6075848333849878,
+            "width": 0.2632258064516129,
+            "height": 0.021956087824351298,
+            "ocrtext": "M(\\kappa)\\ddot{\\kappa} + C(\\kappa,\\dot\\kappa)\\dot{\\kappa} + K(\\kappa) = u + d_{\\text{cat}},",
+            "rotation": 0,
+            "ocrlabels": [
+              "Formula"
+            ],
+            "pageIndex": 2
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "WMXfD_O_Jn",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.9109677419354839,
+            "y": 0.03033931526595247,
+            "width": 0.015483870967741935,
+            "height": 0.010978043912175649,
+            "ocrtext": "2",
+            "rotation": 0,
+            "ocrlabels": [
+              "Text"
+            ],
+            "pageIndex": 2
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "Nij_L0iqrF",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.9083870967741936,
+            "y": 0.03033931526595247,
+            "width": 0.01935483870967742,
+            "height": 0.010978043912175649,
+            "ocrtext": "3",
+            "rotation": 0,
+            "ocrlabels": [
+              "Text"
+            ],
+            "pageIndex": 3
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "_wsnOyq-Fi",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.23741935483870968,
+            "y": 0.15009979430786863,
+            "width": 0.09548387096774194,
+            "height": 0.020958083832335328,
+            "ocrtext": "d \\;=\\; \\mathcal{P}_{\\mathcal D}(\\Delta),",
+            "rotation": 0,
+            "ocrlabels": [
+              "Formula"
+            ],
+            "pageIndex": 3
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "TqB4odbUfr",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.14967741935483872,
+            "y": 0.464471067021231,
+            "width": 0.2658064516129032,
+            "height": 0.03093812375249501,
+            "ocrtext": "p_x = \\frac{\\sin(\\kappa L)}{\\kappa},\\qquad p_z = \\frac{1-\\cos(\\kappa L)}{\\kappa},",
+            "rotation": 0,
+            "ocrlabels": [
+              "Formula"
+            ],
+            "pageIndex": 3
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "-HYroomq8q",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.152258064516129,
+            "y": 0.5672654781988757,
+            "width": 0.2683870967741935,
+            "height": 0.0489021956087822,
+            "ocrtext": "&=\\frac{dy}{d\\kappa}=n^\\top J_\\kappa(\\kappa),\\\\\n\\Lambda_n(\\kappa)\n&=\\left(J_n(\\kappa)M^{-1}(\\kappa)J_n(\\kappa)\\right)^{-1}>0,",
+            "rotation": 0,
+            "ocrlabels": [
+              "Formula"
+            ],
+            "pageIndex": 3
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "iEpeSw1kCI",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.5135483870967742,
+            "y": 0.23792414560527383,
+            "width": 0.40258064516129033,
+            "height": 0.03592814371257485,
+            "ocrtext": "u = \\underbrace{u_{\\text{ff}}}_{\\text{Layer 1: interaction-dynamics normalization}} + \\underbrace{J_n F_{\\text{mpc}}}_{\\text{Layer 2: predictive correction}},\n",
+            "rotation": 0,
+            "ocrlabels": [
+              "Formula"
+            ],
+            "pageIndex": 3
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "YNmsD-QDAC",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.5277419354838709,
+            "y": 0.4844311392473841,
+            "width": 0.3496774193548387,
+            "height": 0.05688622754491018,
+            "ocrtext": "\\dot x_e = \\underbrace{\\begin{bmatrix}0&1\\\\0&0\\end{bmatrix}}_{A_c\\,(\\text{const})} x_e + \\underbrace{\\begin{bmatrix}0\\\\-\\Lambda_n^{-1}(\\kappa)\\end{bmatrix}}_{B_c(\\kappa)} F_{\\text{mpc}} + \\underbrace{\\begin{bmatrix}0\\\\1\\end{bmatrix}}_{E_c\\,(\\text{const})} d(t),\n",
+            "rotation": 0,
+            "ocrlabels": [
+              "Formula"
+            ],
+            "pageIndex": 3
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "fn0A3qXKAd",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.5445161290322581,
+            "y": 0.700997997900683,
+            "width": 0.33806451612903227,
+            "height": 0.03792415169660679,
+            "ocrtext": "A_d=\\begin{bmatrix}1&\\Delta t\\\\0&1\\end{bmatrix},\\quad B_d(\\kappa_k)=\\begin{bmatrix}-\\tfrac12\\Lambda_n^{-1}(\\kappa_k)\\Delta t^2\\\\-\\Lambda_n^{-1}(\\kappa_k)\\Delta t\\end{bmatrix}.\n",
+            "rotation": 0,
+            "ocrlabels": [
+              "Formula"
+            ],
+            "pageIndex": 3
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "N6gJGg_iHq",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.535483870967742,
+            "y": 0.7648702533897049,
+            "width": 0.3406451612903226,
+            "height": 0.03592814371257485,
+            "ocrtext": "\\begin{bmatrix}x_{e,k+1}\\\\\\hat d_{k+1}\\end{bmatrix}=\\begin{bmatrix}A_d&G_d\\\\0&1\\end{bmatrix}\\begin{bmatrix}x_{e,k}\\\\\\hat d_k\\end{bmatrix}+\\begin{bmatrix}B_d(\\kappa_k)\\\\0\\end{bmatrix}F_{\\text{mpc},k},\n",
+            "rotation": 0,
+            "ocrlabels": [
+              "Formula"
+            ],
+            "pageIndex": 3
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "I5-pRy8ach",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.08774193548387096,
+            "y": 0.10918163063521394,
+            "width": 0.3690322580645163,
+            "height": 0.0219560878243513,
+            "ocrtext": "\\min_{U}\\ \\tfrac12 U^\\top H\\,U\n+ \\Big(\\Gamma^\\top\\bar Q\\big(\\Phi x_{e,k}+\\Delta(\\hat d)\\big)-\\bar R U_d(\\hat d)\\Big)^\\top U,",
+            "rotation": 0,
+            "ocrlabels": [
+              "Formula"
+            ],
+            "pageIndex": 4
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "yvM4CDVIdw",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.4670967741935484,
+            "y": 0.11117763861924589,
+            "width": 0.023225806451612905,
+            "height": 0.015968063872255488,
+            "ocrtext": "(10)",
+            "rotation": 0,
+            "ocrlabels": [
+              "Text"
+            ],
+            "pageIndex": 4
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "uiXPeik1U-",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.1135483870967742,
+            "y": 0.20898202983681075,
+            "width": 0.3174193548387097,
+            "height": 0.021956087824351298,
+            "ocrtext": "U^\\star=-H^{-1}\\!\\left[\\Gamma^\\top\\bar Q\\big(\\Phi x_e+\\Delta(\\hat d)\\big)-\\bar R U_d(\\hat d)\\right],\n",
+            "rotation": 0,
+            "ocrlabels": [
+              "Formula"
+            ],
+            "pageIndex": 4
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "CdjYVOMRcr",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.10451612903225807,
+            "y": 0.45349301406723297,
+            "width": 0.3303225806451613,
+            "height": 0.01996007984031936,
+            "ocrtext": "\\hat F_{n,k}=J_n(\\kappa_k)\\,|T_k|-k_{\\text{eff}}\\,|y_k|=k_{\\text{eff}}\\,e_k+F_{\\text{mpc},k},\n",
+            "rotation": 0,
+            "ocrlabels": [
+              "Formula"
+            ],
+            "pageIndex": 4
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "7a1L9PbFpx",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.2064516129032258,
+            "y": 0.5742515061429875,
+            "width": 0.16516129032258065,
+            "height": 0.014970059880239521,
+            "ocrtext": "-F_{\\text{safe}}\\le F_{\\text{mpc},k}\\le F_{\\text{safe}},",
+            "rotation": 0,
+            "ocrlabels": [
+              "Formula"
+            ],
+            "pageIndex": 4
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "58hLx_0VTE",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.4632258064516129,
+            "y": 0.4544910271010713,
+            "width": 0.025806451612903226,
+            "height": 0.018962075848303395,
+            "ocrtext": "(12)",
+            "rotation": 0,
+            "ocrlabels": [
+              "Text"
+            ],
+            "pageIndex": 4
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "_YkBRKTdUY",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.4632258064516129,
+            "y": 0.5722554981589555,
+            "width": 0.024516129032258065,
+            "height": 0.013972055888223553,
+            "ocrtext": "(13)",
+            "rotation": 0,
+            "ocrlabels": [
+              "Text"
+            ],
+            "pageIndex": 4
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "Gxgix2YHbn",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.5780645161290323,
+            "y": 0.8736526885194454,
+            "width": 0.2709677419354839,
+            "height": 0.0688622754491018,
+            "ocrtext": "\\rho^\\star\n&=\\min\\!\\left\\{\\frac{2}{\\Delta t\\,|k_2|},\\\n\\frac{2}{\\Delta t\\,|k_2-\\tfrac12\\Delta t\\,k_1|}\\right\\} \\nonumber\\\\\n&=\\frac{2}{\\Delta t\\,|k_2|},",
+            "rotation": 0,
+            "ocrlabels": [
+              "Formula"
+            ],
+            "pageIndex": 4
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "HAdUGBmQGv",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.9083870967741936,
+            "y": 0.03033931526595247,
+            "width": 0.016774193548387096,
+            "height": 0.011976047904191617,
+            "ocrtext": "5",
+            "rotation": 0,
+            "ocrlabels": [
+              "Text"
+            ],
+            "pageIndex": 5
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "ZrtOsPM6g-",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.5341935483870968,
+            "y": 0.11716566257134169,
+            "width": 0.36129032258064514,
+            "height": 0.08483033932135728,
+            "ocrtext": "\\begin{tabular}{lcccc}\n\\toprule\nController & \\shortstack{Approach\\\\RMS (mm)} & \\shortstack{Max\\\\$F$ (N)} & \\shortstack{$F_{\\text{safe}}$\\\\viol.?} & \\shortstack{Hold err.\\\\(mm)} \\\\\n\\midrule\nClassical impedance & 0.28 & 0.17 & No & 1.48 \\\\\nPredictive ID (no FC) & 0.03 & 0.60 & \\textbf{Yes} & 1.41 \\\\\n\\textbf{Predictive ID (with FC)} & \\textbf{0.03} & \\textbf{0.47} & \\textbf{No} & 1.41 \\\\\nJoint-space PD & 1.82 & 0.00 & No & 3.76 \\\\\n\\bottomrule\n\\end{tabular}",
+            "rotation": 0,
+            "ocrlabels": [
+              "Table"
+            ],
+            "pageIndex": 5
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "0Eqi8TYVtA",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.912258064516129,
+            "y": 0.033333327242000374,
+            "width": 0.014193548387096775,
+            "height": 0.008982035928143712,
+            "ocrtext": "6",
+            "rotation": 0,
+            "ocrlabels": [
+              "Text"
+            ],
+            "pageIndex": 6
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "LLR2DH3_Cq",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.07870967741935483,
+            "y": 0.06826346696255926,
+            "width": 0.40903225806451615,
+            "height": 0.20159680638722555,
+            "ocrtext": "",
+            "rotation": 0,
+            "ocrlabels": [
+              "Image"
+            ],
+            "pageIndex": 6
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "08zke9xE4o",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.512258064516129,
+            "y": 0.11716567018550789,
+            "width": 0.4064516129032258,
+            "height": 0.11277445109780439,
+            "ocrtext": "\\begin{tabular}{lcccccc}\n\\toprule\nMethod & Model & Rate & \\shortstack{Hard\\\\$F$} & \\shortstack{Offset-\\\\free} & \\shortstack{Force\\\\sens.} & Stab. \\\\\n\\midrule\nClass.\\ imp.~\\cite{hogan1985} & port imp. & kHz & No & No & opt. & passiv. \\\\\nJacob.~\\cite{camarillo2008,yip2014} & kinematic & 10--100\\,Hz & No & No & local & partial \\\\\nCosserat~\\cite{rucker2011} & Cosserat & 10--20\\,Hz & soft & varies & yes & NLP-dep. \\\\\nLearning & data & high & No & No & varies & none \\\\\nADRC~\\cite{han2009} & lumped-dist. & kHz & No & yes & yes & yes \\\\\n\\textbf{This work} & int.-dyn.+Kal. & \\textbf{500\\,Hz} & \\textbf{Yes} & \\textbf{yes} & \\textbf{no} & \\shortstack{ISS+\\\\DARE} \\\\\n\\bottomrule\n\\end{tabular}",
+            "rotation": 0,
+            "ocrlabels": [
+              "Table"
+            ],
+            "pageIndex": 6
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "kUq_reMwRV",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.5367741935483871,
+            "y": 0.29580838332871,
+            "width": 0.35870967741935483,
+            "height": 0.08283433133732535,
+            "ocrtext": "\\begin{tabular}{lcccc}\n\\toprule\nWork & Objective & Sensing & Force result & \\shortstack{Hard\\\\bound} \\\\\n\\midrule\n\\cite{jolaei2020} & force reg. & sensor-free & 0.03--0.05\\,N RMSE & no \\\\\n\\cite{kesner2014} & force reg. & sensor+US & ${\\sim}0.08$\\,N RMSE & no \\\\\n\\shortstack[l]{\\textbf{This work}\\\\(safety)} & \\shortstack[c]{pos.\\ track\\\\+ $F$ safety} & sensor-free & \\shortstack[c]{peak \\textbf{0.47}\\,N\\\\($\\le0.5$)} & \\textbf{yes} \\\\\n\\bottomrule\n\\end{tabular}",
+            "rotation": 0,
+            "ocrlabels": [
+              "Table"
+            ],
+            "pageIndex": 6
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "WiGeSajp2k",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.5393548387096774,
+            "y": 0.24890219570395958,
+            "width": 0.3535483870967742,
+            "height": 0.03592814371257483,
+            "ocrtext": "TABLE III Q UANTITATIVE C OMPARISON WITH R EPORTED S ENSOR -F REE / F ORCE -C ONTROLLED C ATHETER R ESULTS",
+            "rotation": 0,
+            "ocrlabels": [
+              "Text"
+            ],
+            "pageIndex": 6
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "Dy1wLWRW8u",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.5548387096774193,
+            "y": 0.11716566257134169,
+            "width": 0.32,
+            "height": 0.07085828343313373,
+            "ocrtext": "\\begin{tabular}{lccc}\n\\toprule\nWall condition & \\shortstack{Approach\\\\RMS (mm)} & \\shortstack{Peak\\\\$F$ (N)} & \\shortstack{$F_{\\text{safe}}$\\\\viol.?} \\\\\n\\midrule\nStatic (Table~\\ref{tab:compare} baseline) & 0.03 & 0.47 & No \\\\\n$0.3$\\,mm @ $1$\\,Hz & 0.03 & 0.47 & No \\\\\n$0.5$\\,mm @ $1.2$\\,Hz $+$ noise & 0.06 & 0.47 & No \\\\\n\\bottomrule\n\\end{tabular}",
+            "rotation": 0,
+            "ocrlabels": [
+              "Table"
+            ],
+            "pageIndex": 7
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "MijjyOc-VM",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.9096774193548387,
+            "y": 0.03033931526595247,
+            "width": 0.016774193548387096,
+            "height": 0.011976047904191617,
+            "ocrtext": "7",
+            "rotation": 0,
+            "ocrlabels": [
+              "Text"
+            ],
+            "pageIndex": 7
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "o7VzT5P-6G",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.09161290322580645,
+            "y": 0.4780439121756487,
+            "width": 0.38451612903225807,
+            "height": 0.03792415169660679,
+            "ocrtext": "A_d=\\begin{bmatrix}1&\\Delta t\\\\0&1\\end{bmatrix},\\qquad\nB_d(\\Lambda_n)=-\\frac1{\\Lambda_n}\\,b,\\quad b=\\begin{bmatrix}\\tfrac12\\Delta t^2\\\\[1pt]\\Delta t\\end{bmatrix}.",
+            "rotation": 0,
+            "ocrlabels": [
+              "Formula"
+            ],
+            "pageIndex": 9
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "xfASix6ujb",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.13548387096774203,
+            "y": 0.591816367265469,
+            "width": 0.29935483870967766,
+            "height": 0.05089820359281404,
+            "ocrtext": "A_{cl}(\\rho)\n&=A_d-\\rho\\,B_d(1)\\,K=A_d+\\rho\\,bK \\nonumber\\\\\n&=\\begin{bmatrix}\n1+\\tfrac12\\rho\\Delta t^2k_1 &\n\\Delta t+\\tfrac12\\rho\\Delta t^2k_2\\\\[2pt]\n\\rho\\Delta t\\,k_1 &\n1+\\rho\\Delta t\\,k_2\n\\end{bmatrix}.",
+            "rotation": 0,
+            "ocrlabels": [
+              "Formula"
+            ],
+            "pageIndex": 9
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "XjSCu0h6zk",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.1703225806451613,
+            "y": 0.6866267465069861,
+            "width": 0.2270967741935484,
+            "height": 0.03992015968063872,
+            "ocrtext": "\\operatorname{tr}(\\rho)&=2+\\rho\\Delta t\\big(k_2+\\tfrac12\\Delta t\\,k_1\\big),\\label{eq:tr}\\\\\n\\det(\\rho)&=1+\\rho\\Delta t\\big(k_2-\\tfrac12\\Delta t\\,k_1\\big).\\label{eq:det}",
+            "rotation": 0,
+            "ocrlabels": [
+              "Formula"
+            ],
+            "pageIndex": 9
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "f0sdVzcdZc",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.1870967741935484,
+            "y": 0.8033932135728543,
+            "width": 0.19741935483870968,
+            "height": 0.054890219560878244,
+            "ocrtext": "|\\det(\\rho)|&<1, \\nonumber\\\\\n\\chi(1)&=1-\\operatorname{tr}+\\det>0, \\nonumber\\\\\n\\chi(-1)&=1+\\operatorname{tr}+\\det>0.",
+            "rotation": 0,
+            "ocrlabels": [
+              "Formula"
+            ],
+            "pageIndex": 9
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "_qVGHHsZIY",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.4632258064516129,
+            "y": 0.6187624750499002,
+            "width": 0.027096774193548386,
+            "height": 0.015968063872255488,
+            "ocrtext": "(15)",
+            "rotation": 0,
+            "ocrlabels": [
+              "Text"
+            ],
+            "pageIndex": 9
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "mc-Q60ZPIs",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.4645161290322581,
+            "y": 0.6906187624750499,
+            "width": 0.02838709677419355,
+            "height": 0.011976047904191617,
+            "ocrtext": "(16)",
+            "rotation": 0,
+            "ocrlabels": [
+              "Text"
+            ],
+            "pageIndex": 9
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "4nR0TLG2Nf",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.46580645161290324,
+            "y": 0.7105788423153693,
+            "width": 0.024516129032258065,
+            "height": 0.013972055888223553,
+            "ocrtext": "(17)",
+            "rotation": 0,
+            "ocrlabels": [
+              "Text"
+            ],
+            "pageIndex": 9
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        },
+        {
+          "id": "fq3OOuTYm_",
+          "type": "ocrlabels",
+          "value": {
+            "x": 0.5548387096774193,
+            "y": 0.1670658621721401,
+            "width": 0.3161290322580645,
+            "height": 0.03493013972055888,
+            "ocrtext": "2 ∆ t | k 2 | = 3 . 39 , 2 ∆ t | k 2 − 1 2 ∆ t k 1 | = 3 . 42 ,",
+            "rotation": 0,
+            "ocrlabels": [
+              "Formula"
+            ],
+            "pageIndex": 9
+          },
+          "origin": "manual",
+          "to_name": "pdf",
+          "from_name": "label"
+        }
+      ],
+      "state": "UPDATED",
+      "reviews": [],
+      "was_cancelled": false,
+      "ground_truth": false,
+      "created_at": "2026-07-29T08:59:27.078893Z",
+      "updated_at": "2026-08-22T08:07:25.067022Z",
+      "draft_created_at": "2026-07-29T08:58:17.020549Z",
+      "lead_time": 1535.421,
+      "prediction": {},
+      "result_count": 210,
+      "unique_id": "327dcfeb-3447-4c9e-ab23-e5892f09594e",
+      "import_id": null,
+      "last_action": "updated",
+      "bulk_created": false,
+      "task": 279712734,
+      "project": 274344,
+      "updated_by": 202728,
+      "parent_prediction": null,
+      "parent_annotation": null,
+      "last_created_by": 202728
+    }
+  ],
+  "file_upload": "a54da8b1-19.pdf",
+  "drafts": [],
+  "predictions": [],
+  "state": "NEEDS_REVIEW",
+  "agreement": 100.0,
+  "data": {
+    "pdf": "upload/274344/a54da8b1-19.pdf"
+  },
+  "meta": {},
+  "created_at": "2026-07-29T08:57:49.490557Z",
+  "updated_at": "2026-08-22T08:07:25.336011Z",
+  "allow_skip": true,
+  "inner_id": 19,
+  "total_annotations": 1,
+  "cancelled_annotations": 0,
+  "total_predictions": 0,
+  "comment_count": 0,
+  "unresolved_comment_count": 0,
+  "last_comment_updated_at": null,
+  "project": 274344,
+  "updated_by": 202728,
+  "comment_authors": []
+}

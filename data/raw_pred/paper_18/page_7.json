@@ -1,0 +1,705 @@
+{
+    "input_path": "/home/bocchi/Downloads/Paper_Data/Electrical Engineering and Systems Science/2607.20909v1.pdf",
+    "page_index": 7,
+    "page_count": 14,
+    "width": 1224,
+    "height": 1584,
+    "model_settings": {
+        "use_doc_preprocessor": false,
+        "use_layout_detection": true,
+        "use_chart_recognition": false,
+        "use_seal_recognition": false,
+        "use_ocr_for_image_block": true,
+        "format_block_content": true,
+        "merge_layout_blocks": true,
+        "markdown_ignore_labels": [
+            "number",
+            "footnote",
+            "header",
+            "header_image",
+            "footer",
+            "footer_image",
+            "aside_text"
+        ],
+        "return_layout_polygon_points": true
+    },
+    "parsing_res_list": [
+        {
+            "block_label": "number",
+            "block_content": "8",
+            "block_bbox": [
+                1115,
+                51,
+                1128,
+                65
+            ],
+            "block_id": 0,
+            "block_order": null,
+            "group_id": 0,
+            "block_polygon_points": [
+                [
+                    1115.0,
+                    51.0
+                ],
+                [
+                    1127.0,
+                    51.0
+                ],
+                [
+                    1127.0,
+                    64.0
+                ],
+                [
+                    1115.0,
+                    64.0
+                ]
+            ]
+        },
+        {
+            "block_label": "image",
+            "block_content": "<div style=\"text-align: center;\"><img src=\"imgs/img_in_image_box_100_110_1122_621.jpg\" alt=\"Image\" width=\"83%\" />\n\nObservation\nGround Truth\nKriging\nRME-GAN\nRME-GAN†\nLaPnP\nRadioDiff-Inverse\nRadioTrace\n\n</div>\n",
+            "block_bbox": [
+                100,
+                110,
+                1122,
+                621
+            ],
+            "block_id": 1,
+            "block_order": null,
+            "group_id": 1,
+            "block_polygon_points": [
+                [
+                    100.0,
+                    110.0
+                ],
+                [
+                    1122.0,
+                    110.0
+                ],
+                [
+                    1122.0,
+                    621.0
+                ],
+                [
+                    100.0,
+                    621.0
+                ]
+            ]
+        },
+        {
+            "block_label": "figure_title",
+            "block_content": "<div style=\"text-align: center;\">Fig. 6: Comparison of RM Estimation on RadioMapSeer dataset under random sampling (row 1, 2) and restricted-area sampling (row 3, 4) with low sampling ratios (1% and 5%). The red regions correspond to restricted areas where no measurements are available.</div>\n",
+            "block_bbox": [
+                93,
+                634,
+                1130,
+                707
+            ],
+            "block_id": 2,
+            "block_order": null,
+            "group_id": 2,
+            "block_polygon_points": [
+                [
+                    93.0,
+                    634.0
+                ],
+                [
+                    1130.0,
+                    634.0
+                ],
+                [
+                    1130.0,
+                    707.0
+                ],
+                [
+                    93.0,
+                    707.0
+                ]
+            ]
+        },
+        {
+            "block_label": "paragraph_title",
+            "block_content": "### D. Results of comparable experiments",
+            "block_bbox": [
+                93,
+                750,
+                439,
+                774
+            ],
+            "block_id": 3,
+            "block_order": 1,
+            "group_id": 3,
+            "block_polygon_points": [
+                [
+                    93.0,
+                    750.0
+                ],
+                [
+                    439.0,
+                    750.0
+                ],
+                [
+                    439.0,
+                    774.0
+                ],
+                [
+                    93.0,
+                    774.0
+                ]
+            ]
+        },
+        {
+            "block_label": "text",
+            "block_content": "1) Results on RadioMapSeer dataset: We first evaluate the performance of different methods on RadioMapSeer dataset under the random sampling pattern introduced in Section V-B1. We compare our proposed RadioTrace with several representative RM estimation baselines mentioned in Section V-B3.",
+            "block_bbox": [
+                91,
+                780,
+                603,
+                924
+            ],
+            "block_id": 4,
+            "block_order": 2,
+            "group_id": 4,
+            "block_polygon_points": [
+                [
+                    91.0,
+                    780.0
+                ],
+                [
+                    603.0,
+                    780.0
+                ],
+                [
+                    603.0,
+                    924.0
+                ],
+                [
+                    91.0,
+                    924.0
+                ]
+            ]
+        },
+        {
+            "block_label": "text",
+            "block_content": "In this experiment, the RSS measurements are uniformly and randomly collected from the entire area without any spatial constraints. We evaluate all methods under different sampling ratios, which denote the proportion of observed locations. Specifically, we consider four sampling ratios: 1%, 5%, 10%, and 20%, to simulate various levels of observation sparsity.",
+            "block_bbox": [
+                90,
+                925,
+                604,
+                1091
+            ],
+            "block_id": 5,
+            "block_order": 3,
+            "group_id": 5,
+            "block_polygon_points": [
+                [
+                    90.0,
+                    925.0
+                ],
+                [
+                    604.0,
+                    925.0
+                ],
+                [
+                    604.0,
+                    1091.0
+                ],
+                [
+                    90.0,
+                    1091.0
+                ]
+            ]
+        },
+        {
+            "block_label": "text",
+            "block_content": "The quantitative comparison under random sampling is summarized in Table II. RadioTrace clearly surpasses the non-learning baselines (Kriging and LaPnP) at all sampling rates, delivering higher perceptual fidelity and lower distortion. The results of RadioDiff-Inverse indicate that posterior reconstruction with an unconditional diffusion prior may have difficulty capturing Tx-dependent propagation structures under sparse RSS observations. Compared with RME-GAN, RadioTrace attains the best RMSE, SSIM, and PSNR across all rates while remaining second-best in NMSE. For example, at 1% sampling RadioTrace improves PSNR from 30.98 dB to 32.92 dB and raises SSIM from 0.9457 to 0.9590; at 20% it further widens the PSNR gap (32.79 dB vs. 33.71 dB) with higher SSIM (0.9613 vs. 0.9645).",
+            "block_bbox": [
+                91,
+                1092,
+                604,
+                1450
+            ],
+            "block_id": 6,
+            "block_order": 4,
+            "group_id": 6,
+            "block_polygon_points": [
+                [
+                    91.0,
+                    1092.0
+                ],
+                [
+                    604.0,
+                    1092.0
+                ],
+                [
+                    604.0,
+                    1450.0
+                ],
+                [
+                    91.0,
+                    1450.0
+                ]
+            ]
+        },
+        {
+            "block_label": "text",
+            "block_content": "The reconstructed RMs under random sampling with low sampling ratios (1% and 5%) are visualized in Row 1 and Row 2 of Fig. 6. As shown, RadioTrace produces reconstructions that are visually closer to the ground truth, with clearer signal propagation boundaries and fewer artifacts compared to Kriging and LaPnP. Although RME-GAN also yields good results under random sampling due to supervised training, its performance is slightly inferior in terms of structure preservation. RadioDiff-Inverse fails to recover a meaningful RM at the 1% sampling rate. At 5%, the relatively large spacing between sparse observations limits its ability to resolve localized propagation variations, leading to inaccurate reconstruction near building boundaries. Overall, RadioTrace better preserves both the global propagation pattern and local structural details.",
+            "block_bbox": [
+                91,
+                1450,
+                604,
+                1499
+            ],
+            "block_id": 7,
+            "block_order": 5,
+            "group_id": 7,
+            "block_polygon_points": [
+                [
+                    91.0,
+                    1450.0
+                ],
+                [
+                    604.0,
+                    1450.0
+                ],
+                [
+                    604.0,
+                    1499.0
+                ],
+                [
+                    91.0,
+                    1499.0
+                ]
+            ]
+        },
+        {
+            "block_label": "text",
+            "block_content": "",
+            "block_bbox": [
+                616,
+                749,
+                1130,
+                1086
+            ],
+            "block_id": 8,
+            "block_order": 6,
+            "group_id": 7,
+            "block_polygon_points": [
+                [
+                    616.0,
+                    749.0
+                ],
+                [
+                    1130.0,
+                    749.0
+                ],
+                [
+                    1130.0,
+                    1086.0
+                ],
+                [
+                    616.0,
+                    1086.0
+                ]
+            ]
+        },
+        {
+            "block_label": "text",
+            "block_content": "We further evaluate the performance of different methods under the restricted-area sampling mode introduced in Section V-B1, where RSS measurements are unavailable in specific regions due to environmental constraints. In this experiment, we define two circular restricted areas, each with a radius of 50 meters, within which no measurements can be collected. The remaining accessible region is used for RSS sampling, where measurements are uniformly and randomly drawn. We consider four sampling ratios: 1%, 5%, 10%, and 20%.",
+            "block_bbox": [
+                617,
+                1088,
+                1130,
+                1328
+            ],
+            "block_id": 9,
+            "block_order": 7,
+            "group_id": 9,
+            "block_polygon_points": [
+                [
+                    617.0,
+                    1088.0
+                ],
+                [
+                    1130.0,
+                    1088.0
+                ],
+                [
+                    1130.0,
+                    1328.0
+                ],
+                [
+                    617.0,
+                    1328.0
+                ]
+            ]
+        },
+        {
+            "block_label": "text",
+            "block_content": "The quantitative results are reported in Table III. Compared with Kriging, LaPnP, RME-GAN, and RadioDiff-Inverse, RadioTrace consistently achieves lower RMSE and higher SSIM/PSNR across all sampling ratios. At the 1% sampling ratio, RadioTrace reduces RMSE from 0.0958 to 0.0296 compared with the default RME-GAN and improves PSNR from 20.37 dB to 31.95 dB. This",
+            "block_bbox": [
+                617,
+                1330,
+                1130,
+                1500
+            ],
+            "block_id": 10,
+            "block_order": 8,
+            "group_id": 10,
+            "block_polygon_points": [
+                [
+                    617.0,
+                    1330.0
+                ],
+                [
+                    1130.0,
+                    1330.0
+                ],
+                [
+                    1130.0,
+                    1500.0
+                ],
+                [
+                    617.0,
+                    1500.0
+                ]
+            ]
+        }
+    ],
+    "layout_det_res": {
+        "input_path": null,
+        "page_index": null,
+        "boxes": [
+            {
+                "cls_id": 16,
+                "label": "number",
+                "score": 0.6074874997138977,
+                "coordinate": [
+                    1115,
+                    51,
+                    1128,
+                    65
+                ],
+                "order": 1,
+                "polygon_points": [
+                    [
+                        1115.0,
+                        51.0
+                    ],
+                    [
+                        1127.0,
+                        51.0
+                    ],
+                    [
+                        1127.0,
+                        64.0
+                    ],
+                    [
+                        1115.0,
+                        64.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 14,
+                "label": "image",
+                "score": 0.9728509783744812,
+                "coordinate": [
+                    100,
+                    110,
+                    1122,
+                    621
+                ],
+                "order": null,
+                "polygon_points": [
+                    [
+                        100.0,
+                        110.0
+                    ],
+                    [
+                        1122.0,
+                        110.0
+                    ],
+                    [
+                        1122.0,
+                        621.0
+                    ],
+                    [
+                        100.0,
+                        621.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 7,
+                "label": "figure_title",
+                "score": 0.9001461863517761,
+                "coordinate": [
+                    93,
+                    634,
+                    1130,
+                    707
+                ],
+                "order": null,
+                "polygon_points": [
+                    [
+                        93.0,
+                        634.0
+                    ],
+                    [
+                        1130.0,
+                        634.0
+                    ],
+                    [
+                        1130.0,
+                        707.0
+                    ],
+                    [
+                        93.0,
+                        707.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 17,
+                "label": "paragraph_title",
+                "score": 0.8540821671485901,
+                "coordinate": [
+                    93,
+                    750,
+                    439,
+                    774
+                ],
+                "order": 2,
+                "polygon_points": [
+                    [
+                        93.0,
+                        750.0
+                    ],
+                    [
+                        439.0,
+                        750.0
+                    ],
+                    [
+                        439.0,
+                        774.0
+                    ],
+                    [
+                        93.0,
+                        774.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.9549962878227234,
+                "coordinate": [
+                    91,
+                    780,
+                    603,
+                    924
+                ],
+                "order": 3,
+                "polygon_points": [
+                    [
+                        91.0,
+                        780.0
+                    ],
+                    [
+                        603.0,
+                        780.0
+                    ],
+                    [
+                        603.0,
+                        924.0
+                    ],
+                    [
+                        91.0,
+                        924.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.9606664776802063,
+                "coordinate": [
+                    90,
+                    925,
+                    604,
+                    1091
+                ],
+                "order": 4,
+                "polygon_points": [
+                    [
+                        90.0,
+                        925.0
+                    ],
+                    [
+                        604.0,
+                        925.0
+                    ],
+                    [
+                        604.0,
+                        1091.0
+                    ],
+                    [
+                        90.0,
+                        1091.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.9713846445083618,
+                "coordinate": [
+                    91,
+                    1092,
+                    604,
+                    1450
+                ],
+                "order": 5,
+                "polygon_points": [
+                    [
+                        91.0,
+                        1092.0
+                    ],
+                    [
+                        604.0,
+                        1092.0
+                    ],
+                    [
+                        604.0,
+                        1450.0
+                    ],
+                    [
+                        91.0,
+                        1450.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.931325376033783,
+                "coordinate": [
+                    91,
+                    1450,
+                    604,
+                    1499
+                ],
+                "order": 6,
+                "polygon_points": [
+                    [
+                        91.0,
+                        1450.0
+                    ],
+                    [
+                        604.0,
+                        1450.0
+                    ],
+                    [
+                        604.0,
+                        1499.0
+                    ],
+                    [
+                        91.0,
+                        1499.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.9726232290267944,
+                "coordinate": [
+                    616,
+                    749,
+                    1130,
+                    1086
+                ],
+                "order": 7,
+                "polygon_points": [
+                    [
+                        616.0,
+                        749.0
+                    ],
+                    [
+                        1130.0,
+                        749.0
+                    ],
+                    [
+                        1130.0,
+                        1086.0
+                    ],
+                    [
+                        616.0,
+                        1086.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.9653622508049011,
+                "coordinate": [
+                    617,
+                    1088,
+                    1130,
+                    1328
+                ],
+                "order": 8,
+                "polygon_points": [
+                    [
+                        617.0,
+                        1088.0
+                    ],
+                    [
+                        1130.0,
+                        1088.0
+                    ],
+                    [
+                        1130.0,
+                        1328.0
+                    ],
+                    [
+                        617.0,
+                        1328.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.9619768857955933,
+                "coordinate": [
+                    617,
+                    1330,
+                    1130,
+                    1500
+                ],
+                "order": 9,
+                "polygon_points": [
+                    [
+                        617.0,
+                        1330.0
+                    ],
+                    [
+                        1130.0,
+                        1330.0
+                    ],
+                    [
+                        1130.0,
+                        1500.0
+                    ],
+                    [
+                        617.0,
+                        1500.0
+                    ]
+                ]
+            }
+        ]
+    }
+}

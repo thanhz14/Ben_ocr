@@ -1,0 +1,1142 @@
+{
+    "input_path": "/home/bocchi/Downloads/Paper_Data/Economics/2607.21312v1.pdf",
+    "page_index": 0,
+    "page_count": 7,
+    "width": 1224,
+    "height": 1584,
+    "model_settings": {
+        "use_doc_preprocessor": false,
+        "use_layout_detection": true,
+        "use_chart_recognition": false,
+        "use_seal_recognition": false,
+        "use_ocr_for_image_block": true,
+        "format_block_content": true,
+        "merge_layout_blocks": true,
+        "markdown_ignore_labels": [
+            "number",
+            "footnote",
+            "header",
+            "header_image",
+            "footer",
+            "footer_image",
+            "aside_text"
+        ],
+        "return_layout_polygon_points": true
+    },
+    "parsing_res_list": [
+        {
+            "block_label": "aside_text",
+            "block_content": "arXiv:2607.21312v1 [econ.EM] 23 Jul 2026",
+            "block_bbox": [
+                36,
+                558,
+                80,
+                1294
+            ],
+            "block_id": 0,
+            "block_order": null,
+            "group_id": 0,
+            "block_polygon_points": [
+                [
+                    36.0,
+                    558.0
+                ],
+                [
+                    80.0,
+                    558.0
+                ],
+                [
+                    80.0,
+                    1294.0
+                ],
+                [
+                    36.0,
+                    1294.0
+                ]
+            ]
+        },
+        {
+            "block_label": "doc_title",
+            "block_content": "# Using Pre-Trends for Inference in Difference-in-Differences",
+            "block_bbox": [
+                208,
+                223,
+                1016,
+                261
+            ],
+            "block_id": 1,
+            "block_order": 1,
+            "group_id": 1,
+            "block_polygon_points": [
+                [
+                    208.0,
+                    223.0
+                ],
+                [
+                    1016.0,
+                    223.0
+                ],
+                [
+                    1016.0,
+                    261.0
+                ],
+                [
+                    208.0,
+                    261.0
+                ]
+            ]
+        },
+        {
+            "block_label": "text",
+            "block_content": "Clément de Chaisemartin $ ^{*} $",
+            "block_bbox": [
+                476,
+                293,
+                756,
+                320
+            ],
+            "block_id": 2,
+            "block_order": 2,
+            "group_id": 2,
+            "block_polygon_points": [
+                [
+                    476.0,
+                    293.0
+                ],
+                [
+                    756.0,
+                    293.0
+                ],
+                [
+                    756.0,
+                    320.0
+                ],
+                [
+                    476.0,
+                    320.0
+                ]
+            ]
+        },
+        {
+            "block_label": "paragraph_title",
+            "block_content": "## 1 Introduction",
+            "block_bbox": [
+                140,
+                416,
+                374,
+                445
+            ],
+            "block_id": 3,
+            "block_order": 3,
+            "group_id": 3,
+            "block_polygon_points": [
+                [
+                    140.0,
+                    416.0
+                ],
+                [
+                    374.0,
+                    416.0
+                ],
+                [
+                    374.0,
+                    445.0
+                ],
+                [
+                    140.0,
+                    445.0
+                ]
+            ]
+        },
+        {
+            "block_label": "text",
+            "block_content": "Difference-in-differences (DID) are sometimes estimated with many pre-treatment periods. In such settings, the observed pre-treatment outcome evolutions provide direct information about the magnitude of shocks that could also occur after treatment. This paper proposes a simple inference procedure that uses those pre-trends as the reference distribution for the post-treatment DID.",
+            "block_bbox": [
+                138,
+                469,
+                1083,
+                576
+            ],
+            "block_id": 4,
+            "block_order": 4,
+            "group_id": 4,
+            "block_polygon_points": [
+                [
+                    138.0,
+                    469.0
+                ],
+                [
+                    1083.0,
+                    469.0
+                ],
+                [
+                    1083.0,
+                    576.0
+                ],
+                [
+                    138.0,
+                    576.0
+                ]
+            ]
+        },
+        {
+            "block_label": "text",
+            "block_content": "The idea is to test a candidate treatment effect by subtracting it from the post-treatment outcome of the treated group and comparing the resulting absolute DID with the empirical distribution of the absolute pre-treatment DIDs. Under the null, the adjusted post-treatment DID is an untreated differential trend and should therefore be distributed like its pre-treatment counterparts. If the empirical distribution of those differential trends is uniformly consistent for a continuous limiting distribution, the resulting rank-based test is asymptotically exact. Confidence sets follow by test inversion.",
+            "block_bbox": [
+                136,
+                579,
+                1083,
+                765
+            ],
+            "block_id": 5,
+            "block_order": 5,
+            "group_id": 5,
+            "block_polygon_points": [
+                [
+                    136.0,
+                    579.0
+                ],
+                [
+                    1083.0,
+                    579.0
+                ],
+                [
+                    1083.0,
+                    765.0
+                ],
+                [
+                    136.0,
+                    765.0
+                ]
+            ]
+        },
+        {
+            "block_label": "text",
+            "block_content": "The procedure is closely related to conformal inference, but its DID-specific predictor leads to a distinct identifying restriction. Existing conformal DID procedures are based on outcome levels and imply parallel trends. Here, the prediction error is instead the change in the treated group's untreated outcome minus the contemporaneous change in the control group's untreated outcome. The method therefore does not require parallel trends. It requires only that the distribution of the absolute untreated differential trend be stable over time. This permits the mean differential trend to be nonzero, to vary over time, and even to change sign, while imposing stability on its magnitude. The procedure is nonparametric, easy to implement, and especially natural in applications with a long pre-treatment time series.",
+            "block_bbox": [
+                136,
+                767,
+                1086,
+                1012
+            ],
+            "block_id": 6,
+            "block_order": 6,
+            "group_id": 6,
+            "block_polygon_points": [
+                [
+                    136.0,
+                    767.0
+                ],
+                [
+                    1086.0,
+                    767.0
+                ],
+                [
+                    1086.0,
+                    1012.0
+                ],
+                [
+                    136.0,
+                    1012.0
+                ]
+            ]
+        },
+        {
+            "block_label": "paragraph_title",
+            "block_content": "## 2 Preliminary result",
+            "block_bbox": [
+                139,
+                1048,
+                453,
+                1079
+            ],
+            "block_id": 7,
+            "block_order": 7,
+            "group_id": 7,
+            "block_polygon_points": [
+                [
+                    139.0,
+                    1048.0
+                ],
+                [
+                    453.0,
+                    1048.0
+                ],
+                [
+                    453.0,
+                    1079.0
+                ],
+                [
+                    139.0,
+                    1079.0
+                ]
+            ]
+        },
+        {
+            "block_label": "text",
+            "block_content": "Let  $ U_{1}, \\ldots, U_{T} $ satisfy",
+            "block_bbox": [
+                137,
+                1101,
+                356,
+                1127
+            ],
+            "block_id": 8,
+            "block_order": 8,
+            "group_id": 8,
+            "block_polygon_points": [
+                [
+                    137.0,
+                    1101.0
+                ],
+                [
+                    356.0,
+                    1101.0
+                ],
+                [
+                    356.0,
+                    1127.0
+                ],
+                [
+                    137.0,
+                    1127.0
+                ]
+            ]
+        },
+        {
+            "block_label": "display_formula",
+            "block_content": " $$ \\begin{aligned}U_{t}=U_{t}(0),\\qquad&t=1,\\ldots,T-1,\\\\&U_{T}=U_{T}(0)+\\tau,\\end{aligned} $$ ",
+            "block_bbox": [
+                450,
+                1148,
+                773,
+                1210
+            ],
+            "block_id": 9,
+            "block_order": 9,
+            "group_id": 9,
+            "block_polygon_points": [
+                [
+                    450.0,
+                    1148.0
+                ],
+                [
+                    773.0,
+                    1148.0
+                ],
+                [
+                    773.0,
+                    1210.0
+                ],
+                [
+                    450.0,
+                    1210.0
+                ]
+            ]
+        },
+        {
+            "block_label": "formula_number",
+            "block_content": "(1)",
+            "block_bbox": [
+                1054,
+                1184,
+                1082,
+                1210
+            ],
+            "block_id": 10,
+            "block_order": 10,
+            "group_id": 10,
+            "block_polygon_points": [
+                [
+                    1054.0,
+                    1184.0
+                ],
+                [
+                    1081.0,
+                    1184.0
+                ],
+                [
+                    1081.0,
+                    1209.0
+                ],
+                [
+                    1054.0,
+                    1209.0
+                ]
+            ]
+        },
+        {
+            "block_label": "text",
+            "block_content": "where  $ \\tau \\in \\mathbb{R} $ is an unknown, non-stochastic treatment-effect parameter we seek to estimate. Fix  $ \\alpha \\in (0,1) $, and assume that, for every  $ t $ and every  $ u \\geq 0 $,",
+            "block_bbox": [
+                136,
+                1234,
+                1083,
+                1286
+            ],
+            "block_id": 11,
+            "block_order": 11,
+            "group_id": 11,
+            "block_polygon_points": [
+                [
+                    136.0,
+                    1234.0
+                ],
+                [
+                    1083.0,
+                    1234.0
+                ],
+                [
+                    1083.0,
+                    1286.0
+                ],
+                [
+                    136.0,
+                    1286.0
+                ]
+            ]
+        },
+        {
+            "block_label": "display_formula",
+            "block_content": " $$ \\mathbb{P}(|U_{t}(0)|\\leq u)=F(u), $$ ",
+            "block_bbox": [
+                498,
+                1308,
+                722,
+                1336
+            ],
+            "block_id": 12,
+            "block_order": 12,
+            "group_id": 12,
+            "block_polygon_points": [
+                [
+                    498.0,
+                    1308.0
+                ],
+                [
+                    722.0,
+                    1308.0
+                ],
+                [
+                    722.0,
+                    1336.0
+                ],
+                [
+                    498.0,
+                    1336.0
+                ]
+            ]
+        },
+        {
+            "block_label": "formula_number",
+            "block_content": "(2)",
+            "block_bbox": [
+                1054,
+                1309,
+                1082,
+                1335
+            ],
+            "block_id": 13,
+            "block_order": 13,
+            "group_id": 13,
+            "block_polygon_points": [
+                [
+                    1054.0,
+                    1309.0
+                ],
+                [
+                    1081.0,
+                    1309.0
+                ],
+                [
+                    1081.0,
+                    1334.0
+                ],
+                [
+                    1054.0,
+                    1334.0
+                ]
+            ]
+        },
+        {
+            "block_label": "footnote",
+            "block_content": "*Sciences Po, Department of Economics. E-mail: clement.dechaisemartin@sciencespo.fr. Funded by the European Union (ERC, REALLYCREDIBLE, Grant Agreement No. 101043899). Views and opinions expressed are those of the author only and do not necessarily reflect those of the European Union or the European Research Council Executive Agency. Neither the European Union nor the granting authority can be held responsible for them.",
+            "block_bbox": [
+                138,
+                1354,
+                1084,
+                1445
+            ],
+            "block_id": 14,
+            "block_order": null,
+            "group_id": 14,
+            "block_polygon_points": [
+                [
+                    138.0,
+                    1354.0
+                ],
+                [
+                    1084.0,
+                    1354.0
+                ],
+                [
+                    1084.0,
+                    1445.0
+                ],
+                [
+                    138.0,
+                    1445.0
+                ]
+            ]
+        },
+        {
+            "block_label": "number",
+            "block_content": "1",
+            "block_bbox": [
+                604,
+                1484,
+                619,
+                1503
+            ],
+            "block_id": 15,
+            "block_order": null,
+            "group_id": 15,
+            "block_polygon_points": [
+                [
+                    604.0,
+                    1484.0
+                ],
+                [
+                    618.0,
+                    1484.0
+                ],
+                [
+                    618.0,
+                    1502.0
+                ],
+                [
+                    604.0,
+                    1502.0
+                ]
+            ]
+        }
+    ],
+    "layout_det_res": {
+        "input_path": null,
+        "page_index": null,
+        "boxes": [
+            {
+                "cls_id": 2,
+                "label": "aside_text",
+                "score": 0.8958591222763062,
+                "coordinate": [
+                    36,
+                    558,
+                    80,
+                    1294
+                ],
+                "order": null,
+                "polygon_points": [
+                    [
+                        36.0,
+                        558.0
+                    ],
+                    [
+                        80.0,
+                        558.0
+                    ],
+                    [
+                        80.0,
+                        1294.0
+                    ],
+                    [
+                        36.0,
+                        1294.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 6,
+                "label": "doc_title",
+                "score": 0.8842079639434814,
+                "coordinate": [
+                    208,
+                    223,
+                    1016,
+                    261
+                ],
+                "order": 1,
+                "polygon_points": [
+                    [
+                        208.0,
+                        223.0
+                    ],
+                    [
+                        1016.0,
+                        223.0
+                    ],
+                    [
+                        1016.0,
+                        261.0
+                    ],
+                    [
+                        208.0,
+                        261.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.8172339200973511,
+                "coordinate": [
+                    476,
+                    293,
+                    756,
+                    320
+                ],
+                "order": 2,
+                "polygon_points": [
+                    [
+                        476.0,
+                        293.0
+                    ],
+                    [
+                        756.0,
+                        293.0
+                    ],
+                    [
+                        756.0,
+                        320.0
+                    ],
+                    [
+                        476.0,
+                        320.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 17,
+                "label": "paragraph_title",
+                "score": 0.8737103939056396,
+                "coordinate": [
+                    140,
+                    416,
+                    374,
+                    445
+                ],
+                "order": 3,
+                "polygon_points": [
+                    [
+                        140.0,
+                        416.0
+                    ],
+                    [
+                        374.0,
+                        416.0
+                    ],
+                    [
+                        374.0,
+                        445.0
+                    ],
+                    [
+                        140.0,
+                        445.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.9409067630767822,
+                "coordinate": [
+                    138,
+                    469,
+                    1083,
+                    576
+                ],
+                "order": 4,
+                "polygon_points": [
+                    [
+                        138.0,
+                        469.0
+                    ],
+                    [
+                        1083.0,
+                        469.0
+                    ],
+                    [
+                        1083.0,
+                        576.0
+                    ],
+                    [
+                        138.0,
+                        576.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.9514595866203308,
+                "coordinate": [
+                    136,
+                    579,
+                    1083,
+                    765
+                ],
+                "order": 5,
+                "polygon_points": [
+                    [
+                        136.0,
+                        579.0
+                    ],
+                    [
+                        1083.0,
+                        579.0
+                    ],
+                    [
+                        1083.0,
+                        765.0
+                    ],
+                    [
+                        136.0,
+                        765.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.9490042328834534,
+                "coordinate": [
+                    136,
+                    767,
+                    1086,
+                    1012
+                ],
+                "order": 6,
+                "polygon_points": [
+                    [
+                        136.0,
+                        767.0
+                    ],
+                    [
+                        1086.0,
+                        767.0
+                    ],
+                    [
+                        1086.0,
+                        1012.0
+                    ],
+                    [
+                        136.0,
+                        1012.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 17,
+                "label": "paragraph_title",
+                "score": 0.8727129697799683,
+                "coordinate": [
+                    139,
+                    1048,
+                    453,
+                    1079
+                ],
+                "order": 7,
+                "polygon_points": [
+                    [
+                        139.0,
+                        1048.0
+                    ],
+                    [
+                        453.0,
+                        1048.0
+                    ],
+                    [
+                        453.0,
+                        1079.0
+                    ],
+                    [
+                        139.0,
+                        1079.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.8349760174751282,
+                "coordinate": [
+                    137,
+                    1101,
+                    356,
+                    1127
+                ],
+                "order": 8,
+                "polygon_points": [
+                    [
+                        137.0,
+                        1101.0
+                    ],
+                    [
+                        356.0,
+                        1101.0
+                    ],
+                    [
+                        356.0,
+                        1127.0
+                    ],
+                    [
+                        137.0,
+                        1127.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 15,
+                "label": "inline_formula",
+                "score": 0.7697884440422058,
+                "coordinate": [
+                    181,
+                    1102,
+                    284,
+                    1127
+                ],
+                "order": 9,
+                "polygon_points": [
+                    [
+                        181.0,
+                        1102.0
+                    ],
+                    [
+                        284.0,
+                        1102.0
+                    ],
+                    [
+                        284.0,
+                        1127.0
+                    ],
+                    [
+                        181.0,
+                        1127.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 5,
+                "label": "display_formula",
+                "score": 0.9135065078735352,
+                "coordinate": [
+                    450,
+                    1148,
+                    773,
+                    1210
+                ],
+                "order": 10,
+                "polygon_points": [
+                    [
+                        450.0,
+                        1148.0
+                    ],
+                    [
+                        773.0,
+                        1148.0
+                    ],
+                    [
+                        773.0,
+                        1210.0
+                    ],
+                    [
+                        450.0,
+                        1210.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 11,
+                "label": "formula_number",
+                "score": 0.8117804527282715,
+                "coordinate": [
+                    1054,
+                    1184,
+                    1082,
+                    1210
+                ],
+                "order": 11,
+                "polygon_points": [
+                    [
+                        1054.0,
+                        1184.0
+                    ],
+                    [
+                        1081.0,
+                        1184.0
+                    ],
+                    [
+                        1081.0,
+                        1209.0
+                    ],
+                    [
+                        1054.0,
+                        1209.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.9127422571182251,
+                "coordinate": [
+                    136,
+                    1234,
+                    1083,
+                    1286
+                ],
+                "order": 12,
+                "polygon_points": [
+                    [
+                        136.0,
+                        1234.0
+                    ],
+                    [
+                        1083.0,
+                        1234.0
+                    ],
+                    [
+                        1083.0,
+                        1286.0
+                    ],
+                    [
+                        136.0,
+                        1286.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 15,
+                "label": "inline_formula",
+                "score": 0.8029645681381226,
+                "coordinate": [
+                    205,
+                    1235,
+                    264,
+                    1256
+                ],
+                "order": 13,
+                "polygon_points": [
+                    [
+                        205.0,
+                        1235.0
+                    ],
+                    [
+                        205.0,
+                        1248.0
+                    ],
+                    [
+                        210.0,
+                        1248.0
+                    ],
+                    [
+                        211.0,
+                        1249.0
+                    ],
+                    [
+                        211.0,
+                        1255.0
+                    ],
+                    [
+                        263.0,
+                        1255.0
+                    ],
+                    [
+                        263.0,
+                        1235.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 15,
+                "label": "inline_formula",
+                "score": 0.8375891447067261,
+                "coordinate": [
+                    141,
+                    1261,
+                    231,
+                    1285
+                ],
+                "order": 14,
+                "polygon_points": [
+                    [
+                        141.0,
+                        1261.0
+                    ],
+                    [
+                        230.0,
+                        1261.0
+                    ],
+                    [
+                        230.0,
+                        1284.0
+                    ],
+                    [
+                        141.0,
+                        1284.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 15,
+                "label": "inline_formula",
+                "score": 0.7687894701957703,
+                "coordinate": [
+                    621,
+                    1261,
+                    677,
+                    1284
+                ],
+                "order": 15,
+                "polygon_points": [
+                    [
+                        620.9999389648438,
+                        1260.9998779296875
+                    ],
+                    [
+                        675.9999389648438,
+                        1260.9998779296875
+                    ],
+                    [
+                        675.9999389648438,
+                        1282.9998779296875
+                    ],
+                    [
+                        620.9999389648438,
+                        1282.9998779296875
+                    ]
+                ]
+            },
+            {
+                "cls_id": 5,
+                "label": "display_formula",
+                "score": 0.8761828541755676,
+                "coordinate": [
+                    498,
+                    1308,
+                    722,
+                    1336
+                ],
+                "order": 16,
+                "polygon_points": [
+                    [
+                        498.0,
+                        1308.0
+                    ],
+                    [
+                        722.0,
+                        1308.0
+                    ],
+                    [
+                        722.0,
+                        1336.0
+                    ],
+                    [
+                        498.0,
+                        1336.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 11,
+                "label": "formula_number",
+                "score": 0.7829086780548096,
+                "coordinate": [
+                    1054,
+                    1309,
+                    1082,
+                    1335
+                ],
+                "order": 17,
+                "polygon_points": [
+                    [
+                        1054.0,
+                        1309.0
+                    ],
+                    [
+                        1081.0,
+                        1309.0
+                    ],
+                    [
+                        1081.0,
+                        1334.0
+                    ],
+                    [
+                        1054.0,
+                        1334.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 10,
+                "label": "footnote",
+                "score": 0.9382578730583191,
+                "coordinate": [
+                    138,
+                    1354,
+                    1084,
+                    1445
+                ],
+                "order": null,
+                "polygon_points": [
+                    [
+                        138.0,
+                        1354.0
+                    ],
+                    [
+                        1084.0,
+                        1354.0
+                    ],
+                    [
+                        1084.0,
+                        1445.0
+                    ],
+                    [
+                        138.0,
+                        1445.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 16,
+                "label": "number",
+                "score": 0.7015884518623352,
+                "coordinate": [
+                    604,
+                    1484,
+                    619,
+                    1503
+                ],
+                "order": 18,
+                "polygon_points": [
+                    [
+                        604.0,
+                        1484.0
+                    ],
+                    [
+                        618.0,
+                        1484.0
+                    ],
+                    [
+                        618.0,
+                        1502.0
+                    ],
+                    [
+                        604.0,
+                        1502.0
+                    ]
+                ]
+            }
+        ]
+    }
+}

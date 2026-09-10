@@ -1,0 +1,3627 @@
+{
+  "file_name": "paper_18",
+  "pages": [
+    {
+      "page_index": 1,
+      "blocks": [
+        {
+          "id": "0",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.09,
+            "y": 0.07,
+            "width": 0.817,
+            "height": 0.105
+          },
+          "content": "# RadioTrace: Transmitter-Aware Diffusion for Radio Map Estimation without Deployment-Time Fine-Tuning",
+          "label": "Text"
+        },
+        {
+          "id": "1",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.201,
+            "y": 0.182,
+            "width": 0.591,
+            "height": 0.019
+          },
+          "content": "Liu Yang, Qiang Li, Zhuo Cao, Weijie Xiong, Guomin Sun and Jingran Lin",
+          "label": "Text"
+        },
+        {
+          "id": "2",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.079,
+            "y": 0.252,
+            "width": 0.41,
+            "height": 0.402
+          },
+          "content": "Abstract—Radio map (RM) estimation aims to reconstruct the spatial distribution of wireless signal characteristics, such as received signal strength (RSS), from sparse measurements, a task that is critical for spectrum management, interference mitigation, and localization in modern wireless networks. Traditional approaches, including interpolation and deep learning, either struggle to capture complex propagation effects or require large- scale retraining for each new sampling pattern, which limits their generalization. More recently, prior- based methods have combined pre- trained generative models with measurements to reduce the need for deployment- time model fine- tuning, but they typically treat the prior as a simple regularizer and lack explicit transmitter- aware integration. In this paper, we propose RadioTrace, a novel RM estimation framework without deployment- time fine- tuning that tightly integrates sparse RSS measurements with a frozen pre- trained diffusion prior. RadioTrace incorporates transmitter (Tx) location estimation directly into the denoising loop, iteratively refining Tx coordinates based on reconstruction quality to guide the generative process. To further enhance robustness, we introduce a propagation- guided K- means initialization that mitigates poor local minima in the Tx update and provides a geometry- consistent starting point. Moreover, we provide a stochastic stability analysis for the Tx- coordinate refinement component, showing that the Tx update remains stable under perturbations induced by diffusion sampling and Tx- map relaxation. Extensive experiments demonstrate that RadioTrace achieves competitive performance with state- of- the- art learning- based methods under random sampling, and maintains strong reconstruction quality under restricted- area sampling, highlighting its adaptability, robustness, and practical relevance.Index Terms—radio map estimation, diffusion, transmitter localization",
+          "label": "Text"
+        },
+        {
+          "id": "3",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.078,
+            "y": 0.659,
+            "width": 0.41,
+            "height": 0.026
+          },
+          "content": "Index Terms—radio map estimation, diffusion, transmitter localization",
+          "label": "Text"
+        },
+        {
+          "id": "4",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.225,
+            "y": 0.705,
+            "width": 0.113,
+            "height": 0.014
+          },
+          "content": "## I. Introduction",
+          "label": "Text"
+        },
+        {
+          "id": "5",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.078,
+            "y": 0.724,
+            "width": 0.41,
+            "height": 0.061
+          },
+          "content": "Radio maps (RMs) characterize the spatial distribution of wireless signal attributes, such as received signal strength (RSS), signal- to- noise ratio (SNR), and power spectral density (PSD). They provide radio- environment",
+          "label": "Text"
+        },
+        {
+          "id": "6",
+          "order": 7,
+          "bounding_box": {
+            "x": 0.077,
+            "y": 0.795,
+            "width": 0.411,
+            "height": 0.035
+          },
+          "content": "A preliminary version of this work was presented at 35th IEEE International Workshop on Machine Learning for Signal Processing (MLSP) [1].",
+          "label": "Text"
+        },
+        {
+          "id": "7",
+          "order": 8,
+          "bounding_box": {
+            "x": 0.077,
+            "y": 0.83,
+            "width": 0.411,
+            "height": 0.024
+          },
+          "content": "This work was supported by the National Natural Science Foundation of China under Grant 62301115.",
+          "label": "Text"
+        },
+        {
+          "id": "8",
+          "order": 9,
+          "bounding_box": {
+            "x": 0.077,
+            "y": 0.854,
+            "width": 0.411,
+            "height": 0.039
+          },
+          "content": "L. Yang, \nZ. Cao and \nW. Xiong are with School of Information and Communication Engineering, University of Electronic Science and Technology of China, Chengdu, China, 611731.",
+          "label": "Text"
+        },
+        {
+          "id": "9",
+          "order": 10,
+          "bounding_box": {
+            "x": 0.077,
+            "y": 0.892,
+            "width": 0.411,
+            "height": 0.038
+          },
+          "content": "Q. Li, \nG. Sun and \nJ. Lin are with School of Information and Communication Engineering, University of Electronic Science and Technology of China, Chengdu, China, 611731, and also with Tianfu Jiangxi Laboratory, Chengdu, China, 641419.",
+          "label": "Text"
+        },
+        {
+          "id": "10",
+          "order": 11,
+          "bounding_box": {
+            "x": 0.09,
+            "y": 0.93,
+            "width": 0.363,
+            "height": 0.014
+          },
+          "content": "Q. Li is the corresponding author. E-mail: lq@uestc.edu.cn.",
+          "label": "Text"
+        },
+        {
+          "id": "11",
+          "order": 12,
+          "bounding_box": {
+            "x": 0.508,
+            "y": 0.25,
+            "width": 0.411,
+            "height": 0.136
+          },
+          "content": "information for spectrum management, interference monitoring, base- station planning, localization, and adaptive network optimization. RMs are also relevant to wireless digital twins and integrated sensing and communication (ISAC), where propagation knowledge supports both communication and environmental awareness [2]–[6]. This paper focuses on RM reconstruction from limited RSS measurements and investigates how prior propagation knowledge can be incorporated into this task.",
+          "label": "Text"
+        },
+        {
+          "id": "12",
+          "order": 13,
+          "bounding_box": {
+            "x": 0.508,
+            "y": 0.387,
+            "width": 0.411,
+            "height": 0.194
+          },
+          "content": "Existing RM reconstruction studies can be roughly divided into two lines. The first line is measurement- free RM generation, which synthesizes complete RMs from environmental priors, such as building layouts, material assumptions, and transmitter (Tx) locations. Classical ray- tracing methods provide physically interpretable predictions based on geometric propagation models [7]. Recent learning- based methods, including U- Net- based generators [8] and diffusion models such as RadioDiff [9], improve generation efficiency by learning propagation patterns from data. Although these methods do not directly solve sparse- measurement- based RM estimation, they provide useful generative priors for radio propagation modeling.",
+          "label": "Text"
+        },
+        {
+          "id": "13",
+          "order": 14,
+          "bounding_box": {
+            "x": 0.508,
+            "y": 0.583,
+            "width": 0.411,
+            "height": 0.241
+          },
+          "content": "The second line directly estimates RMs from sparse RSS measurements. Classical interpolation methods, such as Kriging [10], [11], exploit spatial correlation among samples but are limited in complex environments with blockage, shadowing, and multipath effects. Supervised deep models, including auto- encoder- based methods [12], generative adversarial networks [13], [14], and diffusion- based estimators [15], [16], learn nonlinear mappings from sparse observations to complete RMs. More recently, inverse reconstruction methods have been explored to reduce the need for deployment- time fine- tuning. For example, LaPnP combines measurement consistency with latent- domain plug- and- play denoising [17], while RadioDiff- Inverse formulates sparse- measurement RM reconstruction as a Bayesian inverse problem with a diffusion prior [18].",
+          "label": "Text"
+        },
+        {
+          "id": "14",
+          "order": 15,
+          "bounding_box": {
+            "x": 0.508,
+            "y": 0.825,
+            "width": 0.411,
+            "height": 0.118
+          },
+          "content": "Despite these advances, existing methods still face several limitations in practical sparse- measurement RM estimation. First, measurement- free generative models can provide strong propagation priors, but they often rely on source- related conditions, especially accurate Tx locations. In civilian spectrum monitoring with covert unauthorized Tx or in military scenarios involving hostile emitters, such information may be unavailable or deliberately concealed.",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "page_index": 2,
+      "blocks": [
+        {
+          "id": "0",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.075,
+            "y": 0.1,
+            "width": 0.415,
+            "height": 0.103
+          },
+          "content": "<table><tr><td>Method</td><td>Modeling level</td><td>Updated variable</td></tr><tr><td>LaPnP [17]</td><td>RM level</td><td>Reconstructed RM estimate</td></tr><tr><td>RadioDiff-Inverse [18]</td><td>RM level</td><td>Posterior RM samples</td></tr><tr><td>RadioTrace</td><td>Tx-condition level</td><td>Tx locations + RM</td></tr></table>",
+          "label": "Table"
+        },
+        {
+          "id": "1",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.077,
+            "y": 0.064,
+            "width": 0.412,
+            "height": 0.03
+          },
+          "content": "TABLE I: Positioning of RadioTrace relative to priorbased inverse RM reconstruction methods.",
+          "label": "Text"
+        },
+        {
+          "id": "2",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.078,
+            "y": 0.232,
+            "width": 0.412,
+            "height": 0.36
+          },
+          "content": "Second, supervised sparse- measurement estimators typically require large- scale paired training data and may generalize poorly when the deployment sampling pattern differs from the training distribution. In practice, access restrictions, sensing budgets, and task- specific coverage requirements often lead to nonuniform or restricted- area sampling, under which additional fine- tuning may be required. Third, although prior- based inverse reconstruction methods couple denoising or generative priors with sparse measurements, their measurement consistency is mainly imposed at the RM level. For instance, LaPnP refines the reconstructed RM estimate within a PnP reconstruction loop, whereas RadioDiff- Inverse corrects posterior RM samples during reverse diffusion. These methods use sparse measurements to improve the agreement between the reconstructed RM and the observed RSS values in sampled cells. However, the underlying physical factors that govern radio- map formation, such as the propagation geometry, are usually not explicitly modeled or updated during the reconstruction process. This motivates a key question: how can sparse measurements be used not only to enforce RM- level consistency, but also to infer and embed the relevant physical information into the generative RM reconstruction process?",
+          "label": "Text"
+        },
+        {
+          "id": "3",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.079,
+            "y": 0.594,
+            "width": 0.411,
+            "height": 0.196
+          },
+          "content": "To fill in this gap, we explicitly incorporate Tx locations into RM estimation, and propose RadioTrace, a Txaware diffusion framework for RM estimation without deployment- time fine- tuning. RadioTrace uses a frozen pre- trained diffusion model as the RM generation prior, while inferring the unknown Tx locations from sparse RSS measurements during reverse diffusion. Specifically, the current Tx estimates condition RM generation, and the discrepancy between the generated RM and sparse observations is back- propagated to refine these estimates. The refined Tx locations are then fed back into subsequent denoising steps, forming a closed- loop diffusion- geometry inference process, as illustrated in Fig. 1.",
+          "label": "Text"
+        },
+        {
+          "id": "4",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.079,
+            "y": 0.79,
+            "width": 0.411,
+            "height": 0.09
+          },
+          "content": "Table I summarizes the modeling- level distinction between RadioTrace and representative prior- based inverse RM estimation methods. Existing methods mainly operate at the RM level by updating reconstructed RM estimates or posterior RM samples, whereas RadioTrace refines the Tx locations that condition subsequent RM generation.",
+          "label": "Text"
+        },
+        {
+          "id": "5",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.078,
+            "y": 0.881,
+            "width": 0.412,
+            "height": 0.029
+          },
+          "content": "The main contributions of this paper are summarized as follows:",
+          "label": "Text"
+        },
+        {
+          "id": "6",
+          "order": 7,
+          "bounding_box": {
+            "x": 0.092,
+            "y": 0.913,
+            "width": 0.398,
+            "height": 0.03
+          },
+          "content": "- From a modeling perspective, we develop a physics-driven formulation that jointly models the RM and",
+          "label": "Text"
+        },
+        {
+          "id": "7",
+          "order": 8,
+          "bounding_box": {
+            "x": 0.506,
+            "y": 0.07,
+            "width": 0.414,
+            "height": 0.094
+          },
+          "content": "",
+          "label": "Image"
+        },
+        {
+          "id": "8",
+          "order": 9,
+          "bounding_box": {
+            "x": 0.506,
+            "y": 0.172,
+            "width": 0.413,
+            "height": 0.045
+          },
+          "content": "<center>Fig. 1: Conceptual illustration of the loop interaction between the RM generation step and the Tx update step in RadioTrace. </center>",
+          "label": "Text"
+        },
+        {
+          "id": "9",
+          "order": 10,
+          "bounding_box": {
+            "x": 0.536,
+            "y": 0.25,
+            "width": 0.383,
+            "height": 0.045
+          },
+          "content": "Tx levels, treating unknown Tx locations as physical latent variables and casting RM estimation as a joint RM- Tx recovery problem.",
+          "label": "Text"
+        },
+        {
+          "id": "10",
+          "order": 11,
+          "bounding_box": {
+            "x": 0.523,
+            "y": 0.295,
+            "width": 0.396,
+            "height": 0.149
+          },
+          "content": "- From an algorithmic perspective, we develop RadioTrace, an alternating inference framework that embeds Tx estimation into reverse denoising, enabling deep integration between sparse measurements and the diffusion prior. From a theoretical perspective, we establish the stochastic stability of Tx-coordinate refinement under reverse-diffusion-induced time variation, showing that it asymptotically enters a stationary regime under some conditions.",
+          "label": "Text"
+        },
+        {
+          "id": "11",
+          "order": 12,
+          "bounding_box": {
+            "x": 0.623,
+            "y": 0.476,
+            "width": 0.179,
+            "height": 0.015
+          },
+          "content": "## II. Problem Formulation",
+          "label": "Text"
+        },
+        {
+          "id": "12",
+          "order": 13,
+          "bounding_box": {
+            "x": 0.507,
+            "y": 0.502,
+            "width": 0.412,
+            "height": 0.241
+          },
+          "content": "Consider a rectangular region of size \\(w \\times h\\) containing \\(R\\) Tx. These Tx simultaneously emit signals that propagate through the environment, resulting in a spatially varying RSS distribution over the area. Let \\(\\mathbf{X} \\in \\mathbb{R}^{w \\times h}\\) denote the complete RM over the area of interest, where each element \\(\\mathbf{X}(m, n)\\) represents the received signal strength at location \\((m, n)\\) (in dBm). However, this complete map is not directly accessible in practice. Instead, we can only obtain partial information by deploying a limited number of sensors at specific locations to perform signal measurements. Each sensor captures the RSS over a small spatial grid cell. This sparse sampling process can be described by a binary mask \\(\\mathcal{M} \\in \\{0, 1\\}^{w \\times h}\\) , where \\(\\mathcal{M}(m, n) = 1\\) indicates that the grid point \\((m, n)\\) has been measured, and 0 otherwise. The observed measurements \\(\\mathbf{O} \\in \\mathbb{R}^{w \\times h}\\) are therefore obtained as:",
+          "label": "Text"
+        },
+        {
+          "id": "13",
+          "order": 14,
+          "bounding_box": {
+            "x": 0.662,
+            "y": 0.755,
+            "width": 0.255,
+            "height": 0.016
+          },
+          "content": "\\[\\boldsymbol {O} = \\boldsymbol {\\mathcal{M}}\\odot \\boldsymbol {X}, \\quad (1)\\]",
+          "label": "Formula"
+        },
+        {
+          "id": "14",
+          "order": 15,
+          "bounding_box": {
+            "x": 0.507,
+            "y": 0.785,
+            "width": 0.412,
+            "height": 0.06
+          },
+          "content": "where \\(\\odot\\) represents the element- wise product. The goal of RM estimation is to recover the complete radio maps \\(\\mathbf{X}\\) from sparse RSS measurements \\(\\mathbf{O}\\) , the sampling mask \\(\\mathcal{M}\\) and available environmental information.",
+          "label": "Text"
+        },
+        {
+          "id": "15",
+          "order": 16,
+          "bounding_box": {
+            "x": 0.656,
+            "y": 0.871,
+            "width": 0.114,
+            "height": 0.015
+          },
+          "content": "## III. RadioTrace",
+          "label": "Text"
+        },
+        {
+          "id": "16",
+          "order": 17,
+          "bounding_box": {
+            "x": 0.507,
+            "y": 0.898,
+            "width": 0.412,
+            "height": 0.045
+          },
+          "content": "In this section, we present the proposed RadioTrace framework. Section III- A outlines the main idea, while Sections III- B- III- D describe the detailed implementation.",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "page_index": 3,
+      "blocks": [
+        {
+          "id": "0",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.084,
+            "y": 0.065,
+            "width": 0.828,
+            "height": 0.173
+          },
+          "content": "",
+          "label": "Image"
+        },
+        {
+          "id": "1",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.101,
+            "y": 0.246,
+            "width": 0.789,
+            "height": 0.018
+          },
+          "content": "<center>Fig. 2: Overview of the proposed RadioTrace (black arrow: RM generation step, red arrow: Tx update step). </center>",
+          "label": "Text"
+        },
+        {
+          "id": "2",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.078,
+            "y": 0.29,
+            "width": 0.093,
+            "height": 0.015
+          },
+          "content": "### A. Overview",
+          "label": "Text"
+        },
+        {
+          "id": "3",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.078,
+            "y": 0.315,
+            "width": 0.411,
+            "height": 0.09
+          },
+          "content": "As illustrated in Fig. 1 and detailed in Fig. 2, RadioTrace embeds the RM- generation and Tx- coordinate- refinement loop into a reverse diffusion process. Starting from a Gaussian initialization \\(\\pmb{x}_{T} \\sim \\mathcal{N}(\\mathbf{0}, \\pmb {I})\\) , the method proceeds through \\(T\\) denoising steps. At each reverse step \\(t\\) , RadioTrace alternates between two steps:",
+          "label": "Text"
+        },
+        {
+          "id": "4",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.094,
+            "y": 0.41,
+            "width": 0.396,
+            "height": 0.107
+          },
+          "content": "- RM Generation Step: Given the current state \\(\\pmb{x}_{t}\\) , the iteration index \\(t\\) , and a binary Tx map \\(\\pmb{C}_{t}\\) , the fixed generator produces a clean estimate \\(\\hat{\\pmb{x}}_{0}^{t}\\) and the denoised RM \\(\\pmb{x}_{t - 1}\\) for the next step \\(t - 1\\) .- Tx Update Step: The Tx locations are updated via gradient descent to minimize the reconstruction error between \\(\\hat{\\pmb{x}}_{0}^{t}\\) and the observation \\(\\pmb{O}\\) .",
+          "label": "Text"
+        },
+        {
+          "id": "5",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.077,
+            "y": 0.523,
+            "width": 0.411,
+            "height": 0.061
+          },
+          "content": "By repeating the two steps throughout the reverse diffusion process, RadioTrace progressively recovers both the RM and the Tx locations. In the following subsections, we will explain these two steps in detail.",
+          "label": "Text"
+        },
+        {
+          "id": "6",
+          "order": 7,
+          "bounding_box": {
+            "x": 0.078,
+            "y": 0.62,
+            "width": 0.175,
+            "height": 0.015
+          },
+          "content": "### B. RM Generation Step",
+          "label": "Text"
+        },
+        {
+          "id": "7",
+          "order": 8,
+          "bounding_box": {
+            "x": 0.078,
+            "y": 0.644,
+            "width": 0.411,
+            "height": 0.181
+          },
+          "content": "At reverse step \\(t\\) , the RM generation step takes the noisy state \\(\\pmb{x}_{t} \\in \\mathbb{R}^{w \\times h}\\) , the building map \\(\\pmb{B}\\) and the binary Tx map \\(\\pmb{C}_{t} \\in \\{0,1\\}^{w \\times h}\\) (where \\(\\pmb{C}_{t}(m,n) = 1\\) if and only if a Tx is present at \\((m,n)\\) ), and invokes a measurement- free RM generator (diffusion prior) \\(f_{\\theta}\\) whose parameters are trained offline and remain fixed throughout RadioTrace. The generator inputs \\((\\pmb{x}_{t}, t, \\pmb{C}_{t})\\) , produces a clean estimate \\(\\hat{\\pmb{x}}_{0}^{t}\\) , and parameterizes the conditional distribution of \\(\\pmb{x}_{t - 1}\\) , from which we sample to continue the reverse trajectory. In this step, \\(\\pmb{C}_{t}\\) is treated as a given conditioning signal and its representation and subsequent refinement are deferred to Section III- C.",
+          "label": "Text"
+        },
+        {
+          "id": "8",
+          "order": 9,
+          "bounding_box": {
+            "x": 0.077,
+            "y": 0.828,
+            "width": 0.411,
+            "height": 0.076
+          },
+          "content": "As illustrated in Fig. 3, the black arrows depict the reverse sampling path used at inference. Operationally, this step performs a single reverse- diffusion update conditioned on \\((\\pmb{x}_{t}, t, \\pmb{C}_{t})\\) . The generator predicts the injected noise \\(\\epsilon_{\\theta}\\) and yields",
+          "label": "Text"
+        },
+        {
+          "id": "9",
+          "order": 10,
+          "bounding_box": {
+            "x": 0.133,
+            "y": 0.914,
+            "width": 0.354,
+            "height": 0.035
+          },
+          "content": "\\[\\hat{\\pmb{x}}_{0}^{t} = \\frac{1}{\\sqrt{\\bar{\\alpha}_{t}}}\\Big(\\pmb{x}_{t} - \\sqrt{1 - \\bar{\\alpha}_{t}}\\epsilon_{\\theta}(\\pmb{x}_{t},t,\\pmb {B},\\pmb{C}_{t})\\Big), \\quad (2)\\]",
+          "label": "Formula"
+        },
+        {
+          "id": "10",
+          "order": 11,
+          "bounding_box": {
+            "x": 0.515,
+            "y": 0.285,
+            "width": 0.395,
+            "height": 0.054
+          },
+          "content": "",
+          "label": "Image"
+        },
+        {
+          "id": "11",
+          "order": 12,
+          "bounding_box": {
+            "x": 0.506,
+            "y": 0.348,
+            "width": 0.413,
+            "height": 0.03
+          },
+          "content": "<center>Fig. 3: Measurement-free RM generation with diffusion models. </center>",
+          "label": "Text"
+        },
+        {
+          "id": "12",
+          "order": 13,
+          "bounding_box": {
+            "x": 0.506,
+            "y": 0.405,
+            "width": 0.413,
+            "height": 0.032
+          },
+          "content": "where \\(\\bar{\\alpha}_{t} = \\prod_{i = 1}^{t} \\alpha_{i}\\) follows a fixed noise schedule. The mean of the next noisy state is",
+          "label": "Text"
+        },
+        {
+          "id": "13",
+          "order": 14,
+          "bounding_box": {
+            "x": 0.52,
+            "y": 0.444,
+            "width": 0.397,
+            "height": 0.037
+          },
+          "content": "\\[\\mu_{\\theta}(\\pmb{x}_{t - 1}) = \\frac{\\sqrt{\\alpha_{t}} (1 - \\bar{\\alpha}_{t - 1})\\pmb{x}_{t} + (1 - \\alpha_{t})\\sqrt{\\bar{\\alpha}_{t - 1}}\\hat{\\pmb{x}}_{0}^{t}}{1 - \\bar{\\alpha}_{t}}, \\quad (3)\\]",
+          "label": "Formula"
+        },
+        {
+          "id": "14",
+          "order": 15,
+          "bounding_box": {
+            "x": 0.506,
+            "y": 0.49,
+            "width": 0.095,
+            "height": 0.014
+          },
+          "content": "and we draw",
+          "label": "Text"
+        },
+        {
+          "id": "15",
+          "order": 16,
+          "bounding_box": {
+            "x": 0.52,
+            "y": 0.515,
+            "width": 0.397,
+            "height": 0.019
+          },
+          "content": "\\[\\pmb{x}_{t - 1} \\sim p_{\\theta}(\\cdot | \\pmb{x}_{t}, \\pmb{B}, \\pmb{C}_{t}) = \\mathcal{N}(\\pmb{x}_{t - 1}; \\mu_{\\theta}(\\pmb{x}_{t - 1}), \\gamma_{t} \\pmb{I}), \\quad (4)\\]",
+          "label": "Formula"
+        },
+        {
+          "id": "16",
+          "order": 17,
+          "bounding_box": {
+            "x": 0.506,
+            "y": 0.544,
+            "width": 0.413,
+            "height": 0.036
+          },
+          "content": "with variance \\(\\gamma_{t} = \\frac{(1 - \\bar{\\alpha}_{t - 1})(1 - \\alpha_{t})}{1 - \\bar{\\alpha}_{t}}\\) . And the next step noisy RM \\(\\pmb{x}_{t - 1}\\) can be sampled from \\(p_{\\theta}(\\pmb{x}_{t - 1}|\\pmb{x}_{t}, \\pmb{C}_{t})\\) .",
+          "label": "Text"
+        },
+        {
+          "id": "17",
+          "order": 18,
+          "bounding_box": {
+            "x": 0.507,
+            "y": 0.589,
+            "width": 0.413,
+            "height": 0.091
+          },
+          "content": "Remark. The RM generation step relies on a pre- trained diffusion model \\(f_{\\theta}\\) . There are various ways to obtain such a model. For instance, one may pre- train \\(f_{\\theta}\\) offline through a measurement- free RM generation task, as in RadioDiff [9]. Our framework primarily focuses on how to leverage this pre- trained model.",
+          "label": "Text"
+        },
+        {
+          "id": "18",
+          "order": 19,
+          "bounding_box": {
+            "x": 0.507,
+            "y": 0.707,
+            "width": 0.142,
+            "height": 0.015
+          },
+          "content": "### C. Tx Update Step",
+          "label": "Text"
+        },
+        {
+          "id": "19",
+          "order": 20,
+          "bounding_box": {
+            "x": 0.506,
+            "y": 0.728,
+            "width": 0.414,
+            "height": 0.091
+          },
+          "content": "The measurement- free diffusion prior employed in the RM generation stage can produce accurate radio maps when provided with a precise binary Tx map \\(\\pmb{C}_{t}\\) . However, in RM estimation, \\(\\pmb{C}_{t}\\) is unknown. A straightforward approach is therefore to recover \\(\\pmb{C}_{t}\\) from the sampled RSS by minimizing the masked reconstruction error:",
+          "label": "Text"
+        },
+        {
+          "id": "20",
+          "order": 21,
+          "bounding_box": {
+            "x": 0.58,
+            "y": 0.826,
+            "width": 0.337,
+            "height": 0.032
+          },
+          "content": "\\[\\min_{\\pmb{C}_{t} \\in \\{0,1\\}^{w \\times h}} \\left\\| \\hat{\\pmb{x}}_{0}^{t}(\\pmb{C}_{t}) \\odot \\pmb {\\mathcal{M}} - \\pmb {\\mathcal{O}}\\right\\|_{F}^{2}, \\quad (5)\\]",
+          "label": "Formula"
+        },
+        {
+          "id": "21",
+          "order": 22,
+          "bounding_box": {
+            "x": 0.506,
+            "y": 0.867,
+            "width": 0.414,
+            "height": 0.077
+          },
+          "content": "where \\(\\| \\cdot \\|_{F}\\) is the Frobenius norm. However, since \\(\\pmb{C}_{t}\\) is high- dimensional and discrete, direct optimization is challenging. To reduce the degrees of freedom while retaining physical interpretability, we represent the Tx by their continuous coordinates \\(\\Omega_{t} = \\{(a_{t}^{i}, b_{t}^{i})\\}_{i = 1}^{R} \\in \\mathbb{R}^{2R}\\) , and",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "page_index": 4,
+      "blocks": [
+        {
+          "id": "0",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.076,
+            "y": 0.067,
+            "width": 0.414,
+            "height": 0.03
+          },
+          "content": "parameterize the binary Tx map \\(C_{t}\\) through the following relation:",
+          "label": "Text"
+        },
+        {
+          "id": "1",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.092,
+            "y": 0.099,
+            "width": 0.396,
+            "height": 0.041
+          },
+          "content": "\\[\\mathcal{C}_{t}(p,q)\\triangleq \\left\\{ \\begin{array}{ll}1, & \\exists i\\in \\{1,\\ldots ,R\\} \\mathrm{~s.t.~}(p,q) = (u_{t}^{i},v_{t}^{i}),\\\\ 0, & \\mathrm{otherwise}, \\end{array} \\right. \\quad (6)\\]",
+          "label": "Formula"
+        },
+        {
+          "id": "2",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.078,
+            "y": 0.151,
+            "width": 0.412,
+            "height": 0.107
+          },
+          "content": "where \\((u_{t}^{i},v_{t}^{i}) = \\mathrm{round}\\big(a_{t}^{i},b_{t}^{i}\\big)\\) . Thus \\(\\Omega_{t}\\) becomes the actual optimization variables that influence the RM generation through \\(C_{t}\\) , which serves as the input to the reverse diffusion process at step \\(t\\) . This parameterization dramatically reduces the variable dimension from \\(w\\times h\\) binary elements to \\(2R\\) continuous ones, significantly improving computational efficiency.",
+          "label": "Text"
+        },
+        {
+          "id": "3",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.078,
+            "y": 0.258,
+            "width": 0.412,
+            "height": 0.045
+          },
+          "content": "To further stabilize the reverse- time refinement, we introduce a best- anchor mechanism and optimize an augmented objective with a proximal regularization term:",
+          "label": "Text"
+        },
+        {
+          "id": "4",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.087,
+            "y": 0.303,
+            "width": 0.401,
+            "height": 0.027
+          },
+          "content": "\\[\\mathcal{L}_{t}(\\Omega_{t}) = \\left\\| \\hat{\\mathbf{x}}_{0}^{t}(\\Omega_{t})\\odot \\mathcal{M} - \\mathcal{O}\\right\\|_{F}^{2} + \\frac{\\kappa_{t}}{2}\\left\\| \\Omega_{t} - \\Omega_{t}^{*}\\right\\|_{F}^{2}, \\quad (7)\\]",
+          "label": "Formula"
+        },
+        {
+          "id": "5",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.078,
+            "y": 0.331,
+            "width": 0.412,
+            "height": 0.031
+          },
+          "content": "where \\(\\Omega_{t}^{*}\\) denotes the best Tx coordinates found up to time \\(t\\) ,",
+          "label": "Text"
+        },
+        {
+          "id": "6",
+          "order": 7,
+          "bounding_box": {
+            "x": 0.15,
+            "y": 0.364,
+            "width": 0.267,
+            "height": 0.031
+          },
+          "content": "\\[\\Omega_{t}^{*}\\triangleq \\underset {\\Omega_{s},s\\geq t}{\\arg \\min}\\left\\| \\hat{\\mathbf{x}}_{0}^{s}(\\Omega_{s})\\odot \\mathcal{M} - \\mathcal{O}\\right\\|_{F}^{2},\\]",
+          "label": "Formula"
+        },
+        {
+          "id": "7",
+          "order": 8,
+          "bounding_box": {
+            "x": 0.078,
+            "y": 0.397,
+            "width": 0.29,
+            "height": 0.015
+          },
+          "content": "and \\(\\kappa_{t}\\) is a linearly scheduler defined as",
+          "label": "Text"
+        },
+        {
+          "id": "8",
+          "order": 9,
+          "bounding_box": {
+            "x": 0.2,
+            "y": 0.415,
+            "width": 0.167,
+            "height": 0.029
+          },
+          "content": "\\[\\kappa_{t} = \\kappa \\frac{T - t}{T}, \\kappa >0.\\]",
+          "label": "Formula"
+        },
+        {
+          "id": "9",
+          "order": 10,
+          "bounding_box": {
+            "x": 0.078,
+            "y": 0.446,
+            "width": 0.412,
+            "height": 0.121
+          },
+          "content": "The quadratic term acts as a proximal pull, shrinking the search region toward the anchor and suppressing oscillations when the loss landscape becomes sharp at low noise levels. The linear schedule ensures that this pull is negligible during early exploratory stages and gradually strengthens as the noise level decreases. As shown later in Section V, the proposed best- anchor mechanism substantially enhances the recovery accuracy of RM estimation.",
+          "label": "Text"
+        },
+        {
+          "id": "10",
+          "order": 11,
+          "bounding_box": {
+            "x": 0.078,
+            "y": 0.567,
+            "width": 0.412,
+            "height": 0.045
+          },
+          "content": "To minimize \\(\\mathcal{L}_{t}(\\Omega_{t})\\) , we apply momentum- based gradient descent (GD) method to update the coordinates. For each horizontal coordinate \\(a_{t}^{i}\\) , the update is given by:",
+          "label": "Text"
+        },
+        {
+          "id": "11",
+          "order": 12,
+          "bounding_box": {
+            "x": 0.104,
+            "y": 0.615,
+            "width": 0.384,
+            "height": 0.032
+          },
+          "content": "\\[v_{t - 1} = \\beta v_{t} + (1 - \\beta)\\frac{\\partial\\mathcal{L}_{t}}{\\partial a_{t}^{i}},\\quad a_{t - 1}^{i} = a_{t}^{i} - \\eta v_{t - 1}, \\quad (8)\\]",
+          "label": "Formula"
+        },
+        {
+          "id": "12",
+          "order": 13,
+          "bounding_box": {
+            "x": 0.078,
+            "y": 0.65,
+            "width": 0.412,
+            "height": 0.044
+          },
+          "content": "where \\(\\eta >0\\) is the learning rate and \\(\\beta >0\\) is the momentum coefficient. The same update rule is applied to the vertical coordinates \\(b_{t}^{i}\\) .",
+          "label": "Text"
+        },
+        {
+          "id": "13",
+          "order": 14,
+          "bounding_box": {
+            "x": 0.097,
+            "y": 0.694,
+            "width": 0.276,
+            "height": 0.016
+          },
+          "content": "By the chain rule, \\(\\frac{\\partial\\mathcal{L}_{t}}{\\partial a_{t}^{i}}\\) is computed as",
+          "label": "Text"
+        },
+        {
+          "id": "14",
+          "order": 15,
+          "bounding_box": {
+            "x": 0.13,
+            "y": 0.714,
+            "width": 0.358,
+            "height": 0.034
+          },
+          "content": "\\[\\frac{\\partial\\mathcal{L}_{t}}{\\partial a_{t}^{i}} = \\frac{\\partial\\mathcal{L}_{t}}{\\partial\\hat{x}_{0}^{t}}\\cdot \\frac{\\partial\\hat{x}_{0}^{t}}{\\partial\\mathcal{C}_{t}}\\cdot \\frac{\\partial\\mathcal{C}_{t}}{\\partial a_{t}^{i}} +\\kappa_{t}\\left(a_{t}^{i} - a_{t}^{i,\\star}\\right), \\quad (9)\\]",
+          "label": "Formula"
+        },
+        {
+          "id": "15",
+          "order": 16,
+          "bounding_box": {
+            "x": 0.078,
+            "y": 0.753,
+            "width": 0.412,
+            "height": 0.132
+          },
+          "content": "where \\(a_{t}^{i,\\star}\\) is the horizontal coordinate of \\(\\Omega_{t}^{*}\\) . The \\(\\frac{\\partial\\mathcal{L}_{t}}{\\partial\\hat{x}_{0}^{t}}\\) and \\(\\frac{\\partial\\hat{x}_{0}^{t}}{\\partial\\mathcal{C}_{t}}\\) can be easily obtained by back- propagation. As for \\(\\frac{\\partial\\mathcal{L}_{t}}{\\partial a_{t}^{i}}\\) , note that the binary Tx map \\(C_{t}\\) is obtained by applying a non- differentiable operation, cf. Eqn. (6). This makes the gradient \\(\\partial C_{t} / \\partial a_{t}^{i}\\) undefined. To circumvent this difficulty, we introduce a smooth approximation \\(\\hat{C}_{t}\\in \\mathbb{R}_{+}^{w\\times h}\\) , formed by summing \\(R\\) isotropic Gaussian heatmaps centered at each Tx location:",
+          "label": "Text"
+        },
+        {
+          "id": "16",
+          "order": 17,
+          "bounding_box": {
+            "x": 0.078,
+            "y": 0.888,
+            "width": 0.41,
+            "height": 0.051
+          },
+          "content": "\\[\\hat{C}_{t} = \\sum_{i = 1}^{R}\\pmb{P}_{t}^{i},\\quad \\pmb {P}_{t}^{i}(j,k) = \\exp \\left(-\\frac{(j - a_{t}^{i})^{2} + (k - b_{t}^{i})^{2}}{2\\sigma^{2}}\\right), \\quad (10)\\]",
+          "label": "Formula"
+        },
+        {
+          "id": "17",
+          "order": 18,
+          "bounding_box": {
+            "x": 0.506,
+            "y": 0.068,
+            "width": 0.412,
+            "height": 0.045
+          },
+          "content": "where \\(\\sigma\\) is the standard deviation, which controls approximation accuracy. Particularly as \\(\\sigma\\) approaches 0, the soft map \\(\\hat{C}_{t}\\) converges to the binary Tx map \\(C_{t}\\) .",
+          "label": "Text"
+        },
+        {
+          "id": "18",
+          "order": 19,
+          "bounding_box": {
+            "x": 0.506,
+            "y": 0.114,
+            "width": 0.412,
+            "height": 0.045
+          },
+          "content": "With this approximation, we adopt the straight- through estimator (STE) [19], [20] and approximate the backward gradient by differentiating through the soft map:",
+          "label": "Text"
+        },
+        {
+          "id": "19",
+          "order": 20,
+          "bounding_box": {
+            "x": 0.567,
+            "y": 0.163,
+            "width": 0.35,
+            "height": 0.037
+          },
+          "content": "\\[\\frac{\\partial C_{t}}{\\partial a_{t}^{i}}\\approx \\frac{\\partial\\hat{C}_{t}}{\\partial a_{t}^{i}} = \\frac{\\partial P_{t}^{i}}{\\partial a_{t}^{i}} = \\frac{1}{\\sigma^{2}} (\\pmb {J} - a_{t}^{i})\\odot \\pmb{P}_{t}^{i}, \\quad (11)\\]",
+          "label": "Formula"
+        },
+        {
+          "id": "20",
+          "order": 21,
+          "bounding_box": {
+            "x": 0.506,
+            "y": 0.206,
+            "width": 0.412,
+            "height": 0.03
+          },
+          "content": "where \\(\\boldsymbol {J}\\in \\mathbb{R}^{w\\times h}\\) is a row index matrix satisfying \\(\\mathbf{J}(j,k) =\\) \\(j\\)",
+          "label": "Text"
+        },
+        {
+          "id": "21",
+          "order": 22,
+          "bounding_box": {
+            "x": 0.506,
+            "y": 0.237,
+            "width": 0.412,
+            "height": 0.106
+          },
+          "content": "Thus far, we have completed the description of the two core components- RM generation and Tx update. Since the RM estimation problem is highly non- convex, the overall procedure is notably sensitive to the initialization of the Tx coordinates. In the following subsection, we introduce an efficient strategy to obtain a reliable initialization for \\(\\Omega_{T}\\) .",
+          "label": "Text"
+        },
+        {
+          "id": "22",
+          "order": 23,
+          "bounding_box": {
+            "x": 0.506,
+            "y": 0.362,
+            "width": 0.288,
+            "height": 0.016
+          },
+          "content": "### D. Initialization for Tx Coordinates \\(\\Omega_{T}\\)",
+          "label": "Text"
+        },
+        {
+          "id": "23",
+          "order": 24,
+          "bounding_box": {
+            "x": 0.506,
+            "y": 0.382,
+            "width": 0.412,
+            "height": 0.152
+          },
+          "content": "We propose a propagation- guided k- means (PGKMeans) method to initialize the coordinates at \\(t = T\\) . The one- iteration visualization of the method is shown in Fig. 4. Let \\(\\mathcal{S} = \\{(m_{k},n_{k})\\}\\) be the set of sampled grid indices with \\(\\mathcal{M}(m_{k},n_{k}) = 1\\) , and recall that \\(\\mathcal{O}(m_{k},n_{k})\\) denote the measured RSS at those indices. Using a site- calibrated first- order path- loss model \\(o = p(d;\\vartheta)\\) with known parameters \\(\\vartheta\\) , which is easy to get by preliminary investigation, we can map each RSS value to a range via the analytic inverse \\(d = \\psi (o) = p^{- 1}(o;\\vartheta)\\) :",
+          "label": "Text"
+        },
+        {
+          "id": "24",
+          "order": 25,
+          "bounding_box": {
+            "x": 0.585,
+            "y": 0.539,
+            "width": 0.332,
+            "height": 0.019
+          },
+          "content": "\\[d_{k} = \\psi \\big(\\pmb {O}(s_{k})\\big),\\qquad \\mathbf{s}_{k} = \\big(m_{k},n_{k}\\big), \\quad (12)\\]",
+          "label": "Formula"
+        },
+        {
+          "id": "25",
+          "order": 26,
+          "bounding_box": {
+            "x": 0.506,
+            "y": 0.565,
+            "width": 0.412,
+            "height": 0.076
+          },
+          "content": "so that each sample \\(k\\) specifies a circle of feasible Tx locations centered at \\(\\mathbf{s}_{k}\\) with radius \\(d_{k}\\) . Stacking the \\(R\\) Tx positions into \\(\\Omega = \\{\\omega_{i}\\in \\mathbb{R}^{2}\\}_{i = 1}^{R}\\) , we seek \\(\\Omega\\) that best fits all circles in a least- squares sense. A convenient surrogate is the range- consistency distortion",
+          "label": "Text"
+        },
+        {
+          "id": "26",
+          "order": 27,
+          "bounding_box": {
+            "x": 0.567,
+            "y": 0.646,
+            "width": 0.35,
+            "height": 0.036
+          },
+          "content": "\\[\\mathcal{F}(\\Omega) = \\sum_{k\\in \\mathcal{S}}\\min_{1\\leq i\\leq R}\\left(\\| \\mathbf{s}_{k} - \\boldsymbol{\\omega}_{i}\\|_{2} - d_{k}\\right)^{2}, \\quad (13)\\]",
+          "label": "Formula"
+        },
+        {
+          "id": "27",
+          "order": 28,
+          "bounding_box": {
+            "x": 0.506,
+            "y": 0.688,
+            "width": 0.412,
+            "height": 0.062
+          },
+          "content": "which measures how well each sample can be explained by its nearest Tx. Minimizing (13) is nonconvex but admits a fast alternating strategy that mirrors K- means while respecting propagation geometry.",
+          "label": "Text"
+        },
+        {
+          "id": "28",
+          "order": 29,
+          "bounding_box": {
+            "x": 0.506,
+            "y": 0.75,
+            "width": 0.412,
+            "height": 0.031
+          },
+          "content": "Starting from random seeds \\(\\{\\boldsymbol{\\omega}_{i}^{(0)}\\}_{i = 1}^{R}\\) , we iterate three simple operations:",
+          "label": "Text"
+        },
+        {
+          "id": "29",
+          "order": 30,
+          "bounding_box": {
+            "x": 0.519,
+            "y": 0.784,
+            "width": 0.399,
+            "height": 0.086
+          },
+          "content": "1) Assignment: For each sample \\(k\\) , compute \\(e_{k,i} =\\) \\(\\left|\\left|\\left|\\mathbf{s}_{k} - \\boldsymbol{\\omega}_{i}^{(\\ell)}\\right|\\right|_{2} - d_{k}\\right|\\) and assign \\(k\\) to cluster \\(\\mathcal{E}_{i}^{(\\ell)}\\) that attains the minimum \\(e_{k,i}\\) . \n2) Back-projection: For each \\((k,i)\\) with \\(k\\in \\mathcal{E}_{i}^{(\\ell)}\\) , form a candidate Tx point by projecting \\(\\mathbf{s}_{k}\\) onto its range circle along the ray toward the current center:",
+          "label": "Text"
+        },
+        {
+          "id": "30",
+          "order": 31,
+          "bounding_box": {
+            "x": 0.572,
+            "y": 0.875,
+            "width": 0.345,
+            "height": 0.045
+          },
+          "content": "\\[\\tilde{\\boldsymbol{\\omega}}_{k,i} = \\mathbf{s}_{k} + d_{k}\\cdot \\frac{\\boldsymbol{\\omega}_{i}^{(\\ell)} - \\mathbf{s}_{k}}{\\max \\{\\| \\boldsymbol{\\omega}_{i}^{(\\ell)} - \\mathbf{s}_{k}\\|_{2},\\epsilon \\}}, \\quad (14)\\]",
+          "label": "Formula"
+        },
+        {
+          "id": "31",
+          "order": 32,
+          "bounding_box": {
+            "x": 0.545,
+            "y": 0.925,
+            "width": 0.325,
+            "height": 0.016
+          },
+          "content": "with a small \\(\\epsilon >0\\) to avoid division by zero.",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "page_index": 5,
+      "blocks": [
+        {
+          "id": "0",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.076,
+            "y": 0.068,
+            "width": 0.835,
+            "height": 0.193
+          },
+          "content": "",
+          "label": "Image"
+        },
+        {
+          "id": "1",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.075,
+            "y": 0.272,
+            "width": 0.845,
+            "height": 0.047
+          },
+          "content": "<center>Fig. 4: Four-step visualization of the propagation-guided initialization. (a) Convert each sampled RSS to a distance circle. (b) Keep the receiver shape and color by assigned center. (c) Keep colored receivers and back-project to the circle. (d) Update centers by an RSS-weighted centroid. Colors indicate clusters. </center>",
+          "label": "Text"
+        },
+        {
+          "id": "2",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.078,
+            "y": 0.343,
+            "width": 0.177,
+            "height": 0.015
+          },
+          "content": "Algorithm 1 RadioTrace",
+          "label": "Text"
+        },
+        {
+          "id": "3",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.077,
+            "y": 0.36,
+            "width": 0.413,
+            "height": 0.06
+          },
+          "content": "Input: Sparse RSS \\(\\mathcal{O}\\) , mask \\(\\mathcal{M}\\) , building map \\(\\boldsymbol{B}\\) , #Tx \\(R\\) , diffusion model \\(f_{\\theta}\\) , steps \\(T\\) , step size \\(\\eta\\) , momentum \\(\\beta\\) , anchor cap \\(\\kappa\\) , Gaussian width \\(\\sigma\\) , PG- KMeans iteres \\(L_{\\mathrm{max}}\\) , tol \\(\\tau\\)",
+          "label": "Text"
+        },
+        {
+          "id": "4",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.078,
+            "y": 0.42,
+            "width": 0.349,
+            "height": 0.016
+          },
+          "content": "Output: Clean radio map \\(\\pmb{x}_{0}\\) , Tx coordinates \\(\\Omega_{0}\\)",
+          "label": "Text"
+        },
+        {
+          "id": "5",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.085,
+            "y": 0.438,
+            "width": 0.315,
+            "height": 0.016
+          },
+          "content": "1: PG- KMeans init.: \\(\\mathcal{S}\\leftarrow \\{(m_{k},n_{k})\\mid \\mathcal{M} = 1\\}\\)",
+          "label": "Text"
+        },
+        {
+          "id": "6",
+          "order": 7,
+          "bounding_box": {
+            "x": 0.085,
+            "y": 0.454,
+            "width": 0.305,
+            "height": 0.016
+          },
+          "content": "2: Map RSS to ranges: \\(d_{k}\\leftarrow \\psi (\\pmb {O}(m_{k},n_{k}))\\)",
+          "label": "Text"
+        },
+        {
+          "id": "7",
+          "order": 8,
+          "bounding_box": {
+            "x": 0.085,
+            "y": 0.471,
+            "width": 0.292,
+            "height": 0.016
+          },
+          "content": "3: Init seeds \\(\\{\\pmb{\\omega}_{i}^{(0)}\\}_{i = 1}^{R}\\) uniformly on grid",
+          "label": "Text"
+        },
+        {
+          "id": "8",
+          "order": 9,
+          "bounding_box": {
+            "x": 0.085,
+            "y": 0.487,
+            "width": 0.2,
+            "height": 0.014
+          },
+          "content": "4: for \\(\\ell = 0\\) to \\(L_{\\mathrm{max}} - 1\\) do",
+          "label": "Text"
+        },
+        {
+          "id": "9",
+          "order": 10,
+          "bounding_box": {
+            "x": 0.085,
+            "y": 0.501,
+            "width": 0.343,
+            "height": 0.018
+          },
+          "content": "5: Assign \\(k\\) to \\(i = \\arg \\min_{i}\\| \\| s_{k} - \\pmb{\\omega}_{i}^{(\\ell)}\\| - d_{k}\\|\\)",
+          "label": "Text"
+        },
+        {
+          "id": "10",
+          "order": 11,
+          "bounding_box": {
+            "x": 0.085,
+            "y": 0.519,
+            "width": 0.365,
+            "height": 0.021
+          },
+          "content": "6: Back- project: \\(\\tilde{\\omega}_{k,i}\\leftarrow s_{k} + d_{k}\\frac{\\omega_{i}^{(\\ell)} - s_{k}}{\\max \\{\\| \\omega_{i}^{(\\ell)} - s_{k}\\| ,\\epsilon \\}}\\)",
+          "label": "Text"
+        },
+        {
+          "id": "11",
+          "order": 12,
+          "bounding_box": {
+            "x": 0.085,
+            "y": 0.543,
+            "width": 0.265,
+            "height": 0.027
+          },
+          "content": "7: Update: \\(\\pmb{\\omega}_{i}^{(\\ell +1)}\\leftarrow \\frac{\\sum_{k\\in\\mathcal{E}_{i}}\\tilde{O}_{k}\\tilde{\\omega}_{k,i}}{\\sum_{k\\in\\mathcal{E}_{i}}\\tilde{O}_{k}}\\)",
+          "label": "Text"
+        },
+        {
+          "id": "12",
+          "order": 13,
+          "bounding_box": {
+            "x": 0.085,
+            "y": 0.57,
+            "width": 0.315,
+            "height": 0.016
+          },
+          "content": "8: if \\(\\max_{i}\\| \\omega_{i}^{(\\ell +1)} - \\omega_{i}^{(\\ell)}\\| \\leq \\tau\\) then break",
+          "label": "Text"
+        },
+        {
+          "id": "13",
+          "order": 14,
+          "bounding_box": {
+            "x": 0.085,
+            "y": 0.587,
+            "width": 0.071,
+            "height": 0.013
+          },
+          "content": "9: end for",
+          "label": "Text"
+        },
+        {
+          "id": "14",
+          "order": 15,
+          "bounding_box": {
+            "x": 0.078,
+            "y": 0.6,
+            "width": 0.322,
+            "height": 0.017
+          },
+          "content": "10: \\(\\Omega_{T}\\leftarrow \\{\\omega_{i}^{(\\ell_{\\mathrm{end}})}\\}_{i = 1}^{R}\\) ; sample \\(\\pmb {x}_{T}\\sim \\mathcal{N}(\\mathbf{0},\\pmb {I})\\)",
+          "label": "Text"
+        },
+        {
+          "id": "15",
+          "order": 16,
+          "bounding_box": {
+            "x": 0.078,
+            "y": 0.617,
+            "width": 0.339,
+            "height": 0.015
+          },
+          "content": "11: Set anchor \\(\\Omega_{T}^{*}\\leftarrow \\Omega_{T}\\) ; best loss \\(\\mathcal{L}^{*}\\leftarrow +\\infty\\)",
+          "label": "Text"
+        },
+        {
+          "id": "16",
+          "order": 17,
+          "bounding_box": {
+            "x": 0.078,
+            "y": 0.633,
+            "width": 0.339,
+            "height": 0.014
+          },
+          "content": "12: Initialize momentum \\(v_{a,i} = v_{b,i} = 0\\) for \\(i = 1:R\\)",
+          "label": "Text"
+        },
+        {
+          "id": "17",
+          "order": 18,
+          "bounding_box": {
+            "x": 0.078,
+            "y": 0.648,
+            "width": 0.162,
+            "height": 0.014
+          },
+          "content": "13: for \\(t = T\\) to 1 do",
+          "label": "Text"
+        },
+        {
+          "id": "18",
+          "order": 19,
+          "bounding_box": {
+            "x": 0.078,
+            "y": 0.663,
+            "width": 0.297,
+            "height": 0.015
+          },
+          "content": "14: Build binary Tx map \\(\\pmb{C}_{t}\\) with \\(\\Omega_{t}\\)",
+          "label": "Text"
+        },
+        {
+          "id": "19",
+          "order": 20,
+          "bounding_box": {
+            "x": 0.078,
+            "y": 0.678,
+            "width": 0.302,
+            "height": 0.016
+          },
+          "content": "15: Predict noise: \\(\\epsilon_{\\theta}\\leftarrow f_{\\theta}(\\pmb{x}_{t},t,\\pmb {B},\\pmb{C}_{t})\\)",
+          "label": "Text"
+        },
+        {
+          "id": "20",
+          "order": 21,
+          "bounding_box": {
+            "x": 0.078,
+            "y": 0.694,
+            "width": 0.252,
+            "height": 0.016
+          },
+          "content": "16: \\(\\hat{\\pmb{x}}_{0}^{t}\\leftarrow \\frac{1}{\\sqrt{\\alpha_{t}}}\\left(\\pmb{x}_{t} - \\sqrt{1 - \\alpha_{t}}\\epsilon_{\\theta}\\right)\\)",
+          "label": "Text"
+        },
+        {
+          "id": "21",
+          "order": 22,
+          "bounding_box": {
+            "x": 0.078,
+            "y": 0.71,
+            "width": 0.378,
+            "height": 0.015
+          },
+          "content": "17: Sample \\(\\pmb{x}_{t - 1}\\) with DDPM mean and variance",
+          "label": "Text"
+        },
+        {
+          "id": "22",
+          "order": 23,
+          "bounding_box": {
+            "x": 0.078,
+            "y": 0.725,
+            "width": 0.152,
+            "height": 0.015
+          },
+          "content": "18: \\(\\kappa_{t}\\leftarrow \\kappa \\cdot \\frac{T - t}{T}\\)",
+          "label": "Text"
+        },
+        {
+          "id": "23",
+          "order": 24,
+          "bounding_box": {
+            "x": 0.078,
+            "y": 0.74,
+            "width": 0.39,
+            "height": 0.019
+          },
+          "content": "19: Loss: \\(\\mathcal{L}_{t}\\leftarrow \\| (\\hat{\\pmb{x}}_{0}^{t}\\odot \\mathcal{M}) - \\pmb {O}\\|_{F}^{2} + \\frac{\\kappa_{t}}{2}\\left\\| \\Omega_{t} - \\Omega_{t}^{*}\\right\\|_{2}^{2}\\)",
+          "label": "Text"
+        },
+        {
+          "id": "24",
+          "order": 25,
+          "bounding_box": {
+            "x": 0.078,
+            "y": 0.759,
+            "width": 0.215,
+            "height": 0.013
+          },
+          "content": "20: Backprop to get \\(\\nabla_{\\Omega_{t}}\\mathcal{L}_{t}\\)",
+          "label": "Text"
+        },
+        {
+          "id": "25",
+          "order": 26,
+          "bounding_box": {
+            "x": 0.078,
+            "y": 0.773,
+            "width": 0.31,
+            "height": 0.014
+          },
+          "content": "21: Update the coordinates to get \\(\\Omega_{t - 1}\\)",
+          "label": "Text"
+        },
+        {
+          "id": "26",
+          "order": 27,
+          "bounding_box": {
+            "x": 0.078,
+            "y": 0.787,
+            "width": 0.31,
+            "height": 0.015
+          },
+          "content": "22: if \\(\\mathcal{L}_{t}< \\mathcal{L}^{*}\\) then \\(\\mathcal{L}^{*}\\leftarrow \\mathcal{L}_{t}\\) , \\(\\Omega_{t - 1}^{*}\\leftarrow \\Omega_{t}\\)",
+          "label": "Text"
+        },
+        {
+          "id": "27",
+          "order": 28,
+          "bounding_box": {
+            "x": 0.078,
+            "y": 0.803,
+            "width": 0.078,
+            "height": 0.013
+          },
+          "content": "23: end for",
+          "label": "Text"
+        },
+        {
+          "id": "28",
+          "order": 29,
+          "bounding_box": {
+            "x": 0.078,
+            "y": 0.818,
+            "width": 0.122,
+            "height": 0.014
+          },
+          "content": "24: return \\(\\pmb{x}_{0}\\) , \\(\\Omega_{0}\\)",
+          "label": "Text"
+        },
+        {
+          "id": "29",
+          "order": 30,
+          "bounding_box": {
+            "x": 0.091,
+            "y": 0.862,
+            "width": 0.399,
+            "height": 0.031
+          },
+          "content": "3) Update: use a confidence-weighted centroid with weights taken directly from RSS,",
+          "label": "Text"
+        },
+        {
+          "id": "30",
+          "order": 31,
+          "bounding_box": {
+            "x": 0.204,
+            "y": 0.901,
+            "width": 0.285,
+            "height": 0.049
+          },
+          "content": "\\[\\omega_{i}^{(\\ell +1)} = \\frac{\\sum_{k\\in\\mathcal{E}_{i}^{(\\ell)}}\\tilde{O}_{k}\\tilde{\\omega}_{k,i}}{\\sum_{k\\in\\mathcal{E}_{i}^{(\\ell)}}\\tilde{O}_{k}}, \\quad (15)\\]",
+          "label": "Formula"
+        },
+        {
+          "id": "31",
+          "order": 32,
+          "bounding_box": {
+            "x": 0.545,
+            "y": 0.343,
+            "width": 0.375,
+            "height": 0.03
+          },
+          "content": "where \\(\\epsilon >0\\) is a small constant and \\(\\tilde{O}_{k}\\) is a nonnegative proxy of the sampled RSS at \\(\\mathbf{s}_{k}\\) :",
+          "label": "Text"
+        },
+        {
+          "id": "32",
+          "order": 33,
+          "bounding_box": {
+            "x": 0.614,
+            "y": 0.378,
+            "width": 0.236,
+            "height": 0.018
+          },
+          "content": "\\[\\tilde{O}_{k} = \\log (1 + \\exp (\\pmb {O}(m_{k},n_{k}))).\\]",
+          "label": "Formula"
+        },
+        {
+          "id": "33",
+          "order": 34,
+          "bounding_box": {
+            "x": 0.506,
+            "y": 0.401,
+            "width": 0.414,
+            "height": 0.111
+          },
+          "content": "We stop when \\(\\max_{i}\\| \\pmb{\\omega}_{i}^{(\\ell +1)} - \\pmb{\\omega}_{i}^{(\\ell)}\\|_{2}\\leq \\tau\\) or when \\(\\ell\\) matches the max iterations \\(L_{\\mathrm{max}}\\) . This propagation- guided K- means decreases (13) in practice and typically converges within 10 iterations by our numerical experience. Larger RSS indicates stronger links and typically shorter ranges, so weighting by \\(\\tilde{O}_{k}\\) prioritizes more informative samples while keeping the mechanics simple.",
+          "label": "Text"
+        },
+        {
+          "id": "34",
+          "order": 35,
+          "bounding_box": {
+            "x": 0.506,
+            "y": 0.512,
+            "width": 0.414,
+            "height": 0.03
+          },
+          "content": "Putting all pieces together, the complete RadioTrace procedure is summarized in Algorithm 1.",
+          "label": "Text"
+        },
+        {
+          "id": "35",
+          "order": 36,
+          "bounding_box": {
+            "x": 0.622,
+            "y": 0.556,
+            "width": 0.181,
+            "height": 0.014
+          },
+          "content": "## IV. Theoretical Analysis",
+          "label": "Text"
+        },
+        {
+          "id": "36",
+          "order": 37,
+          "bounding_box": {
+            "x": 0.506,
+            "y": 0.575,
+            "width": 0.414,
+            "height": 0.15
+          },
+          "content": "This section analyzes the stability of the Tx- coordinate refinement component in the proposed RadioTrace framework. Due to the tightly coupled in- loop inference procedure, the effective refinement objective evolves across diffusion time steps, since the RM estimate and the relaxed Tx- map representation are progressively updated during reverse generation. We therefore formulate the Tx- coordinate update as a time- varying stochastic optimization process and analyze its long- term behavior under standard regularity conditions.",
+          "label": "Text"
+        },
+        {
+          "id": "37",
+          "order": 38,
+          "bounding_box": {
+            "x": 0.506,
+            "y": 0.726,
+            "width": 0.414,
+            "height": 0.194
+          },
+          "content": "For the purpose of convergence analysis, we study the algorithm in the forward direction with time index \\(k = 0,1,2,\\ldots\\) instead of the diffusion reverse iteration, and rewrite the coordinate- refinement recursion accordingly. This re- indexing does not alter the algorithm but simplifies the subsequent analysis. At analysis step \\(k\\) , the reverse diffusion process produces a random RM reconstruction, which induces a stochastic loss function \\(L_{k}(\\Omega ;\\xi_{k})\\) , where \\(\\Omega \\in \\mathbb{R}^{2R}\\) denotes the Tx- coordinate vector and \\(\\xi_{k}\\) is a random variable, arising from the diffusion sampling and the rounding procedures. Let \\(\\mathcal{F}_{k}\\coloneqq \\mathcal{F}(\\Omega_{0},\\xi_{0},\\ldots ,\\xi_{k - 1})\\) be the natural filtration generated by the past iterates and past randomness, and define the conditional mean loss",
+          "label": "Text"
+        },
+        {
+          "id": "38",
+          "order": 39,
+          "bounding_box": {
+            "x": 0.612,
+            "y": 0.927,
+            "width": 0.2,
+            "height": 0.017
+          },
+          "content": "\\[\\bar{L}_{k}(\\Omega)\\coloneqq \\mathbb{E}[L_{k}(\\Omega ;\\xi_{k})\\mid \\mathcal{F}_{k}].\\]",
+          "label": "Formula"
+        }
+      ]
+    },
+    {
+      "page_index": 6,
+      "blocks": [
+        {
+          "id": "0",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.093,
+            "y": 0.068,
+            "width": 0.277,
+            "height": 0.015
+          },
+          "content": "The refinement update is rewritten as",
+          "label": "Text"
+        },
+        {
+          "id": "1",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.087,
+            "y": 0.09,
+            "width": 0.401,
+            "height": 0.018
+          },
+          "content": "\\[\\upsilon_{k + 1} = \\beta \\upsilon_{k} + (1 - \\beta)G_{k},\\qquad \\Omega_{k + 1} = \\Omega_{k} - \\eta_{k}\\upsilon_{k + 1}, \\quad (16)\\]",
+          "label": "Formula"
+        },
+        {
+          "id": "2",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.077,
+            "y": 0.113,
+            "width": 0.412,
+            "height": 0.046
+          },
+          "content": "where \\(G_{k}\\) denotes the implemented gradient surrogate. We next introduce the assumptions required for the subsequent analysis.",
+          "label": "Text"
+        },
+        {
+          "id": "3",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.077,
+            "y": 0.159,
+            "width": 0.412,
+            "height": 0.03
+          },
+          "content": "Assumption 1 (Smoothness): For each \\(k\\) , the function \\(\\bar{L}_{k}\\) is \\(M_{k}\\) - smooth, namely,",
+          "label": "Text"
+        },
+        {
+          "id": "4",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.088,
+            "y": 0.195,
+            "width": 0.389,
+            "height": 0.017
+          },
+          "content": "\\[\\| \\nabla \\bar{L}_{k}(\\Omega_{1}) - \\nabla \\bar{L}_{k}(\\Omega_{2})\\| \\leq M_{k}\\| \\Omega_{1} - \\Omega_{2}\\| ,\\qquad \\forall \\Omega_{1},\\Omega_{2}.\\]",
+          "label": "Formula"
+        },
+        {
+          "id": "5",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.077,
+            "y": 0.219,
+            "width": 0.412,
+            "height": 0.03
+          },
+          "content": "Assumption 2 (Bounded Drift and Perturbation): The implemented gradient admits the decomposition",
+          "label": "Text"
+        },
+        {
+          "id": "6",
+          "order": 7,
+          "bounding_box": {
+            "x": 0.13,
+            "y": 0.255,
+            "width": 0.307,
+            "height": 0.018
+          },
+          "content": "\\[G_{k} = \\nabla \\bar{L}_{k}(\\Omega_{k}) + \\zeta_{k},\\qquad m_{k}\\coloneqq \\mathbb{E}[\\zeta_{k}\\mid \\mathcal{F}_{k}].\\]",
+          "label": "Formula"
+        },
+        {
+          "id": "7",
+          "order": 8,
+          "bounding_box": {
+            "x": 0.077,
+            "y": 0.28,
+            "width": 0.412,
+            "height": 0.06
+          },
+          "content": "where \\(\\zeta_{k}\\) models the combined effect of diffusion sampling and rounding on the gradient. There exist non- negative sequences \\(\\{\\delta_{k}\\}\\) , \\(\\{\\sigma_{k}\\}\\) , and \\(\\{\\bar{d}_{k}\\}\\) , and a constant \\(\\bar{\\delta} > 0\\) such that for all \\(k\\)",
+          "label": "Text"
+        },
+        {
+          "id": "8",
+          "order": 9,
+          "bounding_box": {
+            "x": 0.115,
+            "y": 0.345,
+            "width": 0.335,
+            "height": 0.02
+          },
+          "content": "\\[\\| m_{k}\\| \\leq \\delta_{k}\\leq \\bar{\\delta},\\qquad \\mathbb{E}\\big[\\| \\zeta_{k} - m_{k}\\|^{2}\\mid \\mathcal{F}_{k}\\big]\\leq \\sigma_{k}^{2},\\]",
+          "label": "Formula"
+        },
+        {
+          "id": "9",
+          "order": 10,
+          "bounding_box": {
+            "x": 0.18,
+            "y": 0.368,
+            "width": 0.208,
+            "height": 0.018
+          },
+          "content": "\\[|\\bar{L}_{k + 1}(\\Omega) - \\bar{L}_{k}(\\Omega)|\\leq \\bar{d}_{k},\\forall \\Omega ,\\]",
+          "label": "Formula"
+        },
+        {
+          "id": "10",
+          "order": 11,
+          "bounding_box": {
+            "x": 0.077,
+            "y": 0.393,
+            "width": 0.028,
+            "height": 0.013
+          },
+          "content": "and",
+          "label": "Text"
+        },
+        {
+          "id": "11",
+          "order": 12,
+          "bounding_box": {
+            "x": 0.099,
+            "y": 0.408,
+            "width": 0.366,
+            "height": 0.042
+          },
+          "content": "\\[\\sum_{k = 0}^{\\infty}\\bar{d}_{k}< \\infty ,\\qquad \\sum_{k = 0}^{\\infty}\\eta_{k}\\delta_{k}< \\infty ,\\qquad \\sum_{k = 0}^{\\infty}\\eta_{k}\\sigma_{k}^{2}< \\infty .\\]",
+          "label": "Formula"
+        },
+        {
+          "id": "12",
+          "order": 13,
+          "bounding_box": {
+            "x": 0.077,
+            "y": 0.454,
+            "width": 0.412,
+            "height": 0.045
+          },
+          "content": "Assumption 3 (Stepsizes and momentum): The momentum parameter satisfies \\(\\beta \\in [0,1)\\) , and the stepsizes \\(\\{\\eta_{k}\\}\\) are nonincreasing such that",
+          "label": "Text"
+        },
+        {
+          "id": "13",
+          "order": 14,
+          "bounding_box": {
+            "x": 0.135,
+            "y": 0.504,
+            "width": 0.295,
+            "height": 0.039
+          },
+          "content": "\\[\\sum_{k = 0}^{\\infty}\\eta_{k} = \\infty ,\\qquad \\eta_{k}\\to 0,\\qquad \\eta_{k}M_{k}\\to 0.\\]",
+          "label": "Formula"
+        },
+        {
+          "id": "14",
+          "order": 15,
+          "bounding_box": {
+            "x": 0.077,
+            "y": 0.547,
+            "width": 0.412,
+            "height": 0.256
+          },
+          "content": "The above assumptions should be interpreted as regularity conditions for the Tx- coordinate refinement process under reverse diffusion. Assumptions 1 and 3 are standard technical conditions in stochastic approximation: the former imposes smoothness on the conditional mean refinement loss over a finite spatial search region, while the latter specifies a classical diminishing stepsize rule. The key condition is Assumption 2. It requires the accumulated objective drift, gradient perturbation, and stochastic fluctuation caused by reverse diffusion to remain finite. This condition is reasonably aligned with the practical denoising process, in which the noise scale \\(\\gamma_{t}\\) gradually decreases and the randomness of the refinement objective is expected to diminish over time. The empirical behavior of the Tx- coordinate refinement process reported in Section V- L also provides supporting evidence for this controlled- drift interpretation.",
+          "label": "Text"
+        },
+        {
+          "id": "15",
+          "order": 16,
+          "bounding_box": {
+            "x": 0.077,
+            "y": 0.805,
+            "width": 0.412,
+            "height": 0.044
+          },
+          "content": "We are now ready to state the main theorem, which summarizes the long- term behavior of the algorithm under the above conditions.",
+          "label": "Text"
+        },
+        {
+          "id": "16",
+          "order": 17,
+          "bounding_box": {
+            "x": 0.077,
+            "y": 0.85,
+            "width": 0.412,
+            "height": 0.03
+          },
+          "content": "Theorem 1: Under Assumptions 1- 3, the iterates, generated by (16), satisfy",
+          "label": "Text"
+        },
+        {
+          "id": "17",
+          "order": 18,
+          "bounding_box": {
+            "x": 0.184,
+            "y": 0.886,
+            "width": 0.197,
+            "height": 0.023
+          },
+          "content": "\\[\\lim_{k\\to \\infty}\\inf \\mathbb{E}\\big[\\| \\nabla \\bar{L}_{k}(\\Omega_{k})\\| ^{2}\\big] = 0.\\]",
+          "label": "Formula"
+        },
+        {
+          "id": "18",
+          "order": 19,
+          "bounding_box": {
+            "x": 0.077,
+            "y": 0.913,
+            "width": 0.412,
+            "height": 0.03
+          },
+          "content": "The proof is based on a Lyapunov argument. By exploiting the smoothness of \\(\\bar{L}_{k}\\) and the momentum recursion,",
+          "label": "Text"
+        },
+        {
+          "id": "19",
+          "order": 20,
+          "bounding_box": {
+            "x": 0.506,
+            "y": 0.068,
+            "width": 0.413,
+            "height": 0.06
+          },
+          "content": "a one- step descent inequality can be established for a suitable Lyapunov function, which together with bounded drift assumption gives the stated convergence result. The detailed proof is provided in Appendix A.",
+          "label": "Text"
+        },
+        {
+          "id": "20",
+          "order": 21,
+          "bounding_box": {
+            "x": 0.506,
+            "y": 0.129,
+            "width": 0.413,
+            "height": 0.075
+          },
+          "content": "Theorem 1 establishes that the expected squared gradient of the conditional mean loss asymptotically approaches zero, demonstrating the stability of Tx- coordinate refinement under time- varying objectives and stochastic perturbations.",
+          "label": "Text"
+        },
+        {
+          "id": "21",
+          "order": 22,
+          "bounding_box": {
+            "x": 0.654,
+            "y": 0.217,
+            "width": 0.117,
+            "height": 0.014
+          },
+          "content": "### V. Experiments",
+          "label": "Text"
+        },
+        {
+          "id": "22",
+          "order": 23,
+          "bounding_box": {
+            "x": 0.507,
+            "y": 0.237,
+            "width": 0.082,
+            "height": 0.013
+          },
+          "content": "### A. Dataset",
+          "label": "Text"
+        },
+        {
+          "id": "23",
+          "order": 24,
+          "bounding_box": {
+            "x": 0.506,
+            "y": 0.256,
+            "width": 0.413,
+            "height": 0.044
+          },
+          "content": "In this study, we evaluate the performance of the proposed method using the RadioMapSeer [8] and the BART- Lab dataset [21].",
+          "label": "Text"
+        },
+        {
+          "id": "24",
+          "order": 25,
+          "bounding_box": {
+            "x": 0.507,
+            "y": 0.301,
+            "width": 0.412,
+            "height": 0.326
+          },
+          "content": "The RadioMapSeer dataset contains 700 building maps, each with 80 Tx locations. These building maps cover major cities such as Ankara, Berlin, and so on. The heights of Tx, receivers, and buildings are defined as 1.5 meters (m), 1.5 m, and \\(25\\mathrm{m}\\) , respectively. The Tx power is set to \\(23\\mathrm{dBm}\\) , and the carrier frequency is \\(5.9\\mathrm{GHz}\\) . The RM are generated using Maxwell's equations and stored as \\(256\\times 256\\mathrm{m}^2\\) grids with a 1- meter resolution. Among the 700 building maps, we use 500 maps for training the pre- trained measurement- free RM generation model used in our method and the deep- learning- based RM estimation baselines, while the remaining 200 maps are reserved for evaluating all methods. Because RadioMapSeer provides only single- Tx RMs (in dBm), we synthesize multi- Tx scenes for evaluation by converting each single- Tx map to linear power, summing the maps pixel- wise across multiple distinct Tx selections from the same building, converting the composite back to dBm. To ensure a controlled comparison and isolate geometric/propagation effects, we set all Tx to the same power (23 dBm) when composing multi- Tx scenes; thus, variation arises from layout and occlusions rather than per- Tx power differences.",
+          "label": "Text"
+        },
+        {
+          "id": "25",
+          "order": 26,
+          "bounding_box": {
+            "x": 0.507,
+            "y": 0.629,
+            "width": 0.412,
+            "height": 0.211
+          },
+          "content": "The BART- Lab is a more challenging dataset than RadioMapSeer, due to its finer- grained building layouts and more intricate propagation characteristics. The dataset is generated using Altair Feko over regions in the United States, where the environmental maps are obtained from OpenStreetMap. In each scenario, buildings are modeled with a height of \\(10\\mathrm{m}\\) , and three Tx are deployed, each with antennas mounted at \\(30\\mathrm{m}\\) and an initial transmit power of \\(46.00\\mathrm{dBm}\\) . Among the five available frequency bands, we use the 1750 MHz band in our experiments for consistency. Furthermore, from each original radio map, we extract a \\(256\\times 256\\) subregion that covers all three Tx, thereby preserving the essential multi- Tx propagation characteristics.",
+          "label": "Text"
+        },
+        {
+          "id": "26",
+          "order": 27,
+          "bounding_box": {
+            "x": 0.507,
+            "y": 0.858,
+            "width": 0.071,
+            "height": 0.015
+          },
+          "content": "### B. Setup<sup>1</sup>",
+          "label": "Text"
+        },
+        {
+          "id": "27",
+          "order": 28,
+          "bounding_box": {
+            "x": 0.506,
+            "y": 0.877,
+            "width": 0.413,
+            "height": 0.03
+          },
+          "content": "1) Sampling modes: To evaluate the performance of RadioTrace under different measurement conditions, we",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "page_index": 7,
+      "blocks": [
+        {
+          "id": "0",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.086,
+            "y": 0.068,
+            "width": 0.394,
+            "height": 0.16
+          },
+          "content": "",
+          "label": "Image"
+        },
+        {
+          "id": "1",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.076,
+            "y": 0.237,
+            "width": 0.413,
+            "height": 0.031
+          },
+          "content": "<center>Fig. 5: The sampled RSS from different sampling mode with sampling rate of \\(20\\%\\) . </center>",
+          "label": "Text"
+        },
+        {
+          "id": "2",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.077,
+            "y": 0.297,
+            "width": 0.411,
+            "height": 0.03
+          },
+          "content": "consider two sampling modes for collecting RSS measurements in outdoor environments:",
+          "label": "Text"
+        },
+        {
+          "id": "3",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.094,
+            "y": 0.332,
+            "width": 0.396,
+            "height": 0.151
+          },
+          "content": "Random sampling: RSS measurements are uniformly and randomly collected from the entire area without any spatial constraints. Restricted- area sampling: It defines some restricted areas, within which no RSS measurements can be collected. Outside the restricted regions, RSS measurements are uniformly and randomly sampled across the accessible area. Restricted- area sampling is much more challenging than random sampling case, especially when there exists Tx inside the restricted areas.",
+          "label": "Text"
+        },
+        {
+          "id": "4",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.078,
+            "y": 0.486,
+            "width": 0.412,
+            "height": 0.256
+          },
+          "content": "2) Implementation Details: For the diffusion-based measurement-free RM generation model used in RadioTrace, we adopt the pre-trained model provided by RadioDiff [9], without any additional fine-tuning or retraining. The RadioDiff backbone comprises a U-Net core [22] with approximately 137M parameters and a Swin-Transformer-based conditional embedding network [23] with about 87M parameters. The reverse denoising process is performed with \\(T = 100\\) steps. For the Tx map generation, we set the standard deviation of the Gaussian kernel to \\(\\sigma = 10\\) . The Tx coordinates are optimized using momentum-based GD, with a learning rate of \\(\\eta = 300\\) and a momentum coefficient of \\(\\beta = 0.4\\) . The upper bound of the linear scheduler of incumbent best anchor \\(\\kappa = 0.8\\) . The max iterations of PG-KMeans \\(L_{\\mathrm{max}} = 10\\) . The Tx coordinate set before PG-KMeans is initialized by selecting the \\(R\\) locations with the highest RSS values.",
+          "label": "Text"
+        },
+        {
+          "id": "5",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.078,
+            "y": 0.744,
+            "width": 0.412,
+            "height": 0.044
+          },
+          "content": "3) Baselines: To better contextualize the reported gains, we briefly introduce the main baselines used in our experiments.",
+          "label": "Text"
+        },
+        {
+          "id": "6",
+          "order": 7,
+          "bounding_box": {
+            "x": 0.095,
+            "y": 0.792,
+            "width": 0.395,
+            "height": 0.152
+          },
+          "content": "- Kriging [11] formulates RM estimation as spatial interpolation from sparse RSS samples via a hand-crafted covariance model. It does not use Tx locations or learned generative priors. \n- RME-GAN [13] is a supervised, data-driven model trained offline to learn a feed-forward mapping from sparse measurements to full radio maps. It relies on large-scale training data and assumes Tx locations are available as part of the conditioning setup in our comparison. By default, RME-GAN is trained under",
+          "label": "Text"
+        },
+        {
+          "id": "7",
+          "order": 8,
+          "bounding_box": {
+            "x": 0.54,
+            "y": 0.068,
+            "width": 0.379,
+            "height": 0.075
+          },
+          "content": "the random sampling setting. In addition, we consider a stronger variant trained under both random and restricted-area sampling settings, denoted as RMEGAN, to evaluate the effect of sampling-pattern-specific supervision.",
+          "label": "Text"
+        },
+        {
+          "id": "8",
+          "order": 9,
+          "bounding_box": {
+            "x": 0.525,
+            "y": 0.144,
+            "width": 0.394,
+            "height": 0.076
+          },
+          "content": "- LaPnP [17] treats RM estimation as an inverse problem by alternating between enforcing measurement consistency and applying a pre-trained latent-domain prior. Tx locations are not utilized during inference, and the prior only serves as a regularizer for map completion.",
+          "label": "Text"
+        },
+        {
+          "id": "9",
+          "order": 10,
+          "bounding_box": {
+            "x": 0.525,
+            "y": 0.231,
+            "width": 0.394,
+            "height": 0.109
+          },
+          "content": "- RadioDiff-Inverse [18] treats RM construction as a diffusion-enhanced Bayesian inverse problem from noisy sparse measurements. Tx locations are not explicitly utilized during inference, and the learned diffusion prior mainly serves as a distributional regularizer rather than a Tx-geometry-aware reconstruction guide.",
+          "label": "Text"
+        },
+        {
+          "id": "10",
+          "order": 11,
+          "bounding_box": {
+            "x": 0.508,
+            "y": 0.361,
+            "width": 0.079,
+            "height": 0.014
+          },
+          "content": "### C. Metrics",
+          "label": "Text"
+        },
+        {
+          "id": "11",
+          "order": 12,
+          "bounding_box": {
+            "x": 0.508,
+            "y": 0.381,
+            "width": 0.411,
+            "height": 0.106
+          },
+          "content": "We evaluate reconstruction quality with four metrics: normalized mean- square error (NMSE), root- mean- square error (RMSE), structural similarity (SSIM), and peak signal- to- noise ratio (PSNR). For each test scene, we first linearly rescale the ground- truth \\(\\mathbf{x}\\) and predicted dB radio maps \\(\\hat{\\mathbf{x}}\\) to \\([0,1]\\) , then compute all metrics on the rescaled maps.",
+          "label": "Text"
+        },
+        {
+          "id": "12",
+          "order": 13,
+          "bounding_box": {
+            "x": 0.508,
+            "y": 0.488,
+            "width": 0.411,
+            "height": 0.045
+          },
+          "content": "NMSE measures the squared error relative to the energy of the ground- truth map, providing a scale- invariant notion of distortion across scenes",
+          "label": "Text"
+        },
+        {
+          "id": "13",
+          "order": 14,
+          "bounding_box": {
+            "x": 0.633,
+            "y": 0.536,
+            "width": 0.285,
+            "height": 0.034
+          },
+          "content": "\\[\\mathrm{NMSE} = \\frac{\\|\\hat{\\mathbf{x}} - \\mathbf{x}\\|_{2}^{2}}{\\|\\mathbf{x}\\|_{2}^{2}}. \\quad (17)\\]",
+          "label": "Formula"
+        },
+        {
+          "id": "14",
+          "order": 15,
+          "bounding_box": {
+            "x": 0.508,
+            "y": 0.576,
+            "width": 0.411,
+            "height": 0.045
+          },
+          "content": "RMSE is the average per- pixel deviation in the same \\([0,1]\\) units as the rescaled maps and is easy to interpret as an absolute error level",
+          "label": "Text"
+        },
+        {
+          "id": "15",
+          "order": 16,
+          "bounding_box": {
+            "x": 0.6,
+            "y": 0.623,
+            "width": 0.318,
+            "height": 0.051
+          },
+          "content": "\\[\\mathrm{RMSE} = \\sqrt{\\frac{1}{N}\\sum_{i = 1}^{N}\\left(\\hat{x}_{i} - x_{i}\\right)^{2}}. \\quad (18)\\]",
+          "label": "Formula"
+        },
+        {
+          "id": "16",
+          "order": 17,
+          "bounding_box": {
+            "x": 0.508,
+            "y": 0.68,
+            "width": 0.411,
+            "height": 0.046
+          },
+          "content": "SSIM focuses on structural fidelity by comparing local luminance, contrast, and structure; values typically lie in \\([0,1]\\) with higher being better",
+          "label": "Text"
+        },
+        {
+          "id": "17",
+          "order": 18,
+          "bounding_box": {
+            "x": 0.536,
+            "y": 0.73,
+            "width": 0.382,
+            "height": 0.041
+          },
+          "content": "\\[\\mathrm{SSIM}(\\mathbf{x},\\hat{\\mathbf{x}}) = \\frac{\\left(2\\mu_{\\mathbf{x}}\\mu_{\\hat{\\mathbf{x}}} + c_{1}\\right)\\left(2\\sigma_{\\mathbf{x}\\hat{\\mathbf{x}}} + c_{2}\\right)}{\\left(\\mu_{\\mathbf{x}}^{2} + \\mu_{\\hat{\\mathbf{x}}}^{2} + c_{1}\\right)\\left(\\sigma_{\\mathbf{x}}^{2} + \\sigma_{\\hat{\\mathbf{x}}}^{2} + c_{2}\\right)}. \\quad (19)\\]",
+          "label": "Formula"
+        },
+        {
+          "id": "18",
+          "order": 19,
+          "bounding_box": {
+            "x": 0.508,
+            "y": 0.776,
+            "width": 0.411,
+            "height": 0.045
+          },
+          "content": "Here \\(\\mu_{\\mathbf{x}}\\) and \\(\\mu_{\\hat{\\mathbf{x}}}\\) are local means, \\(\\sigma_{\\mathbf{x}\\hat{\\mathbf{x}}}^{2}\\) and \\(\\sigma_{\\hat{\\mathbf{x}}}^{2}\\) are local variances, \\(\\sigma_{\\mathbf{x}\\hat{\\mathbf{x}}}\\) is the local covariance, and \\(c_{1},c_{2}\\) are stabilization constants.",
+          "label": "Text"
+        },
+        {
+          "id": "19",
+          "order": 20,
+          "bounding_box": {
+            "x": 0.508,
+            "y": 0.822,
+            "width": 0.411,
+            "height": 0.045
+          },
+          "content": "PSNR expresses fidelity in decibels as a monotonic transform of MSE; with maps rescaled to \\([0,1]\\) , larger PSNR directly corresponds to smaller MSE",
+          "label": "Text"
+        },
+        {
+          "id": "20",
+          "order": 21,
+          "bounding_box": {
+            "x": 0.61,
+            "y": 0.87,
+            "width": 0.308,
+            "height": 0.038
+          },
+          "content": "\\[\\mathrm{PSNR} = 10\\log_{10}\\left(\\frac{1}{\\mathrm{MSE}}\\right). \\quad (20)\\]",
+          "label": "Formula"
+        },
+        {
+          "id": "21",
+          "order": 22,
+          "bounding_box": {
+            "x": 0.508,
+            "y": 0.913,
+            "width": 0.411,
+            "height": 0.03
+          },
+          "content": "The metrics are computed over all pixels per scene and then averaged over the test set.",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "page_index": 8,
+      "blocks": [
+        {
+          "id": "0",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.078,
+            "y": 0.066,
+            "width": 0.838,
+            "height": 0.324
+          },
+          "content": "",
+          "label": "Image"
+        },
+        {
+          "id": "1",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.077,
+            "y": 0.398,
+            "width": 0.843,
+            "height": 0.046
+          },
+          "content": "<center>Fig. 6: Comparison of RM Estimation on RadioMapSeer dataset under random sampling (row 1, 2) and restricted-area sampling (row 3, 4) with low sampling ratios (1% and 5%). The red regions correspond to restricted areas where no measurements are available. </center>",
+          "label": "Text"
+        },
+        {
+          "id": "2",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.079,
+            "y": 0.472,
+            "width": 0.276,
+            "height": 0.015
+          },
+          "content": "### D. Results of comparable experiments",
+          "label": "Text"
+        },
+        {
+          "id": "3",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.078,
+            "y": 0.491,
+            "width": 0.411,
+            "height": 0.09
+          },
+          "content": "1) Results on RadioMapSeer dataset: We first evaluate the performance of different methods on RadioMapSeer dataset under the random sampling pattern introduced in Section V-B1. We compare our proposed RadioTrace with several representative RM estimation baselines mentioned in Section V-B3.",
+          "label": "Text"
+        },
+        {
+          "id": "4",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.078,
+            "y": 0.582,
+            "width": 0.411,
+            "height": 0.105
+          },
+          "content": "In this experiment, the RSS measurements are uniformly and randomly collected from the entire area without any spatial constraints. We evaluate all methods under different sampling ratios, which denote the proportion of observed locations. Specifically, we consider four sampling ratios: \\(1\\%\\) , \\(5\\%\\) , \\(10\\%\\) , and \\(20\\%\\) , to simulate various levels of observation sparsity.",
+          "label": "Text"
+        },
+        {
+          "id": "5",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.079,
+            "y": 0.688,
+            "width": 0.41,
+            "height": 0.225
+          },
+          "content": "The quantitative comparison under random sampling is summarized in Table II. RadioTrace clearly surpasses the non- learning baselines (Kriging and LaPnP) at all sampling rates, delivering higher perceptual fidelity and lower distortion. The results of RadioDiff-Inverse indicate that posterior reconstruction with an unconditional diffusion prior may have difficulty capturing Tx- dependent propagation structures under sparse RSS observations. Compared with RME- GAN, RadioTrace attains the best RMSE, SSIM, and PSNR across all rates while remaining second- best in NMSE. For example, at \\(1\\%\\) sampling RadioTrace improves PSNR from \\(30.98\\mathrm{dB}\\) to \\(32.92\\mathrm{dB}\\) and raises SSIM from \\(0.9457\\) to \\(0.9590\\) ; at \\(20\\%\\) it further widens the PSNR gap \\((32.79\\mathrm{dB}\\) vs. \\(33.71\\mathrm{dB}\\) ) with higher SSIM (0.9613 vs. 0.9645).",
+          "label": "Text"
+        },
+        {
+          "id": "6",
+          "order": 7,
+          "bounding_box": {
+            "x": 0.078,
+            "y": 0.914,
+            "width": 0.411,
+            "height": 0.029
+          },
+          "content": "The reconstructed RMs under random sampling with low sampling ratios (1% and 5%) are visualized in Row",
+          "label": "Text"
+        },
+        {
+          "id": "7",
+          "order": 8,
+          "bounding_box": {
+            "x": 0.508,
+            "y": 0.471,
+            "width": 0.411,
+            "height": 0.211
+          },
+          "content": "1 and Row 2 of Fig. 6. As shown, RadioTrace produces reconstructions that are visually closer to the ground truth, with clearer signal propagation boundaries and fewer artifacts compared to Kriging and LaPnP. Although RME- GAN also yields good results under random sampling due to supervised training, its performance is slightly inferior in terms of structure preservation. RadioDiff- Inverse fails to recover a meaningful RM at the \\(1\\%\\) sampling rate. At \\(5\\%\\) , the relatively large spacing between sparse observations limits its ability to resolve localized propagation variations, leading to inaccurate reconstruction near building boundaries. Overall, RadioTrace better preserves both the global propagation pattern and local structural details.",
+          "label": "Text"
+        },
+        {
+          "id": "8",
+          "order": 9,
+          "bounding_box": {
+            "x": 0.508,
+            "y": 0.685,
+            "width": 0.411,
+            "height": 0.15
+          },
+          "content": "We further evaluate the performance of different methods under the restricted- area sampling mode introduced in Section V- B1, where RSS measurements are unavailable in specific regions due to environmental constraints. In this experiment, we define two circular restricted areas, each with a radius of 50 meters, within which no measurements can be collected. The remaining accessible region is used for RSS sampling, where measurements are uniformly and randomly drawn. We consider four sampling ratios: \\(1\\%\\) , \\(5\\%\\) , \\(10\\%\\) , and \\(20\\%\\) .",
+          "label": "Text"
+        },
+        {
+          "id": "9",
+          "order": 10,
+          "bounding_box": {
+            "x": 0.508,
+            "y": 0.837,
+            "width": 0.411,
+            "height": 0.106
+          },
+          "content": "The quantitative results are reported in Table III. Compared with Kriging, LaPnP, RME- GAN, and RadioDiff- Inverse, RadioTrace consistently achieves lower RMSE and higher SSIM/PSNR across all sampling ratios. At the \\(1\\%\\) sampling ratio, RadioTrace reduces RMSE from 0.0958 to 0.0296 compared with the default RME- GAN and improves PSNR from 20.37 dB to 31.95 dB. This",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "page_index": 9,
+      "blocks": [
+        {
+          "id": "0",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.079,
+            "y": 0.068,
+            "width": 0.837,
+            "height": 0.17
+          },
+          "content": "",
+          "label": "Image"
+        },
+        {
+          "id": "1",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.078,
+            "y": 0.244,
+            "width": 0.842,
+            "height": 0.031
+          },
+          "content": "<center>Fig. 7: Comparison of RM Estimation on different methods under restricted-area sampling with low sampling ratios (1% and 5%). The red regions correspond to restricted areas where no measurements are available. </center>",
+          "label": "Text"
+        },
+        {
+          "id": "2",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.08,
+            "y": 0.32,
+            "width": 0.408,
+            "height": 0.155
+          },
+          "content": "<table><tr><td>Sampling rate</td><td>Metrics</td><td>Kriging</td><td>RME-GAN</td><td>LaPnP</td><td>RadioDiff-Inverse</td><td>RadioTrace</td></tr><tr><td rowspan=\"5\">1%</td><td>NMSE</td><td>0.0274</td><td>0.0062</td><td>0.0192</td><td>0.5835</td><td>0.0093</td></tr><tr><td>RMSE</td><td>0.0524</td><td>0.0282</td><td>0.0433</td><td>0.2478</td><td>0.0244</td></tr><tr><td>SSIM ↑</td><td>0.8726</td><td>0.9457</td><td>0.9056</td><td>0.3322</td><td>0.9590</td></tr><tr><td>PSNR ↑</td><td>25.81</td><td>30.98</td><td>27.48</td><td>12.29</td><td>32.92</td></tr><tr><td>NMSE</td><td>0.0233</td><td>0.0046</td><td>0.0138</td><td>0.0841</td><td>0.0070</td></tr><tr><td rowspan=\"3\">5%</td><td>RMSE</td><td>0.0481</td><td>0.0243</td><td>0.0364</td><td>0.0911</td><td>0.0229</td></tr><tr><td>SSIM ↑</td><td>0.8929</td><td>0.9573</td><td>0.9358</td><td>0.7588</td><td>0.9616</td></tr><tr><td>PSNR ↑</td><td>26.58</td><td>32.28</td><td>29.03</td><td>21.09</td><td>33.26</td></tr><tr><td rowspan=\"4\">10%</td><td>NMSE</td><td>0.0226</td><td>0.0043</td><td>0.0130</td><td>0.0586</td><td>0.0065</td></tr><tr><td>RMSE</td><td>0.0473</td><td>0.0235</td><td>0.0353</td><td>0.0597</td><td>0.0224</td></tr><tr><td>SSIM ↑</td><td>0.8996</td><td>0.9600</td><td>0.9423</td><td>0.8724</td><td>0.9630</td></tr><tr><td>PSNR ↑</td><td>26.73</td><td>32.56</td><td>29.31</td><td>24.88</td><td>33.44</td></tr><tr><td rowspan=\"4\">20%</td><td>NMSE</td><td>0.0221</td><td>0.0041</td><td>0.0123</td><td>0.0188</td><td>0.0054</td></tr><tr><td>RMSE</td><td>0.0469</td><td>0.0229</td><td>0.0344</td><td>0.0435</td><td>0.0215</td></tr><tr><td>SSIM ↑</td><td>0.9048</td><td>0.9613</td><td>0.9471</td><td>0.9257</td><td>0.9645</td></tr><tr><td>PSNR ↑</td><td>26.81</td><td>32.79</td><td>29.53</td><td>27.46</td><td>33.71</td></tr></table>",
+          "label": "Table"
+        },
+        {
+          "id": "3",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.079,
+            "y": 0.297,
+            "width": 0.411,
+            "height": 0.015
+          },
+          "content": "TABLE II: Results of random sampling on RadioMapSeer",
+          "label": "Text"
+        },
+        {
+          "id": "4",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.08,
+            "y": 0.52,
+            "width": 0.408,
+            "height": 0.14
+          },
+          "content": "<table><tr><td>Sampling rate</td><td>Metrics</td><td>Kriging</td><td>RME-GAN</td><td>RME-GAN†</td><td>LaPnP</td><td>RadioDiff-Inverse</td><td>RadioTrace</td></tr><tr><td rowspan=\"5\">1%</td><td>NMSE</td><td>0.0392</td><td>0.0715</td><td>0.0096</td><td>0.0336</td><td>0.7108</td><td>0.0174</td></tr><tr><td>RMSE</td><td>0.0622</td><td>0.0958</td><td>0.0335</td><td>0.0576</td><td>0.2808</td><td>0.0296</td></tr><tr><td>SSIM ↑</td><td>0.8643</td><td>0.8829</td><td>0.9301</td><td>0.8860</td><td>0.2790</td><td>0.9518</td></tr><tr><td>PSNR ↑</td><td>24.32</td><td>20.37</td><td>29.55</td><td>24.99</td><td>11.15</td><td>31.95</td></tr><tr><td>NMSE</td><td>0.0331</td><td>0.0521</td><td>0.0078</td><td>0.0267</td><td>0.2697</td><td>0.0141</td></tr><tr><td rowspan=\"3\">5%</td><td>RMSE</td><td>0.0573</td><td>0.0818</td><td>0.0302</td><td>0.0513</td><td>0.1689</td><td>0.0266</td></tr><tr><td>SSIM ↑</td><td>0.8818</td><td>0.9069</td><td>0.9421</td><td>0.9139</td><td>0.6490</td><td>0.9566</td></tr><tr><td>PSNR ↑</td><td>25.05</td><td>21.74</td><td>30.43</td><td>25.99</td><td>15.71</td><td>32.57</td></tr><tr><td rowspan=\"4\">10%</td><td>NMSE</td><td>0.0320</td><td>0.0489</td><td>0.0075</td><td>0.0255</td><td>0.1944</td><td>0.0115</td></tr><tr><td>RMSE</td><td>0.0563</td><td>0.0792</td><td>0.0297</td><td>0.0502</td><td>0.1415</td><td>0.0255</td></tr><tr><td>SSIM ↑</td><td>0.8878</td><td>0.9114</td><td>0.9451</td><td>0.9218</td><td>0.7609</td><td>0.9586</td></tr><tr><td>PSNR ↑</td><td>25.19</td><td>22.02</td><td>30.57</td><td>26.19</td><td>17.41</td><td>32.81</td></tr><tr><td rowspan=\"4\">20%</td><td>NMSE</td><td>0.0314</td><td>0.0471</td><td>0.0074</td><td>0.0249</td><td>0.1622</td><td>0.0108</td></tr><tr><td>RMSE</td><td>0.0558</td><td>0.0778</td><td>0.0296</td><td>0.0496</td><td>0.1280</td><td>0.0245</td></tr><tr><td>SSIM ↑</td><td>0.8922</td><td>0.9136</td><td>0.9460</td><td>0.9244</td><td>0.8176</td><td>0.9605</td></tr><tr><td>PSNR ↑</td><td>25.29</td><td>22.18</td><td>30.61</td><td>26.30</td><td>18.41</td><td>33.69</td></tr></table>",
+          "label": "Table"
+        },
+        {
+          "id": "5",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.078,
+            "y": 0.485,
+            "width": 0.41,
+            "height": 0.03
+          },
+          "content": "TABLE III: Results of restricted-area sampling on RadioMapSeer",
+          "label": "Text"
+        },
+        {
+          "id": "6",
+          "order": 7,
+          "bounding_box": {
+            "x": 0.079,
+            "y": 0.688,
+            "width": 0.409,
+            "height": 0.12
+          },
+          "content": "large gap suggests that a supervised model trained only under random sampling can suffer from a clear sampling- pattern mismatch when directly applied to restricted- area measurements. We also include RME- GAN†. As expected, this stronger supervised baseline substantially improves over the default RME- GAN and achieves the lowest NMSE in Table III. Nevertheless, RadioTrace still obtains lower RMSE and higher SSIM/PSNR at all sampling ratios.",
+          "label": "Text"
+        },
+        {
+          "id": "7",
+          "order": 8,
+          "bounding_box": {
+            "x": 0.079,
+            "y": 0.809,
+            "width": 0.409,
+            "height": 0.104
+          },
+          "content": "The visual results in the last two rows of Fig. 6 further show that RME- GAN† can recover the intensity values within the restricted regions, but its reconstructed maps may still blur or distort the underlying propagation structures. In contrast, RadioTrace produces more geometry- consistent reconstructions around buildings and unobserved regions.",
+          "label": "Text"
+        },
+        {
+          "id": "8",
+          "order": 9,
+          "bounding_box": {
+            "x": 0.078,
+            "y": 0.913,
+            "width": 0.41,
+            "height": 0.029
+          },
+          "content": "2) Results on BART-Lab dataset: To further assess the methods under more challenging conditions, we evaluate",
+          "label": "Text"
+        },
+        {
+          "id": "9",
+          "order": 10,
+          "bounding_box": {
+            "x": 0.506,
+            "y": 0.338,
+            "width": 0.411,
+            "height": 0.132
+          },
+          "content": "<table><tr><td>Sampling rate</td><td>Metrics</td><td>Kriging</td><td>RME-GAN</td><td>RME-GAN†</td><td>LaPnP</td><td>RadioDiff-Inverse</td><td>RadioTrace</td></tr><tr><td rowspan=\"5\">1%</td><td>NMSE</td><td>0.0312</td><td>0.0391</td><td>0.0092</td><td>0.0022</td><td>0.0352</td><td>0.0175</td></tr><tr><td>RMSE</td><td>0.0634</td><td>0.0798</td><td>0.0469</td><td>0.0624</td><td>0.4496</td><td>0.0504</td></tr><tr><td>SSIM ↑</td><td>0.9089</td><td>0.9145</td><td>0.9210</td><td>0.8969</td><td>0.2133</td><td>0.9223</td></tr><tr><td>PSNR ↑</td><td>24.60</td><td>21.99</td><td>25.59</td><td>24.20</td><td>6.94</td><td>26.16</td></tr><tr><td>NMSE</td><td>0.0232</td><td>0.0281</td><td>0.0081</td><td>0.0217</td><td>0.2879</td><td>0.0136</td></tr><tr><td rowspan=\"3\">5%</td><td>RMSE</td><td>0.0540</td><td>0.0703</td><td>0.0393</td><td>0.0508</td><td>0.1930</td><td>0.0418</td></tr><tr><td>SSIM ↑</td><td>0.9213</td><td>0.9189</td><td>0.9264</td><td>0.9219</td><td>0.6225</td><td>0.9308</td></tr><tr><td>PSNR ↑</td><td>25.31</td><td>23.09</td><td>26.11</td><td>26.03</td><td>14.29</td><td>27.31</td></tr><tr><td rowspan=\"4\">10%</td><td>NMSE</td><td>0.0187</td><td>0.0204</td><td>0.0077</td><td>0.0155</td><td>0.2389</td><td>0.0126</td></tr><tr><td>RMSE</td><td>0.0509</td><td>0.0687</td><td>0.0376</td><td>0.0480</td><td>0.1603</td><td>0.0398</td></tr><tr><td>SSIM ↑</td><td>0.9277</td><td>0.9221</td><td>0.9310</td><td>0.9325</td><td>0.7428</td><td>0.9345</td></tr><tr><td>PSNR ↑</td><td>25.96</td><td>23.30</td><td>26.51</td><td>26.56</td><td>16.04</td><td>27.63</td></tr><tr><td rowspan=\"4\">20%</td><td>NMSE</td><td>0.0150</td><td>0.0182</td><td>0.0076</td><td>0.0141</td><td>0.2090</td><td>0.0114</td></tr><tr><td>RMSE</td><td>0.0473</td><td>0.0684</td><td>0.0373</td><td>0.0459</td><td>0.1479</td><td>0.0384</td></tr><tr><td>SSIM ↑</td><td>0.9348</td><td>0.9257</td><td>0.9311</td><td>0.9379</td><td>0.7971</td><td>0.9368</td></tr><tr><td>PSNR ↑</td><td>26.58</td><td>23.33</td><td>26.77</td><td>26.96</td><td>17.44</td><td>27.97</td></tr></table>",
+          "label": "Table"
+        },
+        {
+          "id": "10",
+          "order": 11,
+          "bounding_box": {
+            "x": 0.506,
+            "y": 0.297,
+            "width": 0.411,
+            "height": 0.028
+          },
+          "content": "TABLE IV: Results of restricted-area sampling on BARTLab",
+          "label": "Text"
+        },
+        {
+          "id": "11",
+          "order": 12,
+          "bounding_box": {
+            "x": 0.506,
+            "y": 0.51,
+            "width": 0.411,
+            "height": 0.081
+          },
+          "content": "<table><tr><td colspan=\"2\">Components</td><td colspan=\"2\">Metrics</td></tr><tr><td>PG</td><td>Momentum</td><td>Best</td><td></td></tr><tr><td>K-means</td><td>GD</td><td>anchor</td><td>NMSE</td><td>RMSE</td><td>SSIM ↑</td><td>PSNR ↑</td></tr><tr><td>✓</td><td></td><td></td><td>0.0316</td><td>0.0394</td><td>0.9367</td><td>30.00</td></tr><tr><td>✓</td><td>✓</td><td></td><td>0.0205</td><td>0.0330</td><td>0.9472</td><td>31.07</td></tr><tr><td>✓</td><td>✓</td><td>✓</td><td>0.0264</td><td>0.0402</td><td>0.9419</td><td>29.97</td></tr><tr><td>✓</td><td>✓</td><td>✓</td><td>0.0174</td><td>0.0296</td><td>0.9518</td><td>31.95</td></tr></table>",
+          "label": "Table"
+        },
+        {
+          "id": "12",
+          "order": 13,
+          "bounding_box": {
+            "x": 0.506,
+            "y": 0.489,
+            "width": 0.411,
+            "height": 0.016
+          },
+          "content": "TABLE V: Ablation under restricted-area sampling at \\(1\\%\\)",
+          "label": "Text"
+        },
+        {
+          "id": "13",
+          "order": 14,
+          "bounding_box": {
+            "x": 0.507,
+            "y": 0.618,
+            "width": 0.41,
+            "height": 0.226
+          },
+          "content": "them on the BART- Lab dataset using the same restricted- area sampling setting. Compared with RadioMapSeer, BART- Lab contains finer building layouts and more complex multi- Tx propagation patterns. As reported in Table IV, RadioTrace achieves the highest PSNR across all sampling ratios and lower RMSE than the non- retrained baselines. The visual results in Fig. 7 show a similar trend. Kriging and LaPnP recover the coarse field but tend to oversmooth the unobserved regions, while RME- GAN introduces visible artifacts under the sampling- pattern shift. RadioDiff- Inverse shows evident degradation at low sampling ratios. RME- GAN† remains competitive, but its results are still relatively blurry within restricted regions. In comparison, RadioTrace produces clearer large- scale propagation structures.",
+          "label": "Text"
+        },
+        {
+          "id": "14",
+          "order": 15,
+          "bounding_box": {
+            "x": 0.507,
+            "y": 0.864,
+            "width": 0.145,
+            "height": 0.014
+          },
+          "content": "### E. Ablation Studies",
+          "label": "Text"
+        },
+        {
+          "id": "15",
+          "order": 16,
+          "bounding_box": {
+            "x": 0.506,
+            "y": 0.884,
+            "width": 0.411,
+            "height": 0.058
+          },
+          "content": "Next, we conduct ablation studies for RadioTrace. Unless otherwise specified, all subsequent experiments are conducted under the restricted- area sampling setting. As summarized in Table V, PG K- means alone provides",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "page_index": 10,
+      "blocks": [
+        {
+          "id": "0",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.08,
+            "y": 0.07,
+            "width": 0.4,
+            "height": 0.25
+          },
+          "content": "",
+          "label": "Image"
+        },
+        {
+          "id": "1",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.077,
+            "y": 0.327,
+            "width": 0.413,
+            "height": 0.091
+          },
+          "content": "<center>Fig. 8: Ablation under restricted-area sampling: metric-rate curves (NMSE, RMSE, SSIM, PSNR) versus sampling rate (1%, 5%, 10%, 20%) for four component configurations—PG K-means; PG K-means + Momentum GD; Momentum GD + Best anchor; and PG K-means + Momentum GD + Best anchor (Full RadioTrace). </center>",
+          "label": "Text"
+        },
+        {
+          "id": "2",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.079,
+            "y": 0.448,
+            "width": 0.411,
+            "height": 0.207
+          },
+          "content": "a geometry- consistent starting point but plateaus under extreme sparsity; adding Momentum GD tightens errors (about 16% RMSE reduction), indicating more effective assimilation of biased, sparse observations. Using Momentum GD with the best anchor without PG K- means remains limited in this regime, showing that late- stage stabilization cannot compensate for poor basin selection. The full configuration achieves the strongest performance, with RMSE about 25% lower than PG K- means and 10% below PG K- means + Momentum GD, demonstrating that the anchor adds value once the iterate is already close to a plausible geometry. The metric curves in Fig. 8 further show that the gain of the full model is consistent from 1% to 20% sampling.",
+          "label": "Text"
+        },
+        {
+          "id": "3",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.079,
+            "y": 0.682,
+            "width": 0.218,
+            "height": 0.014
+          },
+          "content": "### F. Hyperparameter sensitivity",
+          "label": "Text"
+        },
+        {
+          "id": "4",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.078,
+            "y": 0.702,
+            "width": 0.411,
+            "height": 0.045
+          },
+          "content": "All experiments in this subsection are conducted with a 1% sampling rate. We report PSNR trends using the two plots in Fig. 9.",
+          "label": "Text"
+        },
+        {
+          "id": "5",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.079,
+            "y": 0.749,
+            "width": 0.411,
+            "height": 0.194
+          },
+          "content": "1) Variance \\(\\sigma^2\\) of the Gaussian Tx map: Fig. 9(a) shows PSNR versus \\(\\sigma^2\\) on a logarithmic x-axis. PSNR rises from \\(\\sigma^2 = 0.1\\) to 10 and then saturates near \\(\\sigma^2 = 100\\) . A small \\(\\sigma^2\\) produces an overly sharp Tx prior that behaves like a near-delta seed. Under sparse and spatially biased observations, such a sharp seed is sensitive to small localization errors and to missing measurements near the true source, which leads to larger reconstruction error. Increasing \\(\\sigma^2\\) widens the prior and spreads energy over a neighborhood, which reduces sensitivity to missing samples and helps the optimizer enter a geometry-consistent basin. The gains diminish once the initialization is already inside a good basin, so further widening yields only small benefits. This",
+          "label": "Text"
+        },
+        {
+          "id": "6",
+          "order": 7,
+          "bounding_box": {
+            "x": 0.512,
+            "y": 0.081,
+            "width": 0.388,
+            "height": 0.124
+          },
+          "content": "",
+          "label": "Image"
+        },
+        {
+          "id": "7",
+          "order": 8,
+          "bounding_box": {
+            "x": 0.506,
+            "y": 0.212,
+            "width": 0.413,
+            "height": 0.031
+          },
+          "content": "<center>Fig. 9: PSNR sensitivity at 1% sampling under restricted-area sampling. </center>",
+          "label": "Text"
+        },
+        {
+          "id": "8",
+          "order": 9,
+          "bounding_box": {
+            "x": 0.512,
+            "y": 0.29,
+            "width": 0.4,
+            "height": 0.096
+          },
+          "content": "<table><tr><td>Std. (σn)</td><td>Rate</td><td>NMSE</td><td>RMSE</td><td>SSIM ↑</td><td>PSNR ↑</td></tr><tr><td rowspan=\"2\">0 (no noise)</td><td>1%</td><td>0.0174</td><td>0.0296</td><td>0.9518</td><td>31.95</td></tr><tr><td>0.01</td><td>0.0178</td><td>0.0298</td><td>0.9512</td><td>31.86</td></tr><tr><td rowspan=\"2\">0.10</td><td>1%</td><td>0.0221</td><td>0.0344</td><td>0.9455</td><td>30.79</td></tr><tr><td>0 (no noise)</td><td>5%</td><td>0.0141</td><td>0.0266</td><td>0.9566</td><td>32.57</td></tr><tr><td rowspan=\"2\">0.01</td><td>5%</td><td>0.0138</td><td>0.0265</td><td>0.9567</td><td>32.61</td></tr><tr><td>0.10</td><td>5%</td><td>0.0131</td><td>0.0280</td><td>0.9547</td><td>32.14</td></tr></table>",
+          "label": "Table"
+        },
+        {
+          "id": "9",
+          "order": 10,
+          "bounding_box": {
+            "x": 0.506,
+            "y": 0.255,
+            "width": 0.414,
+            "height": 0.03
+          },
+          "content": "TABLE VI: Results under noisy observations in the restricted-area setting.",
+          "label": "Text"
+        },
+        {
+          "id": "10",
+          "order": 11,
+          "bounding_box": {
+            "x": 0.506,
+            "y": 0.409,
+            "width": 0.413,
+            "height": 0.03
+          },
+          "content": "explains the observed saturation and suggests a practical range \\(\\sigma^2 \\in [10, 100]\\) for this regime.",
+          "label": "Text"
+        },
+        {
+          "id": "11",
+          "order": 12,
+          "bounding_box": {
+            "x": 0.507,
+            "y": 0.439,
+            "width": 0.413,
+            "height": 0.195
+          },
+          "content": "2) Momentum coefficient \\(\\beta\\) in GD: Fig. 9(b) plots PSNR versus \\(\\beta\\) . The curve has a shallow maximum around \\(\\beta = 0.4\\) . With a very small \\(\\beta\\) , updates rely mostly on the current noisy gradient, which slows progress and increases iterate jitter when measurements are scarce. With a large \\(\\beta\\) , the velocity accumulates stale directions from earlier steps, which can overshoot near the solution and reduce late-stage accuracy. A mid-range momentum balances variance reduction and stability, allowing faster travel along consistent directions while still adapting at the end of optimization. The surface is relatively flat around the optimum, which indicates that the method is tolerant to moderate variation in \\(\\beta\\) .",
+          "label": "Text"
+        },
+        {
+          "id": "12",
+          "order": 13,
+          "bounding_box": {
+            "x": 0.507,
+            "y": 0.65,
+            "width": 0.263,
+            "height": 0.014
+          },
+          "content": "### G. Results under noisy observations",
+          "label": "Text"
+        },
+        {
+          "id": "13",
+          "order": 14,
+          "bounding_box": {
+            "x": 0.507,
+            "y": 0.669,
+            "width": 0.413,
+            "height": 0.135
+          },
+          "content": "We assess robustness to measurement noise, which typically stems from device errors, by adding zero- mean Gaussian perturbations with standard deviation \\(\\sigma_n\\) after normalizing the dB maps to \\([- 1, 1]\\) . Experiments are conducted at 1% and 5% sampling rates. As summarized in Table VI, mild noise ( \\(\\sigma_n = 0.01\\) ) stays close to the clean baseline at both rates, while stronger noise ( \\(\\sigma_n = 0.10\\) ) causes a moderate, smooth drop in PSNR and a small rise in RMSE.",
+          "label": "Text"
+        },
+        {
+          "id": "14",
+          "order": 15,
+          "bounding_box": {
+            "x": 0.507,
+            "y": 0.821,
+            "width": 0.181,
+            "height": 0.014
+          },
+          "content": "### H. Localization accuracy",
+          "label": "Text"
+        },
+        {
+          "id": "15",
+          "order": 16,
+          "bounding_box": {
+            "x": 0.507,
+            "y": 0.839,
+            "width": 0.413,
+            "height": 0.104
+          },
+          "content": "In this experiment, we also evaluate Tx localization accuracy results under the restricted- area sampling mode, though our main goal is to recover RM. In our pipeline, PG- KMeans is the initialization in the proposed RadioTrace and provides the initialized Tx positions, while RadioTrace denotes the whole framework containing PG- KMeans and Tx refinement. As shown in Fig. 10, the",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "page_index": 11,
+      "blocks": [
+        {
+          "id": "0",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.094,
+            "y": 0.081,
+            "width": 0.374,
+            "height": 0.209
+          },
+          "content": "",
+          "label": "Image"
+        },
+        {
+          "id": "1",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.077,
+            "y": 0.296,
+            "width": 0.412,
+            "height": 0.031
+          },
+          "content": "<center>Fig. 10: Transmitter localization accuracy under restricted-area sampling. </center>",
+          "label": "Text"
+        },
+        {
+          "id": "2",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.108,
+            "y": 0.375,
+            "width": 0.352,
+            "height": 0.045
+          },
+          "content": "<table><tr><td>Rate</td><td>Points</td><td>NMSE</td><td>RMSE</td><td>SSIM ↑</td><td>PSNR ↑</td></tr><tr><td>0.10%</td><td>≈66</td><td>0.0435</td><td>0.0435</td><td>0.9307</td><td>29.84</td></tr><tr><td>0.05%</td><td>≈33</td><td>0.0675</td><td>0.0592</td><td>0.9087</td><td>27.40</td></tr></table>",
+          "label": "Table"
+        },
+        {
+          "id": "3",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.077,
+            "y": 0.338,
+            "width": 0.412,
+            "height": 0.032
+          },
+          "content": "TABLE VII: Extreme low sampling rate results under restricted-area sampling on a \\(256\\times 256\\) grid (65,536 pixels).",
+          "label": "Text"
+        },
+        {
+          "id": "4",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.078,
+            "y": 0.444,
+            "width": 0.411,
+            "height": 0.121
+          },
+          "content": "update consistently improves over the initialization at \\(1\\%\\) , \\(5\\%\\) , \\(10\\%\\) , and \\(20\\%\\) sampling. The gap is visible at low sampling rates and grows slightly with more observations, whereas the initialization curve tends to plateau at higher rates. These results indicate that the update stage, informed by the concurrent map reconstruction, adds clear value beyond the PG- KMeans initializer and yields lower mean localization error across sampling levels.",
+          "label": "Text"
+        },
+        {
+          "id": "5",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.078,
+            "y": 0.585,
+            "width": 0.306,
+            "height": 0.015
+          },
+          "content": "### I. Extreme low sampling rate performance",
+          "label": "Text"
+        },
+        {
+          "id": "6",
+          "order": 7,
+          "bounding_box": {
+            "x": 0.079,
+            "y": 0.604,
+            "width": 0.411,
+            "height": 0.196
+          },
+          "content": "We evaluate RadioTrace at extremely low sampling rates \\(0.1\\%\\) and \\(0.05\\%\\) . On a \\(256\\times 256\\) grid (65,536 pixels), this corresponds to roughly 66 and 33 measurements, respectively. As shown in Table VII, at sampling rate of \\(0.1\\%\\) , we obtain NMSE 0.0435, RMSE 0.0435, SSIM 0.9307, and PSNR 29.84 dB; the mean Tx error improves from 24.78 m at initialization to 20.45 m after refinement \\((\\approx 4.33 \\mathrm{m}\\) reduction). At \\(0.05\\%\\) , performance drops as expected (NMSE 0.0675, RMSE 0.0592, SSIM 0.9087, PSNR 27.40 dB), while localization still improves from 41.28 m to 33.88 m \\((\\approx 7.40 \\mathrm{m}\\) reduction). These results show that RadioTrace remains effective even when only very limited measurements are available.",
+          "label": "Text"
+        },
+        {
+          "id": "7",
+          "order": 8,
+          "bounding_box": {
+            "x": 0.079,
+            "y": 0.82,
+            "width": 0.198,
+            "height": 0.015
+          },
+          "content": "### J. Runtime and complexity",
+          "label": "Text"
+        },
+        {
+          "id": "8",
+          "order": 9,
+          "bounding_box": {
+            "x": 0.079,
+            "y": 0.839,
+            "width": 0.411,
+            "height": 0.105
+          },
+          "content": "We study the cost- quality tradeoff on one A800 GPU by varying the number of sampling steps \\(T \\in \\{100, 50, 10\\}\\) at \\(1\\%\\) observations. The reported rate is an approximate, measured end- to- end throughput that includes typical overheads such as data movement and light pre/post- processing. As \\(T\\) decreases, the rate increases while accuracy drops smoothly; a practical choice is \\(T = 50\\) , which",
+          "label": "Text"
+        },
+        {
+          "id": "9",
+          "order": 10,
+          "bounding_box": {
+            "x": 0.512,
+            "y": 0.1,
+            "width": 0.4,
+            "height": 0.056
+          },
+          "content": "<table><tr><td>T</td><td>NMSE</td><td>RMSE</td><td>SSIM ↑</td><td>PSNR ↑</td><td>rate (maps/s)</td></tr><tr><td>100</td><td>0.0174</td><td>0.0296</td><td>0.9518</td><td>31.95</td><td>0.0618</td></tr><tr><td>50</td><td>0.0186</td><td>0.0306</td><td>0.9497</td><td>31.70</td><td>0.1187</td></tr><tr><td>10</td><td>0.0222</td><td>0.0327</td><td>0.9468</td><td>31.28</td><td>0.5832</td></tr></table>",
+          "label": "Table"
+        },
+        {
+          "id": "10",
+          "order": 11,
+          "bounding_box": {
+            "x": 0.506,
+            "y": 0.064,
+            "width": 0.413,
+            "height": 0.031
+          },
+          "content": "TABLE VIII: Cost-quality tradeoff at \\(1\\%\\) sampling under restricted-area sampling",
+          "label": "Text"
+        },
+        {
+          "id": "11",
+          "order": 12,
+          "bounding_box": {
+            "x": 0.507,
+            "y": 0.185,
+            "width": 0.412,
+            "height": 0.135
+          },
+          "content": "preserves most of the quality of \\(T = 100\\) at roughly double the measured rate, while \\(T = 10\\) offers a large speedup with moderate loss. In practice, RadioTrace can also be paired with fast samplers such as denoising diffusion implicit models (DDIM) to reduce the required steps, and the backbone capacity can be chosen to match latency and memory constraints so that lighter models with accelerated sampling favor throughput, whereas heavier models with moderate steps favor accuracy.",
+          "label": "Text"
+        },
+        {
+          "id": "12",
+          "order": 13,
+          "bounding_box": {
+            "x": 0.507,
+            "y": 0.322,
+            "width": 0.413,
+            "height": 0.285
+          },
+          "content": "We also report the average inference time per RM reconstruction on the same device. Interpolation methods like Kriging are the fastest \\((< 0.1 \\mathrm{s})\\) , making them attractive for strictly resource- constrained scenarios; however, their accuracy collapses under non- uniform or restricted- area sampling. RME- GAN requires only \\(0.2 \\mathrm{s}\\) via a single forward pass, but it operates under a much more favorable formulation that strictly requires known Tx locations. Furthermore, its brief runtime excludes substantial offline training (12 hours) and the necessity for retraining under sampling shifts. In contrast, RadioTrace and LaPnP solve an iterative inverse problem at deployment without any Tx knowledge. With \\(T = 10\\) reverse steps, RadioTrace takes 1.7 s, which is significantly more efficient than LaPnP (25 s). RadioDiff- Inverse is also computationally demanding, requiring about 198 s per reconstruction due to its diffusion- based posterior sampling procedure. Overall, RadioTrace offers a highly favorable accuracy- deployability tradeoff for performance- oriented settings.",
+          "label": "Text"
+        },
+        {
+          "id": "13",
+          "order": 14,
+          "bounding_box": {
+            "x": 0.508,
+            "y": 0.634,
+            "width": 0.1,
+            "height": 0.014
+          },
+          "content": "### K. Scalability",
+          "label": "Text"
+        },
+        {
+          "id": "14",
+          "order": 15,
+          "bounding_box": {
+            "x": 0.508,
+            "y": 0.656,
+            "width": 0.411,
+            "height": 0.15
+          },
+          "content": "We evaluate scalability with respect to the number of Tx by varying \\(R \\in \\{1, 2, 3, 4, 5\\}\\) with \\(1\\%\\) sampling rate, while keeping the environment, map resolution, and measurement protocol fixed. As shown in Fig. 11, as the number of Tx increases, the RMSE gradually rises while the PSNR consistently decreases, indicating that the reconstruction task becomes more challenging in more complex multi- Tx scenarios. Nevertheless, the overall degradation remains moderate, which demonstrates that the proposed method still maintains reasonable scalability.",
+          "label": "Text"
+        },
+        {
+          "id": "15",
+          "order": 16,
+          "bounding_box": {
+            "x": 0.508,
+            "y": 0.808,
+            "width": 0.412,
+            "height": 0.135
+          },
+          "content": "As the number of Tx \\(R\\) increases, the only additional computations introduced are the generation of the \\(R\\) soft Gaussian Tx maps and the calculation of their gradients with respect to the Tx coordinates. Since these are simple, low- dimensional mathematical operations, their overhead is strictly negligible compared to the heavy neural network evaluations of the diffusion backbone. Therefore, an increase in \\(R\\) adds practically zero computational burden to the overall inference pipeline.",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "page_index": 12,
+      "blocks": [
+        {
+          "id": "0",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.116,
+            "y": 0.066,
+            "width": 0.328,
+            "height": 0.179
+          },
+          "content": "",
+          "label": "Image"
+        },
+        {
+          "id": "1",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.115,
+            "y": 0.248,
+            "width": 0.335,
+            "height": 0.017
+          },
+          "content": "<center>Fig. 11: Scalability of number of transmitters. </center>",
+          "label": "Text"
+        },
+        {
+          "id": "2",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.077,
+            "y": 0.29,
+            "width": 0.413,
+            "height": 0.018
+          },
+          "content": "L. Empirical Behavior of Tx Refinement During Denoising",
+          "label": "Text"
+        },
+        {
+          "id": "3",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.078,
+            "y": 0.31,
+            "width": 0.412,
+            "height": 0.256
+          },
+          "content": "We further record the Tx- coordinate refinement trajectory of a representative test sample during reverse denoising. As shown in Fig. 12, the three panels from top to bottom report the gradient norm of the refinement loss, the MSE loss, and the absolute inter-step loss variation, respectively. The blue curves denote the raw recorded values, while the red curves denote the moving- average trends. It can be observed that the curves fluctuate more noticeably in the early denoising stage, where the generated RM and Tx locations are still uncertain. As denoising proceeds, the moving- average curves gradually decrease and become smoother, especially for the gradient norm and the absolute inter-step loss variation. This indicates that the Tx- coordinate refinement process becomes more stable in later denoising steps, which is consistent with the controlled objective drift and gradient perturbation assumed in the stability analysis.",
+          "label": "Text"
+        },
+        {
+          "id": "4",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.228,
+            "y": 0.584,
+            "width": 0.111,
+            "height": 0.015
+          },
+          "content": "## VI. Conclusion",
+          "label": "Text"
+        },
+        {
+          "id": "5",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.078,
+            "y": 0.603,
+            "width": 0.412,
+            "height": 0.255
+          },
+          "content": "In this paper, we presented RadioTrace, a transmitter- aware diffusion framework for sparse- measurement RM estimation with unknown Tx locations. By treating Tx coordinates as explicit physical variables and refining them within the reverse diffusion process, RadioTrace enables sparse RSS measurements to update both the reconstructed RM and the Tx- conditioned generative process. A propagation- guided K- means initializer is introduced to provide geometry- consistent Tx seeds, and the stability of the Tx- coordinate refinement process is analyzed under diffusion- induced randomness. Experiments under different sampling settings demonstrate the effectiveness of RadioTrace for joint RM reconstruction and Tx localization. These results suggest that incorporating source- related physical variables into diffusion- based inverse reconstruction can improve the practical applicability of generative priors for radio- environment mapping.",
+          "label": "Text"
+        },
+        {
+          "id": "6",
+          "order": 7,
+          "bounding_box": {
+            "x": 0.249,
+            "y": 0.875,
+            "width": 0.071,
+            "height": 0.015
+          },
+          "content": "## Appendix",
+          "label": "Text"
+        },
+        {
+          "id": "7",
+          "order": 8,
+          "bounding_box": {
+            "x": 0.078,
+            "y": 0.894,
+            "width": 0.167,
+            "height": 0.015
+          },
+          "content": "### A. Proof of Theorem 1",
+          "label": "Text"
+        },
+        {
+          "id": "8",
+          "order": 9,
+          "bounding_box": {
+            "x": 0.077,
+            "y": 0.912,
+            "width": 0.413,
+            "height": 0.032
+          },
+          "content": "Let \\(g_{k}\\coloneqq \\nabla \\bar{L}_{k}(\\Omega_{k})\\) and \\(G_{k} = g_{k} + \\zeta_{k}\\) . Define \\(m_{k}\\coloneqq\\) \\(\\mathbb{E}[\\zeta_{k}\\mid \\mathcal{F}_{k}]\\) and \\(\\zeta_{k}\\coloneqq \\zeta_{k} - m_{k}\\) , so that \\(\\mathbb{E}[\\zeta_{k}\\mid \\mathcal{F}_{k}] = 0\\)",
+          "label": "Text"
+        },
+        {
+          "id": "9",
+          "order": 10,
+          "bounding_box": {
+            "x": 0.525,
+            "y": 0.068,
+            "width": 0.38,
+            "height": 0.343
+          },
+          "content": "",
+          "label": "Image"
+        },
+        {
+          "id": "10",
+          "order": 11,
+          "bounding_box": {
+            "x": 0.506,
+            "y": 0.421,
+            "width": 0.413,
+            "height": 0.032
+          },
+          "content": "<center>Fig. 12: Empirical behavior of Tx-coordinate refinement during reverse denoising. </center>",
+          "label": "Text"
+        },
+        {
+          "id": "11",
+          "order": 12,
+          "bounding_box": {
+            "x": 0.506,
+            "y": 0.476,
+            "width": 0.413,
+            "height": 0.032
+          },
+          "content": "\\(\\mathbb{E}[\\|\\tilde{\\zeta}_{k}\\|^{2}\\mid \\mathcal{F}_{k}]\\leq \\sigma_{k}^{2}\\) , and \\(\\zeta_{k} = m_{k} + \\tilde{\\zeta}_{k}\\) . The update rule is reexpressed as",
+          "label": "Text"
+        },
+        {
+          "id": "12",
+          "order": 13,
+          "bounding_box": {
+            "x": 0.575,
+            "y": 0.512,
+            "width": 0.342,
+            "height": 0.04
+          },
+          "content": "\\[\\begin{array}{c}{v_{k + 1} = \\beta v_{k} + (1 - \\beta)(g_{k} + m_{k} + \\tilde{\\zeta}_{k}),}\\\\ {\\Omega_{k + 1} = \\Omega_{k} - \\eta_{k}v_{k + 1}.} \\end{array} \\quad (21)\\]",
+          "label": "Formula"
+        },
+        {
+          "id": "13",
+          "order": 14,
+          "bounding_box": {
+            "x": 0.521,
+            "y": 0.557,
+            "width": 0.398,
+            "height": 0.018
+          },
+          "content": "By the \\(M_{k}\\) - smoothness of \\(\\bar{L}_{k}\\) and \\(\\Omega_{k + 1} - \\Omega_{k} = - \\eta_{k}v_{k + 1}\\)",
+          "label": "Text"
+        },
+        {
+          "id": "14",
+          "order": 15,
+          "bounding_box": {
+            "x": 0.512,
+            "y": 0.58,
+            "width": 0.407,
+            "height": 0.032
+          },
+          "content": "\\[\\bar{L}_{k}(\\Omega_{k + 1})\\leq \\bar{L}_{k}(\\Omega_{k}) - \\eta_{k}\\langle g_{k},v_{k + 1}\\rangle +\\frac{M_{k}\\eta_{k}^{2}}{2}\\| v_{k + 1}\\|^{2}. \\quad (22)\\]",
+          "label": "Formula"
+        },
+        {
+          "id": "15",
+          "order": 16,
+          "bounding_box": {
+            "x": 0.506,
+            "y": 0.617,
+            "width": 0.413,
+            "height": 0.046
+          },
+          "content": "Let \\(e_{k}\\coloneqq m_{k} + \\tilde{\\zeta}_{k}\\) . From (21), \\(v_{k + 1} - \\beta v_{k} = (1 - \\beta)(g_{k} + e_{k})\\) . Squaring this identity and eliminating \\(2\\beta \\langle v_{k},v_{k + 1}\\rangle\\) gives",
+          "label": "Text"
+        },
+        {
+          "id": "16",
+          "order": 17,
+          "bounding_box": {
+            "x": 0.506,
+            "y": 0.667,
+            "width": 0.413,
+            "height": 0.021
+          },
+          "content": "\\[2(1 - \\beta)\\langle g_{k},v_{k + 1}\\rangle = \\| v_{k + 1}\\|^{2} - \\beta^{2}\\| v_{k}\\|^{2} + (1 - \\beta)^{2}\\| g_{k}\\|^{2} + R_{k}, \\quad (23)\\]",
+          "label": "Formula"
+        },
+        {
+          "id": "17",
+          "order": 18,
+          "bounding_box": {
+            "x": 0.507,
+            "y": 0.704,
+            "width": 0.043,
+            "height": 0.013
+          },
+          "content": "where",
+          "label": "Text"
+        },
+        {
+          "id": "18",
+          "order": 19,
+          "bounding_box": {
+            "x": 0.517,
+            "y": 0.722,
+            "width": 0.402,
+            "height": 0.036
+          },
+          "content": "\\[R_{k}\\coloneqq (1 - \\beta)^{2}\\big(\\| e_{k}\\|^{2} + 2\\langle g_{k},e_{k}\\rangle \\big) - 2(1 - \\beta)\\langle e_{k},v_{k + 1}\\rangle . \\quad (24)\\]",
+          "label": "Formula"
+        },
+        {
+          "id": "19",
+          "order": 20,
+          "bounding_box": {
+            "x": 0.507,
+            "y": 0.758,
+            "width": 0.233,
+            "height": 0.016
+          },
+          "content": "Substituting (23) into (22) yields",
+          "label": "Text"
+        },
+        {
+          "id": "20",
+          "order": 21,
+          "bounding_box": {
+            "x": 0.506,
+            "y": 0.778,
+            "width": 0.424,
+            "height": 0.072
+          },
+          "content": "\\[\\begin{array}{c}{\\bar{L}_{k}(\\Omega_{k + 1})\\leq \\bar{L}_{k}(\\Omega_{k}) - \\frac{\\eta_{k}(1 - \\beta)}{2}\\| g_{k}\\|^{2} + \\frac{\\eta_{k}\\beta^{2}}{2(1 - \\beta)}\\| v_{k}\\|^{2}}\\\\ {-\\left(\\frac{\\eta_{k}}{2(1 - \\beta)} -\\frac{M_{k}\\eta_{k}^{2}}{2}\\right)\\| v_{k + 1}\\|^{2} - \\frac{\\eta_{k}}{2(1 - \\beta)} R_{k}.} \\end{array} \\quad (25)\\]",
+          "label": "Formula"
+        },
+        {
+          "id": "21",
+          "order": 22,
+          "bounding_box": {
+            "x": 0.522,
+            "y": 0.855,
+            "width": 0.348,
+            "height": 0.017
+          },
+          "content": "By (24) and Young's inequality, for any \\(\\rho ,\\epsilon >0\\)",
+          "label": "Text"
+        },
+        {
+          "id": "22",
+          "order": 23,
+          "bounding_box": {
+            "x": 0.54,
+            "y": 0.876,
+            "width": 0.379,
+            "height": 0.02
+          },
+          "content": "\\[|R_{k}|\\leq \\rho (1 - \\beta)^{2}\\| g_{k}\\|^{2} + \\epsilon \\| v_{k + 1}\\|^{2} + C\\| e_{k}\\|^{2}, \\quad (26)\\]",
+          "label": "Formula"
+        },
+        {
+          "id": "23",
+          "order": 24,
+          "bounding_box": {
+            "x": 0.507,
+            "y": 0.902,
+            "width": 0.337,
+            "height": 0.017
+          },
+          "content": "where \\(C\\coloneqq (1 - \\beta)^{2}(1 + \\rho^{- 1} + \\epsilon^{- 1})\\) . Moreover,",
+          "label": "Text"
+        },
+        {
+          "id": "24",
+          "order": 25,
+          "bounding_box": {
+            "x": 0.506,
+            "y": 0.924,
+            "width": 0.437,
+            "height": 0.02
+          },
+          "content": "\\[\\mathbb{E}[\\| e_{k}\\|^{2}\\mid \\mathcal{F}_{k}] = \\| m_{k}\\|^{2} + \\mathbb{E}[\\| \\tilde{\\zeta}_{k}\\|^{2}\\mid \\mathcal{F}_{k}]\\leq \\delta_{k}^{2} + \\sigma_{k}^{2}\\leq C_{0}(\\delta_{k} + \\sigma_{k}^{2}),\\]",
+          "label": "Formula"
+        }
+      ]
+    },
+    {
+      "page_index": 13,
+      "blocks": [
+        {
+          "id": "0",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.076,
+            "y": 0.068,
+            "width": 0.414,
+            "height": 0.03
+          },
+          "content": "for some constant \\(C_0\\) independent of \\(k\\) , where the last step uses \\(\\delta_k \\leq \\bar{\\delta}\\) . Hence,",
+          "label": "Text"
+        },
+        {
+          "id": "1",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.077,
+            "y": 0.102,
+            "width": 0.412,
+            "height": 0.019
+          },
+          "content": "\\[\\mathbb{E}[|R_k| | \\mathcal{F}_k] \\leq c_1 \\| g_k\\| ^2 + \\epsilon \\mathbb{E}[|v_{k + 1}| | \\mathcal{F}_k] + C_1 (\\delta_k + \\sigma_k^2), \\quad (34)\\]",
+          "label": "Formula"
+        },
+        {
+          "id": "2",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.076,
+            "y": 0.126,
+            "width": 0.414,
+            "height": 0.045
+          },
+          "content": "with \\(c_1 \\coloneqq \\rho (1 - \\beta)^2\\) and some constant \\(C_1\\) . Taking conditional expectation in (25) and using the above bound, we obtain",
+          "label": "Text"
+        },
+        {
+          "id": "3",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.075,
+            "y": 0.175,
+            "width": 0.415,
+            "height": 0.095
+          },
+          "content": "\\[\\begin{array}{r l r} & {} & {\\mathbb{E}[\\bar{L}_{k}(\\Omega_{k + 1}) | \\mathcal{F}_{k}]\\leq \\bar{L}_{k}(\\Omega_{k}) - \\eta_{k}\\Big(\\frac{1 - \\beta}{2} -\\frac{c_{1}}{2(1 - \\beta)}\\Big)\\| g_{k}\\|^{2}}\\\\ & {} & {\\qquad +\\frac{\\eta_{k}\\beta^{2}}{2(1 - \\beta)}\\| v_{k}\\|^{2} - A_{k}\\mathbb{E}[\\| v_{k + 1}\\|^{2} | \\mathcal{F}_{k}]}\\\\ & {} & {\\qquad +C_{2}\\eta_{k}(\\delta_{k} + \\sigma_{k}^{2})} \\end{array} \\quad (27)\\]",
+          "label": "Formula"
+        },
+        {
+          "id": "4",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.076,
+            "y": 0.272,
+            "width": 0.414,
+            "height": 0.056
+          },
+          "content": "for some constant \\(C_2\\) and \\(A_k \\coloneqq \\frac{\\eta_k}{2(1 - \\beta)} - \\frac{M_k \\eta_k^2}{2} - \\frac{\\eta_k \\epsilon}{2(1 - \\beta)}\\) . Choosing \\(\\rho \\in (0,1)\\) and defining \\(c_2 \\coloneqq \\frac{1 - \\beta}{2} (1 - \\rho) > 0\\) , (27) becomes",
+          "label": "Text"
+        },
+        {
+          "id": "5",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.075,
+            "y": 0.331,
+            "width": 0.415,
+            "height": 0.057
+          },
+          "content": "\\[\\begin{array}{r l r} & {} & {\\mathbb{E}[\\bar{L}_{k}(\\Omega_{k + 1}) | \\mathcal{F}_{k}]\\leq \\bar{L}_{k}(\\Omega_{k}) - c_{2}\\eta_{k}\\| g_{k}\\|^{2} + \\frac{\\eta_{k}\\beta^{2}}{2(1 - \\beta)}\\| v_{k}\\|^{2}}\\\\ & {} & {\\qquad -A_{k}\\mathbb{E}[\\| v_{k + 1}\\|^{2} | \\mathcal{F}_{k}] + C_{2}^{\\prime}\\eta_{k}(\\delta_{k} + \\sigma_{k}^{2}).} \\end{array} \\quad (28)\\]",
+          "label": "Formula"
+        },
+        {
+          "id": "6",
+          "order": 7,
+          "bounding_box": {
+            "x": 0.076,
+            "y": 0.391,
+            "width": 0.374,
+            "height": 0.016
+          },
+          "content": "for some constant \\(C_2'\\) . Define the Lyapunov function",
+          "label": "Text"
+        },
+        {
+          "id": "7",
+          "order": 8,
+          "bounding_box": {
+            "x": 0.12,
+            "y": 0.41,
+            "width": 0.369,
+            "height": 0.035
+          },
+          "content": "\\[\\Phi_k \\coloneqq \\bar{L}_k(\\Omega_k) + \\lambda_k\\| v_k\\| ^2, \\qquad \\lambda_k \\coloneqq \\frac{\\eta_k\\beta^2}{2(1 - \\beta)}. \\quad (29)\\]",
+          "label": "Formula"
+        },
+        {
+          "id": "8",
+          "order": 9,
+          "bounding_box": {
+            "x": 0.076,
+            "y": 0.45,
+            "width": 0.413,
+            "height": 0.031
+          },
+          "content": "Using the drift condition \\(\\bar{L}_{k + 1}(\\Omega_{k + 1}) \\leq \\bar{L}_k(\\Omega_{k + 1}) + \\bar{d}_k\\) together with (28), we obtain",
+          "label": "Text"
+        },
+        {
+          "id": "9",
+          "order": 10,
+          "bounding_box": {
+            "x": 0.09,
+            "y": 0.484,
+            "width": 0.399,
+            "height": 0.056
+          },
+          "content": "\\[\\begin{array}{r l r} & {} & {\\mathbb{E}[\\Phi_{k + 1} | \\mathcal{F}_k] \\leq \\Phi_k - c_2\\eta_k\\| g_k\\| ^2 + \\bar{d}_k + C_2'\\eta_k(\\delta_k + \\sigma_k^2)}\\\\ & {} & {\\qquad -\\left(A_k - \\lambda_{k + 1}\\right)\\mathbb{E}[\\| v_{k + 1}\\| ^2 | \\mathcal{F}_k].} \\end{array} \\quad (29)\\]",
+          "label": "Formula"
+        },
+        {
+          "id": "10",
+          "order": 11,
+          "bounding_box": {
+            "x": 0.076,
+            "y": 0.542,
+            "width": 0.394,
+            "height": 0.018
+          },
+          "content": "Since \\(\\eta_k\\) is nonincreasing and \\(\\lambda_{k + 1} \\leq \\eta_k \\beta^2 / [2(1 - \\beta)]\\) ,",
+          "label": "Text"
+        },
+        {
+          "id": "11",
+          "order": 12,
+          "bounding_box": {
+            "x": 0.088,
+            "y": 0.564,
+            "width": 0.401,
+            "height": 0.066
+          },
+          "content": "\\[\\begin{array}{r l r} & {} & {A_{k} - \\lambda_{k + 1} = \\frac{\\eta_{k}}{2(1 - \\beta)} -\\frac{M_{k}\\eta_{k}^{2}}{2} -\\frac{\\eta_{k}\\epsilon}{2(1 - \\beta)} -\\lambda_{k + 1}}\\\\ & {} & {\\qquad \\geq \\eta_{k}\\Big(\\frac{1 + \\beta}{2} -\\frac{\\epsilon}{2(1 - \\beta)} -\\frac{M_{k}\\eta_{k}}{2}\\Big).} \\end{array} \\quad (30)\\]",
+          "label": "Formula"
+        },
+        {
+          "id": "12",
+          "order": 13,
+          "bounding_box": {
+            "x": 0.076,
+            "y": 0.633,
+            "width": 0.414,
+            "height": 0.078
+          },
+          "content": "Choose \\(\\epsilon > 0\\) sufficiently small such that \\(\\frac{1 + \\beta}{2} - \\frac{\\epsilon}{2(1 - \\beta)} > 0\\) . Since \\(\\eta_k M_k \\to 0\\) , there exist \\(k_0\\) and \\(c_3 > 0\\) such that the coefficient in (30) is at least \\(c_3 \\eta_k\\) for all \\(k \\geq k_0\\) . Hence the last term in (29) is nonpositive for all sufficiently large \\(k\\) , and thus for \\(k \\geq k_0\\) ,",
+          "label": "Text"
+        },
+        {
+          "id": "13",
+          "order": 14,
+          "bounding_box": {
+            "x": 0.085,
+            "y": 0.715,
+            "width": 0.404,
+            "height": 0.019
+          },
+          "content": "\\[\\mathbb{E}[\\Phi_{k + 1} | \\mathcal{F}_k] \\leq \\Phi_k - c_2\\eta_k\\| g_k\\| ^2 + \\bar{d}_k + C_2'\\eta_k(\\delta_k + \\sigma_k^2). \\quad (31)\\]",
+          "label": "Formula"
+        },
+        {
+          "id": "14",
+          "order": 15,
+          "bounding_box": {
+            "x": 0.076,
+            "y": 0.739,
+            "width": 0.414,
+            "height": 0.031
+          },
+          "content": "Taking full expectation and summing (31) from \\(k_0\\) to \\(K\\) gives",
+          "label": "Text"
+        },
+        {
+          "id": "15",
+          "order": 16,
+          "bounding_box": {
+            "x": 0.092,
+            "y": 0.775,
+            "width": 0.397,
+            "height": 0.089
+          },
+          "content": "\\[\\begin{array}{r l r} & {} & {\\mathbb{E}[\\Phi_{K + 1}]\\leq \\mathbb{E}[\\Phi_{k_0}] - c_2\\sum_{k = k_0}^{K}\\eta_k\\mathbb{E}[\\| g_k\\| ^2 ] + \\sum_{k = k_0}^{K}\\bar{d}_k}\\\\ & {} & {\\qquad +C_2^{\\prime}\\sum_{k = k_0}^{K}\\eta_k(\\delta_k + \\sigma_k^2).} \\end{array} \\quad (32)\\]",
+          "label": "Formula"
+        },
+        {
+          "id": "16",
+          "order": 17,
+          "bounding_box": {
+            "x": 0.075,
+            "y": 0.868,
+            "width": 0.415,
+            "height": 0.043
+          },
+          "content": "Since \\(\\bar{L}_k(\\Omega_k) \\geq 0\\) and \\(\\lambda_k \\| v_k\\| ^2 \\geq 0\\) , we have \\(\\Phi_k \\geq 0\\) . Using Assumption 2 and letting \\(K \\to \\infty\\) in (32), we conclude that",
+          "label": "Text"
+        },
+        {
+          "id": "17",
+          "order": 18,
+          "bounding_box": {
+            "x": 0.207,
+            "y": 0.909,
+            "width": 0.282,
+            "height": 0.035
+          },
+          "content": "\\[\\sum_{k = 0}^{\\infty} \\eta_k \\mathbb{E}[\\| g_k\\| ^2 ] < \\infty . \\quad (33)\\]",
+          "label": "Formula"
+        },
+        {
+          "id": "18",
+          "order": 19,
+          "bounding_box": {
+            "x": 0.507,
+            "y": 0.068,
+            "width": 0.099,
+            "height": 0.014
+          },
+          "content": "Equivalently,",
+          "label": "Text"
+        },
+        {
+          "id": "19",
+          "order": 20,
+          "bounding_box": {
+            "x": 0.61,
+            "y": 0.088,
+            "width": 0.309,
+            "height": 0.04
+          },
+          "content": "\\[\\sum_{k = 0}^{\\infty} \\eta_k \\mathbb{E}[\\| \\nabla \\bar{L}_k(\\Omega_k)\\| ^2 ] < \\infty . \\quad (34)\\]",
+          "label": "Formula"
+        },
+        {
+          "id": "20",
+          "order": 21,
+          "bounding_box": {
+            "x": 0.507,
+            "y": 0.135,
+            "width": 0.413,
+            "height": 0.029
+          },
+          "content": "Notice that \\(\\sum_{k = 0}^{\\infty} \\eta_k = \\infty\\) by Assumption 3, it follows that",
+          "label": "Text"
+        },
+        {
+          "id": "21",
+          "order": 22,
+          "bounding_box": {
+            "x": 0.612,
+            "y": 0.164,
+            "width": 0.197,
+            "height": 0.026
+          },
+          "content": "\\[\\liminf_{k\\to \\infty}\\mathbb{E}[\\| \\nabla \\bar{L}_k(\\Omega_k)\\| ^2 ] = 0.\\]",
+          "label": "Formula"
+        },
+        {
+          "id": "22",
+          "order": 23,
+          "bounding_box": {
+            "x": 0.507,
+            "y": 0.194,
+            "width": 0.185,
+            "height": 0.014
+          },
+          "content": "This completes the proof.",
+          "label": "Text"
+        },
+        {
+          "id": "23",
+          "order": 24,
+          "bounding_box": {
+            "x": 0.673,
+            "y": 0.228,
+            "width": 0.078,
+            "height": 0.013
+          },
+          "content": "## References",
+          "label": "Text"
+        },
+        {
+          "id": "24",
+          "order": 25,
+          "bounding_box": {
+            "x": 0.507,
+            "y": 0.247,
+            "width": 0.413,
+            "height": 0.696
+          },
+          "content": "[1] L. Yang, Q. Li, Z. Cao, and J. Lin, \"RadioTrace: Bridging diffusion priors and rss measurements for accurate radio map estimation,\" in 2025 IEEE 35th International Workshop on Machine Learning for Signal Processing (MLSP), 2025. [2] S. Bi, J. Lyu, Z. Ding, and R. Zhang, \"Engineering radio maps for wireless resource management,\" IEEE Wireless Communications, vol. 26, no. 2, pp. 133- 141, 2019. [3] Y. Chen, D. Yang, L. Xiao, F. Wu, and Y. Xu, \"Optimal trajectory design for unmanned aerial vehicle cargo pickup and delivery system based on radio map,\" IEEE Transactions on Vehicular Technology, vol. 73, no. 8, pp. 11 706- 11 718, 2024. [4] Y. Zeng, J. Chen, J. Xu, D. Wu, X. Xu, S. Jin, X. Gao, D. Gesbert, S. Cui, and R. Zhang, \"A tutorial on environment- aware communications via channel knowledge map for 6g,\" IEEE Communications Surveys & Tutorials, vol. 26, no. 3, pp. 1478- 1519, 2024. [5] S. Fu, Y. Zeng, Z. Wu, D. Wu, S. Jin, C.- X. Wang, and X. Gao, \"CKMDiff: A generative diffusion model for ckm construction via inverse problems with learned priors,\" arXiv preprint arXiv:2504.17323, 2025. [6] L. Zhao, Z. Fei, X. Wang, J. Huang, Y. Li, and Y. Zhang, \"IMNet: Interference- aware channel knowledge map construction and localization,\" IEEE Wireless Communications Letters, vol. 14, no. 3, pp. 856- 860, 2025. [7] Z. Yun and M. F. Iskander, \"Ray tracing for radio propagation modeling: Principles and applications,\" IEEE Access, vol. 3, pp. 1089- 1100, 2015. [8] R. Levie, C. Yapar, G. Kutyniok, and G. Caire, \"RadioUNet: Fast radio map estimation with convolutional neural networks,\" IEEE Transactions on Wireless Communications, vol. 20, no. 6, pp. 4001- 4015, 2021. [9] X. Wang, K. Tao, N. Cheng, Z. Yin, Z. Li, Y. Zhang, and X. Shen, \"RadioDiff: An effective generative diffusion model for sampling- free dynamic radio map construction,\" IEEE Transactions on Cognitive Communications and Networking, pp. 1- 1, 2024. [10] M. Lee and D. Han, \"Voronoi tessellation based interpolation method for Wi- Fi radio map construction,\" IEEE Communications Letters, vol. 16, no. 3, pp. 404- 407, 2012. [11] D. Romero and S.- J. Kim, \"Radio map estimation: A data- driven approach to spectrum cartography,\" IEEE Signal Processing Magazine, vol. 39, no. 6, pp. 53- 72, 2022. [12] Y. Teganya and D. Romero, \"Deep completion autoencoders for radio map estimation,\" IEEE Transactions on Wireless Communications, vol. 21, no. 3, pp. 1710- 1724, 2022. [13] S. Zhang, A. Wijesinghe, and Z. Ding, \"RME- GAN: A learning framework for radio map estimation based on conditional generative adversarial network,\" IEEE Internet of Things Journal, vol. 10, no. 20, pp. 18106- 18 027, 2023. [14] Z. Zhang, G. Zhu, J. Chen, and S. Cui, \"Fast and accurate cooperative radio map estimation enabled by GAN,\" in 2024 IEEE International Conference on Communications Workshops (ICC Workshops), 2024, pp. 1641- 1646. [15] H. Jia, W. Chen, Z. Huang, H. Xiao, N. Jia, K. Wu, S. Lai, and Y. Yue, \"RMDM: Radio map diffusion model with physics informed,\" arXiv preprint arXiv:2501.19160, 2025. [16] X. Luo, Z. Li, Z. Peng, M. Chen, and Y. Liu, \"Denoising diffusion probabilistic model for radio map estimation in generative wireless networks,\" IEEE Transactions on Cognitive Communications and Networking, vol. 11, no. 2, pp. 751- 763, 2025.",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "page_index": 14,
+      "blocks": [
+        {
+          "id": "0",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.077,
+            "y": 0.07,
+            "width": 0.413,
+            "height": 0.33
+          },
+          "content": "[17] L. Xu, L. Cheng, J. Chen, W. Pu, and X. Fu, \"Radio map estimation via latent domain plug-and-play denoising,\" IEEE Transactions on Signal Processing, pp. 1- 14, 2026. [18] X. Wang, Z. Fang, N. Cheng, R. Sun, H. Zhou, Z. Su, Z. Li, and X. Shen, \"RadioDiff- Inverse: Diffusion enhanced bayesian inverse estimation for isac radio map construction,\" IEEE Transactions on Wireless Communications, vol. 25, pp. 14611- 14626, 2026. [19] Y. Bengio, N. Léonard, and A. Courville, \"Estimating or propagating gradients through stochastic neurons for conditional computation,\" arXiv preprint arXiv:1308.3432, 2013. [20] A. van den Oord, O. Vinyals, and k. kavukcuoglu, \"Neural discrete representation learning,\" in Advances in Neural Information Processing Systems, I. Guyon, U. V. Luxburg, S. Bengio, H. Wallach, R. Fergus, S. Vishwanathan, and R. Garnett, Eds., vol. 30. Curran Associates, Inc., 2017. [21] S. Zhang, B. Choi, F. Ouyang, and Z. Ding, \"Physics- inspired machine learning for radiomap estimation: Integration of radio propagation models and artificial intelligence,\" IEEE Communications Magazine, vol. 62, no. 8, pp. 155- 161, 2024. [22] O. Ronneberger, P. Fischer, and T. Brox, \"U- net: Convolutional networks for biomedical image segmentation,\" in International Conference on Medical image computing and computer- assisted intervention. Springer, 2015, pp. 234- 241. [23] Z. Liu, Y. Lin, Y. Cao, H. Hu, Y. Wei, Z. Zhang, S. Lin, and B. Guo, \"Swin transformer: Hierarchical vision transformer using shifted windows,\" in Proceedings of the IEEE/CVF international conference on computer vision, 2021, pp. 10012- 10022.",
+          "label": "Text"
+        },
+        {
+          "id": "1",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.08,
+            "y": 0.501,
+            "width": 0.111,
+            "height": 0.113
+          },
+          "content": "",
+          "label": "Image"
+        },
+        {
+          "id": "2",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.08,
+            "y": 0.714,
+            "width": 0.111,
+            "height": 0.114
+          },
+          "content": "",
+          "label": "Image"
+        },
+        {
+          "id": "3",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.21,
+            "y": 0.497,
+            "width": 0.279,
+            "height": 0.104
+          },
+          "content": "Liu Yang received the B.Eng degree in 2020 from the University of Electronic Science and Technology of China (UESTC), Chengdu, China, where he is currently working toward the PhD degree with the School of Information and Communication Engineering. His current research interests include signal processing, radio frequency fingerprint identification and generative models.",
+          "label": "Text"
+        },
+        {
+          "id": "4",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.08,
+            "y": 0.712,
+            "width": 0.111,
+            "height": 0.115
+          },
+          "content": "",
+          "label": "Image"
+        },
+        {
+          "id": "5",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.21,
+            "y": 0.71,
+            "width": 0.279,
+            "height": 0.125
+          },
+          "content": "Qiang Li received the B.Eng. and M.Phil. degrees in Communication and Information Engineering from University of Electronic Science and Technology of China (UESTC), Chengdu, China, and the Ph.D. degree in Electronic Engineering from the Chinese University of Hong Kong (CUHK), Hong Kong, in 2005, 2008, and 2012, respectively. He was a Visiting Scholar with the University of Minnesota and Research Associate with the Department of Electronic Engineering and the Department of Systems",
+          "label": "Text"
+        },
+        {
+          "id": "6",
+          "order": 7,
+          "bounding_box": {
+            "x": 0.078,
+            "y": 0.835,
+            "width": 0.411,
+            "height": 0.081
+          },
+          "content": "Engineering and Engineering Management, CUHK. Since November 2013, he has been with the School of Information and Communication Engineering, UESTC, where he is currently a Professor. His recent research interests focus on machine learning and intelligent signal processing in wireless communications. He received a Best Paper Award of IEEE PIMRC 2016, and the Best Paper Award of the IEEE Signal Processing Letters 2016.",
+          "label": "Text"
+        },
+        {
+          "id": "7",
+          "order": 8,
+          "bounding_box": {
+            "x": 0.51,
+            "y": 0.075,
+            "width": 0.112,
+            "height": 0.112
+          },
+          "content": "",
+          "label": "Image"
+        },
+        {
+          "id": "8",
+          "order": 9,
+          "bounding_box": {
+            "x": 0.64,
+            "y": 0.07,
+            "width": 0.28,
+            "height": 0.107
+          },
+          "content": "Zhuo Cao received the B.S. degree from Anhui Normal University, Wuhu, Anhui, China, and is currently pursuing the Master's degree with the School of Information and Communication Engineering, University of Electronic Science and Technology of China (UESTC), Chengdu, Sichuan, China. His research interests include wireless communications, signal processing, deep learning, and radio map construction.",
+          "label": "Text"
+        },
+        {
+          "id": "9",
+          "order": 10,
+          "bounding_box": {
+            "x": 0.64,
+            "y": 0.231,
+            "width": 0.28,
+            "height": 0.127
+          },
+          "content": "Weijie Xiong was born in Sichuan, China, in 1999. He received the B.S. degree in electronic information engineering from the University of Electronic Science and Technology of China (UESTC), Chengdu, China, in 2021, where he is currently pursuing the Ph.D. degree in information and communication engineering. His research interests include waveform design for radar and communication systems, intelligent reflecting surfaces, optimization theory, and deep learning.",
+          "label": "Text"
+        },
+        {
+          "id": "10",
+          "order": 11,
+          "bounding_box": {
+            "x": 0.64,
+            "y": 0.401,
+            "width": 0.28,
+            "height": 0.114
+          },
+          "content": "Guomin Sun received the bachelor's degree from Shanxi Normal University, Shanxi, China, in 2012, and the Ph.D. degree from the University of Electronic Science and Technology of China (UESTC), Sichuan, China, in 2020. She is currently an Assistant Research Fellow with the School of Information and Communication Engineering, UESTC. Her research interests include deep learning and RF transmitter identification.",
+          "label": "Text"
+        },
+        {
+          "id": "11",
+          "order": 12,
+          "bounding_box": {
+            "x": 0.64,
+            "y": 0.57,
+            "width": 0.28,
+            "height": 0.126
+          },
+          "content": "Jingran Lin received the B.S. degree in Computer Communication from University of Electronic Science and Technology of China (UESTC), Chengdu, China, in 2001, and the M.S. and Ph.D. degrees in Signal and Information Processing from UESTC in 2005 and 2007, respectively. After his graduation in June 2007, he joined the School of Information and Communication Engineering, UESTC, where he is currently a Full Professor. From January 2012 to January 2013, he was a Visiting Scholar with the University of Minnesota (Twin Cities), Minneapolis, MN, USA. His research interests include the algorithm design and analysis for the intelligent signal processing problems arising from modern communication systems.",
+          "label": "Text"
+        },
+        {
+          "id": "12",
+          "order": 13,
+          "bounding_box": {
+            "x": 0.507,
+            "y": 0.696,
+            "width": 0.413,
+            "height": 0.046
+          },
+          "content": "a Visiting Scholar with the University of Minnesota (Twin Cities), Minneapolis, MN, USA. His research interests include the algorithm design and analysis for the Intelligent signal processing problems arising from modern communication systems.",
+          "label": "Text"
+        }
+      ]
+    }
+  ]
+}

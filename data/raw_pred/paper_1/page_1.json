@@ -1,0 +1,827 @@
+{
+    "input_path": "/home/bocchi/Work/Paper-Translate-Personal-Project/input/2210.17323v2.pdf",
+    "page_index": 1,
+    "page_count": 16,
+    "width": 1224,
+    "height": 1584,
+    "model_settings": {
+        "use_doc_preprocessor": false,
+        "use_layout_detection": true,
+        "use_chart_recognition": false,
+        "use_seal_recognition": false,
+        "use_ocr_for_image_block": true,
+        "format_block_content": true,
+        "merge_layout_blocks": true,
+        "markdown_ignore_labels": [
+            "number",
+            "footnote",
+            "header",
+            "header_image",
+            "footer",
+            "footer_image",
+            "aside_text"
+        ],
+        "return_layout_polygon_points": true
+    },
+    "parsing_res_list": [
+        {
+            "block_label": "header",
+            "block_content": "Published as a conference paper at ICLR 2023",
+            "block_bbox": [
+                212,
+                54,
+                589,
+                76
+            ],
+            "block_id": 0,
+            "block_order": null,
+            "group_id": 0,
+            "block_polygon_points": [
+                [
+                    212.0,
+                    54.0
+                ],
+                [
+                    589.0,
+                    54.0
+                ],
+                [
+                    589.0,
+                    76.0
+                ],
+                [
+                    212.0,
+                    76.0
+                ]
+            ]
+        },
+        {
+            "block_label": "text",
+            "block_content": "2022). To date, only basic variants of round-to-nearest quantization (Yao et al., 2022; Dettmers et al., 2022) have been applied at the scale of GPT-175B; while this works well for low compression targets, e.g., 8-bit weights, they fail to preserve accuracy at higher rates. It therefore remains open whether one-shot post-training quantization to higher compression rates is generally-feasible.",
+            "block_bbox": [
+                209,
+                166,
+                1013,
+                255
+            ],
+            "block_id": 1,
+            "block_order": 1,
+            "group_id": 1,
+            "block_polygon_points": [
+                [
+                    209.0,
+                    166.0
+                ],
+                [
+                    1013.0,
+                    166.0
+                ],
+                [
+                    1013.0,
+                    255.0
+                ],
+                [
+                    209.0,
+                    255.0
+                ]
+            ]
+        },
+        {
+            "block_label": "chart",
+            "block_content": "<div style=\"text-align: center;\"><img src=\"imgs/img_in_chart_box_253_281_608_559.jpg\" alt=\"Image\" width=\"29%\" />\n\n\n\n</div>\n",
+            "block_bbox": [
+                253,
+                281,
+                608,
+                559
+            ],
+            "block_id": 2,
+            "block_order": null,
+            "group_id": 2,
+            "block_polygon_points": [
+                [
+                    253.0,
+                    281.0
+                ],
+                [
+                    608.0,
+                    281.0
+                ],
+                [
+                    608.0,
+                    559.0
+                ],
+                [
+                    253.0,
+                    559.0
+                ]
+            ]
+        },
+        {
+            "block_label": "chart",
+            "block_content": "<div style=\"text-align: center;\"><img src=\"imgs/img_in_chart_box_616_282_969_556.jpg\" alt=\"Image\" width=\"28%\" />\n\n\n\n</div>\n",
+            "block_bbox": [
+                616,
+                282,
+                969,
+                556
+            ],
+            "block_id": 3,
+            "block_order": null,
+            "group_id": 3,
+            "block_polygon_points": [
+                [
+                    616.0,
+                    282.0
+                ],
+                [
+                    969.0,
+                    282.0
+                ],
+                [
+                    969.0,
+                    556.0
+                ],
+                [
+                    616.0,
+                    556.0
+                ]
+            ]
+        },
+        {
+            "block_label": "figure_title",
+            "block_content": "<div style=\"text-align: center;\">Figure 1: Quantizing OPT models to 4 and BLOOM models to 3 bit precision, comparing GPTQ with the FP16 baseline and round-to-nearest (RTN) (Yao et al., 2022; Dettmers et al., 2022).</div>\n",
+            "block_bbox": [
+                209,
+                567,
+                1011,
+                612
+            ],
+            "block_id": 4,
+            "block_order": null,
+            "group_id": 4,
+            "block_polygon_points": [
+                [
+                    209.0,
+                    567.0
+                ],
+                [
+                    1011.0,
+                    567.0
+                ],
+                [
+                    1011.0,
+                    612.0
+                ],
+                [
+                    209.0,
+                    612.0
+                ]
+            ]
+        },
+        {
+            "block_label": "text",
+            "block_content": "Contribution. In this paper, we present a new post-training quantization method, called GPTQ, $ ^{1} $ which is efficient enough to execute on models with hundreds of billions of parameters in at most a few hours, and precise enough to compress such models to 3 or 4 bits per parameter without significant loss of accuracy. For illustration, GPTQ can quantize the largest publicly-available models, OPT-175B and BLOOM-176B, in approximately four GPU hours, with minimal increase in perplexity, known to be a very stringent accuracy metric.",
+            "block_bbox": [
+                209,
+                638,
+                1013,
+                771
+            ],
+            "block_id": 5,
+            "block_order": 2,
+            "group_id": 5,
+            "block_polygon_points": [
+                [
+                    209.0,
+                    638.0
+                ],
+                [
+                    1013.0,
+                    638.0
+                ],
+                [
+                    1013.0,
+                    771.0
+                ],
+                [
+                    209.0,
+                    771.0
+                ]
+            ]
+        },
+        {
+            "block_label": "text",
+            "block_content": "Further, we show that our model can also provide robust results in the extreme quantization regime, in which models are quantized to 2 bits per component, or even ternary values. On the practical side, we develop an execution harness which allows us to execute the resulting compressed models efficiently for generative tasks. Specifically, we are able to run the compressed OPT-175B model for the first time on a single NVIDIA A100 GPU, or using only two more cost-effective NVIDIA A6000 GPUs. We also implement bespoke GPU kernels which are able to leverage compression for faster memory loading, resulting in speedups of  $ \\approx 3.25\\times $ when using A100 GPUs, and  $ 4.5\\times $ when using A6000 GPUs.",
+            "block_bbox": [
+                209,
+                781,
+                1013,
+                955
+            ],
+            "block_id": 6,
+            "block_order": 3,
+            "group_id": 6,
+            "block_polygon_points": [
+                [
+                    209.0,
+                    781.0
+                ],
+                [
+                    1013.0,
+                    781.0
+                ],
+                [
+                    1013.0,
+                    955.0
+                ],
+                [
+                    209.0,
+                    955.0
+                ]
+            ]
+        },
+        {
+            "block_label": "text",
+            "block_content": "To our knowledge, we are the first to show that extremely accurate language models with hundreds of billions of parameters can be quantized to 3-4 bits/component: prior post-training methods only remain accurate at 8 bits (Yao et al., 2022; Dettmers et al., 2022), while prior training-based techniques have only tackled models that are smaller by one to two orders of magnitude (Wu et al., 2022). This high degree of compression may appear natural, as these networks are overparametrized; yet, as we discuss in our detailed analysis of results, compression induces non-trivial tradeoffs between the accuracy of the language modeling (perplexity), bit-width, and the size of the original model.",
+            "block_bbox": [
+                208,
+                964,
+                1012,
+                1117
+            ],
+            "block_id": 7,
+            "block_order": 4,
+            "group_id": 7,
+            "block_polygon_points": [
+                [
+                    208.0,
+                    964.0
+                ],
+                [
+                    1012.0,
+                    964.0
+                ],
+                [
+                    1012.0,
+                    1117.0
+                ],
+                [
+                    208.0,
+                    1117.0
+                ]
+            ]
+        },
+        {
+            "block_label": "text",
+            "block_content": "We hope that our work will stimulate further research in this area, and can be a further step towards making these models available to a wider audience. In terms of limitations, our method currently does not provide speedups for the actual multiplications, due to the lack of hardware support for mixed-precision operands (e.g. FP16 x INT4) on mainstream architectures. Moreover, our current results do not include activation quantization, as they are not a significant bottleneck in our target scenarios; however, this can be supported using orthogonal techniques (Yao et al., 2022).",
+            "block_bbox": [
+                209,
+                1127,
+                1013,
+                1258
+            ],
+            "block_id": 8,
+            "block_order": 5,
+            "group_id": 8,
+            "block_polygon_points": [
+                [
+                    209.0,
+                    1127.0
+                ],
+                [
+                    1013.0,
+                    1127.0
+                ],
+                [
+                    1013.0,
+                    1258.0
+                ],
+                [
+                    209.0,
+                    1258.0
+                ]
+            ]
+        },
+        {
+            "block_label": "paragraph_title",
+            "block_content": "## 2 RELATED WORK",
+            "block_bbox": [
+                212,
+                1288,
+                426,
+                1313
+            ],
+            "block_id": 9,
+            "block_order": 6,
+            "group_id": 9,
+            "block_polygon_points": [
+                [
+                    212.0,
+                    1288.0
+                ],
+                [
+                    426.0,
+                    1288.0
+                ],
+                [
+                    426.0,
+                    1313.0
+                ],
+                [
+                    212.0,
+                    1313.0
+                ]
+            ]
+        },
+        {
+            "block_label": "text",
+            "block_content": "Quantization methods fall broadly into two categories: quantization during training, and post-training methods. The former quantizes models during typically extensive retraining and/or fine-tuning, using some approximate differentiation mechanism for the rounding operation (Gholami et al., 2021; Nagel et al., 2021). By contrast, post-training (\"one-shot\") methods quantize a pre-",
+            "block_bbox": [
+                209,
+                1339,
+                1013,
+                1428
+            ],
+            "block_id": 10,
+            "block_order": 7,
+            "group_id": 10,
+            "block_polygon_points": [
+                [
+                    209.0,
+                    1339.0
+                ],
+                [
+                    1013.0,
+                    1339.0
+                ],
+                [
+                    1013.0,
+                    1428.0
+                ],
+                [
+                    209.0,
+                    1428.0
+                ]
+            ]
+        },
+        {
+            "block_label": "footnote",
+            "block_content": " $ ^{1} $This merges the name of the OPT model family with the abbreviation for post-training quantization (PTQ).",
+            "block_bbox": [
+                236,
+                1443,
+                1010,
+                1466
+            ],
+            "block_id": 11,
+            "block_order": null,
+            "group_id": 11,
+            "block_polygon_points": [
+                [
+                    236.0,
+                    1443.0
+                ],
+                [
+                    1010.0,
+                    1443.0
+                ],
+                [
+                    1010.0,
+                    1466.0
+                ],
+                [
+                    236.0,
+                    1466.0
+                ]
+            ]
+        },
+        {
+            "block_label": "number",
+            "block_content": "2",
+            "block_bbox": [
+                604,
+                1504,
+                620,
+                1523
+            ],
+            "block_id": 12,
+            "block_order": null,
+            "group_id": 12,
+            "block_polygon_points": [
+                [
+                    604.0,
+                    1504.0
+                ],
+                [
+                    619.0,
+                    1504.0
+                ],
+                [
+                    619.0,
+                    1522.0
+                ],
+                [
+                    604.0,
+                    1522.0
+                ]
+            ]
+        }
+    ],
+    "layout_det_res": {
+        "input_path": null,
+        "page_index": null,
+        "boxes": [
+            {
+                "cls_id": 12,
+                "label": "header",
+                "score": 0.8728314638137817,
+                "coordinate": [
+                    212,
+                    54,
+                    589,
+                    76
+                ],
+                "order": null,
+                "polygon_points": [
+                    [
+                        212.0,
+                        54.0
+                    ],
+                    [
+                        589.0,
+                        54.0
+                    ],
+                    [
+                        589.0,
+                        76.0
+                    ],
+                    [
+                        212.0,
+                        76.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.9440550804138184,
+                "coordinate": [
+                    209,
+                    166,
+                    1013,
+                    255
+                ],
+                "order": 1,
+                "polygon_points": [
+                    [
+                        209.0,
+                        166.0
+                    ],
+                    [
+                        1013.0,
+                        166.0
+                    ],
+                    [
+                        1013.0,
+                        255.0
+                    ],
+                    [
+                        209.0,
+                        255.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 3,
+                "label": "chart",
+                "score": 0.8872167468070984,
+                "coordinate": [
+                    253,
+                    281,
+                    608,
+                    559
+                ],
+                "order": null,
+                "polygon_points": [
+                    [
+                        253.0,
+                        281.0
+                    ],
+                    [
+                        608.0,
+                        281.0
+                    ],
+                    [
+                        608.0,
+                        559.0
+                    ],
+                    [
+                        253.0,
+                        559.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 3,
+                "label": "chart",
+                "score": 0.883929431438446,
+                "coordinate": [
+                    616,
+                    282,
+                    969,
+                    556
+                ],
+                "order": null,
+                "polygon_points": [
+                    [
+                        616.0,
+                        282.0
+                    ],
+                    [
+                        969.0,
+                        282.0
+                    ],
+                    [
+                        969.0,
+                        556.0
+                    ],
+                    [
+                        616.0,
+                        556.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 7,
+                "label": "figure_title",
+                "score": 0.9171197414398193,
+                "coordinate": [
+                    209,
+                    567,
+                    1011,
+                    612
+                ],
+                "order": null,
+                "polygon_points": [
+                    [
+                        209.0,
+                        567.0
+                    ],
+                    [
+                        1011.0,
+                        567.0
+                    ],
+                    [
+                        1011.0,
+                        612.0
+                    ],
+                    [
+                        209.0,
+                        612.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.9571366906166077,
+                "coordinate": [
+                    209,
+                    638,
+                    1013,
+                    771
+                ],
+                "order": 2,
+                "polygon_points": [
+                    [
+                        209.0,
+                        638.0
+                    ],
+                    [
+                        1013.0,
+                        638.0
+                    ],
+                    [
+                        1013.0,
+                        771.0
+                    ],
+                    [
+                        209.0,
+                        771.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.9591197371482849,
+                "coordinate": [
+                    209,
+                    781,
+                    1013,
+                    955
+                ],
+                "order": 3,
+                "polygon_points": [
+                    [
+                        209.0,
+                        781.0
+                    ],
+                    [
+                        1013.0,
+                        781.0
+                    ],
+                    [
+                        1013.0,
+                        955.0
+                    ],
+                    [
+                        209.0,
+                        955.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.9596282839775085,
+                "coordinate": [
+                    208,
+                    964,
+                    1012,
+                    1117
+                ],
+                "order": 4,
+                "polygon_points": [
+                    [
+                        208.0,
+                        964.0
+                    ],
+                    [
+                        1012.0,
+                        964.0
+                    ],
+                    [
+                        1012.0,
+                        1117.0
+                    ],
+                    [
+                        208.0,
+                        1117.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.9589858651161194,
+                "coordinate": [
+                    209,
+                    1127,
+                    1013,
+                    1258
+                ],
+                "order": 5,
+                "polygon_points": [
+                    [
+                        209.0,
+                        1127.0
+                    ],
+                    [
+                        1013.0,
+                        1127.0
+                    ],
+                    [
+                        1013.0,
+                        1258.0
+                    ],
+                    [
+                        209.0,
+                        1258.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 17,
+                "label": "paragraph_title",
+                "score": 0.8580307364463806,
+                "coordinate": [
+                    212,
+                    1288,
+                    426,
+                    1313
+                ],
+                "order": 6,
+                "polygon_points": [
+                    [
+                        212.0,
+                        1288.0
+                    ],
+                    [
+                        426.0,
+                        1288.0
+                    ],
+                    [
+                        426.0,
+                        1313.0
+                    ],
+                    [
+                        212.0,
+                        1313.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.9415141940116882,
+                "coordinate": [
+                    209,
+                    1339,
+                    1013,
+                    1428
+                ],
+                "order": 7,
+                "polygon_points": [
+                    [
+                        209.0,
+                        1339.0
+                    ],
+                    [
+                        1013.0,
+                        1339.0
+                    ],
+                    [
+                        1013.0,
+                        1428.0
+                    ],
+                    [
+                        209.0,
+                        1428.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 10,
+                "label": "footnote",
+                "score": 0.9146259427070618,
+                "coordinate": [
+                    236,
+                    1443,
+                    1010,
+                    1466
+                ],
+                "order": null,
+                "polygon_points": [
+                    [
+                        236.0,
+                        1443.0
+                    ],
+                    [
+                        1010.0,
+                        1443.0
+                    ],
+                    [
+                        1010.0,
+                        1466.0
+                    ],
+                    [
+                        236.0,
+                        1466.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 16,
+                "label": "number",
+                "score": 0.6818574070930481,
+                "coordinate": [
+                    604,
+                    1504,
+                    620,
+                    1523
+                ],
+                "order": 8,
+                "polygon_points": [
+                    [
+                        604.0,
+                        1504.0
+                    ],
+                    [
+                        619.0,
+                        1504.0
+                    ],
+                    [
+                        619.0,
+                        1522.0
+                    ],
+                    [
+                        604.0,
+                        1522.0
+                    ]
+                ]
+            }
+        ]
+    }
+}

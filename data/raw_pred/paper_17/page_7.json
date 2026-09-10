@@ -1,0 +1,583 @@
+{
+    "input_path": "/home/bocchi/Downloads/Paper_Data/Statistics/2607.21114v1.pdf",
+    "page_index": 7,
+    "page_count": 22,
+    "width": 1072,
+    "height": 1395,
+    "model_settings": {
+        "use_doc_preprocessor": false,
+        "use_layout_detection": true,
+        "use_chart_recognition": false,
+        "use_seal_recognition": false,
+        "use_ocr_for_image_block": true,
+        "format_block_content": true,
+        "merge_layout_blocks": true,
+        "markdown_ignore_labels": [
+            "number",
+            "footnote",
+            "header",
+            "header_image",
+            "footer",
+            "footer_image",
+            "aside_text"
+        ],
+        "return_layout_polygon_points": true
+    },
+    "parsing_res_list": [
+        {
+            "block_label": "number",
+            "block_content": "8",
+            "block_bbox": [
+                98,
+                55,
+                111,
+                70
+            ],
+            "block_id": 0,
+            "block_order": null,
+            "group_id": 0,
+            "block_polygon_points": [
+                [
+                    98.0,
+                    55.0
+                ],
+                [
+                    110.0,
+                    55.0
+                ],
+                [
+                    110.0,
+                    69.0
+                ],
+                [
+                    98.0,
+                    69.0
+                ]
+            ]
+        },
+        {
+            "block_label": "text",
+            "block_content": "the network structure is necessarily learned from data. The structural learning algorithms can be grouped in three main principal categories: constraint-based, score-based and hybrid algorithms (Kitson et al., 2023). Constraint-based algorithms rely on conditional independence tests to learn the dependence structure of the data; score-based algorithms compare networks based on scoring function (e.g., AIC, BIC) and select the structure optimizing this function; hybrid algorithms combine key features of the previous two approaches, relying first on a constraint-based method to reduce the search space and then on a score-based method to select the best structure within that space.",
+            "block_bbox": [
+                96,
+                106,
+                994,
+                241
+            ],
+            "block_id": 1,
+            "block_order": 1,
+            "group_id": 1,
+            "block_polygon_points": [
+                [
+                    96.0,
+                    106.0
+                ],
+                [
+                    994.0,
+                    106.0
+                ],
+                [
+                    994.0,
+                    241.0
+                ],
+                [
+                    96.0,
+                    241.0
+                ]
+            ]
+        },
+        {
+            "block_label": "text",
+            "block_content": "BNs provide an intuitive and transparent explanation of the influence (direct or indirect) of one variable on another. Moreover, BNs are equipped with an inferential engine to make inferences about model parameters, thereby supporting decision makers with an easy-to-read graphical framework and a computationally efficient platform to perform inferential queries and scenario evaluations.",
+            "block_bbox": [
+                95,
+                243,
+                995,
+                334
+            ],
+            "block_id": 2,
+            "block_order": 2,
+            "group_id": 2,
+            "block_polygon_points": [
+                [
+                    95.0,
+                    243.0
+                ],
+                [
+                    995.0,
+                    243.0
+                ],
+                [
+                    995.0,
+                    334.0
+                ],
+                [
+                    95.0,
+                    334.0
+                ]
+            ]
+        },
+        {
+            "block_label": "paragraph_title",
+            "block_content": "#### 3.1. From BNs to OOBNs",
+            "block_bbox": [
+                96,
+                385,
+                417,
+                412
+            ],
+            "block_id": 3,
+            "block_order": 3,
+            "group_id": 3,
+            "block_polygon_points": [
+                [
+                    96.0,
+                    385.0
+                ],
+                [
+                    417.0,
+                    385.0
+                ],
+                [
+                    417.0,
+                    412.0
+                ],
+                [
+                    96.0,
+                    412.0
+                ]
+            ]
+        },
+        {
+            "block_label": "text",
+            "block_content": "In Mecatti et al. (2022), the potential of BNs was explored to improve the monitoring and assessment of gender equality as measured by the GEI. Although the results were promising, the use of a single BN appears somewhat limited with respect to the ambitious goal of interpreting the complex and multilayered nature of both the notion of gender equality and the composite indicator that quantifies it. To overcome this limitation, we propose the use of OOBNs (Koller and Pfeffer, 1997) as a fundamental tool to both mirror the structure of domains, sub-domains, and variables and model their relationships. This approach takes advantage of a crucial property of BN models known as modularity, which enables the decomposition of a complex multivariate relational structure into simpler sub-networks, while retaining the ability to capture conditional (in)dependencies. In the literature, there are several applications of OOBNs to different fields, such as forensic statistics (Dawid et al., 2007), economic decisions (Mortera et al., 2013) and quality management (Musella and Vicard, 2015).",
+            "block_bbox": [
+                94,
+                426,
+                996,
+                655
+            ],
+            "block_id": 4,
+            "block_order": 4,
+            "group_id": 4,
+            "block_polygon_points": [
+                [
+                    94.0,
+                    426.0
+                ],
+                [
+                    996.0,
+                    426.0
+                ],
+                [
+                    996.0,
+                    655.0
+                ],
+                [
+                    94.0,
+                    655.0
+                ]
+            ]
+        },
+        {
+            "block_label": "text",
+            "block_content": "OOBNs are an extension of BNs by which complex and high dimensional problems can be modelled in terms of inter-related objects. They provide a hierarchical definition of a BN by means of building blocks (instances of classes of BNs). OOBNs are still multivariate statistical models of dependencies among variables, but they allow for more complex modelling than single BNs and require a more articulated system of nodes. In particular, an OOBN is composed of nodes of different nature and scope, the essential being: 1) chance nodes, i.e., nodes that represent random variables; 2) function nodes, i.e., nodes that are function of their parents; 3) instance nodes, i.e., objects of the OOBN that represent BNs (or even classes of BNs) and form the hierarchical layers, namely the lower-level(s) of the OOBN; and 4) interface nodes, i.e., a special type of (chance or function) nodes that connect the hierarchical levels of the OOBN, channeling information into instances (input node(s), possibly multiple), and out of instances (output node, always unique).",
+            "block_bbox": [
+                95,
+                656,
+                995,
+                884
+            ],
+            "block_id": 5,
+            "block_order": 5,
+            "group_id": 5,
+            "block_polygon_points": [
+                [
+                    95.0,
+                    656.0
+                ],
+                [
+                    995.0,
+                    656.0
+                ],
+                [
+                    995.0,
+                    884.0
+                ],
+                [
+                    95.0,
+                    884.0
+                ]
+            ]
+        },
+        {
+            "block_label": "text",
+            "block_content": "From now on nodes are indicated in teletype face and classes of networks in bold face. Figure 4(a) shows an example of the top level network of an OOBN; it comprises three chance nodes (X1, X6, X9), and two instance nodes (or instances, represented as rounded rectangles) of classes  $ Instance\\ 1 $ and  $ Instance\\ 2 $ which are BNs themselves as shown in Figure 4(c) and 4(d) respectively. Consider for example 4(c). X1 and X5 are input and output nodes, graphically characterized by an outer grey ring with a dashed line and a full line respectively. In detail X1 imports information from the top level network (Figure 4(a)) into  $ Instance\\ 1 $ and X5 exports information from  $ Instance\\ 1 $ to the top level network (Figure 4(a)). Figure 4(b) summarises the entire OOBN and reflects its hierarchical nature. In fact, it provides a picture of the top level network with expanded instances thus showing both the chance nodes and the interface (input and output) nodes of the two instances.",
+            "block_bbox": [
+                95,
+                885,
+                994,
+                1089
+            ],
+            "block_id": 6,
+            "block_order": 6,
+            "group_id": 6,
+            "block_polygon_points": [
+                [
+                    95.0,
+                    885.0
+                ],
+                [
+                    994.0,
+                    885.0
+                ],
+                [
+                    994.0,
+                    1089.0
+                ],
+                [
+                    95.0,
+                    1089.0
+                ]
+            ]
+        },
+        {
+            "block_label": "text",
+            "block_content": "As for arrows, their meaning may differ from that of statistical dependence when at least one endpoint is not an ordinary chance node. In particular, arrows from chance nodes to input nodes are identity links. So in Figure 4(b) the arrow from the chance node X1 to the input node X1 of Instance 1 represents the fact that information about variable X1 is transferred identically within Instance 1. Differently, arrows from output nodes may be either standard statistical dependence links pointing to a chance node, or functional links pointing to a function node associated with an expression depending on its parents.",
+            "block_bbox": [
+                95,
+                1091,
+                994,
+                1227
+            ],
+            "block_id": 7,
+            "block_order": 7,
+            "group_id": 7,
+            "block_polygon_points": [
+                [
+                    95.0,
+                    1091.0
+                ],
+                [
+                    994.0,
+                    1091.0
+                ],
+                [
+                    994.0,
+                    1227.0
+                ],
+                [
+                    95.0,
+                    1227.0
+                ]
+            ]
+        },
+        {
+            "block_label": "text",
+            "block_content": "It is important to note that, since OOBNs are composed of a hierarchy of BNs, all their statistical properties, including the chain rule (2), are retained. Moreover, the inference process of OOBNs is particularly efficient in spite of the complex structure since the standard nodes inside an instance are conditionally independent from the rest of the OOBN, given the interface nodes of that instance.",
+            "block_bbox": [
+                95,
+                1228,
+                995,
+                1319
+            ],
+            "block_id": 8,
+            "block_order": 8,
+            "group_id": 8,
+            "block_polygon_points": [
+                [
+                    95.0,
+                    1228.0
+                ],
+                [
+                    995.0,
+                    1228.0
+                ],
+                [
+                    995.0,
+                    1319.0
+                ],
+                [
+                    95.0,
+                    1319.0
+                ]
+            ]
+        }
+    ],
+    "layout_det_res": {
+        "input_path": null,
+        "page_index": null,
+        "boxes": [
+            {
+                "cls_id": 16,
+                "label": "number",
+                "score": 0.6351059079170227,
+                "coordinate": [
+                    98,
+                    55,
+                    111,
+                    70
+                ],
+                "order": 1,
+                "polygon_points": [
+                    [
+                        98.0,
+                        55.0
+                    ],
+                    [
+                        110.0,
+                        55.0
+                    ],
+                    [
+                        110.0,
+                        69.0
+                    ],
+                    [
+                        98.0,
+                        69.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.9532036781311035,
+                "coordinate": [
+                    96,
+                    106,
+                    994,
+                    241
+                ],
+                "order": 2,
+                "polygon_points": [
+                    [
+                        96.0,
+                        106.0
+                    ],
+                    [
+                        994.0,
+                        106.0
+                    ],
+                    [
+                        994.0,
+                        241.0
+                    ],
+                    [
+                        96.0,
+                        241.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.9353442788124084,
+                "coordinate": [
+                    95,
+                    243,
+                    995,
+                    334
+                ],
+                "order": 3,
+                "polygon_points": [
+                    [
+                        95.0,
+                        243.0
+                    ],
+                    [
+                        995.0,
+                        243.0
+                    ],
+                    [
+                        995.0,
+                        334.0
+                    ],
+                    [
+                        95.0,
+                        334.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 17,
+                "label": "paragraph_title",
+                "score": 0.8760267496109009,
+                "coordinate": [
+                    96,
+                    385,
+                    417,
+                    412
+                ],
+                "order": 4,
+                "polygon_points": [
+                    [
+                        96.0,
+                        385.0
+                    ],
+                    [
+                        417.0,
+                        385.0
+                    ],
+                    [
+                        417.0,
+                        412.0
+                    ],
+                    [
+                        96.0,
+                        412.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.962546169757843,
+                "coordinate": [
+                    94,
+                    426,
+                    996,
+                    655
+                ],
+                "order": 5,
+                "polygon_points": [
+                    [
+                        94.0,
+                        426.0
+                    ],
+                    [
+                        996.0,
+                        426.0
+                    ],
+                    [
+                        996.0,
+                        655.0
+                    ],
+                    [
+                        94.0,
+                        655.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.9628574848175049,
+                "coordinate": [
+                    95,
+                    656,
+                    995,
+                    884
+                ],
+                "order": 6,
+                "polygon_points": [
+                    [
+                        95.0,
+                        656.0
+                    ],
+                    [
+                        995.0,
+                        656.0
+                    ],
+                    [
+                        995.0,
+                        884.0
+                    ],
+                    [
+                        95.0,
+                        884.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.9654836058616638,
+                "coordinate": [
+                    95,
+                    885,
+                    994,
+                    1089
+                ],
+                "order": 7,
+                "polygon_points": [
+                    [
+                        95.0,
+                        885.0
+                    ],
+                    [
+                        994.0,
+                        885.0
+                    ],
+                    [
+                        994.0,
+                        1089.0
+                    ],
+                    [
+                        95.0,
+                        1089.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.9621996879577637,
+                "coordinate": [
+                    95,
+                    1091,
+                    994,
+                    1227
+                ],
+                "order": 8,
+                "polygon_points": [
+                    [
+                        95.0,
+                        1091.0
+                    ],
+                    [
+                        994.0,
+                        1091.0
+                    ],
+                    [
+                        994.0,
+                        1227.0
+                    ],
+                    [
+                        95.0,
+                        1227.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.9475706815719604,
+                "coordinate": [
+                    95,
+                    1228,
+                    995,
+                    1319
+                ],
+                "order": 9,
+                "polygon_points": [
+                    [
+                        95.0,
+                        1228.0
+                    ],
+                    [
+                        995.0,
+                        1228.0
+                    ],
+                    [
+                        995.0,
+                        1319.0
+                    ],
+                    [
+                        95.0,
+                        1319.0
+                    ]
+                ]
+            }
+        ]
+    }
+}

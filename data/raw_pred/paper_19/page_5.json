@@ -1,0 +1,1253 @@
+{
+    "input_path": "/home/bocchi/Downloads/Paper_Data/Electrical Engineering and Systems Science/2607.20939v1.pdf",
+    "page_index": 5,
+    "page_count": 9,
+    "width": 1224,
+    "height": 1584,
+    "model_settings": {
+        "use_doc_preprocessor": false,
+        "use_layout_detection": true,
+        "use_chart_recognition": false,
+        "use_seal_recognition": false,
+        "use_ocr_for_image_block": true,
+        "format_block_content": true,
+        "merge_layout_blocks": true,
+        "markdown_ignore_labels": [
+            "number",
+            "footnote",
+            "header",
+            "header_image",
+            "footer",
+            "footer_image",
+            "aside_text"
+        ],
+        "return_layout_polygon_points": true
+    },
+    "parsing_res_list": [
+        {
+            "block_label": "header",
+            "block_content": "PREPRINT",
+            "block_bbox": [
+                95,
+                49,
+                167,
+                65
+            ],
+            "block_id": 0,
+            "block_order": null,
+            "group_id": 0,
+            "block_polygon_points": [
+                [
+                    95.0,
+                    49.0
+                ],
+                [
+                    166.0,
+                    49.0
+                ],
+                [
+                    166.0,
+                    64.0
+                ],
+                [
+                    95.0,
+                    64.0
+                ]
+            ]
+        },
+        {
+            "block_label": "number",
+            "block_content": "6",
+            "block_bbox": [
+                1117,
+                51,
+                1129,
+                65
+            ],
+            "block_id": 1,
+            "block_order": null,
+            "group_id": 1,
+            "block_polygon_points": [
+                [
+                    1117.0,
+                    51.0
+                ],
+                [
+                    1128.0,
+                    51.0
+                ],
+                [
+                    1128.0,
+                    64.0
+                ],
+                [
+                    1117.0,
+                    64.0
+                ]
+            ]
+        },
+        {
+            "block_label": "chart",
+            "block_content": "<div style=\"text-align: center;\"><img src=\"imgs/img_in_chart_box_101_119_595_423.jpg\" alt=\"Image\" width=\"40%\" />\n\n\n\n</div>\n",
+            "block_bbox": [
+                101,
+                119,
+                595,
+                423
+            ],
+            "block_id": 2,
+            "block_order": null,
+            "group_id": 2,
+            "block_polygon_points": [
+                [
+                    101.0,
+                    119.0
+                ],
+                [
+                    595.0,
+                    119.0
+                ],
+                [
+                    595.0,
+                    423.0
+                ],
+                [
+                    101.0,
+                    423.0
+                ]
+            ]
+        },
+        {
+            "block_label": "figure_title",
+            "block_content": "<div style=\"text-align: center;\">Fig. 2. Catheter tip tracking (top) and contact force (bottom) for the four controllers of Table I over the approach–press–hold–retract task, on the MuJoCo distributed-compliance plant. The shaded band marks the contact-hold window. The force-constrained predictive interaction-dynamics controller (green) tracks the reference and holds the contact force below the 0.5N safety bound (dashed); the unconstrained offset-free controller (blue) tracks identically but drives to 0.60N—over the bound—to eliminate position error against the penetrating target. Classical impedance (red) stays gentle (0.17N) but mistracks, and joint-space PD (gray), lacking the Layer-1 feedforward, cannot overcome the distributed elasticity to reach the tissue.</div>\n",
+            "block_bbox": [
+                92,
+                453,
+                604,
+                636
+            ],
+            "block_id": 3,
+            "block_order": null,
+            "group_id": 3,
+            "block_polygon_points": [
+                [
+                    92.0,
+                    453.0
+                ],
+                [
+                    604.0,
+                    453.0
+                ],
+                [
+                    604.0,
+                    636.0
+                ],
+                [
+                    92.0,
+                    636.0
+                ]
+            ]
+        },
+        {
+            "block_label": "text",
+            "block_content": "residual; classical impedance leaves a 0.28 mm approach error against it, which the offset-free integrator drives to 0.03 mm (90% reduction)—rejecting genuine model-reduction error, not a synthetic bias.",
+            "block_bbox": [
+                131,
+                710,
+                603,
+                804
+            ],
+            "block_id": 4,
+            "block_order": 1,
+            "group_id": 4,
+            "block_polygon_points": [
+                [
+                    131.0,
+                    710.0
+                ],
+                [
+                    603.0,
+                    710.0
+                ],
+                [
+                    603.0,
+                    804.0
+                ],
+                [
+                    131.0,
+                    804.0
+                ]
+            ]
+        },
+        {
+            "block_label": "text",
+            "block_content": "- Force safety is the decisive interaction constraint. Only the force-constrained predictive interaction-dynamics controller achieves both accurate tracking (0.03 mm) and the 0.5 N bound (peak 0.47 N). Classical impedance (0.17 N) and joint-space PD (no contact) stay under the bound only by being too soft to track the penetrating target—safety bought with accuracy, the trade the constraint removes.",
+            "block_bbox": [
+                111,
+                805,
+                604,
+                996
+            ],
+            "block_id": 5,
+            "block_order": 2,
+            "group_id": 5,
+            "block_polygon_points": [
+                [
+                    111.0,
+                    805.0
+                ],
+                [
+                    604.0,
+                    805.0
+                ],
+                [
+                    604.0,
+                    996.0
+                ],
+                [
+                    111.0,
+                    996.0
+                ]
+            ]
+        },
+        {
+            "block_label": "text",
+            "block_content": "• Offset-free motion regulation without a force limit overshoots the bound. The unconstrained predictive controller, driving hard to eliminate position error against the penetrating target, pushes the contact force to 0.60N (0.595N precisely)—19% over  $ F_{safe} $. This is far milder than the multi-newton overshoot a stiff lumped plant predicts (the compliant catheter and 8N tendon cap the realizable force below 1N), but the bound is still breached: offset-free motion regulation and force safety remain in tension, resolved only by the hard interaction constraint (0.60→0.47N at identical tracking).",
+            "block_bbox": [
+                110,
+                997,
+                603,
+                1259
+            ],
+            "block_id": 6,
+            "block_order": 3,
+            "group_id": 6,
+            "block_polygon_points": [
+                [
+                    110.0,
+                    997.0
+                ],
+                [
+                    603.0,
+                    997.0
+                ],
+                [
+                    603.0,
+                    1259.0
+                ],
+                [
+                    110.0,
+                    1259.0
+                ]
+            ]
+        },
+        {
+            "block_label": "text",
+            "block_content": "• Hold error is contact-limited. The tracking controllers retain  $ \\sim $1.41 mm hold error because the commanded depth needs >7N the tendon cannot deliver. Joint-space PD, lacking the Layer-1 feedforward, cannot even reach the tissue at a stably-rescaled gain (1.82 mm approach, no contact)—evidence that the feedforward, not raw gain, overcomes the distributed elasticity. The simulation thus does not support a blanket “zero steady-state error” claim under stiff contact—offset-free holds in free space and in the nominal limit.",
+            "block_bbox": [
+                109,
+                1260,
+                604,
+                1500
+            ],
+            "block_id": 7,
+            "block_order": 4,
+            "group_id": 7,
+            "block_polygon_points": [
+                [
+                    109.0,
+                    1260.0
+                ],
+                [
+                    604.0,
+                    1260.0
+                ],
+                [
+                    604.0,
+                    1500.0
+                ],
+                [
+                    109.0,
+                    1500.0
+                ]
+            ]
+        },
+        {
+            "block_label": "figure_title",
+            "block_content": "<div style=\"text-align: center;\">TABLE II</div>\n",
+            "block_bbox": [
+                838,
+                114,
+                911,
+                131
+            ],
+            "block_id": 8,
+            "block_order": null,
+            "group_id": 8,
+            "block_polygon_points": [
+                [
+                    838.0,
+                    114.0
+                ],
+                [
+                    910.0,
+                    114.0
+                ],
+                [
+                    910.0,
+                    130.0
+                ],
+                [
+                    838.0,
+                    130.0
+                ]
+            ]
+        },
+        {
+            "block_label": "table",
+            "block_content": "\n<table border=1 style='margin: auto; word-wrap: break-word;'><tr><td style='text-align: center; word-wrap: break-word;'>Method</td><td style='text-align: center; word-wrap: break-word;'>Model</td><td style='text-align: center; word-wrap: break-word;'>Rate</td><td style='text-align: center; word-wrap: break-word;'>Hard F</td><td style='text-align: center; word-wrap: break-word;'>Offset-free</td><td style='text-align: center; word-wrap: break-word;'>Force sens.</td><td style='text-align: center; word-wrap: break-word;'>Stab.</td></tr><tr><td style='text-align: center; word-wrap: break-word;'>Class. imp. [1]</td><td style='text-align: center; word-wrap: break-word;'>port imp.</td><td style='text-align: center; word-wrap: break-word;'>kHz</td><td style='text-align: center; word-wrap: break-word;'>No</td><td style='text-align: center; word-wrap: break-word;'>No</td><td style='text-align: center; word-wrap: break-word;'>opt.</td><td style='text-align: center; word-wrap: break-word;'>passiv.</td></tr><tr><td style='text-align: center; word-wrap: break-word;'>Jacob. [5], [6]</td><td style='text-align: center; word-wrap: break-word;'>kinematic</td><td style='text-align: center; word-wrap: break-word;'>10-100 Hz</td><td style='text-align: center; word-wrap: break-word;'>No</td><td style='text-align: center; word-wrap: break-word;'>No</td><td style='text-align: center; word-wrap: break-word;'>local</td><td style='text-align: center; word-wrap: break-word;'>partial</td></tr><tr><td style='text-align: center; word-wrap: break-word;'>Cosserat [4]</td><td style='text-align: center; word-wrap: break-word;'>Cosserat</td><td style='text-align: center; word-wrap: break-word;'>10-20 Hz</td><td style='text-align: center; word-wrap: break-word;'>soft</td><td style='text-align: center; word-wrap: break-word;'>varies</td><td style='text-align: center; word-wrap: break-word;'>yes</td><td style='text-align: center; word-wrap: break-word;'>NLP-dep.</td></tr><tr><td style='text-align: center; word-wrap: break-word;'>Learning</td><td style='text-align: center; word-wrap: break-word;'>data</td><td style='text-align: center; word-wrap: break-word;'>high</td><td style='text-align: center; word-wrap: break-word;'>No</td><td style='text-align: center; word-wrap: break-word;'>No</td><td style='text-align: center; word-wrap: break-word;'>varies</td><td style='text-align: center; word-wrap: break-word;'>none</td></tr><tr><td style='text-align: center; word-wrap: break-word;'>ADRC [8]</td><td style='text-align: center; word-wrap: break-word;'>lumped-dist.</td><td style='text-align: center; word-wrap: break-word;'>kHz</td><td style='text-align: center; word-wrap: break-word;'>No</td><td style='text-align: center; word-wrap: break-word;'>yes</td><td style='text-align: center; word-wrap: break-word;'>yes</td><td style='text-align: center; word-wrap: break-word;'>yes</td></tr><tr><td style='text-align: center; word-wrap: break-word;'>This work</td><td style='text-align: center; word-wrap: break-word;'>int.-dyn.+Kal.</td><td style='text-align: center; word-wrap: break-word;'>500 Hz</td><td style='text-align: center; word-wrap: break-word;'>Yes</td><td style='text-align: center; word-wrap: break-word;'>yes</td><td style='text-align: center; word-wrap: break-word;'>no</td><td style='text-align: center; word-wrap: break-word;'>DARE</td></tr></table>",
+            "block_bbox": [
+                623,
+                186,
+                1123,
+                363
+            ],
+            "block_id": 9,
+            "block_order": null,
+            "group_id": 9,
+            "block_polygon_points": [
+                [
+                    623.0,
+                    186.0
+                ],
+                [
+                    1123.0,
+                    186.0
+                ],
+                [
+                    1123.0,
+                    363.0
+                ],
+                [
+                    623.0,
+                    363.0
+                ]
+            ]
+        },
+        {
+            "block_label": "figure_title",
+            "block_content": "<div style=\"text-align: center;\">Capability Comparison with Representative Catheter-Control Methods</div>\n",
+            "block_bbox": [
+                622,
+                132,
+                1126,
+                169
+            ],
+            "block_id": 10,
+            "block_order": null,
+            "group_id": 10,
+            "block_polygon_points": [
+                [
+                    622.0,
+                    132.0
+                ],
+                [
+                    1126.0,
+                    132.0
+                ],
+                [
+                    1126.0,
+                    169.0
+                ],
+                [
+                    622.0,
+                    169.0
+                ]
+            ]
+        },
+        {
+            "block_label": "figure_title",
+            "block_content": "<div style=\"text-align: center;\">TABLE III</div>\n",
+            "block_bbox": [
+                835,
+                398,
+                914,
+                416
+            ],
+            "block_id": 11,
+            "block_order": null,
+            "group_id": 11,
+            "block_polygon_points": [
+                [
+                    835.0,
+                    398.0
+                ],
+                [
+                    913.0,
+                    398.0
+                ],
+                [
+                    913.0,
+                    415.0
+                ],
+                [
+                    835.0,
+                    415.0
+                ]
+            ]
+        },
+        {
+            "block_label": "figure_title",
+            "block_content": "<div style=\"text-align: center;\">QUANTITATIVE COMPARISON WITH REPORTED SENSOR-FREE / FORCE-CONTROLLED CATHETER RESULTS</div>\n",
+            "block_bbox": [
+                656,
+                416,
+                1093,
+                455
+            ],
+            "block_id": 12,
+            "block_order": null,
+            "group_id": 12,
+            "block_polygon_points": [
+                [
+                    656.0,
+                    416.0
+                ],
+                [
+                    1093.0,
+                    416.0
+                ],
+                [
+                    1093.0,
+                    455.0
+                ],
+                [
+                    656.0,
+                    455.0
+                ]
+            ]
+        },
+        {
+            "block_label": "table",
+            "block_content": "\n<table border=1 style='margin: auto; word-wrap: break-word;'><tr><td style='text-align: center; word-wrap: break-word;'>Work</td><td style='text-align: center; word-wrap: break-word;'>Objective</td><td style='text-align: center; word-wrap: break-word;'>Sensing</td><td style='text-align: center; word-wrap: break-word;'>Force result</td><td style='text-align: center; word-wrap: break-word;'>Hard bound</td></tr><tr><td style='text-align: center; word-wrap: break-word;'>[14]</td><td style='text-align: center; word-wrap: break-word;'>force reg.</td><td style='text-align: center; word-wrap: break-word;'>sensor-free</td><td style='text-align: center; word-wrap: break-word;'>0.03-0.05 N RMSE</td><td style='text-align: center; word-wrap: break-word;'>no</td></tr><tr><td style='text-align: center; word-wrap: break-word;'>[15]</td><td style='text-align: center; word-wrap: break-word;'>force reg.</td><td style='text-align: center; word-wrap: break-word;'>sensor+US</td><td style='text-align: center; word-wrap: break-word;'>$ \\sim $0.08 N RMSE</td><td style='text-align: center; word-wrap: break-word;'>no</td></tr><tr><td style='text-align: center; word-wrap: break-word;'>This work (safety)</td><td style='text-align: center; word-wrap: break-word;'>pos. track</td><td style='text-align: center; word-wrap: break-word;'>sensor-free</td><td style='text-align: center; word-wrap: break-word;'>peak 0.47 N (≤ 0.5)</td><td style='text-align: center; word-wrap: break-word;'>yes</td></tr></table>",
+            "block_bbox": [
+                655,
+                469,
+                1097,
+                598
+            ],
+            "block_id": 13,
+            "block_order": null,
+            "group_id": 13,
+            "block_polygon_points": [
+                [
+                    655.0,
+                    469.0
+                ],
+                [
+                    1097.0,
+                    469.0
+                ],
+                [
+                    1097.0,
+                    598.0
+                ],
+                [
+                    655.0,
+                    598.0
+                ]
+            ]
+        },
+        {
+            "block_label": "paragraph_title",
+            "block_content": "### C. Comparison with Published Catheter-Control Approaches",
+            "block_bbox": [
+                619,
+                646,
+                1128,
+                669
+            ],
+            "block_id": 14,
+            "block_order": 5,
+            "group_id": 14,
+            "block_polygon_points": [
+                [
+                    619.0,
+                    646.0
+                ],
+                [
+                    1128.0,
+                    646.0
+                ],
+                [
+                    1128.0,
+                    669.0
+                ],
+                [
+                    619.0,
+                    669.0
+                ]
+            ]
+        },
+        {
+            "block_label": "text",
+            "block_content": "Table II positions the proposed predictive interaction-dynamics framework against representative classes of catheter/continuum-robot control from the literature. Direct numerical comparison is limited—reported conditions (platform, sensing, contact, metric) differ substantially—so the table compares capabilities and order-of-magnitude characteristics rather than asserting head-to-head accuracy. The row for this work is from the MuJoCo simulation in Section VI-B; the literature rows summarize the cited methods at a capability level rather than reproducing their experiments.",
+            "block_bbox": [
+                617,
+                682,
+                1131,
+                922
+            ],
+            "block_id": 15,
+            "block_order": 6,
+            "group_id": 15,
+            "block_polygon_points": [
+                [
+                    617.0,
+                    682.0
+                ],
+                [
+                    1131.0,
+                    682.0
+                ],
+                [
+                    1131.0,
+                    922.0
+                ],
+                [
+                    617.0,
+                    922.0
+                ]
+            ]
+        },
+        {
+            "block_label": "text",
+            "block_content": "Observations. (1) Among the surveyed classes, only the proposed framework provides a hard contact-force interaction constraint with formal feasibility, the clinically essential capability (Section VI-B). Here “hard” means a horizon-wise force bound enforced inside the optimization; input saturation on a non-predictive law (e.g. ADRC with a clamped command) limits the command, not the predicted contact force, and cannot guarantee feasibility against a penetrating reference, so the “No” entries are in this stronger, predictive sense. (2) It retains a high update rate (500 Hz) because the configuration-invariant  $ A_{d} $ structure makes the unconstrained step a matrix-vector multiply, unlike Cosserat predictive control whose online NLP limits rates to  $ \\sim10-20 $ Hz. (3) It requires no force sensor, unlike ADRC formulations that key off a measured force channel. (4) Its formal guarantees (ISS, DARE-based stability) exceed those of learning-based and purely kinematic controllers. The trade-off is reduced model fidelity relative to full Cosserat predictive control—mitigated by the disturbance-compression principle (Remark 1).",
+            "block_bbox": [
+                616,
+                923,
+                1131,
+                1376
+            ],
+            "block_id": 16,
+            "block_order": 7,
+            "group_id": 16,
+            "block_polygon_points": [
+                [
+                    616.0,
+                    923.0
+                ],
+                [
+                    1131.0,
+                    923.0
+                ],
+                [
+                    1131.0,
+                    1376.0
+                ],
+                [
+                    616.0,
+                    1376.0
+                ]
+            ]
+        },
+        {
+            "block_label": "text",
+            "block_content": "Quantitative reading. Table III places the present work against the closest published baselines—the sensor-free tendon-driven ablation-catheter force controllers of Jolaei et al. [14] and Kesner and Howe [15].",
+            "block_bbox": [
+                617,
+                1378,
+                1131,
+                1473
+            ],
+            "block_id": 17,
+            "block_order": 8,
+            "group_id": 17,
+            "block_polygon_points": [
+                [
+                    617.0,
+                    1378.0
+                ],
+                [
+                    1131.0,
+                    1378.0
+                ],
+                [
+                    1131.0,
+                    1473.0
+                ],
+                [
+                    617.0,
+                    1473.0
+                ]
+            ]
+        },
+        {
+            "block_label": "text",
+            "block_content": "A direct head-to-head is not meaningful: [14], [15] regulate",
+            "block_bbox": [
+                638,
+                1475,
+                1130,
+                1499
+            ],
+            "block_id": 18,
+            "block_order": 9,
+            "group_id": 18,
+            "block_polygon_points": [
+                [
+                    638.0,
+                    1475.0
+                ],
+                [
+                    1130.0,
+                    1475.0
+                ],
+                [
+                    1130.0,
+                    1499.0
+                ],
+                [
+                    638.0,
+                    1499.0
+                ]
+            ]
+        }
+    ],
+    "layout_det_res": {
+        "input_path": null,
+        "page_index": null,
+        "boxes": [
+            {
+                "cls_id": 12,
+                "label": "header",
+                "score": 0.8019589781761169,
+                "coordinate": [
+                    95,
+                    49,
+                    167,
+                    65
+                ],
+                "order": null,
+                "polygon_points": [
+                    [
+                        95.0,
+                        49.0
+                    ],
+                    [
+                        166.0,
+                        49.0
+                    ],
+                    [
+                        166.0,
+                        64.0
+                    ],
+                    [
+                        95.0,
+                        64.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 16,
+                "label": "number",
+                "score": 0.6353878378868103,
+                "coordinate": [
+                    1117,
+                    51,
+                    1129,
+                    65
+                ],
+                "order": 1,
+                "polygon_points": [
+                    [
+                        1117.0,
+                        51.0
+                    ],
+                    [
+                        1128.0,
+                        51.0
+                    ],
+                    [
+                        1128.0,
+                        64.0
+                    ],
+                    [
+                        1117.0,
+                        64.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 3,
+                "label": "chart",
+                "score": 0.9593633413314819,
+                "coordinate": [
+                    101,
+                    119,
+                    595,
+                    423
+                ],
+                "order": null,
+                "polygon_points": [
+                    [
+                        101.0,
+                        119.0
+                    ],
+                    [
+                        595.0,
+                        119.0
+                    ],
+                    [
+                        595.0,
+                        423.0
+                    ],
+                    [
+                        101.0,
+                        423.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 7,
+                "label": "figure_title",
+                "score": 0.9279983639717102,
+                "coordinate": [
+                    92,
+                    453,
+                    604,
+                    636
+                ],
+                "order": null,
+                "polygon_points": [
+                    [
+                        92.0,
+                        453.0
+                    ],
+                    [
+                        604.0,
+                        453.0
+                    ],
+                    [
+                        604.0,
+                        636.0
+                    ],
+                    [
+                        92.0,
+                        636.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.936810314655304,
+                "coordinate": [
+                    131,
+                    710,
+                    603,
+                    804
+                ],
+                "order": 2,
+                "polygon_points": [
+                    [
+                        131.0,
+                        710.0
+                    ],
+                    [
+                        603.0,
+                        710.0
+                    ],
+                    [
+                        603.0,
+                        804.0
+                    ],
+                    [
+                        131.0,
+                        804.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.9554997086524963,
+                "coordinate": [
+                    111,
+                    805,
+                    604,
+                    996
+                ],
+                "order": 3,
+                "polygon_points": [
+                    [
+                        111.0,
+                        805.0
+                    ],
+                    [
+                        604.0,
+                        805.0
+                    ],
+                    [
+                        604.0,
+                        996.0
+                    ],
+                    [
+                        111.0,
+                        996.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.9619931578636169,
+                "coordinate": [
+                    110,
+                    997,
+                    603,
+                    1259
+                ],
+                "order": 4,
+                "polygon_points": [
+                    [
+                        110.0,
+                        997.0
+                    ],
+                    [
+                        603.0,
+                        997.0
+                    ],
+                    [
+                        603.0,
+                        1259.0
+                    ],
+                    [
+                        110.0,
+                        1259.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 15,
+                "label": "inline_formula",
+                "score": 0.6920687556266785,
+                "coordinate": [
+                    323,
+                    1092,
+                    362,
+                    1115
+                ],
+                "order": 5,
+                "polygon_points": [
+                    [
+                        323.0,
+                        1092.0
+                    ],
+                    [
+                        323.0,
+                        1114.0
+                    ],
+                    [
+                        361.0,
+                        1114.0
+                    ],
+                    [
+                        361.0,
+                        1092.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.9534574151039124,
+                "coordinate": [
+                    109,
+                    1260,
+                    604,
+                    1500
+                ],
+                "order": 6,
+                "polygon_points": [
+                    [
+                        109.0,
+                        1260.0
+                    ],
+                    [
+                        604.0,
+                        1260.0
+                    ],
+                    [
+                        604.0,
+                        1500.0
+                    ],
+                    [
+                        109.0,
+                        1500.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 7,
+                "label": "figure_title",
+                "score": 0.7297919988632202,
+                "coordinate": [
+                    838,
+                    114,
+                    911,
+                    131
+                ],
+                "order": null,
+                "polygon_points": [
+                    [
+                        838.0,
+                        114.0
+                    ],
+                    [
+                        910.0,
+                        114.0
+                    ],
+                    [
+                        910.0,
+                        130.0
+                    ],
+                    [
+                        838.0,
+                        130.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 21,
+                "label": "table",
+                "score": 0.947088897228241,
+                "coordinate": [
+                    623,
+                    186,
+                    1123,
+                    363
+                ],
+                "order": null,
+                "polygon_points": [
+                    [
+                        623.0,
+                        186.0
+                    ],
+                    [
+                        1123.0,
+                        186.0
+                    ],
+                    [
+                        1123.0,
+                        363.0
+                    ],
+                    [
+                        623.0,
+                        363.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 7,
+                "label": "figure_title",
+                "score": 0.8228216171264648,
+                "coordinate": [
+                    622,
+                    132,
+                    1126,
+                    169
+                ],
+                "order": null,
+                "polygon_points": [
+                    [
+                        622.0,
+                        132.0
+                    ],
+                    [
+                        1126.0,
+                        132.0
+                    ],
+                    [
+                        1126.0,
+                        169.0
+                    ],
+                    [
+                        622.0,
+                        169.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 7,
+                "label": "figure_title",
+                "score": 0.7496306300163269,
+                "coordinate": [
+                    835,
+                    398,
+                    914,
+                    416
+                ],
+                "order": null,
+                "polygon_points": [
+                    [
+                        835.0,
+                        398.0
+                    ],
+                    [
+                        913.0,
+                        398.0
+                    ],
+                    [
+                        913.0,
+                        415.0
+                    ],
+                    [
+                        835.0,
+                        415.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 7,
+                "label": "figure_title",
+                "score": 0.8366889953613281,
+                "coordinate": [
+                    656,
+                    416,
+                    1093,
+                    455
+                ],
+                "order": null,
+                "polygon_points": [
+                    [
+                        656.0,
+                        416.0
+                    ],
+                    [
+                        1093.0,
+                        416.0
+                    ],
+                    [
+                        1093.0,
+                        455.0
+                    ],
+                    [
+                        656.0,
+                        455.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 21,
+                "label": "table",
+                "score": 0.9318324327468872,
+                "coordinate": [
+                    655,
+                    469,
+                    1097,
+                    598
+                ],
+                "order": null,
+                "polygon_points": [
+                    [
+                        655.0,
+                        469.0
+                    ],
+                    [
+                        1097.0,
+                        469.0
+                    ],
+                    [
+                        1097.0,
+                        598.0
+                    ],
+                    [
+                        655.0,
+                        598.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 17,
+                "label": "paragraph_title",
+                "score": 0.8506011962890625,
+                "coordinate": [
+                    619,
+                    646,
+                    1128,
+                    669
+                ],
+                "order": 7,
+                "polygon_points": [
+                    [
+                        619.0,
+                        646.0
+                    ],
+                    [
+                        1128.0,
+                        646.0
+                    ],
+                    [
+                        1128.0,
+                        669.0
+                    ],
+                    [
+                        619.0,
+                        669.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.9640868902206421,
+                "coordinate": [
+                    617,
+                    682,
+                    1131,
+                    922
+                ],
+                "order": 8,
+                "polygon_points": [
+                    [
+                        617.0,
+                        682.0
+                    ],
+                    [
+                        1131.0,
+                        682.0
+                    ],
+                    [
+                        1131.0,
+                        922.0
+                    ],
+                    [
+                        617.0,
+                        922.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.9699571132659912,
+                "coordinate": [
+                    616,
+                    923,
+                    1131,
+                    1376
+                ],
+                "order": 9,
+                "polygon_points": [
+                    [
+                        616.0,
+                        923.0
+                    ],
+                    [
+                        1131.0,
+                        923.0
+                    ],
+                    [
+                        1131.0,
+                        1376.0
+                    ],
+                    [
+                        616.0,
+                        1376.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 15,
+                "label": "inline_formula",
+                "score": 0.6466912031173706,
+                "coordinate": [
+                    699,
+                    1162,
+                    725,
+                    1184
+                ],
+                "order": 10,
+                "polygon_points": [
+                    [
+                        699.0,
+                        1162.0
+                    ],
+                    [
+                        699.0,
+                        1183.0
+                    ],
+                    [
+                        724.0,
+                        1183.0
+                    ],
+                    [
+                        724.0,
+                        1162.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.9489417672157288,
+                "coordinate": [
+                    617,
+                    1378,
+                    1131,
+                    1473
+                ],
+                "order": 11,
+                "polygon_points": [
+                    [
+                        617.0,
+                        1378.0
+                    ],
+                    [
+                        1131.0,
+                        1378.0
+                    ],
+                    [
+                        1131.0,
+                        1473.0
+                    ],
+                    [
+                        617.0,
+                        1473.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.8425479531288147,
+                "coordinate": [
+                    638,
+                    1475,
+                    1130,
+                    1499
+                ],
+                "order": 12,
+                "polygon_points": [
+                    [
+                        638.0,
+                        1475.0
+                    ],
+                    [
+                        1130.0,
+                        1475.0
+                    ],
+                    [
+                        1130.0,
+                        1499.0
+                    ],
+                    [
+                        638.0,
+                        1499.0
+                    ]
+                ]
+            }
+        ]
+    }
+}

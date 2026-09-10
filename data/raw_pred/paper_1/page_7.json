@@ -1,0 +1,705 @@
+{
+    "input_path": "/home/bocchi/Work/Paper-Translate-Personal-Project/input/2210.17323v2.pdf",
+    "page_index": 7,
+    "page_count": 16,
+    "width": 1224,
+    "height": 1584,
+    "model_settings": {
+        "use_doc_preprocessor": false,
+        "use_layout_detection": true,
+        "use_chart_recognition": false,
+        "use_seal_recognition": false,
+        "use_ocr_for_image_block": true,
+        "format_block_content": true,
+        "merge_layout_blocks": true,
+        "markdown_ignore_labels": [
+            "number",
+            "footnote",
+            "header",
+            "header_image",
+            "footer",
+            "footer_image",
+            "aside_text"
+        ],
+        "return_layout_polygon_points": true
+    },
+    "parsing_res_list": [
+        {
+            "block_label": "header",
+            "block_content": "Published as a conference paper at ICLR 2023",
+            "block_bbox": [
+                212,
+                54,
+                589,
+                76
+            ],
+            "block_id": 0,
+            "block_order": null,
+            "group_id": 0,
+            "block_polygon_points": [
+                [
+                    212.0,
+                    54.0
+                ],
+                [
+                    589.0,
+                    54.0
+                ],
+                [
+                    589.0,
+                    76.0
+                ],
+                [
+                    212.0,
+                    76.0
+                ]
+            ]
+        },
+        {
+            "block_label": "figure_title",
+            "block_content": "<div style=\"text-align: center;\">We note that grouping interacts very well with GPTQ, as the group parameters can be determined during the quantization process of each layer, always using the most current updated weights.</div>\n",
+            "block_bbox": [
+                210,
+                166,
+                1011,
+                213
+            ],
+            "block_id": 1,
+            "block_order": null,
+            "group_id": 1,
+            "block_polygon_points": [
+                [
+                    210.0,
+                    166.0
+                ],
+                [
+                    1011.0,
+                    166.0
+                ],
+                [
+                    1011.0,
+                    213.0
+                ],
+                [
+                    210.0,
+                    213.0
+                ]
+            ]
+        },
+        {
+            "block_label": "table",
+            "block_content": "\n<table border=1 style='margin: auto; word-wrap: break-word;'><tr><td rowspan=\"2\">Method</td><td rowspan=\"2\">Bits</td><td colspan=\"4\">OPT-175B</td><td colspan=\"4\">BLOOM-176B</td></tr><tr><td style='text-align: center; word-wrap: break-word;'>Wiki2</td><td style='text-align: center; word-wrap: break-word;'>PTB</td><td style='text-align: center; word-wrap: break-word;'>C4</td><td style='text-align: center; word-wrap: break-word;'>LAMB. $ \\uparrow $</td><td style='text-align: center; word-wrap: break-word;'>Wiki2</td><td style='text-align: center; word-wrap: break-word;'>PTB</td><td style='text-align: center; word-wrap: break-word;'>C4</td><td style='text-align: center; word-wrap: break-word;'>LAMB. $ \\uparrow $</td></tr><tr><td style='text-align: center; word-wrap: break-word;'>Baseline</td><td style='text-align: center; word-wrap: break-word;'>16</td><td style='text-align: center; word-wrap: break-word;'>8.34</td><td style='text-align: center; word-wrap: break-word;'>12.01</td><td style='text-align: center; word-wrap: break-word;'>10.13</td><td style='text-align: center; word-wrap: break-word;'>75.59</td><td style='text-align: center; word-wrap: break-word;'>8.11</td><td style='text-align: center; word-wrap: break-word;'>14.59</td><td style='text-align: center; word-wrap: break-word;'>11.71</td><td style='text-align: center; word-wrap: break-word;'>67.40</td></tr><tr><td style='text-align: center; word-wrap: break-word;'>RTN</td><td style='text-align: center; word-wrap: break-word;'>4</td><td style='text-align: center; word-wrap: break-word;'>10.54</td><td style='text-align: center; word-wrap: break-word;'>14.22</td><td style='text-align: center; word-wrap: break-word;'>11.61</td><td style='text-align: center; word-wrap: break-word;'>71.34</td><td style='text-align: center; word-wrap: break-word;'>8.37</td><td style='text-align: center; word-wrap: break-word;'>15.00</td><td style='text-align: center; word-wrap: break-word;'>12.04</td><td style='text-align: center; word-wrap: break-word;'>66.70</td></tr><tr><td style='text-align: center; word-wrap: break-word;'>GPTQ</td><td style='text-align: center; word-wrap: break-word;'>4</td><td style='text-align: center; word-wrap: break-word;'>8.37</td><td style='text-align: center; word-wrap: break-word;'>12.26</td><td style='text-align: center; word-wrap: break-word;'>10.28</td><td style='text-align: center; word-wrap: break-word;'>76.80</td><td style='text-align: center; word-wrap: break-word;'>8.21</td><td style='text-align: center; word-wrap: break-word;'>14.75</td><td style='text-align: center; word-wrap: break-word;'>11.81</td><td style='text-align: center; word-wrap: break-word;'>67.71</td></tr><tr><td style='text-align: center; word-wrap: break-word;'>RTN</td><td style='text-align: center; word-wrap: break-word;'>3</td><td style='text-align: center; word-wrap: break-word;'>7.3e3</td><td style='text-align: center; word-wrap: break-word;'>8.0e3</td><td style='text-align: center; word-wrap: break-word;'>4.6e3</td><td style='text-align: center; word-wrap: break-word;'>0</td><td style='text-align: center; word-wrap: break-word;'>571.</td><td style='text-align: center; word-wrap: break-word;'>107.</td><td style='text-align: center; word-wrap: break-word;'>598.</td><td style='text-align: center; word-wrap: break-word;'>0.17</td></tr><tr><td style='text-align: center; word-wrap: break-word;'>GPTQ</td><td style='text-align: center; word-wrap: break-word;'>3</td><td style='text-align: center; word-wrap: break-word;'>8.68</td><td style='text-align: center; word-wrap: break-word;'>12.68</td><td style='text-align: center; word-wrap: break-word;'>10.67</td><td style='text-align: center; word-wrap: break-word;'>76.19</td><td style='text-align: center; word-wrap: break-word;'>8.64</td><td style='text-align: center; word-wrap: break-word;'>15.57</td><td style='text-align: center; word-wrap: break-word;'>12.27</td><td style='text-align: center; word-wrap: break-word;'>65.10</td></tr><tr><td style='text-align: center; word-wrap: break-word;'>GPTQ</td><td style='text-align: center; word-wrap: break-word;'>3/g1024</td><td style='text-align: center; word-wrap: break-word;'>8.45</td><td style='text-align: center; word-wrap: break-word;'>12.48</td><td style='text-align: center; word-wrap: break-word;'>10.47</td><td style='text-align: center; word-wrap: break-word;'>77.39</td><td style='text-align: center; word-wrap: break-word;'>8.35</td><td style='text-align: center; word-wrap: break-word;'>15.01</td><td style='text-align: center; word-wrap: break-word;'>11.98</td><td style='text-align: center; word-wrap: break-word;'>67.47</td></tr><tr><td style='text-align: center; word-wrap: break-word;'>GPTQ</td><td style='text-align: center; word-wrap: break-word;'>3/g128</td><td style='text-align: center; word-wrap: break-word;'>8.45</td><td style='text-align: center; word-wrap: break-word;'>12.37</td><td style='text-align: center; word-wrap: break-word;'>10.36</td><td style='text-align: center; word-wrap: break-word;'>76.42</td><td style='text-align: center; word-wrap: break-word;'>8.26</td><td style='text-align: center; word-wrap: break-word;'>14.89</td><td style='text-align: center; word-wrap: break-word;'>11.85</td><td style='text-align: center; word-wrap: break-word;'>67.86</td></tr></table>",
+            "block_bbox": [
+                242,
+                231,
+                976,
+                450
+            ],
+            "block_id": 2,
+            "block_order": null,
+            "group_id": 2,
+            "block_polygon_points": [
+                [
+                    242.0,
+                    231.0
+                ],
+                [
+                    976.0,
+                    231.0
+                ],
+                [
+                    976.0,
+                    450.0
+                ],
+                [
+                    242.0,
+                    450.0
+                ]
+            ]
+        },
+        {
+            "block_label": "figure_title",
+            "block_content": "<div style=\"text-align: center;\">Table 5: Results summary for OPT-175B and BLOOM-176B. “g1024” and “g128” denote results with groupings of size 1024 and 128, respectively.</div>\n",
+            "block_bbox": [
+                210,
+                461,
+                1011,
+                508
+            ],
+            "block_id": 3,
+            "block_order": null,
+            "group_id": 3,
+            "block_polygon_points": [
+                [
+                    210.0,
+                    461.0
+                ],
+                [
+                    1011.0,
+                    461.0
+                ],
+                [
+                    1011.0,
+                    508.0
+                ],
+                [
+                    210.0,
+                    508.0
+                ]
+            ]
+        },
+        {
+            "block_label": "text",
+            "block_content": "Practical Speedups. Finally, we study practical applications. As an interesting use-case, we focus on the OPT-175B model: quantized to 3 bits, this model takes approximately 63GB of memory, including the embeddings and the output layer, which are kept in full FP16 precision. Additionally, storing the complete history of keys and values for all layers, a common optimization for generation tasks, consumes another ≈ 9GB for the maximum of 2048 tokens. Hence, we can actually fit the entire quantized model into a single 80GB A100 GPU, which can be executed by dynamically dequantizing layers as they are required during inference (the model would not fully fit using 4 bits). For reference, standard FP16 execution requires 5x80GB GPUs, and the state-of-the-art 8bit LLM.int8() quantizer (Dettmers et al., 2022) requires 3 such GPUs.",
+            "block_bbox": [
+                209,
+                531,
+                1013,
+                728
+            ],
+            "block_id": 4,
+            "block_order": 1,
+            "group_id": 4,
+            "block_polygon_points": [
+                [
+                    209.0,
+                    531.0
+                ],
+                [
+                    1013.0,
+                    531.0
+                ],
+                [
+                    1013.0,
+                    728.0
+                ],
+                [
+                    209.0,
+                    728.0
+                ]
+            ]
+        },
+        {
+            "block_label": "text",
+            "block_content": "Next, we consider language generation, one of the most appealing applications of these models, with the goal of latency reduction. Unlike LLM.int8(), which reduces memory costs but has the same runtime as the FP16 baseline, we show that our quantized models can achieve significant speedups for this application. For language generation, the model processes and outputs one token at-a-time, which for OPT-175B can easily take a few 100s of milliseconds per token. Increasing the speed at which the user receives generated results is challenging, as compute is dominated by matrix-vector products. Unlike matrix-matrix products, these are primarily limited by memory bandwidth. We address this problem by developing a quantized-matrix full-precision-vector product kernel which performs a matrix vector product by dynamically dequantizing weights when needed. Most notably, this does not require any activation quantization. While dequantization consumes extra compute, the kernel has to access a lot less memory, leading to significant speedups, as shown in Table 6. We note that almost all of the speedup is due to our kernels, as communication costs are negligible in our standard HuggingFace-accelerate-like setting (see Appendix A.2.2 for details).",
+            "block_bbox": [
+                209,
+                737,
+                1014,
+                1019
+            ],
+            "block_id": 5,
+            "block_order": 2,
+            "group_id": 5,
+            "block_polygon_points": [
+                [
+                    209.0,
+                    737.0
+                ],
+                [
+                    1014.0,
+                    737.0
+                ],
+                [
+                    1014.0,
+                    1019.0
+                ],
+                [
+                    209.0,
+                    1019.0
+                ]
+            ]
+        },
+        {
+            "block_label": "table",
+            "block_content": "\n<table border=1 style='margin: auto; word-wrap: break-word;'><tr><td style='text-align: center; word-wrap: break-word;'>GPU</td><td style='text-align: center; word-wrap: break-word;'>FP16</td><td style='text-align: center; word-wrap: break-word;'>3bit</td><td style='text-align: center; word-wrap: break-word;'>Speedup</td><td style='text-align: center; word-wrap: break-word;'>GPU reduction</td></tr><tr><td style='text-align: center; word-wrap: break-word;'>A6000-48GB</td><td style='text-align: center; word-wrap: break-word;'>589ms</td><td style='text-align: center; word-wrap: break-word;'>130ms</td><td style='text-align: center; word-wrap: break-word;'>4.53 $ \\times $</td><td style='text-align: center; word-wrap: break-word;'>8 $ \\rightarrow $2</td></tr><tr><td style='text-align: center; word-wrap: break-word;'>A100-80GB</td><td style='text-align: center; word-wrap: break-word;'>230ms</td><td style='text-align: center; word-wrap: break-word;'>71ms</td><td style='text-align: center; word-wrap: break-word;'>3.24 $ \\times $</td><td style='text-align: center; word-wrap: break-word;'>5 $ \\rightarrow $1</td></tr></table>",
+            "block_bbox": [
+                362,
+                1038,
+                855,
+                1113
+            ],
+            "block_id": 6,
+            "block_order": null,
+            "group_id": 6,
+            "block_polygon_points": [
+                [
+                    362.0,
+                    1038.0
+                ],
+                [
+                    855.0,
+                    1038.0
+                ],
+                [
+                    855.0,
+                    1113.0
+                ],
+                [
+                    362.0,
+                    1113.0
+                ]
+            ]
+        },
+        {
+            "block_label": "figure_title",
+            "block_content": "<div style=\"text-align: center;\">Table 6: Average per-token latency (batch size 1) when generating sequences of length 128.</div>\n",
+            "block_bbox": [
+                241,
+                1127,
+                980,
+                1149
+            ],
+            "block_id": 7,
+            "block_order": null,
+            "group_id": 7,
+            "block_polygon_points": [
+                [
+                    241.0,
+                    1127.0
+                ],
+                [
+                    980.0,
+                    1127.0
+                ],
+                [
+                    980.0,
+                    1149.0
+                ],
+                [
+                    241.0,
+                    1149.0
+                ]
+            ]
+        },
+        {
+            "block_label": "text",
+            "block_content": "For example, using our kernels, the 3-bit OPT-175B model obtained via GPTQ running on a single A100 is about  $ 3.25 \\times $ faster than the FP16 version (running on 5 GPUs) in terms of average time per token. More accessible GPUs, such as the NVIDIA A6000, have much lower memory bandwidth, so this strategy is even more effective: executing the 3-bit OPT-175B model on 2x A6000 GPUs reduces latency from 589 milliseconds for FP16 inference (on 8 GPUs) to 130 milliseconds, a  $ 4.5 \\times $ latency reduction.",
+            "block_bbox": [
+                209,
+                1173,
+                1013,
+                1304
+            ],
+            "block_id": 8,
+            "block_order": 3,
+            "group_id": 8,
+            "block_polygon_points": [
+                [
+                    209.0,
+                    1173.0
+                ],
+                [
+                    1013.0,
+                    1173.0
+                ],
+                [
+                    1013.0,
+                    1304.0
+                ],
+                [
+                    209.0,
+                    1304.0
+                ]
+            ]
+        },
+        {
+            "block_label": "text",
+            "block_content": "Zero-Shot Tasks. While our focus is on language generation, we also evaluate the performance of quantized models on some popular zero-shot tasks, namely LAMBADA (Paperno et al., 2016), ARC (Easy and Challenge) (Boratko et al., 2018) and PIQA (Tata & Patel, 2003). Figure 3 visualizes model performance on LAMBADA (and see also \"Lamb.\" results in Table 5). We observe similar behavior as before: the outliers are that 1) quantization appears \"easier\" across the whole spectrum of models at 4-bit, where even RTN performs relatively well, and 2) at 3-bit, RTN breaks down, while GPTQ still provides good accuracy. We provide additional results in Appendix A.4.",
+            "block_bbox": [
+                209,
+                1314,
+                1013,
+                1468
+            ],
+            "block_id": 9,
+            "block_order": 4,
+            "group_id": 9,
+            "block_polygon_points": [
+                [
+                    209.0,
+                    1314.0
+                ],
+                [
+                    1013.0,
+                    1314.0
+                ],
+                [
+                    1013.0,
+                    1468.0
+                ],
+                [
+                    209.0,
+                    1468.0
+                ]
+            ]
+        },
+        {
+            "block_label": "number",
+            "block_content": "8",
+            "block_bbox": [
+                605,
+                1504,
+                620,
+                1523
+            ],
+            "block_id": 10,
+            "block_order": null,
+            "group_id": 10,
+            "block_polygon_points": [
+                [
+                    605.0,
+                    1504.0
+                ],
+                [
+                    619.0,
+                    1504.0
+                ],
+                [
+                    619.0,
+                    1522.0
+                ],
+                [
+                    605.0,
+                    1522.0
+                ]
+            ]
+        }
+    ],
+    "layout_det_res": {
+        "input_path": null,
+        "page_index": null,
+        "boxes": [
+            {
+                "cls_id": 12,
+                "label": "header",
+                "score": 0.8765891790390015,
+                "coordinate": [
+                    212,
+                    54,
+                    589,
+                    76
+                ],
+                "order": null,
+                "polygon_points": [
+                    [
+                        212.0,
+                        54.0
+                    ],
+                    [
+                        589.0,
+                        54.0
+                    ],
+                    [
+                        589.0,
+                        76.0
+                    ],
+                    [
+                        212.0,
+                        76.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 7,
+                "label": "figure_title",
+                "score": 0.8856237530708313,
+                "coordinate": [
+                    210,
+                    166,
+                    1011,
+                    213
+                ],
+                "order": null,
+                "polygon_points": [
+                    [
+                        210.0,
+                        166.0
+                    ],
+                    [
+                        1011.0,
+                        166.0
+                    ],
+                    [
+                        1011.0,
+                        213.0
+                    ],
+                    [
+                        210.0,
+                        213.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 21,
+                "label": "table",
+                "score": 0.9680348634719849,
+                "coordinate": [
+                    242,
+                    231,
+                    976,
+                    450
+                ],
+                "order": null,
+                "polygon_points": [
+                    [
+                        242.0,
+                        231.0
+                    ],
+                    [
+                        976.0,
+                        231.0
+                    ],
+                    [
+                        976.0,
+                        450.0
+                    ],
+                    [
+                        242.0,
+                        450.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 7,
+                "label": "figure_title",
+                "score": 0.9043740034103394,
+                "coordinate": [
+                    210,
+                    461,
+                    1011,
+                    508
+                ],
+                "order": null,
+                "polygon_points": [
+                    [
+                        210.0,
+                        461.0
+                    ],
+                    [
+                        1011.0,
+                        461.0
+                    ],
+                    [
+                        1011.0,
+                        508.0
+                    ],
+                    [
+                        210.0,
+                        508.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.9591595530509949,
+                "coordinate": [
+                    209,
+                    531,
+                    1013,
+                    728
+                ],
+                "order": 1,
+                "polygon_points": [
+                    [
+                        209.0,
+                        531.0
+                    ],
+                    [
+                        1013.0,
+                        531.0
+                    ],
+                    [
+                        1013.0,
+                        728.0
+                    ],
+                    [
+                        209.0,
+                        728.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.965838611125946,
+                "coordinate": [
+                    209,
+                    737,
+                    1014,
+                    1019
+                ],
+                "order": 2,
+                "polygon_points": [
+                    [
+                        209.0,
+                        737.0
+                    ],
+                    [
+                        1014.0,
+                        737.0
+                    ],
+                    [
+                        1014.0,
+                        1019.0
+                    ],
+                    [
+                        209.0,
+                        1019.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 21,
+                "label": "table",
+                "score": 0.9195473790168762,
+                "coordinate": [
+                    362,
+                    1038,
+                    855,
+                    1113
+                ],
+                "order": null,
+                "polygon_points": [
+                    [
+                        362.0,
+                        1038.0
+                    ],
+                    [
+                        855.0,
+                        1038.0
+                    ],
+                    [
+                        855.0,
+                        1113.0
+                    ],
+                    [
+                        362.0,
+                        1113.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 7,
+                "label": "figure_title",
+                "score": 0.8428563475608826,
+                "coordinate": [
+                    241,
+                    1127,
+                    980,
+                    1149
+                ],
+                "order": null,
+                "polygon_points": [
+                    [
+                        241.0,
+                        1127.0
+                    ],
+                    [
+                        980.0,
+                        1127.0
+                    ],
+                    [
+                        980.0,
+                        1149.0
+                    ],
+                    [
+                        241.0,
+                        1149.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.9561194777488708,
+                "coordinate": [
+                    209,
+                    1173,
+                    1013,
+                    1304
+                ],
+                "order": 3,
+                "polygon_points": [
+                    [
+                        209.0,
+                        1173.0
+                    ],
+                    [
+                        1013.0,
+                        1173.0
+                    ],
+                    [
+                        1013.0,
+                        1304.0
+                    ],
+                    [
+                        209.0,
+                        1304.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.9555140733718872,
+                "coordinate": [
+                    209,
+                    1314,
+                    1013,
+                    1468
+                ],
+                "order": 4,
+                "polygon_points": [
+                    [
+                        209.0,
+                        1314.0
+                    ],
+                    [
+                        1013.0,
+                        1314.0
+                    ],
+                    [
+                        1013.0,
+                        1468.0
+                    ],
+                    [
+                        209.0,
+                        1468.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 16,
+                "label": "number",
+                "score": 0.7217534184455872,
+                "coordinate": [
+                    605,
+                    1504,
+                    620,
+                    1523
+                ],
+                "order": 5,
+                "polygon_points": [
+                    [
+                        605.0,
+                        1504.0
+                    ],
+                    [
+                        619.0,
+                        1504.0
+                    ],
+                    [
+                        619.0,
+                        1522.0
+                    ],
+                    [
+                        605.0,
+                        1522.0
+                    ]
+                ]
+            }
+        ]
+    }
+}

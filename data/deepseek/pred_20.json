@@ -1,0 +1,2308 @@
+{
+  "file_name": "paper_20",
+  "pages": [
+    {
+      "page_index": 1,
+      "blocks": [
+        {
+          "id": "0",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.195,
+            "y": 0.088,
+            "width": 0.596,
+            "height": 0.023
+          },
+          "content": "# Robust Adaptive Backup Control Barrier Functions",
+          "label": "Text"
+        },
+        {
+          "id": "1",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.13,
+            "y": 0.114,
+            "width": 0.709,
+            "height": 0.019
+          },
+          "content": "Ersin Daş \\(^{1}\\) , David E. J. van Wijk \\(^{2}\\) , Tamas G. Molnar \\(^{3}\\) , Aaron D. Ames \\(^{2}\\) , and Joel W. Burdick \\(^{2}\\)",
+          "label": "Text"
+        },
+        {
+          "id": "2",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.086,
+            "y": 0.159,
+            "width": 0.4,
+            "height": 0.225
+          },
+          "content": "Abstract—We propose a notion of robust adaptive backup control barrier functions for nonlinear control affine systems with parametric uncertainty in both the drift dynamics and actuation matrix. Backup control barrier functions guarantee safety by predicting the system's trajectory under a pre- certified safe controller. However, these predictions rely on the model and can be inaccurate when the system contains unknown parameters. To address this issue, we estimate the unknown parameters using element- wise certified adaptive estimators that provide a parameter adaptation law and component- wise estimation error bounds. We compute the backup flow using the estimated model and tighten the safety conditions using these certified bounds. The resulting safety conditions account for the sensitivity of the predicted flow to parameter estimation errors. Moreover, to handle uncertainty in the actuation matrix, we use a duality- based reformulation that enables the use of a computationally efficient quadratic- program- based safety filter. We prove that controllers satisfying the proposed robust adaptive backup control barrier function constraints guarantee safety under parametric uncertainty and input constraints.",
+          "label": "Text"
+        },
+        {
+          "id": "3",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.22,
+            "y": 0.39,
+            "width": 0.13,
+            "height": 0.014
+          },
+          "content": "## I. INTRODUCTION",
+          "label": "Text"
+        },
+        {
+          "id": "4",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.086,
+            "y": 0.407,
+            "width": 0.4,
+            "height": 0.161
+          },
+          "content": "Safety- critical control is essential for autonomous systems that operate in complex real- world environments. Control barrier functions (CBFs) provide a constructive framework for synthesizing controllers that render a prescribed safe set forward invariant, ensuring safety w.r.t. state constraints [1]. This can be realized by safety filters, often formulated as quadratic programs (QPs), that modify a nominal controller when safety necessitates intervention. However, CBF design requires a safe set in which feasible safe control inputs are available. Constructing such a set is difficult for input- constrained nonlinear systems, especially when the system must be steered close to the safe set boundary [2], [3].",
+          "label": "Text"
+        },
+        {
+          "id": "5",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.086,
+            "y": 0.568,
+            "width": 0.4,
+            "height": 0.134
+          },
+          "content": "Model predictive control (MPC) provides another way to handle state and input constraints. It predicts the system evolution over a finite horizon while enforcing constraints along the predicted trajectory. This makes MPC effective for constrained nonlinear systems, but recursive feasibility and safety guarantees require additional terminal conditions, invariant sets, or robustness margins. Adaptive MPC and robust sensitivity- based MPC reduce conservatism by updating model information online [4]- [6] or by propagating the effect of parametric uncertainty along the prediction horizon [7].",
+          "label": "Text"
+        },
+        {
+          "id": "6",
+          "order": 7,
+          "bounding_box": {
+            "x": 0.086,
+            "y": 0.702,
+            "width": 0.4,
+            "height": 0.123
+          },
+          "content": "Backup control barrier functions (bCBFs) use a similar finite horizon prediction idea for safety- critical control to construct an implicit safe set online [8]. Instead of requiring an explicit controlled invariant set, bCBFs predict the evolution of the system under a pre- certified safe controller, called a backup controller, over a finite time horizon. A system is considered safe if the predicted backup trajectory satisfies the state constraints and reaches a known backup set [8]. This approach guarantees feasibility for input- constrained systems",
+          "label": "Text"
+        },
+        {
+          "id": "7",
+          "order": 8,
+          "bounding_box": {
+            "x": 0.509,
+            "y": 0.157,
+            "width": 0.401,
+            "height": 0.069
+          },
+          "content": "by providing a constructive certificate that the state remains safe. However, bCBFs rely on forward integration to compute the flow of the system model. Thus, model uncertainty can cause the computed backup trajectory to differ from the true trajectory, invalidating safety [9].",
+          "label": "Text"
+        },
+        {
+          "id": "8",
+          "order": 9,
+          "bounding_box": {
+            "x": 0.51,
+            "y": 0.226,
+            "width": 0.4,
+            "height": 0.215
+          },
+          "content": "This limitation becomes more severe when the uncertainty appears in both the drift dynamics and the actuation matrix. Actuation uncertainty complicates robust safety filter design because the worst- case uncertainty involves the control input that is the decision variable of the underlying optimization problem. Recent robust CBF methods address related issues by using worst- case bounds, set- membership identification, or duality- based reformulations [10], [11]. Adaptive CBF methods reduce conservatism by estimating uncertain parameters online [12], [13]. However, robust bCBFs require more than a pointwise estimate of uncertain parameters. Since the safety condition depends on the predicted backup flow, it must account for the sensitivity of the flow to the parameter estimation errors. Moreover, if the estimator returns only a set- valued update, it may not provide the parameter estimate required for computing the backup flow sensitivity.",
+          "label": "Text"
+        },
+        {
+          "id": "9",
+          "order": 10,
+          "bounding_box": {
+            "x": 0.51,
+            "y": 0.441,
+            "width": 0.4,
+            "height": 0.186
+          },
+          "content": "In this letter, we propose a robust adaptive bCBF framework for nonlinear systems with structured parametric uncertainty in the drift dynamics and actuation matrix. We consider a parameter affine uncertainty model and use element- wise certified adaptive estimators. These estimators provide a parameter adaptation law and certified component- wise bounds on the parameter estimation error. The proposed method computes the backup flow using the estimated model and tightens the safety conditions using the certified error bounds. These tightened conditions define an inner approximation of the implicit safe set. To handle uncertainty in the actuation matrix, we use a duality- based robustification that preserves a QP- based safety filter. We demonstrate the effectiveness of the proposed approach through a planar quadrotor example.",
+          "label": "Text"
+        },
+        {
+          "id": "10",
+          "order": 11,
+          "bounding_box": {
+            "x": 0.641,
+            "y": 0.64,
+            "width": 0.137,
+            "height": 0.013
+          },
+          "content": "## II. PRELIMINARIES",
+          "label": "Text"
+        },
+        {
+          "id": "11",
+          "order": 12,
+          "bounding_box": {
+            "x": 0.525,
+            "y": 0.659,
+            "width": 0.385,
+            "height": 0.015
+          },
+          "content": "We consider a nonlinear control affine system of the form",
+          "label": "Text"
+        },
+        {
+          "id": "12",
+          "order": 13,
+          "bounding_box": {
+            "x": 0.523,
+            "y": 0.678,
+            "width": 0.387,
+            "height": 0.018
+          },
+          "content": "\\[\\dot{\\pmb{x}} = \\pmb {f}(\\pmb {x}) + \\pmb {g}(\\pmb {x})\\pmb {u},\\pmb {x}\\in \\mathcal{X}\\subset \\mathbb{R}^{n},\\pmb {u}\\in \\mathcal{U}\\subset \\mathbb{R}^{m}, \\quad (1)\\]",
+          "label": "Formula"
+        },
+        {
+          "id": "13",
+          "order": 14,
+          "bounding_box": {
+            "x": 0.509,
+            "y": 0.702,
+            "width": 0.401,
+            "height": 0.042
+          },
+          "content": "where \\(\\pmb {f}:\\mathcal{X}\\to \\mathbb{R}^{n}\\) and \\(\\pmb {g}:\\mathcal{X}\\to \\mathbb{R}^{n\\times m}\\) are continuously differentiable, and \\(\\mathcal{U}\\) is a convex polytope. To capture state constraints that characterize safety, we define the safe set",
+          "label": "Text"
+        },
+        {
+          "id": "14",
+          "order": 15,
+          "bounding_box": {
+            "x": 0.617,
+            "y": 0.748,
+            "width": 0.293,
+            "height": 0.018
+          },
+          "content": "\\[\\mathcal{C}_{\\mathrm{S}}\\triangleq \\{\\pmb {x}\\in \\mathcal{X}:h(\\pmb {x})\\geq 0\\} , \\quad (2)\\]",
+          "label": "Formula"
+        },
+        {
+          "id": "15",
+          "order": 16,
+          "bounding_box": {
+            "x": 0.509,
+            "y": 0.771,
+            "width": 0.401,
+            "height": 0.07
+          },
+          "content": "where \\(h:\\mathcal{X}\\to \\mathbb{R}\\) is continuously differentiable. Safety requires that (1) evolves inside the safe set, i.e., \\(\\mathcal{C}_{\\mathrm{S}}\\) must be forward invariant. Control barrier functions (CBFs) enable the synthesis of safe controllers. The function \\(h\\) is a CBF if there exists an extended class- \\(\\mathcal{K}_{\\infty}\\) function \\(\\alpha\\) such that",
+          "label": "Text"
+        },
+        {
+          "id": "16",
+          "order": 17,
+          "bounding_box": {
+            "x": 0.56,
+            "y": 0.844,
+            "width": 0.35,
+            "height": 0.026
+          },
+          "content": "\\[\\sup_{\\pmb {u}\\in \\mathcal{U}}\\left[\\nabla h(\\pmb {x})\\big(f(\\pmb {x}) + \\pmb {g}(\\pmb {x})\\pmb {u}\\big)\\right] > -\\alpha \\big(h(\\pmb {x})\\big), \\quad (3)\\]",
+          "label": "Formula"
+        },
+        {
+          "id": "17",
+          "order": 18,
+          "bounding_box": {
+            "x": 0.509,
+            "y": 0.875,
+            "width": 0.401,
+            "height": 0.029
+          },
+          "content": "holds for all \\(\\pmb {x}\\in \\mathcal{C}_{\\mathrm{S}}\\) . Then, any locally Lipschitz controller \\(\\pmb {u} = \\pmb {k}(\\pmb {x})\\) , \\(\\pmb {k}:\\mathcal{X}\\to \\mathcal{U}\\) , satisfying",
+          "label": "Text"
+        },
+        {
+          "id": "18",
+          "order": 19,
+          "bounding_box": {
+            "x": 0.536,
+            "y": 0.908,
+            "width": 0.374,
+            "height": 0.018
+          },
+          "content": "\\[\\nabla h(\\pmb {x})\\big(f(\\pmb {x}) + \\pmb {g}(\\pmb {x})\\pmb {u}\\big)\\geq -\\alpha \\big(h(\\pmb {x})\\big),\\quad \\forall \\pmb {x}\\in \\mathcal{C}_{\\mathrm{S}}, \\quad (4)\\]",
+          "label": "Formula"
+        }
+      ]
+    },
+    {
+      "page_index": 2,
+      "blocks": [
+        {
+          "id": "0",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.085,
+            "y": 0.065,
+            "width": 0.4,
+            "height": 0.015
+          },
+          "content": "renders \\(C_{\\mathrm{S}}\\) forward invariant [1], ensuring the safety of (1).",
+          "label": "Text"
+        },
+        {
+          "id": "1",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.085,
+            "y": 0.08,
+            "width": 0.402,
+            "height": 0.107
+          },
+          "content": "While CBFs provide a systematic way to synthesize safe controllers, an arbitrary safety function \\(h\\) may not satisfy the CBF condition (3), especially with bounded inputs. In this case, there may exist states in \\(C_{\\mathrm{S}}\\) for which there is no admissible input satisfying the constraint (4). Backup CBFs [8] address this issue by constructing a subset of \\(C_{\\mathrm{S}}\\) where safe inputs are guaranteed to exist and by generating corresponding safe controllers within the CBF framework.",
+          "label": "Text"
+        },
+        {
+          "id": "2",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.085,
+            "y": 0.188,
+            "width": 0.402,
+            "height": 0.041
+          },
+          "content": "The backup CBF method leverages a backup controller and a backup set that typically represent safe but conservative behavior. Let \\(C_{\\mathrm{B}} \\subseteq C_{\\mathrm{S}}\\) be a backup set, defined by",
+          "label": "Text"
+        },
+        {
+          "id": "3",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.189,
+            "y": 0.233,
+            "width": 0.296,
+            "height": 0.018
+          },
+          "content": "\\[C_{\\mathrm{B}} \\triangleq \\{x \\in \\mathcal{X}: h_{\\mathrm{b}}(\\boldsymbol{x}) \\geq 0\\}, \\quad (5)\\]",
+          "label": "Formula"
+        },
+        {
+          "id": "4",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.085,
+            "y": 0.256,
+            "width": 0.402,
+            "height": 0.083
+          },
+          "content": "with a continuously differentiable safety function \\(h_{\\mathrm{b}}:\\mathcal{X}\\to \\mathbb{R}\\) and \\(k_{\\mathrm{b}}:\\mathcal{X}\\to \\mathcal{U}\\) be a backup controller that renders \\(C_{\\mathrm{B}}\\) forward invariant. The closed- loop dynamics under \\(k_{\\mathrm{b}}\\) are \\(\\dot{\\boldsymbol{x}} = \\boldsymbol {f}(\\boldsymbol {x}) + \\boldsymbol {g}(\\boldsymbol {x})k_{\\mathrm{b}}(\\boldsymbol {x})\\) , and the backup flow \\(\\phi_{\\mathrm{b}}(\\tau ,\\boldsymbol {x})\\) denotes the solution of this system starting from state \\(\\boldsymbol{x}\\) , over time \\(\\tau \\in [0,T]\\) with a backup horizon \\(T > 0\\)",
+          "label": "Text"
+        },
+        {
+          "id": "5",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.1,
+            "y": 0.339,
+            "width": 0.38,
+            "height": 0.014
+          },
+          "content": "The key idea of bCBFs is to define the implicit safe set",
+          "label": "Text"
+        },
+        {
+          "id": "6",
+          "order": 7,
+          "bounding_box": {
+            "x": 0.1,
+            "y": 0.356,
+            "width": 0.385,
+            "height": 0.035
+          },
+          "content": "\\[C_{\\mathrm{I}} \\triangleq \\left\\{x \\in \\mathcal{X}: \\begin{array}{l} h(\\phi_{\\mathrm{b}}(\\tau ,\\boldsymbol {x})) \\geq 0, \\quad \\forall \\tau \\in [0,T], \\\\ h_{\\mathrm{b}}(\\phi_{\\mathrm{b}}(T,\\boldsymbol {x})) \\geq 0 \\end{array} \\right\\}. \\quad (6)\\]",
+          "label": "Formula"
+        },
+        {
+          "id": "7",
+          "order": 8,
+          "bounding_box": {
+            "x": 0.085,
+            "y": 0.394,
+            "width": 0.402,
+            "height": 0.096
+          },
+          "content": "This represents the states from which the system can safely reach the backup set in time \\(T\\) via the backup controller. The set \\(C_{\\mathrm{I}}\\) is a subset of \\(C_{\\mathrm{S}}\\) , and it is forward invariant under the backup controller. Therefore, by construction, safe inputs are guaranteed to exist in \\(C_{\\mathrm{I}}\\) . This construction is useful for input- constrained systems because feasibility can be inherited from the backup controller [8].",
+          "label": "Text"
+        },
+        {
+          "id": "8",
+          "order": 9,
+          "bounding_box": {
+            "x": 0.181,
+            "y": 0.5,
+            "width": 0.211,
+            "height": 0.014
+          },
+          "content": "## III. PROBLEM FORMULATION",
+          "label": "Text"
+        },
+        {
+          "id": "9",
+          "order": 10,
+          "bounding_box": {
+            "x": 0.1,
+            "y": 0.519,
+            "width": 0.38,
+            "height": 0.014
+          },
+          "content": "We extend bCBFs to systems with model uncertainty as",
+          "label": "Text"
+        },
+        {
+          "id": "10",
+          "order": 11,
+          "bounding_box": {
+            "x": 0.145,
+            "y": 0.537,
+            "width": 0.34,
+            "height": 0.018
+          },
+          "content": "\\[\\dot{\\boldsymbol{x}} = \\boldsymbol {f}(\\boldsymbol {x}) + \\boldsymbol {g}(\\boldsymbol {x})\\boldsymbol {u} + \\Delta \\boldsymbol {f}(\\boldsymbol {x}) + \\Delta \\boldsymbol {g}(\\boldsymbol {x})\\boldsymbol {u}, \\quad (7)\\]",
+          "label": "Formula"
+        },
+        {
+          "id": "11",
+          "order": 12,
+          "bounding_box": {
+            "x": 0.085,
+            "y": 0.56,
+            "width": 0.402,
+            "height": 0.071
+          },
+          "content": "where \\(\\boldsymbol {f}:\\mathcal{X}\\to \\mathbb{R}^{n}\\) and \\(\\boldsymbol {g}:\\mathcal{X}\\to \\mathbb{R}^{n\\times m}\\) are the known nominal components of the dynamics, while \\(\\Delta \\boldsymbol {f}:\\mathcal{X}\\to \\mathbb{R}^{n}\\) and \\(\\Delta \\boldsymbol {g}:\\mathcal{X}\\to \\mathbb{R}^{n\\times m}\\) represent unknown structured uncertainty in the drift vector field and actuation matrix. We assume that the uncertainty admits the parameter affine representation",
+          "label": "Text"
+        },
+        {
+          "id": "12",
+          "order": 13,
+          "bounding_box": {
+            "x": 0.106,
+            "y": 0.635,
+            "width": 0.379,
+            "height": 0.043
+          },
+          "content": "\\[\\Delta \\boldsymbol {f}(\\boldsymbol {x}) = \\boldsymbol {F}(\\boldsymbol {x})\\boldsymbol {\\theta}_{\\mathrm{f}},\\quad \\Delta \\boldsymbol {g}(\\boldsymbol {x})\\boldsymbol {u} = \\sum_{j = 1}^{N_{\\mathrm{g}}}\\boldsymbol {G}_{j}(\\boldsymbol {x})\\boldsymbol {u}\\boldsymbol {\\theta}_{\\mathrm{g},j}, \\quad (8)\\]",
+          "label": "Formula"
+        },
+        {
+          "id": "13",
+          "order": 14,
+          "bounding_box": {
+            "x": 0.085,
+            "y": 0.685,
+            "width": 0.402,
+            "height": 0.029
+          },
+          "content": "where \\(\\boldsymbol {F}:\\mathcal{X}\\to \\mathbb{R}^{n\\times N_{\\mathrm{f}}}\\) and \\(\\boldsymbol {G}_{j}:\\mathcal{X}\\to \\mathbb{R}^{n\\times m}\\) are known terms, while \\(\\boldsymbol {\\theta}_{\\mathrm{f}}\\in \\mathbb{R}^{N_{\\mathrm{f}}}\\) and \\(\\boldsymbol {\\theta}_{\\mathrm{g}}\\in \\mathbb{R}^{N_{\\mathrm{g}}}\\) are unknown parameters.",
+          "label": "Text"
+        },
+        {
+          "id": "14",
+          "order": 15,
+          "bounding_box": {
+            "x": 0.085,
+            "y": 0.715,
+            "width": 0.402,
+            "height": 0.043
+          },
+          "content": "Collecting the parameters in a vector \\(\\boldsymbol {\\theta}\\in \\mathbb{R}^{N}\\) such that \\(\\boldsymbol {\\theta}\\triangleq \\left[\\boldsymbol{\\theta}_{\\mathrm{f}}^{\\top}\\quad \\boldsymbol{\\theta}_{\\mathrm{g}}^{\\top}\\right]^{\\top} = \\left[\\boldsymbol{\\theta}_{1}\\quad \\boldsymbol{\\theta}_{2}\\quad \\ldots \\quad \\boldsymbol{\\theta}_{N}\\right]^{\\top}\\) , with \\(N = N_{\\mathrm{f}} + N_{\\mathrm{g}}\\) parameters, and by defining a regression matrix as",
+          "label": "Text"
+        },
+        {
+          "id": "15",
+          "order": 16,
+          "bounding_box": {
+            "x": 0.123,
+            "y": 0.763,
+            "width": 0.362,
+            "height": 0.018
+          },
+          "content": "\\[\\phi (\\boldsymbol {x},\\boldsymbol {u})\\triangleq [\\boldsymbol {F}(\\boldsymbol {x})\\quad \\boldsymbol {G}_{1}(\\boldsymbol {x})\\boldsymbol {u}\\quad \\dots \\quad \\boldsymbol {G}_{N_{\\mathrm{g}}}(\\boldsymbol {x})\\boldsymbol {u}], \\quad (9)\\]",
+          "label": "Formula"
+        },
+        {
+          "id": "16",
+          "order": 17,
+          "bounding_box": {
+            "x": 0.085,
+            "y": 0.787,
+            "width": 0.267,
+            "height": 0.014
+          },
+          "content": "system (7) can be written compactly as",
+          "label": "Text"
+        },
+        {
+          "id": "17",
+          "order": 18,
+          "bounding_box": {
+            "x": 0.175,
+            "y": 0.806,
+            "width": 0.31,
+            "height": 0.017
+          },
+          "content": "\\[\\dot{\\boldsymbol{x}} = \\boldsymbol {f}(\\boldsymbol {x}) + \\boldsymbol {g}(\\boldsymbol {x})\\boldsymbol {u} + \\boldsymbol {\\phi}(\\boldsymbol {x},\\boldsymbol {u})\\boldsymbol {\\theta}. \\quad (10)\\]",
+          "label": "Formula"
+        },
+        {
+          "id": "18",
+          "order": 19,
+          "bounding_box": {
+            "x": 0.085,
+            "y": 0.829,
+            "width": 0.402,
+            "height": 0.068
+          },
+          "content": "The uncertainty representation in (10) is essential for our subsequent results. In particular, the control direction uncertainty term \\(\\Delta \\boldsymbol {g}(\\boldsymbol {x})\\boldsymbol {u}\\) will preserve affine dependence on the control input in the robust bCBF conditions and is therefore critical for constructing a QP- based safety filter.",
+          "label": "Text"
+        },
+        {
+          "id": "19",
+          "order": 20,
+          "bounding_box": {
+            "x": 0.085,
+            "y": 0.897,
+            "width": 0.402,
+            "height": 0.027
+          },
+          "content": "While \\(\\theta\\) is unknown, it represents fixed coefficients that parameterize model uncertainty, a structure also common to",
+          "label": "Text"
+        },
+        {
+          "id": "20",
+          "order": 21,
+          "bounding_box": {
+            "x": 0.508,
+            "y": 0.065,
+            "width": 0.402,
+            "height": 0.095
+          },
+          "content": "adaptive and learning- based control. In robotic systems, these coefficients often correspond to physical quantities or model mismatches, such as damping coefficients, gravity mismatch, mass or inertia errors, for which conservative ranges can be obtained from system identification, nominal specifications, or physical limits. Accordingly, we assume that we know lower and upper bounds on each component of \\(\\theta\\) .",
+          "label": "Text"
+        },
+        {
+          "id": "21",
+          "order": 22,
+          "bounding_box": {
+            "x": 0.508,
+            "y": 0.168,
+            "width": 0.402,
+            "height": 0.046
+          },
+          "content": "Assumption 1. There exist known constants \\(\\theta_{i}^{- },\\theta_{i}^{+}\\in \\mathbb{R}\\) for \\(i\\in \\{1,\\ldots ,N\\}\\) such that \\(\\theta_{i}^{- }\\leq \\theta_{i}\\leq \\theta_{i}^{+}\\) . Therefore, \\(\\theta \\in \\Theta\\) where \\(\\Theta \\triangleq [\\theta_{1}^{- },\\theta_{1}^{+}]\\times \\dots \\times [\\theta_{N}^{- },\\theta_{N}^{+}]\\)",
+          "label": "Text"
+        },
+        {
+          "id": "22",
+          "order": 23,
+          "bounding_box": {
+            "x": 0.508,
+            "y": 0.221,
+            "width": 0.402,
+            "height": 0.095
+          },
+          "content": "Given Assumption 1, the unknown parameter \\(\\theta\\) will be estimated, and the estimate will be used for safe control design. The proposed safety result does not require a specific adaptive law for estimation. Instead, it requires a differentiable parameter estimate and certified component- wise bounds on the estimation error. We next define an estimator class that can provide the required estimate and bounds.",
+          "label": "Text"
+        },
+        {
+          "id": "23",
+          "order": 24,
+          "bounding_box": {
+            "x": 0.508,
+            "y": 0.317,
+            "width": 0.402,
+            "height": 0.069
+          },
+          "content": "Let \\(\\mathcal{H}_{t}\\) denote the measured state and input data history available at time \\(t\\) , which may contain filtered regressions, integral regressions, or stored data. These data are used for calculating an estimate \\(\\hat{\\theta} (t)\\in \\mathbb{R}^{N}\\) of the parameter \\(\\theta\\) . We consider general parameter estimation dynamics of the form",
+          "label": "Text"
+        },
+        {
+          "id": "24",
+          "order": 25,
+          "bounding_box": {
+            "x": 0.652,
+            "y": 0.391,
+            "width": 0.257,
+            "height": 0.019
+          },
+          "content": "\\[\\dot{\\boldsymbol{\\theta}} = \\boldsymbol {q}(\\hat{\\boldsymbol{\\theta}},\\mathcal{H}_{t},t). \\quad (11)\\]",
+          "label": "Formula"
+        },
+        {
+          "id": "25",
+          "order": 26,
+          "bounding_box": {
+            "x": 0.508,
+            "y": 0.417,
+            "width": 0.402,
+            "height": 0.015
+          },
+          "content": "Assume the estimator is initialized as \\(\\hat{\\theta} (0)\\in \\Theta\\) and satisfies",
+          "label": "Text"
+        },
+        {
+          "id": "26",
+          "order": 27,
+          "bounding_box": {
+            "x": 0.636,
+            "y": 0.437,
+            "width": 0.273,
+            "height": 0.018
+          },
+          "content": "\\[\\hat{\\theta} (t)\\in \\Theta ,\\quad \\forall t\\geq 0. \\quad (12)\\]",
+          "label": "Formula"
+        },
+        {
+          "id": "27",
+          "order": 28,
+          "bounding_box": {
+            "x": 0.508,
+            "y": 0.463,
+            "width": 0.402,
+            "height": 0.058
+          },
+          "content": "Definition 1 (Element- wise certified adaptive estimator). An estimator satisfying (11) and (12) is an element- wise certified adaptive estimator if it provides a known signal \\(\\rho (t)\\in \\mathbb{R}_{\\geq 0}^{N}\\) such that the estimation error \\(\\hat{\\theta} (t)\\triangleq \\theta -\\hat{\\theta} (t)\\) satisfies",
+          "label": "Text"
+        },
+        {
+          "id": "28",
+          "order": 29,
+          "bounding_box": {
+            "x": 0.515,
+            "y": 0.526,
+            "width": 0.395,
+            "height": 0.02
+          },
+          "content": "\\[|\\hat{\\theta}_{i}(t)|\\leq \\rho_{i}(t),\\rho (t) = [\\rho_{1}(t)\\dots \\rho_{N}(t)]^{\\top},i\\in \\{1,\\dots ,N\\} , \\quad (13)\\]",
+          "label": "Formula"
+        },
+        {
+          "id": "29",
+          "order": 30,
+          "bounding_box": {
+            "x": 0.508,
+            "y": 0.551,
+            "width": 0.342,
+            "height": 0.015
+          },
+          "content": "for all \\(t\\geq 0\\) . Equivalently, this can be expressed as",
+          "label": "Text"
+        },
+        {
+          "id": "30",
+          "order": 31,
+          "bounding_box": {
+            "x": 0.58,
+            "y": 0.57,
+            "width": 0.329,
+            "height": 0.02
+          },
+          "content": "\\[\\hat{\\theta} (t)\\in \\widehat{\\Theta} (t)\\triangleq \\{\\pmb {\\eta}\\in \\mathbb{R}^{N}:\\pmb {A}\\pmb {\\eta}\\leq \\pmb {b}(t)\\} , \\quad (14)\\]",
+          "label": "Formula"
+        },
+        {
+          "id": "31",
+          "order": 32,
+          "bounding_box": {
+            "x": 0.508,
+            "y": 0.595,
+            "width": 0.402,
+            "height": 0.035
+          },
+          "content": "with \\(\\boldsymbol {A}\\triangleq [\\boldsymbol {I} - \\boldsymbol {I}]^{\\top}\\) and \\(\\boldsymbol {b}(t)\\triangleq [\\boldsymbol {\\rho}(t)^{\\top}\\boldsymbol {\\rho}(t)^{\\top}]^{\\top}\\) . Note that, since \\(\\theta ,\\hat{\\theta} (t)\\in \\Theta\\) , the bounds satisfy \\(\\rho_{i}(t)\\leq \\theta_{i}^{+} - \\theta_{i}^{-}\\) .",
+          "label": "Text"
+        },
+        {
+          "id": "32",
+          "order": 33,
+          "bounding_box": {
+            "x": 0.508,
+            "y": 0.637,
+            "width": 0.402,
+            "height": 0.193
+          },
+          "content": "Example 1 (Dynamic regressor extension and mixing (DREM) parameter estimator [14], [15]). Consider a linear regression \\(y_{t}(t) = m_{t}^{\\top}(t)\\theta\\) , where \\(y_{t}(t)\\in \\mathbb{R}\\) and \\(m_{t}(t)\\in \\mathbb{R}^{N}\\) are known. DREM estimator estimates a parameter in two steps. First, the extension step constructs known signals \\(\\mathbf{Y}_{\\mathrm{e}}(t)\\in \\mathbb{R}^{N}\\) and \\(\\boldsymbol {M}_{\\mathrm{e}}(t)\\in \\mathbb{R}^{N\\times N}\\) satisfying \\(\\mathbf{Y}_{\\mathrm{e}}(t) = \\boldsymbol {M}_{\\mathrm{e}}(t)\\boldsymbol {\\theta}\\) . This extended regression can be obtained, for example, by stacking the original regression with filtered regressions generated by stable linear operators [14]. Second, the mixing step multiplies the extended regression by the adjugate of \\(\\boldsymbol {M}_{\\mathrm{e}}(t)\\) as \\(\\mathbf{Y}_{\\mathrm{D}}(t)\\triangleq \\mathrm{adj}(\\boldsymbol {M}_{\\mathrm{e}}(t))\\mathbf{Y}_{\\mathrm{e}}(t)\\) . By defining \\(\\chi (t)\\triangleq \\operatorname *{det}(\\boldsymbol {M}_{\\mathrm{e}}(t))\\) , it can be shown that \\(\\mathbf{Y}_{\\mathrm{D}}(t) = \\chi (t)\\theta\\) holds because \\(\\mathrm{adj}(\\boldsymbol {M}_{\\mathrm{e}})\\boldsymbol {M}_{\\mathrm{e}} = \\operatorname *{det}(\\boldsymbol {M}_{\\mathrm{e}})\\boldsymbol{I}_{N}\\) . Then, each parameter is estimated with the update law",
+          "label": "Text"
+        },
+        {
+          "id": "33",
+          "order": 34,
+          "bounding_box": {
+            "x": 0.54,
+            "y": 0.835,
+            "width": 0.369,
+            "height": 0.021
+          },
+          "content": "\\[\\dot{\\hat{\\theta}}_{i}(t) = \\gamma_{i}\\chi (t)\\big(Y_{\\mathrm{D},i}(t) - \\chi (t)\\hat{\\theta}_{i}(t)\\big),\\quad \\gamma_{i} > 0, \\quad (15)\\]",
+          "label": "Formula"
+        },
+        {
+          "id": "34",
+          "order": 35,
+          "bounding_box": {
+            "x": 0.508,
+            "y": 0.862,
+            "width": 0.292,
+            "height": 0.014
+          },
+          "content": "which yields the estimation error dynamics",
+          "label": "Text"
+        },
+        {
+          "id": "35",
+          "order": 36,
+          "bounding_box": {
+            "x": 0.63,
+            "y": 0.881,
+            "width": 0.279,
+            "height": 0.021
+          },
+          "content": "\\[\\dot{\\hat{\\theta}}_{i}(t) = -\\gamma_{i}\\chi^{2}(t)\\hat{\\theta}_{i}(t). \\quad (16)\\]",
+          "label": "Formula"
+        },
+        {
+          "id": "36",
+          "order": 37,
+          "bounding_box": {
+            "x": 0.508,
+            "y": 0.909,
+            "width": 0.402,
+            "height": 0.015
+          },
+          "content": "Lemma 1. Consider the uncertain system (10) and update",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "page_index": 3,
+      "blocks": [
+        {
+          "id": "0",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.085,
+            "y": 0.065,
+            "width": 0.403,
+            "height": 0.043
+          },
+          "content": "law (15) for the estimation of the parameter \\(\\theta\\) . Under Assumption 1 and the initialization \\(\\hat{\\theta} (0) \\in \\Theta\\) , the DREM estimator in Example 1 satisfies (12) and (13).",
+          "label": "Text"
+        },
+        {
+          "id": "1",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.085,
+            "y": 0.113,
+            "width": 0.403,
+            "height": 0.212
+          },
+          "content": "Proof. Let \\(\\nu_{i}(t) \\triangleq \\mathrm{e}^{- \\gamma_{i} \\int_{0}^{t} \\chi^{2}(s) d s}\\) . Since \\(\\gamma_{i} > 0\\) , we have \\(0 < \\nu_{i}(t) \\leq 1\\) for all \\(t \\geq 0\\) . The solution of (16) with the initial condition \\(\\hat{\\theta}_{i}(0)\\) is given by \\(\\hat{\\theta}_{i}(t) = \\nu_{i}(t) \\hat{\\theta}_{i}(0)\\) . Thus, \\(|\\hat{\\theta}_{i}(t)|\\) satisfies the error bound (13) with \\(\\rho_{i}(t) = \\nu_{i}(t) \\rho_{i}(0)\\) , if \\(\\rho_{i}(0) \\geq |\\hat{\\theta}_{i}(0)|\\) . For \\(\\rho_{i}(0)\\) , Assumption 1 and \\(\\hat{\\theta} (0) \\in \\Theta\\) allow the choice \\(\\rho_{i}(0) = \\max \\{\\hat{\\theta}_{i}(0) - \\theta_{i}^{-}, \\theta_{i}^{+} - \\hat{\\theta}_{i}(0)\\}\\) . Note that the least conservative bound is obtained for \\(\\rho_{i}(t)\\) if the initial value of \\(\\hat{\\theta}_{i}\\) is the midpoint of the interval, given by \\(\\hat{\\theta}_{i}(0) = (\\theta_{i}^{-} + \\theta_{i}^{+}) / 2\\) . Finally, we prove that \\(\\hat{\\theta} (t) \\in \\Theta\\) for all \\(t \\geq 0\\) . Using \\(\\hat{\\theta}_{i}(t) = \\theta_{i} - \\hat{\\theta}_{i}(t)\\) gives \\(\\hat{\\theta}_{i}(t) = (1 - \\nu_{i}(t)) \\theta_{i} + \\nu_{i}(t) \\hat{\\theta}_{i}(0)\\) . By Assumption 1, \\(\\theta_{i} \\in [\\theta_{i}^{-}, \\theta_{i}^{+}]\\) , and by \\(\\hat{\\theta} (0) \\in \\Theta\\) , \\(\\hat{\\theta}_{i}(0) \\in [\\theta_{i}^{-}, \\theta_{i}^{+}]\\) . Hence, \\(\\hat{\\theta}_{i}(t) \\in [\\theta_{i}^{-}, \\theta_{i}^{+}]\\) for all \\(t \\geq 0\\) and \\(i \\in \\{1, \\ldots , N\\}\\) , implying \\(\\hat{\\theta} (t) \\in \\Theta\\) , \\(\\forall t \\geq 0\\) . Thus, the estimator satisfies Def. 1. \\(\\square\\)",
+          "label": "Text"
+        },
+        {
+          "id": "2",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.085,
+            "y": 0.33,
+            "width": 0.403,
+            "height": 0.095
+          },
+          "content": "We remark that DREM is only one example realization of the estimator class. For instance, recursive least- squares estimators with zonotopic uncertainty propagation also provide an adaptation law with a set- valued uncertainty certificate [13]. More generally, any adaptive, composite learning, or set- membership estimator can be used if it provides the adaptation law in (11) and an element- wise bound [11], [13]. We are now in a position to state the considered problem, which will be addressed using robust adaptive bCBFs.",
+          "label": "Text"
+        },
+        {
+          "id": "3",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.085,
+            "y": 0.427,
+            "width": 0.403,
+            "height": 0.029
+          },
+          "content": "We are now in a position to state the considered problem, which will be addressed using robust adaptive bCBFs.",
+          "label": "Text"
+        },
+        {
+          "id": "4",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.084,
+            "y": 0.46,
+            "width": 0.404,
+            "height": 0.056
+          },
+          "content": "Problem 1. Given the uncertain system (10), the safe set \\(\\mathcal{C}_{\\mathrm{S}}\\) in (2), and an element- wise certified adaptive estimator (11), design a control law \\(\\pmb {u} = \\pmb {k}(t,\\pmb {x},\\hat{\\pmb{\\theta}})\\in \\mathcal{U}\\) that renders a subset of \\(\\mathcal{C}_{\\mathrm{S}}\\) forward invariant, ensuring the safety of (10).",
+          "label": "Text"
+        },
+        {
+          "id": "5",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.214,
+            "y": 0.52,
+            "width": 0.138,
+            "height": 0.013
+          },
+          "content": "## IV. MAIN RESULTS",
+          "label": "Text"
+        },
+        {
+          "id": "6",
+          "order": 7,
+          "bounding_box": {
+            "x": 0.085,
+            "y": 0.536,
+            "width": 0.403,
+            "height": 0.112
+          },
+          "content": "We now develop the proposed robust adaptive bCBF method in four steps. First, we propagate the backup flow using the current parameter estimate. Second, we bound the mismatch between the true and estimated backup flows using the certified component- wise parameter error bounds. Third, we use this bound to define a tightened inner approximation of the implicit safe set. Fourth, we derive duality- based robust safety conditions that preserve a QP implementation.",
+          "label": "Text"
+        },
+        {
+          "id": "7",
+          "order": 8,
+          "bounding_box": {
+            "x": 0.085,
+            "y": 0.648,
+            "width": 0.403,
+            "height": 0.054
+          },
+          "content": "Similar to the standard bCBF method outlined in Section II, the proposed approach leverages a backup controller \\(k_{\\mathrm{b}}:\\mathcal{X}\\to \\mathcal{U}\\) and a backup set \\(\\mathcal{C}_{\\mathrm{B}}\\subseteq \\mathcal{C}_{\\mathrm{S}}\\) given in (5). This time, we assume that \\(k_{\\mathrm{b}}\\) is a robust backup controller.",
+          "label": "Text"
+        },
+        {
+          "id": "8",
+          "order": 9,
+          "bounding_box": {
+            "x": 0.085,
+            "y": 0.705,
+            "width": 0.403,
+            "height": 0.028
+          },
+          "content": "Assumption 2. The backup controller \\(k_{\\mathrm{b}}\\) renders \\(\\mathcal{C}_{\\mathrm{B}}\\) forward invariant for (10) for any \\(\\theta \\in \\Theta\\) .",
+          "label": "Text"
+        },
+        {
+          "id": "9",
+          "order": 10,
+          "bounding_box": {
+            "x": 0.085,
+            "y": 0.738,
+            "width": 0.403,
+            "height": 0.082
+          },
+          "content": "In practice, robust backup sets can often be obtained by robustifying Lyapunov level sets around a stabilizable equilibrium point and verifying their invariance under the corresponding stabilizing feedback control law [9]. In Section V, we utilize this approach to synthesize a robust backup controller and a robust backup set for a quadrotor model.",
+          "label": "Text"
+        },
+        {
+          "id": "10",
+          "order": 11,
+          "bounding_box": {
+            "x": 0.085,
+            "y": 0.82,
+            "width": 0.403,
+            "height": 0.028
+          },
+          "content": "We introduce the closed- loop dynamics of the system (10) under the robust backup controller as",
+          "label": "Text"
+        },
+        {
+          "id": "11",
+          "order": 12,
+          "bounding_box": {
+            "x": 0.112,
+            "y": 0.852,
+            "width": 0.376,
+            "height": 0.018
+          },
+          "content": "\\[\\dot{x} = f_{\\mathrm{b}}(x,\\theta)\\triangleq f(x) + g(x)k_{\\mathrm{b}}(x) + \\psi_{\\mathrm{b}}(x)\\theta , \\quad (17)\\]",
+          "label": "Formula"
+        },
+        {
+          "id": "12",
+          "order": 13,
+          "bounding_box": {
+            "x": 0.085,
+            "y": 0.875,
+            "width": 0.403,
+            "height": 0.029
+          },
+          "content": "where \\(\\psi_{\\mathrm{b}}\\) indicates the regression matrix in (9) evaluated along the backup controller:",
+          "label": "Text"
+        },
+        {
+          "id": "13",
+          "order": 14,
+          "bounding_box": {
+            "x": 0.208,
+            "y": 0.909,
+            "width": 0.28,
+            "height": 0.018
+          },
+          "content": "\\[\\psi_{\\mathrm{b}}(x)\\triangleq \\phi (x,k_{\\mathrm{b}}(x)). \\quad (18)\\]",
+          "label": "Formula"
+        },
+        {
+          "id": "14",
+          "order": 15,
+          "bounding_box": {
+            "x": 0.51,
+            "y": 0.065,
+            "width": 0.208,
+            "height": 0.015
+          },
+          "content": "Then, the backup flow satisfies",
+          "label": "Text"
+        },
+        {
+          "id": "15",
+          "order": 16,
+          "bounding_box": {
+            "x": 0.535,
+            "y": 0.084,
+            "width": 0.377,
+            "height": 0.021
+          },
+          "content": "\\[\\begin{array}{r}\\frac{\\partial}{\\partial\\tau}\\phi_{\\mathrm{b}}(\\tau ,x) = f_{\\mathrm{b}}(\\phi_{\\mathrm{b}}(\\tau ,x),\\theta),\\phi_{\\mathrm{b}}(0,x) = x. \\end{array} \\quad (19)\\]",
+          "label": "Formula"
+        },
+        {
+          "id": "16",
+          "order": 17,
+          "bounding_box": {
+            "x": 0.51,
+            "y": 0.108,
+            "width": 0.402,
+            "height": 0.11
+          },
+          "content": "Ideally, one would use the backup flow to enforce the forward invariance of the implicit safe set \\(\\mathcal{C}_{\\mathrm{I}}\\) defined in (6). However, since the parameter \\(\\theta\\) is unknown, the backup flow \\(\\phi_{\\mathrm{b}}\\) and the implicit set \\(\\mathcal{C}_{\\mathrm{I}}\\) may not be known. Therefore, we instead establish a known subset of \\(\\mathcal{C}_{\\mathrm{I}}\\) and enforce the forward invariance thereof. To this end, we propagate an estimated backup flow \\(\\hat{\\phi}_{\\mathrm{b}}\\) using the current parameter estimate \\(\\hat{\\theta} (t)\\) that is frozen over the backup horizon:",
+          "label": "Text"
+        },
+        {
+          "id": "17",
+          "order": 18,
+          "bounding_box": {
+            "x": 0.51,
+            "y": 0.222,
+            "width": 0.402,
+            "height": 0.021
+          },
+          "content": "\\[\\begin{array}{r}\\frac{\\partial}{\\partial\\tau}\\hat{\\phi}_{\\mathrm{b}}(\\tau ,x,t) = f_{\\mathrm{b}}(\\hat{\\phi}_{\\mathrm{b}}(\\tau ,x,t),\\hat{\\theta} (t)),\\hat{\\phi}_{\\mathrm{b}}(0,x,t) = x. \\end{array} \\quad (20)\\]",
+          "label": "Formula"
+        },
+        {
+          "id": "18",
+          "order": 19,
+          "bounding_box": {
+            "x": 0.51,
+            "y": 0.247,
+            "width": 0.402,
+            "height": 0.057
+          },
+          "content": "While the estimated flow \\(\\hat{\\phi}_{\\mathrm{b}}\\) is known, it is not sufficient for ensuring safety by itself, since the true parameter \\(\\theta\\) can differ from the estimated parameter \\(\\hat{\\theta}\\) . Therefore, we bound the difference between the true and estimated backup flows:",
+          "label": "Text"
+        },
+        {
+          "id": "19",
+          "order": 20,
+          "bounding_box": {
+            "x": 0.575,
+            "y": 0.307,
+            "width": 0.335,
+            "height": 0.019
+          },
+          "content": "\\[\\left\\| \\phi_{\\mathrm{b}}(\\tau ,x) - \\hat{\\phi}_{\\mathrm{b}}(\\tau ,x,t)\\right\\| \\leq \\delta_{\\phi}(\\tau ,x,t), \\quad (21)\\]",
+          "label": "Formula"
+        },
+        {
+          "id": "20",
+          "order": 21,
+          "bounding_box": {
+            "x": 0.51,
+            "y": 0.33,
+            "width": 0.402,
+            "height": 0.029
+          },
+          "content": "and use these bounds to establish robust safety. The following lemma provides one possible flow error bound \\(\\delta_{\\phi}\\) .",
+          "label": "Text"
+        },
+        {
+          "id": "21",
+          "order": 22,
+          "bounding_box": {
+            "x": 0.51,
+            "y": 0.364,
+            "width": 0.402,
+            "height": 0.043
+          },
+          "content": "Lemma 2. Assume that \\(f_{\\mathrm{b}}(\\boldsymbol {x},\\boldsymbol {\\theta})\\) in (17) is uniformly Lipschitz on \\(\\mathcal{X}\\) over all \\(\\theta \\in \\Theta\\) with Lipschitz constant \\(L_{\\mathrm{b}}\\) . Then, (21) holds for all \\(\\tau \\in [0,T]\\) , \\(x \\in \\mathcal{X}\\) , and \\(t \\geq 0\\) with",
+          "label": "Text"
+        },
+        {
+          "id": "22",
+          "order": 23,
+          "bounding_box": {
+            "x": 0.55,
+            "y": 0.41,
+            "width": 0.36,
+            "height": 0.075
+          },
+          "content": "\\[\\begin{array}{l}{\\delta_{\\phi}(\\tau ,x,t)\\triangleq \\int_{0}^{\\tau}\\mathrm{e}^{L_{\\mathrm{b}}(\\tau -s)}d_{\\mathrm{b}}(s,x,t)d s,}\\\\ {}\\\\ {d_{\\mathrm{b}}(\\tau ,x,t)\\triangleq \\sum_{i = 1}^{N}\\left\\| \\psi_{\\mathrm{b},i}(\\hat{\\phi}_{\\mathrm{b}}(\\tau ,x,t))\\right\\|_{\\mathrm{s}}\\rho_{i}(t),} \\end{array} \\quad (22)\\]",
+          "label": "Formula"
+        },
+        {
+          "id": "23",
+          "order": 24,
+          "bounding_box": {
+            "x": 0.51,
+            "y": 0.49,
+            "width": 0.402,
+            "height": 0.042
+          },
+          "content": "where \\(\\psi_{\\mathrm{b},i}\\) is the \\(i\\) th column of \\(\\psi_{\\mathrm{b}}\\) in (18), \\(\\left\\| \\cdot \\right\\|_{\\mathrm{s}}\\) represents a smooth upper bound of the Euclidean norm\\*, and \\(\\rho_{i}(t)\\) is the element- wise parameter estimation error bound in (13).",
+          "label": "Text"
+        },
+        {
+          "id": "24",
+          "order": 25,
+          "bounding_box": {
+            "x": 0.51,
+            "y": 0.537,
+            "width": 0.402,
+            "height": 0.043
+          },
+          "content": "Proof. First, we derive the dynamics of the error term \\(e(\\tau ,x,t)\\triangleq \\phi_{\\mathrm{b}}(\\tau ,x) - \\hat{\\phi}_{\\mathrm{b}}(\\tau ,x,t)\\) . Using (19) and (20), and adding and subtracting \\(f_{\\mathrm{b}}(\\hat{\\phi}_{\\mathrm{b}}(\\tau ,x,t),\\theta)\\) , we have",
+          "label": "Text"
+        },
+        {
+          "id": "25",
+          "order": 26,
+          "bounding_box": {
+            "x": 0.536,
+            "y": 0.585,
+            "width": 0.35,
+            "height": 0.04
+          },
+          "content": "\\[\\begin{array}{r}\\frac{\\partial}{\\partial\\tau} e(\\tau ,x,t) = f_{\\mathrm{b}}(\\phi_{\\mathrm{b}}(\\tau ,x),\\theta) - f_{\\mathrm{b}}(\\hat{\\phi}_{\\mathrm{b}}(\\tau ,x,t),\\theta)\\\\ +\\psi_{\\mathrm{b}}(\\hat{\\phi}_{\\mathrm{b}}(\\tau ,x,t))\\hat{\\theta} (t). \\end{array} \\quad (21)\\]",
+          "label": "Formula"
+        },
+        {
+          "id": "26",
+          "order": 27,
+          "bounding_box": {
+            "x": 0.51,
+            "y": 0.629,
+            "width": 0.284,
+            "height": 0.015
+          },
+          "content": "The last term can be bounded using \\(d_{\\mathrm{b}}\\) as",
+          "label": "Text"
+        },
+        {
+          "id": "27",
+          "order": 28,
+          "bounding_box": {
+            "x": 0.512,
+            "y": 0.648,
+            "width": 0.398,
+            "height": 0.084
+          },
+          "content": "\\[\\begin{array}{r l r} & {} & {\\left\\| \\psi_{\\mathrm{b}}(\\hat{\\phi}_{\\mathrm{b}}(\\tau ,x,t))\\hat{\\theta} (t)\\right\\| = \\left\\| \\sum_{i = 1}^{N}\\psi_{\\mathrm{b},i}(\\hat{\\phi}_{\\mathrm{b}}(\\tau ,x,t))\\hat{\\theta}_{i}(t)\\right\\|}\\\\ & {} & {\\leq \\sum_{i = 1}^{N}\\left\\| \\psi_{\\mathrm{b},i}(\\hat{\\phi}_{\\mathrm{b}}(\\tau ,x,t))\\right\\|_{\\mathrm{s}}\\rho_{i}(t) = d_{\\mathrm{b}}(\\tau ,x,t).} \\end{array} \\quad (22)\\]",
+          "label": "Formula"
+        },
+        {
+          "id": "28",
+          "order": 29,
+          "bounding_box": {
+            "x": 0.51,
+            "y": 0.736,
+            "width": 0.402,
+            "height": 0.029
+          },
+          "content": "Next, using the integral form of the error dynamics and \\(e(0,x,t) = 0\\) , we get",
+          "label": "Text"
+        },
+        {
+          "id": "29",
+          "order": 30,
+          "bounding_box": {
+            "x": 0.51,
+            "y": 0.769,
+            "width": 0.4,
+            "height": 0.095
+          },
+          "content": "\\[\\begin{array}{r l r} & {} & {\\| e(\\tau ,x,t)\\| \\leq \\int_{0}^{\\tau}\\| f_{\\mathrm{b}}(\\phi_{\\mathrm{b}}(s,x),\\theta) - f_{\\mathrm{b}}(\\hat{\\phi}_{\\mathrm{b}}(s,x,t),\\theta)\\| d s}\\\\ & {} & {\\qquad +\\int_{0}^{\\tau}\\left\\| \\psi_{\\mathrm{b}}(\\hat{\\phi}_{\\mathrm{b}}(s,x,t))\\hat{\\theta} (t)\\right\\| d s,}\\\\ & {} & {\\leq \\int_{0}^{\\tau}\\left(L_{\\mathrm{b}}\\| e(s,x,t)\\| +d_{\\mathrm{b}}(s,x,t)\\right)d s,} \\end{array} \\quad (23)\\]",
+          "label": "Formula"
+        },
+        {
+          "id": "30",
+          "order": 31,
+          "bounding_box": {
+            "x": 0.51,
+            "y": 0.87,
+            "width": 0.402,
+            "height": 0.016
+          },
+          "content": "where the first inequality follows from the triangle inequality",
+          "label": "Text"
+        },
+        {
+          "id": "31",
+          "order": 32,
+          "bounding_box": {
+            "x": 0.51,
+            "y": 0.895,
+            "width": 0.402,
+            "height": 0.029
+          },
+          "content": "\\*In this work, we use \\(\\| x\\|_{\\mathrm{s}} = \\sqrt{\\| z\\|^{2} + \\sigma^{2}}\\) with \\(\\sigma > 0\\) , which is continuously differentiable and satisfies \\(\\| z\\|_{\\mathrm{s}} \\geq \\| z\\|\\) for all \\(z \\in \\mathbb{R}^{n}\\) .",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "page_index": 4,
+      "blocks": [
+        {
+          "id": "0",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.085,
+            "y": 0.066,
+            "width": 0.401,
+            "height": 0.042
+          },
+          "content": "and the second inequality holds because of the uniform Lipschitz property of \\(f_{\\mathrm{b}}\\) and the definition of \\(d_{\\mathrm{b}}\\) . Thus, the bound in (22) follows from the Gronwall- Bellman inequality. \\(\\square\\)",
+          "label": "Text"
+        },
+        {
+          "id": "1",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.085,
+            "y": 0.115,
+            "width": 0.401,
+            "height": 0.056
+          },
+          "content": "We note that \\(\\delta_{\\phi}\\) in (22) is one possible flow bound. When more information about the closed- loop system may be leveraged (e.g., contraction, one- sided Lipschitzness [16], or linearity), this bound can be made tighter [17].",
+          "label": "Text"
+        },
+        {
+          "id": "2",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.085,
+            "y": 0.171,
+            "width": 0.401,
+            "height": 0.068
+          },
+          "content": "Having established the flow error bound in (21), we now introduce tightening terms that allow us to make constraints on the estimated backup flow sufficient for satisfying constraints on the true backup flow. These tightening terms are denoted as \\(\\epsilon\\) and \\(\\epsilon_{\\mathrm{b}}\\) , and they are constructed such that",
+          "label": "Text"
+        },
+        {
+          "id": "3",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.119,
+            "y": 0.24,
+            "width": 0.366,
+            "height": 0.04
+          },
+          "content": "\\[\\begin{array}{r}\\epsilon (\\tau ,\\pmb {x},t)\\geq h(\\widehat{\\phi}_{\\mathrm{b}}(\\tau ,\\pmb {x},t)) - h(\\phi_{\\mathrm{b}}(\\tau ,\\pmb {x})),\\\\ \\epsilon_{\\mathrm{b}}(\\pmb {x},t)\\geq h_{\\mathrm{b}}(\\widehat{\\phi}_{\\mathrm{b}}(T,\\pmb {x},t)) - h_{\\mathrm{b}}(\\phi_{\\mathrm{b}}(T,\\pmb {x})), \\end{array} \\quad (23)\\]",
+          "label": "Formula"
+        },
+        {
+          "id": "4",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.085,
+            "y": 0.28,
+            "width": 0.401,
+            "height": 0.058
+          },
+          "content": "hold for all \\(\\tau \\in [0,T]\\) \\(\\pmb {x}\\in \\mathcal{X}\\) , and \\(t\\geq 0\\) , providing bounds on the effect of the parameter uncertainty on safety. For example, by the Lipschitz continuity of \\(h\\) and \\(h_{\\mathrm{b}}\\) , we may define continuously differentiable tightening functions as",
+          "label": "Text"
+        },
+        {
+          "id": "5",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.193,
+            "y": 0.34,
+            "width": 0.292,
+            "height": 0.044
+          },
+          "content": "\\[\\begin{array}{r}\\epsilon (\\tau ,\\pmb {x},t)\\triangleq L_{h}\\delta_{\\phi}(\\tau ,\\pmb {x},t),\\\\ \\epsilon_{\\mathrm{b}}(\\pmb {x},t)\\triangleq L_{h_{\\mathrm{b}}}\\delta_{\\phi}(\\pmb {x},t), \\end{array} \\quad (24)\\]",
+          "label": "Formula"
+        },
+        {
+          "id": "6",
+          "order": 7,
+          "bounding_box": {
+            "x": 0.085,
+            "y": 0.383,
+            "width": 0.401,
+            "height": 0.042
+          },
+          "content": "where \\(L_{h}\\) and \\(L_{h_{\\mathrm{b}}}\\) are the Lipschitz constants of \\(h\\) and \\(h_{\\mathrm{b}}\\) . For convex or quadratic barriers, even tighter \\(\\epsilon\\) and \\(\\epsilon_{\\mathrm{b}}\\) terms may be obtained [18, Remark 2].",
+          "label": "Text"
+        },
+        {
+          "id": "7",
+          "order": 8,
+          "bounding_box": {
+            "x": 0.085,
+            "y": 0.425,
+            "width": 0.401,
+            "height": 0.056
+          },
+          "content": "To enhance robustness against parameter estimation errors, similar to the uncertainty estimator- based bCBF method proposed in [17], we define a time- varying inner approximation \\(\\widehat{C}_{1}(t)\\) of the true implicit safe set \\(\\mathcal{C}_{1}\\) in (6):",
+          "label": "Text"
+        },
+        {
+          "id": "8",
+          "order": 9,
+          "bounding_box": {
+            "x": 0.1,
+            "y": 0.483,
+            "width": 0.385,
+            "height": 0.035
+          },
+          "content": "\\[\\widehat{C}_{1}(t)\\triangleq \\left\\{\\pmb {x}\\in \\mathcal{X}:\\frac{\\bar{h}(\\tau,\\pmb{x},t)\\geq 0,\\quad\\forall\\tau\\in[0,T]}{\\bar{h}_{\\mathrm{b}}(\\pmb{x},t)\\geq 0}\\right\\} , \\quad (25)\\]",
+          "label": "Formula"
+        },
+        {
+          "id": "9",
+          "order": 10,
+          "bounding_box": {
+            "x": 0.085,
+            "y": 0.522,
+            "width": 0.401,
+            "height": 0.015
+          },
+          "content": "for all \\(t\\geq 0\\) , where the tightening terms are incorporated in",
+          "label": "Text"
+        },
+        {
+          "id": "10",
+          "order": 11,
+          "bounding_box": {
+            "x": 0.15,
+            "y": 0.54,
+            "width": 0.335,
+            "height": 0.044
+          },
+          "content": "\\[\\begin{array}{r}\\bar{h} (\\tau ,\\pmb {x},t)\\triangleq h(\\widehat{\\phi}_{\\mathrm{b}}(\\tau ,\\pmb {x},t)) - \\epsilon (\\tau ,\\pmb {x},t),\\\\ \\bar{h}_{\\mathrm{b}}(\\pmb {x},t)\\triangleq h_{\\mathrm{b}}(\\widehat{\\phi}_{\\mathrm{b}}(T,\\pmb {x},t)) - \\epsilon_{\\mathrm{b}}(\\pmb {x},t). \\end{array} \\quad (26)\\]",
+          "label": "Formula"
+        },
+        {
+          "id": "11",
+          "order": 12,
+          "bounding_box": {
+            "x": 0.085,
+            "y": 0.588,
+            "width": 0.292,
+            "height": 0.014
+          },
+          "content": "We remark that, since \\(\\epsilon ,\\epsilon_{\\mathrm{b}}\\geq 0\\) \\(\\widehat{C}_{1}(t)\\subseteq \\mathcal{C}_{1}\\)",
+          "label": "Text"
+        },
+        {
+          "id": "12",
+          "order": 13,
+          "bounding_box": {
+            "x": 0.085,
+            "y": 0.602,
+            "width": 0.401,
+            "height": 0.043
+          },
+          "content": "Having constructed a known subset of \\(\\widehat{C}_{1}\\) , we are now in a position to enforce the forward invariance of \\(\\widehat{C}_{1}(t)\\) . We impose that the control input \\(\\pmb{u}\\) must satisfy",
+          "label": "Text"
+        },
+        {
+          "id": "13",
+          "order": 14,
+          "bounding_box": {
+            "x": 0.125,
+            "y": 0.648,
+            "width": 0.36,
+            "height": 0.048
+          },
+          "content": "\\[\\begin{array}{r}\\dot{\\bar{h}} (\\tau ,\\pmb {x},t,\\pmb {u})\\geq -\\alpha (\\bar{h} (\\tau ,\\pmb {x},t)),\\quad \\forall \\tau \\in [0,T],\\\\ \\dot{\\bar{h}}_{\\mathrm{b}}(\\pmb {x},t,\\pmb {u})\\geq -\\alpha_{\\mathrm{b}}(\\bar{h}_{\\mathrm{b}}(\\pmb {x},t)), \\end{array} \\quad (27)\\]",
+          "label": "Formula"
+        },
+        {
+          "id": "14",
+          "order": 15,
+          "bounding_box": {
+            "x": 0.085,
+            "y": 0.699,
+            "width": 0.401,
+            "height": 0.028
+          },
+          "content": "for all \\(\\pmb {x}\\in \\widehat{C}_{1}(t)\\) and \\(t\\geq 0\\) . By calculating the time derivatives via the chain rule, these inequalities can be written as",
+          "label": "Text"
+        },
+        {
+          "id": "15",
+          "order": 16,
+          "bounding_box": {
+            "x": 0.159,
+            "y": 0.73,
+            "width": 0.326,
+            "height": 0.04
+          },
+          "content": "\\[\\begin{array}{r}a(\\tau ,\\pmb {x},u,t) + c(\\tau ,\\pmb {x},u,t)^{\\top}\\tilde{\\pmb{\\theta}} (t)\\geq 0,\\\\ a_{\\mathrm{b}}(\\pmb {x},u,t) + c_{\\mathrm{b}}(\\pmb {x},u,t)^{\\top}\\tilde{\\pmb{\\theta}} (t)\\geq 0, \\end{array} \\quad (28)\\]",
+          "label": "Formula"
+        },
+        {
+          "id": "16",
+          "order": 17,
+          "bounding_box": {
+            "x": 0.085,
+            "y": 0.774,
+            "width": 0.401,
+            "height": 0.056
+          },
+          "content": "where the expressions of \\(a\\) , \\(a_{\\mathrm{b}}\\) , \\(c\\) , and \\(c_{\\mathrm{b}}\\) are derived in the Appendix. Note that while the \\(a\\) , \\(a_{\\mathrm{b}}\\) , \\(c\\) , and \\(c_{\\mathrm{b}}\\) coefficients are known, the parameter estimation error \\(\\tilde{\\pmb{\\theta}} (t)\\) is unknown, and hence (28) cannot be enforced directly.",
+          "label": "Text"
+        },
+        {
+          "id": "17",
+          "order": 18,
+          "bounding_box": {
+            "x": 0.1,
+            "y": 0.83,
+            "width": 0.37,
+            "height": 0.014
+          },
+          "content": "Instead, we apply the robust adaptive bCBF conditions",
+          "label": "Text"
+        },
+        {
+          "id": "18",
+          "order": 19,
+          "bounding_box": {
+            "x": 0.144,
+            "y": 0.848,
+            "width": 0.341,
+            "height": 0.059
+          },
+          "content": "\\[\\begin{array}{r}a(\\tau ,\\pmb {x},u,t) + \\inf_{\\eta \\in \\widehat{\\Theta}(t)}c(\\tau ,\\pmb {x},u,t)^{\\top}\\eta \\geq 0,\\\\ a_{\\mathrm{b}}(\\pmb {x},u,t) + \\inf_{\\eta \\in \\widehat{\\Theta}(t)}c_{\\mathrm{b}}(\\pmb {x},u,t)^{\\top}\\eta \\geq 0. \\end{array} \\quad (30)\\]",
+          "label": "Formula"
+        },
+        {
+          "id": "19",
+          "order": 20,
+          "bounding_box": {
+            "x": 0.085,
+            "y": 0.91,
+            "width": 0.401,
+            "height": 0.015
+          },
+          "content": "These inequalities enforce the bCBF conditions for all ad",
+          "label": "Text"
+        },
+        {
+          "id": "20",
+          "order": 21,
+          "bounding_box": {
+            "x": 0.509,
+            "y": 0.066,
+            "width": 0.401,
+            "height": 0.072
+          },
+          "content": "missible parameter estimation errors inside the known error set \\(\\widehat{\\Theta} (t)\\) given by (14). The inner minimizations are linear programs (LPs) over the component- wise estimation error set. Using LP duality [10], the robust constraints are enforced by the existence of dual variables \\(\\pmb{\\mu}_{\\tau},\\pmb{\\mu}_{\\mathrm{b}}\\in \\mathbb{R}^{2N}\\) such that",
+          "label": "Text"
+        },
+        {
+          "id": "21",
+          "order": 22,
+          "bounding_box": {
+            "x": 0.59,
+            "y": 0.14,
+            "width": 0.32,
+            "height": 0.076
+          },
+          "content": "\\[\\begin{array}{r}a(\\tau ,\\pmb {x},u,t) + b(t)^{\\top}\\pmb{\\mu}_{\\tau}\\geq 0,\\\\ \\pmb{\\mu}_{\\tau}^{\\top}\\pmb {A} = c(\\tau ,\\pmb {x},u,t)^{\\top},\\quad \\pmb{\\mu}_{\\tau}\\leq 0,\\\\ a_{\\mathrm{b}}(\\pmb {x},u,t) + b(t)^{\\top}\\pmb{\\mu}_{\\mathrm{b}}\\geq 0,\\\\ \\pmb{\\mu}_{\\mathrm{b}}^{\\top}\\pmb {A} = c_{\\mathrm{b}}(\\pmb {x},u,t)^{\\top},\\quad \\pmb{\\mu}_{\\mathrm{b}}\\leq 0, \\end{array} \\quad (34)\\]",
+          "label": "Formula"
+        },
+        {
+          "id": "22",
+          "order": 23,
+          "bounding_box": {
+            "x": 0.509,
+            "y": 0.22,
+            "width": 0.401,
+            "height": 0.044
+          },
+          "content": "with \\(\\pmb{A}\\) and \\(b(t)\\) from (14). Note that the functions \\(a\\) , \\(a_{\\mathrm{b}}\\) , \\(c\\) , and \\(c_{\\mathrm{b}}\\) are affine in \\(\\pmb{u}\\) as \\(\\phi (\\pmb {x},\\pmb {u})\\) is affine in \\(\\pmb{u}\\) . Hence, (31)–(34) are affine in the decision variables \\(\\pmb {u}\\) , \\(\\pmb{\\mu}_{\\tau}\\) , and \\(\\pmb{\\mu}_{\\mathrm{b}}\\) .",
+          "label": "Text"
+        },
+        {
+          "id": "23",
+          "order": 24,
+          "bounding_box": {
+            "x": 0.509,
+            "y": 0.27,
+            "width": 0.401,
+            "height": 0.116
+          },
+          "content": "Theorem 1. Consider the uncertain system (10), an estimator in Definition 1, the safe set \\(C_{\\mathrm{S}}\\) in (2), the backup controller \\(k_{\\mathrm{b}}\\) , the backup set \\(C_{\\mathrm{B}}\\) in (5), and the time- varying set \\(\\widehat{C}_{1}(t)\\) in (25). Suppose Assumptions 1 and 2 hold. Then, any locally Lipschitz controller satisfying (31)–(34) for all \\(\\tau \\in [0,T]\\) renders \\(\\widehat{C}_{1}(t)\\) forward invariant for (10). Consequently, every closed- loop trajectory starting in \\(\\widehat{C}_{1}(0)\\) remains in \\(C_{\\mathrm{S}}\\) : \\(\\mathbf{x}(0)\\in \\widehat{C}_{1}(0)\\implies \\mathbf{x}(t)\\in C_{\\mathrm{S}}\\) , \\(\\forall t\\geq 0\\) .",
+          "label": "Text"
+        },
+        {
+          "id": "24",
+          "order": 25,
+          "bounding_box": {
+            "x": 0.509,
+            "y": 0.392,
+            "width": 0.401,
+            "height": 0.115
+          },
+          "content": "Proof. By strong duality, the dual inequality and equality conditions in (31)–(34) imply the primal robust inequalities (29) and (30). Since \\(\\tilde{\\pmb{\\theta}} (t)\\in \\widehat{\\Theta} (t)\\) , these primal inequalities imply (27). Consequently, the comparison lemma gives the forward invariance of \\(\\widehat{C}_{1}(t)\\) . From the tightening construction (23), we have \\(\\widehat{C}_{1}(t)\\subseteq C_{\\mathrm{I}}\\) . Since \\(\\tau = 0\\) is included in the definition of \\(C_{\\mathrm{I}}\\) , we also have \\(C_{\\mathrm{I}}\\subseteq C_{\\mathrm{S}}\\) . Therefore, every closed- loop trajectory starting in \\(\\widehat{C}_{1}(0)\\) remains in \\(C_{\\mathrm{S}}\\) . \\(\\square\\)",
+          "label": "Text"
+        },
+        {
+          "id": "25",
+          "order": 26,
+          "bounding_box": {
+            "x": 0.509,
+            "y": 0.517,
+            "width": 0.401,
+            "height": 0.127
+          },
+          "content": "Having established the robust safety constraints in (31)–(34), we now introduce an optimization problem, in the form of a QP, that enables the synthesis of safe controllers. Let the backup horizon be discretized by \\(\\tau_{j} = jT / N_{T}\\) for \\(j\\in \\{0,\\ldots ,N_{T}\\}\\) , and define the decision variable vector as \\(\\pmb {w}\\triangleq (\\pmb {u},\\{\\pmb{\\mu}_{\\tau_{j}}\\}_{j = 0}^{N_{T}},\\pmb{\\mu}_{\\mathrm{b}})\\) that contains \\(N_{w}\\triangleq m + (N_{T} + 2)2N\\) elements. With \\(\\pmb {w}\\) , we formulate an adaptive safety filter that minimally modifies a potentially unsafe primary controller \\(k_{\\mathrm{p}}:\\mathcal{X}\\to \\mathcal{U}\\) into a safe controller:",
+          "label": "Text"
+        },
+        {
+          "id": "26",
+          "order": 27,
+          "bounding_box": {
+            "x": 0.52,
+            "y": 0.648,
+            "width": 0.39,
+            "height": 0.064
+          },
+          "content": "\\[\\begin{array}{r l} & {k^{*}(t,\\pmb {x},\\hat{\\pmb{\\theta}}) = \\underset {\\pmb {w}\\in \\mathbb{R}^{N_{w}}}{\\arg \\min}\\quad \\| \\pmb {u} - k_{\\mathrm{p}}(\\pmb {x})\\|^{2}}\\\\ & {\\qquad \\mathrm{s.t.}\\quad \\pmb {u}\\in \\mathcal{U}, \\mathrm{(33), (34),}}\\\\ & {\\qquad \\mathrm{(31), (32)~at~}\\tau_{j}, j\\in \\{0,\\ldots ,N_{T}\\} .} \\end{array} \\quad (35)\\]",
+          "label": "Formula"
+        },
+        {
+          "id": "27",
+          "order": 28,
+          "bounding_box": {
+            "x": 0.509,
+            "y": 0.717,
+            "width": 0.401,
+            "height": 0.086
+          },
+          "content": "Note that (35) is a QP, since its constraints are affine in \\(w\\) . Remark 1. Theorem 1 uses continuous time safety conditions over \\(\\tau \\in [0,T]\\) , while the QP in (35) enforces discretized constraints on a grid using \\(\\tau_{j}\\) . As in standard bCBF implementations, one can add inter- sample margins or choose a sufficiently fine grid to account for the discretization error.",
+          "label": "Text"
+        },
+        {
+          "id": "28",
+          "order": 29,
+          "bounding_box": {
+            "x": 0.509,
+            "y": 0.806,
+            "width": 0.401,
+            "height": 0.087
+          },
+          "content": "Remark 2. The proposed method with the QP in (35) ensures safety without requiring the notoriously restrictive persistent excitation (PE) condition on the regression matrix. Furthermore, as the certified bounds \\(\\rho_{i}(t)\\) decrease, the flow error bound \\(\\delta_{\\phi}\\) and the tightening terms \\(\\epsilon ,\\epsilon_{\\mathrm{b}}\\) shrink; therefore, the inner approximation \\(\\widehat{C}_{1}(t)\\) approaches \\(C_{\\mathrm{I}}\\) as \\(\\rho_{i}(t)\\to 0\\) .",
+          "label": "Text"
+        },
+        {
+          "id": "29",
+          "order": 30,
+          "bounding_box": {
+            "x": 0.509,
+            "y": 0.897,
+            "width": 0.401,
+            "height": 0.028
+          },
+          "content": "Remark 3. Since the set \\(\\widehat{C}_{1}(t)\\) is not necessarily controlled invariant by construction, the QP in (35) can be infeasible for",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "page_index": 5,
+      "blocks": [
+        {
+          "id": "0",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.085,
+            "y": 0.065,
+            "width": 0.403,
+            "height": 0.206
+          },
+          "content": "some \\(t \\geq 0\\) because of the input bounds or the emptiness of the set \\(\\tilde{C}_1(t)\\) . Note that the non- emptiness of \\(\\tilde{C}_1(t)\\) depends on the size of the tightening terms \\(\\epsilon , \\epsilon_{\\mathrm{b}}\\) , which are largest at \\(t = 0\\) and shrink as the certified bounds \\(\\rho_i(t)\\) decrease. In practice, \\(\\tilde{C}_1(t)\\) can be made non- empty by choosing a sufficiently short backup horizon \\(T\\) or a sufficiently tight initial parameter box \\(\\Theta\\) , and becomes progressively less conservative as the estimator refines the parameter estimate. To ensure robust safety in the case of potential infeasibility of the QP, the robust backup controller \\(k_{\\mathrm{b}}\\) can be utilized. By Assumption 2, \\(k_{\\mathrm{b}}\\) renders \\(C_1\\) forward invariant along (10), and satisfies \\(k_{\\mathrm{b}}(x) \\in \\mathcal{U}\\) for all \\(x \\in C_1\\) . Therefore, if (35) becomes infeasible, one can switch to \\(k_{\\mathrm{b}}\\) to keep the state in \\(C_1 \\subseteq C_{\\mathrm{S}}\\) while satisfying the input constraints. A smooth switching between \\(k^*\\) and \\(k_{\\mathrm{b}}\\) can also be used, as in [19].",
+          "label": "Text"
+        },
+        {
+          "id": "1",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.163,
+            "y": 0.293,
+            "width": 0.248,
+            "height": 0.014
+          },
+          "content": "### V. PLANAR QUADROTOR EXAMPLE",
+          "label": "Text"
+        },
+        {
+          "id": "2",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.085,
+            "y": 0.32,
+            "width": 0.403,
+            "height": 0.14
+          },
+          "content": "We illustrate the proposed control method using a planar quadrotor example with parametric uncertainty in both the drift and input matrices. The state and input vectors are \\(\\pmb {x}\\triangleq [p_{x} p_{z} \\theta v_{x} v_{z} \\omega ]^{\\top} \\in \\mathcal{X}, \\pmb {u}\\triangleq [F M]^{\\top} \\in \\mathcal{U}\\) , where \\(\\mathcal{X} \\subset \\mathbb{R}^{2} \\times \\mathbb{S}^{1} \\times \\mathbb{R}^{3}\\) , \\(p_{x}\\) and \\(p_{z}\\) denote the horizontal and vertical quadrotor positions, \\(\\vartheta\\) is its pitch angle, and \\((v_{x}, v_{z}, \\omega)\\) are the translational and angular velocities. The inputs are the thrust force \\(F\\) and pitch moment \\(M\\) , with \\(\\mathcal{U} \\triangleq [0, F_{\\mathrm{max}}] \\times [- M_{\\mathrm{max}}, M_{\\mathrm{max}}] \\subset \\mathbb{R}^{2}\\) . The planar quadrotor model is",
+          "label": "Text"
+        },
+        {
+          "id": "3",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.099,
+            "y": 0.461,
+            "width": 0.388,
+            "height": 0.043
+          },
+          "content": "\\[\\begin{array}{r l} & {\\dot{p}_{x} = v_{x},\\quad \\dot{p}_{z} = v_{z},\\quad \\dot{\\theta} = \\omega ,\\quad \\dot{\\omega} = \\delta_{\\ell}F - \\frac{1}{J} M,}\\\\ & {v_{x} = -c_{x}v_{x} + \\frac{\\sin\\vartheta}{m} F,\\quad v_{z} = -c_{z}v_{z} - g + \\frac{\\cos\\vartheta}{m} F,} \\end{array} \\quad (36)\\]",
+          "label": "Formula"
+        },
+        {
+          "id": "4",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.085,
+            "y": 0.504,
+            "width": 0.403,
+            "height": 0.083
+          },
+          "content": "where \\(c_{x}\\) and \\(c_{z}\\) are damping coefficients, \\(g\\) is the gravitational acceleration, \\(m\\) is the mass of the quadrotor, \\(J\\) is its mass moment of inertia, and \\(\\delta_{\\ell}\\) captures an unknown pitch moment generated by thrust. We assume that each of these six parameters is uncertain, and the nominal values used for control design are 0, 0, \\(g_{0}\\) , \\(m_{0}\\) , \\(J_{0}\\) , and 0, respectively.",
+          "label": "Text"
+        },
+        {
+          "id": "5",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.085,
+            "y": 0.587,
+            "width": 0.403,
+            "height": 0.057
+          },
+          "content": "Accordingly, we introduce the unknown parameter vector \\(\\pmb {\\theta} \\triangleq [c_{x} c_{z} \\delta_{g} \\delta_{m} \\delta_{J} \\delta_{\\ell}]^{\\top} \\in \\Theta \\subset \\mathbb{R}^{6}\\) , with \\(\\delta_{g} \\triangleq g - g_{0}\\) , \\(\\delta_{m} \\triangleq \\frac{1}{m} - \\frac{1}{m_{0}}\\) , \\(\\delta_{J} \\triangleq \\frac{1}{J} - \\frac{1}{J_{0}}\\) , and we separate the nominal model and the uncertainty as",
+          "label": "Text"
+        },
+        {
+          "id": "6",
+          "order": 7,
+          "bounding_box": {
+            "x": 0.083,
+            "y": 0.65,
+            "width": 0.405,
+            "height": 0.115
+          },
+          "content": "\\[\\dot{\\pmb{x}} = \\left[ \\begin{array}{c}v_{x}\\\\ v_{z}\\\\ \\omega \\\\ 0\\\\ -g_{0}\\\\ 0 \\end{array} \\right] + \\frac{\\sin\\vartheta}{\\cos\\vartheta}\\left[ \\begin{array}{c}0\\\\ 0\\\\ 0\\\\ 0\\\\ 0 \\end{array} \\right]u + \\left[ \\begin{array}{cccccc}0 & 0 & 0 & 0 & 0 & 0\\\\ 0 & 0 & 0 & 0 & 0 & 0\\\\ 0 & 0 & 0 & 0 & \\cos \\vartheta & 0\\\\ 0 & -v_{x} & 0 & F\\sin \\vartheta & 0 & 0\\\\ 0 & -v_{z} & -1 & F\\cos \\vartheta & 0 & 0\\\\ 0 & 0 & 0 & 0 & 0 & -M F \\end{array} \\right]\\pmb {\\theta}.\\]",
+          "label": "Formula"
+        },
+        {
+          "id": "7",
+          "order": 8,
+          "bounding_box": {
+            "x": 0.085,
+            "y": 0.769,
+            "width": 0.403,
+            "height": 0.069
+          },
+          "content": "We remark that \\(c_{x}\\) , \\(c_{z}\\) , and \\(\\delta_{g}\\) introduce drift uncertainty, while the uncertainties \\(\\delta_{m}\\) , \\(\\delta_{J}\\) , and \\(\\delta_{\\ell}\\) enter through the actuation matrix and multiply the control input, which is addressed by the duality- based robustification in Section IV. Note that the regression matrix \\(\\phi (x, u)\\) is affine in \\(u\\) .",
+          "label": "Text"
+        },
+        {
+          "id": "8",
+          "order": 9,
+          "bounding_box": {
+            "x": 0.085,
+            "y": 0.839,
+            "width": 0.403,
+            "height": 0.055
+          },
+          "content": "For a safe control scenario, we consider a payload insertion task inspired by the deployment of aerial payloads on natural surfaces. The robot must remain \\(p_{x}^{\\min} \\geq 0\\) away from a wall while maintaining a minimum height and a bounded",
+          "label": "Text"
+        },
+        {
+          "id": "9",
+          "order": 10,
+          "bounding_box": {
+            "x": 0.528,
+            "y": 0.071,
+            "width": 0.373,
+            "height": 0.249
+          },
+          "content": "",
+          "label": "Image"
+        },
+        {
+          "id": "10",
+          "order": 11,
+          "bounding_box": {
+            "x": 0.509,
+            "y": 0.327,
+            "width": 0.403,
+            "height": 0.082
+          },
+          "content": "<center>Fig. 1. Simulation of the uncertain quadrotor model. (Top) The trajectories in the \\(p_{x} - p_{z}\\) plane. The proposed robust adaptive bCBF-QP (35) keeps the quadrotor inside the safe set \\(C_{\\mathrm{S}}\\) under parametric uncertainty and bounded inputs, while the primary controller and the nominal bCBF violate safety. (Middle) The inputs with \\(F\\) and \\(M\\) satisfy the input constraints. (Bottom) The six parameter estimates \\(\\hat{\\theta}_i\\) . The DREM parameter estimator provides certified component-wise estimation error bounds that shrink over time. </center>",
+          "label": "Text"
+        },
+        {
+          "id": "11",
+          "order": 12,
+          "bounding_box": {
+            "x": 0.51,
+            "y": 0.424,
+            "width": 0.306,
+            "height": 0.015
+          },
+          "content": "pitch angle. This is captured by the functions",
+          "label": "Text"
+        },
+        {
+          "id": "12",
+          "order": 13,
+          "bounding_box": {
+            "x": 0.509,
+            "y": 0.441,
+            "width": 0.401,
+            "height": 0.021
+          },
+          "content": "\\[h_{x}(\\pmb {x}) = p_{x} - p_{x}^{\\min}, h_{z}(\\pmb {x}) = p_{z} - p_{z}^{\\min}, h_{\\theta}(\\pmb {x}) = \\theta_{x}^{2} - \\theta^{2},\\]",
+          "label": "Formula"
+        },
+        {
+          "id": "13",
+          "order": 14,
+          "bounding_box": {
+            "x": 0.509,
+            "y": 0.466,
+            "width": 0.348,
+            "height": 0.016
+          },
+          "content": "which are combined into a single safety function as",
+          "label": "Text"
+        },
+        {
+          "id": "14",
+          "order": 15,
+          "bounding_box": {
+            "x": 0.525,
+            "y": 0.484,
+            "width": 0.385,
+            "height": 0.021
+          },
+          "content": "\\[h(\\pmb {x}) = -\\frac{1}{\\kappa}\\ln \\left(\\mathrm{e}^{-\\kappa h_{x}(\\pmb{x})} + \\mathrm{e}^{-\\kappa h_{z}(\\pmb{x})} + \\mathrm{e}^{-\\kappa h_{\\theta}(\\pmb{x})}\\right), \\quad (37)\\]",
+          "label": "Formula"
+        },
+        {
+          "id": "15",
+          "order": 16,
+          "bounding_box": {
+            "x": 0.509,
+            "y": 0.509,
+            "width": 0.371,
+            "height": 0.015
+          },
+          "content": "with a smoothing parameter \\(\\kappa > 0\\) and safe set \\(C_{\\mathrm{S}}\\) in (2).",
+          "label": "Text"
+        },
+        {
+          "id": "16",
+          "order": 17,
+          "bounding_box": {
+            "x": 0.509,
+            "y": 0.524,
+            "width": 0.403,
+            "height": 0.171
+          },
+          "content": "The insertion task is executed by a primary controller \\(k_{\\mathrm{p}}\\) that is a cascaded position- attitude law steering the quadrotor to a goal \\((p_{x}^{\\mathrm{g}}, p_{z}^{\\mathrm{g}})\\) : \\(a_{x} = - k_{\\mathrm{p}}^{x}(p_{x} - p_{z}^{\\mathrm{g}}) - k_{x}^{x} v_{x}\\) , \\(a_{z} = - k_{z}^{x}(p_{x} - p_{z}^{\\mathrm{g}}) - k_{z}^{x} v_{z}\\) , \\(F = m_{0} \\sqrt{a_{x}^{2} + (g_{0} + a_{z})^{2}}\\) , \\(\\vartheta_{\\mathrm{d}} = \\mathrm{atan}2(a_{x}, g_{0} + a_{z})\\) , \\(M = J_{0} \\left(k_{\\mathrm{p}}^{\\vartheta}(\\vartheta - \\vartheta_{\\mathrm{d}}) + k_{\\mathrm{d}}^{\\vartheta} \\omega\\right)\\) , saturated to \\(\\mathcal{U}\\) . Since \\(k_{\\mathrm{p}}\\) is agnostic to both the safety constraint and the parametric uncertainty, we apply the proposed QP- based safety filter in (35): the DREM estimator of Example 1 provides the parameter estimate \\(\\hat{\\theta} (t)\\) and the certified error bounds \\(\\rho_{i}(t)\\) , the backup flow is propagated with \\(\\hat{\\theta} (t)\\) , and the safety conditions tightened by \\(\\rho_{i}(t)\\) are enforced along this flow.",
+          "label": "Text"
+        },
+        {
+          "id": "17",
+          "order": 18,
+          "bounding_box": {
+            "x": 0.53,
+            "y": 0.696,
+            "width": 0.292,
+            "height": 0.014
+          },
+          "content": "The robust backup controller takes the form",
+          "label": "Text"
+        },
+        {
+          "id": "18",
+          "order": 19,
+          "bounding_box": {
+            "x": 0.545,
+            "y": 0.714,
+            "width": 0.365,
+            "height": 0.02
+          },
+          "content": "\\[k_{\\mathrm{b}}(\\pmb {x}) = \\left[F_{\\mathrm{max}} \\quad \\mathrm{sat}\\left(k_{\\theta}(\\vartheta - \\vartheta_{\\mathrm{r}}) + k_{\\omega}\\omega\\right)\\right]^{\\top}, \\quad (38)\\]",
+          "label": "Formula"
+        },
+        {
+          "id": "19",
+          "order": 20,
+          "bounding_box": {
+            "x": 0.509,
+            "y": 0.739,
+            "width": 0.403,
+            "height": 0.043
+          },
+          "content": "where \\(k_{\\theta} > 0\\) and \\(k_{\\omega} > 0\\) are gains, \\(\\vartheta_{\\mathrm{r}} \\in (0, \\vartheta_{\\mathrm{max}})\\) is a reference pitch angle, and \\(\\mathrm{sat}\\) is a smooth saturation map into \\([- M_{\\mathrm{max}}, M_{\\mathrm{max}}]\\) . The corresponding backup set is",
+          "label": "Text"
+        },
+        {
+          "id": "20",
+          "order": 21,
+          "bounding_box": {
+            "x": 0.509,
+            "y": 0.785,
+            "width": 0.401,
+            "height": 0.035
+          },
+          "content": "\\[C_{\\mathrm{B}} \\triangleq \\left\\{ \\begin{array}{l} \\pmb {x} \\in \\mathcal{X}: \\begin{array}{l} h_{x,\\mathrm{b}}(\\pmb {x}) \\geq 0, \\\\ h_{v_{x,\\mathrm{b}}}(\\pmb {x}) \\geq 0, \\end{array} h_{z,\\mathrm{b}}(\\pmb {x}) \\geq 0, \\\\ h_{v_{z,\\mathrm{b}}}(\\pmb {x}) \\geq 0 \\end{array} \\right\\}, \\quad (39)\\]",
+          "label": "Formula"
+        },
+        {
+          "id": "21",
+          "order": 22,
+          "bounding_box": {
+            "x": 0.509,
+            "y": 0.825,
+            "width": 0.403,
+            "height": 0.101
+          },
+          "content": "where \\(h_{x,\\mathrm{b}}(\\pmb {x}) = p_{x} - p_{x}^{\\min} - r_{x}\\) and \\(h_{z,\\mathrm{b}}(\\pmb {x}) = p_{z} - p_{z}^{\\min} - r_{z}\\) represent surface and altitude clearance with margins \\(r_{x} > 0\\) and \\(r_{z} > 0\\) , while \\(h_{v_{x,\\mathrm{b}}}(\\pmb {x}) = v_{x}\\) and \\(h_{v_{z,\\mathrm{b}}}(\\pmb {x}) = v_{z}\\) prescribe positive velocities. For the pitch dynamics, we let \\(\\pmb {y}_{\\vartheta} \\triangleq [\\vartheta - \\vartheta_{\\mathrm{r}} \\omega ]^{\\top}\\) and \\(h_{\\vartheta ,\\mathrm{b}}(\\pmb {x}) = \\varrho_{\\vartheta} - \\pmb {y}_{\\vartheta}^{\\top} \\pmb {P}_{\\vartheta} \\pmb {y}_{\\vartheta}\\) , with \\(\\varrho_{\\vartheta} > 0\\) and \\(\\pmb{P}_{\\vartheta} = \\pmb{P}_{\\vartheta}^{\\top} > 0\\) . Further details on the construction of \\(k_{\\mathrm{b}}\\) and \\(C_{\\mathrm{B}}\\) can be found in the supplementary material, where",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "page_index": 6,
+      "blocks": [
+        {
+          "id": "0",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.085,
+            "y": 0.065,
+            "width": 0.4,
+            "height": 0.029
+          },
+          "content": "it is shown that (38) renders \\(\\mathcal{C}_{\\mathrm{B}}\\) in (39) robustly forward invariant for suitable choices of \\(P_{\\theta}\\) , \\(\\rho_{\\theta}\\) , \\(r_{x}\\) , \\(r_{z}\\) , and \\(\\theta_{\\mathrm{r}}\\) .",
+          "label": "Text"
+        },
+        {
+          "id": "1",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.086,
+            "y": 0.092,
+            "width": 0.401,
+            "height": 0.315
+          },
+          "content": "Fig. 1 shows a simulation of the planar quadrotor using the proposed robust adaptive bCBF and the DREM estimator of Example 1. We compare our method against two baselines: the primary controller \\(k_{\\mathrm{p}}\\) alone, and the nominal bCBF method of Section II that propagates the backup flow with the nominal model \\(\\theta = 0\\) and applies no tightening or robustification. The true parameters \\(\\theta = [0.08 \\quad 0.08 \\quad 0.22 \\quad - 0.32 \\quad 0.008 \\quad 0.003]^{\\top}\\) correspond to a quadrotor that is approximately \\(47\\%\\) heavier than the nominal model; the remaining simulation parameters are provided in the code repository. As shown in Fig. 1, the primary controller alone enters the unsafe set. The nominal bCBF intervenes late and violates the surface clearance as the true quadrotor is heavier than the nominal model. On the other hand, the proposed robust adaptive bCBF ensures safety by keeping the quadrotor within \\(\\mathcal{C}_{\\mathrm{S}}\\) and satisfying the input constraints despite parametric uncertainty. This is achieved using the parameter estimates, whose certified bounds shrink over time. Accordingly, the estimated backup flows \\(\\hat{\\phi}_{\\mathrm{b}}(\\tau , x, t)\\) initially deviate from the true backup flows \\(\\phi_{\\mathrm{b}}(\\tau , x)\\) and later coincide with them as the estimates converge, making the tightening terms vanish and the inner approximation \\(\\hat{C}_{\\mathrm{I}}(t)\\) approach the implicit safe set \\(\\mathcal{C}_{\\mathrm{I}}\\) .",
+          "label": "Text"
+        },
+        {
+          "id": "2",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.22,
+            "y": 0.416,
+            "width": 0.132,
+            "height": 0.014
+          },
+          "content": "## VI. CONCLUSION",
+          "label": "Text"
+        },
+        {
+          "id": "3",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.086,
+            "y": 0.434,
+            "width": 0.401,
+            "height": 0.11
+          },
+          "content": "We presented a robust adaptive backup CBF framework for the safety- critical control of nonlinear systems with parametric uncertainty and bounded inputs. This method computes the backup flow using an online parameter estimate and tightens the backup safety constraints with certified componentwise error bounds. A duality- based robustification yielded a safety filter in the form of a convex QP. Future work will focus on tighter bounds for flow prediction errors.",
+          "label": "Text"
+        },
+        {
+          "id": "4",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.243,
+            "y": 0.554,
+            "width": 0.079,
+            "height": 0.013
+          },
+          "content": "## APPENDIX",
+          "label": "Text"
+        },
+        {
+          "id": "5",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.086,
+            "y": 0.571,
+            "width": 0.401,
+            "height": 0.029
+          },
+          "content": "We derive the constraints in (28) by expressing the time derivatives \\(\\dot{\\bar{h}}\\) and \\(\\dot{\\bar{h}}_{\\mathrm{b}}\\) in (27). First, we define the derivatives",
+          "label": "Text"
+        },
+        {
+          "id": "6",
+          "order": 7,
+          "bounding_box": {
+            "x": 0.12,
+            "y": 0.602,
+            "width": 0.332,
+            "height": 0.053
+          },
+          "content": "\\[\\Phi (\\tau ,x,t)\\triangleq \\frac{\\partial\\hat{\\phi}_{\\mathrm{b}}(\\tau,x,t)}{\\partial x},\\quad \\Gamma (\\tau ,x,t)\\triangleq \\frac{\\partial\\hat{\\phi}_{\\mathrm{b}}(\\tau,x,t)}{\\partial\\theta},\\] \\[\\hat{J}_{\\mathrm{b}}(\\tau ,x,t)\\triangleq \\frac{\\partial}{\\partial x} f_{\\mathrm{b}}(z,\\hat{\\theta} (t))\\Big|_{z = \\hat{\\phi}_{\\mathrm{b}}(\\tau ,x,t)},\\]",
+          "label": "Formula"
+        },
+        {
+          "id": "7",
+          "order": 8,
+          "bounding_box": {
+            "x": 0.086,
+            "y": 0.658,
+            "width": 0.401,
+            "height": 0.057
+          },
+          "content": "where \\(\\Phi\\) and \\(\\Gamma\\) represent the sensitivity of the estimated backup flow \\(\\hat{\\phi}_{\\mathrm{b}}\\) to the current state and parameter estimate, while \\(\\hat{J}_{\\mathrm{b}}\\) is the Jacobian of the estimated backup system (20). The sensitivity matrices can be computed by solving",
+          "label": "Text"
+        },
+        {
+          "id": "8",
+          "order": 9,
+          "bounding_box": {
+            "x": 0.101,
+            "y": 0.719,
+            "width": 0.369,
+            "height": 0.062
+          },
+          "content": "\\[\\frac{\\partial}{\\partial\\tau}\\Phi (\\tau ,x,t) = \\hat{J}_{\\mathrm{b}}(\\tau ,x,t)\\Phi (\\tau ,x,t),\\quad \\Phi (0,x,t) = I,\\] \\[\\frac{\\partial}{\\partial\\tau}\\Gamma (\\tau ,x,t) = \\hat{J}_{\\mathrm{b}}(\\tau ,x,t)\\Gamma (\\tau ,x,t) + \\psi_{\\mathrm{b}}(\\hat{\\phi}_{\\mathrm{b}}(\\tau ,x,t)),\\] \\[\\Gamma (0,x,t) = 0.\\]",
+          "label": "Formula"
+        },
+        {
+          "id": "9",
+          "order": 10,
+          "bounding_box": {
+            "x": 0.086,
+            "y": 0.784,
+            "width": 0.401,
+            "height": 0.03
+          },
+          "content": "Then, by differentiating the expressions of \\(\\bar{h}\\) and \\(\\bar{h}_{\\mathrm{b}}\\) in (26), the total time derivatives \\(\\bar{h}\\) and \\(\\bar{h}_{\\mathrm{b}}\\) become",
+          "label": "Text"
+        },
+        {
+          "id": "10",
+          "order": 11,
+          "bounding_box": {
+            "x": 0.144,
+            "y": 0.817,
+            "width": 0.282,
+            "height": 0.049
+          },
+          "content": "\\[\\dot{\\bar{h}} (\\tau ,x,t,u) = \\frac{\\partial\\bar{h}}{\\partial x} (\\tau ,x,t)\\dot{x} +\\frac{\\partial\\bar{h}}{\\partial t} (\\tau ,x,t),\\] \\[\\dot{\\bar{h}}_{\\mathrm{b}}(x,t,u) = \\frac{\\partial\\bar{h}_{\\mathrm{b}}}{\\partial x} (x,t)\\dot{x} +\\frac{\\partial\\bar{h}_{\\mathrm{b}}}{\\partial t} (x,t),\\]",
+          "label": "Formula"
+        },
+        {
+          "id": "11",
+          "order": 12,
+          "bounding_box": {
+            "x": 0.086,
+            "y": 0.866,
+            "width": 0.401,
+            "height": 0.014
+          },
+          "content": "where the partial derivatives are expressed via the chain rule:",
+          "label": "Text"
+        },
+        {
+          "id": "12",
+          "order": 13,
+          "bounding_box": {
+            "x": 0.101,
+            "y": 0.884,
+            "width": 0.369,
+            "height": 0.048
+          },
+          "content": "\\[\\frac{\\partial\\bar{h}}{\\partial x} (\\tau ,x,t) = \\nabla h(\\hat{\\phi}_{\\mathrm{b}}(\\tau ,x,t))\\Phi (\\tau ,x,t) - \\frac{\\partial\\epsilon}{\\partial x} (\\tau ,x,t),\\] \\[\\frac{\\partial\\bar{h}}{\\partial t} (\\tau ,x,t) = \\nabla h(\\hat{\\phi}_{\\mathrm{b}}(\\tau ,x,t))\\Gamma (\\tau ,x,t)\\dot{\\theta} -\\frac{\\partial\\epsilon}{\\partial t} (\\tau ,x,t),\\]",
+          "label": "Formula"
+        },
+        {
+          "id": "13",
+          "order": 14,
+          "bounding_box": {
+            "x": 0.53,
+            "y": 0.063,
+            "width": 0.358,
+            "height": 0.045
+          },
+          "content": "\\[\\frac{\\partial\\bar{h}_{\\mathrm{b}}}{\\partial x} (x,t) = \\nabla h_{\\mathrm{b}}(\\hat{\\phi}_{\\mathrm{b}}(T,x,t))\\Phi (T,x,t) - \\frac{\\partial\\epsilon_{\\mathrm{b}}}{\\partial x} (x,t),\\] \\[\\frac{\\partial\\bar{h}_{\\mathrm{b}}}{\\partial t} (x,t) = \\nabla h_{\\mathrm{b}}(\\hat{\\phi}_{\\mathrm{b}}(T,x,t))\\Gamma (T,x,t)\\dot{\\theta} -\\frac{\\partial\\epsilon_{\\mathrm{b}}}{\\partial t} (x,t).\\]",
+          "label": "Formula"
+        },
+        {
+          "id": "14",
+          "order": 15,
+          "bounding_box": {
+            "x": 0.51,
+            "y": 0.114,
+            "width": 0.401,
+            "height": 0.03
+          },
+          "content": "Here \\(\\hat{\\theta}\\) is given by the estimator in (11), while \\(\\dot{x}\\) is given by the dynamics in (10) as",
+          "label": "Text"
+        },
+        {
+          "id": "15",
+          "order": 16,
+          "bounding_box": {
+            "x": 0.536,
+            "y": 0.148,
+            "width": 0.348,
+            "height": 0.018
+          },
+          "content": "\\[\\dot{x} = f(x) + g(x)u + \\phi (x,u)\\hat{\\theta} (t) + \\phi (x,u)\\hat{\\theta} (t).\\]",
+          "label": "Formula"
+        },
+        {
+          "id": "16",
+          "order": 17,
+          "bounding_box": {
+            "x": 0.51,
+            "y": 0.171,
+            "width": 0.401,
+            "height": 0.028
+          },
+          "content": "Next, substituting these derivatives into (27) and moving all terms to the left- hand side, we obtain (28) with",
+          "label": "Text"
+        },
+        {
+          "id": "17",
+          "order": 18,
+          "bounding_box": {
+            "x": 0.51,
+            "y": 0.202,
+            "width": 0.401,
+            "height": 0.131
+          },
+          "content": "\\[\\begin{array}{rl} & a(\\tau ,x,u,t)\\triangleq \\frac{\\partial\\bar{h}}{\\partial x} (\\tau ,x,t)\\big(f(x) + g(x)u + \\phi (x,u)\\hat{\\theta} (t)\\big)\\\\ & \\qquad +\\frac{\\partial\\bar{h}}{\\partial t} (\\tau ,x,t) + \\alpha (\\bar{h} (\\tau ,x,t)),\\\\ & c(\\tau ,x,u,t)^{\\top}\\triangleq \\frac{\\partial\\bar{h}}{\\partial x} (\\tau ,x,t)\\phi (x,u),\\\\ & a_{\\mathrm{b}}(x,u,t)\\triangleq \\frac{\\partial\\bar{h}_{\\mathrm{b}}}{\\partial x} (x,t)\\big(f(x) + g(x)u + \\phi (x,u)\\hat{\\theta} (t)\\big)\\\\ & \\qquad +\\frac{\\partial\\bar{h}_{\\mathrm{b}}}{\\partial t} (\\tau ,x,t) + \\alpha_{\\mathrm{b}}(\\bar{h}_{\\mathrm{b}}(x,t)),\\\\ & c_{\\mathrm{b}}(x,u,t)^{\\top}\\triangleq \\frac{\\partial\\bar{h}_{\\mathrm{b}}}{\\partial x} (x,t)\\phi (x,u). \\end{array} \\quad (29)\\]",
+          "label": "Formula"
+        },
+        {
+          "id": "18",
+          "order": 19,
+          "bounding_box": {
+            "x": 0.663,
+            "y": 0.352,
+            "width": 0.093,
+            "height": 0.012
+          },
+          "content": "## REFERENCES",
+          "label": "Text"
+        },
+        {
+          "id": "19",
+          "order": 20,
+          "bounding_box": {
+            "x": 0.51,
+            "y": 0.37,
+            "width": 0.401,
+            "height": 0.541
+          },
+          "content": "[1] A. D. Ames, X. Xu, J. W. Grizzle, and P. Tabuada, \"Control barrier function based quadratic programs for safety critical systems,\" IEEE Trans. Autom. Control, vol. 62, no. 8, 2017. [2] J. Zeng, B. Zhang, Z. Li, and K. Sreenath, \"Safety- critical control using optimal- decay control barrier function with guaranteed pointwise feasibility,\" in Amer. Control Conf., 2021. [3] V. Freire and M. M. Nicotra, \"Using dynamic safety margins as control barrier functions,\" IEEE Trans. Autom. Control, 2026. [4] A. Sasi, M. N. Zeilinger, and J. Köhler, \"Robust adaptive MPC using control contraction metrics,\" Automatica, vol. 155, 2023. [5] P. Culbertson, J.- J. Slotine, and M. Schwager, \"Decentralized adaptive control for collaborative manipulation of rigid bodies,\" IEEE Trans. Robot., vol. 37, no. 6, 2021. [6] M. V. Minniti, R. Grandia, F. Farshidian, and M. Hutter, \"Adaptive CLF- MPC with application to quadrupedal robots,\" IEEE Robot. Automat. Lett., vol. 7, no. 1, 2021. [7] T. Belvedere, M. Cognetti, G. Oriolo, and P. R. Giordano, \"Sensitivity- aware model predictive control for robots with parametric uncertainty,\" IEEE Trans. Robot., vol. 41, 2025. [8] T. Gurriet, M. Mote, A. Singletary, P. Nilsson, E. Feron, and A. D. Ames, \"A scalable safety critical control framework for nonlinear systems,\" IEEE Access, vol. 8, 2020. [9] D. E. van Wijk, S. Coogan, T. G. Molnar, M. Majji, and K. L. Hobbs, \"Disturbance- robust backup control barrier functions: Safety under uncertain dynamics,\" IEEE Control Syst. Lett., vol. 8, 2024. [10] M. H. Cohen, C. Belta, and R. Tron, \"Robust control barrier functions for nonlinear control systems with uncertainty: A duality- based approach,\" in IEEE Conf. Decis. Control, 2022. [11] T. Pati and S. Z. Yong, \"Robust control barrier functions for uncertain parameter- varying control affine systems with set- membership parameter estimation,\" IEEE Trans. Autom. Control, vol. 70, no. 11, 2025. [12] B. T. Lopez and J.- J. E. Slotine, \"Unmatched control barrier functions: Certainty equivalence adaptive safety,\" in Amer. Control Conf., 2023. [13] M. H. Cohen, M. Mann, K. Leahy, and C. Belta, \"Uncertainty quantification for recursive estimation in adaptive safety- critical control,\" in Amer. Control Conf., 2024. [14] S. Aranovskiy, A. Bobtsov, R. Ortega, and A. Pyrkin, \"Performance enhancement of parameter estimators via dynamic regressor extension and mixing,\" IEEE Trans. Autom. Control, vol. 62, no. 7, 2017. [15] R. Ortega, S. Aranovskiy, A. A. Pyrkin, A. Astolfi, and A. A. Bobtsov, \"New results on parameter estimation via dynamic regressor extension and mixing: Continuous and discrete- time cases,\" IEEE Trans. Autom. Control, vol. 66, no. 5, 2021. [16] F. Bullo, Contraction Theory for Dynamical Systems, 1st ed. Kindle Direct Publishing, 2024. [17] D. E. van Wijk et al., \"Uncertainty estimators for robust backup control barrier functions,\" arXiv preprint arXiv:2503.15734, 2025. [18] D. E. van Wijk, T. G. Molnar, S. Coogan, M. Majji, A. D. Ames, and J. W. Burdick, \"Output feedback backup control barrier functions: Safety guarantees under input bounds and state estimation error,\" arXiv preprint arXiv:2604.19893, 2026. [19] P. Rabiee and J. B. Hoagg, \"Soft- minimum and soft- maximum barrier functions for safety with actuation constraints,\" Automatica, vol. 171, 2025.",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "page_index": 7,
+      "blocks": [
+        {
+          "id": "0",
+          "order": 1,
+          "bounding_box": {
+            "x": 0.095,
+            "y": 0.13,
+            "width": 0.395,
+            "height": 0.048
+          },
+          "content": "To simplify the notation used in this section, we use \\(\\lambda_{\\min}(S)\\) and \\(\\lambda_{\\max}(S)\\) to denote the smallest and largest eigenvalues of a symmetric matrix \\(S\\) , and we define",
+          "label": "Text"
+        },
+        {
+          "id": "1",
+          "order": 2,
+          "bounding_box": {
+            "x": 0.084,
+            "y": 0.183,
+            "width": 0.404,
+            "height": 0.097
+          },
+          "content": "\\[\\begin{array}{r l} & {a_{m}(\\pmb {\\theta})\\triangleq \\frac{1}{m_{0}} +\\delta_{m},\\quad a_{J}(\\pmb {\\theta})\\triangleq \\frac{1}{J_{0}} +\\delta_{J},\\quad e_{1}\\triangleq \\left[1\\quad 0\\right]^{\\top},}\\\\ & {K_{\\theta}\\triangleq \\left[k_{\\theta}\\quad k_{\\omega}\\right],\\quad b_{\\theta}\\triangleq \\left[0\\quad 1\\right]^{\\top},\\quad A_{\\theta}(a)\\triangleq \\left[ \\begin{array}{c c}{0} & 1\\\\ -a k_{\\theta} & -a k_{\\omega} \\end{array} \\right],}\\\\ & {\\Delta_{\\theta}\\triangleq \\sqrt{\\varrho_{\\theta}e_{1}^{\\top}P_{\\theta}^{-1}e_{1}},\\Delta_{M}\\triangleq \\sqrt{\\varrho_{\\theta}K_{\\theta}P_{\\theta}^{-1}K_{\\theta}^{\\top}},\\bar{\\vartheta}\\triangleq \\vartheta_{\\mathrm{r}} + \\Delta_{\\theta}.} \\end{array} \\quad (1)\\]",
+          "label": "Formula"
+        },
+        {
+          "id": "2",
+          "order": 3,
+          "bounding_box": {
+            "x": 0.085,
+            "y": 0.279,
+            "width": 0.404,
+            "height": 0.03
+          },
+          "content": "Then, parameter bounds in Assumption 1 induce known constants satisfying",
+          "label": "Text"
+        },
+        {
+          "id": "3",
+          "order": 4,
+          "bounding_box": {
+            "x": 0.115,
+            "y": 0.313,
+            "width": 0.335,
+            "height": 0.041
+          },
+          "content": "\\[\\delta_{g}^{-}\\leq \\delta_{g}\\leq \\delta_{g}^{+},\\quad \\delta_{r}^{-}\\leq \\delta_{\\ell}\\leq \\delta_{r}^{+},\\] \\[0< a_{J}^{-}\\leq a_{J}(\\pmb {\\theta})\\leq a_{J}^{+},\\quad 0< a_{m}^{-}\\leq a_{m}(\\pmb {\\theta})\\leq a_{m}^{+},\\]",
+          "label": "Formula"
+        },
+        {
+          "id": "4",
+          "order": 5,
+          "bounding_box": {
+            "x": 0.085,
+            "y": 0.356,
+            "width": 0.404,
+            "height": 0.06
+          },
+          "content": "for all \\(\\pmb {\\theta}\\in \\Theta\\) . The proposition below provides sufficient conditions on the design parameters of the backup controller (38) and the backup set (39) for Assumption 2 to hold for the uncertain quadrotor model (36).",
+          "label": "Text"
+        },
+        {
+          "id": "5",
+          "order": 6,
+          "bounding_box": {
+            "x": 0.085,
+            "y": 0.425,
+            "width": 0.404,
+            "height": 0.106
+          },
+          "content": "Proposition 1. Consider the uncertain quadrotor model (36), the safety function (37) with the safe set \\(C_{\\mathrm{S}}\\) , the backup controller (38), and the backup set \\(C_{\\mathrm{B}}\\) in (39). If the controller gains \\(k_{\\theta} > 0\\) , \\(k_{\\omega} > 0\\) and the design parameters \\(P_{\\theta} = P_{\\theta}^{\\top}\\succ 0\\) , \\(Q_{\\theta} = Q_{\\theta}^{\\top}\\succ 0\\) , \\(\\varrho_{\\theta} > 0\\) , \\(\\vartheta_{\\mathrm{r}}\\in (0,\\vartheta_{\\mathrm{max}})\\) , \\(r_{x},r_{z} > 0\\) , and \\(r_{\\theta}\\in (0,\\vartheta_{\\mathrm{max}}^{2})\\) , with \\(\\bar{\\vartheta} < \\pi /2\\) , are chosen such that",
+          "label": "Text"
+        },
+        {
+          "id": "6",
+          "order": 7,
+          "bounding_box": {
+            "x": 0.095,
+            "y": 0.533,
+            "width": 0.393,
+            "height": 0.177
+          },
+          "content": "\\[\\begin{array}{r l} & {A_{\\theta}(a_{J}^{-})^{\\top}P_{\\theta} + P_{\\theta}A_{\\theta}(a_{J}^{-})\\preceq -Q_{\\theta},}\\\\ & {A_{\\theta}(a_{J}^{+})^{\\top}P_{\\theta} + P_{\\theta}A_{\\theta}(a_{J}^{+})\\preceq -Q_{\\theta},}\\\\ & {\\Delta_{M}\\leq M_{\\mathrm{max}},}\\\\ & {\\vartheta_{\\mathrm{r}} - \\Delta_{\\theta}\\geq 0,}\\\\ & {\\vartheta_{\\mathrm{r}} + \\Delta_{\\theta}\\leq \\sqrt{\\vartheta_{\\mathrm{max}}^{2} - r_{\\theta}},}\\\\ & {\\varrho_{\\theta}\\geq \\lambda_{\\mathrm{max}}(P_{\\theta})\\left(\\frac{2\\|P_{\\theta}b_{\\theta}\\|F_{\\mathrm{max}}\\max \\{|\\delta_{\\ell}^{-}|,|\\delta_{\\ell}^{+}|\\}}{\\lambda_{\\mathrm{min}}(Q_{\\theta})}\\right)^{2},}\\\\ & {a_{m}^{-}F_{\\mathrm{max}}\\cos (\\bar{\\vartheta}) - g_{0} - \\delta_{g}^{+}\\geq 0,}\\\\ & {\\mathrm{e}^{-K r_{x}} + \\mathrm{e}^{-K r_{z}} + \\mathrm{e}^{-K r_{\\theta}}\\leq 1,} \\end{array} \\quad (40)\\]",
+          "label": "Formula"
+        },
+        {
+          "id": "7",
+          "order": 8,
+          "bounding_box": {
+            "x": 0.085,
+            "y": 0.714,
+            "width": 0.403,
+            "height": 0.06
+          },
+          "content": "then the moment saturation in (38) is inactive on \\(C_{\\mathrm{B}}\\) , \\(C_{\\mathrm{B}}\\subseteq C_{\\mathrm{S}}\\) holds, and the backup controller (38) renders \\(C_{\\mathrm{B}}\\) robustly forward invariant for (36) for all \\(\\pmb {\\theta}\\in \\Theta\\) , i.e., Assumption 2 is satisfied.",
+          "label": "Text"
+        },
+        {
+          "id": "8",
+          "order": 9,
+          "bounding_box": {
+            "x": 0.085,
+            "y": 0.784,
+            "width": 0.403,
+            "height": 0.031
+          },
+          "content": "Proof. We first consider the pitch dynamics. On the set \\(C_{\\mathrm{B}}\\) , \\(h_{\\theta ,\\mathrm{b}}(\\pmb {x})\\geq 0\\) implies \\(\\pmb{y}_{\\theta}^{\\top}\\pmb{P}_{\\theta}\\pmb{y}_{\\theta}\\leq \\varrho_{\\theta}\\) , and hence",
+          "label": "Text"
+        },
+        {
+          "id": "9",
+          "order": 10,
+          "bounding_box": {
+            "x": 0.174,
+            "y": 0.821,
+            "width": 0.226,
+            "height": 0.019
+          },
+          "content": "\\[|\\vartheta -\\vartheta_{\\mathrm{r}}|\\leq \\Delta_{\\theta},\\quad |K_{\\theta}\\pmb{y}_{\\theta}|\\leq \\Delta_{M}.\\]",
+          "label": "Formula"
+        },
+        {
+          "id": "10",
+          "order": 11,
+          "bounding_box": {
+            "x": 0.085,
+            "y": 0.845,
+            "width": 0.403,
+            "height": 0.061
+          },
+          "content": "Thus, by the fourth and fifth conditions in (40), the pitch angle satisfies \\(0\\leq \\vartheta \\leq \\bar{\\vartheta}\\leq \\sqrt{\\vartheta_{\\mathrm{max}}^{2} - r_{\\theta}}\\) on \\(C_{\\mathrm{B}}\\) . Moreover, the third condition in (40) yields \\(|K_{\\theta}\\pmb{y}_{\\theta}|\\leq M_{\\mathrm{max}}\\) , and hence the moment saturation in (38) is inactive on \\(C_{\\mathrm{B}}\\) .",
+          "label": "Text"
+        },
+        {
+          "id": "11",
+          "order": 12,
+          "bounding_box": {
+            "x": 0.1,
+            "y": 0.909,
+            "width": 0.388,
+            "height": 0.015
+          },
+          "content": "We next verify the robust invariance of the pitch dynamics",
+          "label": "Text"
+        },
+        {
+          "id": "12",
+          "order": 13,
+          "bounding_box": {
+            "x": 0.508,
+            "y": 0.064,
+            "width": 0.281,
+            "height": 0.015
+          },
+          "content": "under the backup controller, which satisfy",
+          "label": "Text"
+        },
+        {
+          "id": "13",
+          "order": 14,
+          "bounding_box": {
+            "x": 0.595,
+            "y": 0.087,
+            "width": 0.227,
+            "height": 0.016
+          },
+          "content": "\\[\\dot{\\pmb{y}}_{\\theta} = \\pmb {A}_{\\theta}(\\pmb {a}_{J}(\\pmb {\\theta}))\\pmb{y}_{\\theta} + \\pmb{b}_{\\theta}\\delta_{\\ell}F_{\\mathrm{max}}.\\]",
+          "label": "Formula"
+        },
+        {
+          "id": "14",
+          "order": 15,
+          "bounding_box": {
+            "x": 0.508,
+            "y": 0.111,
+            "width": 0.403,
+            "height": 0.03
+          },
+          "content": "Since \\(A_{\\theta}(a)\\) depends affinely on \\(a\\) , the first two conditions in (40) imply",
+          "label": "Text"
+        },
+        {
+          "id": "15",
+          "order": 16,
+          "bounding_box": {
+            "x": 0.54,
+            "y": 0.145,
+            "width": 0.337,
+            "height": 0.02
+          },
+          "content": "\\[A_{\\theta}(a)^{\\top}P_{\\theta} + P_{\\theta}A_{\\theta}(a)\\preceq -Q_{\\theta},\\quad \\forall a\\in [a_{J}^{-},a_{J}^{+}].\\]",
+          "label": "Formula"
+        },
+        {
+          "id": "16",
+          "order": 17,
+          "bounding_box": {
+            "x": 0.508,
+            "y": 0.171,
+            "width": 0.279,
+            "height": 0.017
+          },
+          "content": "Therefore, with \\(V_{\\theta}\\triangleq \\pmb{y}_{\\theta}^{\\top}\\pmb{P}_{\\theta}\\pmb{y}_{\\theta}\\) , we have",
+          "label": "Text"
+        },
+        {
+          "id": "17",
+          "order": 18,
+          "bounding_box": {
+            "x": 0.508,
+            "y": 0.192,
+            "width": 0.404,
+            "height": 0.063
+          },
+          "content": "\\[\\begin{array}{rl} & {\\dot{V}_{\\theta} = \\pmb{y}_{\\theta}^{\\top}\\left(\\pmb {A}_{\\theta}(a_{J}(\\pmb {\\theta}))^{\\top}\\pmb{P}_{\\theta} + \\pmb{P}_{\\theta}\\pmb {A}_{\\theta}(a_{J}(\\pmb {\\theta}))\\right)\\pmb{y}_{\\theta}}\\\\ & {\\quad +2\\pmb{y}_{\\theta}^{\\top}\\pmb{P}_{\\theta}\\pmb{b}_{\\theta}\\delta_{\\ell}F_{\\mathrm{max}}}\\\\ & {\\leq -\\lambda_{\\min}(Q_{\\theta})\\| \\pmb{y}_{\\theta}\\|^{2} + 2F_{\\mathrm{max}}\\| \\pmb{P}_{\\theta}\\pmb{b}_{\\theta}\\| \\max \\{\\left|\\delta_{\\ell}^{-}\\right|,\\left|\\delta_{\\ell}^{+}\\right|\\} \\| \\pmb{y}_{\\theta}\\| .} \\end{array} \\quad (40)\\]",
+          "label": "Formula"
+        },
+        {
+          "id": "18",
+          "order": 19,
+          "bounding_box": {
+            "x": 0.508,
+            "y": 0.259,
+            "width": 0.403,
+            "height": 0.076
+          },
+          "content": "On the boundary \\(h_{\\theta ,\\mathrm{b}}(\\pmb {x}) = 0\\) , we have \\(V_{\\theta} = \\varrho_{\\theta}\\) , and hence \\(\\| \\pmb{y}_{\\theta}\\| \\geq \\sqrt{\\varrho_{\\theta} / \\lambda_{\\mathrm{max}}(P_{\\theta})} >0\\) . Therefore, by the sixth condition in (40), \\(\\dot{V}_{\\theta}\\leq 0\\) on the boundary of the zero superlevel set of \\(h_{\\theta ,\\mathrm{b}}(\\pmb {x})\\) . Equivalently, \\(h_{\\theta ,\\mathrm{b}}(\\pmb {x})\\geq 0\\) on this boundary, and the pitch component of \\(C_{\\mathrm{B}}\\) is robustly forward invariant.",
+          "label": "Text"
+        },
+        {
+          "id": "19",
+          "order": 20,
+          "bounding_box": {
+            "x": 0.508,
+            "y": 0.336,
+            "width": 0.403,
+            "height": 0.045
+          },
+          "content": "We now consider the horizontal component of the motion. Since \\(0\\leq \\vartheta \\leq \\bar{\\vartheta}< \\pi /2\\) on \\(C_{\\mathrm{B}}\\) , the horizontal dynamics of (36) under (38) satisfy",
+          "label": "Text"
+        },
+        {
+          "id": "20",
+          "order": 21,
+          "bounding_box": {
+            "x": 0.598,
+            "y": 0.387,
+            "width": 0.222,
+            "height": 0.018
+          },
+          "content": "\\[\\dot{v}_{x} = a_{m}(\\pmb {\\theta})F_{\\mathrm{max}}\\sin (\\vartheta) - c_{x}v_{x}.\\]",
+          "label": "Formula"
+        },
+        {
+          "id": "21",
+          "order": 22,
+          "bounding_box": {
+            "x": 0.508,
+            "y": 0.411,
+            "width": 0.403,
+            "height": 0.016
+          },
+          "content": "On the boundary \\(h_{v_{x},\\mathrm{b}}(\\pmb {x}) = 0\\) , we have \\(v_{x} = 0\\) , and therefore",
+          "label": "Text"
+        },
+        {
+          "id": "22",
+          "order": 23,
+          "bounding_box": {
+            "x": 0.59,
+            "y": 0.433,
+            "width": 0.235,
+            "height": 0.021
+          },
+          "content": "\\[\\dot{h}_{v_{x},\\mathrm{b}}(\\pmb {x}) = a_{m}(\\pmb {\\theta})F_{\\mathrm{max}}\\sin (\\vartheta)\\geq 0,\\]",
+          "label": "Formula"
+        },
+        {
+          "id": "23",
+          "order": 24,
+          "bounding_box": {
+            "x": 0.508,
+            "y": 0.46,
+            "width": 0.403,
+            "height": 0.061
+          },
+          "content": "where we used \\(a_{m}(\\pmb {\\theta}) > 0\\) and \\(\\vartheta \\geq 0\\) . Hence, the \\(v_{x}\\) component of \\(C_{\\mathrm{B}}\\) is robustly forward invariant. Moreover, on \\(C_{\\mathrm{B}}\\) , \\(v_{x}\\geq 0\\) , and hence \\(\\dot{h}_{x,\\mathrm{b}}(\\pmb {x}) = v_{x}\\geq 0\\) . Therefore, the surface clearance component of \\(C_{\\mathrm{B}}\\) is robustly forward invariant.",
+          "label": "Text"
+        },
+        {
+          "id": "24",
+          "order": 25,
+          "bounding_box": {
+            "x": 0.508,
+            "y": 0.521,
+            "width": 0.403,
+            "height": 0.045
+          },
+          "content": "We next consider the altitude component of the motion. On the boundary \\(h_{v_{x},\\mathrm{b}}(\\pmb {x}) = 0\\) , we have \\(v_{x} = 0\\) , and the vertical dynamics of (36) satisfy",
+          "label": "Text"
+        },
+        {
+          "id": "25",
+          "order": 26,
+          "bounding_box": {
+            "x": 0.54,
+            "y": 0.57,
+            "width": 0.34,
+            "height": 0.04
+          },
+          "content": "\\[\\begin{array}{r l} & {\\dot{h}_{v_{x},\\mathrm{b}}(\\pmb {x}) = \\dot{v}_{x} = -g_{0} - \\delta_{g} + a_{m}(\\pmb {\\theta})F_{\\mathrm{max}}\\cos (\\vartheta)}\\\\ & {\\qquad \\geq -g_{0} - \\delta_{g}^{+} + a_{m}^{-}F_{\\mathrm{max}}\\cos (\\bar{\\vartheta})\\geq 0,} \\end{array} \\quad (40)\\]",
+          "label": "Formula"
+        },
+        {
+          "id": "26",
+          "order": 27,
+          "bounding_box": {
+            "x": 0.508,
+            "y": 0.614,
+            "width": 0.403,
+            "height": 0.077
+          },
+          "content": "where we used \\(0\\leq \\vartheta \\leq \\bar{\\vartheta}< \\pi /2\\) and the seventh condition in (40). Therefore, the \\(v_{x}\\) component of \\(C_{\\mathrm{B}}\\) is robustly forward invariant. Furthermore, on \\(C_{\\mathrm{B}}\\) , \\(v_{x}\\geq 0\\) , thus \\(\\dot{h}_{x,\\mathrm{b}}(\\pmb {x}) = v_{x}\\geq 0\\) , and the altitude clearance component of \\(C_{\\mathrm{B}}\\) is also robustly forward invariant.",
+          "label": "Text"
+        },
+        {
+          "id": "27",
+          "order": 28,
+          "bounding_box": {
+            "x": 0.508,
+            "y": 0.691,
+            "width": 0.403,
+            "height": 0.087
+          },
+          "content": "Finally, we show that \\(C_{\\mathrm{B}}\\subseteq C_{\\mathrm{S}}\\) . Since \\(h_{x,\\mathrm{b}}(\\pmb {x})\\geq 0\\) and \\(h_{x,\\mathrm{b}}(\\pmb {x})\\geq 0\\) , we have \\(h_{x}(\\pmb {x})\\geq r_{x}\\) and \\(h_{x}(\\pmb {x})\\geq r_{z}\\) . Moreover, by the fifth condition in (40), \\(h_{\\theta ,\\mathrm{b}}(\\pmb {x})\\geq 0\\) implies \\(h_{\\theta}(\\pmb {x}) = \\vartheta_{\\mathrm{max}}^{2} - \\vartheta^{2}\\geq r_{\\theta}\\) . Therefore, by the last condition in (40), the smooth minimum safety function (37) satisfies \\(h(\\pmb {x})\\geq 0\\) for all \\(\\pmb {x}\\in C_{\\mathrm{B}}\\) , i.e., \\(C_{\\mathrm{B}}\\subseteq C_{\\mathrm{S}}\\) .",
+          "label": "Text"
+        },
+        {
+          "id": "28",
+          "order": 29,
+          "bounding_box": {
+            "x": 0.508,
+            "y": 0.78,
+            "width": 0.403,
+            "height": 0.061
+          },
+          "content": "Combining the pitch, horizontal, and altitude invariance results with the input admissibility and \\(C_{\\mathrm{B}}\\subseteq C_{\\mathrm{S}}\\) , the backup controller (38) renders the backup set (39) robustly forward invariant for (36) for all \\(\\theta \\in \\Theta\\) . \\(\\square\\)",
+          "label": "Text"
+        }
+      ]
+    }
+  ]
+}

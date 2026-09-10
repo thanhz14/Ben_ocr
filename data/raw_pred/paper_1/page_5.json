@@ -1,0 +1,583 @@
+{
+    "input_path": "/home/bocchi/Work/Paper-Translate-Personal-Project/input/2210.17323v2.pdf",
+    "page_index": 5,
+    "page_count": 16,
+    "width": 1224,
+    "height": 1584,
+    "model_settings": {
+        "use_doc_preprocessor": false,
+        "use_layout_detection": true,
+        "use_chart_recognition": false,
+        "use_seal_recognition": false,
+        "use_ocr_for_image_block": true,
+        "format_block_content": true,
+        "merge_layout_blocks": true,
+        "markdown_ignore_labels": [
+            "number",
+            "footnote",
+            "header",
+            "header_image",
+            "footer",
+            "footer_image",
+            "aside_text"
+        ],
+        "return_layout_polygon_points": true
+    },
+    "parsing_res_list": [
+        {
+            "block_label": "header",
+            "block_content": "Published as a conference paper at ICLR 2023",
+            "block_bbox": [
+                212,
+                54,
+                589,
+                76
+            ],
+            "block_id": 0,
+            "block_order": null,
+            "group_id": 0,
+            "block_polygon_points": [
+                [
+                    212.0,
+                    54.0
+                ],
+                [
+                    589.0,
+                    54.0
+                ],
+                [
+                    589.0,
+                    76.0
+                ],
+                [
+                    212.0,
+                    76.0
+                ]
+            ]
+        },
+        {
+            "block_label": "paragraph_title",
+            "block_content": "## 5 EXPERIMENTAL VALIDATION",
+            "block_bbox": [
+                212,
+                165,
+                552,
+                189
+            ],
+            "block_id": 1,
+            "block_order": 1,
+            "group_id": 1,
+            "block_polygon_points": [
+                [
+                    212.0,
+                    165.0
+                ],
+                [
+                    552.0,
+                    165.0
+                ],
+                [
+                    552.0,
+                    189.0
+                ],
+                [
+                    212.0,
+                    189.0
+                ]
+            ]
+        },
+        {
+            "block_label": "text",
+            "block_content": "Overview. We begin our experiments by validating the accuracy of GPTQ relative to other accurate-but-expensive quantizers, on smaller models, for which these methods provide reasonable runtimes. Next, we examine GPTQ's runtime scaling for very large models. Then, we present 3- and 4-bit quantization results for the entire BLOOM and OPT model families, evaluated via perplexity on challenging language generation tasks. In addition, we show that our method is also stable for 2-bit quantization when the granularity is reduced to small blocks of consecutive weights. To complement this perplexity analysis, we also evaluate the resulting quantized models on a series of standard zero-shot tasks. Finally, we focus on the two largest (and interesting) openly-available models, Bloom-176B and OPT-175B, where we perform a detailed evaluation on several tasks. For these models, we also present practical improvements, namely reducing the number of GPUs required for inference as well as end-to-end speedups for generative tasks.",
+            "block_bbox": [
+                209,
+                224,
+                1013,
+                463
+            ],
+            "block_id": 2,
+            "block_order": 2,
+            "group_id": 2,
+            "block_polygon_points": [
+                [
+                    209.0,
+                    224.0
+                ],
+                [
+                    1013.0,
+                    224.0
+                ],
+                [
+                    1013.0,
+                    463.0
+                ],
+                [
+                    209.0,
+                    463.0
+                ]
+            ]
+        },
+        {
+            "block_label": "text",
+            "block_content": "Setup. We implemented GPTQ in PyTorch (Paszke et al., 2019) and worked with the HuggingFace integrations of the BLOOM (Laurençon et al., 2022) and OPT (Zhang et al., 2022) model families. We quantized all models (including the 175 billion parameter variants) using a single NVIDIA A100 GPU with 80GB of memory. Our entire GPTQ calibration data consists of 128 random 2048 token segments from the C4 dataset (Raffel et al., 2020), i.e., excerpts from randomly crawled websites, which represents generic text data. We emphasize that this means that GPTQ does not see any task-specific data, and our results thus remain actually “zero-shot”. We perform standard uniform per-row asymmetric quantization on the min-max grid, similar to Dettmers et al. (2022). Additional evaluation details can be found in Appendix A.2.1.",
+            "block_bbox": [
+                210,
+                471,
+                1013,
+                667
+            ],
+            "block_id": 3,
+            "block_order": 3,
+            "group_id": 3,
+            "block_polygon_points": [
+                [
+                    210.0,
+                    471.0
+                ],
+                [
+                    1013.0,
+                    471.0
+                ],
+                [
+                    1013.0,
+                    667.0
+                ],
+                [
+                    210.0,
+                    667.0
+                ]
+            ]
+        },
+        {
+            "block_label": "text",
+            "block_content": "To ensure that the entire compression procedure can be performed with significantly less GPU memory than what would be required to run the full precision model, some care must be taken. Specifically, we always load one Transformer block, consisting of 6 layers, at a time into GPU memory and then accumulate the layer-Hessians and perform quantization. Finally, the current block inputs are sent through the fully quantized block again to produce the new inputs for the quantization of the next block. Hence, the quantization process operates not on the layer inputs in the full precision model but on the actual layer inputs in the already partially quantized one. We find that this brings noticeable improvements at negligible extra cost.",
+            "block_bbox": [
+                209,
+                678,
+                1013,
+                851
+            ],
+            "block_id": 4,
+            "block_order": 4,
+            "group_id": 4,
+            "block_polygon_points": [
+                [
+                    209.0,
+                    678.0
+                ],
+                [
+                    1013.0,
+                    678.0
+                ],
+                [
+                    1013.0,
+                    851.0
+                ],
+                [
+                    209.0,
+                    851.0
+                ]
+            ]
+        },
+        {
+            "block_label": "text",
+            "block_content": "Baselines. Our primary baseline, denoted by RTN, consists of rounding all weights to the nearest quantized value on exactly the same asymmetric per-row grid that is also used for GPTQ, meaning that it corresponds precisely to the state-of-the-art weight quantization of LLM.int8(). This is currently the method of choice in all works on quantization of very large language models (Dettmers et al., 2022; Yao et al., 2022; Park et al., 2022): its runtime scales well to networks with many billions of parameters, as it simply performs direct rounding. As we will also discuss further, more accurate methods, such as AdaRound (Nagel et al., 2020) or BRECQ (Li et al., 2021), are currently too slow for models with many billions of parameters, the main focus of this work. Nevertheless, we also show that GPTQ is competitive with such methods for small models, while scaling to huge ones like OPT-175B as well.",
+            "block_bbox": [
+                209,
+                861,
+                1013,
+                1078
+            ],
+            "block_id": 5,
+            "block_order": 5,
+            "group_id": 5,
+            "block_polygon_points": [
+                [
+                    209.0,
+                    861.0
+                ],
+                [
+                    1013.0,
+                    861.0
+                ],
+                [
+                    1013.0,
+                    1078.0
+                ],
+                [
+                    209.0,
+                    1078.0
+                ]
+            ]
+        },
+        {
+            "block_label": "text",
+            "block_content": "Quantizing Small Models. As a first ablation study, we compare GPTQ's performance relative to state-of-the-art post-training quantization (PTQ) methods, on ResNet18 and ResNet50, which are standard PTO benchmarks, in the same setup as (Frantar et al., 2022). As can be seen in Table 1, GPTQ performs on par at 4-bit, and slightly worse than the most accurate methods at 3-bit. At the same time, it significantly outperforms AdaQuant, the fastest amongst prior PTO methods. Further, we compare against the full greedy OBQ method on two smaller language models: BERT-base (Devlin et al., 2019) and OPT-125M. The results are shown in Appendix Table 8. At 4 bits, both methods perform similarly, and for 3 bits, GPTQ surprisingly performs slightly better. We suspect that this is because some of the additional heuristics used by OBQ, such as early outlier rounding, might require careful adjustments for optimal performance on non-vision models. Overall, GPTQ appears to be competitive with state-of-the-art post-training methods for smaller models, while taking only < 1 minute rather than  $ \\approx $ 1 hour. This enables scaling to much larger models.",
+            "block_bbox": [
+                210,
+                1087,
+                1012,
+                1348
+            ],
+            "block_id": 6,
+            "block_order": 6,
+            "group_id": 6,
+            "block_polygon_points": [
+                [
+                    210.0,
+                    1087.0
+                ],
+                [
+                    1012.0,
+                    1087.0
+                ],
+                [
+                    1012.0,
+                    1348.0
+                ],
+                [
+                    210.0,
+                    1348.0
+                ]
+            ]
+        },
+        {
+            "block_label": "text",
+            "block_content": "Runtime. Next we measure the full model quantization time (on a single NVIDIA A100 GPU) via GPTQ; the results are shown in Table 2. As can be seen, GPTQ quantizes 1-3 billion parameter models in a matter of minutes and 175B ones in a few hours. For reference, the straight-through based method ZeroQuant-LKD (Yao et al., 2022) reports a 3 hour runtime (on the same hardware) for a 1.3B model, which would linearly extrapolate to several hundred hours (a few weeks) for 175B.",
+            "block_bbox": [
+                210,
+                1356,
+                1013,
+                1467
+            ],
+            "block_id": 7,
+            "block_order": 7,
+            "group_id": 7,
+            "block_polygon_points": [
+                [
+                    210.0,
+                    1356.0
+                ],
+                [
+                    1013.0,
+                    1356.0
+                ],
+                [
+                    1013.0,
+                    1467.0
+                ],
+                [
+                    210.0,
+                    1467.0
+                ]
+            ]
+        },
+        {
+            "block_label": "number",
+            "block_content": "6",
+            "block_bbox": [
+                605,
+                1504,
+                620,
+                1522
+            ],
+            "block_id": 8,
+            "block_order": null,
+            "group_id": 8,
+            "block_polygon_points": [
+                [
+                    605.0,
+                    1504.0
+                ],
+                [
+                    619.0,
+                    1504.0
+                ],
+                [
+                    619.0,
+                    1521.0
+                ],
+                [
+                    605.0,
+                    1521.0
+                ]
+            ]
+        }
+    ],
+    "layout_det_res": {
+        "input_path": null,
+        "page_index": null,
+        "boxes": [
+            {
+                "cls_id": 12,
+                "label": "header",
+                "score": 0.8705005049705505,
+                "coordinate": [
+                    212,
+                    54,
+                    589,
+                    76
+                ],
+                "order": null,
+                "polygon_points": [
+                    [
+                        212.0,
+                        54.0
+                    ],
+                    [
+                        589.0,
+                        54.0
+                    ],
+                    [
+                        589.0,
+                        76.0
+                    ],
+                    [
+                        212.0,
+                        76.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 17,
+                "label": "paragraph_title",
+                "score": 0.8570855855941772,
+                "coordinate": [
+                    212,
+                    165,
+                    552,
+                    189
+                ],
+                "order": 1,
+                "polygon_points": [
+                    [
+                        212.0,
+                        165.0
+                    ],
+                    [
+                        552.0,
+                        165.0
+                    ],
+                    [
+                        552.0,
+                        189.0
+                    ],
+                    [
+                        212.0,
+                        189.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.9612754583358765,
+                "coordinate": [
+                    209,
+                    224,
+                    1013,
+                    463
+                ],
+                "order": 2,
+                "polygon_points": [
+                    [
+                        209.0,
+                        224.0
+                    ],
+                    [
+                        1013.0,
+                        224.0
+                    ],
+                    [
+                        1013.0,
+                        463.0
+                    ],
+                    [
+                        209.0,
+                        463.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.9631327390670776,
+                "coordinate": [
+                    210,
+                    471,
+                    1013,
+                    667
+                ],
+                "order": 3,
+                "polygon_points": [
+                    [
+                        210.0,
+                        471.0
+                    ],
+                    [
+                        1013.0,
+                        471.0
+                    ],
+                    [
+                        1013.0,
+                        667.0
+                    ],
+                    [
+                        210.0,
+                        667.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.9618305563926697,
+                "coordinate": [
+                    209,
+                    678,
+                    1013,
+                    851
+                ],
+                "order": 4,
+                "polygon_points": [
+                    [
+                        209.0,
+                        678.0
+                    ],
+                    [
+                        1013.0,
+                        678.0
+                    ],
+                    [
+                        1013.0,
+                        851.0
+                    ],
+                    [
+                        209.0,
+                        851.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.9678007960319519,
+                "coordinate": [
+                    209,
+                    861,
+                    1013,
+                    1078
+                ],
+                "order": 5,
+                "polygon_points": [
+                    [
+                        209.0,
+                        861.0
+                    ],
+                    [
+                        1013.0,
+                        861.0
+                    ],
+                    [
+                        1013.0,
+                        1078.0
+                    ],
+                    [
+                        209.0,
+                        1078.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.9706416130065918,
+                "coordinate": [
+                    210,
+                    1087,
+                    1012,
+                    1348
+                ],
+                "order": 6,
+                "polygon_points": [
+                    [
+                        210.0,
+                        1087.0
+                    ],
+                    [
+                        1012.0,
+                        1087.0
+                    ],
+                    [
+                        1012.0,
+                        1348.0
+                    ],
+                    [
+                        210.0,
+                        1348.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.9559831619262695,
+                "coordinate": [
+                    210,
+                    1356,
+                    1013,
+                    1467
+                ],
+                "order": 7,
+                "polygon_points": [
+                    [
+                        210.0,
+                        1356.0
+                    ],
+                    [
+                        1013.0,
+                        1356.0
+                    ],
+                    [
+                        1013.0,
+                        1467.0
+                    ],
+                    [
+                        210.0,
+                        1467.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 16,
+                "label": "number",
+                "score": 0.6982059478759766,
+                "coordinate": [
+                    605,
+                    1504,
+                    620,
+                    1522
+                ],
+                "order": 8,
+                "polygon_points": [
+                    [
+                        605.0,
+                        1504.0
+                    ],
+                    [
+                        619.0,
+                        1504.0
+                    ],
+                    [
+                        619.0,
+                        1521.0
+                    ],
+                    [
+                        605.0,
+                        1521.0
+                    ]
+                ]
+            }
+        ]
+    }
+}

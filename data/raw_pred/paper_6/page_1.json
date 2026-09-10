@@ -1,0 +1,644 @@
+{
+    "input_path": "/home/bocchi/Downloads/Paper_Data/Economics/2607.21268v1.pdf",
+    "page_index": 1,
+    "page_count": 17,
+    "width": 1224,
+    "height": 1584,
+    "model_settings": {
+        "use_doc_preprocessor": false,
+        "use_layout_detection": true,
+        "use_chart_recognition": false,
+        "use_seal_recognition": false,
+        "use_ocr_for_image_block": true,
+        "format_block_content": true,
+        "merge_layout_blocks": true,
+        "markdown_ignore_labels": [
+            "number",
+            "footnote",
+            "header",
+            "header_image",
+            "footer",
+            "footer_image",
+            "aside_text"
+        ],
+        "return_layout_polygon_points": true
+    },
+    "parsing_res_list": [
+        {
+            "block_label": "header",
+            "block_content": "GATED MULTI-AGENT THEORY DEVELOPMENT",
+            "block_bbox": [
+                140,
+                70,
+                551,
+                92
+            ],
+            "block_id": 0,
+            "block_order": null,
+            "group_id": 0,
+            "block_polygon_points": [
+                [
+                    140.0,
+                    70.0
+                ],
+                [
+                    551.0,
+                    70.0
+                ],
+                [
+                    551.0,
+                    92.0
+                ],
+                [
+                    140.0,
+                    92.0
+                ]
+            ]
+        },
+        {
+            "block_label": "header",
+            "block_content": "A PREPRINT - JULY 24, 2026",
+            "block_bbox": [
+                831,
+                70,
+                1083,
+                92
+            ],
+            "block_id": 1,
+            "block_order": null,
+            "group_id": 1,
+            "block_polygon_points": [
+                [
+                    831.0,
+                    70.0
+                ],
+                [
+                    1083.0,
+                    70.0
+                ],
+                [
+                    1083.0,
+                    92.0
+                ],
+                [
+                    831.0,
+                    92.0
+                ]
+            ]
+        },
+        {
+            "block_label": "text",
+            "block_content": "identification, econometric execution, and computational reproducibility [4, 5], and none of them settles the mechanism behind an estimated effect, the question a structural model is built to answer [6]. Algebraic re-derivation, numerical analysis, and counterexample search can test parts of a model, but they do not jointly certify institutional fit, assumption validity, equilibrium selection, or welfare interpretation. A paper may identify an effect convincingly while leaving open which canonical model family fits the institution, which assumptions generate the result, whether the comparative statics are non-trivial, and whether the welfare interpretation follows. When a language model fills that gap, fluency conceals five recurring failures, catalogued in Section 2.1, which are instances of confident unsupported generation [7] arising at the points where domain judgment matters most.",
+            "block_bbox": [
+                137,
+                148,
+                1084,
+                325
+            ],
+            "block_id": 2,
+            "block_order": 1,
+            "group_id": 2,
+            "block_polygon_points": [
+                [
+                    137.0,
+                    148.0
+                ],
+                [
+                    1084.0,
+                    148.0
+                ],
+                [
+                    1084.0,
+                    325.0
+                ],
+                [
+                    137.0,
+                    325.0
+                ]
+            ]
+        },
+        {
+            "block_label": "text",
+            "block_content": "Existing agentic research systems demonstrate the value of decomposing scientific work into specialized roles and persistent intermediate outputs. Systems for automated science and machine-learning research coordinate agents for ideation, experimentation, coding, review, and writing [1, 2, 8], and comparable multi-agent pipelines with in-process quality control serve biomedical research [9]. Role-specialized LLM organizations [10, 11, 12, 13], general orchestration frameworks such as AutoGen [14], and reasoning-acting paradigms such as ReAct [15] establish related patterns beyond any single domain. Self-critique loops also improve output when a model can meaningfully inspect its own intermediate steps [16]. In companion work we develop a related pipeline for empirical economic research and argue that human oversight is what makes AI-assisted social science reliable [17, 18], and related workflows organized around persistent shared files reduce the steering needed to turn a question into a structured workspace [19]. Many of these systems operate in settings with executable code, experimental feedback, or benchmarked outputs. Those signals do not cover the full economic-theory task, which additionally requires institutional reality checking, canonical-lineage selection, an explicit equilibrium concept, assumption-sensitive welfare accounting, and a record of which claims were proved, illustrated, weakened, or left open.",
+            "block_bbox": [
+                137,
+                333,
+                1087,
+                619
+            ],
+            "block_id": 3,
+            "block_order": 2,
+            "group_id": 3,
+            "block_polygon_points": [
+                [
+                    137.0,
+                    333.0
+                ],
+                [
+                    1087.0,
+                    333.0
+                ],
+                [
+                    1087.0,
+                    619.0
+                ],
+                [
+                    137.0,
+                    619.0
+                ]
+            ]
+        },
+        {
+            "block_label": "text",
+            "block_content": "We address this gap with a human-in-the-loop multi-agent workflow for constructing the theory component of an empirical economics study. The workflow decomposes modeling into named and inspectable stages running from puzzle refinement to manuscript construction, each writing a persistent record (Table 2). Quality gates target specific failure modes and recommend loopbacks without certifying any stage as correct, and mandatory checkpoints reserve the institutional framing, the equilibrium concept, the proposition set, and the treatment of counterexamples for the researcher. Human oversight is therefore part of the system architecture [20, 21].",
+            "block_bbox": [
+                137,
+                628,
+                1084,
+                761
+            ],
+            "block_id": 4,
+            "block_order": 3,
+            "group_id": 4,
+            "block_polygon_points": [
+                [
+                    137.0,
+                    628.0
+                ],
+                [
+                    1084.0,
+                    628.0
+                ],
+                [
+                    1084.0,
+                    761.0
+                ],
+                [
+                    137.0,
+                    761.0
+                ]
+            ]
+        },
+        {
+            "block_label": "text",
+            "block_content": "The central research question is comparative: holding the user-level task and underlying model fixed within each matched pair, does a gated oversight architecture produce more reliable and useful theory manuscripts than an ordinary ungated interaction? We evaluate the workflow using five matched task pairs spanning human capital, health economics, nutrition and macro-development, consumer information, and agri-food system transformation. Two evaluators scored the ten resulting manuscripts under blinded A/B labels and agreed on all five pairwise rankings, preferring the full workflow in four tasks and the baseline in one (Section 5). The largest difference arose in the nutrition-label task, whose process trace recorded rejection of a false monopoly premise and revision of a false welfare-incidence proposition; Task 1 is the necessary counterexample, where both evaluators preferred the richer baseline because the full workflow simplified the human-capital mechanism without resolving its key formal errors. The stage-by-stage record shows why: a gate sometimes initiated a loopback that changed the model or proposition set, and elsewhere exposed a gap without closing it, so the architecture's value depends on whether the relevant check is well targeted and the human adjudication produces a valid correction.",
+            "block_bbox": [
+                136,
+                769,
+                1086,
+                1034
+            ],
+            "block_id": 5,
+            "block_order": 4,
+            "group_id": 5,
+            "block_polygon_points": [
+                [
+                    136.0,
+                    769.0
+                ],
+                [
+                    1086.0,
+                    769.0
+                ],
+                [
+                    1086.0,
+                    1034.0
+                ],
+                [
+                    136.0,
+                    1034.0
+                ]
+            ]
+        },
+        {
+            "block_label": "text",
+            "block_content": "This paper makes three contributions. First, it derives three architectural principles for agent systems whose outputs cannot be certified by a task-complete automated verifier and realizes them as a gated multi-agent architecture with blackboard coordination, a supervisory gate tier, and bounded agent autonomy. Second, it develops a failure taxonomy and maps each mode to a concrete interception mechanism, making reliability claims inspectable at the level of individual stage outputs. Third, it provides a matched evaluation protocol combining blinded endpoint ratings with process tracing over the workflow's own records. The broader implication is that, absent a reliable task-complete oracle, autonomy is a poor proxy for reliability, while the placement of irreversible human judgment, independent re-derivation, adversarial counterexample search, and disclosure of unresolved gaps are more informative design variables.",
+            "block_bbox": [
+                136,
+                1043,
+                1086,
+                1219
+            ],
+            "block_id": 6,
+            "block_order": 5,
+            "group_id": 6,
+            "block_polygon_points": [
+                [
+                    136.0,
+                    1043.0
+                ],
+                [
+                    1086.0,
+                    1043.0
+                ],
+                [
+                    1086.0,
+                    1219.0
+                ],
+                [
+                    136.0,
+                    1219.0
+                ]
+            ]
+        },
+        {
+            "block_label": "paragraph_title",
+            "block_content": "## 2 Design Motivation",
+            "block_bbox": [
+                139,
+                1258,
+                370,
+                1284
+            ],
+            "block_id": 7,
+            "block_order": 6,
+            "group_id": 7,
+            "block_polygon_points": [
+                [
+                    139.0,
+                    1258.0
+                ],
+                [
+                    370.0,
+                    1258.0
+                ],
+                [
+                    370.0,
+                    1284.0
+                ],
+                [
+                    139.0,
+                    1284.0
+                ]
+            ]
+        },
+        {
+            "block_label": "text",
+            "block_content": "This section organizes the errors of LLM-assisted economic theory into a small taxonomy of failure modes, including citation hallucination and unreliable reference grounding, and then states three architectural principles that the taxonomy forces on any oversight system built to intercept them. The principles govern where stages, quality gates, and human checkpoints are placed in Sections 3–4, and Section 5 tests whether the resulting placement does the work claimed for it. The organizing premise is that reliability is carried by the oversight architecture, with the underlying model held fixed within each matched task pair.",
+            "block_bbox": [
+                137,
+                1314,
+                1085,
+                1447
+            ],
+            "block_id": 8,
+            "block_order": 7,
+            "group_id": 8,
+            "block_polygon_points": [
+                [
+                    137.0,
+                    1314.0
+                ],
+                [
+                    1085.0,
+                    1314.0
+                ],
+                [
+                    1085.0,
+                    1447.0
+                ],
+                [
+                    137.0,
+                    1447.0
+                ]
+            ]
+        },
+        {
+            "block_label": "number",
+            "block_content": "2",
+            "block_bbox": [
+                604,
+                1485,
+                620,
+                1503
+            ],
+            "block_id": 9,
+            "block_order": null,
+            "group_id": 9,
+            "block_polygon_points": [
+                [
+                    604.0,
+                    1485.0
+                ],
+                [
+                    619.0,
+                    1485.0
+                ],
+                [
+                    619.0,
+                    1502.0
+                ],
+                [
+                    604.0,
+                    1502.0
+                ]
+            ]
+        }
+    ],
+    "layout_det_res": {
+        "input_path": null,
+        "page_index": null,
+        "boxes": [
+            {
+                "cls_id": 12,
+                "label": "header",
+                "score": 0.8616536855697632,
+                "coordinate": [
+                    140,
+                    70,
+                    551,
+                    92
+                ],
+                "order": null,
+                "polygon_points": [
+                    [
+                        140.0,
+                        70.0
+                    ],
+                    [
+                        551.0,
+                        70.0
+                    ],
+                    [
+                        551.0,
+                        92.0
+                    ],
+                    [
+                        140.0,
+                        92.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 12,
+                "label": "header",
+                "score": 0.8585072159767151,
+                "coordinate": [
+                    831,
+                    70,
+                    1083,
+                    92
+                ],
+                "order": null,
+                "polygon_points": [
+                    [
+                        831.0,
+                        70.0
+                    ],
+                    [
+                        1083.0,
+                        70.0
+                    ],
+                    [
+                        1083.0,
+                        92.0
+                    ],
+                    [
+                        831.0,
+                        92.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.9587462544441223,
+                "coordinate": [
+                    137,
+                    148,
+                    1084,
+                    325
+                ],
+                "order": 1,
+                "polygon_points": [
+                    [
+                        137.0,
+                        148.0
+                    ],
+                    [
+                        1084.0,
+                        148.0
+                    ],
+                    [
+                        1084.0,
+                        325.0
+                    ],
+                    [
+                        137.0,
+                        325.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.96622633934021,
+                "coordinate": [
+                    137,
+                    333,
+                    1087,
+                    619
+                ],
+                "order": 2,
+                "polygon_points": [
+                    [
+                        137.0,
+                        333.0
+                    ],
+                    [
+                        1087.0,
+                        333.0
+                    ],
+                    [
+                        1087.0,
+                        619.0
+                    ],
+                    [
+                        137.0,
+                        619.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.9575207829475403,
+                "coordinate": [
+                    137,
+                    628,
+                    1084,
+                    761
+                ],
+                "order": 3,
+                "polygon_points": [
+                    [
+                        137.0,
+                        628.0
+                    ],
+                    [
+                        1084.0,
+                        628.0
+                    ],
+                    [
+                        1084.0,
+                        761.0
+                    ],
+                    [
+                        137.0,
+                        761.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.9643120169639587,
+                "coordinate": [
+                    136,
+                    769,
+                    1086,
+                    1034
+                ],
+                "order": 4,
+                "polygon_points": [
+                    [
+                        136.0,
+                        769.0
+                    ],
+                    [
+                        1086.0,
+                        769.0
+                    ],
+                    [
+                        1086.0,
+                        1034.0
+                    ],
+                    [
+                        136.0,
+                        1034.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.9629924297332764,
+                "coordinate": [
+                    136,
+                    1043,
+                    1086,
+                    1219
+                ],
+                "order": 5,
+                "polygon_points": [
+                    [
+                        136.0,
+                        1043.0
+                    ],
+                    [
+                        1086.0,
+                        1043.0
+                    ],
+                    [
+                        1086.0,
+                        1219.0
+                    ],
+                    [
+                        136.0,
+                        1219.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 17,
+                "label": "paragraph_title",
+                "score": 0.8707656264305115,
+                "coordinate": [
+                    139,
+                    1258,
+                    370,
+                    1284
+                ],
+                "order": 6,
+                "polygon_points": [
+                    [
+                        139.0,
+                        1258.0
+                    ],
+                    [
+                        370.0,
+                        1258.0
+                    ],
+                    [
+                        370.0,
+                        1284.0
+                    ],
+                    [
+                        139.0,
+                        1284.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.9562152028083801,
+                "coordinate": [
+                    137,
+                    1314,
+                    1085,
+                    1447
+                ],
+                "order": 7,
+                "polygon_points": [
+                    [
+                        137.0,
+                        1314.0
+                    ],
+                    [
+                        1085.0,
+                        1314.0
+                    ],
+                    [
+                        1085.0,
+                        1447.0
+                    ],
+                    [
+                        137.0,
+                        1447.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 16,
+                "label": "number",
+                "score": 0.7019954323768616,
+                "coordinate": [
+                    604,
+                    1485,
+                    620,
+                    1503
+                ],
+                "order": 8,
+                "polygon_points": [
+                    [
+                        604.0,
+                        1485.0
+                    ],
+                    [
+                        619.0,
+                        1485.0
+                    ],
+                    [
+                        619.0,
+                        1502.0
+                    ],
+                    [
+                        604.0,
+                        1502.0
+                    ]
+                ]
+            }
+        ]
+    }
+}

@@ -1,0 +1,733 @@
+{
+    "input_path": "/home/bocchi/Downloads/Paper_Data/Statistics/2607.20760v1.pdf",
+    "page_index": 4,
+    "page_count": 20,
+    "width": 1224,
+    "height": 1584,
+    "model_settings": {
+        "use_doc_preprocessor": false,
+        "use_layout_detection": true,
+        "use_chart_recognition": false,
+        "use_seal_recognition": false,
+        "use_ocr_for_image_block": true,
+        "format_block_content": true,
+        "merge_layout_blocks": true,
+        "markdown_ignore_labels": [
+            "number",
+            "footnote",
+            "header",
+            "header_image",
+            "footer",
+            "footer_image",
+            "aside_text"
+        ],
+        "return_layout_polygon_points": true
+    },
+    "parsing_res_list": [
+        {
+            "block_label": "text",
+            "block_content": "options based on martingale difference divergence (Shao and Zhang, 2014)), but none of such methods introduce sparsity for each block independently. Further extensions into casewise and cellwise robust estimators are given in Serneels (2026b,a). ttree is agnostic to the choice of base estimator, and its leaves may therefore carry dense or sparse local models. While not pushed in this paper, leaves could even be casewise or cellwise robust twoblock models.",
+            "block_bbox": [
+                138,
+                147,
+                1084,
+                290
+            ],
+            "block_id": 0,
+            "block_order": 1,
+            "group_id": 0,
+            "block_polygon_points": [
+                [
+                    138.0,
+                    147.0
+                ],
+                [
+                    1084.0,
+                    147.0
+                ],
+                [
+                    1084.0,
+                    290.0
+                ],
+                [
+                    138.0,
+                    290.0
+                ]
+            ]
+        },
+        {
+            "block_label": "text",
+            "block_content": "The single most important property for what follows is that (2) is a second-moment objective: every quantity in the estimator derives from cross-covariances alone. When the data within a node are homogeneous – a single local linear law with Gaussian scatter – the covariance criterion is the right one. When the node instead contains a mixture of regimes, the criterion is no longer sufficient. For that reason, a criterion based on third co-moments is adopted in what follows.",
+            "block_bbox": [
+                137,
+                292,
+                1084,
+                466
+            ],
+            "block_id": 1,
+            "block_order": 2,
+            "group_id": 1,
+            "block_polygon_points": [
+                [
+                    137.0,
+                    292.0
+                ],
+                [
+                    1084.0,
+                    292.0
+                ],
+                [
+                    1084.0,
+                    466.0
+                ],
+                [
+                    137.0,
+                    466.0
+                ]
+            ]
+        },
+        {
+            "block_label": "paragraph_title",
+            "block_content": "## 3 A coskewness-based twoblock decomposition",
+            "block_bbox": [
+                139,
+                508,
+                927,
+                545
+            ],
+            "block_id": 2,
+            "block_order": 3,
+            "group_id": 2,
+            "block_polygon_points": [
+                [
+                    139.0,
+                    508.0
+                ],
+                [
+                    927.0,
+                    508.0
+                ],
+                [
+                    927.0,
+                    545.0
+                ],
+                [
+                    139.0,
+                    545.0
+                ]
+            ]
+        },
+        {
+            "block_label": "paragraph_title",
+            "block_content": "### 3.1 Why a third-moment objective",
+            "block_bbox": [
+                138,
+                572,
+                648,
+                604
+            ],
+            "block_id": 3,
+            "block_order": 4,
+            "group_id": 3,
+            "block_polygon_points": [
+                [
+                    138.0,
+                    572.0
+                ],
+                [
+                    648.0,
+                    572.0
+                ],
+                [
+                    648.0,
+                    604.0
+                ],
+                [
+                    138.0,
+                    604.0
+                ]
+            ]
+        },
+        {
+            "block_label": "text",
+            "block_content": "Suppose a node contains two regimes, each a local linear map from X to Y with Gaussian scatter, in proportions  $ \\pi $ and  $ 1 - \\pi $. Along any direction the marginal score distribution is then a two-component Gaussian mixture, which is non-Gaussian whenever the component means differ. The signature of that non-Gaussianity is carried by the higher-order moments: a two-component mixture is, in general, both skewed and heavy-tailed relative to a single Gaussian, and the skewness in particular encodes the asymmetry between the two components. The direction that best separates the regimes is therefore often a direction of large joint skewness, and it need not coincide with – and may be orthogonal to – the direction of large joint covariance. A covariance-based objective such as (2) cannot, by construction, prefer such a direction; a third-moment objective can. This is the motivation for a twoblock decomposition driven by coskeewness, the natural third-order cross-moment between the predictor and response scores.",
+            "block_bbox": [
+                136,
+                620,
+                1083,
+                965
+            ],
+            "block_id": 4,
+            "block_order": 5,
+            "group_id": 4,
+            "block_polygon_points": [
+                [
+                    136.0,
+                    620.0
+                ],
+                [
+                    1083.0,
+                    620.0
+                ],
+                [
+                    1083.0,
+                    965.0
+                ],
+                [
+                    136.0,
+                    965.0
+                ]
+            ]
+        },
+        {
+            "block_label": "text",
+            "block_content": "At this point, it is noted that dimension reduction based on higher order (co-)moments has been explored before.. For instance, a kurtosis based one-block dimension reduction was illustrated to better reveal cluster in analytical chemical data (Driscoll et al., 2020). Likewise, a criterion that accommodates for higher order comoments was adopted to calculate generalized betas for financial portfolios (Serneels, 2019). However, in both those approaches, a computationally involved projection pursuit algorithm was used. This article is first to extend the use of higher order co-moments into the twoblock simultaneous dimension reduction framework and it is also first to do so based on a computationally very efficient matrix-free power method, as will bne explained in Subsection 3.3.",
+            "block_bbox": [
+                137,
+                966,
+                1084,
+                1227
+            ],
+            "block_id": 5,
+            "block_order": 6,
+            "group_id": 5,
+            "block_polygon_points": [
+                [
+                    137.0,
+                    966.0
+                ],
+                [
+                    1084.0,
+                    966.0
+                ],
+                [
+                    1084.0,
+                    1227.0
+                ],
+                [
+                    137.0,
+                    1227.0
+                ]
+            ]
+        },
+        {
+            "block_label": "paragraph_title",
+            "block_content": "### 3.2 Objectives",
+            "block_bbox": [
+                139,
+                1264,
+                365,
+                1295
+            ],
+            "block_id": 6,
+            "block_order": 7,
+            "group_id": 6,
+            "block_polygon_points": [
+                [
+                    139.0,
+                    1264.0
+                ],
+                [
+                    365.0,
+                    1264.0
+                ],
+                [
+                    365.0,
+                    1295.0
+                ],
+                [
+                    139.0,
+                    1295.0
+                ]
+            ]
+        },
+        {
+            "block_label": "text",
+            "block_content": "Write  $ t = Xw $ and  $ u = Yv $ for a generic pair of score vectors. Beside the covariance  $ \\mathbb{E}[t u] $ that drives (2), the two third-order cross-moments of the pair are  $ \\mathbb{E}[t^2 u] $ and  $ \\mathbb{E}[t u^2] $. The coskewness decomposition retains the architecture of Section 2: two deflation loops, each pairing its own deflated block with the other block in full. However, the second order",
+            "block_bbox": [
+                137,
+                1310,
+                1081,
+                1428
+            ],
+            "block_id": 7,
+            "block_order": 8,
+            "group_id": 7,
+            "block_polygon_points": [
+                [
+                    137.0,
+                    1310.0
+                ],
+                [
+                    1081.0,
+                    1310.0
+                ],
+                [
+                    1081.0,
+                    1428.0
+                ],
+                [
+                    137.0,
+                    1428.0
+                ]
+            ]
+        },
+        {
+            "block_label": "number",
+            "block_content": "5",
+            "block_bbox": [
+                603,
+                1482,
+                620,
+                1504
+            ],
+            "block_id": 8,
+            "block_order": null,
+            "group_id": 8,
+            "block_polygon_points": [
+                [
+                    603.0,
+                    1482.0
+                ],
+                [
+                    619.0,
+                    1482.0
+                ],
+                [
+                    619.0,
+                    1503.0
+                ],
+                [
+                    603.0,
+                    1503.0
+                ]
+            ]
+        }
+    ],
+    "layout_det_res": {
+        "input_path": null,
+        "page_index": null,
+        "boxes": [
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.9546392560005188,
+                "coordinate": [
+                    138,
+                    147,
+                    1084,
+                    290
+                ],
+                "order": 1,
+                "polygon_points": [
+                    [
+                        138.0,
+                        147.0
+                    ],
+                    [
+                        1084.0,
+                        147.0
+                    ],
+                    [
+                        1084.0,
+                        290.0
+                    ],
+                    [
+                        138.0,
+                        290.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.9515474438667297,
+                "coordinate": [
+                    137,
+                    292,
+                    1084,
+                    466
+                ],
+                "order": 2,
+                "polygon_points": [
+                    [
+                        137.0,
+                        292.0
+                    ],
+                    [
+                        1084.0,
+                        292.0
+                    ],
+                    [
+                        1084.0,
+                        466.0
+                    ],
+                    [
+                        137.0,
+                        466.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 17,
+                "label": "paragraph_title",
+                "score": 0.8749947547912598,
+                "coordinate": [
+                    139,
+                    508,
+                    927,
+                    545
+                ],
+                "order": 3,
+                "polygon_points": [
+                    [
+                        139.0,
+                        508.0
+                    ],
+                    [
+                        927.0,
+                        508.0
+                    ],
+                    [
+                        927.0,
+                        545.0
+                    ],
+                    [
+                        139.0,
+                        545.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 17,
+                "label": "paragraph_title",
+                "score": 0.8642576336860657,
+                "coordinate": [
+                    138,
+                    572,
+                    648,
+                    604
+                ],
+                "order": 4,
+                "polygon_points": [
+                    [
+                        138.0,
+                        572.0
+                    ],
+                    [
+                        648.0,
+                        572.0
+                    ],
+                    [
+                        648.0,
+                        604.0
+                    ],
+                    [
+                        138.0,
+                        604.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.9604985117912292,
+                "coordinate": [
+                    136,
+                    620,
+                    1083,
+                    965
+                ],
+                "order": 5,
+                "polygon_points": [
+                    [
+                        136.0,
+                        620.0
+                    ],
+                    [
+                        1083.0,
+                        620.0
+                    ],
+                    [
+                        1083.0,
+                        965.0
+                    ],
+                    [
+                        136.0,
+                        965.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 15,
+                "label": "inline_formula",
+                "score": 0.3861408233642578,
+                "coordinate": [
+                    448,
+                    650,
+                    508,
+                    674
+                ],
+                "order": 6,
+                "polygon_points": [
+                    [
+                        448.0,
+                        650.0
+                    ],
+                    [
+                        448.0,
+                        673.0
+                    ],
+                    [
+                        507.0,
+                        673.0
+                    ],
+                    [
+                        507.0,
+                        650.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.963853657245636,
+                "coordinate": [
+                    137,
+                    966,
+                    1084,
+                    1227
+                ],
+                "order": 7,
+                "polygon_points": [
+                    [
+                        137.0,
+                        966.0
+                    ],
+                    [
+                        1084.0,
+                        966.0
+                    ],
+                    [
+                        1084.0,
+                        1227.0
+                    ],
+                    [
+                        137.0,
+                        1227.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 17,
+                "label": "paragraph_title",
+                "score": 0.8655425310134888,
+                "coordinate": [
+                    139,
+                    1264,
+                    365,
+                    1295
+                ],
+                "order": 8,
+                "polygon_points": [
+                    [
+                        139.0,
+                        1264.0
+                    ],
+                    [
+                        365.0,
+                        1264.0
+                    ],
+                    [
+                        365.0,
+                        1295.0
+                    ],
+                    [
+                        139.0,
+                        1295.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.9491174221038818,
+                "coordinate": [
+                    137,
+                    1310,
+                    1081,
+                    1428
+                ],
+                "order": 9,
+                "polygon_points": [
+                    [
+                        137.0,
+                        1310.0
+                    ],
+                    [
+                        1081.0,
+                        1310.0
+                    ],
+                    [
+                        1081.0,
+                        1428.0
+                    ],
+                    [
+                        137.0,
+                        1428.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 15,
+                "label": "inline_formula",
+                "score": 0.34869515895843506,
+                "coordinate": [
+                    207,
+                    1312,
+                    309,
+                    1336
+                ],
+                "order": 10,
+                "polygon_points": [
+                    [
+                        207.0,
+                        1312.0
+                    ],
+                    [
+                        207.0,
+                        1335.0
+                    ],
+                    [
+                        308.0,
+                        1335.0
+                    ],
+                    [
+                        308.0,
+                        1312.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 15,
+                "label": "inline_formula",
+                "score": 0.31706714630126953,
+                "coordinate": [
+                    364,
+                    1312,
+                    462,
+                    1337
+                ],
+                "order": 11,
+                "polygon_points": [
+                    [
+                        364.0,
+                        1312.0
+                    ],
+                    [
+                        462.0,
+                        1312.0
+                    ],
+                    [
+                        462.0,
+                        1337.0
+                    ],
+                    [
+                        364.0,
+                        1337.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 15,
+                "label": "inline_formula",
+                "score": 0.7358025908470154,
+                "coordinate": [
+                    891,
+                    1337,
+                    954,
+                    1368
+                ],
+                "order": 12,
+                "polygon_points": [
+                    [
+                        891.0,
+                        1337.0
+                    ],
+                    [
+                        954.0,
+                        1337.0
+                    ],
+                    [
+                        954.0,
+                        1368.0
+                    ],
+                    [
+                        891.0,
+                        1368.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 15,
+                "label": "inline_formula",
+                "score": 0.6371844410896301,
+                "coordinate": [
+                    1006,
+                    1338,
+                    1073,
+                    1368
+                ],
+                "order": 13,
+                "polygon_points": [
+                    [
+                        1006.0,
+                        1338.0
+                    ],
+                    [
+                        1073.0,
+                        1338.0
+                    ],
+                    [
+                        1073.0,
+                        1368.0
+                    ],
+                    [
+                        1006.0,
+                        1368.0
+                    ]
+                ]
+            },
+            {
+                "cls_id": 16,
+                "label": "number",
+                "score": 0.7072444558143616,
+                "coordinate": [
+                    603,
+                    1482,
+                    620,
+                    1504
+                ],
+                "order": 14,
+                "polygon_points": [
+                    [
+                        603.0,
+                        1482.0
+                    ],
+                    [
+                        619.0,
+                        1482.0
+                    ],
+                    [
+                        619.0,
+                        1503.0
+                    ],
+                    [
+                        603.0,
+                        1503.0
+                    ]
+                ]
+            }
+        ]
+    }
+}
